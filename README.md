@@ -1,6 +1,6 @@
 pycpptraj
 =======
 
-cppptraj wrapper for python user
+cpptraj wrapper for python user
 
 
