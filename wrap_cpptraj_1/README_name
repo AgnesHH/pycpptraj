@@ -1,0 +1,2 @@
+1. Add "_" to cpptraj classes' name
+For example: cdef cppclass _ArgList "ArgList"
