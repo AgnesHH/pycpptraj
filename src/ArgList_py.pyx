@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from ArgList_pxd cimport *
+from ArgList cimport *
 
 cdef class ArgList:
     cdef _ArgList *thisptr

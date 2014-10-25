@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from TrajoutList_pxd cimport *
+from TrajoutList cimport *
 
 cdef class TrajoutList:
     cdef _TrajoutList  *thisptr

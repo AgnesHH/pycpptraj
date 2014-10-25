@@ -1,0 +1,84 @@
+# distutils: language = c++
+import numpy as np
+cimport numpy as np
+from ReplicaDimArray cimport ReplicaDimArray
+from NetcdfFile cimport NetcdfFile 
+
+#ctypedef np.ndarray[dtype=np.float, ndim=1] npfloatdim1
+#ctypedef np.ndarray[dtype=np.double, ndim=1] npdoubledim1
+#ctypedef np.float32_t[:] npfloatdim1
+#ctypedef np.float64_t[:] npdoubledim1
+
+cdef class NetcdfFile_py:
+    cdef NetcdfFile * thisptr
+
+    def __cinit__(self):
+        self.thisptr = new NetcdfFile()
+
+    def __dealloc__(self):
+        del self.thisptr
+
+    def NetcdfDebug(self):
+        self.thisptr.NetcdfDebug()
+
+    def GetAttrText(self, mystring):
+        return self.thisptr.GetAttrText(mystring) 
+
+    def NC_openRead(self, mystring):
+        self.thisptr.NC_openRead(mystring)
+
+    def NC_openWrite(self, mystring):
+        return self.thisptr.NC_openWrite(mystring)
+
+    #add NC_createReservoir
+    #add NC_create
+    
+    def NC_close(self):
+        self.thisptr.NC_close()
+
+    def SetupFrame(self):
+        return self.thisptr.SetupFrame()
+
+    #def SetupCoordsVelo(self,)
+    def SetupTime(self):
+        return self.thisptr.SetupTime()
+
+    #def SetupBox(self):
+
+    def SetupTemperature(self):
+        return self.thisptr.SetupTemperature()
+
+    cdef SetupMultiD(self, ReplicaDimArray & reparray):
+        return self.thisptr.SetupMultiD(reparray)
+
+    #do I need to use this function while numpy has it?
+    #def FloatToDouble(self, npdoubledim1 * adouble, npfloatdim1 * afloat):
+    #def FloatToDouble(self, npdoubledim1  adouble, npfloatdim1  afloat):
+    #def FloatToDouble(self, np.ndarray[np.float64_t, ndim=1] adouble, 
+    #                        np.ndarray[np.float32_t] afloat):
+    #    #self.thisptr.FloatToDouble(<double *>adouble.data, <float *> afloat.data)
+    #    self.thisptr.FloatToDouble(&adouble[0], &afloat[0])
+
+    ##def DoubleToFloat(self, npfloatdim1 afloat, npdoubledim1 adouble):
+    #def DoubleToFloat(self, np.ndarray[np.float32_t, ndim=1] afloat, 
+    #                        np.ndarray[np.float64_t, ndim=1] adouble):
+    #    #self.thisptr.DoubleToFloat(<float *> afloat.data, <double *> adouble.data)
+    #    self.thisptr.DoubleToFloat(&afloat[0], &adouble[0])
+        
+    def Ncid(self):
+        return self.thisptr.Ncid()
+
+    def Ncatom(self):
+        return self.thisptr.Ncatom()
+
+    def Ncatom3(self):
+        return self.thisptr.Ncatom3()
+
+    def Ncframe(self):
+        return self.thisptr.Ncframe()
+
+    def HasVelocities(self):
+        return self.thisptr.HasVelocities()
+
+    def HasCoords(self):
+        return self.thisptr.HasCoords()

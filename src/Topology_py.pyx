@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from Topology_pxd cimport *
+from Topology cimport *
 
 cdef class Topology:
     cdef _Topology  *thisptr

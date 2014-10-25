@@ -3,8 +3,8 @@
 from libc.stdlib cimport malloc
 from libcpp.vector cimport vector
 from libcpp.string cimport string
-from arg_wrapper cimport wrap_argv
-from CpptrajState_pxd cimport CpptrajState
+from arg_wrap cimport wrap_argv
+from CpptrajState cimport CpptrajState
 
 cdef enum Mode: BATCH = 0, ERROR, QUIT, INTERACTIVE, SILENT_EXIT
 
@@ -51,5 +51,5 @@ cdef class Cpptraj_py:
     
     def AmbPDB(self, id1, id2, stringlist):
         cdef char **c_argv
-        c_argv - wrap_argv(stringlist)
+        c_argv =  wrap_argv(stringlist)
         return self.ptraj_ptr.AmbPDB(id1, id2, c_argv)

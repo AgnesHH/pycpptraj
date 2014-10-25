@@ -3,8 +3,8 @@
 from libcpp.string cimport string
 
 cdef extern from "FileName.h":
-    cdef cppclass _FileName "FileName":
-    #cdef cppclass FileName:
+    #cdef cppclass _FileName "FileName":
+    cdef cppclass FileName:
         FileName()
         FileName(FileName)
         int SetFileName(string)
@@ -23,11 +23,11 @@ cdef extern from "FileName.h":
         string DirPrefix()
         bint empty()
 
-cdef class FileName:
-    cdef _FileName * thisptr
+cdef class FileName_py:
+    cdef FileName * thisptr
 
     def __cinit__(self, myname=''):
-        self.thisptr = new _FileName()
+        self.thisptr = new FileName()
         self.thisptr.SetFileName(myname)
 
     def __dealloc__(self):
@@ -50,6 +50,10 @@ cdef class FileName:
 
     def Base(self):
         return self.thisptr.Base()
+
+    property ext:
+        def __get__(self):
+            return self.Ext()
 
     def Ext(self):
         return self.thisptr.Ext()

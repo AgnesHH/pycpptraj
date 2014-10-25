@@ -1,4 +1,4 @@
-from Analysis_Clustering_pxd cimport *
+from Analysis_Clustering cimport *
 
 cdef class Analysis_Clustering:
     cdef _Analysis_Clustering * thisptr

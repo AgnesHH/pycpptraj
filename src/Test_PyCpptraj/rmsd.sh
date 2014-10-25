@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PyCpptraj=/mnt/raidc2/haichit/Study/Cython/wrap_cpptraj_1/PyCpptraj.py
+PyCpptraj=/mnt/raidc2/haichit/Study/Cython//pycpptraj/src/PyCpptraj.py
 top=Tc5b.ff99SB_JSC.mb3.newHmass.dt4fs.top
 refnat=./initialFiles/mb3.nmr.99SB/Tc5b.nat.crd
 
