@@ -1,4 +1,4 @@
 # distutil: language = c++
 
-cdef extern from "*.h":
+cdef extern from "xyz.h":
     cdef cppclass xyz:
