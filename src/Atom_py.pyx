@@ -1,8 +1,6 @@
 # distutils: language = c++
 
-cdef extern from "Atom.h":
-    cdef cppclass Atom:
-        Atom()
+from Atom cimport *
 
 cdef class Atom_py:
     cdef Atom *thisptr

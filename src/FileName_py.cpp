@@ -430,8 +430,8 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_11FileName_py_FileName_py;
 
-/* "FileName_py.pyx":26
- *         bint empty()
+/* "FileName_py.pyx":5
+ * from FileName cimport *
  * 
  * cdef class FileName_py:             # <<<<<<<<<<<<<<
  *     cdef FileName * thisptr
@@ -578,6 +578,8 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'libcpp.string' */
 
+/* Module declarations from 'FileName' */
+
 /* Module declarations from 'FileName_py' */
 static PyTypeObject *__pyx_ptype_11FileName_py_FileName_py = 0;
 static std::string __pyx_convert_string_from_py_std__string(PyObject *); /*proto*/
@@ -615,7 +617,7 @@ static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_myname;
 static PyObject *__pyx_n_s_test;
 
-/* "FileName_py.pyx":29
+/* "FileName_py.pyx":8
  *     cdef FileName * thisptr
  * 
  *     def __cinit__(self, myname=''):             # <<<<<<<<<<<<<<
@@ -654,7 +656,7 @@ static int __pyx_pw_11FileName_py_11FileName_py_1__cinit__(PyObject *__pyx_v_sel
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -667,7 +669,7 @@ static int __pyx_pw_11FileName_py_11FileName_py_1__cinit__(PyObject *__pyx_v_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 29; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("FileName_py.FileName_py.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -689,7 +691,7 @@ static int __pyx_pf_11FileName_py_11FileName_py___cinit__(struct __pyx_obj_11Fil
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "FileName_py.pyx":30
+  /* "FileName_py.pyx":9
  * 
  *     def __cinit__(self, myname=''):
  *         self.thisptr = new FileName()             # <<<<<<<<<<<<<<
@@ -698,17 +700,17 @@ static int __pyx_pf_11FileName_py_11FileName_py___cinit__(struct __pyx_obj_11Fil
  */
   __pyx_v_self->thisptr = new FileName();
 
-  /* "FileName_py.pyx":31
+  /* "FileName_py.pyx":10
  *     def __cinit__(self, myname=''):
  *         self.thisptr = new FileName()
  *         self.thisptr.SetFileName(myname)             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
-  __pyx_t_1 = __pyx_convert_string_from_py_std__string(__pyx_v_myname); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_convert_string_from_py_std__string(__pyx_v_myname); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->thisptr->SetFileName(__pyx_t_1);
 
-  /* "FileName_py.pyx":29
+  /* "FileName_py.pyx":8
  *     cdef FileName * thisptr
  * 
  *     def __cinit__(self, myname=''):             # <<<<<<<<<<<<<<
@@ -727,7 +729,7 @@ static int __pyx_pf_11FileName_py_11FileName_py___cinit__(struct __pyx_obj_11Fil
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":33
+/* "FileName_py.pyx":12
  *         self.thisptr.SetFileName(myname)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -750,7 +752,7 @@ static void __pyx_pf_11FileName_py_11FileName_py_2__dealloc__(struct __pyx_obj_1
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "FileName_py.pyx":34
+  /* "FileName_py.pyx":13
  * 
  *     def __dealloc__(self):
  *         del self.thisptr             # <<<<<<<<<<<<<<
@@ -759,7 +761,7 @@ static void __pyx_pf_11FileName_py_11FileName_py_2__dealloc__(struct __pyx_obj_1
  */
   delete __pyx_v_self->thisptr;
 
-  /* "FileName_py.pyx":33
+  /* "FileName_py.pyx":12
  *         self.thisptr.SetFileName(myname)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -771,7 +773,7 @@ static void __pyx_pf_11FileName_py_11FileName_py_2__dealloc__(struct __pyx_obj_1
   __Pyx_RefNannyFinishContext();
 }
 
-/* "FileName_py.pyx":36
+/* "FileName_py.pyx":15
  *         del self.thisptr
  * 
  *     def SetFileName(self, mystring):             # <<<<<<<<<<<<<<
@@ -801,17 +803,17 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_4SetFileName(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("SetFileName", 0);
 
-  /* "FileName_py.pyx":37
+  /* "FileName_py.pyx":16
  * 
  *     def SetFileName(self, mystring):
  *         self.thisptr.SetFileName(mystring)             # <<<<<<<<<<<<<<
  * 
  *     def SetFileNameWithExpansion(self, mystring):
  */
-  __pyx_t_1 = __pyx_convert_string_from_py_std__string(__pyx_v_mystring); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_convert_string_from_py_std__string(__pyx_v_mystring); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->thisptr->SetFileName(__pyx_t_1);
 
-  /* "FileName_py.pyx":36
+  /* "FileName_py.pyx":15
  *         del self.thisptr
  * 
  *     def SetFileName(self, mystring):             # <<<<<<<<<<<<<<
@@ -831,7 +833,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_4SetFileName(struct __pyx_
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":39
+/* "FileName_py.pyx":18
  *         self.thisptr.SetFileName(mystring)
  * 
  *     def SetFileNameWithExpansion(self, mystring):             # <<<<<<<<<<<<<<
@@ -861,17 +863,17 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_6SetFileNameWithExpansion(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("SetFileNameWithExpansion", 0);
 
-  /* "FileName_py.pyx":40
+  /* "FileName_py.pyx":19
  * 
  *     def SetFileNameWithExpansion(self, mystring):
  *         self.thisptr.SetFileNameWithExpansion(mystring)             # <<<<<<<<<<<<<<
  * 
  *     def clear(self):
  */
-  __pyx_t_1 = __pyx_convert_string_from_py_std__string(__pyx_v_mystring); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 40; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_convert_string_from_py_std__string(__pyx_v_mystring); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->thisptr->SetFileNameWithExpansion(__pyx_t_1);
 
-  /* "FileName_py.pyx":39
+  /* "FileName_py.pyx":18
  *         self.thisptr.SetFileName(mystring)
  * 
  *     def SetFileNameWithExpansion(self, mystring):             # <<<<<<<<<<<<<<
@@ -891,7 +893,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_6SetFileNameWithExpansion(
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":42
+/* "FileName_py.pyx":21
  *         self.thisptr.SetFileNameWithExpansion(mystring)
  * 
  *     def clear(self):             # <<<<<<<<<<<<<<
@@ -917,7 +919,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_8clear(struct __pyx_obj_11
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("clear", 0);
 
-  /* "FileName_py.pyx":43
+  /* "FileName_py.pyx":22
  * 
  *     def clear(self):
  *         self.thisptr.clear()             # <<<<<<<<<<<<<<
@@ -926,7 +928,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_8clear(struct __pyx_obj_11
  */
   __pyx_v_self->thisptr->clear();
 
-  /* "FileName_py.pyx":42
+  /* "FileName_py.pyx":21
  *         self.thisptr.SetFileNameWithExpansion(mystring)
  * 
  *     def clear(self):             # <<<<<<<<<<<<<<
@@ -941,7 +943,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_8clear(struct __pyx_obj_11
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":45
+/* "FileName_py.pyx":24
  *         self.thisptr.clear()
  * 
  *     def MatchFullOrBase(self, mystring):             # <<<<<<<<<<<<<<
@@ -972,7 +974,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_10MatchFullOrBase(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("MatchFullOrBase", 0);
 
-  /* "FileName_py.pyx":46
+  /* "FileName_py.pyx":25
  * 
  *     def MatchFullOrBase(self, mystring):
  *         return self.thisptr.MatchFullOrBase(mystring)             # <<<<<<<<<<<<<<
@@ -980,14 +982,14 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_10MatchFullOrBase(struct _
  *     def Full(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_string_from_py_std__string(__pyx_v_mystring); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->thisptr->MatchFullOrBase(__pyx_t_1)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 46; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_convert_string_from_py_std__string(__pyx_v_mystring); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->thisptr->MatchFullOrBase(__pyx_t_1)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "FileName_py.pyx":45
+  /* "FileName_py.pyx":24
  *         self.thisptr.clear()
  * 
  *     def MatchFullOrBase(self, mystring):             # <<<<<<<<<<<<<<
@@ -1006,7 +1008,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_10MatchFullOrBase(struct _
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":48
+/* "FileName_py.pyx":27
  *         return self.thisptr.MatchFullOrBase(mystring)
  * 
  *     def Full(self):             # <<<<<<<<<<<<<<
@@ -1036,7 +1038,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_12Full(struct __pyx_obj_11
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("Full", 0);
 
-  /* "FileName_py.pyx":49
+  /* "FileName_py.pyx":28
  * 
  *     def Full(self):
  *         return self.thisptr.Full()             # <<<<<<<<<<<<<<
@@ -1044,13 +1046,13 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_12Full(struct __pyx_obj_11
  *     def Base(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->Full()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->Full()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "FileName_py.pyx":48
+  /* "FileName_py.pyx":27
  *         return self.thisptr.MatchFullOrBase(mystring)
  * 
  *     def Full(self):             # <<<<<<<<<<<<<<
@@ -1069,7 +1071,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_12Full(struct __pyx_obj_11
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":51
+/* "FileName_py.pyx":30
  *         return self.thisptr.Full()
  * 
  *     def Base(self):             # <<<<<<<<<<<<<<
@@ -1099,7 +1101,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_14Base(struct __pyx_obj_11
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("Base", 0);
 
-  /* "FileName_py.pyx":52
+  /* "FileName_py.pyx":31
  * 
  *     def Base(self):
  *         return self.thisptr.Base()             # <<<<<<<<<<<<<<
@@ -1107,13 +1109,13 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_14Base(struct __pyx_obj_11
  *     property ext:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->Base()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 52; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->Base()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "FileName_py.pyx":51
+  /* "FileName_py.pyx":30
  *         return self.thisptr.Full()
  * 
  *     def Base(self):             # <<<<<<<<<<<<<<
@@ -1132,7 +1134,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_14Base(struct __pyx_obj_11
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":55
+/* "FileName_py.pyx":34
  * 
  *     property ext:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -1164,7 +1166,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_3ext___get__(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "FileName_py.pyx":56
+  /* "FileName_py.pyx":35
  *     property ext:
  *         def __get__(self):
  *             return self.Ext()             # <<<<<<<<<<<<<<
@@ -1172,7 +1174,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_3ext___get__(struct __pyx_
  *     def Ext(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_Ext); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_Ext); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1185,10 +1187,10 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_3ext___get__(struct __pyx_
     }
   }
   if (__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -1196,7 +1198,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_3ext___get__(struct __pyx_
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "FileName_py.pyx":55
+  /* "FileName_py.pyx":34
  * 
  *     property ext:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -1217,7 +1219,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_3ext___get__(struct __pyx_
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":58
+/* "FileName_py.pyx":37
  *             return self.Ext()
  * 
  *     def Ext(self):             # <<<<<<<<<<<<<<
@@ -1247,7 +1249,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_16Ext(struct __pyx_obj_11F
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("Ext", 0);
 
-  /* "FileName_py.pyx":59
+  /* "FileName_py.pyx":38
  * 
  *     def Ext(self):
  *         return self.thisptr.Ext()             # <<<<<<<<<<<<<<
@@ -1255,13 +1257,13 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_16Ext(struct __pyx_obj_11F
  *     def empty(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->Ext()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 59; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->Ext()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 38; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "FileName_py.pyx":58
+  /* "FileName_py.pyx":37
  *             return self.Ext()
  * 
  *     def Ext(self):             # <<<<<<<<<<<<<<
@@ -1280,7 +1282,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_16Ext(struct __pyx_obj_11F
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":61
+/* "FileName_py.pyx":40
  *         return self.thisptr.Ext()
  * 
  *     def empty(self):             # <<<<<<<<<<<<<<
@@ -1310,7 +1312,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_18empty(struct __pyx_obj_1
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("empty", 0);
 
-  /* "FileName_py.pyx":62
+  /* "FileName_py.pyx":41
  * 
  *     def empty(self):
  *         return self.thisptr.empty()             # <<<<<<<<<<<<<<
@@ -1318,13 +1320,13 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_18empty(struct __pyx_obj_1
  *     def Compress(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->thisptr->empty()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->thisptr->empty()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 41; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "FileName_py.pyx":61
+  /* "FileName_py.pyx":40
  *         return self.thisptr.Ext()
  * 
  *     def empty(self):             # <<<<<<<<<<<<<<
@@ -1343,7 +1345,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_18empty(struct __pyx_obj_1
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":64
+/* "FileName_py.pyx":43
  *         return self.thisptr.empty()
  * 
  *     def Compress(self):             # <<<<<<<<<<<<<<
@@ -1373,7 +1375,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_20Compress(struct __pyx_ob
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("Compress", 0);
 
-  /* "FileName_py.pyx":65
+  /* "FileName_py.pyx":44
  * 
  *     def Compress(self):
  *         return self.thisptr.Compress()             # <<<<<<<<<<<<<<
@@ -1381,13 +1383,13 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_20Compress(struct __pyx_ob
  *     def DirPrefix(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->Compress()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 65; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->Compress()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 44; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "FileName_py.pyx":64
+  /* "FileName_py.pyx":43
  *         return self.thisptr.empty()
  * 
  *     def Compress(self):             # <<<<<<<<<<<<<<
@@ -1406,7 +1408,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_20Compress(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":67
+/* "FileName_py.pyx":46
  *         return self.thisptr.Compress()
  * 
  *     def DirPrefix(self):             # <<<<<<<<<<<<<<
@@ -1436,7 +1438,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_22DirPrefix(struct __pyx_o
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("DirPrefix", 0);
 
-  /* "FileName_py.pyx":68
+  /* "FileName_py.pyx":47
  * 
  *     def DirPrefix(self):
  *         return self.thisptr.DirPrefix()             # <<<<<<<<<<<<<<
@@ -1444,13 +1446,13 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_22DirPrefix(struct __pyx_o
  *     def full(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->DirPrefix()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 68; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_convert_PyBytes_string_to_py_std__string(__pyx_v_self->thisptr->DirPrefix()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 47; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "FileName_py.pyx":67
+  /* "FileName_py.pyx":46
  *         return self.thisptr.Compress()
  * 
  *     def DirPrefix(self):             # <<<<<<<<<<<<<<
@@ -1469,7 +1471,7 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_22DirPrefix(struct __pyx_o
   return __pyx_r;
 }
 
-/* "FileName_py.pyx":70
+/* "FileName_py.pyx":49
  *         return self.thisptr.DirPrefix()
  * 
  *     def full(self):             # <<<<<<<<<<<<<<
@@ -1494,14 +1496,14 @@ static PyObject *__pyx_pf_11FileName_py_11FileName_py_24full(struct __pyx_obj_11
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("full", 0);
 
-  /* "FileName_py.pyx":71
+  /* "FileName_py.pyx":50
  * 
  *     def full(self):
  *         self.thisptr.full()             # <<<<<<<<<<<<<<
  */
   __pyx_v_self->thisptr->full();
 
-  /* "FileName_py.pyx":70
+  /* "FileName_py.pyx":49
  *         return self.thisptr.DirPrefix()
  * 
  *     def full(self):             # <<<<<<<<<<<<<<
@@ -2010,9 +2012,9 @@ PyMODINIT_FUNC PyInit_FileName_py(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_11FileName_py_FileName_py) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_11FileName_py_FileName_py) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_11FileName_py_FileName_py.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "FileName_py", (PyObject *)&__pyx_type_11FileName_py_FileName_py) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "FileName_py", (PyObject *)&__pyx_type_11FileName_py_FileName_py) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_11FileName_py_FileName_py = &__pyx_type_11FileName_py_FileName_py;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -2022,7 +2024,7 @@ PyMODINIT_FUNC PyInit_FileName_py(void)
   /* "FileName_py.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
  * 
- * from libcpp.string cimport string
+ * from FileName cimport *
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
