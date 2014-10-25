@@ -1,3 +1,0 @@
-1. Name
-+ "Cpptraj" class (C++)--> "Cpptraj_py" (Cython)
-+ Keep the same function's name
