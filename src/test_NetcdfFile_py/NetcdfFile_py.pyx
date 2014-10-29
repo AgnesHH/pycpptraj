@@ -4,7 +4,7 @@ from ReplicaDimArray cimport *
 
 cdef enum NCTYPE: NC_UNKNOWN = 0, NC_AMBERTRAJ, NC_AMBERRESTART
 
-cdef extern from "NetcdfFile.cpp":
+cdef extern from "NetcdfFile.h":
     cdef cppclass NetcdfFile:
         NetcdfFile()
         NetcdfDebug()

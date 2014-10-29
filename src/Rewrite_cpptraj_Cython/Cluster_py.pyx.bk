@@ -1,0 +1,14 @@
+# distutils: language = c++
+
+from ClusterList cimport *
+
+#cdef class ClusterList:
+#    cdef:
+#        _ClusterList * thisptr
+#        ClusterMatrix FrameDistances_
+#
+#    def __cinit__(self):
+#        self.thisptr = new _ClusterList()
+#
+#    def __dealloc__(self):
+#        del self.thisptr

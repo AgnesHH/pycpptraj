@@ -1,0 +1,148 @@
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+# distutil: language = c++
+
+from ClusterDist cimport *
+^
+------------------------------------------------------------
+
+ClusterNode.pxd:3:0: 'ClusterDist.pxd' not found
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+from ClusterDist cimport *
+
+cdef extern from "ClusterNode.h":
+    cdef cppclass ClusterNode:
+        ClusterNode()
+        ClusterNode(ClusterNode*, ClusterDist.Cframce&, int )
+                                 ^
+------------------------------------------------------------
+
+ClusterNode.pxd:8:34: 'ClusterDist' is not declared
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+       void Summary(string, int)
+       void Summary_Part(string, int, vector[int]&)
+       void PrintClustersToFile(string&, int)
+       void PrintClusters()
+
+       int CalcFrameDistances(string&, DsArray&, DistModeType, DistMetricType,
+                                      ^
+------------------------------------------------------------
+
+ClusterList.pxd:24:39: 'DsArray' is not a type identifier
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+       #virtual int SetupCluster(ArgList&) = 0
+       #virtual void ClusteringInfo() = o
+       #virtual int Cluster() = 0
+
+       #protected:
+       ClusterMatrix FrameDistances_
+      ^
+------------------------------------------------------------
+
+ClusterList.pxd:31:7: 'ClusterMatrix' is not a type identifier
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+from ArgList cimport *
+from CpptrajFile cimport *
+from CpptrajStdio cimport *
+from ClusterList cimport *
+
+cdef class Cluster_DBSCAN(ClusterList):
+    ^
+------------------------------------------------------------
+
+Cluster_DBSCAN_py.pyx:22:5: 'ClusterList' is not an extension type
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        #cdef vector[int].const_iterator otherpoint = FramesToCluster.begin()
+        cdef vector[int].iterator otherpoint = FramesToCluster.begin()
+        
+        while otherpoint != FramesToCluster.end():
+            if point == deref(otherpoint): pass
+            if (FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_): NeighborPts.push_back(deref(otherpoint))
+                              ^
+------------------------------------------------------------
+
+Cluster_DBSCAN_py.pyx:67:31: undeclared name not builtin: FrameDistances_
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        while point != FramesToCluster.end():
+            dists.clear()
+            while otherpoint != FramesToCluster.end():
+                dists.push_back(FrameDistances_.GetFdist(deref(point), deref(otherpoint)))
+                inc(otherpoint)
+            list.sort(dists.begin(), dists.end())
+               ^
+------------------------------------------------------------
+
+Cluster_DBSCAN_py.pyx:91:16: sort not a static member of list[T]
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                inc(otherpoint)
+            list.sort(dists.begin(), dists.end())
+            Kdist.push_back(dists[Kval])
+            inc(point)
+
+        list.sort(Kdist.begin(), Kdist.end())
+           ^
+------------------------------------------------------------
+
+Cluster_DBSCAN_py.pyx:95:12: sort not a static member of list[T]
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            list.sort(dists.begin(), dists.end())
+            Kdist.push_back(dists[Kval])
+            inc(point)
+
+        list.sort(Kdist.begin(), Kdist.end())
+        list.reverse(Kdist.begin(), Kdist.end())
+           ^
+------------------------------------------------------------
+
+Cluster_DBSCAN_py.pyx:96:12: reverse not a static member of list[T]
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        list.sort(Kdist.begin(), Kdist.end())
+        list.reverse(Kdist.begin(), Kdist.end())
+
+        cdef CpptrajFile Outfile
+        Outfile.OpenWrite(outfilename)
+        Outfile.Printf("%-8s %1i%-11s\n", "#Point", Kval,"-dist")
+                     ^
+------------------------------------------------------------
+
+Cluster_DBSCAN_py.pyx:100:22: Call with wrong number of arguments (expected 1, got 4)
+missing cimport in module 'ClusterDist': ./ClusterNode.pxd
+Compiling Cluster_DBSCAN_py.pyx because it changed.
+Cythonizing Cluster_DBSCAN_py.pyx
+Traceback (most recent call last):
+  File "./setup.py", line 10, in <module>
+    include_dirs=[np.get_include()])
+  File "/mnt/raidc/haichit/Programs/Cython-0.21.1/build/lib.linux-x86_64-2.7/Cython/Build/Dependencies.py", line 840, in cythonize
+    cythonize_one(*args[1:])
+  File "/mnt/raidc/haichit/Programs/Cython-0.21.1/build/lib.linux-x86_64-2.7/Cython/Build/Dependencies.py", line 959, in cythonize_one
+    raise CompileError(None, pyx_file)
+Cython.Compiler.Errors.CompileError: Cluster_DBSCAN_py.pyx
