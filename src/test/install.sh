@@ -1,1 +1,0 @@
-CFLAGS="-I/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/" LDFLAGS="-L/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/ -lm -lgfortran -w" python ./setup.py build_ext -i
