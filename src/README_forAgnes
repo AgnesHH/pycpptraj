@@ -1,8 +1,0 @@
-1. You can test the cpptraj_py code by
-
-ssh to naga84 (or 85, ...)
-
-source /mnt/raidc2/haichit/Study/Cython/wrap_cpptraj_1/source.sh
-
-PyCpptraj.py [cpptraj regular options] 
-      Example: PyCpptraj.py --help
