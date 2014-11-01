@@ -240,6 +240,7 @@ void __Pyx_call_destructor(T* x) {
 #include "ClusterDist.h"
 #include "ClusterNode.h"
 #include "ClusterMatrix.h"
+#include "DataSet.h"
 #include "ClusterList.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -431,6 +432,13 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN;
 
+/* "typedef_me.pxd":5
+ * 
+ * #ClusterDist
+ * ctypedef vector[DataSet*] DsArray             # <<<<<<<<<<<<<<
+ */
+typedef std::vector<DataSet *>  __pyx_t_10typedef_me_DsArray;
+
 /* "Cluster_DBSCAN_py.pyx":25
  * from ClusterList cimport ClusterList
  * 
@@ -455,7 +463,7 @@ struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN {
 
 
 struct __pyx_vtabstruct_17Cluster_DBSCAN_py_Cluster_DBSCAN {
-  PyObject *(*SetupCluster)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, ArgList &);
+  int (*SetupCluster)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, ArgList &);
   PyObject *(*ClusterResults)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, CpptrajFile &);
   PyObject *(*RegionQuery)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, std::vector<int>  &, std::vector<int>  &, int);
   PyObject *(*ComputeKdist)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, int, std::vector<int>  &);
@@ -531,6 +539,13 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[], \
 
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
     Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
+static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb);
+static CYTHON_INLINE void __Pyx_ErrFetch(PyObject **type, PyObject **value, PyObject **tb);
+
+static void __Pyx_WriteUnraisable(const char *name, int clineno,
+                                  int lineno, const char *filename,
+                                  int full_traceback);
 
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
@@ -620,7 +635,7 @@ static int __Pyx_check_binary_version(void);
 
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
-static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_SetupCluster(CYTHON_UNUSED struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *__pyx_v_self, CYTHON_UNUSED ArgList &__pyx_v_myarglist); /* proto*/
+static int __pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_SetupCluster(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *__pyx_v_self, ArgList &__pyx_v_analyzeArgs); /* proto*/
 static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ClusterResults(CYTHON_UNUSED struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *__pyx_v_self, CYTHON_UNUSED CpptrajFile &__pyx_v_mycpptrajfile); /* proto*/
 static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_RegionQuery(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *__pyx_v_self, std::vector<int>  &__pyx_v_NeighborPts, std::vector<int>  &__pyx_v_FramesToCluster, int __pyx_v_point); /* proto*/
 static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *__pyx_v_self, int __pyx_v_Kval, std::vector<int>  &__pyx_v_FramesToCluster); /* proto*/
@@ -644,6 +659,10 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
 /* Module declarations from 'ClusterNode' */
 
 /* Module declarations from 'ClusterMatrix' */
+
+/* Module declarations from 'DataSet' */
+
+/* Module declarations from 'typedef_me' */
 
 /* Module declarations from 'ClusterList' */
 
@@ -675,14 +694,22 @@ static char __pyx_k_kdist[] = "kdist_";
 static char __pyx_k_print[] = "print";
 static char __pyx_k_range[] = "range";
 static char __pyx_k_epsilon[] = "epsilon_";
+static char __pyx_k_kdist_2[] = "kdist";
 static char __pyx_k_reverse[] = "reverse";
 static char __pyx_k_8s_1i_11s[] = "%-8s %1i%-11s\n";
+static char __pyx_k_epsilon_2[] = "epsilon";
 static char __pyx_k_minPoints[] = "minPoints_";
+static char __pyx_k_minpoints[] = "minpoints";
 static char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
+static char __pyx_k_sievetoframe[] = "sievetoframe";
 static char __pyx_k_sieveToCentroid[] = "sieveToCentroid_";
 static char __pyx_k_DBSCAN_Calculating_Kdist_i_outp[] = "\tDBSCAN: Calculating Kdist(%i), output to %s\n";
+static char __pyx_k_Re_implement_Cpptraj_C_to_Cytho[] = "\nRe-implement Cpptraj C++ to Cython/Python style\nMost of the hard word is from Daniel R. Roe\n";
 static char __pyx_k_dbscan_minpoints_n_epsilon_e_si[] = "\t[dbscan minpoints <n> epsilon <e> [sievetoframe] [kdist <k>]]\n";
-static char __pyx_k_re_implement_Cpptraj_C_to_Cython[] = "re-implement Cpptraj C++ to Cython/Python style\nMost of the hard word is from Daniel R. Roe\nI just changed a bit\n";
+static char __pyx_k_Error_DBSCAN_requires_epsilon_to[] = "Error: DBSCAN requires epsilon to be set and > 0.0\nError: Use 'epsilon <e>'\n";
+static char __pyx_k_Error_DBSCAN_requires_minimum_of[] = "Error: DBSCAN requires minimum # of points to be set and >= 1\nError: Use 'minpoints <N>'\n";
+static PyObject *__pyx_kp_s_Error_DBSCAN_requires_epsilon_to;
+static PyObject *__pyx_kp_s_Error_DBSCAN_requires_minimum_of;
 static PyObject *__pyx_kp_s_Kdist;
 static PyObject *__pyx_kp_s_dat;
 static PyObject *__pyx_kp_s_dbscan_minpoints_n_epsilon_e_si;
@@ -971,7 +998,7 @@ static PyObject *__pyx_pf_17Cluster_DBSCAN_py_14Cluster_DBSCAN_4Help(CYTHON_UNUS
  *     def Help(self):
  *         print "\t[dbscan minpoints <n> epsilon <e> [sievetoframe] [kdist <k>]]\n"             # <<<<<<<<<<<<<<
  * 
- *     cdef SetupCluster(self, ArgList& myarglist):
+ *     cdef int SetupCluster(self, ArgList& analyzeArgs):
  */
   if (__Pyx_PrintOne(0, __pyx_kp_s_dbscan_minpoints_n_epsilon_e_si) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
@@ -998,33 +1025,167 @@ static PyObject *__pyx_pf_17Cluster_DBSCAN_py_14Cluster_DBSCAN_4Help(CYTHON_UNUS
 /* "Cluster_DBSCAN_py.pyx":51
  *         print "\t[dbscan minpoints <n> epsilon <e> [sievetoframe] [kdist <k>]]\n"
  * 
- *     cdef SetupCluster(self, ArgList& myarglist):             # <<<<<<<<<<<<<<
- *         pass
- * 
+ *     cdef int SetupCluster(self, ArgList& analyzeArgs):             # <<<<<<<<<<<<<<
+ *         """Add doc here"""
+ *         self.kdist_ = analyzeArgs.getKeyInt("kdist", 0)
  */
 
-static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_SetupCluster(CYTHON_UNUSED struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *__pyx_v_self, CYTHON_UNUSED ArgList &__pyx_v_myarglist) {
-  PyObject *__pyx_r = NULL;
+static int __pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_SetupCluster(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *__pyx_v_self, ArgList &__pyx_v_analyzeArgs) {
+  int __pyx_r;
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("SetupCluster", 0);
 
+  /* "Cluster_DBSCAN_py.pyx":53
+ *     cdef int SetupCluster(self, ArgList& analyzeArgs):
+ *         """Add doc here"""
+ *         self.kdist_ = analyzeArgs.getKeyInt("kdist", 0)             # <<<<<<<<<<<<<<
+ *         if self.kdist_ < 1:
+ *             self.minPoints_ = analyzeArgs.getKeyInt("minpoints", -1)
+ */
+  __pyx_v_self->kdist_ = __pyx_v_analyzeArgs.getKeyInt(__pyx_k_kdist_2, 0);
+
+  /* "Cluster_DBSCAN_py.pyx":54
+ *         """Add doc here"""
+ *         self.kdist_ = analyzeArgs.getKeyInt("kdist", 0)
+ *         if self.kdist_ < 1:             # <<<<<<<<<<<<<<
+ *             self.minPoints_ = analyzeArgs.getKeyInt("minpoints", -1)
+ *             if self.minPoints_ < 1:
+ */
+  __pyx_t_1 = ((__pyx_v_self->kdist_ < 1) != 0);
+  if (__pyx_t_1) {
+
+    /* "Cluster_DBSCAN_py.pyx":55
+ *         self.kdist_ = analyzeArgs.getKeyInt("kdist", 0)
+ *         if self.kdist_ < 1:
+ *             self.minPoints_ = analyzeArgs.getKeyInt("minpoints", -1)             # <<<<<<<<<<<<<<
+ *             if self.minPoints_ < 1:
+ *                 print("Error: DBSCAN requires minimum # of points to be set and >= 1\n"
+ */
+    __pyx_v_self->minPoints_ = __pyx_v_analyzeArgs.getKeyInt(__pyx_k_minpoints, -1);
+
+    /* "Cluster_DBSCAN_py.pyx":56
+ *         if self.kdist_ < 1:
+ *             self.minPoints_ = analyzeArgs.getKeyInt("minpoints", -1)
+ *             if self.minPoints_ < 1:             # <<<<<<<<<<<<<<
+ *                 print("Error: DBSCAN requires minimum # of points to be set and >= 1\n"
+ *                           "Error: Use 'minpoints <N>'\n")
+ */
+    __pyx_t_1 = ((__pyx_v_self->minPoints_ < 1) != 0);
+    if (__pyx_t_1) {
+
+      /* "Cluster_DBSCAN_py.pyx":57
+ *             self.minPoints_ = analyzeArgs.getKeyInt("minpoints", -1)
+ *             if self.minPoints_ < 1:
+ *                 print("Error: DBSCAN requires minimum # of points to be set and >= 1\n"             # <<<<<<<<<<<<<<
+ *                           "Error: Use 'minpoints <N>'\n")
+ *                 return 1
+ */
+      if (__Pyx_PrintOne(0, __pyx_kp_s_Error_DBSCAN_requires_minimum_of) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+      /* "Cluster_DBSCAN_py.pyx":59
+ *                 print("Error: DBSCAN requires minimum # of points to be set and >= 1\n"
+ *                           "Error: Use 'minpoints <N>'\n")
+ *                 return 1             # <<<<<<<<<<<<<<
+ *             self.epsilon_ = analyzeArgs.getKeyDouble("epsilon", -1.0)
+ *             if self.epsilon_ <= 0.0:
+ */
+      __pyx_r = 1;
+      goto __pyx_L0;
+    }
+
+    /* "Cluster_DBSCAN_py.pyx":60
+ *                           "Error: Use 'minpoints <N>'\n")
+ *                 return 1
+ *             self.epsilon_ = analyzeArgs.getKeyDouble("epsilon", -1.0)             # <<<<<<<<<<<<<<
+ *             if self.epsilon_ <= 0.0:
+ *                 print("Error: DBSCAN requires epsilon to be set and > 0.0\n"
+ */
+    __pyx_v_self->epsilon_ = __pyx_v_analyzeArgs.getKeyDouble(__pyx_k_epsilon_2, -1.0);
+
+    /* "Cluster_DBSCAN_py.pyx":61
+ *                 return 1
+ *             self.epsilon_ = analyzeArgs.getKeyDouble("epsilon", -1.0)
+ *             if self.epsilon_ <= 0.0:             # <<<<<<<<<<<<<<
+ *                 print("Error: DBSCAN requires epsilon to be set and > 0.0\n"
+ *                           "Error: Use 'epsilon <e>'\n")
+ */
+    __pyx_t_1 = ((__pyx_v_self->epsilon_ <= 0.0) != 0);
+    if (__pyx_t_1) {
+
+      /* "Cluster_DBSCAN_py.pyx":62
+ *             self.epsilon_ = analyzeArgs.getKeyDouble("epsilon", -1.0)
+ *             if self.epsilon_ <= 0.0:
+ *                 print("Error: DBSCAN requires epsilon to be set and > 0.0\n"             # <<<<<<<<<<<<<<
+ *                           "Error: Use 'epsilon <e>'\n")
+ *                 return 1
+ */
+      if (__Pyx_PrintOne(0, __pyx_kp_s_Error_DBSCAN_requires_epsilon_to) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 62; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+      /* "Cluster_DBSCAN_py.pyx":64
+ *                 print("Error: DBSCAN requires epsilon to be set and > 0.0\n"
+ *                           "Error: Use 'epsilon <e>'\n")
+ *                 return 1             # <<<<<<<<<<<<<<
+ *         #from cpptraj: sieveToCentroid_ = !analyzeArgs.hasKey("sievetoframe")
+ *         #double-check this
+ */
+      __pyx_r = 1;
+      goto __pyx_L0;
+    }
+    goto __pyx_L3;
+  }
+  __pyx_L3:;
+
+  /* "Cluster_DBSCAN_py.pyx":67
+ *         #from cpptraj: sieveToCentroid_ = !analyzeArgs.hasKey("sievetoframe")
+ *         #double-check this
+ *         self.sieveToCentroid_ = not analyzeArgs.hasKey("sievetoframe")             # <<<<<<<<<<<<<<
+ *         return 0
+ * 
+ */
+  __pyx_v_self->sieveToCentroid_ = (!(__pyx_v_analyzeArgs.hasKey(__pyx_k_sievetoframe) != 0));
+
+  /* "Cluster_DBSCAN_py.pyx":68
+ *         #double-check this
+ *         self.sieveToCentroid_ = not analyzeArgs.hasKey("sievetoframe")
+ *         return 0             # <<<<<<<<<<<<<<
+ * 
+ *     def ClusteringInfo(self):
+ */
+  __pyx_r = 0;
+  goto __pyx_L0;
+
+  /* "Cluster_DBSCAN_py.pyx":51
+ *         print "\t[dbscan minpoints <n> epsilon <e> [sievetoframe] [kdist <k>]]\n"
+ * 
+ *     cdef int SetupCluster(self, ArgList& analyzeArgs):             # <<<<<<<<<<<<<<
+ *         """Add doc here"""
+ *         self.kdist_ = analyzeArgs.getKeyInt("kdist", 0)
+ */
+
   /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  __Pyx_XGIVEREF(__pyx_r);
+  __pyx_L1_error:;
+  __Pyx_WriteUnraisable("Cluster_DBSCAN_py.Cluster_DBSCAN.SetupCluster", __pyx_clineno, __pyx_lineno, __pyx_filename, 0);
+  __pyx_r = 0;
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "Cluster_DBSCAN_py.pyx":54
- *         pass
+/* "Cluster_DBSCAN_py.pyx":70
+ *         return 0
  * 
  *     def ClusteringInfo(self):             # <<<<<<<<<<<<<<
- *         pass
+ *         """add doc here"""
  * 
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_17Cluster_DBSCAN_py_14Cluster_DBSCAN_7ClusteringInfo(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static char __pyx_doc_17Cluster_DBSCAN_py_14Cluster_DBSCAN_6ClusteringInfo[] = "add doc here";
 static PyObject *__pyx_pw_17Cluster_DBSCAN_py_14Cluster_DBSCAN_7ClusteringInfo(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -1048,8 +1209,8 @@ static PyObject *__pyx_pf_17Cluster_DBSCAN_py_14Cluster_DBSCAN_6ClusteringInfo(C
   return __pyx_r;
 }
 
-/* "Cluster_DBSCAN_py.pyx":57
- *         pass
+/* "Cluster_DBSCAN_py.pyx":73
+ *         """add doc here"""
  * 
  *     def Cluster(self):             # <<<<<<<<<<<<<<
  *         pass
@@ -1081,7 +1242,7 @@ static PyObject *__pyx_pf_17Cluster_DBSCAN_py_14Cluster_DBSCAN_8Cluster(CYTHON_U
   return __pyx_r;
 }
 
-/* "Cluster_DBSCAN_py.pyx":60
+/* "Cluster_DBSCAN_py.pyx":76
  *         pass
  * 
  *     def AddSievedFrames(self):             # <<<<<<<<<<<<<<
@@ -1114,7 +1275,7 @@ static PyObject *__pyx_pf_17Cluster_DBSCAN_py_14Cluster_DBSCAN_10AddSievedFrames
   return __pyx_r;
 }
 
-/* "Cluster_DBSCAN_py.pyx":63
+/* "Cluster_DBSCAN_py.pyx":79
  *         pass
  * 
  *     cdef ClusterResults(self, CpptrajFile& mycpptrajfile):             # <<<<<<<<<<<<<<
@@ -1134,7 +1295,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ClusterResults(CYT
   return __pyx_r;
 }
 
-/* "Cluster_DBSCAN_py.pyx":66
+/* "Cluster_DBSCAN_py.pyx":82
  *         pass
  * 
  *     cdef RegionQuery(self, vector[int]& NeighborPts, vector[int]& FramesToCluster,             # <<<<<<<<<<<<<<
@@ -1149,16 +1310,16 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_RegionQuery(struct
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("RegionQuery", 0);
 
-  /* "Cluster_DBSCAN_py.pyx":69
- *                      int point):
+  /* "Cluster_DBSCAN_py.pyx":86
  *         """add doc here"""
+ * 
  *         NeighborPts.clear()             # <<<<<<<<<<<<<<
  *         #cdef vector[int].const_iterator otherpoint = FramesToCluster.begin()
  *         cdef vector[int].iterator otherpoint = FramesToCluster.begin()
  */
   __pyx_v_NeighborPts.clear();
 
-  /* "Cluster_DBSCAN_py.pyx":71
+  /* "Cluster_DBSCAN_py.pyx":88
  *         NeighborPts.clear()
  *         #cdef vector[int].const_iterator otherpoint = FramesToCluster.begin()
  *         cdef vector[int].iterator otherpoint = FramesToCluster.begin()             # <<<<<<<<<<<<<<
@@ -1167,23 +1328,23 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_RegionQuery(struct
  */
   __pyx_v_otherpoint = __pyx_v_FramesToCluster.begin();
 
-  /* "Cluster_DBSCAN_py.pyx":73
+  /* "Cluster_DBSCAN_py.pyx":90
  *         cdef vector[int].iterator otherpoint = FramesToCluster.begin()
  * 
  *         while otherpoint != FramesToCluster.end():             # <<<<<<<<<<<<<<
  *             if point == deref(otherpoint): pass
- *             if (self.clusterlist_ptr.FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_): NeighborPts.push_back(deref(otherpoint))
+ *             if (self.clusterlist_ptr.FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_):
  */
   while (1) {
     __pyx_t_1 = ((__pyx_v_otherpoint != __pyx_v_FramesToCluster.end()) != 0);
     if (!__pyx_t_1) break;
 
-    /* "Cluster_DBSCAN_py.pyx":74
+    /* "Cluster_DBSCAN_py.pyx":91
  * 
  *         while otherpoint != FramesToCluster.end():
  *             if point == deref(otherpoint): pass             # <<<<<<<<<<<<<<
- *             if (self.clusterlist_ptr.FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_): NeighborPts.push_back(deref(otherpoint))
- *             inc(otherpoint)
+ *             if (self.clusterlist_ptr.FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_):
+ *                 NeighborPts.push_back(deref(otherpoint))
  */
     __pyx_t_1 = ((__pyx_v_point == (*__pyx_v_otherpoint)) != 0);
     if (__pyx_t_1) {
@@ -1191,23 +1352,31 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_RegionQuery(struct
     }
     __pyx_L5:;
 
-    /* "Cluster_DBSCAN_py.pyx":75
+    /* "Cluster_DBSCAN_py.pyx":92
  *         while otherpoint != FramesToCluster.end():
  *             if point == deref(otherpoint): pass
- *             if (self.clusterlist_ptr.FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_): NeighborPts.push_back(deref(otherpoint))             # <<<<<<<<<<<<<<
+ *             if (self.clusterlist_ptr.FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_):             # <<<<<<<<<<<<<<
+ *                 NeighborPts.push_back(deref(otherpoint))
  *             inc(otherpoint)
- * 
  */
     __pyx_t_1 = ((__pyx_v_self->clusterlist_ptr->FrameDistances_.GetFdist(__pyx_v_point, (*__pyx_v_otherpoint)) < __pyx_v_self->epsilon_) != 0);
     if (__pyx_t_1) {
+
+      /* "Cluster_DBSCAN_py.pyx":93
+ *             if point == deref(otherpoint): pass
+ *             if (self.clusterlist_ptr.FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_):
+ *                 NeighborPts.push_back(deref(otherpoint))             # <<<<<<<<<<<<<<
+ *             inc(otherpoint)
+ * 
+ */
       __pyx_v_NeighborPts.push_back((*__pyx_v_otherpoint));
       goto __pyx_L6;
     }
     __pyx_L6:;
 
-    /* "Cluster_DBSCAN_py.pyx":76
- *             if point == deref(otherpoint): pass
- *             if (self.clusterlist_ptr.FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_): NeighborPts.push_back(deref(otherpoint))
+    /* "Cluster_DBSCAN_py.pyx":94
+ *             if (self.clusterlist_ptr.FrameDistances_.GetFdist(point, deref(otherpoint)) < self.epsilon_):
+ *                 NeighborPts.push_back(deref(otherpoint))
  *             inc(otherpoint)             # <<<<<<<<<<<<<<
  * 
  * 
@@ -1215,7 +1384,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_RegionQuery(struct
     (++__pyx_v_otherpoint);
   }
 
-  /* "Cluster_DBSCAN_py.pyx":66
+  /* "Cluster_DBSCAN_py.pyx":82
  *         pass
  * 
  *     cdef RegionQuery(self, vector[int]& NeighborPts, vector[int]& FramesToCluster,             # <<<<<<<<<<<<<<
@@ -1230,7 +1399,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_RegionQuery(struct
   return __pyx_r;
 }
 
-/* "Cluster_DBSCAN_py.pyx":79
+/* "Cluster_DBSCAN_py.pyx":97
  * 
  * 
  *     cdef ComputeKdist(self, int Kval, vector[int]& FramesToCluster):             # <<<<<<<<<<<<<<
@@ -1259,46 +1428,46 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("ComputeKdist", 0);
 
-  /* "Cluster_DBSCAN_py.pyx":83
+  /* "Cluster_DBSCAN_py.pyx":101
  *         cdef:
  *             vector[double] dists, Kdist
  *             string outfilename = "Kdist." + str(Kval) + ".dat"             # <<<<<<<<<<<<<<
  * 
  *         dists.reverse(FramesToCluster.size())
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_Kval); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_Kval); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyString_Type))), __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyString_Type))), __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyNumber_Add(__pyx_kp_s_Kdist, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = PyNumber_Add(__pyx_kp_s_Kdist, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_kp_s_dat); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_kp_s_dat); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __pyx_convert_string_from_py_(__pyx_t_1); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 83; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __pyx_convert_string_from_py_(__pyx_t_1); if (unlikely(PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 101; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_outfilename = __pyx_t_3;
 
-  /* "Cluster_DBSCAN_py.pyx":85
+  /* "Cluster_DBSCAN_py.pyx":103
  *             string outfilename = "Kdist." + str(Kval) + ".dat"
  * 
  *         dists.reverse(FramesToCluster.size())             # <<<<<<<<<<<<<<
  *         Kdist.reverse(FramesToCluster.size())
  *         mprintf("\tDBSCAN: Calculating Kdist(%i), output to %s\n", Kval, outfilename.c_str())
  */
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_v_dists); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_v_dists); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_reverse); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_reverse); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_FramesToCluster.size()); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyInt_FromSize_t(__pyx_v_FramesToCluster.size()); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
@@ -1311,36 +1480,36 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
     }
   }
   if (!__pyx_t_5) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
     PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 85; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 103; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Cluster_DBSCAN_py.pyx":86
+  /* "Cluster_DBSCAN_py.pyx":104
  * 
  *         dists.reverse(FramesToCluster.size())
  *         Kdist.reverse(FramesToCluster.size())             # <<<<<<<<<<<<<<
  *         mprintf("\tDBSCAN: Calculating Kdist(%i), output to %s\n", Kval, outfilename.c_str())
  * 
  */
-  __pyx_t_4 = __pyx_convert_vector_to_py_double(__pyx_v_Kdist); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __pyx_convert_vector_to_py_double(__pyx_v_Kdist); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_reverse); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_reverse); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_FromSize_t(__pyx_v_FramesToCluster.size()); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyInt_FromSize_t(__pyx_v_FramesToCluster.size()); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_2 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_6))) {
@@ -1353,24 +1522,24 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
     }
   }
   if (!__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_4); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 86; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Cluster_DBSCAN_py.pyx":87
+  /* "Cluster_DBSCAN_py.pyx":105
  *         dists.reverse(FramesToCluster.size())
  *         Kdist.reverse(FramesToCluster.size())
  *         mprintf("\tDBSCAN: Calculating Kdist(%i), output to %s\n", Kval, outfilename.c_str())             # <<<<<<<<<<<<<<
@@ -1379,7 +1548,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
   mprintf(__pyx_k_DBSCAN_Calculating_Kdist_i_outp, __pyx_v_Kval, __pyx_v_outfilename.c_str());
 
-  /* "Cluster_DBSCAN_py.pyx":90
+  /* "Cluster_DBSCAN_py.pyx":108
  * 
  *         #cdef vector[int].const_iterator point = FramesToCluster.begin()
  *         cdef vector[int].iterator point = FramesToCluster.begin()             # <<<<<<<<<<<<<<
@@ -1388,7 +1557,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
   __pyx_v_point = __pyx_v_FramesToCluster.begin();
 
-  /* "Cluster_DBSCAN_py.pyx":92
+  /* "Cluster_DBSCAN_py.pyx":110
  *         cdef vector[int].iterator point = FramesToCluster.begin()
  *         #cdef vector[int].const_iterator otherpoint = FramesToCluster.begin()
  *         cdef vector[int].iterator otherpoint = FramesToCluster.begin()             # <<<<<<<<<<<<<<
@@ -1397,7 +1566,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
   __pyx_v_otherpoint = __pyx_v_FramesToCluster.begin();
 
-  /* "Cluster_DBSCAN_py.pyx":94
+  /* "Cluster_DBSCAN_py.pyx":112
  *         cdef vector[int].iterator otherpoint = FramesToCluster.begin()
  * 
  *         while point != FramesToCluster.end():             # <<<<<<<<<<<<<<
@@ -1408,7 +1577,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
     __pyx_t_7 = ((__pyx_v_point != __pyx_v_FramesToCluster.end()) != 0);
     if (!__pyx_t_7) break;
 
-    /* "Cluster_DBSCAN_py.pyx":95
+    /* "Cluster_DBSCAN_py.pyx":113
  * 
  *         while point != FramesToCluster.end():
  *             dists.clear()             # <<<<<<<<<<<<<<
@@ -1417,7 +1586,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
     __pyx_v_dists.clear();
 
-    /* "Cluster_DBSCAN_py.pyx":96
+    /* "Cluster_DBSCAN_py.pyx":114
  *         while point != FramesToCluster.end():
  *             dists.clear()
  *             while otherpoint != FramesToCluster.end():             # <<<<<<<<<<<<<<
@@ -1428,7 +1597,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
       __pyx_t_7 = ((__pyx_v_otherpoint != __pyx_v_FramesToCluster.end()) != 0);
       if (!__pyx_t_7) break;
 
-      /* "Cluster_DBSCAN_py.pyx":97
+      /* "Cluster_DBSCAN_py.pyx":115
  *             dists.clear()
  *             while otherpoint != FramesToCluster.end():
  *                 dists.push_back(self.clusterlist_ptr.FrameDistances_.GetFdist(deref(point), deref(otherpoint)))             # <<<<<<<<<<<<<<
@@ -1437,7 +1606,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
       __pyx_v_dists.push_back(__pyx_v_self->clusterlist_ptr->FrameDistances_.GetFdist((*__pyx_v_point), (*__pyx_v_otherpoint)));
 
-      /* "Cluster_DBSCAN_py.pyx":98
+      /* "Cluster_DBSCAN_py.pyx":116
  *             while otherpoint != FramesToCluster.end():
  *                 dists.push_back(self.clusterlist_ptr.FrameDistances_.GetFdist(deref(point), deref(otherpoint)))
  *                 inc(otherpoint)             # <<<<<<<<<<<<<<
@@ -1447,7 +1616,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
       (++__pyx_v_otherpoint);
     }
 
-    /* "Cluster_DBSCAN_py.pyx":99
+    /* "Cluster_DBSCAN_py.pyx":117
  *                 dists.push_back(self.clusterlist_ptr.FrameDistances_.GetFdist(deref(point), deref(otherpoint)))
  *                 inc(otherpoint)
  *             csort(dists.begin(), dists.end())             # <<<<<<<<<<<<<<
@@ -1456,7 +1625,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
     std::sort<std::vector<double> ::iterator>(__pyx_v_dists.begin(), __pyx_v_dists.end());
 
-    /* "Cluster_DBSCAN_py.pyx":100
+    /* "Cluster_DBSCAN_py.pyx":118
  *                 inc(otherpoint)
  *             csort(dists.begin(), dists.end())
  *             Kdist.push_back(dists[Kval])             # <<<<<<<<<<<<<<
@@ -1465,7 +1634,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
     __pyx_v_Kdist.push_back((__pyx_v_dists[__pyx_v_Kval]));
 
-    /* "Cluster_DBSCAN_py.pyx":101
+    /* "Cluster_DBSCAN_py.pyx":119
  *             csort(dists.begin(), dists.end())
  *             Kdist.push_back(dists[Kval])
  *             inc(point)             # <<<<<<<<<<<<<<
@@ -1475,7 +1644,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
     (++__pyx_v_point);
   }
 
-  /* "Cluster_DBSCAN_py.pyx":103
+  /* "Cluster_DBSCAN_py.pyx":121
  *             inc(point)
  * 
  *         csort(Kdist.begin(), Kdist.end())             # <<<<<<<<<<<<<<
@@ -1484,7 +1653,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
   std::sort<std::vector<double> ::iterator>(__pyx_v_Kdist.begin(), __pyx_v_Kdist.end());
 
-  /* "Cluster_DBSCAN_py.pyx":104
+  /* "Cluster_DBSCAN_py.pyx":122
  * 
  *         csort(Kdist.begin(), Kdist.end())
  *         creverse(Kdist.begin(), Kdist.end())             # <<<<<<<<<<<<<<
@@ -1493,7 +1662,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
   std::reverse<std::vector<double> ::iterator>(__pyx_v_Kdist.begin(), __pyx_v_Kdist.end());
 
-  /* "Cluster_DBSCAN_py.pyx":107
+  /* "Cluster_DBSCAN_py.pyx":125
  * 
  *         cdef CpptrajFile Outfile
  *         Outfile.OpenWrite(outfilename)             # <<<<<<<<<<<<<<
@@ -1502,7 +1671,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
   __pyx_v_Outfile.OpenWrite(__pyx_v_outfilename);
 
-  /* "Cluster_DBSCAN_py.pyx":108
+  /* "Cluster_DBSCAN_py.pyx":126
  *         cdef CpptrajFile Outfile
  *         Outfile.OpenWrite(outfilename)
  *         Outfile.Printf("%-8s %1i%-11s\n", "#Point", Kval,"-dist")             # <<<<<<<<<<<<<<
@@ -1511,7 +1680,7 @@ static PyObject *__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist(struc
  */
   __pyx_v_Outfile.Printf(__pyx_k_8s_1i_11s, __pyx_k_Point, __pyx_v_Kval, __pyx_k_dist);
 
-  /* "Cluster_DBSCAN_py.pyx":79
+  /* "Cluster_DBSCAN_py.pyx":97
  * 
  * 
  *     cdef ComputeKdist(self, int Kval, vector[int]& FramesToCluster):             # <<<<<<<<<<<<<<
@@ -1694,7 +1863,7 @@ static void __pyx_tp_dealloc_17Cluster_DBSCAN_py_Cluster_DBSCAN(PyObject *o) {
 
 static PyMethodDef __pyx_methods_17Cluster_DBSCAN_py_Cluster_DBSCAN[] = {
   {"Help", (PyCFunction)__pyx_pw_17Cluster_DBSCAN_py_14Cluster_DBSCAN_5Help, METH_NOARGS, 0},
-  {"ClusteringInfo", (PyCFunction)__pyx_pw_17Cluster_DBSCAN_py_14Cluster_DBSCAN_7ClusteringInfo, METH_NOARGS, 0},
+  {"ClusteringInfo", (PyCFunction)__pyx_pw_17Cluster_DBSCAN_py_14Cluster_DBSCAN_7ClusteringInfo, METH_NOARGS, __pyx_doc_17Cluster_DBSCAN_py_14Cluster_DBSCAN_6ClusteringInfo},
   {"Cluster", (PyCFunction)__pyx_pw_17Cluster_DBSCAN_py_14Cluster_DBSCAN_9Cluster, METH_NOARGS, 0},
   {"AddSievedFrames", (PyCFunction)__pyx_pw_17Cluster_DBSCAN_py_14Cluster_DBSCAN_11AddSievedFrames, METH_NOARGS, 0},
   {0, 0, 0, 0}
@@ -1769,7 +1938,7 @@ static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
   #endif
     "Cluster_DBSCAN_py",
-    __pyx_k_re_implement_Cpptraj_C_to_Cython, /* m_doc */
+    __pyx_k_Re_implement_Cpptraj_C_to_Cytho, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
     NULL, /* m_reload */
@@ -1780,6 +1949,8 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_kp_s_Error_DBSCAN_requires_epsilon_to, __pyx_k_Error_DBSCAN_requires_epsilon_to, sizeof(__pyx_k_Error_DBSCAN_requires_epsilon_to), 0, 0, 1, 0},
+  {&__pyx_kp_s_Error_DBSCAN_requires_minimum_of, __pyx_k_Error_DBSCAN_requires_minimum_of, sizeof(__pyx_k_Error_DBSCAN_requires_minimum_of), 0, 0, 1, 0},
   {&__pyx_kp_s_Kdist, __pyx_k_Kdist, sizeof(__pyx_k_Kdist), 0, 0, 1, 0},
   {&__pyx_kp_s_dat, __pyx_k_dat, sizeof(__pyx_k_dat), 0, 0, 1, 0},
   {&__pyx_kp_s_dbscan_minpoints_n_epsilon_e_si, __pyx_k_dbscan_minpoints_n_epsilon_e_si, sizeof(__pyx_k_dbscan_minpoints_n_epsilon_e_si), 0, 0, 1, 0},
@@ -1862,7 +2033,7 @@ PyMODINIT_FUNC PyInit_Cluster_DBSCAN_py(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("Cluster_DBSCAN_py", __pyx_methods, __pyx_k_re_implement_Cpptraj_C_to_Cython, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("Cluster_DBSCAN_py", __pyx_methods, __pyx_k_Re_implement_Cpptraj_C_to_Cytho, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -1899,7 +2070,7 @@ PyMODINIT_FUNC PyInit_Cluster_DBSCAN_py(void)
   /*--- Function export code ---*/
   /*--- Type init code ---*/
   __pyx_vtabptr_17Cluster_DBSCAN_py_Cluster_DBSCAN = &__pyx_vtable_17Cluster_DBSCAN_py_Cluster_DBSCAN;
-  __pyx_vtable_17Cluster_DBSCAN_py_Cluster_DBSCAN.SetupCluster = (PyObject *(*)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, ArgList &))__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_SetupCluster;
+  __pyx_vtable_17Cluster_DBSCAN_py_Cluster_DBSCAN.SetupCluster = (int (*)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, ArgList &))__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_SetupCluster;
   __pyx_vtable_17Cluster_DBSCAN_py_Cluster_DBSCAN.ClusterResults = (PyObject *(*)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, CpptrajFile &))__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ClusterResults;
   __pyx_vtable_17Cluster_DBSCAN_py_Cluster_DBSCAN.RegionQuery = (PyObject *(*)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, std::vector<int>  &, std::vector<int>  &, int))__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_RegionQuery;
   __pyx_vtable_17Cluster_DBSCAN_py_Cluster_DBSCAN.ComputeKdist = (PyObject *(*)(struct __pyx_obj_17Cluster_DBSCAN_py_Cluster_DBSCAN *, int, std::vector<int>  &))__pyx_f_17Cluster_DBSCAN_py_14Cluster_DBSCAN_ComputeKdist;
@@ -1916,7 +2087,7 @@ PyMODINIT_FUNC PyInit_Cluster_DBSCAN_py(void)
   /* "Cluster_DBSCAN_py.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
  * 
- * """re-implement Cpptraj C++ to Cython/Python style
+ * """
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -2108,6 +2279,64 @@ static void __Pyx_RaiseArgtupleInvalid(
                  "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
                  func_name, more_or_less, num_expected,
                  (num_expected == 1) ? "" : "s", num_found);
+}
+
+static CYTHON_INLINE void __Pyx_ErrRestore(PyObject *type, PyObject *value, PyObject *tb) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    PyObject *tmp_type, *tmp_value, *tmp_tb;
+    PyThreadState *tstate = PyThreadState_GET();
+    tmp_type = tstate->curexc_type;
+    tmp_value = tstate->curexc_value;
+    tmp_tb = tstate->curexc_traceback;
+    tstate->curexc_type = type;
+    tstate->curexc_value = value;
+    tstate->curexc_traceback = tb;
+    Py_XDECREF(tmp_type);
+    Py_XDECREF(tmp_value);
+    Py_XDECREF(tmp_tb);
+#else
+    PyErr_Restore(type, value, tb);
+#endif
+}
+static CYTHON_INLINE void __Pyx_ErrFetch(PyObject **type, PyObject **value, PyObject **tb) {
+#if CYTHON_COMPILING_IN_CPYTHON
+    PyThreadState *tstate = PyThreadState_GET();
+    *type = tstate->curexc_type;
+    *value = tstate->curexc_value;
+    *tb = tstate->curexc_traceback;
+    tstate->curexc_type = 0;
+    tstate->curexc_value = 0;
+    tstate->curexc_traceback = 0;
+#else
+    PyErr_Fetch(type, value, tb);
+#endif
+}
+
+static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
+                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
+                                  int full_traceback) {
+    PyObject *old_exc, *old_val, *old_tb;
+    PyObject *ctx;
+    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
+    if (full_traceback) {
+        Py_XINCREF(old_exc);
+        Py_XINCREF(old_val);
+        Py_XINCREF(old_tb);
+        __Pyx_ErrRestore(old_exc, old_val, old_tb);
+        PyErr_PrintEx(1);
+    }
+    #if PY_MAJOR_VERSION < 3
+    ctx = PyString_FromString(name);
+    #else
+    ctx = PyUnicode_FromString(name);
+    #endif
+    __Pyx_ErrRestore(old_exc, old_val, old_tb);
+    if (!ctx) {
+        PyErr_WriteUnraisable(Py_None);
+    } else {
+        PyErr_WriteUnraisable(ctx);
+        Py_DECREF(ctx);
+    }
 }
 
 #if CYTHON_COMPILING_IN_CPYTHON

@@ -14,3 +14,5 @@ cdef extern from "Analysis_Clustering.h":
         bint nofitrms_
         bint useMass_
 
+#cdef extern from "Analysis_Clustering.h" namespace "Analysis_Clustering":
+#    string maskexpr_

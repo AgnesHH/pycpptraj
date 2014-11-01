@@ -224,18 +224,9 @@ void __Pyx_call_destructor(T* x) {
 #define _USE_MATH_DEFINES
 #endif
 #include <math.h>
-#define __PYX_HAVE__src__Mol2File_py
-#define __PYX_HAVE_API__src__Mol2File_py
-#include "string.h"
-#include <string>
-#include "ios"
-#include "new"
-#include "stdexcept"
-#include "typeinfo"
-#include "NameType.h"
-#include "CpptrajFile.h"
-#include "Atom.h"
-#include "Mol2File.h"
+#define __PYX_HAVE__src__ReadLine_py
+#define __PYX_HAVE_API__src__ReadLine_py
+#include "ReadLine.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -418,10 +409,24 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "src/Mol2File_py.pyx",
+  "src/ReadLine_py.pyx",
 };
 
 /*--- Type declarations ---*/
+struct __pyx_obj_3src_11ReadLine_py_ReadLine_py;
+
+/* "src/ReadLine_py.pyx":17
+ *      #char** cpptraj_completion(const char*, int, int)
+ * 
+ * cdef class ReadLine_py:             # <<<<<<<<<<<<<<
+ *     cdef ReadLine *thisptr
+ * 
+ */
+struct __pyx_obj_3src_11ReadLine_py_ReadLine_py {
+  PyObject_HEAD
+  ReadLine *thisptr;
+};
+
 #ifndef CYTHON_REFNANNY
   #define CYTHON_REFNANNY 0
 #endif
@@ -484,6 +489,11 @@ static const char *__pyx_f[] = {
 #define __Pyx_CLEAR(r)    do { PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);} while(0)
 #define __Pyx_XCLEAR(r)   do { if((r) != NULL) {PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);}} while(0)
 
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
+static CYTHON_INLINE int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name, int kw_allowed);
+
 typedef struct {
     int code_line;
     PyCodeObject* code_object;
@@ -512,27 +522,399 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
-/* Module declarations from 'libc.string' */
+/* Module declarations from 'src.ReadLine_py' */
+static PyTypeObject *__pyx_ptype_3src_11ReadLine_py_ReadLine_py = 0;
+#define __Pyx_MODULE_NAME "src.ReadLine_py"
+int __pyx_module_is_main_src__ReadLine_py = 0;
 
-/* Module declarations from 'libcpp.string' */
-
-/* Module declarations from 'src.NameType' */
-
-/* Module declarations from 'src.CpptrajFile' */
-
-/* Module declarations from 'src.Atom' */
-
-/* Module declarations from 'src.Mol2File' */
-
-/* Module declarations from 'src.Mol2File_py' */
-#define __Pyx_MODULE_NAME "src.Mol2File_py"
-int __pyx_module_is_main_src__Mol2File_py = 0;
-
-/* Implementation of 'src.Mol2File_py' */
+/* Implementation of 'src.ReadLine_py' */
+static int __pyx_pf_3src_11ReadLine_py_11ReadLine_py___cinit__(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3src_11ReadLine_py_11ReadLine_py_2GetInput(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3src_11ReadLine_py_11ReadLine_py_4YesNoPrompt(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self, PyObject *__pyx_v_mystring); /* proto */
+static PyObject *__pyx_pf_3src_11ReadLine_py_11ReadLine_py_6c_str(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3src_11ReadLine_py_11ReadLine_py_8empty(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self); /* proto */
+static PyObject *__pyx_tp_new_3src_11ReadLine_py_ReadLine_py(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_test[] = "__test__";
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_test;
+
+/* "src/ReadLine_py.pyx":20
+ *     cdef ReadLine *thisptr
+ * 
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
+ *         self.thisptr = new ReadLine()
+ * 
+ */
+
+/* Python wrapper */
+static int __pyx_pw_3src_11ReadLine_py_11ReadLine_py_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_3src_11ReadLine_py_11ReadLine_py_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
+  if (unlikely(PyTuple_GET_SIZE(__pyx_args) > 0)) {
+    __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 0, 0, PyTuple_GET_SIZE(__pyx_args)); return -1;}
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__cinit__", 0))) return -1;
+  __pyx_r = __pyx_pf_3src_11ReadLine_py_11ReadLine_py___cinit__(((struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static int __pyx_pf_3src_11ReadLine_py_11ReadLine_py___cinit__(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__cinit__", 0);
+
+  /* "src/ReadLine_py.pyx":21
+ * 
+ *     def __cinit__(self):
+ *         self.thisptr = new ReadLine()             # <<<<<<<<<<<<<<
+ * 
+ *     def GetInput(self):
+ */
+  __pyx_v_self->thisptr = new ReadLine();
+
+  /* "src/ReadLine_py.pyx":20
+ *     cdef ReadLine *thisptr
+ * 
+ *     def __cinit__(self):             # <<<<<<<<<<<<<<
+ *         self.thisptr = new ReadLine()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_r = 0;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/ReadLine_py.pyx":23
+ *         self.thisptr = new ReadLine()
+ * 
+ *     def GetInput(self):             # <<<<<<<<<<<<<<
+ *         self.thisptr.GetInput()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_3src_11ReadLine_py_11ReadLine_py_3GetInput(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3src_11ReadLine_py_11ReadLine_py_3GetInput(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("GetInput (wrapper)", 0);
+  __pyx_r = __pyx_pf_3src_11ReadLine_py_11ReadLine_py_2GetInput(((struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_3src_11ReadLine_py_11ReadLine_py_2GetInput(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("GetInput", 0);
+
+  /* "src/ReadLine_py.pyx":24
+ * 
+ *     def GetInput(self):
+ *         self.thisptr.GetInput()             # <<<<<<<<<<<<<<
+ * 
+ *     def YesNoPrompt(self, mystring):
+ */
+  __pyx_v_self->thisptr->GetInput();
+
+  /* "src/ReadLine_py.pyx":23
+ *         self.thisptr = new ReadLine()
+ * 
+ *     def GetInput(self):             # <<<<<<<<<<<<<<
+ *         self.thisptr.GetInput()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/ReadLine_py.pyx":26
+ *         self.thisptr.GetInput()
+ * 
+ *     def YesNoPrompt(self, mystring):             # <<<<<<<<<<<<<<
+ *         return self.thisptr.YesNoPrompt(mystring)
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_3src_11ReadLine_py_11ReadLine_py_5YesNoPrompt(PyObject *__pyx_v_self, PyObject *__pyx_v_mystring); /*proto*/
+static PyObject *__pyx_pw_3src_11ReadLine_py_11ReadLine_py_5YesNoPrompt(PyObject *__pyx_v_self, PyObject *__pyx_v_mystring) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("YesNoPrompt (wrapper)", 0);
+  __pyx_r = __pyx_pf_3src_11ReadLine_py_11ReadLine_py_4YesNoPrompt(((struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *)__pyx_v_self), ((PyObject *)__pyx_v_mystring));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_3src_11ReadLine_py_11ReadLine_py_4YesNoPrompt(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self, PyObject *__pyx_v_mystring) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  char *__pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("YesNoPrompt", 0);
+
+  /* "src/ReadLine_py.pyx":27
+ * 
+ *     def YesNoPrompt(self, mystring):
+ *         return self.thisptr.YesNoPrompt(mystring)             # <<<<<<<<<<<<<<
+ * 
+ *     def c_str(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyObject_AsString(__pyx_v_mystring); if (unlikely((!__pyx_t_1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_self->thisptr->YesNoPrompt(__pyx_t_1)); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
+  goto __pyx_L0;
+
+  /* "src/ReadLine_py.pyx":26
+ *         self.thisptr.GetInput()
+ * 
+ *     def YesNoPrompt(self, mystring):             # <<<<<<<<<<<<<<
+ *         return self.thisptr.YesNoPrompt(mystring)
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_AddTraceback("src.ReadLine_py.ReadLine_py.YesNoPrompt", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/ReadLine_py.pyx":29
+ *         return self.thisptr.YesNoPrompt(mystring)
+ * 
+ *     def c_str(self):             # <<<<<<<<<<<<<<
+ *         return self.thisptr.c_str()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_3src_11ReadLine_py_11ReadLine_py_7c_str(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3src_11ReadLine_py_11ReadLine_py_7c_str(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("c_str (wrapper)", 0);
+  __pyx_r = __pyx_pf_3src_11ReadLine_py_11ReadLine_py_6c_str(((struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_3src_11ReadLine_py_11ReadLine_py_6c_str(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("c_str", 0);
+
+  /* "src/ReadLine_py.pyx":30
+ * 
+ *     def c_str(self):
+ *         return self.thisptr.c_str()             # <<<<<<<<<<<<<<
+ * 
+ *     def empty(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_self->thisptr->c_str()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "src/ReadLine_py.pyx":29
+ *         return self.thisptr.YesNoPrompt(mystring)
+ * 
+ *     def c_str(self):             # <<<<<<<<<<<<<<
+ *         return self.thisptr.c_str()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("src.ReadLine_py.ReadLine_py.c_str", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/ReadLine_py.pyx":32
+ *         return self.thisptr.c_str()
+ * 
+ *     def empty(self):             # <<<<<<<<<<<<<<
+ *         return self.thisptr.empty()
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_3src_11ReadLine_py_11ReadLine_py_9empty(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3src_11ReadLine_py_11ReadLine_py_9empty(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("empty (wrapper)", 0);
+  __pyx_r = __pyx_pf_3src_11ReadLine_py_11ReadLine_py_8empty(((struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_3src_11ReadLine_py_11ReadLine_py_8empty(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("empty", 0);
+
+  /* "src/ReadLine_py.pyx":33
+ * 
+ *     def empty(self):
+ *         return self.thisptr.empty()             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->thisptr->empty()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "src/ReadLine_py.pyx":32
+ *         return self.thisptr.c_str()
+ * 
+ *     def empty(self):             # <<<<<<<<<<<<<<
+ *         return self.thisptr.empty()
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("src.ReadLine_py.ReadLine_py.empty", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_tp_new_3src_11ReadLine_py_ReadLine_py(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  PyObject *o;
+  if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
+    o = (*t->tp_alloc)(t, 0);
+  } else {
+    o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
+  }
+  if (unlikely(!o)) return 0;
+  if (unlikely(__pyx_pw_3src_11ReadLine_py_11ReadLine_py_1__cinit__(o, __pyx_empty_tuple, NULL) < 0)) {
+    Py_DECREF(o); o = 0;
+  }
+  return o;
+}
+
+static void __pyx_tp_dealloc_3src_11ReadLine_py_ReadLine_py(PyObject *o) {
+  #if PY_VERSION_HEX >= 0x030400a1
+  if (unlikely(Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
+    if (PyObject_CallFinalizerFromDealloc(o)) return;
+  }
+  #endif
+  (*Py_TYPE(o)->tp_free)(o);
+}
+
+static PyMethodDef __pyx_methods_3src_11ReadLine_py_ReadLine_py[] = {
+  {"GetInput", (PyCFunction)__pyx_pw_3src_11ReadLine_py_11ReadLine_py_3GetInput, METH_NOARGS, 0},
+  {"YesNoPrompt", (PyCFunction)__pyx_pw_3src_11ReadLine_py_11ReadLine_py_5YesNoPrompt, METH_O, 0},
+  {"c_str", (PyCFunction)__pyx_pw_3src_11ReadLine_py_11ReadLine_py_7c_str, METH_NOARGS, 0},
+  {"empty", (PyCFunction)__pyx_pw_3src_11ReadLine_py_11ReadLine_py_9empty, METH_NOARGS, 0},
+  {0, 0, 0, 0}
+};
+
+static PyTypeObject __pyx_type_3src_11ReadLine_py_ReadLine_py = {
+  PyVarObject_HEAD_INIT(0, 0)
+  "src.ReadLine_py.ReadLine_py", /*tp_name*/
+  sizeof(struct __pyx_obj_3src_11ReadLine_py_ReadLine_py), /*tp_basicsize*/
+  0, /*tp_itemsize*/
+  __pyx_tp_dealloc_3src_11ReadLine_py_ReadLine_py, /*tp_dealloc*/
+  0, /*tp_print*/
+  0, /*tp_getattr*/
+  0, /*tp_setattr*/
+  #if PY_MAJOR_VERSION < 3
+  0, /*tp_compare*/
+  #else
+  0, /*reserved*/
+  #endif
+  0, /*tp_repr*/
+  0, /*tp_as_number*/
+  0, /*tp_as_sequence*/
+  0, /*tp_as_mapping*/
+  0, /*tp_hash*/
+  0, /*tp_call*/
+  0, /*tp_str*/
+  0, /*tp_getattro*/
+  0, /*tp_setattro*/
+  0, /*tp_as_buffer*/
+  Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE, /*tp_flags*/
+  0, /*tp_doc*/
+  0, /*tp_traverse*/
+  0, /*tp_clear*/
+  0, /*tp_richcompare*/
+  0, /*tp_weaklistoffset*/
+  0, /*tp_iter*/
+  0, /*tp_iternext*/
+  __pyx_methods_3src_11ReadLine_py_ReadLine_py, /*tp_methods*/
+  0, /*tp_members*/
+  0, /*tp_getset*/
+  0, /*tp_base*/
+  0, /*tp_dict*/
+  0, /*tp_descr_get*/
+  0, /*tp_descr_set*/
+  0, /*tp_dictoffset*/
+  0, /*tp_init*/
+  0, /*tp_alloc*/
+  __pyx_tp_new_3src_11ReadLine_py_ReadLine_py, /*tp_new*/
+  0, /*tp_free*/
+  0, /*tp_is_gc*/
+  0, /*tp_bases*/
+  0, /*tp_mro*/
+  0, /*tp_cache*/
+  0, /*tp_subclasses*/
+  0, /*tp_weaklist*/
+  0, /*tp_del*/
+  0, /*tp_version_tag*/
+  #if PY_VERSION_HEX >= 0x030400a1
+  0, /*tp_finalize*/
+  #endif
+};
 
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
@@ -545,7 +927,7 @@ static struct PyModuleDef __pyx_moduledef = {
   #else
     PyModuleDef_HEAD_INIT,
   #endif
-    "Mol2File_py",
+    "ReadLine_py",
     0, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
@@ -580,11 +962,11 @@ static int __Pyx_InitGlobals(void) {
 }
 
 #if PY_MAJOR_VERSION < 3
-PyMODINIT_FUNC initMol2File_py(void); /*proto*/
-PyMODINIT_FUNC initMol2File_py(void)
+PyMODINIT_FUNC initReadLine_py(void); /*proto*/
+PyMODINIT_FUNC initReadLine_py(void)
 #else
-PyMODINIT_FUNC PyInit_Mol2File_py(void); /*proto*/
-PyMODINIT_FUNC PyInit_Mol2File_py(void)
+PyMODINIT_FUNC PyInit_ReadLine_py(void); /*proto*/
+PyMODINIT_FUNC PyInit_ReadLine_py(void)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
@@ -601,7 +983,7 @@ PyMODINIT_FUNC PyInit_Mol2File_py(void)
           Py_FatalError("failed to import 'refnanny' module");
   }
   #endif
-  __Pyx_RefNannySetupContext("PyMODINIT_FUNC PyInit_Mol2File_py(void)", 0);
+  __Pyx_RefNannySetupContext("PyMODINIT_FUNC PyInit_ReadLine_py(void)", 0);
   if ( __Pyx_check_binary_version() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -623,7 +1005,7 @@ PyMODINIT_FUNC PyInit_Mol2File_py(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("Mol2File_py", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("ReadLine_py", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -640,14 +1022,14 @@ PyMODINIT_FUNC PyInit_Mol2File_py(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   #endif
-  if (__pyx_module_is_main_src__Mol2File_py) {
+  if (__pyx_module_is_main_src__ReadLine_py) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (!PyDict_GetItemString(modules, "src.Mol2File_py")) {
-      if (unlikely(PyDict_SetItemString(modules, "src.Mol2File_py", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (!PyDict_GetItemString(modules, "src.ReadLine_py")) {
+      if (unlikely(PyDict_SetItemString(modules, "src.ReadLine_py", __pyx_m) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     }
   }
   #endif
@@ -659,15 +1041,19 @@ PyMODINIT_FUNC PyInit_Mol2File_py(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
+  if (PyType_Ready(&__pyx_type_3src_11ReadLine_py_ReadLine_py) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_type_3src_11ReadLine_py_ReadLine_py.tp_print = 0;
+  if (PyObject_SetAttrString(__pyx_m, "ReadLine_py", (PyObject *)&__pyx_type_3src_11ReadLine_py_ReadLine_py) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_3src_11ReadLine_py_ReadLine_py = &__pyx_type_3src_11ReadLine_py_ReadLine_py;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
   /*--- Execution code ---*/
 
-  /* "src/Mol2File_py.pyx":1
+  /* "src/ReadLine_py.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
  * 
- * from Mol2File cimport *
+ * cdef extern from "ReadLine.h":
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -681,12 +1067,12 @@ PyMODINIT_FUNC PyInit_Mol2File_py(void)
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init src.Mol2File_py", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init src.ReadLine_py", __pyx_clineno, __pyx_lineno, __pyx_filename);
       Py_DECREF(__pyx_d); __pyx_d = 0;
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init src.Mol2File_py");
+    PyErr_SetString(PyExc_ImportError, "init src.ReadLine_py");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -713,6 +1099,70 @@ end:
     return (__Pyx_RefNannyAPIStruct *)r;
 }
 #endif
+
+static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
+}
+
+static CYTHON_INLINE int __Pyx_CheckKeywordStrings(
+    PyObject *kwdict,
+    const char* function_name,
+    int kw_allowed)
+{
+    PyObject* key = 0;
+    Py_ssize_t pos = 0;
+#if CYTHON_COMPILING_IN_PYPY
+    if (!kw_allowed && PyDict_Next(kwdict, &pos, &key, 0))
+        goto invalid_keyword;
+    return 1;
+#else
+    while (PyDict_Next(kwdict, &pos, &key, 0)) {
+        #if PY_MAJOR_VERSION < 3
+        if (unlikely(!PyString_CheckExact(key)) && unlikely(!PyString_Check(key)))
+        #endif
+            if (unlikely(!PyUnicode_Check(key)))
+                goto invalid_keyword_type;
+    }
+    if ((!kw_allowed) && unlikely(key))
+        goto invalid_keyword;
+    return 1;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    return 0;
+#endif
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+    return 0;
+}
 
 static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
     int start = 0, mid = 0, end = count - 1;

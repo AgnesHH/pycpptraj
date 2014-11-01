@@ -6,6 +6,6 @@ cdef extern from "CpptrajFile.h":
         #enum
         #enum
         CpptrajFile()
-        #CpptrajFile(const CpptrajFile&)
-        #CpptrajFile &operator=(const CpptrajFile&)
+        CpptrajFile(const CpptrajFile&)
+        #CpptrajFile& operator=(const CpptrajFile&)
         #not done yet
