@@ -1,17 +1,17 @@
 # distutil: language = c++
 
 cdef extern from "Vec3.h":
-    cdef cppclass Vec3:
-        Vec3()
-        Vec3(Vec3& rhs)
-        Vec3(double, double, double)
-        Vec3(double)
+    cdef cppclass _Vec3 "Vec3":
+        _Vec3()
+        _Vec3(_Vec3& rhs)
+        _Vec3(double, double, double)
+        _Vec3(double)
         #why not using template?
-        Vec3(double*)
-        Vec3(float*)
-        Vec3(int*)
-        #Vec3& operator=(const Vec3& rhs)
-        #add more Vec3 operator below
+        _Vec3(double*)
+        _Vec3(float*)
+        _Vec3(int*)
+        #_Vec3& operator=(const _Vec3& rhs)
+        #add more _Vec3 operator below
         #end
         double Magnitude2()
         void Zero()
@@ -20,8 +20,8 @@ cdef extern from "Vec3.h":
         void SetVec(double, double, double)
         double Normalize()
         void Print(char*)
-        double Angle(Vec3 & )
-        double SignedAngle(Vec3&, Vec3&)
+        double Angle(_Vec3 & )
+        double SignedAngle(_Vec3&, _Vec3&)
 
         double* Dptr()
 
