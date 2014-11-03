@@ -17,7 +17,7 @@ http://pubs.acs.org/doi/abs/10.1021/ct400341p
 
 Install
 =======
-- Install libcpptraj.so and move to $AMBERHOME/lib/
+- Install `libcpptraj.so` and move to $AMBERHOME/lib/
 - Compile Cython files: CFLAGS="-I$PYCPPTRAJHOME/src/ -I$AMBERHOME/AmberTools/src/cpptraj/src/" LDFLAGS="-I$AMBERHOME/lib/ -lgfortran -w" python ./setup.py build_ext -i  
        * example of setup.py: ./src/setup.py
 
