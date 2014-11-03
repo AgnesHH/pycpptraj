@@ -10,8 +10,11 @@ Aim: Write cpptraj wrapper for Python user
     * paramfit --> pyparamfit
     * reduce --> pyreduce 
     * ParmedTools
-    * ...
-Status: `pycpptraj` is not ready to use but you can explore its codes in ./src/ folder.
+    * (add many more)
+
+Status: 
+======
+`pycpptraj` is not ready to use but you can explore its codes in ./src/ folder.
 
 cpptraj paper: 
 ==============
