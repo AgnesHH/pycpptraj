@@ -5,7 +5,12 @@ Aim: Write cpptraj wrapper for Python user
 =========================================
 - Short term goal: expose cpptraj library to Python
 - Long term goal: cpptraj + pycuda for GPU
-
+- Very very long term goal: glue most of useful library in AMBER by Python: 
+    * tleap --> pyleap
+    * paramfit --> pyparamfit
+    * reduce --> pyreduce 
+    * ParmedTools
+    * ...
 Status: `pycpptraj` is not ready to use but you can explore its codes in ./src/ folder.
 
 cpptraj paper: 
