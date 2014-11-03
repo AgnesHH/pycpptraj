@@ -1,5 +1,5 @@
 # distutils: language = c++
-#@Dan and Jason: This files shows how I will wrap cpptraj lib
+#@Dan and Jason: This file shows how I will wrap cpptraj lib
 #this code is not correct (yet), just try to make a workflow. :D
 #
 from Vec3 cimport *
