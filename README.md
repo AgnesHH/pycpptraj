@@ -27,4 +27,4 @@ Usage:
     + export LD_LIBRARY_PATH="$AMBERHOME/lib/"
 - ./src/PyCpptraj [cpptraj command line] 
 - Using cpptraj lib: (to be added)
---./Examples/
+       * ./Examples/
