@@ -1,7 +1,0 @@
-source leaprc.ff99SB
-m=loadpdb 1L2Y.pdb 
-set default pbradii mbondi3
-saveamberparm m Tc5b.ff99SB.mb3.top Tc5b.nat.crd
-savepdb m Tc5b.nat.pdb
-quit
-

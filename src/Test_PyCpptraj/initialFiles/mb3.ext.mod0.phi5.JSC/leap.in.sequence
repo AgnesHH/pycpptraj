@@ -1,8 +1,0 @@
-source leaprc.ff13SB
-loadamberparams frcmod.mod0.5phi
-m=sequence {NASN LEU TYR ILE GLN TRP LEU LYS ASP GLY GLY PRO SER SER GLY ARG PRO PRO PRO CSER}
-set default pbradii mbondi3
-saveamberparm m Tc5b.mod0.5phi.JSC.mb3.top Tc5b.ext.crd
-savepdb m Tc5b.ext.pdb
-quit
-

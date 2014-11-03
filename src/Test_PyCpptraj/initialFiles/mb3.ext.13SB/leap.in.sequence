@@ -1,7 +1,0 @@
-source leaprc.ff13SB
-m=sequence {NASN LEU TYR ILE GLN TRP LEU LYS ASP GLY GLY PRO SER SER GLY ARG PRO PRO PRO CSER}
-set default pbradii mbondi3
-saveamberparm m Tc5b.ff13SB.mb3.top Tc5b.ext.crd
-savepdb m Tc5b.ext.pdb
-quit
-

@@ -1,5 +1,0 @@
-#!/bin/bash
-
-source ~jmaier/intel.sh
-AMBERHOME=~jmaier/amberGit/amber ~jmaier/amberGit/amber/bin/tleap "$@"
-
