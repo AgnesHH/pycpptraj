@@ -125,30 +125,3 @@ cdef class Cluster_DBSCAN:
         Outfile.OpenWrite(outfilename)
         Outfile.Printf("%-8s %1i%-11s\n", "#Point", Kval,"-dist")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
