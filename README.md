@@ -5,7 +5,7 @@ Aim: Write cpptraj wrapper for Python user
 + Short term goal: expose cpptraj library to Python
 + Long term goal: cpptraj + pycuda for GPU
 
-cpptraj: 
+cpptraj paper: 
 PTRAJ and CPPTRAJ: Software for Processing and Analysis of Molecular Dynamics Trajectory Data
 Daniel R. Roe and Thomas E. Cheatham, III
 Journal of Chemical Theory and Computation 2013 9 (7), 3084-3095
