@@ -27,8 +27,4 @@ Usage:
     + export LD_LIBRARY_PATH="$AMBERHOME/lib/"
 - ./src/PyCpptraj [cpptraj command line] 
 - Using cpptraj lib: (to be added)
-- Matrix_3x3:
-   #from src.Matrix_3x3_py import Matrix_3x3 as M
-   from Matrix_3x3_py import Matrix_3x3 as M
-   m = M()
-   m.Print("My 3x3 matrix")
+--./Examples/
