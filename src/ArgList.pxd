@@ -3,7 +3,7 @@
 from libcpp.string cimport string as c_string
 
 cdef extern from "ArgList.h":
-    cdef cppclass _ArgList "ArgList":
+    cdef cppclass ArgList:
         void AddArg(c_string input)
         bint hasKey(char * mystring)
         bint CheckForMoreArgs()

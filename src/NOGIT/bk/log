@@ -1,0 +1,112 @@
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+# distutils: language = c++
+from arg_wrapper cimport wrap_argv
+^
+------------------------------------------------------------
+
+Cpptraj_py.pyx:2:0: 'arg_wrapper.pxd' not found
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+# distutils: language = c++
+from arg_wrapper cimport wrap_argv
+^
+------------------------------------------------------------
+
+Cpptraj_py.pyx:2:0: 'wrap_argv.pxd' not found
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+# distutils: language = c++
+from arg_wrapper cimport wrap_argv
+                        ^
+------------------------------------------------------------
+
+Cpptraj_py.pyx:2:25: Name 'wrap_argv' not declared in module 'arg_wrapper'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    def Intro_py(self):
+        self.ptraj_ptr.Intro()
+
+    def RunCpptraj_py(args):
+        cdef char **c_argv
+        c_argv = wrap_argv(args)
+                         ^
+------------------------------------------------------------
+
+Cpptraj_py.pyx:29:26: undeclared name not builtin: wrap_argv
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    def Intro_py(self):
+        self.ptraj_ptr.Intro()
+
+    def RunCpptraj_py(args):
+        cdef char **c_argv
+        c_argv = wrap_argv(args)
+                         ^
+------------------------------------------------------------
+
+Cpptraj_py.pyx:29:26: Cannot convert Python object to 'char **'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+    def Intro_py(self):
+        self.ptraj_ptr.Intro()
+
+    def RunCpptraj_py(args):
+        cdef char **c_argv
+        c_argv = wrap_argv(args)
+                         ^
+------------------------------------------------------------
+
+Cpptraj_py.pyx:29:26: Storing unsafe C derivative of temporary Python reference
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        self.ptraj_ptr.Intro()
+
+    def RunCpptraj_py(args):
+        cdef char **c_argv
+        c_argv = wrap_argv(args)
+        self.ptraj_ptr.RunCpptraj_py(len(args),c_argv)
+           ^
+------------------------------------------------------------
+
+Cpptraj_py.pyx:30:12: undeclared name not builtin: self
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        self.ptraj_ptr.Intro()
+
+    def RunCpptraj_py(args):
+        cdef char **c_argv
+        c_argv = wrap_argv(args)
+        self.ptraj_ptr.RunCpptraj_py(len(args),c_argv)
+                                                    ^
+------------------------------------------------------------
+
+Cpptraj_py.pyx:30:53: Cannot convert 'char **' to Python object
+missing cimport in module 'arg_wrapper': Cpptraj_py.pyx
+Compiling arg_wrapper.pyx because it changed.
+Compiling Cpptraj_py.pyx because it changed.
+Cythonizing Cpptraj_py.pyx
+Traceback (most recent call last):
+  File "./setup.py", line 10, in <module>
+    include_dirs=[np.get_include()])
+  File "/mnt/raidc/haichit/Programs/Cython-0.21/build/lib.linux-x86_64-2.7/Cython/Build/Dependencies.py", line 825, in cythonize
+    cythonize_one(*args[1:])
+  File "/mnt/raidc/haichit/Programs/Cython-0.21/build/lib.linux-x86_64-2.7/Cython/Build/Dependencies.py", line 944, in cythonize_one
+    raise CompileError(None, pyx_file)
+Cython.Compiler.Errors.CompileError: Cpptraj_py.pyx

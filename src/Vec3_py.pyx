@@ -1,13 +1,13 @@
 # distutils: language = c++
 
-from Vec3 cimport *
-
 cdef class Vec3:
-    cdef _Vec3 *thisptr
+    cdef _Vec3* thisptr
 
-    def __cinit__(self, x='', y='', z=''):
+    def __cinit__(self, double x, double y, double z):
         self.thisptr = new _Vec3()
-        if type(x) == 'double' and (not y) and (not z):
+        if not x and not y and not z: 
+            self.thisptr.Zero()
+        if x and not y and not z:
             self.thisptr.SetVec(x, x, x)
         if x and y and z:
             self.thisptr.SetVec(x, y, z)
@@ -30,5 +30,5 @@ cdef class Vec3:
     def Print(self, mystring):
         self.thisptr.Print(mystring)
 
-    #cdef Angle(self, Vec3 othervec):
-    #    return self.thisptr.Angle(othervec.thisptr)
+    def Angle(self, Vec3 othervec):
+        return self.thisptr.Angle(othervec.thisptr[0])

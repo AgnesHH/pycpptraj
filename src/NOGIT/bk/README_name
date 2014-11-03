@@ -1,0 +1,5 @@
+1. Add "_" to cpptraj classes' name (or not?)
+For example: cdef cppclass _ArgList "ArgList"
+
+2. CpptrajState_pxd.pxd: should be similiar to "CpptrajState.h" in Cpptraj
+

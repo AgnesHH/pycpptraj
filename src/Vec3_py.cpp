@@ -415,11 +415,11 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_3src_7Vec3_py_Vec3;
 
-/* "src/Vec3_py.pyx":5
- * from Vec3 cimport *
+/* "src/Vec3_py.pyx":3
+ * # distutils: language = c++
  * 
  * cdef class Vec3:             # <<<<<<<<<<<<<<
- *     cdef _Vec3 *thisptr
+ *     cdef _Vec3* thisptr
  * 
  */
 struct __pyx_obj_3src_7Vec3_py_Vec3 {
@@ -489,26 +489,17 @@ struct __pyx_obj_3src_7Vec3_py_Vec3 {
 #define __Pyx_CLEAR(r)    do { PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);} while(0)
 #define __Pyx_XCLEAR(r)   do { if((r) != NULL) {PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);}} while(0)
 
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
 static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
 
 static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[], \
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args, \
     const char* function_name);
 
-static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
-    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
-
-#include <string.h>
-
-static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals);
-
-static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals);
-
-#if PY_MAJOR_VERSION >= 3
-#define __Pyx_PyString_Equals __Pyx_PyUnicode_Equals
-#else
-#define __Pyx_PyString_Equals __Pyx_PyBytes_Equals
-#endif
+static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
+    const char *name, int exact);
 
 typedef struct {
     int code_line;
@@ -538,51 +529,46 @@ static int __Pyx_check_binary_version(void);
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
-/* Module declarations from 'src.Vec3' */
-
 /* Module declarations from 'src.Vec3_py' */
 static PyTypeObject *__pyx_ptype_3src_7Vec3_py_Vec3 = 0;
 #define __Pyx_MODULE_NAME "src.Vec3_py"
 int __pyx_module_is_main_src__Vec3_py = 0;
 
 /* Implementation of 'src.Vec3_py' */
-static int __pyx_pf_3src_7Vec3_py_4Vec3___cinit__(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_z); /* proto */
+static int __pyx_pf_3src_7Vec3_py_4Vec3___cinit__(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self, double __pyx_v_x, double __pyx_v_y, double __pyx_v_z); /* proto */
 static void __pyx_pf_3src_7Vec3_py_4Vec3_2__dealloc__(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_4Magnitude2(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_6Zero(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_8SetVec(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self, double __pyx_v_x, double __pyx_v_y, double __pyx_v_z); /* proto */
 static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_10Normalize(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_12Print(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self, PyObject *__pyx_v_mystring); /* proto */
+static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_14Angle(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self, struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_othervec); /* proto */
 static PyObject *__pyx_tp_new_3src_7Vec3_py_Vec3(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static char __pyx_k_[] = "";
 static char __pyx_k_x[] = "x";
 static char __pyx_k_y[] = "y";
 static char __pyx_k_z[] = "z";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_test[] = "__test__";
-static char __pyx_k_double[] = "double";
-static PyObject *__pyx_kp_s_;
-static PyObject *__pyx_n_s_double;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_x;
 static PyObject *__pyx_n_s_y;
 static PyObject *__pyx_n_s_z;
 
-/* "src/Vec3_py.pyx":8
- *     cdef _Vec3 *thisptr
+/* "src/Vec3_py.pyx":6
+ *     cdef _Vec3* thisptr
  * 
- *     def __cinit__(self, x='', y='', z=''):             # <<<<<<<<<<<<<<
+ *     def __cinit__(self, double x, double y, double z):             # <<<<<<<<<<<<<<
  *         self.thisptr = new _Vec3()
- *         if type(x) == 'double' and (not y) and (not z):
+ *         if not x and not y and not z:
  */
 
 /* Python wrapper */
 static int __pyx_pw_3src_7Vec3_py_4Vec3_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static int __pyx_pw_3src_7Vec3_py_4Vec3_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  PyObject *__pyx_v_x = 0;
-  PyObject *__pyx_v_y = 0;
-  PyObject *__pyx_v_z = 0;
+  double __pyx_v_x;
+  double __pyx_v_y;
+  double __pyx_v_z;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -592,9 +578,6 @@ static int __pyx_pw_3src_7Vec3_py_4Vec3_1__cinit__(PyObject *__pyx_v_self, PyObj
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_x,&__pyx_n_s_y,&__pyx_n_s_z,0};
     PyObject* values[3] = {0,0,0};
-    values[0] = ((PyObject *)__pyx_kp_s_);
-    values[1] = ((PyObject *)__pyx_kp_s_);
-    values[2] = ((PyObject *)__pyx_kp_s_);
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -608,40 +591,36 @@ static int __pyx_pw_3src_7Vec3_py_4Vec3_1__cinit__(PyObject *__pyx_v_self, PyObj
       kw_args = PyDict_Size(__pyx_kwds);
       switch (pos_args) {
         case  0:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_x);
-          if (value) { values[0] = value; kw_args--; }
-        }
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_x)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
         case  1:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_y);
-          if (value) { values[1] = value; kw_args--; }
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_y)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_z);
-          if (value) { values[2] = value; kw_args--; }
+        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_z)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
     } else {
-      switch (PyTuple_GET_SIZE(__pyx_args)) {
-        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
-        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
-        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_x = values[0];
-    __pyx_v_y = values[1];
-    __pyx_v_z = values[2];
+    __pyx_v_x = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_x == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_y = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_y == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_z = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_z == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 0, 0, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("src.Vec3_py.Vec3.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -654,47 +633,38 @@ static int __pyx_pw_3src_7Vec3_py_4Vec3_1__cinit__(PyObject *__pyx_v_self, PyObj
   return __pyx_r;
 }
 
-static int __pyx_pf_3src_7Vec3_py_4Vec3___cinit__(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_z) {
+static int __pyx_pf_3src_7Vec3_py_4Vec3___cinit__(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self, double __pyx_v_x, double __pyx_v_y, double __pyx_v_z) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
-  int __pyx_t_3;
-  double __pyx_t_4;
-  double __pyx_t_5;
-  double __pyx_t_6;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "src/Vec3_py.pyx":9
+  /* "src/Vec3_py.pyx":7
  * 
- *     def __cinit__(self, x='', y='', z=''):
+ *     def __cinit__(self, double x, double y, double z):
  *         self.thisptr = new _Vec3()             # <<<<<<<<<<<<<<
- *         if type(x) == 'double' and (not y) and (not z):
- *             self.thisptr.SetVec(x, x, x)
+ *         if not x and not y and not z:
+ *             self.thisptr.Zero()
  */
   __pyx_v_self->thisptr = new Vec3();
 
-  /* "src/Vec3_py.pyx":10
- *     def __cinit__(self, x='', y='', z=''):
+  /* "src/Vec3_py.pyx":8
+ *     def __cinit__(self, double x, double y, double z):
  *         self.thisptr = new _Vec3()
- *         if type(x) == 'double' and (not y) and (not z):             # <<<<<<<<<<<<<<
- *             self.thisptr.SetVec(x, x, x)
- *         if x and y and z:
+ *         if not x and not y and not z:             # <<<<<<<<<<<<<<
+ *             self.thisptr.Zero()
+ *         if x and not y and not z:
  */
-  __pyx_t_2 = (__Pyx_PyString_Equals(((PyObject *)Py_TYPE(__pyx_v_x)), __pyx_n_s_double, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = (__pyx_t_2 != 0);
-  if (__pyx_t_3) {
+  __pyx_t_2 = ((!(__pyx_v_x != 0)) != 0);
+  if (__pyx_t_2) {
     goto __pyx_L5_next_and;
   } else {
-    __pyx_t_1 = __pyx_t_3;
+    __pyx_t_1 = __pyx_t_2;
     goto __pyx_L4_bool_binop_done;
   }
   __pyx_L5_next_and:;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_y); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_2 = ((!__pyx_t_3) != 0);
+  __pyx_t_2 = ((!(__pyx_v_y != 0)) != 0);
   if (__pyx_t_2) {
     goto __pyx_L6_next_and;
   } else {
@@ -702,53 +672,89 @@ static int __pyx_pf_3src_7Vec3_py_4Vec3___cinit__(struct __pyx_obj_3src_7Vec3_py
     goto __pyx_L4_bool_binop_done;
   }
   __pyx_L6_next_and:;
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_z); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 10; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = ((!__pyx_t_2) != 0);
-  __pyx_t_1 = __pyx_t_3;
+  __pyx_t_2 = ((!(__pyx_v_z != 0)) != 0);
+  __pyx_t_1 = __pyx_t_2;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "src/Vec3_py.pyx":11
+    /* "src/Vec3_py.pyx":9
  *         self.thisptr = new _Vec3()
- *         if type(x) == 'double' and (not y) and (not z):
- *             self.thisptr.SetVec(x, x, x)             # <<<<<<<<<<<<<<
- *         if x and y and z:
- *             self.thisptr.SetVec(x, y, z)
+ *         if not x and not y and not z:
+ *             self.thisptr.Zero()             # <<<<<<<<<<<<<<
+ *         if x and not y and not z:
+ *             self.thisptr.SetVec(x, x, x)
  */
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_v_x); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_v_x); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_v_x); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 11; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_v_self->thisptr->SetVec(__pyx_t_4, __pyx_t_5, __pyx_t_6);
+    __pyx_v_self->thisptr->Zero();
     goto __pyx_L3;
   }
   __pyx_L3:;
 
+  /* "src/Vec3_py.pyx":10
+ *         if not x and not y and not z:
+ *             self.thisptr.Zero()
+ *         if x and not y and not z:             # <<<<<<<<<<<<<<
+ *             self.thisptr.SetVec(x, x, x)
+ *         if x and y and z:
+ */
+  __pyx_t_2 = (__pyx_v_x != 0);
+  if (__pyx_t_2) {
+    goto __pyx_L9_next_and;
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L8_bool_binop_done;
+  }
+  __pyx_L9_next_and:;
+  __pyx_t_2 = ((!(__pyx_v_y != 0)) != 0);
+  if (__pyx_t_2) {
+    goto __pyx_L10_next_and;
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L8_bool_binop_done;
+  }
+  __pyx_L10_next_and:;
+  __pyx_t_2 = ((!(__pyx_v_z != 0)) != 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L8_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "src/Vec3_py.pyx":11
+ *             self.thisptr.Zero()
+ *         if x and not y and not z:
+ *             self.thisptr.SetVec(x, x, x)             # <<<<<<<<<<<<<<
+ *         if x and y and z:
+ *             self.thisptr.SetVec(x, y, z)
+ */
+    __pyx_v_self->thisptr->SetVec(__pyx_v_x, __pyx_v_x, __pyx_v_x);
+    goto __pyx_L7;
+  }
+  __pyx_L7:;
+
   /* "src/Vec3_py.pyx":12
- *         if type(x) == 'double' and (not y) and (not z):
+ *         if x and not y and not z:
  *             self.thisptr.SetVec(x, x, x)
  *         if x and y and z:             # <<<<<<<<<<<<<<
  *             self.thisptr.SetVec(x, y, z)
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_x); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__pyx_t_3) {
-    goto __pyx_L9_next_and;
+  __pyx_t_2 = (__pyx_v_x != 0);
+  if (__pyx_t_2) {
+    goto __pyx_L13_next_and;
   } else {
-    __pyx_t_1 = __pyx_t_3;
-    goto __pyx_L8_bool_binop_done;
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L12_bool_binop_done;
   }
-  __pyx_L9_next_and:;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_y); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  if (__pyx_t_3) {
-    goto __pyx_L10_next_and;
+  __pyx_L13_next_and:;
+  __pyx_t_2 = (__pyx_v_y != 0);
+  if (__pyx_t_2) {
+    goto __pyx_L14_next_and;
   } else {
-    __pyx_t_1 = __pyx_t_3;
-    goto __pyx_L8_bool_binop_done;
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L12_bool_binop_done;
   }
-  __pyx_L10_next_and:;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_z); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_1 = __pyx_t_3;
-  __pyx_L8_bool_binop_done:;
+  __pyx_L14_next_and:;
+  __pyx_t_2 = (__pyx_v_z != 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L12_bool_binop_done:;
   if (__pyx_t_1) {
 
     /* "src/Vec3_py.pyx":13
@@ -758,29 +764,21 @@ static int __pyx_pf_3src_7Vec3_py_4Vec3___cinit__(struct __pyx_obj_3src_7Vec3_py
  * 
  *     def __dealloc__(self):
  */
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_v_x); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_v_y); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_v_z); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_v_self->thisptr->SetVec(__pyx_t_6, __pyx_t_5, __pyx_t_4);
-    goto __pyx_L7;
+    __pyx_v_self->thisptr->SetVec(__pyx_v_x, __pyx_v_y, __pyx_v_z);
+    goto __pyx_L11;
   }
-  __pyx_L7:;
+  __pyx_L11:;
 
-  /* "src/Vec3_py.pyx":8
- *     cdef _Vec3 *thisptr
+  /* "src/Vec3_py.pyx":6
+ *     cdef _Vec3* thisptr
  * 
- *     def __cinit__(self, x='', y='', z=''):             # <<<<<<<<<<<<<<
+ *     def __cinit__(self, double x, double y, double z):             # <<<<<<<<<<<<<<
  *         self.thisptr = new _Vec3()
- *         if type(x) == 'double' and (not y) and (not z):
+ *         if not x and not y and not z:
  */
 
   /* function exit code */
   __pyx_r = 0;
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_AddTraceback("src.Vec3_py.Vec3.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = -1;
-  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
@@ -1147,7 +1145,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_12Print(struct __pyx_obj_3src_7Vec
  *     def Print(self, mystring):
  *         self.thisptr.Print(mystring)             # <<<<<<<<<<<<<<
  * 
- *     #cdef Angle(self, Vec3 othervec):
+ *     def Angle(self, Vec3 othervec):
  */
   __pyx_t_1 = __Pyx_PyObject_AsString(__pyx_v_mystring); if (unlikely((!__pyx_t_1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->thisptr->Print(__pyx_t_1);
@@ -1165,6 +1163,73 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_12Print(struct __pyx_obj_3src_7Vec
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_AddTraceback("src.Vec3_py.Vec3.Print", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "src/Vec3_py.pyx":33
+ *         self.thisptr.Print(mystring)
+ * 
+ *     def Angle(self, Vec3 othervec):             # <<<<<<<<<<<<<<
+ *         return self.thisptr.Angle(othervec.thisptr[0])
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_3src_7Vec3_py_4Vec3_15Angle(PyObject *__pyx_v_self, PyObject *__pyx_v_othervec); /*proto*/
+static PyObject *__pyx_pw_3src_7Vec3_py_4Vec3_15Angle(PyObject *__pyx_v_self, PyObject *__pyx_v_othervec) {
+  CYTHON_UNUSED int __pyx_lineno = 0;
+  CYTHON_UNUSED const char *__pyx_filename = NULL;
+  CYTHON_UNUSED int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("Angle (wrapper)", 0);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_othervec), __pyx_ptype_3src_7Vec3_py_Vec3, 1, "othervec", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_r = __pyx_pf_3src_7Vec3_py_4Vec3_14Angle(((struct __pyx_obj_3src_7Vec3_py_Vec3 *)__pyx_v_self), ((struct __pyx_obj_3src_7Vec3_py_Vec3 *)__pyx_v_othervec));
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_14Angle(struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_self, struct __pyx_obj_3src_7Vec3_py_Vec3 *__pyx_v_othervec) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("Angle", 0);
+
+  /* "src/Vec3_py.pyx":34
+ * 
+ *     def Angle(self, Vec3 othervec):
+ *         return self.thisptr.Angle(othervec.thisptr[0])             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->thisptr->Angle((__pyx_v_othervec->thisptr[0]))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "src/Vec3_py.pyx":33
+ *         self.thisptr.Print(mystring)
+ * 
+ *     def Angle(self, Vec3 othervec):             # <<<<<<<<<<<<<<
+ *         return self.thisptr.Angle(othervec.thisptr[0])
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("src.Vec3_py.Vec3.Angle", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -1209,6 +1274,7 @@ static PyMethodDef __pyx_methods_3src_7Vec3_py_Vec3[] = {
   {"SetVec", (PyCFunction)__pyx_pw_3src_7Vec3_py_4Vec3_9SetVec, METH_VARARGS|METH_KEYWORDS, 0},
   {"Normalize", (PyCFunction)__pyx_pw_3src_7Vec3_py_4Vec3_11Normalize, METH_NOARGS, 0},
   {"Print", (PyCFunction)__pyx_pw_3src_7Vec3_py_4Vec3_13Print, METH_O, 0},
+  {"Angle", (PyCFunction)__pyx_pw_3src_7Vec3_py_4Vec3_15Angle, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -1292,8 +1358,6 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
-  {&__pyx_n_s_double, __pyx_k_double, sizeof(__pyx_k_double), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_x, __pyx_k_x, sizeof(__pyx_k_x), 0, 0, 1, 1},
@@ -1399,9 +1463,9 @@ PyMODINIT_FUNC PyInit_Vec3_py(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_3src_7Vec3_py_Vec3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyType_Ready(&__pyx_type_3src_7Vec3_py_Vec3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_type_3src_7Vec3_py_Vec3.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "Vec3", (PyObject *)&__pyx_type_3src_7Vec3_py_Vec3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetAttrString(__pyx_m, "Vec3", (PyObject *)&__pyx_type_3src_7Vec3_py_Vec3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_ptype_3src_7Vec3_py_Vec3 = &__pyx_type_3src_7Vec3_py_Vec3;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -1411,7 +1475,7 @@ PyMODINIT_FUNC PyInit_Vec3_py(void)
   /* "src/Vec3_py.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
  * 
- * from Vec3 cimport *
+ * cdef class Vec3:
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -1457,6 +1521,31 @@ end:
     return (__Pyx_RefNannyAPIStruct *)r;
 }
 #endif
+
+static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
+}
 
 static void __Pyx_RaiseDoubleKeywordsError(
     const char* func_name,
@@ -1572,149 +1661,30 @@ bad:
     return -1;
 }
 
-static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
-{
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
-    } else {
-        num_expected = num_max;
-        more_or_less = "at most";
-    }
-    if (exact) {
-        more_or_less = "exactly";
-    }
+static void __Pyx_RaiseArgumentTypeInvalid(const char* name, PyObject *obj, PyTypeObject *type) {
     PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
+        "Argument '%.200s' has incorrect type (expected %.200s, got %.200s)",
+        name, type->tp_name, Py_TYPE(obj)->tp_name);
 }
-
-static CYTHON_INLINE int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
-#if CYTHON_COMPILING_IN_PYPY
-    return PyObject_RichCompareBool(s1, s2, equals);
-#else
-    if (s1 == s2) {
-        return (equals == Py_EQ);
-    } else if (PyBytes_CheckExact(s1) & PyBytes_CheckExact(s2)) {
-        const char *ps1, *ps2;
-        Py_ssize_t length = PyBytes_GET_SIZE(s1);
-        if (length != PyBytes_GET_SIZE(s2))
-            return (equals == Py_NE);
-        ps1 = PyBytes_AS_STRING(s1);
-        ps2 = PyBytes_AS_STRING(s2);
-        if (ps1[0] != ps2[0]) {
-            return (equals == Py_NE);
-        } else if (length == 1) {
-            return (equals == Py_EQ);
-        } else {
-            int result = memcmp(ps1, ps2, (size_t)length);
-            return (equals == Py_EQ) ? (result == 0) : (result != 0);
-        }
-    } else if ((s1 == Py_None) & PyBytes_CheckExact(s2)) {
-        return (equals == Py_NE);
-    } else if ((s2 == Py_None) & PyBytes_CheckExact(s1)) {
-        return (equals == Py_NE);
-    } else {
-        int result;
-        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
-        if (!py_result)
-            return -1;
-        result = __Pyx_PyObject_IsTrue(py_result);
-        Py_DECREF(py_result);
-        return result;
+static CYTHON_INLINE int __Pyx_ArgTypeTest(PyObject *obj, PyTypeObject *type, int none_allowed,
+    const char *name, int exact)
+{
+    if (unlikely(!type)) {
+        PyErr_SetString(PyExc_SystemError, "Missing type object");
+        return 0;
     }
-#endif
-}
-
-static CYTHON_INLINE int __Pyx_PyUnicode_Equals(PyObject* s1, PyObject* s2, int equals) {
-#if CYTHON_COMPILING_IN_PYPY
-    return PyObject_RichCompareBool(s1, s2, equals);
-#else
-#if PY_MAJOR_VERSION < 3
-    PyObject* owned_ref = NULL;
-#endif
-    int s1_is_unicode, s2_is_unicode;
-    if (s1 == s2) {
-        goto return_eq;
+    if (none_allowed && obj == Py_None) return 1;
+    else if (exact) {
+        if (likely(Py_TYPE(obj) == type)) return 1;
+        #if PY_MAJOR_VERSION == 2
+        else if ((type == &PyBaseString_Type) && likely(__Pyx_PyBaseString_CheckExact(obj))) return 1;
+        #endif
     }
-    s1_is_unicode = PyUnicode_CheckExact(s1);
-    s2_is_unicode = PyUnicode_CheckExact(s2);
-#if PY_MAJOR_VERSION < 3
-    if ((s1_is_unicode & (!s2_is_unicode)) && PyString_CheckExact(s2)) {
-        owned_ref = PyUnicode_FromObject(s2);
-        if (unlikely(!owned_ref))
-            return -1;
-        s2 = owned_ref;
-        s2_is_unicode = 1;
-    } else if ((s2_is_unicode & (!s1_is_unicode)) && PyString_CheckExact(s1)) {
-        owned_ref = PyUnicode_FromObject(s1);
-        if (unlikely(!owned_ref))
-            return -1;
-        s1 = owned_ref;
-        s1_is_unicode = 1;
-    } else if (((!s2_is_unicode) & (!s1_is_unicode))) {
-        return __Pyx_PyBytes_Equals(s1, s2, equals);
+    else {
+        if (likely(PyObject_TypeCheck(obj, type))) return 1;
     }
-#endif
-    if (s1_is_unicode & s2_is_unicode) {
-        Py_ssize_t length;
-        int kind;
-        void *data1, *data2;
-        if (unlikely(__Pyx_PyUnicode_READY(s1) < 0) || unlikely(__Pyx_PyUnicode_READY(s2) < 0))
-            return -1;
-        length = __Pyx_PyUnicode_GET_LENGTH(s1);
-        if (length != __Pyx_PyUnicode_GET_LENGTH(s2)) {
-            goto return_ne;
-        }
-        kind = __Pyx_PyUnicode_KIND(s1);
-        if (kind != __Pyx_PyUnicode_KIND(s2)) {
-            goto return_ne;
-        }
-        data1 = __Pyx_PyUnicode_DATA(s1);
-        data2 = __Pyx_PyUnicode_DATA(s2);
-        if (__Pyx_PyUnicode_READ(kind, data1, 0) != __Pyx_PyUnicode_READ(kind, data2, 0)) {
-            goto return_ne;
-        } else if (length == 1) {
-            goto return_eq;
-        } else {
-            int result = memcmp(data1, data2, (size_t)(length * kind));
-            #if PY_MAJOR_VERSION < 3
-            Py_XDECREF(owned_ref);
-            #endif
-            return (equals == Py_EQ) ? (result == 0) : (result != 0);
-        }
-    } else if ((s1 == Py_None) & s2_is_unicode) {
-        goto return_ne;
-    } else if ((s2 == Py_None) & s1_is_unicode) {
-        goto return_ne;
-    } else {
-        int result;
-        PyObject* py_result = PyObject_RichCompare(s1, s2, equals);
-        if (!py_result)
-            return -1;
-        result = __Pyx_PyObject_IsTrue(py_result);
-        Py_DECREF(py_result);
-        return result;
-    }
-return_eq:
-    #if PY_MAJOR_VERSION < 3
-    Py_XDECREF(owned_ref);
-    #endif
-    return (equals == Py_EQ);
-return_ne:
-    #if PY_MAJOR_VERSION < 3
-    Py_XDECREF(owned_ref);
-    #endif
-    return (equals == Py_NE);
-#endif
+    __Pyx_RaiseArgumentTypeInvalid(name, obj, type);
+    return 0;
 }
 
 static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {

@@ -1,0 +1,5 @@
+# distutil: language = c++
+
+cdef extern from "DispatchObject.h":
+    cdef cppclass DispatchObject:
+        pass

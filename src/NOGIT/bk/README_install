@@ -1,0 +1,34 @@
+0. Requirement:
++ Cpptraj 
++ Cython
+
+Successfully wrappingnaive cpptraj
+1. cd $AMBERHOME/AmberTools/src/cpptraj
+2. ./configure gnu -nobzlib -nozlib -nonetcdf -nomathlib
+3/ cd src/
+4. g++ -shared -o libcpptraj.so *.o ./readline/*.o
+5. Wrapping: 
+CFLAGS="-I$AMBERHOME/AmberTools/src/cpptraj/src/" LDFLAGS="-L$AMBERHOME/AmberTools/src/cpptraj/src/" python ./setup.py build_ext -i
+6. Running: 
+export LD_LIBRARY_PATH=/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/
+
+Example: python -c 'from atom_py import Atom_py as Atom; #Atom class in cpptraj'
+
+2. LOG
+
+CFLAGS="-I/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/" LDFLAGS="-L/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/" python ./setup.py build_ext -i
+
+running build_ext
+
+building 'readline_py' extension
+
+creating build
+
+creating build/temp.linux-x86_64-2.7
+
+x86_64-linux-gnu-gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -I/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/ -fPIC -I/usr/local/lib/python2.7/dist-packages/numpy/core/include -I/usr/include/python2.7 -c readline_py.cpp -o build/temp.linux-x86_64-2.7/readline_py.o
+
+cc1plus: warning: command line option âstrict-prototypesâs valid for C/ObjC but not for C++ [enabled by default]
+
+c++ -pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-Bsymbolic-functions -Wl,-z,relro -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -D_FORTIFY_SOURCE=2 -g -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -L/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/ -I/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/ build/temp.linux-x86_64-2.7/readline_py.o -lcpptraj -o /mnt/raidc2/haichit/Study/Cython/wrap_cpptraj_1/readline_py.so
+

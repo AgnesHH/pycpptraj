@@ -2,39 +2,39 @@
 from Vec3 cimport *
 
 cdef extern from "Matrix_3x3.h":
-    cdef cppclass Matrix_3x3:
-        Matrix_3x3()
-        Matrix_3x3(Matrix_3x3&)
-        Matrix_3x3(double*)
-        Matrix_3x3(double)
-        Matrix_3x3(double, double, double)
-        #Matrix_3x3& operator=(const Matrix_3x3&)
+    cdef cppclass _Matrix_3x3 "Matrix_3x3":
+        _Matrix_3x3()
+        _Matrix_3x3(_Matrix_3x3&)
+        _Matrix_3x3(double*)
+        _Matrix_3x3(double)
+        _Matrix_3x3(double, double, double)
+        #_Matrix_3x3& operator=(const _Matrix_3x3&)
 
-        #double  operator[](int idx) const { return M_[idx];  }
-        #double& operator[](int idx)       { return M_[idx];  }
-        Vec3 Row1()
-        Vec3 Row2()
-        Vec3 Row3()
-        Vec3 Col1()
-        Vec3 Col2()
-        Vec3 Col3()
+        double  operator[](int)
+        double& operator[](int)
+        _Vec3 Row1()
+        _Vec3 Row2()
+        _Vec3 Row3()
+        _Vec3 Col1()
+        _Vec3 Col2()
+        _Vec3 Col3()
         void Zero()
         void Print(char*)
 
-        int Diagonalize(Vec3&)
-        int Diagonalize_Sort(Vec3&)
-        int Diagonalize_Sort_Chirality(Vec3&, int)
+        int Diagonalize(_Vec3&)
+        int Diagonalize_Sort(_Vec3&)
+        int Diagonalize_Sort_Chirality(_Vec3&, int)
 
         void Transpose()
-        #Matrix_3x3& operator*=(const Matrix_3x3&)
+        #_Matrix_3x3& operator*=(const _Matrix_3x3&)
         void RotationAroundZ(double, double)
         void RotationAroundY(double, double)
-        void CalcRotationMatrix(Vec3&, double)
+        void CalcRotationMatrix(_Vec3&, double)
         void CalcRotationMatrix(double, double, double)
         double RotationAngle()
-        Vec3 AxisOfRotation(double)
-        #Vec3 operator*(Vec3 const& rhs)
-        Vec3 TransposeMult(Vec3& rhs)
-        #Matrix_3x3 operator*(Matrix_3x3 const&) const
-        Matrix_3x3 TransposeMult(Matrix_3x3&)
+        _Vec3 AxisOfRotation(double)
+        _Vec3 operator*(const _Vec3& rhs)
+        _Vec3 TransposeMult(_Vec3& rhs)
+        _Matrix_3x3 operator*(const _Matrix_3x3&) const
+        _Matrix_3x3 TransposeMult(_Matrix_3x3&)
         double* Dptr()
