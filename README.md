@@ -45,5 +45,5 @@ Version:
 * Cython 0.21
 * numpy 1.9.0
 * May need
-*  Nose: for testing
-*  Matplotlib: for plotting
+**  Nose: for testing
+**  Matplotlib: for plotting
