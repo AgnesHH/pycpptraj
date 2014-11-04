@@ -4,6 +4,7 @@ from Vec3 cimport *
 cdef extern from "Matrix_3x3.h":
     cdef cppclass _Matrix_3x3 "Matrix_3x3":
         _Matrix_3x3()
+        #copy?
         _Matrix_3x3(_Matrix_3x3&)
         _Matrix_3x3(double*)
         _Matrix_3x3(double)

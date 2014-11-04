@@ -1,16 +1,10 @@
 # distutils: language = c++
 
 cdef class Vec3:
-    cdef _Vec3* thisptr
+    #cdef _Vec3* thisptr
 
-    def __cinit__(self, double x, double y, double z):
+    def __cinit__(self):
         self.thisptr = new _Vec3()
-        if not x and not y and not z: 
-            self.thisptr.Zero()
-        if x and not y and not z:
-            self.thisptr.SetVec(x, x, x)
-        if x and y and z:
-            self.thisptr.SetVec(x, y, z)
 
     def __dealloc__(self):
         del self.thisptr
