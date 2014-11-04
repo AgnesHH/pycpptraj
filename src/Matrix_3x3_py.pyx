@@ -37,10 +37,10 @@ cdef class Matrix_3x3:
     def Diagonalize(self, Vec3 vect): 
         self.thisptr.Diagonalize(vect.thisptr[0])
         
-    cdef Diagonalize_Sort(self, Vec3 vectds):
+    def Diagonalize_Sort(self, Vec3 vectds):
         self.thisptr.Diagonalize_Sort(vectds.thisptr[0])
 
-    cdef Diagonalize_Sort_Chirality(self, Vec3 vectds, int idx):
+    def Diagonalize_Sort_Chirality(self, Vec3 vectds, int idx):
         self.thisptr.Diagonalize_Sort_Chirality(vectds.thisptr[0], idx)
 
     def Transpose(self):
