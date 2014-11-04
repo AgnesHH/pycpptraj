@@ -9,6 +9,9 @@ cdef class Vec3:
     def __dealloc__(self):
         del self.thisptr
 
+    #def __repr__(self):
+    #    return self.Print("")
+
     def Magnitude2(self):
         return self.thisptr.Magnitude2()
 

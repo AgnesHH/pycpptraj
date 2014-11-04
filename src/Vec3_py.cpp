@@ -636,7 +636,7 @@ static void __pyx_pf_3src_7Vec3_py_4Vec3_2__dealloc__(struct __pyx_obj_3src_7Vec
  *     def __dealloc__(self):
  *         del self.thisptr             # <<<<<<<<<<<<<<
  * 
- *     def Magnitude2(self):
+ *     #def __repr__(self):
  */
   delete __pyx_v_self->thisptr;
 
@@ -652,8 +652,8 @@ static void __pyx_pf_3src_7Vec3_py_4Vec3_2__dealloc__(struct __pyx_obj_3src_7Vec
   __Pyx_RefNannyFinishContext();
 }
 
-/* "src/Vec3_py.pyx":12
- *         del self.thisptr
+/* "src/Vec3_py.pyx":15
+ *     #    return self.Print("")
  * 
  *     def Magnitude2(self):             # <<<<<<<<<<<<<<
  *         return self.thisptr.Magnitude2()
@@ -682,7 +682,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_4Magnitude2(struct __pyx_obj_3src_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("Magnitude2", 0);
 
-  /* "src/Vec3_py.pyx":13
+  /* "src/Vec3_py.pyx":16
  * 
  *     def Magnitude2(self):
  *         return self.thisptr.Magnitude2()             # <<<<<<<<<<<<<<
@@ -690,14 +690,14 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_4Magnitude2(struct __pyx_obj_3src_
  *     def Zero(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->thisptr->Magnitude2()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 13; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->thisptr->Magnitude2()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/Vec3_py.pyx":12
- *         del self.thisptr
+  /* "src/Vec3_py.pyx":15
+ *     #    return self.Print("")
  * 
  *     def Magnitude2(self):             # <<<<<<<<<<<<<<
  *         return self.thisptr.Magnitude2()
@@ -715,7 +715,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_4Magnitude2(struct __pyx_obj_3src_
   return __pyx_r;
 }
 
-/* "src/Vec3_py.pyx":15
+/* "src/Vec3_py.pyx":18
  *         return self.thisptr.Magnitude2()
  * 
  *     def Zero(self):             # <<<<<<<<<<<<<<
@@ -741,7 +741,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_6Zero(struct __pyx_obj_3src_7Vec3_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("Zero", 0);
 
-  /* "src/Vec3_py.pyx":16
+  /* "src/Vec3_py.pyx":19
  * 
  *     def Zero(self):
  *         self.thisptr.Zero()             # <<<<<<<<<<<<<<
@@ -750,7 +750,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_6Zero(struct __pyx_obj_3src_7Vec3_
  */
   __pyx_v_self->thisptr->Zero();
 
-  /* "src/Vec3_py.pyx":15
+  /* "src/Vec3_py.pyx":18
  *         return self.thisptr.Magnitude2()
  * 
  *     def Zero(self):             # <<<<<<<<<<<<<<
@@ -765,7 +765,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_6Zero(struct __pyx_obj_3src_7Vec3_
   return __pyx_r;
 }
 
-/* "src/Vec3_py.pyx":18
+/* "src/Vec3_py.pyx":21
  *         self.thisptr.Zero()
  * 
  *     def SetVec(self, double x, double y, double z):             # <<<<<<<<<<<<<<
@@ -806,16 +806,16 @@ static PyObject *__pyx_pw_3src_7Vec3_py_4Vec3_9SetVec(PyObject *__pyx_v_self, Py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("SetVec", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("SetVec", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_z)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("SetVec", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("SetVec", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "SetVec") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "SetVec") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -824,13 +824,13 @@ static PyObject *__pyx_pw_3src_7Vec3_py_4Vec3_9SetVec(PyObject *__pyx_v_self, Py
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_x = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_x == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_y = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_y == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-    __pyx_v_z = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_z == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_x = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_x == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_y = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_y == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+    __pyx_v_z = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_z == (double)-1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("SetVec", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("SetVec", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 21; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("src.Vec3_py.Vec3.SetVec", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -848,7 +848,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_8SetVec(struct __pyx_obj_3src_7Vec
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("SetVec", 0);
 
-  /* "src/Vec3_py.pyx":19
+  /* "src/Vec3_py.pyx":22
  * 
  *     def SetVec(self, double x, double y, double z):
  *         self.thisptr.SetVec(x, y, z)             # <<<<<<<<<<<<<<
@@ -857,7 +857,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_8SetVec(struct __pyx_obj_3src_7Vec
  */
   __pyx_v_self->thisptr->SetVec(__pyx_v_x, __pyx_v_y, __pyx_v_z);
 
-  /* "src/Vec3_py.pyx":18
+  /* "src/Vec3_py.pyx":21
  *         self.thisptr.Zero()
  * 
  *     def SetVec(self, double x, double y, double z):             # <<<<<<<<<<<<<<
@@ -872,7 +872,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_8SetVec(struct __pyx_obj_3src_7Vec
   return __pyx_r;
 }
 
-/* "src/Vec3_py.pyx":21
+/* "src/Vec3_py.pyx":24
  *         self.thisptr.SetVec(x, y, z)
  * 
  *     def Normalize(self):             # <<<<<<<<<<<<<<
@@ -902,7 +902,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_10Normalize(struct __pyx_obj_3src_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("Normalize", 0);
 
-  /* "src/Vec3_py.pyx":22
+  /* "src/Vec3_py.pyx":25
  * 
  *     def Normalize(self):
  *         return self.thisptr.Normalize()             # <<<<<<<<<<<<<<
@@ -910,13 +910,13 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_10Normalize(struct __pyx_obj_3src_
  *     def Print(self, mystring):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->thisptr->Normalize()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 22; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->thisptr->Normalize()); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/Vec3_py.pyx":21
+  /* "src/Vec3_py.pyx":24
  *         self.thisptr.SetVec(x, y, z)
  * 
  *     def Normalize(self):             # <<<<<<<<<<<<<<
@@ -935,7 +935,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_10Normalize(struct __pyx_obj_3src_
   return __pyx_r;
 }
 
-/* "src/Vec3_py.pyx":24
+/* "src/Vec3_py.pyx":27
  *         return self.thisptr.Normalize()
  * 
  *     def Print(self, mystring):             # <<<<<<<<<<<<<<
@@ -965,17 +965,17 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_12Print(struct __pyx_obj_3src_7Vec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("Print", 0);
 
-  /* "src/Vec3_py.pyx":25
+  /* "src/Vec3_py.pyx":28
  * 
  *     def Print(self, mystring):
  *         self.thisptr.Print(mystring)             # <<<<<<<<<<<<<<
  * 
  *     def Angle(self, Vec3 othervec):
  */
-  __pyx_t_1 = __Pyx_PyObject_AsString(__pyx_v_mystring); if (unlikely((!__pyx_t_1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_AsString(__pyx_v_mystring); if (unlikely((!__pyx_t_1) && PyErr_Occurred())) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_v_self->thisptr->Print(__pyx_t_1);
 
-  /* "src/Vec3_py.pyx":24
+  /* "src/Vec3_py.pyx":27
  *         return self.thisptr.Normalize()
  * 
  *     def Print(self, mystring):             # <<<<<<<<<<<<<<
@@ -995,7 +995,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_12Print(struct __pyx_obj_3src_7Vec
   return __pyx_r;
 }
 
-/* "src/Vec3_py.pyx":27
+/* "src/Vec3_py.pyx":30
  *         self.thisptr.Print(mystring)
  * 
  *     def Angle(self, Vec3 othervec):             # <<<<<<<<<<<<<<
@@ -1011,7 +1011,7 @@ static PyObject *__pyx_pw_3src_7Vec3_py_4Vec3_15Angle(PyObject *__pyx_v_self, Py
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("Angle (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_othervec), __pyx_ptype_3src_7Vec3_py_Vec3, 1, "othervec", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_othervec), __pyx_ptype_3src_7Vec3_py_Vec3, 1, "othervec", 0))) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_r = __pyx_pf_3src_7Vec3_py_4Vec3_14Angle(((struct __pyx_obj_3src_7Vec3_py_Vec3 *)__pyx_v_self), ((struct __pyx_obj_3src_7Vec3_py_Vec3 *)__pyx_v_othervec));
 
   /* function exit code */
@@ -1032,19 +1032,19 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_14Angle(struct __pyx_obj_3src_7Vec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("Angle", 0);
 
-  /* "src/Vec3_py.pyx":28
+  /* "src/Vec3_py.pyx":31
  * 
  *     def Angle(self, Vec3 othervec):
  *         return self.thisptr.Angle(othervec.thisptr[0])             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->thisptr->Angle((__pyx_v_othervec->thisptr[0]))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->thisptr->Angle((__pyx_v_othervec->thisptr[0]))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 31; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "src/Vec3_py.pyx":27
+  /* "src/Vec3_py.pyx":30
  *         self.thisptr.Print(mystring)
  * 
  *     def Angle(self, Vec3 othervec):             # <<<<<<<<<<<<<<
