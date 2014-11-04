@@ -44,6 +44,7 @@ Version:
 * Python 2.7.8 :: Anaconda 2.1.0 (64-bit)
 * Cython 0.21
 * numpy 1.9.0
-* May need
-**  Nose: for testing
-**  Matplotlib: for plotting
+
+May need
+*  Nose: for testing
+*  Matplotlib: for plotting
