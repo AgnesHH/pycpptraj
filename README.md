@@ -20,8 +20,7 @@ cpptraj paper:
 ==============
 PTRAJ and CPPTRAJ: Software for Processing and Analysis of Molecular Dynamics Trajectory Data
 Daniel R. Roe and Thomas E. Cheatham, III
-Journal of Chemical Theory and Computation 2013 9 (7), 3084-3095
-http://pubs.acs.org/doi/abs/10.1021/ct400341p
+Journal of Chemical Theory and Computation 2013 9 (7), 3084-3095 [http://pubs.acs.org/doi/abs/10.1021/ct400341p]
 
 Install
 =======
@@ -45,6 +44,6 @@ Version:
 * Cython 0.21
 * numpy 1.9.0
 
-May need
+May need (to be added)
 *  Nose: for testing
 *  Matplotlib: for plotting
