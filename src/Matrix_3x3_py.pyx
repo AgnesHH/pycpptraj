@@ -7,7 +7,6 @@ In [1]: from Matrix_3x3_py import Matrix_3x3 as M3x3
 
 In [2]: import numpy as np
 
-In [3]: 
 
 In [3]: x = np.arange(9).astype(float)
 
@@ -18,8 +17,6 @@ In [5]: m.Print("3x3 matrix m: ")
        0.0000   1.0000   2.0000
        3.0000   4.0000   5.0000
        6.0000   7.0000   8.0000
-
-In [6]: 
 
 In [6]: y = np.array([100.,]).astype(float)
 
@@ -51,8 +48,8 @@ cdef class Matrix_3x3:
             #make new instance
             self.thisptr = new _Matrix_3x3()
         #copy constructor, not sure how to do this shortly
-        elif isinstance(X, Matrix_3x3):
-            self = deepcopy(X)
+        #elif isinstance(X, Matrix_3x3):
+        #    self = deepcopy(X)
         elif X.shape[0] == 9:
             #Takes array of 9, row-major
             self.thisptr = new _Matrix_3x3(&X[0])
@@ -66,7 +63,9 @@ cdef class Matrix_3x3:
         """Free memory"""
         del self.thisptr
 
-
+    def copy(self):
+        "Not right yet"
+        return deepcopy(self)
 
     def Zero(self):
         self.thisptr.Zero()
