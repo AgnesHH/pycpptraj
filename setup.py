@@ -1,1 +1,1 @@
-#
+#see ./src/setup.py
