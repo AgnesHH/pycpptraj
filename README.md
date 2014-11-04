@@ -15,6 +15,9 @@ Aim: Write cpptraj wrapper for Python user
 Status: 
 ======
 `pycpptraj` is not ready to use but you can explore its codes in ./src/ folder.
+Code examples:
+* ./src/Matrix_3x3_py.pyx
+* ./src/main_cpptraj_py.pyx
 
 cpptraj paper: 
 ==============
