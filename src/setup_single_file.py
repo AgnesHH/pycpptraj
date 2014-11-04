@@ -1,14 +1,14 @@
 from distutils.core import setup
 from distutils.extension import Extension
-import numpy as np
+#import numpy as np
 from Cython.Build import cythonize
 
 setup(
       ext_modules = cythonize([
-          Extension("*", ["*.pyx"],
+          Extension("*", ["test_Matrix_3x3.pyx"],
                     libraries=['cpptraj'],
-                    include_dirs=[np.get_include()])
-#                    )
+                    #include_dirs=[np.get_include()])
+                    )
           ])
      )
 

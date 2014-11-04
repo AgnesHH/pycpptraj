@@ -60,12 +60,6 @@ cdef class Matrix_3x3:
             #Set all elements to the same number
             self.thisptr = new _Matrix_3x3(X[0])
 
-        #elif isinstance(X, (float, int)):
-        #    if len(X) == 1:
-        #        self.thisptr = new _Matrix_3x3(X)
-        #    elif len(X) == 3:
-        #        self.thisptr = new _Matrix_3x3(X[0], X[1], X[2])
-
     def __dealloc__(self):
         """Free memory"""
         del self.thisptr
