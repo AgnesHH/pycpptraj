@@ -10,6 +10,7 @@ cdef extern from "Matrix_3x3.h":
         _Matrix_3x3(double)
         _Matrix_3x3(double, double, double)
         #_Matrix_3x3& operator=(const _Matrix_3x3&)
+        _Matrix_3x3 operator*(const _Matrix_3x3&)
 
         double  operator[](int)
         double& operator[](int)

@@ -43,19 +43,22 @@ cdef class Matrix_3x3:
 
     def __cinit__(self, double[::1] X=None):
         """TODO: add numpy array"""
+        #MAX_ITERATIONS = Max number of iterations to execute Jacobi algorithm
+        #for Diagonalize the matrix
         self.MAX_ITERATIONS = 50
         if X is None: 
             #make new instance
             self.thisptr = new _Matrix_3x3()
-        #copy constructor, not sure how to do this shortly
-        #elif isinstance(X, Matrix_3x3):
-        #    self = deepcopy(X)
         elif X.shape[0] == 9:
             #Takes array of 9, row-major
             self.thisptr = new _Matrix_3x3(&X[0])
         elif X.shape[0] == 1:
             #Set all elements to the same number
             self.thisptr = new _Matrix_3x3(X[0])
+        elif X.shape[0] == 3:
+            #Set Set diagonal
+            x, y, z = X
+            self.thisptr = new _Matrix_3x3(x, y, z)
         else: 
             raise ValueError("Must be array with length of None, 1 or 9")
 
@@ -63,14 +66,35 @@ cdef class Matrix_3x3:
         """Free memory"""
         del self.thisptr
 
-    def copy(self):
-        "Not right yet"
-        return deepcopy(self)
+    def copy(self, Matrix_3x3 other):
+        """
+        Copy matrix
 
+        Parameters:
+        ----------
+        other : Matrix_3x3 instance
+
+        Returns:
+        -------
+        out : Matrix_3x3 instance
+
+        Examples
+        -------
+        #add example here
+        >>>x = np.arange(9).astype(float)
+        >>>m = M3x3(x)
+        >>>mcp = M3x3()
+        >>>mcp.copy(m)
+        >>>m.Print("m")
+        >>>print
+        >>>mcp.Print("mcp")
+        """
+        self.thisptr = other.thisptr
+        
     def Zero(self):
         self.thisptr.Zero()
 
-    def Print(self, char* Title):
+    def Print(self, char* Title=""):
         """Print matrix"""
         self.thisptr.Print(Title)
 
@@ -95,13 +119,14 @@ cdef class Matrix_3x3:
     def CalcRotationMatrix(self, Vec3 vec, double theta):
         self.thisptr.CalcRotationMatrix(vec.thisptr[0], id)
 
-    def  __mul__(self, mymat):
-        if isinstance(mymat, Matrix_3x3):
-            pass
+    #def  __mul__(self, Matrix_3x3 other):
+    #    """Note worked yet"""
+    #    cdef Matrix_3x3 result = Matrix_3x3()
+    #    if isinstance(other, Matrix_3x3):
+    #        #cdef Matrix_3x3 result 
+    #        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
+    #        return result
+    #    else:
+    #        raise TypeError("Must be Matrix_3x3 instance")
 
-    #def __richcmp__(self, Matrix_3x3 mata, Matrix_3x3 matb):
-    #    pass
-        #if mata is None or matab is None:
-        #    return NotImplemnted
 
-        #return mata.thisptr == matb.thisptr
