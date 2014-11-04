@@ -2,11 +2,11 @@
 
 from ArgList cimport *
 
-cdef class ArgList_py:
-    cdef ArgList *thisptr
+cdef class ArgList:
+    cdef _ArgList *thisptr
 
     def __cinit__(self):
-        self.thisptr = new ArgList()
+        self.thisptr = new _ArgList()
 
     def __dealloc__(self):
         del self.thisptr

@@ -4,14 +4,14 @@ from Topology cimport *
 from ArgList cimport *
 
 cdef extern from "TopologyList.h":
-    cdef cppclass TopologyList:
+    cdef cppclass _TopologyList "TopologyList":
         const char* ParmArgs
         TopologyList()
         void Clear()
         void SetDebug(int)
-        Topology* GetParm(int)
-        Topology* GetParmByIndex(ArgList&)
-        Topology* GetParm(ArgList&)
+        _Topology* GetParm(int)
+        _Topology* GetParmByIndex(_ArgList&)
+        _Topology* GetParm(_ArgList&)
         int AddParmFile(string&)
-        int AddParmFile(string&, ArgList&)
+        int AddParmFile(string&, _ArgList&)
         void List()

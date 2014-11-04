@@ -1,24 +1,25 @@
 # distutils: language = c++
 
+#do I need to wrap this ReadLine class? Python is very good for text processing
 cdef extern from "ReadLine.h":
     char* duplicate_string(const char*)
     char* command_generator(const char*, int)
-    #char** cpptraj_completion(const char*, int, int)
-    cdef cppclass ReadLine:
-        ReadLine()
+    char** cpptraj_completion(const char*, int, int)
+    cdef cppclass _ReadLine "ReadLine":
+        _ReadLine()
         int GetInput()
         bint YesNoPrompt(char *)
         const char* c_str()
         bint empty()
-     #char* duplicate_string(const char*)
-     #char* command_generator(const char*, int)
-     #char** cpptraj_completion(const char*, int, int)
+    char* duplicate_string(const char*)
+    char* command_generator(const char*, int)
+    char** cpptraj_completion(const char*, int, int)
 
 cdef class ReadLine_py:
-    cdef ReadLine *thisptr
+    cdef _ReadLine *thisptr
 
     def __cinit__(self):
-        self.thisptr = new ReadLine()
+        self.thisptr = new _ReadLine()
 
     def GetInput(self):
         self.thisptr.GetInput()

@@ -59,6 +59,8 @@ cdef class Matrix_3x3:
         elif X.shape[0] == 1:
             #Set all elements to the same number
             self.thisptr = new _Matrix_3x3(X[0])
+        else: 
+            raise ValueError("Must be array with length of None, 1 or 9")
 
     def __dealloc__(self):
         """Free memory"""

@@ -420,16 +420,16 @@ static const char *__pyx_f[] = {
 };
 
 /*--- Type declarations ---*/
-struct __pyx_obj_3src_10ArgList_py_ArgList_py;
+struct __pyx_obj_3src_10ArgList_py_ArgList;
 
 /* "src/ArgList_py.pyx":5
  * from ArgList cimport *
  * 
- * cdef class ArgList_py:             # <<<<<<<<<<<<<<
- *     cdef ArgList *thisptr
+ * cdef class ArgList:             # <<<<<<<<<<<<<<
+ *     cdef _ArgList *thisptr
  * 
  */
-struct __pyx_obj_3src_10ArgList_py_ArgList_py {
+struct __pyx_obj_3src_10ArgList_py_ArgList {
   PyObject_HEAD
   ArgList *thisptr;
 };
@@ -575,50 +575,50 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 /* Module declarations from 'src.ArgList' */
 
 /* Module declarations from 'src.ArgList_py' */
-static PyTypeObject *__pyx_ptype_3src_10ArgList_py_ArgList_py = 0;
+static PyTypeObject *__pyx_ptype_3src_10ArgList_py_ArgList = 0;
 static std::string __pyx_convert_string_from_py_(PyObject *); /*proto*/
 #define __Pyx_MODULE_NAME "src.ArgList_py"
 int __pyx_module_is_main_src__ArgList_py = 0;
 
 /* Implementation of 'src.ArgList_py' */
-static int __pyx_pf_3src_10ArgList_py_10ArgList_py___cinit__(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self); /* proto */
-static void __pyx_pf_3src_10ArgList_py_10ArgList_py_2__dealloc__(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_4AddArg(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self, PyObject *__pyx_v_mystring); /* proto */
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_6hasKey(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self, PyObject *__pyx_v_key); /* proto */
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_8CheckForMoreArgs(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_10PrintList(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_12ClearList(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self); /* proto */
-static PyObject *__pyx_tp_new_3src_10ArgList_py_ArgList_py(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static int __pyx_pf_3src_10ArgList_py_7ArgList___cinit__(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self); /* proto */
+static void __pyx_pf_3src_10ArgList_py_7ArgList_2__dealloc__(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_4AddArg(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self, PyObject *__pyx_v_mystring); /* proto */
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_6hasKey(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self, PyObject *__pyx_v_key); /* proto */
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_8CheckForMoreArgs(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_10PrintList(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_12ClearList(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self); /* proto */
+static PyObject *__pyx_tp_new_3src_10ArgList_py_ArgList(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_test[] = "__test__";
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_test;
 
 /* "src/ArgList_py.pyx":8
- *     cdef ArgList *thisptr
+ *     cdef _ArgList *thisptr
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
- *         self.thisptr = new ArgList()
+ *         self.thisptr = new _ArgList()
  * 
  */
 
 /* Python wrapper */
-static int __pyx_pw_3src_10ArgList_py_10ArgList_py_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_3src_10ArgList_py_10ArgList_py_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_3src_10ArgList_py_7ArgList_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_3src_10ArgList_py_7ArgList_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__ (wrapper)", 0);
   if (unlikely(PyTuple_GET_SIZE(__pyx_args) > 0)) {
     __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 0, 0, PyTuple_GET_SIZE(__pyx_args)); return -1;}
   if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__cinit__", 0))) return -1;
-  __pyx_r = __pyx_pf_3src_10ArgList_py_10ArgList_py___cinit__(((struct __pyx_obj_3src_10ArgList_py_ArgList_py *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3src_10ArgList_py_7ArgList___cinit__(((struct __pyx_obj_3src_10ArgList_py_ArgList *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_3src_10ArgList_py_10ArgList_py___cinit__(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self) {
+static int __pyx_pf_3src_10ArgList_py_7ArgList___cinit__(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   ArgList *__pyx_t_1;
@@ -630,7 +630,7 @@ static int __pyx_pf_3src_10ArgList_py_10ArgList_py___cinit__(struct __pyx_obj_3s
   /* "src/ArgList_py.pyx":9
  * 
  *     def __cinit__(self):
- *         self.thisptr = new ArgList()             # <<<<<<<<<<<<<<
+ *         self.thisptr = new _ArgList()             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
@@ -643,10 +643,10 @@ static int __pyx_pf_3src_10ArgList_py_10ArgList_py___cinit__(struct __pyx_obj_3s
   __pyx_v_self->thisptr = __pyx_t_1;
 
   /* "src/ArgList_py.pyx":8
- *     cdef ArgList *thisptr
+ *     cdef _ArgList *thisptr
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
- *         self.thisptr = new ArgList()
+ *         self.thisptr = new _ArgList()
  * 
  */
 
@@ -654,7 +654,7 @@ static int __pyx_pf_3src_10ArgList_py_10ArgList_py___cinit__(struct __pyx_obj_3s
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("src.ArgList_py.ArgList_py.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("src.ArgList_py.ArgList.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -662,7 +662,7 @@ static int __pyx_pf_3src_10ArgList_py_10ArgList_py___cinit__(struct __pyx_obj_3s
 }
 
 /* "src/ArgList_py.pyx":11
- *         self.thisptr = new ArgList()
+ *         self.thisptr = new _ArgList()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         del self.thisptr
@@ -670,17 +670,17 @@ static int __pyx_pf_3src_10ArgList_py_10ArgList_py___cinit__(struct __pyx_obj_3s
  */
 
 /* Python wrapper */
-static void __pyx_pw_3src_10ArgList_py_10ArgList_py_3__dealloc__(PyObject *__pyx_v_self); /*proto*/
-static void __pyx_pw_3src_10ArgList_py_10ArgList_py_3__dealloc__(PyObject *__pyx_v_self) {
+static void __pyx_pw_3src_10ArgList_py_7ArgList_3__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_3src_10ArgList_py_7ArgList_3__dealloc__(PyObject *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
-  __pyx_pf_3src_10ArgList_py_10ArgList_py_2__dealloc__(((struct __pyx_obj_3src_10ArgList_py_ArgList_py *)__pyx_v_self));
+  __pyx_pf_3src_10ArgList_py_7ArgList_2__dealloc__(((struct __pyx_obj_3src_10ArgList_py_ArgList *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-static void __pyx_pf_3src_10ArgList_py_10ArgList_py_2__dealloc__(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self) {
+static void __pyx_pf_3src_10ArgList_py_7ArgList_2__dealloc__(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
@@ -694,7 +694,7 @@ static void __pyx_pf_3src_10ArgList_py_10ArgList_py_2__dealloc__(struct __pyx_ob
   delete __pyx_v_self->thisptr;
 
   /* "src/ArgList_py.pyx":11
- *         self.thisptr = new ArgList()
+ *         self.thisptr = new _ArgList()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         del self.thisptr
@@ -714,19 +714,19 @@ static void __pyx_pf_3src_10ArgList_py_10ArgList_py_2__dealloc__(struct __pyx_ob
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_5AddArg(PyObject *__pyx_v_self, PyObject *__pyx_v_mystring); /*proto*/
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_5AddArg(PyObject *__pyx_v_self, PyObject *__pyx_v_mystring) {
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_5AddArg(PyObject *__pyx_v_self, PyObject *__pyx_v_mystring); /*proto*/
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_5AddArg(PyObject *__pyx_v_self, PyObject *__pyx_v_mystring) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("AddArg (wrapper)", 0);
-  __pyx_r = __pyx_pf_3src_10ArgList_py_10ArgList_py_4AddArg(((struct __pyx_obj_3src_10ArgList_py_ArgList_py *)__pyx_v_self), ((PyObject *)__pyx_v_mystring));
+  __pyx_r = __pyx_pf_3src_10ArgList_py_7ArgList_4AddArg(((struct __pyx_obj_3src_10ArgList_py_ArgList *)__pyx_v_self), ((PyObject *)__pyx_v_mystring));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_4AddArg(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self, PyObject *__pyx_v_mystring) {
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_4AddArg(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self, PyObject *__pyx_v_mystring) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   std::string __pyx_t_1;
@@ -757,7 +757,7 @@ static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_4AddArg(struct __pyx_ob
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("src.ArgList_py.ArgList_py.AddArg", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("src.ArgList_py.ArgList.AddArg", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -774,19 +774,19 @@ static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_4AddArg(struct __pyx_ob
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_7hasKey(PyObject *__pyx_v_self, PyObject *__pyx_v_key); /*proto*/
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_7hasKey(PyObject *__pyx_v_self, PyObject *__pyx_v_key) {
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_7hasKey(PyObject *__pyx_v_self, PyObject *__pyx_v_key); /*proto*/
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_7hasKey(PyObject *__pyx_v_self, PyObject *__pyx_v_key) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("hasKey (wrapper)", 0);
-  __pyx_r = __pyx_pf_3src_10ArgList_py_10ArgList_py_6hasKey(((struct __pyx_obj_3src_10ArgList_py_ArgList_py *)__pyx_v_self), ((PyObject *)__pyx_v_key));
+  __pyx_r = __pyx_pf_3src_10ArgList_py_7ArgList_6hasKey(((struct __pyx_obj_3src_10ArgList_py_ArgList *)__pyx_v_self), ((PyObject *)__pyx_v_key));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_6hasKey(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self, PyObject *__pyx_v_key) {
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_6hasKey(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self, PyObject *__pyx_v_key) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   char *__pyx_t_1;
@@ -822,7 +822,7 @@ static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_6hasKey(struct __pyx_ob
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_AddTraceback("src.ArgList_py.ArgList_py.hasKey", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("src.ArgList_py.ArgList.hasKey", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -839,19 +839,19 @@ static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_6hasKey(struct __pyx_ob
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_9CheckForMoreArgs(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_9CheckForMoreArgs(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_9CheckForMoreArgs(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_9CheckForMoreArgs(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("CheckForMoreArgs (wrapper)", 0);
-  __pyx_r = __pyx_pf_3src_10ArgList_py_10ArgList_py_8CheckForMoreArgs(((struct __pyx_obj_3src_10ArgList_py_ArgList_py *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3src_10ArgList_py_7ArgList_8CheckForMoreArgs(((struct __pyx_obj_3src_10ArgList_py_ArgList *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_8CheckForMoreArgs(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self) {
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_8CheckForMoreArgs(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -885,7 +885,7 @@ static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_8CheckForMoreArgs(struc
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("src.ArgList_py.ArgList_py.CheckForMoreArgs", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("src.ArgList_py.ArgList.CheckForMoreArgs", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -902,19 +902,19 @@ static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_8CheckForMoreArgs(struc
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_11PrintList(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_11PrintList(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_11PrintList(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_11PrintList(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("PrintList (wrapper)", 0);
-  __pyx_r = __pyx_pf_3src_10ArgList_py_10ArgList_py_10PrintList(((struct __pyx_obj_3src_10ArgList_py_ArgList_py *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3src_10ArgList_py_7ArgList_10PrintList(((struct __pyx_obj_3src_10ArgList_py_ArgList *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_10PrintList(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self) {
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_10PrintList(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("PrintList", 0);
@@ -952,19 +952,19 @@ static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_10PrintList(struct __py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_13ClearList(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_3src_10ArgList_py_10ArgList_py_13ClearList(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_13ClearList(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_3src_10ArgList_py_7ArgList_13ClearList(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("ClearList (wrapper)", 0);
-  __pyx_r = __pyx_pf_3src_10ArgList_py_10ArgList_py_12ClearList(((struct __pyx_obj_3src_10ArgList_py_ArgList_py *)__pyx_v_self));
+  __pyx_r = __pyx_pf_3src_10ArgList_py_7ArgList_12ClearList(((struct __pyx_obj_3src_10ArgList_py_ArgList *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3src_10ArgList_py_10ArgList_py_12ClearList(struct __pyx_obj_3src_10ArgList_py_ArgList_py *__pyx_v_self) {
+static PyObject *__pyx_pf_3src_10ArgList_py_7ArgList_12ClearList(struct __pyx_obj_3src_10ArgList_py_ArgList *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("ClearList", 0);
@@ -1048,7 +1048,7 @@ static std::string __pyx_convert_string_from_py_(PyObject *__pyx_v_o) {
   return __pyx_r;
 }
 
-static PyObject *__pyx_tp_new_3src_10ArgList_py_ArgList_py(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_3src_10ArgList_py_ArgList(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -1056,13 +1056,13 @@ static PyObject *__pyx_tp_new_3src_10ArgList_py_ArgList_py(PyTypeObject *t, CYTH
     o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
   }
   if (unlikely(!o)) return 0;
-  if (unlikely(__pyx_pw_3src_10ArgList_py_10ArgList_py_1__cinit__(o, __pyx_empty_tuple, NULL) < 0)) {
+  if (unlikely(__pyx_pw_3src_10ArgList_py_7ArgList_1__cinit__(o, __pyx_empty_tuple, NULL) < 0)) {
     Py_DECREF(o); o = 0;
   }
   return o;
 }
 
-static void __pyx_tp_dealloc_3src_10ArgList_py_ArgList_py(PyObject *o) {
+static void __pyx_tp_dealloc_3src_10ArgList_py_ArgList(PyObject *o) {
   #if PY_VERSION_HEX >= 0x030400a1
   if (unlikely(Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
@@ -1072,28 +1072,28 @@ static void __pyx_tp_dealloc_3src_10ArgList_py_ArgList_py(PyObject *o) {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
     ++Py_REFCNT(o);
-    __pyx_pw_3src_10ArgList_py_10ArgList_py_3__dealloc__(o);
+    __pyx_pw_3src_10ArgList_py_7ArgList_3__dealloc__(o);
     --Py_REFCNT(o);
     PyErr_Restore(etype, eval, etb);
   }
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static PyMethodDef __pyx_methods_3src_10ArgList_py_ArgList_py[] = {
-  {"AddArg", (PyCFunction)__pyx_pw_3src_10ArgList_py_10ArgList_py_5AddArg, METH_O, 0},
-  {"hasKey", (PyCFunction)__pyx_pw_3src_10ArgList_py_10ArgList_py_7hasKey, METH_O, 0},
-  {"CheckForMoreArgs", (PyCFunction)__pyx_pw_3src_10ArgList_py_10ArgList_py_9CheckForMoreArgs, METH_NOARGS, 0},
-  {"PrintList", (PyCFunction)__pyx_pw_3src_10ArgList_py_10ArgList_py_11PrintList, METH_NOARGS, 0},
-  {"ClearList", (PyCFunction)__pyx_pw_3src_10ArgList_py_10ArgList_py_13ClearList, METH_NOARGS, 0},
+static PyMethodDef __pyx_methods_3src_10ArgList_py_ArgList[] = {
+  {"AddArg", (PyCFunction)__pyx_pw_3src_10ArgList_py_7ArgList_5AddArg, METH_O, 0},
+  {"hasKey", (PyCFunction)__pyx_pw_3src_10ArgList_py_7ArgList_7hasKey, METH_O, 0},
+  {"CheckForMoreArgs", (PyCFunction)__pyx_pw_3src_10ArgList_py_7ArgList_9CheckForMoreArgs, METH_NOARGS, 0},
+  {"PrintList", (PyCFunction)__pyx_pw_3src_10ArgList_py_7ArgList_11PrintList, METH_NOARGS, 0},
+  {"ClearList", (PyCFunction)__pyx_pw_3src_10ArgList_py_7ArgList_13ClearList, METH_NOARGS, 0},
   {0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_3src_10ArgList_py_ArgList_py = {
+static PyTypeObject __pyx_type_3src_10ArgList_py_ArgList = {
   PyVarObject_HEAD_INIT(0, 0)
-  "src.ArgList_py.ArgList_py", /*tp_name*/
-  sizeof(struct __pyx_obj_3src_10ArgList_py_ArgList_py), /*tp_basicsize*/
+  "src.ArgList_py.ArgList", /*tp_name*/
+  sizeof(struct __pyx_obj_3src_10ArgList_py_ArgList), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_3src_10ArgList_py_ArgList_py, /*tp_dealloc*/
+  __pyx_tp_dealloc_3src_10ArgList_py_ArgList, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -1120,7 +1120,7 @@ static PyTypeObject __pyx_type_3src_10ArgList_py_ArgList_py = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_3src_10ArgList_py_ArgList_py, /*tp_methods*/
+  __pyx_methods_3src_10ArgList_py_ArgList, /*tp_methods*/
   0, /*tp_members*/
   0, /*tp_getset*/
   0, /*tp_base*/
@@ -1130,7 +1130,7 @@ static PyTypeObject __pyx_type_3src_10ArgList_py_ArgList_py = {
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_3src_10ArgList_py_ArgList_py, /*tp_new*/
+  __pyx_tp_new_3src_10ArgList_py_ArgList, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -1270,10 +1270,10 @@ PyMODINIT_FUNC PyInit_ArgList_py(void)
   /*--- Variable export code ---*/
   /*--- Function export code ---*/
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_3src_10ArgList_py_ArgList_py) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_type_3src_10ArgList_py_ArgList_py.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "ArgList_py", (PyObject *)&__pyx_type_3src_10ArgList_py_ArgList_py) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_ptype_3src_10ArgList_py_ArgList_py = &__pyx_type_3src_10ArgList_py_ArgList_py;
+  if (PyType_Ready(&__pyx_type_3src_10ArgList_py_ArgList) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_type_3src_10ArgList_py_ArgList.tp_print = 0;
+  if (PyObject_SetAttrString(__pyx_m, "ArgList", (PyObject *)&__pyx_type_3src_10ArgList_py_ArgList) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_ptype_3src_10ArgList_py_ArgList = &__pyx_type_3src_10ArgList_py_ArgList;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
   /*--- Function import code ---*/

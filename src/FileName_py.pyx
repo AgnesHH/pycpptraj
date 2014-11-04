@@ -2,11 +2,11 @@
 
 from FileName cimport *
 
-cdef class FileName_py:
-    cdef FileName * thisptr
+cdef class FileName:
+    cdef _FileName * thisptr
 
     def __cinit__(self, myname=''):
-        self.thisptr = new FileName()
+        self.thisptr = new _FileName()
         self.thisptr.SetFileName(myname)
 
     def __dealloc__(self):

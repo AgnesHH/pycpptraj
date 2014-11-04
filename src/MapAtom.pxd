@@ -1,10 +1,11 @@
 # distutil: language = c++
-
+from libcpp.string cimport string
 from Atom cimport *
 cdef extern from "MapAtom.h":
-    cdef cppclass _MapAtom "MapAtom(Atom)":
+    cdef cppclass _MapAtom "MapAtom":
         _MapAtom()
-        _MapAtom(const MapAtom&)
+        _MapAtom(const _MapAtom&)
+        _MapAtom(const Atom&)
         bint IsChiral()
         bint BoundToChiral()
         bint IsMapped()
@@ -24,4 +25,6 @@ cdef extern from "MapAtom.h":
         void SetNotMapped()
         void SetNotComplete()
         void SetNotChiral()
-        
+
+cdef class MapAtom:
+    cdef _MapAtom* thisptr

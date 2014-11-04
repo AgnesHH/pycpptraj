@@ -1,11 +1,13 @@
 # distutils: language = c++
 from AtomMap cimport *
+from Topology_py cimport *
+from Topology_py import *
 
 cdef class AtomMap_py:
-    cdef AtomMap * thisptr
+    cdef _AtomMap * thisptr
 
     def __cinit__(self):
-        self.thisptr = new AtomMap()
+        self.thisptr = new _AtomMap()
     
     def __dealloc__(self):
         del self.thisptr
@@ -17,4 +19,4 @@ cdef class AtomMap_py:
         self.thisptr.SetDebug(flag)
     
     cdef int Setup(self, Topology top):
-        return self.thisptr.Setup(top)
+        return self.thisptr.Setup(top.thisptr[0])

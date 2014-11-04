@@ -2,11 +2,11 @@
 
 from Topology cimport *
 
-cdef class Topology_py:
-    cdef Topology  *thisptr
+cdef class Topology:
+    #cdef _Topology  *thisptr
 
     def __cinit__(self):
-        self.thisptr = new Topology()
+        self.thisptr = new _Topology()
 
     def __dealloc__(self):
         del self.thisptr

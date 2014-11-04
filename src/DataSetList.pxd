@@ -1,5 +1,5 @@
 # distutil: language = c++
 
 cdef extern from "DataSetList.h":
-    cdef cppclass DataSetList:
+    cdef cppclass _DataSetList "DataSetList":
         pass

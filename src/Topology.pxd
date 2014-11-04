@@ -1,9 +1,9 @@
 from libcpp.string cimport string as string
-from FileName cimport FileName
-from Frame cimport Frame
+from FileName cimport *
+from Frame cimport *
 
 cdef extern from "Topology.h":
-    cdef cppclass Topology: 
+    cdef cppclass _Topology "Topology": 
         void SetOffset(double)
         void SetDebug(int)
         void SetIpol(int)
@@ -12,8 +12,8 @@ cdef extern from "Topology.h":
         void SetTag(string)
         void SetVelInfo(bint)
         void SetNrepDim(int)
-        void SetGBradiiSet(string, FileName)
-        void SetReferenceCoords(Frame)
+        void SetGBradiiSet(string, _FileName)
+        void SetReferenceCoords(_Frame)
 
         string Tag()
         int Ipol()
@@ -27,11 +27,11 @@ cdef extern from "Topology.h":
         bint HasVelInfo()
         int NrepDim()
         string ParmName()
-        FileName OriginalFilename()
+        _FileName OriginalFilename()
         string GBradiiSet()
         bint NoRefCoords()
         int FinalSoluteRes()
         char *c_str()
         #atom_iterator begin()
         #atom_iterator end()
-        
+

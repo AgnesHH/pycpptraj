@@ -439,7 +439,7 @@ struct __pyx_obj_3src_18Action_Distance_py_Action_Distance_py;
  * from Action_Distance cimport *
  * 
  * cdef class Action_Distance_py:             # <<<<<<<<<<<<<<
- *     cdef Action_Distance* thisptr
+ *     cdef _Action_Distance* thisptr
  *     cdef char* NOE_Help
  */
 struct __pyx_obj_3src_18Action_Distance_py_Action_Distance_py {
@@ -632,7 +632,7 @@ static PyObject *__pyx_n_s_test;
  *     cdef char* NOE_Help
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
- *         self.thisptr = new Action_Distance()
+ *         self.thisptr = new _Action_Distance()
  * 
  */
 
@@ -660,7 +660,7 @@ static int __pyx_pf_3src_18Action_Distance_py_18Action_Distance_py___cinit__(str
   /* "src/Action_Distance_py.pyx":10
  * 
  *     def __cinit__(self):
- *         self.thisptr = new Action_Distance()             # <<<<<<<<<<<<<<
+ *         self.thisptr = new _Action_Distance()             # <<<<<<<<<<<<<<
  * 
  *     def __dealloc__(self):
  */
@@ -670,7 +670,7 @@ static int __pyx_pf_3src_18Action_Distance_py_18Action_Distance_py___cinit__(str
  *     cdef char* NOE_Help
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
- *         self.thisptr = new Action_Distance()
+ *         self.thisptr = new _Action_Distance()
  * 
  */
 
@@ -681,7 +681,7 @@ static int __pyx_pf_3src_18Action_Distance_py_18Action_Distance_py___cinit__(str
 }
 
 /* "src/Action_Distance_py.pyx":12
- *         self.thisptr = new Action_Distance()
+ *         self.thisptr = new _Action_Distance()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         del self.thisptr
@@ -713,7 +713,7 @@ static void __pyx_pf_3src_18Action_Distance_py_18Action_Distance_py_2__dealloc__
   delete __pyx_v_self->thisptr;
 
   /* "src/Action_Distance_py.pyx":12
- *         self.thisptr = new Action_Distance()
+ *         self.thisptr = new _Action_Distance()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
  *         del self.thisptr

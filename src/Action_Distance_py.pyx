@@ -3,11 +3,11 @@
 from Action_Distance cimport *
 
 cdef class Action_Distance_py:
-    cdef Action_Distance* thisptr
+    cdef _Action_Distance* thisptr
     cdef char* NOE_Help
 
     def __cinit__(self):
-        self.thisptr = new Action_Distance()
+        self.thisptr = new _Action_Distance()
 
     def __dealloc__(self):
         del self.thisptr

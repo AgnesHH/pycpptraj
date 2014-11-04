@@ -6,17 +6,17 @@ from DataSet cimport *
 from ArgList cimport *
 
 cdef extern from "DataFileList.h":
-    cdef cppclass DataFileList:
+    cdef cppclass _DataFileList "DataFileList":
         DataFileList()
         void Clear()
-        DataFile* RemoveDataFile(DataFile*)
-        void RemoveDataSet(DataSet*)
+        _DataFile* RemoveDataFile(_DataFile*)
+        void Remove_DataSet(_DataSet*)
         void SetDebug(int)
-        DataFile* GetDataFile(string&)
-        DataFile* AddDataFile(string&, ArgList&)
-        DataFile* AddDataFile(string&)
-        DataFile* AddSetToFile(string&, DataSet*) 
+        _DataFile* GetDataFile(string&)
+        _DataFile* AddDataFile(string&, _ArgList&)
+        _DataFile* AddDataFile(string&)
+        _DataFile* AddSetToFile(string&, _DataSet*) 
         void List()
         void WriteAllDF()
-        void RemoveDataSet()
-        int ProcessDataFileArgs(ArgList&)
+        void Remove_DataSet()
+        int ProcessDataFileArgs(_ArgList&)

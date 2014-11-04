@@ -1,0 +1,138 @@
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+cdef extern from "DataFileList.h":
+    cdef cppclass _DataFileList "DataFileList":
+        DataFileList()
+        void Clear()
+        _DataFile* RemoveDataFile(_DataFile*)
+        void Remove_DataSet(_DataSet*)
+                           ^
+------------------------------------------------------------
+
+DataFileList.pxd:13:28: '_DataSet' is not a type identifier
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        void Remove_DataSet(_DataSet*)
+        void SetDebug(int)
+        _DataFile* GetDataFile(string&)
+        _DataFile* AddDataFile(string&, _ArgList&)
+        _DataFile* AddDataFile(string&)
+        _DataFile* AddSetToFile(string&, _DataSet*) 
+                                        ^
+------------------------------------------------------------
+
+DataFileList.pxd:18:41: '_DataSet' is not a type identifier
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        const char* ParmArgs
+        TopologyList()
+        void Clear()
+        void SetDebug(int)
+        Topology* GetParm(int)
+        Topology* GetParmByIndex(ArgList&)
+                                ^
+------------------------------------------------------------
+
+TopologyList.pxd:13:33: 'ArgList' is not a type identifier
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        TopologyList()
+        void Clear()
+        void SetDebug(int)
+        Topology* GetParm(int)
+        Topology* GetParmByIndex(ArgList&)
+        Topology* GetParm(ArgList&)
+                         ^
+------------------------------------------------------------
+
+TopologyList.pxd:14:26: 'ArgList' is not a type identifier
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        void SetDebug(int)
+        Topology* GetParm(int)
+        Topology* GetParmByIndex(ArgList&)
+        Topology* GetParm(ArgList&)
+        int AddParmFile(string&)
+        int AddParmFile(string&, ArgList&)
+                                ^
+------------------------------------------------------------
+
+TopologyList.pxd:16:33: 'ArgList' is not a type identifier
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+cdef extern from "Analysis_Integrate.h":
+    cdef cppclass _Analysis_Integrate "Analysis_Integrate(Analysis)":
+        Analysis_Integrate()
+        DispatchObject* Alloc()
+        void Help()
+        RetType Setup(_ArgList&,_DataSetList*,_TopologyList*,_DataFileList*,
+                               ^
+------------------------------------------------------------
+
+Analysis_Integrate.pxd:12:32: '_DataSetList' is not a type identifier
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+cdef extern from "Analysis_Integrate.h":
+    cdef cppclass _Analysis_Integrate "Analysis_Integrate(Analysis)":
+        Analysis_Integrate()
+        DispatchObject* Alloc()
+        void Help()
+        RetType Setup(_ArgList&,_DataSetList*,_TopologyList*,_DataFileList*,
+                                             ^
+------------------------------------------------------------
+
+Analysis_Integrate.pxd:12:46: '_TopologyList' is not a type identifier
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+
+from Analysis_Integrate cimport *
+from CpptrajStdio cimport *
+
+cdef class Analysis_Integrate:
+    cdef _Analysis_Integrate  *thisptr
+                             ^
+------------------------------------------------------------
+
+Analysis_Integrate_py.pyx:7:30: C attributes cannot be added in implementation part of extension type defined in a pxd
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+# distutils: language = c++
+
+from Analysis_Integrate cimport *
+from CpptrajStdio cimport *
+
+cdef class Analysis_Integrate:
+    ^
+------------------------------------------------------------
+
+Analysis_Integrate_py.pyx:6:5: C class 'Analysis_Integrate' is declared but not defined
+Compiling ArgList_py.pyx because it depends on ./ArgList.pxd.
+Compiling Analysis_Integrate_py.pyx because it changed.
+Compiling Action_Distance_py.pyx because it depends on ./DataFile.pxd.
+Cythonizing Analysis_Integrate_py.pyx
+Traceback (most recent call last):
+  File "./setup.py", line 10, in <module>
+    include_dirs=[np.get_include()])
+  File "/mnt/raidc/haichit/anaconda/lib/python2.7/site-packages/Cython/Build/Dependencies.py", line 825, in cythonize
+    cythonize_one(*args[1:])
+  File "/mnt/raidc/haichit/anaconda/lib/python2.7/site-packages/Cython/Build/Dependencies.py", line 944, in cythonize_one
+    raise CompileError(None, pyx_file)
+Cython.Compiler.Errors.CompileError: Analysis_Integrate_py.pyx
