@@ -37,3 +37,10 @@ Usage:
 - ./src/PyCpptraj [cpptraj command line] 
 - Using cpptraj lib: (to be added)
        * ./Examples/
+
+Version:
+=======
+* Ambertools 14
+* Python 2.7.8 :: Anaconda 2.1.0 (64-bit)
+* Cython 0.21
+* numpy 1.9.0
