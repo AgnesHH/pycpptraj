@@ -88,6 +88,14 @@ cdef class Matrix_3x3:
         self.thisptr = other.thisptr
         
     def Row1(self):
+        """
+        Parameters: None
+        ---------------
+
+        Return
+        ------
+        Instance of Vec3
+        """
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.Row1()
         return vec
@@ -145,10 +153,21 @@ cdef class Matrix_3x3:
     def CalcRotationMatrix(Matrix_3x3 self, Vec3 vec, double theta):
         self.thisptr.CalcRotationMatrix(vec.thisptr[0], id)
 
-#    def  __mul__(Matrix_3x3 self, Matrix_3x3 other):
-#        """Not worked yet"""
-#        cdef Matrix_3x3 result = Matrix_3x3()
-#        del result.thisptr
-#        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
-#        return result
-#
+    def  __mul__(Matrix_3x3 self, Matrix_3x3 other):
+        """
+        Multiply two matrix
+
+        Parameters
+        ----------
+        self: Matrix_3x3 instance
+        other: Matrix_3x3 instance
+
+        Output
+        ------
+        new Matrix_3x3 instance
+        """
+        cdef Matrix_3x3 result = Matrix_3x3()
+        del result.thisptr
+        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
+        return result
+
