@@ -22,3 +22,13 @@ print "mcp is equal to m? ", mcp == m
 mdig = M3x3(np.array([1., 2., 3.]))
 mdig.Print("diagonal matrix: ")
 
+#test returning Vector
+print "Row"
+m.Row1().Print("row1")
+m.Row2().Print("row2")
+m.Row3().Print("row3")
+
+print "Col"
+m.Col1().Print("col1")
+m.Col2().Print("col2")
+m.Col3().Print("col3")
