@@ -1,6 +1,4 @@
 # distutils: language = c++
-#@Dan and Jason: This file shows how I will wrap cpptraj lib
-#this code is not correct (yet), just try to make a workflow. :D
 
 """
 In [1]: from Matrix_3x3_py import Matrix_3x3 as M3x3
@@ -30,22 +28,20 @@ In [8]: n.Print("3x3 matrix n: ")
 """
 
 from copy import deepcopy
-#import numpy as np
-#cimport numpy as np
 from Vec3_py cimport Vec3
-from Matrix_3x3 cimport *
+#from Matrix_3x3 cimport *
 from Vec3_py import Vec3 
 
 cdef class Matrix_3x3:
-    cdef:
-        _Matrix_3x3 * thisptr
-        int MAX_ITERATIONS
+    #cdef:
+        #_Matrix_3x3 * thisptr
+        #int MAX_ITERATIONS
 
     def __cinit__(self, double[::1] X=None):
         """TODO: add numpy array"""
         #MAX_ITERATIONS = Max number of iterations to execute Jacobi algorithm
         #for Diagonalize the matrix
-        self.MAX_ITERATIONS = 50
+        #self.MAX_ITERATIONS = 50
         if X is None: 
             #make new instance
             self.thisptr = new _Matrix_3x3()
@@ -60,7 +56,7 @@ cdef class Matrix_3x3:
             x, y, z = X
             self.thisptr = new _Matrix_3x3(x, y, z)
         else: 
-            raise ValueError("Must be array with length of None, 1 or 9")
+            raise ValueError("Must be array with length of None, 1, 3 or 9")
 
     def __dealloc__(self):
         """Free memory"""
@@ -91,6 +87,36 @@ cdef class Matrix_3x3:
         """
         self.thisptr = other.thisptr
         
+    def Row1(self):
+        cdef Vec3 vec = Vec3()
+        vec.thisptr[0] = self.thisptr.Row1()
+        return vec
+
+    def Row2(self):
+        cdef Vec3 vec = Vec3()
+        vec.thisptr[0] = self.thisptr.Row2()
+        return vec
+
+    def Row3(self):
+        cdef Vec3 vec = Vec3()
+        vec.thisptr[0] = self.thisptr.Row3()
+        return vec
+
+    def Col1(self):
+        cdef Vec3 vec = Vec3()
+        vec.thisptr[0] = self.thisptr.Col1()
+        return vec
+
+    def Col2(self):
+        cdef Vec3 vec = Vec3()
+        vec.thisptr[0] = self.thisptr.Col2()
+        return vec
+
+    def Col3(self):
+        cdef Vec3 vec = Vec3()
+        vec.thisptr[0] = self.thisptr.Col3()
+        return vec
+
     def Zero(self):
         self.thisptr.Zero()
 
@@ -116,17 +142,13 @@ cdef class Matrix_3x3:
     def RotationAroundY(self, idx, idz):
         self.thisptr.RotationAroundY(idx, idz)
 
-    def CalcRotationMatrix(self, Vec3 vec, double theta):
+    def CalcRotationMatrix(Matrix_3x3 self, Vec3 vec, double theta):
         self.thisptr.CalcRotationMatrix(vec.thisptr[0], id)
 
-    #def  __mul__(self, Matrix_3x3 other):
-    #    """Note worked yet"""
-    #    cdef Matrix_3x3 result = Matrix_3x3()
-    #    if isinstance(other, Matrix_3x3):
-    #        #cdef Matrix_3x3 result 
-    #        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
-    #        return result
-    #    else:
-    #        raise TypeError("Must be Matrix_3x3 instance")
-
-
+#    def  __mul__(Matrix_3x3 self, Matrix_3x3 other):
+#        """Not worked yet"""
+#        cdef Matrix_3x3 result = Matrix_3x3()
+#        del result.thisptr
+#        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
+#        return result
+#

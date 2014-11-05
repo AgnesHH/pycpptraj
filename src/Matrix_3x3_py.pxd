@@ -10,7 +10,7 @@ cdef extern from "Matrix_3x3.h":
         _Matrix_3x3(double)
         _Matrix_3x3(double, double, double)
         #_Matrix_3x3& operator=(const _Matrix_3x3&)
-        const _Matrix_3x3 operator*(const _Matrix_3x3)
+        _Matrix_3x3 operator*(_Matrix_3x3)
 
         double  operator[](int)
         double& operator[](int)
@@ -42,4 +42,5 @@ cdef extern from "Matrix_3x3.h":
         double* Dptr()
 
 cdef class Matrix_3x3:
-    _Matrix_3x3* thisptr
+    cdef _Matrix_3x3* thisptr
+    #cdef int MAX_ITERATIONS
