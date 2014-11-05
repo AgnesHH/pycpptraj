@@ -2,7 +2,7 @@ import numpy as np
 from copy import deepcopy
 from Matrix_3x3_py import Matrix_3x3 as M3x3
 
-x = np.arange(9).astype(float)
+x = np.arange(1,10).astype(float)
 m = M3x3(x)
 m.Print("3x3 matrix m: ")
 
@@ -32,3 +32,13 @@ print "Col"
 m.Col1().Print("col1")
 m.Col2().Print("col2")
 m.Col3().Print("col3")
+
+#test matrix multiplication
+x2 = np.arange(9,0,-1).astype(float)
+m2 = M3x3(x2)
+print("Start multiplication")
+m.Print('m')
+print("")
+m2.Print('m2')
+m3 = m * m2
+m3.Print("m3")
