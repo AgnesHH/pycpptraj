@@ -23,3 +23,5 @@ cdef extern from "Vec3.h":
         double Angle(_Vec3&)
         double SignedAngle(_Vec3&, _Vec3&)
         double* Dptr()
+cdef class Vec3:
+    cdef _Vec3* thisptr 

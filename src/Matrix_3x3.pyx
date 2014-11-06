@@ -26,9 +26,14 @@ In [8]: n.Print("3x3 matrix n: ")
      100.0000 100.0000 100.0000
      100.0000 100.0000 100.0000
 """
-from copy import deepcopy
 from Vec3 import Vec3
 from Vec3 cimport Vec3
+from FusedType cimport *
+
+#temporatoyr define fused type here
+#ctypedef fused MatVecType:
+#    Vec3
+#    Matrix_3x3
 
 cdef class Matrix_3x3:
     def __cinit__(self, double[::1] X=None):
@@ -142,23 +147,66 @@ cdef class Matrix_3x3:
     def RotationAroundY(self, idx, idz):
         self.thisptr.RotationAroundY(idx, idz)
 
-    def CalcRotationMatrix(Matrix_3x3 self, Vec3 vec, double theta):
-        self.thisptr.CalcRotationMatrix(vec.thisptr[0], id)
+#    def  __mul__(Matrix_3x3 self, MatVecType other):
+#        """ 
+#        Note: for some reason this code does not work yet.
+#        (works fine with regular method, but not with __mul__)
+#        Multiply two matrices or a matrix with a vector
+#
+#        Parameters
+#        ----------
+#        self: Matrix_3x3 instance
+#        other: Matrix_3x3 instance or Vec3 instance
+#
+#        Output
+#        ------
+#        new Matrix_3x3 instance or Vec3 instance
+#        """
+#        cdef MatVecType result
+#        if type(other) == Vec3:
+#            result = Vec3()
+#        elif type(other) == Matrix_3x3:
+#            result = Matrix_3x3()
+#        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
+#        return result
 
-    def  __mul__(Matrix_3x3 self, Matrix_3x3 other):
+    def CalcRotationMatrix(self, Vec3 vec, double theta):
+        """add doc here
+        Not tested yet
         """
-        Multiply two matrix
+        self.thisptr.CalcRotationMatrix(vec.thisptr[0], theta)
 
-        Parameters
-        ----------
-        self: Matrix_3x3 instance
-        other: Matrix_3x3 instance
-
-        Output
-        ------
-        new Matrix_3x3 instance
+    def CalcRotationMatrix_xyz(self, double x, double y, double z):
+        """add doc here
+        Not tested yet
         """
-        cdef Matrix_3x3 result = Matrix_3x3()
-        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
-        return result
+        self.thisptr.CalcRotationMatrix(x, y, z)
+
+    def RotationAngle(self):
+       return self.thisptr.RotationAngle()
+
+    def AxisOfRotation(self, theta):
+        cdef Vec3 vec = Vec3()
+        vec.thisptr[0] = self.thisptr.AxisOfRotation(theta)
+        return vec 
+
+#    def TransposeMult(self, Vec3 vec):
+#        cdef Vec3 result = Vec3()
+#        result.thisptr[0] = self.thisptr.TransposeMult(vec.thisptr[0])
+#        return result 
+#
+#    def TransposeMult(Matrix_3x3 self, Matrix_3x3 other):
+#        """Can I combine with previous method?"""
+#        cdef Matrix_3x3 result = Matrix_3x3()
+#        result.thisptr[0] = self.thisptr.TransposeMult(other.thisptr[0])
+#        return result 
+
+    def TransposeMult(self, MatVecType other):
+        cdef MatVecType result
+        if MatVecType == Vec3:
+            result = Vec3()
+        elif MatVecType == Matrix_3x3:
+            result =  Matrix_3x3()
+        result.thisptr[0] = self.thisptr.TransposeMult(other.thisptr[0])
+        return result 
 

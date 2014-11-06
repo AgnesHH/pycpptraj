@@ -10,3 +10,6 @@ cdef extern from "ArgList.h":
         void PrintList()
         void ClearList()
 
+cdef class ArgList:
+    cdef _ArgList* thisptr
+

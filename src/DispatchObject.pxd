@@ -1,5 +1,6 @@
 # distutil: language = c++
 
 cdef extern from "DispatchObject.h":
-    cdef cppclass DispatchObject:
+    ctypedef DispatchAllocatorType "DispatchObject::DispatchAllocatorType"
+    cdef cppclass _DispatchObject "DispatchObject":
         pass

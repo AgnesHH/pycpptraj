@@ -3,8 +3,6 @@
 from ArgList cimport *
 
 cdef class ArgList:
-    cdef _ArgList *thisptr
-
     def __cinit__(self):
         self.thisptr = new _ArgList()
 

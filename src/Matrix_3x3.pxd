@@ -36,9 +36,9 @@ cdef extern from "Matrix_3x3.h":
         double RotationAngle()
         _Vec3 AxisOfRotation(double)
         _Vec3 operator*(const _Vec3& rhs)
-        _Vec3 TransposeMult(_Vec3& rhs)
-        _Matrix_3x3 TransposeMult(_Matrix_3x3&)
-        double* Dptr()
+        _Vec3 TransposeMult(const _Vec3& rhs)
+        _Matrix_3x3 TransposeMult(const _Matrix_3x3&)
+        #double* Dptr()
 
 cdef class Matrix_3x3:
     cdef _Matrix_3x3* thisptr

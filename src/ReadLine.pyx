@@ -15,9 +15,8 @@ cdef extern from "ReadLine.h":
     char* command_generator(const char*, int)
     char** cpptraj_completion(const char*, int, int)
 
-cdef class ReadLine_py:
-    cdef _ReadLine *thisptr
-
+cdef class ReadLine:
+    cdef _ReadLine* thisptr
     def __cinit__(self):
         self.thisptr = new _ReadLine()
 

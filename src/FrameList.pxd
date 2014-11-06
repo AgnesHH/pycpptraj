@@ -1,5 +1,5 @@
 # distutil: language = c++
 
 cdef extern from "FrameList.h":
-    cdef cppclass FrameList:
+    cdef cppclass _FrameList "FrameList":
         pass
