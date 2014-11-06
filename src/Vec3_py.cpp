@@ -1139,6 +1139,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_14Print(struct __pyx_obj_3src_7Vec
  * 
  *     def Angle(self, Vec3 othervec):             # <<<<<<<<<<<<<<
  *         return self.thisptr.Angle(othervec.thisptr[0])
+ * 
  */
 
 /* Python wrapper */
@@ -1175,6 +1176,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_16Angle(struct __pyx_obj_3src_7Vec
  * 
  *     def Angle(self, Vec3 othervec):
  *         return self.thisptr.Angle(othervec.thisptr[0])             # <<<<<<<<<<<<<<
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->thisptr->Angle((__pyx_v_othervec->thisptr[0]))); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 37; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1188,6 +1190,7 @@ static PyObject *__pyx_pf_3src_7Vec3_py_4Vec3_16Angle(struct __pyx_obj_3src_7Vec
  * 
  *     def Angle(self, Vec3 othervec):             # <<<<<<<<<<<<<<
  *         return self.thisptr.Angle(othervec.thisptr[0])
+ * 
  */
 
   /* function exit code */

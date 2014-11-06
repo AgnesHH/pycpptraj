@@ -28,9 +28,8 @@ In [8]: n.Print("3x3 matrix n: ")
 """
 
 from copy import deepcopy
+from Vec3_py import Vec3
 from Vec3_py cimport Vec3
-#from Matrix_3x3 cimport *
-from Vec3_py import Vec3 
 
 cdef class Matrix_3x3:
     #cdef:
@@ -86,6 +85,7 @@ cdef class Matrix_3x3:
         >>>mcp.Print("mcp")
         """
         self.thisptr = other.thisptr
+        del other.thisptr
         
     def Row1(self):
         """
