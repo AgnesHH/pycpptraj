@@ -41,4 +41,4 @@ cdef extern from "Matrix_3x3.h":
         double* Dptr()
 
 cdef class Matrix_3x3:
-    _Matrix_3x3* thisptr
+    cdef _Matrix_3x3* thisptr
