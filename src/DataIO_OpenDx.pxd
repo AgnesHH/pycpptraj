@@ -1,5 +1,7 @@
 # distutil: language = c++
 
+from libcpp.string cimport string
+
 cdef extern from "DataIO_OpenDx.h":
     cdef cppclass _DataIO_OpenDx "DataIO_OpenDx":
         _DataIO_OpenDx()
