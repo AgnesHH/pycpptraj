@@ -5,10 +5,6 @@ Re-implement Cpptraj C++ to Cython/Python style
 Most of the hard word is from Daniel R. Roe
 """
 
-#import operator *ptr and ++ptr
-from cython.operator cimport dereference as deref
-from cython.operator cimport preincrement as inc
-
 #import C++ function
 from libcpp.string cimport string
 from libcpp.vector cimport vector
@@ -61,15 +57,15 @@ cdef class Cluster_DBSCAN:
             self.minPoints = analyzeArgs.getKeyInt("minpoints", -1)
             if self.minPoints < 1:
                 raise ValueError("Error: DBSCAN requires minimum # of points to be set and >= 1\n"
-                          "Error: Use 'minpoints <N>'\n")
+                                 "Error: Use 'minpoints <N>'\n")
             self.epsilon = analyzeArgs.getKeyDouble("epsilon", -1.0)
             if self.epsilon <= 0.0:
                 raise ValueError("Error: DBSCAN requires epsilon to be set and > 0.0\n"
-                          "Error: Use 'epsilon <e>'\n")
+                                 "Error: Use 'epsilon <e>'\n")
         self.sieveToCentroid = not analyzeArgs.hasKey("sievetoframe")
 
     def ClusteringInfo(self):
-        """add doc here"""
+        """doc: Print out cluster information"""
         pass
 
     def Cluster(self):
@@ -117,8 +113,6 @@ cdef class Cluster_DBSCAN:
         cluster_progress.Update(iterator++)
         #to be continued
 
-
-
     def AddSievedFrames(self):
         pass
 
@@ -127,18 +121,18 @@ cdef class Cluster_DBSCAN:
 
     cdef RegionQuery(self, vector[int] NeighborPts, 
                            vector[int] FramesToCluster,  
-                           int point):
+                           int pointid):
         """ 
         return all points of "point"'s neighbor (within self.epsilon)
         """ 
 
         NeighborPts.clear()
-        cdef int frame
+        cdef int frameid
         
-        for frame in FramesToCluster:
-            if point == frame: pass
-            if (FrameDistances.GetFdist(point, frame) < self.epsilon): 
-                NeighborPts.push_back(frame)
+        for frameid in FramesToCluster:
+            if pointid == frameid: pass
+            if (FrameDistances.GetFdist(pointid, frameid) < self.epsilon): 
+                NeighborPts.push_back(frameid)
 
     cdef ComputeKdist(self, int Kval, vector[int] FramesToCluster):
         """add doc here"""
