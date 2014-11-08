@@ -1,5 +1,6 @@
 # distutil: language = c++
 
+from posix.unistd cimport off_t
 from libcpp.string cimport string
 from FileName cimport *
 from FileIO  cimport *
@@ -12,8 +13,8 @@ cdef extern from "CpptrajFile.h":
     ctypedef enum FileType "CpptrajFile::FileType":
         pass
     cdef cppclass _CpptrajFile "CpptrajFile":
-        CpptrajFile()
-        CpptrajFile(const CpptrajFile&)
+        _CpptrajFile()
+        _CpptrajFile(const _CpptrajFile&)
 
         int OpenRead(const string&)
         int SetupRead(const string&, int)
@@ -34,7 +35,7 @@ cdef extern from "CpptrajFile.h":
         AccessType Access()
         CompressType Compression()
         bint IsOpen()
-        const _Filename& Filename()
+        const _FileName& Filename()
         int IsDos()
         off_t FileSize()
         bint IsCompressed()
