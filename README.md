@@ -48,5 +48,4 @@ Version:
 * numpy 1.9.0
 
 May need (to be added)
-*  Nose: for testing
 *  Matplotlib: for plotting
