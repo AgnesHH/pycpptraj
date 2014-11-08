@@ -15,11 +15,7 @@ cdef extern from "Cpptraj.h":
         int RunCpptraj(int, char**)
         void Usage()
         void Intro()
-
-        vector[string] Sarray
         Mode ProcessCmdLineArgs(int, char**)
         int Interactive()
         int AmbPDB(int, int, char**)
-        CpptrajState State_
-        string logfilename
 
