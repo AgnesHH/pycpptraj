@@ -26,9 +26,12 @@ In [8]: n.Print("3x3 matrix n: ")
      100.0000 100.0000 100.0000
      100.0000 100.0000 100.0000
 """
-from Vec3 import Vec3
 from Vec3 cimport Vec3
 from FusedType cimport *
+
+#check memory leaked
+#import pdb; pdb.set_trace()
+#It seems not working with Cython
 
 #temporatoyr define fused type here
 #ctypedef fused MatVecType:
