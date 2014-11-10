@@ -1,10 +1,10 @@
 # distutils: language = c++
 
-from libcpp.string cimport string as c_string
+from libcpp.string cimport string as string
 
 cdef extern from "ArgList.h":
     cdef cppclass _ArgList "ArgList":
-        void AddArg(c_string input)
+        void AddArg(string input)
         bint hasKey(char * mystring)
         bint CheckForMoreArgs()
         void PrintList()

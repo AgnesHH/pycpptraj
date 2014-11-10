@@ -48,9 +48,5 @@ cdef extern from "CpptrajFile.h":
         int Flush()
         off_t Tell()
 
-        #protected: Does Cython can call?
-        #const size_t BUF_SIZE 
-        #char linebuffer_[BUF_SIZE]
-
 cdef class CpptrajFile:
     cdef _CpptrajFile* thisptr
