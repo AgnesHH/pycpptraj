@@ -17,3 +17,6 @@ cdef class Cpptraj:
         cdef Mode cmode = ProcessCmdLineArgs(args)
 
         if cmode == BATCH:
+            pass
+        elif:
+            pass
