@@ -1,0 +1,2 @@
+1. Automatically generated from 
+   for fh in `cat list`../python ../codegen_pxd.py $fh".h" > $fh".pxd";
