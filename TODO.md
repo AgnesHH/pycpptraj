@@ -5,5 +5,6 @@ TODO
     * Done
 * Add exception
 
-Files should be done (soon):
-    * Frame.{pxd, pyx}
+Files should be done (soon)
+---------------------------
+* Frame.{pxd, pyx}
