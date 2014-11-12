@@ -18,7 +18,6 @@ def find_class(src):
             if line.startswith("class"):
                 classname = line.split()[1].split(":")[0].split(";")[0]
                 classlist.append(classname)
-                #print "%s --> %s" % (fnshort, classname)
         fh.close()
     return list(set(classlist))
 
@@ -38,6 +37,7 @@ class Line_codegen:
                     self.myline = self.myline.replace(classname, r"_" + classname)
 
     def replace_others(self):
+        """Add DOC here"""
         if self.myline.startswith("~"):
             #dont need to use destructor here
             self.myline = "#" + self.myline
@@ -53,6 +53,7 @@ class Line_codegen:
         self.myline = self.myline.replace("bool", "bint")
 
     def swap_const(self):
+        """add DOC here"""
         p = re.compile("[a-zA-Z]* const &")
         words = re.findall(p, self.myline)
         for word in words:
