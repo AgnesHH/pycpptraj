@@ -5,7 +5,7 @@ from Cython.Build import cythonize
 
 setup(
       ext_modules = cythonize([
-          Extension("*", ["test_Matrix_3x3.pyx"],
+          Extension("*", ["Matrix_3x3.pyx",],
                     libraries=['cpptraj'],
                     #include_dirs=[np.get_include()])
                     )
