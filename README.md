@@ -40,12 +40,13 @@ Usage:
 - Using cpptraj lib: (to be added)
        * ./Examples/
 
-Version:
+Version I am working:
 =======
 * Ambertools 14
 * Python 2.7.8 :: Anaconda 2.1.0 (64-bit)
 * Cython 0.21
 * numpy 1.9.0
+* CppHeaderParser 2.4.3
 
 May need (to be added)
 *  Matplotlib: for plotting
