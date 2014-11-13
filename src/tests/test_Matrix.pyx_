@@ -1,0 +1,7 @@
+# distutils: language = c++
+from Matrix_1 cimport *
+
+cdef _Matrix[double]* p = new _Matrix[double]()
+print p.size()
+
+del p

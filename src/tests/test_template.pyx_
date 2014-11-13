@@ -1,0 +1,7 @@
+# distutils: language = c++
+
+from template cimport *
+
+cdef _template* p = new _template()
+
+del p
