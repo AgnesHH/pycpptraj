@@ -35,5 +35,5 @@ cdef extern from "Topology.h":
         #atom_iterator begin()
         #atom_iterator end()
 
-cdef class Topology:
-    cdef _Topology* thisptr
+#cdef class Topology:
+#    cdef _Topology* thisptr
