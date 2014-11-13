@@ -23,5 +23,3 @@ cdef class ArgList:
 
     def ClearList(self):
         self.thisptr.ClearList()
-
-

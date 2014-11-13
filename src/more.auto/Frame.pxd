@@ -6,6 +6,11 @@ from Box cimport *
 
 
 cdef extern from "Frame.h": 
+    ctypedef vector[float] CRDtype
+    ctypedef enum CenterMode "Frame::CenterMode":
+        ORIGIN "Frame::ORIGIN"
+        BOXCTR "Frame::BOXCTR"
+        POINT "Frame::POINT"
     cdef cppclass _Frame "Frame":
         _Frame() 
         #~_Frame() 
@@ -51,7 +56,7 @@ cdef extern from "Frame.h":
         int Setup_FrameM(const vector[_Atom]&)
         int Setup_FrameXM(const vector[double]&, const vector[double]&)
         int Setup_FrameV(const vector[_Atom]&, bint, int)
-        int Setup_FrameFromMask(const _AtomMask&, const vector[Atom]&)
+        int Setup_FrameFromMask(const _AtomMask&, const vector[_Atom]&)
         void SetCoordinates(const _Frame&, const _AtomMask&)
         void SetCoordinates(const _Frame&)
         void Set_Frame(const _Frame&, const _AtomMask&)

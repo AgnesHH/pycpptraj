@@ -9,7 +9,7 @@ cdef extern from "AnalysisList.h":
         void Clear() 
         void SetDebug(int)
         int Debug() const 
-        int Add_Analysis(_DispatchObject::DispatchAllocatorType, _ArgList &, _TopologyList *, _DataSetList *, _DataFileList *)
+        int Add_Analysis(DispatchAllocatorType, _ArgList &, _TopologyList *, _DataSetList *, _DataFileList *)
         int DoAnalyses() 
         void List() const 
         bint Empty() const 
