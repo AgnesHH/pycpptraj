@@ -1,0 +1,16 @@
+# distutils: language = c++
+from CpptrajFile cimport *
+from Atom cimport *
+
+
+cdef extern from "SDFfile.h": 
+    cdef cpplass _SDFfile "SDFfile":
+        _SDFfile() 
+        static bint ID_SDF(_CpptrajFile &)
+        bint ReadHeader() 
+        int SDF_XYZ(double *)
+        Atom SDF_Atom() 
+        int SDF_Bond(int &, int &)
+        int SDF_Natoms() const 
+        int SDF_Nbonds() const 
+        const string& SDF_Title() const 
