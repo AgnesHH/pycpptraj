@@ -5,8 +5,8 @@ from DataIO cimport *
 cdef extern from "DataIO_Grace.h": 
     cdef cppclass _DataIO_Grace "DataIO_Grace":
         _DataIO_Grace() : DataIO(true, false, false ), isInverted_(false)
-        static _BaseIOtype * Alloc() 
-        static void WriteHelp() 
+        _BaseIOtype * Alloc() 
+        void WriteHelp() 
         int ReadData(const string&, _ArgList &, _DataSetList &, const string&)
         int processWriteArgs(_ArgList &)
         int WriteData(const string&, const _DataSetList&)

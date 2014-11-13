@@ -8,7 +8,7 @@ cdef extern from "DataSet_Modes.h":
     cdef cppclass _DataSet_Modes "DataSet_Modes":
         _DataSet_Modes() 
         #~_DataSet_Modes() 
-        static _DataSet * Alloc() 
+        _DataSet * Alloc() 
         size_t Size() const 
         int Sync() 
         void Info() const 

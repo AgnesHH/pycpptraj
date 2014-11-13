@@ -5,7 +5,7 @@ from DataSet_1D cimport *
 cdef extern from "DataSet_integer.h": 
     cdef cppclass _DataSet_integer "DataSet_integer":
         _DataSet_integer() : _DataSet_1D(INTEGER, 12, 0)
-        static _DataSet * Alloc() 
+        _DataSet * Alloc() 
         int & operator [ ](size_t idx)
         int operator [ ](size_t idx)const 
         void AddElement(int i)

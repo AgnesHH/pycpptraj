@@ -9,5 +9,5 @@ from ActionFrameCounter cimport *
 cdef extern from "Action_Matrix.h": 
     cdef cppclass _Action_Matrix "Action_Matrix":
         _Action_Matrix() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

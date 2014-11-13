@@ -7,5 +7,5 @@ cdef extern from "Action_Radial.h":
     cdef cppclass _Action_Radial "Action_Radial":
         _Action_Radial() 
         #~_Action_Radial() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

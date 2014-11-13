@@ -5,8 +5,8 @@ from ParmIO cimport *
 cdef extern from "Parm_PDB.h": 
     cdef cppclass _Parm_PDB "Parm_PDB":
         _Parm_PDB() : readAsPQR_(false)
-        static _BaseIOtype * Alloc() 
-        static void ReadHelp() 
+        _BaseIOtype * Alloc() 
+        void ReadHelp() 
         bint ID_ParmFormat(_CpptrajFile &)
         int processReadArgs(_ArgList &)
         int ReadParm(const string&, _Topology &)

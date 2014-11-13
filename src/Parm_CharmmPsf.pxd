@@ -4,7 +4,7 @@ from ParmIO cimport *
 
 cdef extern from "Parm_CharmmPsf.h": 
     cdef cppclass _Parm_CharmmPsf "Parm_CharmmPsf":
-        static _BaseIOtype * Alloc() 
+        _BaseIOtype * Alloc() 
         bint ID_ParmFormat(_CpptrajFile &)
         int processReadArgs(_ArgList &)
         int ReadParm(const string&, _Topology &)

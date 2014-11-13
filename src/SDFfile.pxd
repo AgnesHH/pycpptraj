@@ -6,7 +6,7 @@ from Atom cimport *
 cdef extern from "SDFfile.h": 
     cdef cppclass _SDFfile "SDFfile":
         _SDFfile() 
-        static bint ID_SDF(_CpptrajFile &)
+        bint ID_SDF(_CpptrajFile &)
         bint ReadHeader() 
         int SDF_XYZ(double *)
         Atom SDF_Atom() 

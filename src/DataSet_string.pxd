@@ -5,7 +5,7 @@ from DataSet_1D cimport *
 cdef extern from "DataSet_string.h": 
     cdef cppclass _DataSet_string "DataSet_string":
         _DataSet_string() : _DataSet_1D(STRING, 1, 0)
-        static _DataSet * Alloc() 
+        _DataSet * Alloc() 
         string & operator [ ](size_t idx)
         void AddElement(const string& s)
         void Resize(size_t sizeIn)

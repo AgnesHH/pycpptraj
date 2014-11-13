@@ -4,7 +4,7 @@ from ParmIO cimport *
 
 cdef extern from "Parm_SDF.h": 
     cdef cppclass _Parm_SDF "Parm_SDF":
-        static _BaseIOtype * Alloc() 
+        _BaseIOtype * Alloc() 
         bint ID_ParmFormat(_CpptrajFile &)
         int processReadArgs(_ArgList &)
         int ReadParm(const string&, _Topology &)

@@ -9,5 +9,5 @@ cdef extern from "Action_NAstruct.h":
     cdef cppclass _Action_NAstruct "Action_NAstruct":
         _Action_NAstruct() 
         #~_Action_NAstruct() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

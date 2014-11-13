@@ -5,5 +5,5 @@ from Action cimport *
 cdef extern from "Action_Temperature.h": 
     cdef cppclass _Action_Temperature "Action_Temperature":
         _Action_Temperature() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

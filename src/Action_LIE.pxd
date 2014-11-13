@@ -6,5 +6,5 @@ from ImagedAction cimport *
 cdef extern from "Action_LIE.h": 
     cdef cppclass _Action_LIE "Action_LIE":
         _Action_LIE() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

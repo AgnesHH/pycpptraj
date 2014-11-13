@@ -7,7 +7,7 @@ cdef extern from "AxisType.h":
         _NA_Base() 
         _NA_Base(const _NA_Base &)
         _NA_Base & operator =(const _NA_Base &)
-        static NAType ID_BaseFromName(const _NameType&)
+        NAType ID_BaseFromName(const _NameType&)
         _NA_Base(const _Topology&, int, NAType)
         void SetInput_Frame(const _Frame&)
         void Print_AtomNames() const 

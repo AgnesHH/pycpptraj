@@ -5,8 +5,8 @@ from DataIO cimport *
 cdef extern from "DataIO_Gnuplot.h": 
     cdef cppclass _DataIO_Gnuplot "DataIO_Gnuplot":
         _DataIO_Gnuplot() 
-        static _BaseIOtype * Alloc() 
-        static void WriteHelp() 
+        _BaseIOtype * Alloc() 
+        void WriteHelp() 
         int ReadData(const string&, _ArgList &, _DataSetList &, const string&)
         int processWriteArgs(_ArgList &)
         int WriteData(const string&, const _DataSetList&)

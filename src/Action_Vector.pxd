@@ -8,5 +8,5 @@ cdef extern from "Action_Vector.h":
     cdef cppclass _Action_Vector "Action_Vector":
         _Action_Vector() 
         #~_Action_Vector() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

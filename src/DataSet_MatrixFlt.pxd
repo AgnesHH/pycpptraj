@@ -7,7 +7,7 @@ cdef extern from "DataSet_MatrixFlt.h":
     cdef cppclass _DataSet_MatrixFlt "DataSet_MatrixFlt":
         _DataSet_MatrixFlt() : _DataSet_2D(MATRIX_FLT, 12, 4)
         float & operator [ ](size_t idx)
-        static _DataSet * Alloc() 
+        _DataSet * Alloc() 
         size_t Size() const 
         int Sync() 
         void Info() const 

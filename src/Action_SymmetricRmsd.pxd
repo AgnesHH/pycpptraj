@@ -7,5 +7,5 @@ from SymmetricRmsdCalc cimport *
 cdef extern from "Action_SymmetricRmsd.h": 
     cdef cppclass _Action_SymmetricRmsd "Action_SymmetricRmsd":
         _Action_SymmetricRmsd() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

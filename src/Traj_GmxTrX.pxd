@@ -6,4 +6,4 @@ cdef extern from "Traj_GmxTrX.h":
     cdef cppclass _Traj_GmxTrX "Traj_GmxTrX":
         _Traj_GmxTrX() 
         #~_Traj_GmxTrX() 
-        static _BaseIOtype * Alloc() 
+        _BaseIOtype * Alloc() 

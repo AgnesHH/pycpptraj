@@ -5,8 +5,8 @@ from DataIO cimport *
 cdef extern from "DataIO_Evecs.h": 
     cdef cppclass _DataIO_Evecs "DataIO_Evecs":
         _DataIO_Evecs() 
-        static _BaseIOtype * Alloc() 
-        static void ReadHelp() 
+        _BaseIOtype * Alloc() 
+        void ReadHelp() 
         int ReadData(const string&, _ArgList &, _DataSetList &, const string&)
         int processWriteArgs(_ArgList &)
         int WriteData(const string&, const _DataSetList&)

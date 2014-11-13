@@ -8,5 +8,5 @@ from Array1D cimport *
 cdef extern from "Action_Projection.h": 
     cdef cppclass _Action_Projection "Action_Projection":
         _Action_Projection() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

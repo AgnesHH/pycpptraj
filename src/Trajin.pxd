@@ -6,7 +6,7 @@ from ProgressBar cimport *
 cdef extern from "Trajin.h": 
     cdef cppclass _Trajin "Trajin":
         _Trajin() 
-        static int Check_FrameArgs(_ArgList &, int, int &, int &, int &)
+        int Check_FrameArgs(_ArgList &, int, int &, int &, int &)
         inline bint CheckFinished() 
         inline void UpdateCounters() 
         inline int GetNext_Frame(_Frame &)

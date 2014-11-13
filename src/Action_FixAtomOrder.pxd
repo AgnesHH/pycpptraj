@@ -6,5 +6,5 @@ cdef extern from "Action_FixAtomOrder.h":
     cdef cppclass _Action_FixAtomOrder "Action_FixAtomOrder":
         _Action_Fix_AtomOrder() 
         #~_Action_Fix_AtomOrder() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

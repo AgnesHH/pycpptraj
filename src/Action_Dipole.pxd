@@ -7,5 +7,5 @@ from GridAction cimport *
 cdef extern from "Action_Dipole.h": 
     cdef cppclass _Action_Dipole "Action_Dipole":
         _Action_Dipole() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 

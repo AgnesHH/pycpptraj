@@ -7,6 +7,6 @@ from DataSet_Vector cimport *
 cdef extern from "Action_Rotdif.h": 
     cdef cppclass _Action_Rotdif "Action_Rotdif":
         _Action_Rotdif() 
-        static _DispatchObject * Alloc() 
-        static void Help() 
+        _DispatchObject * Alloc() 
+        void Help() 
         #~_Action_Rotdif() 
