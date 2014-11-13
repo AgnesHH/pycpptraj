@@ -18,7 +18,7 @@ cdef extern from "ActionList.h":
                       _TopologyList*, _FrameList*,
                       _DataSetList*, _DataFileList*)
         int SetupActions(_Topology**)
-        bint DoActions(Frame **, int)
+        bint DoActions(_Frame **, int)
         void Print()
         void List()
         bint Empty()
@@ -26,5 +26,5 @@ cdef extern from "ActionList.h":
         const string& CmdString(int)
         DispatchAllocatorType ActionAlloc()
 
-cdef class ActionList:
-    cdef _ActionList* thisptr
+#cdef class ActionList:
+#    cdef _ActionList* thisptr

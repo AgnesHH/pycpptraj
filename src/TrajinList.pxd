@@ -1,25 +1,24 @@
-# distutil: language = c++
+# distutils: language = c++
+from Trajin cimport *
+from TopologyList cimport *
 
-from libcpp.string cimport string
-from Trajin cimport Trajin
-from TopologyList cimport TopologyList
 
-cdef extern from "TrajinList.h":
-    ctypedef enum TrajModeType: UNDEFINED, NORMAL, ENSEMBLE
-    cdef cppclass TrajinList:
-        #enum
-        TrajinList()
-        void Clear()
-        void SetDebug(int)
-        int AddTrajin(string&, ArgList&, TrajinList&)
-        int AddEnsemble(string&, ArgList&, TopologyList&)
-
-        ctypedef vector[Trajin*] ListType
-        ctypedef ListType.const_iterator const_iterator
-        const_iterator begin()
-        const_iterator end()
-        bint empty()
-        TrajModeType Mode()
-        Trajin* front()
-        int MaxFrames()
-        void List()
+cdef extern from "TrajinList.h": 
+    ctypedef enum TrajModeType "TrajinList::TrajModeType":
+        UNDEFINED "TrajinList::UNDEFINED"
+        NORMAL "TrajinList::NORMAL"
+        ENSEMBLE "TrajinList::ENSEMBLE"
+    cdef cppclass _TrajinList "TrajinList":
+        _TrajinList ()
+        #~_TrajinList ()
+        void Clear ()
+        void SetDebug(int dIn)
+        int Add_Trajin(const string&, _ArgList &, const _TopologyList&)
+        int AddEnsemble(const string&, _ArgList &, const _TopologyList&)
+        #const_iterator begin ()const 
+        #const_iterator end ()const 
+        bint empty ()const 
+        TrajModeType Mode ()const 
+        const _Trajin * front ()const 
+        int Max_Frames ()const 
+        void List ()const 
