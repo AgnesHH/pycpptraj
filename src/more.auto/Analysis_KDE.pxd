@@ -4,7 +4,7 @@ from DataSet_1D cimport *
 
 
 cdef extern from "Analysis_KDE.h": 
-    cdef cpplass _Analysis_KDE "Analysis_KDE":
+    cdef cppclass _Analysis_KDE "Analysis_KDE":
         _Analysis_KDE() 
         static _DispatchObject * Alloc() 
         static void Help() 

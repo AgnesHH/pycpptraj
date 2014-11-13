@@ -3,7 +3,7 @@ from DataIO cimport *
 
 
 cdef extern from "DataIO_Evecs.h": 
-    cdef cpplass _DataIO_Evecs "DataIO_Evecs":
+    cdef cppclass _DataIO_Evecs "DataIO_Evecs":
         _DataIO_Evecs() 
         static _BaseIOtype * Alloc() 
         static void ReadHelp() 

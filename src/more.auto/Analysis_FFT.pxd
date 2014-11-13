@@ -4,7 +4,7 @@ from Array1D cimport *
 
 
 cdef extern from "Analysis_FFT.h": 
-    cdef cpplass _Analysis_FFT "Analysis_FFT":
+    cdef cppclass _Analysis_FFT "Analysis_FFT":
         _Analysis_FFT() 
         static _DispatchObject * Alloc() 
         static void Help() 

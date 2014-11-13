@@ -2,7 +2,7 @@
 
 
 cdef extern from "ClusterSieve.h": 
-    cdef cpplass _ClusterSieve "ClusterSieve":
+    cdef cppclass _ClusterSieve "ClusterSieve":
         _ClusterSieve() 
         int SetSieve(int, size_t, int)
         int SetSieve(int, vector [bint] const &)

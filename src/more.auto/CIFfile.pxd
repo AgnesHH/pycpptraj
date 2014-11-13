@@ -4,7 +4,7 @@ from BufferedLine cimport *
 
 
 cdef extern from "CIFfile.h": 
-    cdef cpplass _CIFfile::DataBlock "CIFfile::DataBlock":
+    cdef cppclass _CIFfile::DataBlock "CIFfile::DataBlock":
         DataBlock() 
         const string& Header() const 
         bint empty() const 

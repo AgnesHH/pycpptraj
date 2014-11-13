@@ -3,7 +3,7 @@ from DataSet_Coords cimport *
 
 
 cdef extern from "DataSet_Coords_CRD.h": 
-    cdef cpplass _DataSet_Coords_CRD "DataSet_Coords_CRD":
+    cdef cppclass _DataSet_Coords_CRD "DataSet_Coords_CRD":
         _DataSet_Coords_CRD() : DataSet_Coords(COORDS)
         static _DataSet * Alloc() 
         size_t Size() const 

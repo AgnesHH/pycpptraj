@@ -5,7 +5,7 @@ from GridAction cimport *
 
 
 cdef extern from "Action_Grid.h": 
-    cdef cpplass _Action_Grid "Action_Grid":
+    cdef cppclass _Action_Grid "Action_Grid":
         _Action_Grid() 
         static _DispatchObject * Alloc() 
         static void Help() 

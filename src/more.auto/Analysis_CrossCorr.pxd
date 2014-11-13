@@ -3,7 +3,7 @@ from Analysis cimport *
 
 
 cdef extern from "Analysis_CrossCorr.h": 
-    cdef cpplass _Analysis_CrossCorr "Analysis_CrossCorr":
+    cdef cppclass _Analysis_CrossCorr "Analysis_CrossCorr":
         _Analysis_CrossCorr() 
         static _DispatchObject * Alloc() 
         static void Help() 

@@ -4,7 +4,7 @@ from DataSet_Coords cimport *
 
 
 cdef extern from "Analysis_CrdFluct.h": 
-    cdef cpplass _Analysis_CrdFluct "Analysis_CrdFluct":
+    cdef cppclass _Analysis_CrdFluct "Analysis_CrdFluct":
         _Analysis_CrdFluct() 
         static _DispatchObject * Alloc() 
         static void Help() 

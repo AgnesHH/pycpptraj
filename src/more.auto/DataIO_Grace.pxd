@@ -3,7 +3,7 @@ from DataIO cimport *
 
 
 cdef extern from "DataIO_Grace.h": 
-    cdef cpplass _DataIO_Grace "DataIO_Grace":
+    cdef cppclass _DataIO_Grace "DataIO_Grace":
         _DataIO_Grace() : DataIO(true, false, false ), isInverted_(false)
         static _BaseIOtype * Alloc() 
         static void WriteHelp() 

@@ -4,7 +4,7 @@ from DataSet_Vector cimport *
 
 
 cdef extern from "Analysis_VectorMath.h": 
-    cdef cpplass _Analysis_VectorMath "Analysis_VectorMath":
+    cdef cppclass _Analysis_VectorMath "Analysis_VectorMath":
         _Analysis_VectorMath() 
         static _DispatchObject * Alloc() 
         static void Help() 

@@ -5,7 +5,7 @@ from Vec3 cimport *
 
 
 cdef extern from "Action_Spam.h": 
-    cdef cpplass _Action_Spam "Action_Spam":
+    cdef cppclass _Action_Spam "Action_Spam":
         _Action_Spam() 
         static _DispatchObject * Alloc() 
         static void Help() 

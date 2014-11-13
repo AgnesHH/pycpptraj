@@ -3,7 +3,7 @@ from DataSet_1D cimport *
 
 
 cdef extern from "DataSet_double.h": 
-    cdef cpplass _DataSet_double "DataSet_double":
+    cdef cppclass _DataSet_double "DataSet_double":
         _DataSet_double() : _DataSet_1D(DOUBLE, 12, 4 ), bound_(0.0 ), boundh_(0.0 ), rexp_(-1.0)
         static _DataSet * Alloc() 
         double & operator [ ](size_t idx)

@@ -5,7 +5,7 @@ from Analysis cimport *
 
 
 cdef extern from "DataSet_Modes.h": 
-    cdef cpplass _DataSet_Modes "DataSet_Modes":
+    cdef cppclass _DataSet_Modes "DataSet_Modes":
         _DataSet_Modes() 
         #~_DataSet_Modes() 
         static _DataSet * Alloc() 

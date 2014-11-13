@@ -6,7 +6,7 @@ from DataSet_1D cimport *
 
 
 cdef extern from "Action_NAstruct.h": 
-    cdef cpplass _Action_NAstruct "Action_NAstruct":
+    cdef cppclass _Action_NAstruct "Action_NAstruct":
         _Action_NAstruct() 
         #~_Action_NAstruct() 
         static _DispatchObject * Alloc() 

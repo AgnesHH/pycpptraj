@@ -3,7 +3,7 @@ from ArrayIterator cimport *
 
 
 cdef extern from "ComplexArray.h": 
-    cdef cpplass _ComplexArray "ComplexArray":
+    cdef cppclass _ComplexArray "ComplexArray":
         _ComplexArray() : data_(0 ), ndata_(0 ), ncomplex_(0)
         _ComplexArray(int)
         _ComplexArray(const _ComplexArray&)

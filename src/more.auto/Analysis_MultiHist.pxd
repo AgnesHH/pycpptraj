@@ -3,7 +3,7 @@ from Analysis cimport *
 
 
 cdef extern from "Analysis_MultiHist.h": 
-    cdef cpplass _Analysis_MultiHist "Analysis_MultiHist":
+    cdef cppclass _Analysis_MultiHist "Analysis_MultiHist":
         _Analysis_MultiHist() 
         #~_Analysis_MultiHist() 
         static _DispatchObject * Alloc() 

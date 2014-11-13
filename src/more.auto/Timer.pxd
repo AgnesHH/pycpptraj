@@ -2,7 +2,7 @@
 
 
 cdef extern from "Timer.h": 
-    cdef cpplass _Timer "Timer":
+    cdef cppclass _Timer "Timer":
         _Timer() 
         void Start() 
         void Stop() 

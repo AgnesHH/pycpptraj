@@ -3,12 +3,12 @@
 from libcpp.string cimport string
 
 cdef extern from "NameType.h":
-    cdef cppclass NameType:
-        NameType()
-        NameType(NameType&)
-        NameType(string&)
+    cdef cppclass _NameType "NameType":
+        _NameType()
+        _NameType(_NameType&)
+        _NameType(string&)
 
         void ToBuffer(char*)
-        bint Match(NameType&)
+        bint Match(_NameType&)
         string Truncated()
         void ReplaceAsterisk()

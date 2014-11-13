@@ -4,7 +4,7 @@ from Matrix cimport *
 
 
 cdef extern from "DataSet_MatrixFlt.h": 
-    cdef cpplass _DataSet_MatrixFlt "DataSet_MatrixFlt":
+    cdef cppclass _DataSet_MatrixFlt "DataSet_MatrixFlt":
         _DataSet_MatrixFlt() : _DataSet_2D(MATRIX_FLT, 12, 4)
         float & operator [ ](size_t idx)
         static _DataSet * Alloc() 

@@ -5,7 +5,7 @@ from DataSet_integer cimport *
 
 
 cdef extern from "Action_Hbond.h": 
-    cdef cpplass _Action_Hbond "Action_Hbond":
+    cdef cppclass _Action_Hbond "Action_Hbond":
         _Action_Hbond() 
         static _DispatchObject * Alloc() 
         static void Help() 

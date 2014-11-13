@@ -2,9 +2,9 @@
 
 
 cdef extern from "Molecule.h": 
-    cdef cpplass _Molecule "Molecule":
-        _Molecule() : begin_Atom_(0 ), end_Atom_(0 ), isSolvent_(false)
-        _Molecule(int begin, int end): begin_Atom_(begin ), end_Atom_(end ), isSolvent_(false)
+    cdef cppclass _Molecule "Molecule":
+        _Molecule()
+        _Molecule(int begin, int end)
         void SetFirst(int begin)
         void SetLast(int last)
         void SetSolvent() 

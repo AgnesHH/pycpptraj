@@ -6,7 +6,7 @@ from Topology cimport *
 
 
 cdef extern from "GridAction.h": 
-    cdef cpplass _GridAction "GridAction":
+    cdef cppclass _GridAction "GridAction":
         Grid_Action() : increment_(1.0)
         _DataSet_GridFlt * GridInit(const char *, _ArgList &, _DataSetList &)
         void GridInfo(_DataSet_const GridFlt&)

@@ -4,7 +4,7 @@ from FileIO cimport *
 
 
 cdef extern from "FileIO_Bzip2.h": 
-    cdef cpplass _FileIO_Bzip2 "FileIO_Bzip2":
+    cdef cppclass _FileIO_Bzip2 "FileIO_Bzip2":
         _FileIO_Bzip2() 
         #~_FileIO_Bzip2() 
         int Open(const char *, const char *)

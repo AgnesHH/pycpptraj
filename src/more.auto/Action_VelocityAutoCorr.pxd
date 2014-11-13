@@ -4,7 +4,7 @@ from DataSet_Vector cimport *
 
 
 cdef extern from "Action_VelocityAutoCorr.h": 
-    cdef cpplass _Action_VelocityAutoCorr "Action_VelocityAutoCorr":
+    cdef cppclass _Action_VelocityAutoCorr "Action_VelocityAutoCorr":
         _Action_VelocityAutoCorr() 
         static _DispatchObject * Alloc() 
         static void Help() 

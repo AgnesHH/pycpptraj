@@ -3,7 +3,7 @@ from Analysis cimport *
 
 
 cdef extern from "Analysis_Divergence.h": 
-    cdef cpplass _Analysis_Divergence "Analysis_Divergence":
+    cdef cppclass _Analysis_Divergence "Analysis_Divergence":
         _Analysis_Divergence() 
         static _DispatchObject * Alloc() 
         static void Help() 

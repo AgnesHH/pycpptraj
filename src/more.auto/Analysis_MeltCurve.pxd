@@ -4,7 +4,7 @@ from Array1D cimport *
 
 
 cdef extern from "Analysis_MeltCurve.h": 
-    cdef cpplass _Analysis_MeltCurve "Analysis_MeltCurve":
+    cdef cppclass _Analysis_MeltCurve "Analysis_MeltCurve":
         _Analysis_MeltCurve() : mcurve_(0 ), cut_(0.0)
         static _DispatchObject * Alloc() 
         static void Help() 

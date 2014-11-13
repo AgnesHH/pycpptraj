@@ -5,7 +5,7 @@ from DataSet_Vector cimport *
 
 
 cdef extern from "Action_Rotdif.h": 
-    cdef cpplass _Action_Rotdif "Action_Rotdif":
+    cdef cppclass _Action_Rotdif "Action_Rotdif":
         _Action_Rotdif() 
         static _DispatchObject * Alloc() 
         static void Help() 

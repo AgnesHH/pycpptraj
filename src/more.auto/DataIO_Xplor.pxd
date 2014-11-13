@@ -3,7 +3,7 @@ from DataIO cimport *
 
 
 cdef extern from "DataIO_Xplor.h": 
-    cdef cpplass _DataIO_Xplor "DataIO_Xplor":
+    cdef cppclass _DataIO_Xplor "DataIO_Xplor":
         _DataIO_Xplor() : DataIO(false, false, true)
         static _BaseIOtype * Alloc() 
         int ReadData(const string&, _ArgList &, _DataSetList &, const string&)

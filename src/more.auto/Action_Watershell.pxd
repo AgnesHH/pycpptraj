@@ -4,7 +4,7 @@ from ImagedAction cimport *
 
 
 cdef extern from "Action_Watershell.h": 
-    cdef cpplass _Action_Watershell "Action_Watershell":
+    cdef cppclass _Action_Watershell "Action_Watershell":
         _Action_Watershell() 
         #~_Action_Watershell() 
         static _DispatchObject * Alloc() 

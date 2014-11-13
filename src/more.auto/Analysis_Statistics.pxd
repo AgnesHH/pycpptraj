@@ -7,7 +7,7 @@ from DataSet_string cimport *
 
 
 cdef extern from "Analysis_Statistics.h": 
-    cdef cpplass _Analysis_Statistics "Analysis_Statistics":
+    cdef cppclass _Analysis_Statistics "Analysis_Statistics":
         _Analysis_Statistics() 
         static _DispatchObject * Alloc() 
         static void Help() 

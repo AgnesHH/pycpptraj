@@ -4,7 +4,7 @@ from DataSet_Coords cimport *
 
 
 cdef extern from "Action_CreateCrd.h": 
-    cdef cpplass _Action_CreateCrd "Action_CreateCrd":
+    cdef cppclass _Action_CreateCrd "Action_CreateCrd":
         _Action_CreateCrd() 
         static _DispatchObject * Alloc() 
         static void Help() 

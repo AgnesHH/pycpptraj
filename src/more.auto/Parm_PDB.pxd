@@ -3,7 +3,7 @@ from ParmIO cimport *
 
 
 cdef extern from "Parm_PDB.h": 
-    cdef cpplass _Parm_PDB "Parm_PDB":
+    cdef cppclass _Parm_PDB "Parm_PDB":
         _Parm_PDB() : readAsPQR_(false)
         static _BaseIOtype * Alloc() 
         static void ReadHelp() 

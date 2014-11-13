@@ -4,7 +4,7 @@ from Trajin cimport *
 
 
 cdef extern from "DataSet_Coords_TRJ.h": 
-    cdef cpplass _DataSet_Coords_TRJ "DataSet_Coords_TRJ":
+    cdef cppclass _DataSet_Coords_TRJ "DataSet_Coords_TRJ":
         _DataSet_Coords_TRJ() 
         #~_DataSet_Coords_TRJ() 
         static _DataSet * Alloc() 

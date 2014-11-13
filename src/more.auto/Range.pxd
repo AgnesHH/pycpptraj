@@ -2,7 +2,7 @@
 
 
 cdef extern from "Range.h": 
-    cdef cpplass _Range "Range":
+    cdef cppclass _Range "Range":
         _Range() 
         _Range(const string&)
         _Range(const string&, int)

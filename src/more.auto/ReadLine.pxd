@@ -2,7 +2,7 @@
 
 
 cdef extern from "ReadLine.h": 
-    cdef cpplass _ReadLine "ReadLine":
+    cdef cppclass _ReadLine "ReadLine":
         _ReadLine() 
         int GetInput() 
         bint YesNoPrompt(const char *)

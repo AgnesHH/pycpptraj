@@ -5,7 +5,7 @@ from AtomMap cimport *
 
 
 cdef extern from "SymmetricRmsdCalc.h": 
-    cdef cpplass _SymmetricRmsdCalc "SymmetricRmsdCalc":
+    cdef cppclass _SymmetricRmsdCalc "SymmetricRmsdCalc":
         _SymmetricRmsdCalc() 
         _SymmetricRmsdCalc(const _AtomMask&, bint, bint, const _Topology&, int)
         int InitSymmRMSD(bint, bint, int)

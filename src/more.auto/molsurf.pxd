@@ -2,4 +2,4 @@
 
 
 cdef extern from "molsurf.h": 
-    cdef cpplass _VERTEX "VERTEX":
+    cdef cppclass _VERTEX "VERTEX":

@@ -4,6 +4,6 @@ from SDFfile cimport *
 
 
 cdef extern from "Traj_SDF.h": 
-    cdef cpplass _Traj_SDF "Traj_SDF":
+    cdef cppclass _Traj_SDF "Traj_SDF":
         _Traj_SDF() 
         static _BaseIOtype * Alloc() 

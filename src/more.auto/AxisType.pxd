@@ -3,7 +3,7 @@ from Topology cimport *
 
 
 cdef extern from "AxisType.h": 
-    cdef cpplass _NA_Base "NA_Base":
+    cdef cppclass _NA_Base "NA_Base":
         _NA_Base() 
         _NA_Base(const _NA_Base &)
         _NA_Base & operator =(const _NA_Base &)

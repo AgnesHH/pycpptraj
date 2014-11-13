@@ -5,7 +5,7 @@ from Trajout cimport *
 
 
 cdef extern from "Analysis_Modes.h": 
-    cdef cpplass _Analysis_Modes "Analysis_Modes":
+    cdef cppclass _Analysis_Modes "Analysis_Modes":
         _Analysis_Modes() 
         static _DispatchObject * Alloc() 
         static void Help() 

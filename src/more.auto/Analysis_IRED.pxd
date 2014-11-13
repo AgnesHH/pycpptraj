@@ -5,7 +5,7 @@ from DataSet_Modes cimport *
 
 
 cdef extern from "Analysis_IRED.h": 
-    cdef cpplass _Analysis_IRED "Analysis_IRED":
+    cdef cppclass _Analysis_IRED "Analysis_IRED":
         _Analysis_IRED() 
         static _DispatchObject * Alloc() 
         static void Help() 

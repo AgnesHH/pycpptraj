@@ -5,7 +5,7 @@ from DataSet_RemLog cimport *
 
 
 cdef extern from "Trajin_Multi.h": 
-    cdef cpplass _Trajin_Multi "Trajin_Multi":
+    cdef cppclass _Trajin_Multi "Trajin_Multi":
         _Trajin_Multi() 
         #~_Trajin_Multi() 
         int SetupTrajRead(const string&, _ArgList &, _Topology *)

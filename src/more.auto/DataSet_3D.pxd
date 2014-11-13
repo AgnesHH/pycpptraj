@@ -5,7 +5,7 @@ from Vec3 cimport *
 
 
 cdef extern from "DataSet_3D.h": 
-    cdef cpplass _DataSet_3D "DataSet_3D":
+    cdef cppclass _DataSet_3D "DataSet_3D":
         _DataSet_3D() 
         _DataSet_3D(DataSet::DataType tIn, int wIn, int pIn): DataSet(tIn, wIn, pIn, 3)
         void Add(size_t, const void *)

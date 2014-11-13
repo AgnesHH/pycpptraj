@@ -6,7 +6,7 @@ from SymmetricRmsdCalc cimport *
 
 
 cdef extern from "Analysis_Rms2d.h": 
-    cdef cpplass _Analysis_Rms2d "Analysis_Rms2d":
+    cdef cppclass _Analysis_Rms2d "Analysis_Rms2d":
         _Analysis_Rms2d() 
         static _DispatchObject * Alloc() 
         static void Help() 

@@ -3,7 +3,7 @@ from Frame cimport *
 
 
 cdef extern from "FrameArray.h": 
-    cdef cpplass _FrameArray "FrameArray":
+    cdef cppclass _FrameArray "FrameArray":
         _FrameArray() 
         void resize(int nIn)
         _Frame & operator [ ](int idx)

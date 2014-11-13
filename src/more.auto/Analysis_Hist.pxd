@@ -5,7 +5,7 @@ from TrajectoryFile cimport *
 
 
 cdef extern from "Analysis_Hist.h": 
-    cdef cpplass _Analysis_Hist "Analysis_Hist":
+    cdef cppclass _Analysis_Hist "Analysis_Hist":
         _Analysis_Hist() 
         static _DispatchObject * Alloc() 
         static void Help() 

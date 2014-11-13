@@ -5,4 +5,4 @@ from Corr cimport *
 
 
 cdef extern from "Analysis_Timecorr.h": 
-    cdef cpplass _Analysis_Timecorr::DStoken "Analysis_Timecorr::DStoken":
+    cdef cppclass _Analysis_Timecorr::DStoken "Analysis_Timecorr::DStoken":

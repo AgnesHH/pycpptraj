@@ -3,7 +3,7 @@ from Matrix cimport *
 
 
 cdef extern from "Hungarian.h": 
-    cdef cpplass _Hungarian "Hungarian":
+    cdef cppclass _Hungarian "Hungarian":
         _Hungarian() : nrows_(0 ), ncols_(0)
         int Initialize(size_t)
         void AddElement(double d)

@@ -4,6 +4,6 @@ from BufferedFrame cimport *
 
 
 cdef extern from "Traj_AmberRestart.h": 
-    cdef cpplass _Traj_AmberRestart "Traj_AmberRestart":
+    cdef cppclass _Traj_AmberRestart "Traj_AmberRestart":
         _Traj_AmberRestart() 
         static _BaseIOtype * Alloc() 

@@ -4,7 +4,7 @@ from Array1D cimport *
 
 
 cdef extern from "Analysis_Lifetime.h": 
-    cdef cpplass _Analysis_Lifetime "Analysis_Lifetime":
+    cdef cppclass _Analysis_Lifetime "Analysis_Lifetime":
         _Analysis_Lifetime() 
         static _DispatchObject * Alloc() 
         static void Help() 

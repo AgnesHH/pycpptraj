@@ -2,7 +2,7 @@
 
 
 cdef extern from "OnlineVarT.h": 
-    cdef cpplass _StatsMap "StatsMap":
+    cdef cppclass _StatsMap "StatsMap":
         _StatsMap() : n_(0.0)
         void accumulate(map [Key, Value] a)
         Value mean(Key i)

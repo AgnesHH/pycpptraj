@@ -3,7 +3,7 @@ from Analysis cimport *
 
 
 cdef extern from "Analysis_Corr.h": 
-    cdef cpplass _Analysis_Corr "Analysis_Corr":
+    cdef cppclass _Analysis_Corr "Analysis_Corr":
         _Analysis_Corr() 
         static _DispatchObject * Alloc() 
         static void Help() 

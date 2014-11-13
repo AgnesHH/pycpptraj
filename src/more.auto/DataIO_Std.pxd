@@ -3,7 +3,7 @@ from DataIO cimport *
 
 
 cdef extern from "DataIO_Std.h": 
-    cdef cpplass _DataIO_Std "DataIO_Std":
+    cdef cppclass _DataIO_Std "DataIO_Std":
         _DataIO_Std() 
         static _BaseIOtype * Alloc() 
         static void ReadHelp() 

@@ -3,7 +3,7 @@ from DataIO cimport *
 
 
 cdef extern from "DataIO_Gnuplot.h": 
-    cdef cpplass _DataIO_Gnuplot "DataIO_Gnuplot":
+    cdef cppclass _DataIO_Gnuplot "DataIO_Gnuplot":
         _DataIO_Gnuplot() 
         static _BaseIOtype * Alloc() 
         static void WriteHelp() 

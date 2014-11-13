@@ -3,7 +3,7 @@ from DataSet cimport *
 
 
 cdef extern from "DataSet_RemLog.h": 
-    cdef cpplass _DataSet_RemLog "DataSet_RemLog":
+    cdef cppclass _DataSet_RemLog "DataSet_RemLog":
         _DataSet_RemLog() 
         static _DataSet * Alloc() 
         void AllocateReplicas(int)

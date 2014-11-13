@@ -3,7 +3,7 @@ from Trajin cimport *
 
 
 cdef extern from "Trajin_Single.h": 
-    cdef cpplass _Trajin_Single "Trajin_Single":
+    cdef cppclass _Trajin_Single "Trajin_Single":
         _Trajin_Single() 
         #~_Trajin_Single() 
         int SetupTrajRead(const string&, _ArgList &, _Topology *, bint)

@@ -4,7 +4,7 @@ from Array1D cimport *
 
 
 cdef extern from "Analysis_Average.h": 
-    cdef cpplass _Analysis_Average "Analysis_Average":
+    cdef cppclass _Analysis_Average "Analysis_Average":
         _Analysis_Average() 
         static _DispatchObject * Alloc() 
         static void Help() 

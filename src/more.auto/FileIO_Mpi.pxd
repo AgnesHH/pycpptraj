@@ -4,7 +4,7 @@ from MpiRoutines cimport *
 
 
 cdef extern from "FileIO_Mpi.h": 
-    cdef cpplass _FileIO_Mpi "FileIO_Mpi":
+    cdef cppclass _FileIO_Mpi "FileIO_Mpi":
         _FileIO_Mpi() 
         #~_FileIO_Mpi() 
         int Open(const char *, const char *)

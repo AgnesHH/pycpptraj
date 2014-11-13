@@ -5,7 +5,7 @@ from DataSet_Mesh cimport *
 
 
 cdef extern from "Analysis_Spline.h": 
-    cdef cpplass _Analysis_Spline "Analysis_Spline":
+    cdef cppclass _Analysis_Spline "Analysis_Spline":
         _Analysis_Spline() 
         static _DispatchObject * Alloc() 
         static void Help() 

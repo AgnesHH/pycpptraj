@@ -3,7 +3,7 @@ from Analysis cimport *
 
 
 cdef extern from "AnalysisList.h": 
-    cdef cpplass _AnalysisList "AnalysisList":
+    cdef cppclass _AnalysisList "AnalysisList":
         _AnalysisList() 
         #~_AnalysisList() 
         void Clear() 
