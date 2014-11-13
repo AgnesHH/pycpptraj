@@ -37,6 +37,6 @@ cdef extern from "CpptrajState.h":
         int SetListDebug(_ArgList &)
         int ClearList(_ArgList &)
         int Remove_DataSet(_ArgList &)
-        int TrajLength(const string&, const vector [string]&)
+        int TrajLength(const string&, const vector[string]&)
         int Run()
         void Master_DataFileWrite()
