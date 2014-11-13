@@ -26,8 +26,22 @@ class Line_codegen:
     def __init__(self, myline):
         self.myline = myline 
 
+    def add_sharp(self):
+        """add # to the begining of self.myline"""
+        self.myline = "#" + self.myline
+
     def remove_std_namespace(self):
         self.myline = re.sub("std::", "", self.myline)
+
+    def remove_unsupported(self):
+        #delete static
+        self.myline = self.myline.replace("static ", "")
+        if self.myline.startswith("~"):
+            #dont need to use destructor here
+            self.add_sharp()
+
+        if "operator =" in self.myline:
+            self.add_sharp()
 
     def add_under_score_to_class(self, classlist):
         """classlist = list of cpptraj classes"""
@@ -38,9 +52,6 @@ class Line_codegen:
 
     def replace_others(self):
         """Add DOC here"""
-        if self.myline.startswith("~"):
-            #dont need to use destructor here
-            self.myline = "#" + self.myline
         #replace < > to []
         table = string.maketrans("<>", "[]")
         self.myline = self.myline.translate(table)

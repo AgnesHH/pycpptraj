@@ -28,13 +28,14 @@ classname = cpp.classes.keys()[0]
 extcl = "_" + classname
 
 #declare cpp class
-print '%scdef cpplass %s "%s":' % (indent, extcl, classname)
+print '%scdef cppclass %s "%s":' % (indent, extcl, classname)
 
 methods = cpp.classes[classname]['methods']['public']
 for method in methods:
     line = Line_codegen(method['debug'])
     if not 'virtual' in line.myline:
         line.remove_std_namespace()
+        line.remove_unsupported()
         line.swap_const()
         line.add_under_score_to_class(classlist)
         line.replace_others()

@@ -17,7 +17,6 @@ def find_class():
             if line.startswith("class"):
                 classname = line.split()[1].split(":")[0].split(";")[0]
                 classlist.append(classname)
-                #print "%s --> %s" % (fnshort, classname)
         fh.close()
     return list(set(classlist))
 
