@@ -48,5 +48,5 @@ cdef extern from "Atom.h":
         void AddExclusionList(const set[int] &)
         double GetBondLength(_AtomicElementType, _AtomicElementType)
 
-cdef class Atom:
-    cdef _Atom* thisptr
+#cdef class Atom:
+#    cdef _Atom* thisptr
