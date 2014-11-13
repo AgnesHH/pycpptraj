@@ -1,12 +1,16 @@
 # distutil: language = c++
+from libcpp.string cimport string
 
 cdef extern from "Dimension.h":
-    ctypedef enum DimIdxType "Dimension::DimIdxType"
+    ctypedef enum DimIdxType "Dimension::DimIdxType":
+        X "Dimension::X"
+        Y "Dimension::Y"
+        Z "Dimension::Z"
     cdef cppclass _Dimension "Dimension":
         _Dimension()
         _Dimension(double, double, int)
         _Dimension(double, double, int, const string&)
-        _Dimension(const Dimension&)
+        _Dimension(const _Dimension&)
         
         void SetLabel(const string&)
         void SetMin(double)
@@ -25,5 +29,5 @@ cdef extern from "Dimension.h":
         int CalcBinsOrStep()
         void PrintDim()
 
-cdef class Dimension:
-    _Dimension* thisptr
+#cdef class Dimension:
+#    _Dimension* thisptr

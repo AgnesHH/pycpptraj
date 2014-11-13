@@ -8,9 +8,9 @@ from BaseIOtype cimport *
 
 cdef extern from "TrajectoryIO.h": 
     cdef cppclass _TrajectoryIO "TrajectoryIO":
-        _TrajectoryIO (): debug_(0 ), hasV_(false ), hasT_(false)
-        bint Has_Box ()const 
-        const _Box & Traj_Box ()const 
+        _TrajectoryIO()
+        bint Has_Box() const 
+        const _Box & Traj_Box()const 
         bint HasV ()const 
         bint HasT ()const 
         const string& Title ()const 

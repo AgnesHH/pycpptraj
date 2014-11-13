@@ -7,11 +7,22 @@ from FileIO  cimport *
 
 cdef extern from "CpptrajFile.h":
     ctypedef enum AccessType "CpptrajFile::AccessType":
-        pass
+        READ "CpptrajFile::READ"
+        WRITE "CpptrajFile::WRITE"
+        APPEND "CpptrajFile::APPEND"
+        UPDATE "CpptrajFile::UPDATE"
     ctypedef enum CompressType "CpptrajFile::CompressType":
-        pass
+        NO_COMPRESSION "CpptrajFile::NO_COMPRESSION"
+        GZIP "CpptrajFile::GZIP"
+        BZIP2 "CpptrajFile::BZIP2"
+        ZIP "CpptrajFile::ZIP"
     ctypedef enum FileType "CpptrajFile::FileType":
-        pass
+        UNKNOWN_TYPE "CpptrajFile::UNKNOWN_TYPE"
+        STANDARD "CpptrajFile::STANDARD"
+        GZIPFILE "CpptrajFile::GZIPFILE"
+        BZIP2FILE "CpptrajFile::BZIP2FILE"
+        ZIPFILE "CpptrajFile::ZIPFILE"
+        MPIFILE "CpptrajFile::MPIFILE"
     cdef cppclass _CpptrajFile "CpptrajFile":
         _CpptrajFile()
         _CpptrajFile(const _CpptrajFile&)
@@ -48,5 +59,5 @@ cdef extern from "CpptrajFile.h":
         int Flush()
         off_t Tell()
 
-cdef class CpptrajFile:
-    cdef _CpptrajFile* thisptr
+#cdef class CpptrajFile:
+#    cdef _CpptrajFile* thisptr

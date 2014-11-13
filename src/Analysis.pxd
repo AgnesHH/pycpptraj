@@ -13,5 +13,5 @@ cdef extern from "Analysis.h":
     cdef cppclass _Analysis "Analysis":
         pass
         
-cdef class Analysis:
-    cdef _Analysis* thisptr
+#cdef class Analysis:
+#    cdef _Analysis* thisptr
