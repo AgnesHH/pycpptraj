@@ -2,10 +2,11 @@
 
 from TrajectoryFile cimport *
 
-cdef _TrajectoryFile* p = new _TrajectoryFile()
-
-p.ReadOptions()
-print
-p.WriteOptions()
-
-del p
+def main():
+    cdef _TrajectoryFile* p = new _TrajectoryFile()
+    
+    p.ReadOptions()
+    print
+    p.WriteOptions()
+    
+    del p
