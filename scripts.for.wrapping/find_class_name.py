@@ -1,3 +1,4 @@
+# (c) 2014 Hai Nguyen
 #!/usr/bin/env python
 #python ./find_class_name.py filename
 

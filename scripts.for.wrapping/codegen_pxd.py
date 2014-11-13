@@ -1,3 +1,4 @@
+# (c) 2014 Hai Nguyen
 #TODO: should re-write, looks ugly
 import CppHeaderParser
 from util import print_blank_line, Line_codegen

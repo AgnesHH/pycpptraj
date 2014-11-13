@@ -1,8 +1,4 @@
-#TODO: should re-write, looks ugly
-import CppHeaderParser
-from util import print_blank_line, Line_codegen
-from util import find_class
-import sys
+# (c) 2014 - Hai Nguyen
 
 cpptrajsrc="/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/"
 file=cpptrajsrc + sys.argv[1]

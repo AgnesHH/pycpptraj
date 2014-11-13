@@ -1,3 +1,4 @@
+#(c) 2014 - Hai Nguyen
 import string
 import re
 import sys
