@@ -3,13 +3,13 @@
 import sys
 from glob import glob
 
-if not sys.argv[1]:
+if len(sys.argv) == 1:
     solist = glob("*.so")
-    modname = fname.split(".")[0]
     for fname in solist:
+        modname = fname.split(".")[0]
         if not modname is "Atom":
             __import__(modname)
 else:
     #specify modname by user
-    modname = sys.argv[1]
+    modname = 'test_' + sys.argv[1]
     __import__(modname)
