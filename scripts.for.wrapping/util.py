@@ -23,9 +23,19 @@ def find_class(src):
 
 
 class Line_codegen:
+
+    replace_dict = {
+                   r"{": "",
+                   r";": "",
+                   r" ,": ",",
+                   r" ( ": "(",
+                   r" ()": "()",
+                   r" ) ": ")",
+                   r"bool": "bint"
+                   }
     def __init__(self, myline):
         self.myline = myline 
-
+    
     def add_sharp(self):
         """add # to the begining of self.myline"""
         self.myline = "#" + self.myline
@@ -51,17 +61,23 @@ class Line_codegen:
                     self.myline = self.myline.replace(classname, r"_" + classname)
 
     def replace_others(self):
-        """Add DOC here"""
+        """
+        Add DOC here
+        Need better function's name
+        """
+
         #replace < > to []
         table = string.maketrans("<>", "[]")
         self.myline = self.myline.translate(table)
-        self.myline = self.myline.replace(r"{", "")
-        self.myline = self.myline.replace(r";", "")
-        self.myline = self.myline.replace(r" ,", ",")
-        self.myline = self.myline.replace(r" ( ", "(")
-        self.myline = self.myline.replace(r" ) ", ")")
-        #replace "bool" to "bint"
-        self.myline = self.myline.replace("bool", "bint")
+        for key, value in self.replace_dict.iteritems():
+            self.myline = self.myline.replace(key, value)
+        #self.myline = self.myline.replace(r"{", "")
+        #self.myline = self.myline.replace(r";", "")
+        #self.myline = self.myline.replace(r" ,", ",")
+        #self.myline = self.myline.replace(r" ( ", "(")
+        #self.myline = self.myline.replace(r" ) ", ")")
+        ##replace "bool" to "bint"
+        #self.myline = self.myline.replace("bool", "bint")
 
     def swap_const(self):
         """add DOC here"""
