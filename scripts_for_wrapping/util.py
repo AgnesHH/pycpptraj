@@ -3,6 +3,7 @@ import string
 import re
 import sys
 from glob import glob
+from collections import OrderedDict
 
 
 def print_blank_line(num):
@@ -27,14 +28,20 @@ def find_class(src):
 
 class Line_codegen:
 
-    replace_dict = {
-        r"{": "",
-        r";": "",
-        r" ,": ",",
-        r" ( ": "(",
-        r" ()": "()",
-        r" ) ": ")",
-        r"bool": "bint"}
+    # this is OrderedDict
+    replace_dict = OrderedDict(
+        (
+        ("{", ""),
+        (";", ""),
+        (" ,", ","),
+        (" ( ", "("),
+        (" ) ", ")"),
+        #(" ()", "()"),
+        (" [ ]", "[]"),
+        (" [", "["),
+        (" &", "&"),
+        (")const", ") const"),
+        ("bool", "bint")))
 
     def __init__(self, myline):
         self.myline = myline
@@ -53,6 +60,8 @@ class Line_codegen:
             # dont need to use destructor here
             self.add_sharp()
 
+        if "const_iterator" in self.myline:
+            self.add_sharp()
         if "operator =" in self.myline:
             self.add_sharp()
 
@@ -85,9 +94,18 @@ class Line_codegen:
 
     def swap_const(self):
         """add DOC here"""
-        p = re.compile("[a-zA-Z]* const &")
+        p = re.compile("[a-zA-Z0-9_]* const &")
         words = re.findall(p, self.myline)
         for word in words:
             oldword = word.split()[0] + r" const &"
             newword = r"const " + word.split()[0] + r"&"
             self.myline = re.sub(oldword, newword, self.myline)
+
+        # change: "vector[int] const&" to "const vector[int]&"
+        # find type in [ ] 
+        p = re.compile("vector\[(\w+)\] const&")
+        words = re.findall(p, self.myline)
+        for word in words:
+            oldp = "vector[%s] const&" % word
+            newp = "const vector[%s]&" % word
+            self.myline = self.myline.replace(oldp, newp)
