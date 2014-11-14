@@ -4,7 +4,7 @@ from DataSet_1D cimport *
 
 cdef extern from "DataSet_integer.h": 
     cdef cppclass _DataSet_integer "DataSet_integer":
-        _DataSet_integer() : _DataSet_1D(INTEGER, 12, 0)
+        _DataSet_integer()
         _DataSet * Alloc() 
         int & operator [ ](size_t idx)
         int operator [ ](size_t idx)const 
@@ -19,5 +19,5 @@ cdef extern from "DataSet_integer.h":
         double Dval(size_t idx)const 
         double Xcrd(size_t idx)const 
         void WriteBuffer(_CpptrajFile &, size_t)const 
-        iterator begin() 
-        iterator end() 
+        #iterator begin() 
+        #iterator end() 

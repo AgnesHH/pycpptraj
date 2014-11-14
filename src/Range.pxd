@@ -8,8 +8,8 @@ cdef extern from "Range.h":
         _Range(const string&, int)
         _Range(const _Range &)
         _Range & operator =(const _Range &)
-        const_iterator begin() const 
-        const_iterator end() const 
+        #const_iterator begin() const 
+        #const_iterator end() const 
         bint Empty() const 
         int Size() const 
         int Set_Range(const string&)

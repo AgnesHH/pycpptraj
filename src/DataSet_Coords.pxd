@@ -1,20 +1,13 @@
-inden = ' '*4
-print "# distutil: language = c++"
+# distutils: language = c++
+from Topology cimport *
+from DataSet cimport *
+from DataSet_1D cimport *
 
-print "cdef extern from filename.h:"
-#parse "class"
-print indent + "cdef cppclass %s %s" % (classname, classname2)
 
-#process block between public and protected or private
-#parse class keywords and change from classname to _classname
-#if exist "~": skip
-#if exist const&: swap(line[i], line[i+1]) where i+1 is index of const
-#format: type functionname(arglist)
-#    find_func_name: right before 1st "("
-print indent*2 + type + funcname + process_arglist()
-
-def process_arglis(argline):
-    args = argline.split(',')
-    for i, arg in enumerate(args):
-        #search class' name
-    
+cdef extern from "DataSet_Coords.h": 
+    cdef cppclass _DataSet_Coords "DataSet_Coords":
+        _DataSet_Coords ()
+        _DataSet_Coords(DataType t)
+        _Frame Allocate_Frame ()const 
+        void Set_Topology(const _Topology&)
+        inline const _Topology& Top ()const 

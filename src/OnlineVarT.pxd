@@ -7,8 +7,8 @@ cdef extern from "OnlineVarT.h":
         void accumulate(map [Key, Value] a)
         Value mean(Key i)
         Value variance(Key i)
-        iterator mean_begin() 
-        iterator mean_end() 
-        iterator variance_begin() 
-        iterator variance_end() 
+        #iterator mean_begin() 
+        #iterator mean_end() 
+        #iterator variance_begin() 
+        #iterator variance_end() 
         Value nData() const 

@@ -6,12 +6,19 @@ from ArgList cimport *
 from ClusterNode cimport *
 
 cdef extern from "ClusterList.h":
+    ctypedef enum DistModeType "ClusterList::DistModeType":
+        USE_FRAMES "ClusterList::USE_FRAMES"
+        USE_FILE "ClusterList::USE_FILE"
+    # ClusterList.h
+    ctypedef enum DistMetricType "ClusterList::DistMetricType":
+        RMS "ClusterList::RMS"
+        DME "ClusterList::DME"
+        SRMSD "ClusterList::SRMSD"
+        DATA "ClusterList::DATA"
     cdef cppclass ClusterList:
-       #enum DistModeType   { USE_FRAMES = 0, USE_FILE   }
-       #enum DistMetricType { RMS = 0, DME, SRMSD, DATA  }
        char * MetricString(DistMetricType)
        ClusterList()
-       virtual ~ClusterList
+       #virtual ~ClusterList
        int Nclusters()
 
        void SetDebug()
@@ -23,9 +30,9 @@ cdef extern from "ClusterList.h":
 
        int CalcFrameDistances(string&, DsArray&, DistModeType, DistMetricType,
                               bint, bint, string&, int, int)
-       virtual int SetupCluster(ArgList&) = 0
-       virtual void ClusteringInfo() = o
-       virtual int Cluster() = 0
+       #virtual int SetupCluster(ArgList&) = 0
+       #virtual void ClusteringInfo() = o
+       #virtual int Cluster() = 0
 
        #protected:
        ClusterMatrix FrameDistances_
