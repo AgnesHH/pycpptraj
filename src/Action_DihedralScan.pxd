@@ -6,7 +6,7 @@ from Trajout cimport *
 from DihedralSearch cimport *
 
 cdef extern from "Action_DihedralScan.h":
-    cdef cppclass Action_DihedralScan:
-        Action_DihedralScan()
-        DispatchObject* Alloc()
+    cdef cppclass _Action_DihedralScan "Action_DihedralScan":
+        _Action_DihedralScan()
+        _DispatchObject* Alloc()
         void Help()

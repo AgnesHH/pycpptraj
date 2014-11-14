@@ -1,21 +1,17 @@
-# distutil: language = c++
-
+# distutils: language = c++
 from libcpp.string cimport string
-from BaseIOtype cimport *
 from ParmIO cimport *
-from Topology cimport *
-from CpptrajFile cimport *
-from ArgList cimport *
 
 
-cdef extern from "Parm_Amber.h":
-    cdef cppclass Parm_Amber:
-        Parm_Amber()
-        BaseIOtype* Alloc()
-        bint ID_ParmFormat(CpptrajFile&)
-        int processReadArgs(ArgList&)
-        int ReadParm(string&, Topology&)
-        int processWriteArgs(ArgList&)
-        int WriteParm(const string&, const Topology&)
-        void SetDebug(int)
-
+cdef extern from "Parm_Amber.h": 
+    cdef cppclass _Parm_Amber "Parm_Amber":
+        _Parm_Amber() 
+        #~_Parm_Amber() 
+        _BaseIOtype * Alloc() 
+        void WriteHelp() 
+        bint ID_ParmFormat(_CpptrajFile&)
+        int processReadArgs(_ArgList&)
+        int ReadParm(const string&, _Topology&)
+        int processWriteArgs(_ArgList&)
+        int WriteParm(const string&, const _Topology&)
+        void SetDebug(int debugIn)

@@ -8,5 +8,5 @@ cdef extern from "Analysis_CrdFluct.h":
         _Analysis_CrdFluct() 
         _DispatchObject * Alloc() 
         void Help() 
-        _Analysis::RetType Setup(_ArgList &, _DataSetList *, _TopologyList *, _DataFileList *, int)
-        _Analysis::RetType Analyze() 
+        RetType Setup(_ArgList &, _DataSetList *, _TopologyList *, _DataFileList *, int)
+        RetType Analyze() 

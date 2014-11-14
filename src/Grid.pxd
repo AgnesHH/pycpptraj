@@ -5,7 +5,7 @@ from ArrayIterator cimport *
 cdef extern from "Grid.h":
     ctypedef GridIterator "Grid::ArrayIterator[T]"
     ctypedef GridIterator iterator
-    cdef cppclass _Grid "Grid[T]":
+    cdef cppclass _Grid "Grid" [T]:
         _Grid()
         #~Grid() 
         _Grid(const _Grid &)

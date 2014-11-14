@@ -1,29 +1,13 @@
-# distutil: language = c++
-
+# distutils: language = c++
 from Analysis cimport *
 from DataSet_2D cimport *
 from DataSet_Modes cimport *
 
-cdef extern from "Analysis_Matrix.h":
-    cdef cppclass Analysis_Matrix:
-        Analysis_Matrix()
-        void Help()
-        RetType Setup(ArgList&, DataSetList*, TopologyList*, DataSetList*,
-                      int)
-        RetType Analyze()
 
-        #private from cpptraj
-        int NMWizOutput() const
-        DataSet_2D* matrix_
-        DataSet_Modes* modes_
-        cstring outthermo_
-        double thermo_temp_
-        int nevec_
-        bint thermopt_
-        bint reduce_
-        bint eigenvaluesOnly_
-        bint nmwizopt_
-        int nmwizvecs_
-        cstring nmwizfile_
-        Topology nmwizParm_
-        
+cdef extern from "Analysis_Matrix.h": 
+    cdef cppclass _Analysis_Matrix "Analysis_Matrix":
+        _Analysis_Matrix() 
+        _DispatchObject * Alloc() 
+        void Help() 
+        RetType Setup(_ArgList&, _DataSetList *, _TopologyList *, _DataFileList *, int)
+        RetType Analyze() 

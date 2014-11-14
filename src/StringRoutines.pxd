@@ -2,6 +2,8 @@
 # do we really need this routine?
 
 from libcpp.string cimport string
+from libcpp.vector cimport vector
+
 cdef extern from "StringRoutines.h": 
     string tildeExpansion(const string&)
     ctypedef vector[string] StrArray

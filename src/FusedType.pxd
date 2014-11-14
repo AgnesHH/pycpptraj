@@ -1,5 +1,5 @@
-from Vec3 cimport Vec3
-from Matrix_3x3 cimport Matrix_3x3
+from Vec3 cimport *
+from Matrix_3x3 cimport *
 
 ctypedef fused MatVecType:
     Vec3

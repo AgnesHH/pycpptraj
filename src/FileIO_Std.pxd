@@ -1,5 +1,5 @@
 # distutil: language = c++
-
+from posix.unistd cimport off_t
 from FileIO cimport *
 cdef extern from "FileIO_Std.h":
     cdef cppclass _FileIO_Std "FileIO_Std":

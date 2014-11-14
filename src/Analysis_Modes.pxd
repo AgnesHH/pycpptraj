@@ -10,5 +10,5 @@ cdef extern from "Analysis_Modes.h":
         _DispatchObject * Alloc() 
         void Help() 
         #~_Analysis_Modes() 
-        _Analysis::RetType Setup(_ArgList &, _DataSetList *, _TopologyList *, _DataFileList *, int)
-        _Analysis::RetType Analyze() 
+        RetType Setup(_ArgList &, _DataSetList *, _TopologyList *, _DataFileList *, int)
+        RetType Analyze() 

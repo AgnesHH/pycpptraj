@@ -6,9 +6,9 @@ cdef extern from "DataSet_double.h":
     cdef cppclass _DataSet_double "DataSet_double":
         _DataSet_double() : _DataSet_1D(DOUBLE, 12, 4 ), bound_(0.0 ), boundh_(0.0 ), rexp_(-1.0)
         _DataSet * Alloc() 
-        double & operator [ ](size_t idx)
-        double operator [ ](size_t idx)const 
-        void operator =(vector [double] const & rhs)
+        double& operator[](size_t idx)
+        double operator[](size_t idx) const 
+        #void operator =(const vector[double]& rhs)
         void AddElement(double d)
         void Resize(size_t sizeIn)
         size_t Size() const 
@@ -16,11 +16,11 @@ cdef extern from "DataSet_double.h":
         void Info() const 
         int Allocate1D(size_t)
         void Add(size_t, const void *)
-        double Dval(size_t idx)const 
-        double Xcrd(size_t idx)const 
-        void WriteBuffer(_CpptrajFile &, size_t)const 
-        iterator begin() 
-        iterator end() 
+        double Dval(size_t idx) const 
+        double Xcrd(size_t idx) const 
+        void WriteBuffer(_CpptrajFile&, size_t) const 
+        #iterator begin() 
+        #iterator end() 
         void SetNOE(double b, double bh, double r)
         double NOE_bound() const 
         double NOE_boundH() const 

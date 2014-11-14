@@ -9,7 +9,7 @@ cdef extern from "SDFfile.h":
         bint ID_SDF(_CpptrajFile &)
         bint ReadHeader() 
         int SDF_XYZ(double *)
-        Atom SDF_Atom() 
+        _Atom SDF_Atom() 
         int SDF_Bond(int &, int &)
         int SDF_Natoms() const 
         int SDF_Nbonds() const 

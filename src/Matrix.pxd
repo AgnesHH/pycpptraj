@@ -2,9 +2,9 @@
 from ArrayIterator cimport *
 
 cdef extern from "Matrix.h":
-    cdef cppclass Matrix[T]:
-        Matrix()
-        Matrix(const Matrix&)
+    cdef cppclass _Matrix "Matrix" [T]:
+        _Matrix()
+        _Matrix(const _Matrix&)
         T& operator[](size_t idx)
         const T& operator[] (size_t)
         size_t size()
@@ -20,5 +20,5 @@ cdef extern from "Matrix.h":
         size_t CalcIndex(int, int)
         #Cython has not yet support nested ctypedef
         #ctypedef ArrayIterator[T] iterator
-        ArrayIterator[T] begin()
-        ArrayIterator[T] end()
+        #ArrayIterator[T] begin()
+        #ArrayIterator[T] end()

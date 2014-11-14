@@ -3,8 +3,8 @@
 from DistRoutines cimport *
 
 cdef extern from "ImagedAction.h":
-    cdef cppclass ImagedAction:
-        ImagedAction()
+    cdef cppclass _ImagedAction "ImagedAction":
+        _ImagedAction()
         void InitImaging(bint)
         void SetupImaging(BoxType)
         bint ImagingEnabled(self)

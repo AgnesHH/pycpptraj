@@ -4,6 +4,7 @@ from Matrix cimport *
 
 
 cdef extern from "DataSet_MatrixDbl.h": 
+    ctypedef vector[double] Darray
     cdef cppclass _DataSet_MatrixDbl "DataSet_MatrixDbl":
         _DataSet_MatrixDbl (): _DataSet_2D(MATRIX_DBL, 12, 4)
         double & operator [ ](size_t idx)
@@ -24,12 +25,12 @@ cdef extern from "DataSet_MatrixDbl.h":
         double & Element(size_t x, size_t y)
         int AddElement(double d)
         void SetElement(size_t x, size_t y, double d)
-        iterator begin ()
-        iterator end ()
+        #iterator begin ()
+        #iterator end ()
         const Darray& Vect ()const 
         void AllocateVector(size_t vsize)
-        Darray::iterator v1begin ()
-        Darray::iterator v1end ()
+        #Darray::iterator v1begin ()
+        #Darray::iterator v1end ()
         void SetTypeAndKind(MatrixType tIn, MatrixKind kIn)
         void StoreMass(const Darray& mIn)
         const Darray& Mass ()const 

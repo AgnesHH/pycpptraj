@@ -7,5 +7,5 @@ cdef extern from "Analysis_Divergence.h":
         _Analysis_Divergence() 
         _DispatchObject * Alloc() 
         void Help() 
-        _Analysis::RetType Setup(_ArgList &, _DataSetList *, _TopologyList *, _DataFileList *, int)
-        _Analysis::RetType Analyze() 
+        RetType Setup(_ArgList &, _DataSetList *, _TopologyList *, _DataFileList *, int)
+        RetType Analyze() 

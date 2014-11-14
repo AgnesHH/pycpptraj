@@ -35,6 +35,6 @@ cdef extern from "ClusterList.h":
        #virtual int Cluster() = 0
 
        #protected:
-       ClusterMatrix FrameDistances_
+       #ClusterMatrix FrameDistances_
 
 
