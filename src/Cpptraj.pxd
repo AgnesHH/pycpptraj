@@ -18,9 +18,11 @@ cdef extern from "Cpptraj.h":
     cdef cppclass _Cpptraj "Cpptraj":
         _Cpptraj()
         int RunCpptraj(int, char**)
-        void Usage()
-        void Intro()
-        Mode ProcessCmdLineArgs(int, char**)
-        int Interactive()
-        int AmbPDB(int, int, char**)
+
+        #Dan kep those private now
+        #void Usage()
+        #void Intro()
+        #Mode ProcessCmdLineArgs(int, char**)
+        #int Interactive()
+        #int AmbPDB(int, int, char**)
 

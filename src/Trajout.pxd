@@ -24,5 +24,5 @@ cdef extern from "Trajout.h":
         bint TrajIsOpen()
         int NumFramesProcessed()
 
-cdef class Trajout:
-    cdef _Trajout* thisptr
+#cdef class Trajout:
+#    cdef _Trajout* thisptr

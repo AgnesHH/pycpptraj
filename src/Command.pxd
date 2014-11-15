@@ -1,26 +1,38 @@
-# distutil: language = c++
-
-from libcpp.string cimport string
-from ArgList cimport *
+# distutils: language = c++
 from CpptrajState cimport *
+from ArgList cimport *
+from DispatchObject cimport *
 
-cdef extern from "Command.h":
-    ctypedef _RetType "Command::RetType"
-    ctypedef _CommandType "Command::CommandType"
-    ctypedef struct Token "Command::Token":
+
+cdef extern from "Command.h": 
+    ctypedef enum RetType "Command::RetType":
+        C_OK "Command::C_OK"
+        C_ERR "Command::C_ERR"
+        C_QUIT "Command::C_QUIT"
+    ctypedef enum CommandType "Command::CommandType":
+        NONE "Command::NONE"
+        PARM "Command::PARM"
+        TRAJ "Command::TRAJ"
+        ACTION "Command::ACTION"
+        ANALYSIS "Command::ANALYSIS"
+        GENERAL "Command::GENERAL"
+        DEPRECATED "Command::DEPRECATED"
+    #ctypedef DispatchAllocatorType AllocType
+    #ctypedef RetType (*CommandFxnType)(_CpptrajState&, _ArgList&, _AllocType)
+    #ctypedef (*CommandHelpType)()
+    #ctypedef const char* CommandKeywordType
+    ctypedef struct Token:
         pass
         #CommandType Type
-        #CommandKeywordType Cmd 
-        #AllocType Alloc 
-        #CommandHelpType Help 
+        #CommandKeywordType Cmd
+        #AllocType Alloc
+        #CommandHelpType Help
         #CommandFxnType Fxn
+    ctypedef Token* TokenPtr
     cdef cppclass _Command "Command":
-       void ListCommands(_CommandType) 
-       Token* SearchTokenType(_CommandType, const _ArgList&)
-       Token* SearchToken(_ArgList&)
-       _RetType Dispatch(_CpptrajState&, const string&)
-       _RetType ProcessInput(_CpptrajState&, const string&)
-       const Token& CmdToken(int) 
-
-cdef class Command:
-    cdef _Command* thisptr
+        void List_Commands(CommandType)
+        TokenPtr SearchTokenType(_CommandType, const _ArgList& argIn)
+        TokenPtr SearchToken(_ArgList&)
+        RetType Dispatch(_CpptrajState&, const string&)
+        RetType ProcessInput(_CpptrajState&, const string&)
+        const Token& CmdToken(int idx)
