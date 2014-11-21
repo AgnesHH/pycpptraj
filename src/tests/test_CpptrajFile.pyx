@@ -1,6 +1,5 @@
-from CpptrajFile cimport *
+from CpptrajFile cimport CpptrajFile
 
-cdef _CpptrajFile* p = new _CpptrajFile()
+cpp1 = CpptrajFile()
 
-print p.Access()
-del p
+cpp2 = CpptrajFile(cpp1)

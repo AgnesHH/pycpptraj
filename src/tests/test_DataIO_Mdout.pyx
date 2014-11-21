@@ -4,5 +4,6 @@
 from DataIO_Mdout cimport *
 
 cdef _DataIO_Mdout * p = new _DataIO_Mdout()
+print p.EOF_ERROR()
 
 del p

@@ -7,6 +7,4 @@ cdef _Cpptraj* p = new _Cpptraj()
 cdef Cpptraj.Mode testmode = Cpptraj.ERROR
 
 print testmode
-p.Usage()
-p.Intro()
 del p

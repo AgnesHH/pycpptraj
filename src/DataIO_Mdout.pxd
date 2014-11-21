@@ -13,3 +13,8 @@ cdef extern from "DataIO_Mdout.h":
         int WriteData2D(const string&, const _DataSetList&)
         int WriteData3D(const string&, const _DataSetList&)
         bint ID_DataFormat(_CpptrajFile&)
+
+cdef extern from "DataIO_Mdout.cpp":
+    @staticmethod
+    cdef inline int EOF_ERROR()
+    #inline int EOF_ERROR()
