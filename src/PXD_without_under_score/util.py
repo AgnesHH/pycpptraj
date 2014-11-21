@@ -54,16 +54,24 @@ class Line_codegen:
         self.myline = re.sub("std::", "", self.myline)
 
     def remove_unsupported(self):
+        unsupported_operator_list = [
+                "+=", "-=", "/=", "*="
+                "+ =", "- =", "/ =", "* =",
+                "+ =",
+                ]
         # delete static
         self.myline = self.myline.replace("static ", "")
         if self.myline.startswith("~"):
             # dont need to use destructor here
             self.add_sharp()
 
-        if "const_iterator" in self.myline:
+        #if "const_iterator" in self.myline:
+        if "iterator" in self.myline:
             self.add_sharp()
-        if "operator =" in self.myline:
-            self.add_sharp()
+        for opt in unsupported_operator_list:
+            optword = "operator " + opt
+            if optword in self.myline:
+                self.add_sharp()
 
     def add_under_score_to_class(self, classlist):
         """classlist = list of cpptraj classes"""
@@ -109,6 +117,8 @@ class Line_codegen:
             oldp = "vector[%s] const&" % word
             newp = "const vector[%s]&" % word
             self.myline = self.myline.replace(oldp, newp)
+
+        self.myline = self.myline.replace("vector[int]const&", "const vector[int]&")
 
     def remove_initial_assignment(self):
         pass
