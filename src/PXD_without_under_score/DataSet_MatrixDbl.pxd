@@ -25,12 +25,12 @@ cdef extern from "DataSet_MatrixDbl.h":
         double& Element(size_t x, size_t y)
         int AddElement(double d)
         void SetElement(size_t x, size_t y, double d)
-        iterator begin() 
-        iterator end() 
+        #iterator begin() 
+        #iterator end() 
         const Darray& Vect() const 
         void AllocateVector(size_t vsize)
-        iterator v1begin() 
-        iterator v1end() 
+        #iterator v1begin() 
+        #iterator v1end() 
         void SetTypeAndKind(MatrixType tIn, MatrixKind kIn)
         void StoreMass(const Darray& mIn)
         const Darray& Mass() const 

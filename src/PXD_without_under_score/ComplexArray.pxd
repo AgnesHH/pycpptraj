@@ -20,5 +20,5 @@ cdef extern from "ComplexArray.h":
         int size() const 
         double& operator[](int idx)
         const double& operator[](int idx) const 
-        const iterator begin() const 
-        const iterator end() const 
+        #const iterator begin() const 
+        #const iterator end() const 

@@ -20,8 +20,8 @@ cdef extern from "DataSet_GridFlt.h":
         size_t NX() const 
         size_t NY() const 
         size_t NZ() const 
-        iterator begin() 
-        iterator end() 
+        #iterator begin() 
+        #iterator end() 
         inline long int Increment(const Vec3&, float)
         inline long int Increment(const double *, float)
         inline long int Increment(int, int, int, float)

@@ -5,8 +5,8 @@ from Dimension cimport *
 
 
 cdef extern from "DataSet.h": 
-    cdef cppclass DataSet::DS_PtrCmp "DataSet::DS_PtrCmp":
-        inline bint operator()(DataSet const * first, DataSet const * second) const 
+    ctypedef struct DS_PtrCmp "DataSet::DS_PtrCmp":
+        pass
     # DataSet.h
     ctypedef enum DataType "DataSet::DataType":
         UNKNOWN_DATA "DataSet::UNKNOWN_DATA"
@@ -77,7 +77,6 @@ cdef extern from "DataSet.h":
         Dimension& Dim(DimIdxType i)
         Dimension& Dim(int i)
         const Dimension& Dim(int i) const 
-        inline bint operator[( const DataSet&) const 
         const char * DataFormat() const 
         scalarMode ModeFromKeyword(const string&)
         scalarType TypeFromKeyword(const string&, scalarMode&)

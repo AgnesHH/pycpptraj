@@ -1,4 +1,5 @@
 # distutils: language = c++
+from posix.unistd cimport off_t
 from zlib cimport *
 from FileIO cimport *
 

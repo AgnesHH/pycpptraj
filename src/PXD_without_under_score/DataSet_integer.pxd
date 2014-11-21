@@ -20,5 +20,5 @@ cdef extern from "DataSet_integer.h":
         double Dval(size_t idx) const 
         double Xcrd(size_t idx) const 
         void WriteBuffer(CpptrajFile&, size_t) const 
-        iterator begin() 
-        iterator end() 
+        #iterator begin() 
+        #iterator end() 

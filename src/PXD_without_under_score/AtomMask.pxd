@@ -44,5 +44,5 @@ cdef extern from "AtomMask.h":
         int ConvertToIntMask() 
         void MaskInfo() const 
         void BriefMaskInfo() const 
-        inline token_iterator begintoken() const 
-        inline token_iterator endtoken() const 
+        #inline token_iterator begintoken() const 
+        #inline token_iterator endtoken() const 

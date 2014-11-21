@@ -27,5 +27,5 @@ cdef extern from "ClusterList.h":
         void PrintClustersToFile(const string&, int)
         void PrintClusters() 
         int CalcFrameDistances(const string&, const DsArray&, DistModeType, DistMetricType, bint, bint, const string&, int, int)
-        const cluster_iterator begincluster() const 
-        const cluster_iterator endcluster() const 
+        #const cluster_iterator begincluster() const 
+        #const cluster_iterator endcluster() const 

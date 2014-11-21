@@ -4,8 +4,8 @@ from NameType cimport *
 
 cdef extern from "Residue.h": 
     cdef cppclass Residue "Residue":
-        Residue() : firstAtom_(0 ), lastAtom_(0 ), resname_("")
-        Residue(int onum, const NameType& resname, int firstAtomIn): firstAtom_(firstAtomIn ), originalResNum_(onum ), resname_(resname)
+        Residue() 
+        Residue(int onum, const NameType& resname, int firstAtomIn)
         inline void SetLastAtom(int i)
         inline void SetOriginalNum(int i)
         inline int FirstAtom() const 

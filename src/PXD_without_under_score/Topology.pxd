@@ -41,16 +41,16 @@ cdef extern from "Topology.h":
         bint NoRefCoords() const 
         int FinalSoluteRes() const 
         const char * c_str() const 
-        atom_iterator begin() const 
-        atom_iterator end() const 
+        #atom_iterator begin() const 
+        #atom_iterator end() const 
         const Atom& operator[](int idx) const 
         const vector[Atom]& Atoms() const 
-        inline res_iterator ResStart() const 
-        inline res_iterator ResEnd() const 
+        #inline res_iterator ResStart() const 
+        #inline res_iterator ResEnd() const 
         const Residue& Res(int idx) const 
         Residue& SetRes(int idx)
-        inline mol_iterator MolStart() const 
-        inline mol_iterator MolEnd() const 
+        #inline mol_iterator MolStart() const 
+        #inline mol_iterator MolEnd() const 
         const Molecule& Mol(int idx) const 
         void ClearMoleculeInfo() 
         const BondArray& Bonds() const 

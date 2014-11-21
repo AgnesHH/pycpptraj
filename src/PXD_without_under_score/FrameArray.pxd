@@ -10,5 +10,5 @@ cdef extern from "FrameArray.h":
         Frame& operator[](int idx)
         void AddFrame(const Frame& fIn)
         int SetupFrames(const vector[Atom]& Atoms, bint hasV, int Ndim)
-        iterator begin() 
-        iterator end() 
+        #iterator begin() 
+        #iterator end() 

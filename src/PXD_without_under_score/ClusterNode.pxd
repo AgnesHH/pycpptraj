@@ -15,8 +15,8 @@ cdef extern from "ClusterNode.h":
         void CalcEccentricity(const ClusterMatrix&)
         void CalculateCentroid(ClusterDist * Cdist)
         double CalcAvgToCentroid(ClusterDist *)
-        frame_iterator beginframe() const 
-        frame_iterator endframe() const 
+        #frame_iterator beginframe() const 
+        #frame_iterator endframe() const 
         int ClusterFrame(int idx) const 
         inline double AvgDist() const 
         inline double Eccentricity() const 

@@ -1,5 +1,6 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
+from libcpp.set cimport set 
 from NameType cimport *
 
 
@@ -91,10 +92,10 @@ cdef extern from "Atom.h":
         Atom(const Atom&)
         void swap(Atom&, Atom&)
         #Atom& operator =(Atom)
-        inline bond_iterator bondbegin() const 
-        inline bond_iterator bondend() const 
-        inline excluded_iterator excludedbegin() const 
-        inline excluded_iterator excludedend() const 
+        #inline bond_iterator bondbegin() const 
+        #inline bond_iterator bondend() const 
+        #inline excluded_iterator excludedbegin() const 
+        #inline excluded_iterator excludedend() const 
         void SetResNum(int resnumIn)
         void SetMol(int molIn)
         void SetCharge(double qin)
@@ -120,5 +121,5 @@ cdef extern from "Atom.h":
         void AddBond(int)
         void ClearBonds() 
         void SortBonds() 
-        void AddExclusionList(set[int] const&)
+        void AddExclusionList(const set[int]&)
         double GetBondLength(AtomicElementType, AtomicElementType)

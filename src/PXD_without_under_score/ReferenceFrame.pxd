@@ -6,8 +6,8 @@ from ArgList cimport *
 
 cdef extern from "ReferenceFrame.h": 
     cdef cppclass ReferenceFrame "ReferenceFrame":
-        ReferenceFrame() : frame_(0 ), parm_(0 ), num_(0 ), strippedParm_(false)
-        ReferenceFrame(int): frame_(0 ), parm_(0 ), num_(- 1 ), strippedParm_(false)
+        ReferenceFrame() 
+        ReferenceFrame(int)
         #~ReferenceFrame() 
         Frame * Coord() const 
         Topology * Parm() const 

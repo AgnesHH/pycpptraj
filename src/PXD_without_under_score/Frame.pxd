@@ -6,6 +6,7 @@ from Box cimport *
 
 
 cdef extern from "Frame.h": 
+    ctypedef vector[float] CRDtype
     # Frame.h
     ctypedef enum CenterMode "Frame::CenterMode":
         ORIGIN "Frame::ORIGIN"
@@ -60,13 +61,13 @@ cdef extern from "Frame.h":
         void SetCoordinates(const Frame&, const AtomMask&)
         void SetCoordinates(const Frame&)
         void SetFrame(const Frame&, const AtomMask&)
-        void SetCoordinatesByMap(const Frame&, vector[int]const&)
-        void SetReferenceByMap(const Frame&, vector[int]const&)
-        void SetTargetByMap(const Frame&, vector[int]const&)
+        void SetCoordinatesByMap(const Frame&, const vector[int]&)
+        void SetReferenceByMap(const Frame&, const vector[int]&)
+        void SetTargetByMap(const Frame&, const vector[int]&)
         void ZeroCoords() 
-        Frame& operator +=(const Frame&)
-        Frame& operator -=(const Frame&)
-        #Frame& operator *=(const Frame&)
+        #Frame& operator + =(const Frame&)
+        #Frame& operator - =(const Frame&)
+        #Frame& operator * =(const Frame&)
         const Frame operator *(const Frame&) const 
         const Frame operator -(const Frame&) const 
         int Divide(const Frame&, double)

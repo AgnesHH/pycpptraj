@@ -20,8 +20,8 @@ cdef extern from "DataSet_double.h":
         double Dval(size_t idx) const 
         double Xcrd(size_t idx) const 
         void WriteBuffer(CpptrajFile&, size_t) const 
-        iterator begin() 
-        iterator end() 
+        #iterator begin() 
+        #iterator end() 
         void SetNOE(double b, double bh, double r)
         double NOE_bound() const 
         double NOE_boundH() const 
