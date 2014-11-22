@@ -59,5 +59,5 @@ cdef extern from "CpptrajFile.h":
         int Flush()
         off_t Tell()
 
-cdef class CpptrajFile:
-    cdef _CpptrajFile* thisptr
+#cdef class CpptrajFile:
+#    cdef _CpptrajFile* thisptr

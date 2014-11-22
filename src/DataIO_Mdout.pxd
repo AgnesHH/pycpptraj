@@ -15,6 +15,5 @@ cdef extern from "DataIO_Mdout.h":
         bint ID_DataFormat(_CpptrajFile&)
 
 cdef extern from "DataIO_Mdout.cpp":
-    @staticmethod
-    cdef inline int EOF_ERROR()
+    inline int EOF_ERROR()
     #inline int EOF_ERROR()

@@ -30,7 +30,7 @@ cdef extern from "Command.h":
         #CommandFxnType Fxn
     ctypedef Token* TokenPtr
     cdef cppclass _Command "Command":
-        void List_Commands(CommandType)
+        void ListCommands(CommandType)
         TokenPtr SearchTokenType(_CommandType, const _ArgList& argIn)
         TokenPtr SearchToken(_ArgList&)
         RetType Dispatch(_CpptrajState&, const string&)

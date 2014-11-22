@@ -146,13 +146,13 @@ cdef class Action_PairDist_(ImagedAction):
             self.histogram[i].accumulate(tmp[i])
         return ActionOK
 
-    #cdef print(self):
-    #    cdef double dist, Pr, st
-    #    self.output.Printf("#TODO add info here")
+    cdef print_info(self):
+        cdef double dist, Pr, st
+        self.output.Printf("#TODO add info here")
 
-    #    for i in range(self.histogram.size()):
-    #        Pr = self.histogram[i].mean() / delta
-    #        if Pr > 0.0:
-    #            dist = (i + 0.5) * delta
-    #            sd = sqrt(self.histogram[i].variance())
-    #            self.output.Printf("%10.4f %16.2f %10.2f\n", dist, Pr, sd)
+        for i in range(self.histogram.size()):
+            Pr = self.histogram[i].mean() / self.delta
+            if Pr > 0.0:
+                dist = (i + 0.5) * self.delta
+                sd = sqrt(self.histogram[i].variance())
+                self.output.Printf("%10.4f %16.2f %10.2f\n", dist, Pr, sd)
