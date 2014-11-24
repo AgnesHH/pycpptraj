@@ -3,6 +3,7 @@ from copy import deepcopy
 from Matrix_3x3 import Matrix_3x3 as M3x3
 from Vec3 import Vec3
 
+vec = Vec3(1., 2., 3.)
 test = M3x3()
 test.Print("test")
 x = np.arange(1,10).astype(np.float64)
@@ -44,7 +45,12 @@ m.Print('m')
 print("")
 m2.Print('m2')
 m3 = m.mul(m2)
+# can not implment m3 = m*m2 yet. Got KeyError: u'__pyx_fuse_0__mul__'
+# when using fused type
 m3.Print("m3")
+
+m4 = m*m2
+m4.Print("m4 = m3?")
 print("")
 m *= m2
 m.Print("new m")
@@ -56,8 +62,14 @@ m2.TransposeMult(m).Print("TransposeMult with a matrix")
 print 
 
 print "Test RotationMatrix"
-m2.CalcRotationMatrix(1., 2., 3.)
+# m2.CalcRotationMatrix(1., 2., 3., 4.) #ValueError
+m2.CalcRotationMatrix(1., 2., 3.,)
+m2.Print("new m2")
+
+m2.CalcRotationMatrix(vec, 0.5)
 m2.Print("new m2")
 
 print "RotationAngle"
 print m2.RotationAngle()
+
+test.Print("test")
