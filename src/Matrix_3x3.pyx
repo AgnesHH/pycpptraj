@@ -27,6 +27,8 @@ In [8]: n.Print("3x3 matrix n: ")
      100.0000 100.0000 100.0000
 """
 
+#import numpy as np
+#cimport numpy as np
 from Vec3 cimport Vec3
 from FusedType cimport MatVecType 
 
@@ -34,22 +36,41 @@ from FusedType cimport MatVecType
 
 cdef class Matrix_3x3:
     def __cinit__(self, double[::1] X=None):
-        """TODO: add doc"""
-        if X is None: 
+        """TODO: 
+             add doc
+             Add: mat1 = Matrix_3x3(mat2)
+                  (Cython complains "TypeError: 'src.Matrix_3x3.Matrix_3x3' 
+                   does not have the buffer interface")
+        """
+        if X is None:
             #make new instance
-            self.thisptr = new _Matrix_3x3()
-        elif X.shape[0] == 9:
-            #Takes array of 9, row-major
-            self.thisptr = new _Matrix_3x3(&X[0])
-        elif X.shape[0] == 1:
-            #Set all elements to the same number
-            self.thisptr = new _Matrix_3x3(X[0])
-        elif X.shape[0] == 3:
-            #Set Set diagonal
-            x, y, z = X
-            self.thisptr = new _Matrix_3x3(x, y, z)
-        else: 
-            raise ValueError("Must be array with length of None, 1, 3 or 9")
+            # make a Matrix_3x3 with 0.0 element
+            self.thisptr = new _Matrix_3x3(0.0)
+        else:
+            if X.shape[0] == 9:
+                #Takes array of 9, row-major
+                self.thisptr = new _Matrix_3x3(&X[0])
+            elif X.shape[0] == 1:
+                #Set all elements to the same number
+                self.thisptr = new _Matrix_3x3(X[0])
+            elif X.shape[0] == 3:
+                #Set Set diagonal
+                x, y, z = X
+                self.thisptr = new _Matrix_3x3(x, y, z)
+            else: 
+                raise ValueError("Must be array with length of None, 1, 3 or 9")
+    
+    @classmethod
+    def copy_mat(cls, Matrix_3x3 other):
+        # create new instance of Matrix_3x3; make copy and return this instance
+        newmat = Matrix_3x3()
+        newmat.copy(other)
+        return newmat
+
+    def copy(self, Matrix_3x3 other):
+        # deallocate previous pointer
+        del self.thisptr
+        self.thisptr = new _Matrix_3x3(other.thisptr[0])
 
     def __dealloc__(self):
         """Free memory"""
@@ -62,9 +83,6 @@ cdef class Matrix_3x3:
         self.thisptr[0].star_equal(other.thisptr[0])
         return self
 
-    def copy(self, Matrix_3x3 other):
-        pass
-        
     def Row1(self):
         """
         Parameters: None

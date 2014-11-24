@@ -85,10 +85,6 @@ cdef class Topology:
     def CommonSetup(self, bint bondsearch):
         return self.thisptr.CommonSetup(bondsearch)
 
-    def 
-
-
-
     def SetOffset(self, double x):
         self.thisptr.SetOffset(x)
 
@@ -153,4 +149,3 @@ cdef class Topology:
     def __iter__(self):
         """Use generator?"""
         pass
-    
