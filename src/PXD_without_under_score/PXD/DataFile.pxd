@@ -3,6 +3,7 @@ from libcpp.vector cimport vector
 from libcpp.string cimport string
 from DataIO cimport *
 from FileTypes cimport *
+from FileName cimport *
 
 
 cdef extern from "DataFile.h": 

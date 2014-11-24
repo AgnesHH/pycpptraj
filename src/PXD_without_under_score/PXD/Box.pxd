@@ -5,11 +5,11 @@ from Matrix_3x3 cimport *
 cdef extern from "Box.h": 
     # Box.h
     ctypedef enum BoxType "Box::BoxType":
-        NOBOX "Box::NOBOX"
-        ORTHO "Box::ORTHO"
-        TRUNCOCT "Box::TRUNCOCT"
-        RHOMBIC "Box::RHOMBIC"
-        NONORTHO "Box::NONORTHO"
+        bNOBOX "Box::NOBOX"
+        bORTHO "Box::ORTHO"
+        bTRUNCOCT "Box::TRUNCOCT"
+        bRHOMBIC "Box::RHOMBIC"
+        bNONORTHO "Box::NONORTHO"
     cdef cppclass Box "Box":
         Box() 
         Box(const double *)

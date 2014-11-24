@@ -10,9 +10,9 @@ from TopologyList cimport *
 cdef extern from "Action.h" namespace "Action": 
     # Action.h
     ctypedef enum RetType "Action::RetType":
-        OK "Action::OK"
-        ERR "Action::ERR"
-        USEORIGINALFRAME "Action::USEORIGINALFRAME"
-        SUPPRESSCOORDOUTPUT "Action::SUPPRESSCOORDOUTPUT"
+        aOK "Action::OK"
+        aERR "Action::ERR"
+        aUSEORIGINALFRAME "Action::USEORIGINALFRAME"
+        aSUPPRESSCOORDOUTPUT "Action::SUPPRESSCOORDOUTPUT"
     cdef cppclass Action "Action":
         pass
