@@ -6,24 +6,25 @@ from Vec3 import Vec3
 vec = Vec3(1., 2., 3.)
 test = M3x3()
 test.Print("test")
+test.Print("test")
+
 x = np.arange(1,10).astype(np.float64)
 m = M3x3(x)
 m.Print("3x3 matrix m: ")
 
+mcopy = M3x3()
+mcopy.copy(m)
+mcopy.Print("Create mcopy matrix from m")
+
+m2copy = M3x3.copy_mat(mcopy)
+m2copy.Print("Create mcopy matrix from m")
+
 y = np.array([100.,]).astype(np.float64)
 n = M3x3(y)
 n.Print("3x3 matrix n: ")
-#
-#mcp = M3x3()
-#
-#copy matrix "m" to mcp
-#mcp.copy(m)
-#mcp.Print("mcp matrix")
-#
-#print "mcp is equal to m? ", mcp == m
-#
+
 ##test Set diagonal
-mdig = M3x3(np.array([1., 2., 3.]))
+mdig = M3x3(np.array([1., 2., 3.]).astype(np.float64))
 mdig.Print("diagonal matrix: ")
 
 ##test returning Vector
@@ -72,4 +73,4 @@ m2.Print("new m2")
 print "RotationAngle"
 print m2.RotationAngle()
 
-test.Print("test")
+#test.Print("test")
