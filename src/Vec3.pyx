@@ -38,4 +38,3 @@ cdef class Vec3:
 
     def Angle(self, Vec3 othervec):
         return self.thisptr.Angle(othervec.thisptr[0])
-

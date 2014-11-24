@@ -1,7 +1,7 @@
 # distutils: language = c++
 
 """
-In [1]: from Matrix_3x3_py import Matrix_3x3 as M3x3
+In [1]: from Matrix_3x3 import Matrix_3x3 as M3x3
 
 In [2]: import numpy as np
 
@@ -26,8 +26,9 @@ In [8]: n.Print("3x3 matrix n: ")
      100.0000 100.0000 100.0000
      100.0000 100.0000 100.0000
 """
+
 from Vec3 cimport Vec3
-from FusedType cimport *
+from FusedType cimport MatVecType 
 
 #check memory leaked
 
@@ -57,33 +58,12 @@ cdef class Matrix_3x3:
         #print "I was deallocated"
 
     def __imul__(self, Matrix_3x3 other):
+        """mat *= other"""
         self.thisptr[0].star_equal(other.thisptr[0])
         return self
 
     def copy(self, Matrix_3x3 other):
-        """
-        Copy matrix
-
-        Parameters:
-        ----------
-        other : Matrix_3x3 instance
-
-        Returns:
-        -------
-        out : Matrix_3x3 instance
-
-        Examples
-        -------
-        #add example here
-        >>>x = np.arange(9).astype(float)
-        >>>m = M3x3(x)
-        >>>mcp = M3x3()
-        >>>mcp.copy(m)
-        >>>m.Print("m")
-        >>>print
-        >>>mcp.Print("mcp")
-        """
-        self.thisptr = other.thisptr
+        pass
         
     def Row1(self):
         """
@@ -148,6 +128,16 @@ cdef class Matrix_3x3:
     def RotationAroundY(self, idx, idz):
         self.thisptr.RotationAroundY(idx, idz)
 
+    def __mul__(Matrix_3x3 self, other):
+        #cdef Matrix_3x3 result = Matrix_3x3()
+        #result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
+        #return result
+        if isinstance(other, Vec3) or isinstance(other, Matrix_3x3):
+            return self.mul(other)
+        else:
+            raise ValueError("Must be either Matrix_3x3 or Vec3")
+
+
     def mul(Matrix_3x3 self, MatVecType other):
         """ 
         Note: for some reason this code does not work yet.
@@ -173,19 +163,22 @@ cdef class Matrix_3x3:
         result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
         return result
 
-    def _CalcRotationMatrix(self, Vec3 vec, double theta):
+    cdef _CalcRotationMatrix(Matrix_3x3 self, Vec3 vec, double theta):
         """add doc here
         Not tested yet
         """
         self.thisptr.CalcRotationMatrix(vec.thisptr[0], theta)
 
-    def _CalcRotationMatrix_xyz(self, double x, double y, double z):
+    cdef _CalcRotationMatrix_xyz(self, double x, double y, double z):
         """add doc here
         Not tested yet
         """
         self.thisptr.CalcRotationMatrix(x, y, z)
 
     def CalcRotationMatrix(self, *args):
+        """why not directly combining _CalcRotationMatrix_xyz and _CalcRotationMatrix 
+        in this method?
+        """
         if len(args)== 2:
             vec, theta = args
             if not isinstance(vec, Vec3):

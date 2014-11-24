@@ -40,3 +40,5 @@ cdef extern from "Matrix_3x3.h":
 
 cdef class Matrix_3x3:
     cdef _Matrix_3x3* thisptr
+    cdef _CalcRotationMatrix(Matrix_3x3 self, Vec3 vec, double theta)
+    cdef _CalcRotationMatrix_xyz(self, double x, double y, double z)
