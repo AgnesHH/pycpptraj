@@ -20,11 +20,14 @@ cdef class Vec3:
     def SetVec(self, double x, double y, double z):
         self.thisptr.SetVec(x, y, z)
 
-    def SetVec(self, X):
+    def SetVec(self, double[:] X):
         """SetVec from an array"""
         if len(X) != 3:
             raise ValueError("must a an array of 3 elements")
-        cdef double x, y, z = X
+        cdef double x, y, z 
+        x = X[0]
+        y = X[1]
+        z = X[2]
         self.thisptr.SetVec(x, y, z)
 
     def Normalize(self):

@@ -1,7 +1,5 @@
 # distutils: language = c++
 
-from xxx cimport *
-
 cdef class DataIO_Mdout:
     cdef _DataIO_Mdout  *thisptr
 

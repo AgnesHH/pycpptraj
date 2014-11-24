@@ -30,13 +30,6 @@ from Vec3 cimport Vec3
 from FusedType cimport *
 
 #check memory leaked
-#import pdb; pdb.set_trace()
-#It seems not working with Cython
-
-#temporatoyr define fused type here
-#ctypedef fused MatVecType:
-#    Vec3
-#    Matrix_3x3
 
 cdef class Matrix_3x3:
     def __cinit__(self, double[::1] X=None):
@@ -59,8 +52,13 @@ cdef class Matrix_3x3:
 
     def __dealloc__(self):
         """Free memory"""
-        del self.thisptr
+        if self.thisptr:
+            del self.thisptr
         #print "I was deallocated"
+
+    def __imul__(self, Matrix_3x3 other):
+        self.thisptr[0].star_equal(other.thisptr[0])
+        return self
 
     def copy(self, Matrix_3x3 other):
         """
@@ -150,40 +148,54 @@ cdef class Matrix_3x3:
     def RotationAroundY(self, idx, idz):
         self.thisptr.RotationAroundY(idx, idz)
 
-#    def  __mul__(Matrix_3x3 self, MatVecType other):
-#        """ 
-#        Note: for some reason this code does not work yet.
-#        (works fine with regular method, but not with __mul__)
-#        Multiply two matrices or a matrix with a vector
-#
-#        Parameters
-#        ----------
-#        self: Matrix_3x3 instance
-#        other: Matrix_3x3 instance or Vec3 instance
-#
-#        Output
-#        ------
-#        new Matrix_3x3 instance or Vec3 instance
-#        """
-#        cdef MatVecType result
-#        if type(other) == Vec3:
-#            result = Vec3()
-#        elif type(other) == Matrix_3x3:
-#            result = Matrix_3x3()
-#        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
-#        return result
+    def mul(Matrix_3x3 self, MatVecType other):
+        """ 
+        Note: for some reason this code does not work yet.
+        (works fine with regular method "mult", but not with __mul__)
+        Multiply two matrices or a matrix with a vector
 
-    def CalcRotationMatrix(self, Vec3 vec, double theta):
+        Parameters
+        ----------
+        self: Matrix_3x3 instance
+        other: Matrix_3x3 instance or Vec3 instance
+
+        Output
+        ------
+        new Matrix_3x3 instance or Vec3 instance
+        """
+        cdef MatVecType result
+        if isinstance(other, Vec3):
+            result = Vec3()
+        elif isinstance(other, Matrix_3x3):
+            result = Matrix_3x3()
+        else:
+            raise ValueError("Must be a Matrix_3x3 or a Vec3 instance")
+        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
+        return result
+
+    def _CalcRotationMatrix(self, Vec3 vec, double theta):
         """add doc here
         Not tested yet
         """
         self.thisptr.CalcRotationMatrix(vec.thisptr[0], theta)
 
-    def CalcRotationMatrix_xyz(self, double x, double y, double z):
+    def _CalcRotationMatrix_xyz(self, double x, double y, double z):
         """add doc here
         Not tested yet
         """
         self.thisptr.CalcRotationMatrix(x, y, z)
+
+    def CalcRotationMatrix(self, *args):
+        if len(args)== 2:
+            vec, theta = args
+            if not isinstance(vec, Vec3):
+                raise ValueError("Must be a vector")
+            self._CalcRotationMatrix(vec, theta) 
+        elif len(args) == 3:
+            x, y, z = args
+            self._CalcRotationMatrix_xyz(x, y, z)
+        else:
+            raise ValueError('must be "Vec3, theta" or "x, y, z"')
 
     def RotationAngle(self):
        return self.thisptr.RotationAngle()
@@ -193,23 +205,8 @@ cdef class Matrix_3x3:
         vec.thisptr[0] = self.thisptr.AxisOfRotation(theta)
         return vec 
 
-#    def TransposeMult(self, Vec3 vec):
-#        cdef Vec3 result = Vec3()
-#        result.thisptr[0] = self.thisptr.TransposeMult(vec.thisptr[0])
-#        return result 
-#
-#    def TransposeMult(Matrix_3x3 self, Matrix_3x3 other):
-#        """Can I combine with previous method?"""
-#        cdef Matrix_3x3 result = Matrix_3x3()
-#        result.thisptr[0] = self.thisptr.TransposeMult(other.thisptr[0])
-#        return result 
-
-    def TransposeMult(self, MatVecType other):
-        cdef MatVecType result
-        if MatVecType == Vec3:
-            result = Vec3()
-        elif MatVecType == Matrix_3x3:
-            result =  Matrix_3x3()
+    def TransposeMult(self, Matrix_3x3 other):
+        cdef Matrix_3x3 result
+        result =  Matrix_3x3()
         result.thisptr[0] = self.thisptr.TransposeMult(other.thisptr[0])
         return result 
-
