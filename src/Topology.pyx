@@ -51,29 +51,29 @@ cdef class Topology:
     def PrintAtomInfo(self, string maskString):
         self.thisptr.PrintAtomInfo(maskString)
 
-    def PrintBonds(self, BondArray barray, AtomMask maskIn, int nb):
-        self.thisptr.PrintBonds(barray, maskIn, nb)
+    #def PrintBonds(self, BondArray barray, AtomMask maskIn, int nb):
+    #    self.thisptr.PrintBonds(barray, maskIn, nb)
 
     def PrintBondInfo(self, string maskString):
         self.thisptr.PrintBondInfo(maskString)
     
-    def PrintAngles(self):
-        self.thisptr.PrintAngles()
+    #def PrintAngles(self):
+    #    self.thisptr.PrintAngles()
 
-    def PrintAngleInfo(self):
-        self.thisptr.PrintAngleInfo()
+    def PrintAngleInfo(self, string maskString):
+        self.thisptr.PrintAngleInfo(maskString)
 
-    def PrintDihedrals(self):
-        self.thisptr.PrintDihedrals()
+    #def PrintDihedrals(self):
+    #    self.thisptr.PrintDihedrals()
 
-    def PrintDihedralInfo(self):
-        self.thisptr.PrintDihedralInfo()
+    def PrintDihedralInfo(self, string maskString):
+        self.thisptr.PrintDihedralInfo(maskString)
 
-    def PrintMoleculeInfo(self):
-        self.thisptr.PrintMoleculeInfo()
+    def PrintMoleculeInfo(self, maskString):
+        self.thisptr.PrintMoleculeInfo(maskString)
 
-    def PrintResidueInfo(self):
-        self.thisptr.PrintResidueInfo()
+    def PrintResidueInfo(self, string maskString):
+        self.thisptr.PrintResidueInfo(maskString)
 
     def PrintChargeMassInfo(self, string maskString, int idtype):
         self.thisptr.PrintChargeMassInfo(maskString, idtype)
