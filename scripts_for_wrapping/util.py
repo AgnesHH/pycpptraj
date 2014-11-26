@@ -72,6 +72,10 @@ class Line_codegen:
                 if not re.search("_" + classname, self.myline):
                     self.myline = self.myline.replace(
                         classname, r"_" + classname)
+    
+    def replace(self, oldp, newp):
+        self.myline = self.myline.replace(oldp, newp)
+
 
     def replace_others(self):
         """
@@ -91,6 +95,11 @@ class Line_codegen:
         # self.myline = self.myline.replace(r" ) ", ")")
         # replace "bool" to "bint"
         # self.myline = self.myline.replace("bool", "bint")
+
+    def replace_waka(self):
+        """change <> to []"""
+        table = string.maketrans("<>", "[]")
+        self.myline = self.myline.translate(table)
 
     def swap_const(self):
         """add DOC here"""
@@ -114,6 +123,18 @@ class Line_codegen:
         wlist = [" const", " inline", "const", "inline", "&" ]
         for word in wlist:
             self.myline = self.myline.replace(word, "")
+
+    def remove_preassignment(self):
+        """
+        there will be error if having something like this
+        _DihedralParmType() : pk_(0 ), pn_(0 ), phase_(0 ), scee_(0 ), scnb_(0)
+        Or 
+        _DihedralParmType(): pk_(0 ), pn_(0 ), phase_(0 ), scee_(0 ), scnb_(0)
+
+        Aim: remove ": pk_(0 ), pn_(0 ), phase_(0 ), scee_(0 ), scnb_(0)"
+        """
+        if "() :" in self.myline or "):" in self.myline:
+            self.myline = self.myline.split(":", 1)[0]
 
     def insert_self_word(self):
         """Insert "self" to function"""

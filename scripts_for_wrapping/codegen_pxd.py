@@ -6,14 +6,23 @@ from util import find_class
 import sys
 
 cpptrajsrc = "/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/"
-file = cpptrajsrc + sys.argv[1]
+filename = cpptrajsrc + sys.argv[1]
 indent = " " * 4
 classlist = find_class(cpptrajsrc)
-cpp = CppHeaderParser.CppHeader(file)
+cpp = CppHeaderParser.CppHeader(filename)
 
 # print header line "c++" so Cython know it is c++ code
 # (adding to setup.py seems not work)
 print "# distutils: language = c++"
+
+#add vector, string if having ones
+stdlist = ['vector', 'string']
+with open(filename, 'r') as fh:
+    linelist = " ".join(fh.readlines())
+    for word in stdlist:
+        if word in linelist:
+            print "from libcpp.%s cimport %s" % (word, word)
+
 for finclude in cpp.includes:
     # remove "
     if finclude.startswith('"'):
@@ -23,7 +32,7 @@ for finclude in cpp.includes:
         print "from %s cimport *" % (finclude.split(".")[0])
 
 print_blank_line(2)
-print 'cdef extern from "%s": ' % file.split("/")[-1]
+print 'cdef extern from "%s": ' % filename.split("/")[-1]
 
 # make assumption that there's only one class in header file
 for classname in cpp.classes.keys():
@@ -55,7 +64,11 @@ for classname in cpp.classes.keys():
         #call swap_const() again to change "vector[int] const& to const vector[int]&"
         line.swap_const()
         line.remove_unsupported()
+        line.remove_preassignment()
         print indent * 2 + line.myline
     print_blank_line(2)
+
+for classname in cpp.classes.keys():
     print "cdef class %s:" %classname
     print "%scdef _%s* thisptr" %(indent, classname)
+    print 

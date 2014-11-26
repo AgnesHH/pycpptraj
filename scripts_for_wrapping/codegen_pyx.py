@@ -41,6 +41,7 @@ for classname in cpp.classes.keys():
             line.swap_const()
             line.remove_word()
             line.remove_unsupported()
+            line.remove_preassignment()
             line.insert_self_word()
             if not line.has_ignored_words():
                 print "%sdef %s" % (indent, line.myline)

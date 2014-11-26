@@ -77,21 +77,21 @@ cdef extern from "Topology.h":
         inline const vector[_NameType]& Itree() const 
         inline const vector[int]& Join() const 
         inline const vector[int]& Irotat() const 
-        string TruncRes_AtomName(int) const 
-        string _AtomMaskName(int atom) const 
+        string TruncResAtomName(int) const 
+        string AtomMaskName(int atom) const 
         string TruncResNameNum(int) const 
-        int Find_AtomIn_Residue(int, const _NameType&) const 
+        int FindAtomInResidue(int, const _NameType&) const 
         int Find_ResidueMaxNatom() const 
         int Solute_Atoms() const 
         int SetSolvent(const string&)
         void Summary() const 
         void Brief(const char *) const 
-        void Print_AtomInfo(const string&) const 
+        void PrintAtomInfo(const string&) const 
         void PrintBondInfo(const string&) const 
         void PrintAngleInfo(const string&) const 
         void PrintDihedralInfo(const string&) const 
-        void Print_MoleculeInfo(const string&) const 
-        void Print_ResidueInfo(const string&) const 
+        void PrintMoleculeInfo(const string&) const 
+        void PrintResidueInfo(const string&) const 
         int PrintChargeMassInfo(const string&, int) const 
         inline const _Box& Parm_Box() const 
         inline BoxType _BoxType() const 

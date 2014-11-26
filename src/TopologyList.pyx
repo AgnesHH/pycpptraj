@@ -1,4 +1,5 @@
 # distutils: language = c++
+from cython.operator cimport dereference as deref
 from Topology cimport Topology
 from ArgList cimport ArgList
 
@@ -18,7 +19,9 @@ cdef class TopologyList:
 
     def GetParm_test(self, int idx):
         cdef Topology top = Topology()
-        top.thisptr = self.thisptr.GetParm(idx)
+        del top.thisptr
+        #top.thisptr = self.thisptr.GetParm(idx)
+        top.thisptr[0] = deref(self.thisptr.GetParm(idx))
         return top
 
     #def Topology * GetParm(self,int):
@@ -32,6 +35,7 @@ cdef class TopologyList:
             top.thisptr = self.thisptr.GetParm(num)
         if isinstance(arg, ArgList):
             argIn = arg
+            del top.thisptr
             top.thisptr = self.thisptr.GetParm(argIn.thisptr[0])
         return top
 
