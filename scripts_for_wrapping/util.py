@@ -109,3 +109,26 @@ class Line_codegen:
             oldp = "vector[%s] const&" % word
             newp = "const vector[%s]&" % word
             self.myline = self.myline.replace(oldp, newp)
+    
+    def remove_word(self):
+        wlist = [" const", " inline", "const", "inline", "&" ]
+        for word in wlist:
+            self.myline = self.myline.replace(word, "")
+
+    def insert_self_word(self):
+        """Insert "self" to function"""
+        # split first "()"
+        begin, end = self.myline.split("(", 1)
+        self.myline = begin + "(self," + end + ":"
+        if "(self,)" in self.myline:
+            self.myline = self.myline.replace("(self,)", "(self)")
+        # replace ") :" to "):"
+        self.myline = self.myline.replace(") :", "):")
+
+    def has_ignored_words(self):
+        wlist = ["#",]
+
+        for word in wlist:
+            if word in self.myline:
+                return True
+        return False

@@ -27,7 +27,6 @@ print 'cdef extern from "%s": ' % file.split("/")[-1]
 
 # make assumption that there's only one class in header file
 for classname in cpp.classes.keys():
-    
     #create enum
     if cpp.classes[classname]['enums']['public']:
         for enumlist in cpp.classes[classname]['enums']['public']:
@@ -46,13 +45,17 @@ for classname in cpp.classes.keys():
     methods = cpp.classes[classname]['methods']['public']
     for method in methods:
         line = Line_codegen(method['debug'])
-        if 'virtual' not in line.myline:
-            line.remove_std_namespace()
-            #line.remove_unsupported()
-            line.swap_const()
-            line.add_under_score_to_class(classlist)
-            line.replace_others()
-            #call swap_const() again to change "vector[int] const& to const vector[int]&"
-            line.swap_const()
-            line.remove_unsupported()
-            print indent * 2 + line.myline
+        if 'virtual' in line.myline:
+            line.add_sharp()
+        line.remove_std_namespace()
+        #line.remove_unsupported()
+        line.swap_const()
+        line.add_under_score_to_class(classlist)
+        line.replace_others()
+        #call swap_const() again to change "vector[int] const& to const vector[int]&"
+        line.swap_const()
+        line.remove_unsupported()
+        print indent * 2 + line.myline
+    print_blank_line(2)
+    print "cdef class %s:" %classname
+    print "%scdef _%s* thisptr" %(indent, classname)
