@@ -1,12 +1,14 @@
 # distutils: language = c++
-from libcpp cimport vector
+
+from libcpp.vector cimport vector
 from Atom cimport *
 from AtomMask cimport *
 from Box cimport *
 
-
+ctypedef vector[float] CRDtype
 cdef extern from "Frame.h": 
-    ctypedef vector[float] CRDtype
+    # can't not use CRDtype in this scope. Why?
+    # ctypedef vector[float] CRDtype
     ctypedef enum CenterMode "Frame::CenterMode":
         ORIGIN "Frame::ORIGIN"
         BOXCTR "Frame::BOXCTR"
@@ -19,16 +21,18 @@ cdef extern from "Frame.h":
         _Frame(const _Frame&, const _AtomMask&)
         _Frame(const _Frame &)
         #_Frame & operator =(_Frame)
-        void SetFromCRD(const CRDtype&, int, int, bint)
-        void SetFromCRD(const CRDtype&, const _AtomMask&, int, int, bint)
+        #void _SetFromCRD_1 "SetFromCRD"(const CRDtype&, int, int, bint)
+        #void _SetFromCRD_2 "SetFromCRD"(const CRDtype&, const _AtomMask&, int, int, bint)
+        void SetFromCRD (const CRDtype&, int, int, bint)
+        void SetFromCRD (const CRDtype&, const _AtomMask&, int, int, bint)
         CRDtype ConvertToCRD(int, bint)const 
-        void print_AtomCoord(int)const 
+        void printAtomCoord(int)const 
         void Info(const char *)const 
-        void Clear_Atoms() 
+        void ClearAtoms() 
         void AddXYZ(const double *)
-        void Add_Vec3(const _Vec3&)
-        void Swap_Atoms(int, int)
-        double & operator [ ](int idx)
+        void AddVec3(const _Vec3&)
+        void SwapAtoms(int, int)
+        double& index_opr "operator[]"(int idx)
         const double & operator [ ](int idx)const 
         bint empty() const 
         bint HasVelocity() const 
@@ -51,15 +55,15 @@ cdef extern from "Frame.h":
         inline const double * bAddress() const 
         inline const double * tAddress() const 
         inline const int * iAddress() const 
-        inline void Set_BoxAngles(const double *)
-        int Setup_Frame(int)
-        int Setup_FrameM(const vector[_Atom]&)
-        int Setup_FrameXM(const vector[double]&, const vector[double]&)
-        int Setup_FrameV(const vector[_Atom]&, bint, int)
-        int Setup_FrameFromMask(const _AtomMask&, const vector[_Atom]&)
+        inline void SetBoxAngles(const double *)
+        int SetupFrame(int)
+        int SetupFrameM(const vector[_Atom]&)
+        int SetupFrameXM(const vector[double]&, const vector[double]&)
+        int SetupFrameV(const vector[_Atom]&, bint, int)
+        int SetupFrameFromMask(const _AtomMask&, const vector[_Atom]&)
         void SetCoordinates(const _Frame&, const _AtomMask&)
         void SetCoordinates(const _Frame&)
-        void Set_Frame(const _Frame&, const _AtomMask&)
+        void SetFrame(const _Frame&, const _AtomMask&)
         void SetCoordinatesByMap(const _Frame&, const vector[int]&)
         void SetReferenceByMap(const _Frame&, const vector[int]&)
         void SetTargetByMap(const _Frame&, const vector[int]&)
@@ -96,3 +100,9 @@ cdef extern from "Frame.h":
         _Vec3 SetAxisOfRotation(int, int)
         _Vec3 CalculateInertia(const _AtomMask&, _Matrix_3x3 &)const 
         double CalcTemperature(const _AtomMask&, int)const 
+
+
+cdef class Frame:
+    cdef _Frame* thisptr
+    #cdef void _SetFromCRD_1(self, CRDtype farray, numCrd, numBoxCrd, hasVel)
+    #cdef void _SetFromCRD_2(self, CRDtype farray, AtomMask mask, numCrd, numBoxCrd, hasVel)

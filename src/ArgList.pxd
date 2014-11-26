@@ -41,3 +41,6 @@ cdef extern from "ArgList.h":
         double getKeyDouble(const char *, double)
         bint hasKey(const char *)
         bint Contains(const char *) const 
+
+cdef class ArgList:
+    cdef _ArgList* thisptr

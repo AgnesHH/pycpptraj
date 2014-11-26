@@ -15,3 +15,6 @@ cdef extern from "TopologyList.h":
         int AddParmFile(string&)
         int AddParmFile(string&, _ArgList&)
         void List()
+
+cdef class TopologyList:
+    cdef _TopologyList* thisptr

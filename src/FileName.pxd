@@ -20,5 +20,5 @@ cdef extern from "FileName.h":
         string DirPrefix()
         bint empty()
 
-#cdef class FileName:
-#    cdef _FileName* thisptr
+cdef class FileName:
+    cdef _FileName* thisptr

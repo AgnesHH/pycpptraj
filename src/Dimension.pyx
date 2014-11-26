@@ -1,7 +1,6 @@
 # distutils: language = c++
 
 cdef class Dimension:
-    cdef _Dimension  *thisptr
 
     def __cinit__(self):
         """Add more args to function"""

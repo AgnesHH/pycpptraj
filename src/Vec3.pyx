@@ -1,11 +1,10 @@
 # distutils: language = c++
+from array import array
 
 cdef class Vec3:
-    #cdef _Vec3* thisptr
-    #(cdef from Vec3_py.pxd, dont need to re-cdef)
-
-    def __cinit__(self):
+    def __cinit__(self, double[:] X=None):
         self.thisptr = new _Vec3()
+        self.SetVec(X)
 
     def __dealloc__(self):
         if self.thisptr is not NULL:

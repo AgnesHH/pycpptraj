@@ -22,8 +22,11 @@ cdef extern from "MapAtom.h":
         void SetComplete() 
         void SetChiral() 
         void SetBoundToChiral() 
-        void Set_AtomID(const string&)
+        void SetAtomID(const string&)
         void SetUnique(const string&)
         void SetNotMapped() 
         void SetNotComplete() 
         void SetNotChiral() 
+
+cdef class MapAtom:
+    cdef _MapAtom* thisptr

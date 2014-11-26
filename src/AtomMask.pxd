@@ -45,3 +45,6 @@ cdef extern from "AtomMask.h":
         void BriefMaskInfo()const 
         #inline token_iterator begintoken()const 
         #inline token_iterator endtoken()const 
+
+cdef class AtomMask:
+    cdef _AtomMask* thisptr

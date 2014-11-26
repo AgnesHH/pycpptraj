@@ -1,6 +1,5 @@
 # distutils: language = c++
 
-from ArgList cimport *
 
 cdef class ArgList:
     def __cinit__(self):

@@ -108,3 +108,6 @@ cdef extern from "Topology.h":
         _Topology * partialModifyStateByMask(const _AtomMask& m) const 
         _Topology * modifyStateByMask(const _AtomMask& m) const 
         _Topology * ModifyByMap(const vector[int]& m) const 
+
+cdef class Topology:
+    cdef _Topology* thisptr

@@ -40,3 +40,7 @@ cdef extern from "CpptrajState.h":
         int TrajLength(const string&, const vector[string]&)
         int Run()
         void Master_DataFileWrite()
+
+cdef class CpptrajState:
+    cdef _CpptrajState* thisptr
+

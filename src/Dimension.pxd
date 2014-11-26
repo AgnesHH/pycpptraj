@@ -29,5 +29,5 @@ cdef extern from "Dimension.h":
         int CalcBinsOrStep()
         void PrintDim()
 
-#cdef class Dimension:
-#    _Dimension* thisptr
+cdef class Dimension:
+    cdef _Dimension* thisptr

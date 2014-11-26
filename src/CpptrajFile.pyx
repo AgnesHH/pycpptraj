@@ -2,11 +2,11 @@
 
 cdef class CpptrajFile:
 
-    def __cinit__(self, cpp=None):
+    def __cinit__(self, CpptrajFile cpp=None):
         if cpp is None:
             self.thisptr = new _CpptrajFile()
-        else if isinstance(cpp, CpptrajFile):
-            self.thisptr = new _CpptrajFile(cpp.thisptr)
+        elif isinstance(cpp, CpptrajFile):
+            self.thisptr = new _CpptrajFile(cpp.thisptr[0])
 
     def __dealloc__(self):
         del self.thisptr
@@ -16,8 +16,4 @@ cdef class CpptrajFile:
 
     def SetupRead(self, mystring, myint):
         return self.thisptr.SetupRead(mystring, myint)
-
-if __name__ == '__main__':
-    cpp1 = CpptrajFile()
-    cpp2 = CpptrajFile(cpp1)
 
