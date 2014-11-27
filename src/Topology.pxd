@@ -1,4 +1,6 @@
 # distutils: language = c++
+from vector_pycpptraj cimport vector as cppvector
+from libcpp.set cimport set
 from Atom cimport *
 from Residue cimport *
 from Molecule cimport *
@@ -7,6 +9,10 @@ from AtomMask cimport *
 from Frame cimport *
 from FileName cimport *
 
+ctypedef cppvector[_Atom].const_iterator atom_iterator
+ctypedef cppvector[_Residue].const_iterator res_iterator
+ctypedef cppvector[_Molecule].const_iterator mol_iterator
+ctypedef cppvector[set[AtomicElementType]] BP_mapType
 
 cdef extern from "Topology.h": 
     cdef cppclass _Topology "Topology":
@@ -39,18 +45,18 @@ cdef extern from "Topology.h":
         bint NoRefCoords() const 
         int FinalSoluteRes() const 
         const char * c_str() const 
-        #atom_iterator begin() const 
-        #atom_iterator end() const 
+        atom_iterator begin() const 
+        atom_iterator end() const 
         const _Atom& operator[](int idx) const 
         const vector[_Atom]& _Atoms() const 
-        #inline res_iterator ResStart() const 
-        #inline res_iterator ResEnd() const 
+        inline res_iterator ResStart() const 
+        inline res_iterator ResEnd() const 
         const _Residue& Res(int idx) const 
         _Residue& SetRes(int idx)
-        #inline mol_iterator MolStart() const 
-        #inline mol_iterator MolEnd() const 
+        inline mol_iterator MolStart() const 
+        inline mol_iterator MolEnd() const 
         const _Molecule& Mol(int idx) const 
-        void Clear_MoleculeInfo() 
+        void ClearMoleculeInfo() 
         const BondArray& Bonds() const 
         const BondArray& BondsH() const 
         const BondParmArray& BondParm() const 
@@ -98,7 +104,7 @@ cdef extern from "Topology.h":
         void PrintDihedrals(const DihedralArray&, const _AtomMask&, int&) const;
         inline const _Box& Parm_Box() const 
         inline BoxType _BoxType() const 
-        void Set_Box(const _Box& bIn)
+        void SetBox(const _Box& bIn)
         int AddTopAtom(const _Atom&, int, const _NameType&, const double *)
         void StartNewMol() 
         int CommonSetup(bint)
@@ -108,9 +114,9 @@ cdef extern from "Topology.h":
         bint SetupIntegerMask(_AtomMask&, const _Frame&) const 
         bint SetupCharMask(_AtomMask&, const _Frame&) const 
         void ScaleDihedralK(double)
-        _Topology * partialModifyStateByMask(const _AtomMask& m) const 
-        _Topology * modifyStateByMask(const _AtomMask& m) const 
-        _Topology * ModifyByMap(const vector[int]& m) const 
+        _Topology* partialModifyStateByMask(const _AtomMask& m) const 
+        _Topology* modifyStateByMask(const _AtomMask& m) const 
+        _Topology* ModifyByMap(const vector[int]& m) const 
 
 cdef class Topology:
     cdef _Topology* thisptr
