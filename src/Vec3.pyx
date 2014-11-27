@@ -16,8 +16,8 @@ cdef class Vec3:
     def Zero(self):
         self.thisptr.Zero()
 
-    def SetVec(self, double x, double y, double z):
-        self.thisptr.SetVec(x, y, z)
+    #def SetVec(self, double x, double y, double z):
+    #    self.thisptr.SetVec(x, y, z)
 
     def SetVec(self, double[:] X):
         """SetVec from an array"""

@@ -36,7 +36,7 @@ cdef extern from "Matrix_3x3.h":
         _Matrix_3x3 operator *(const _Matrix_3x3&) const 
         _Matrix_3x3 TransposeMult(const _Matrix_3x3&) const 
         const double * Dptr() const 
-        double * Dptr() 
+        #double * Dptr() 
 
 cdef class Matrix_3x3:
     cdef _Matrix_3x3* thisptr
