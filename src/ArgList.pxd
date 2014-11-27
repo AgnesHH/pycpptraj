@@ -1,6 +1,7 @@
 # distutils: language = c++
 from libcpp.string cimport string
 from libcpp.vector cimport vector
+from vector_pycpptraj cimport vector as cppvector
 
 cdef extern from "ArgList.h": 
     cdef cppclass _ArgList "ArgList":
@@ -12,8 +13,8 @@ cdef extern from "ArgList.h":
         #_ArgList& operator =(const _ArgList&)
         const string& operator[](int) const 
         const vector[string]& List() const 
-        #const_iterator begin() const 
-        #const_iterator end() const 
+        cppvector[string].const_iterator begin() const 
+        cppvector[string].const_iterator end() const 
         int Nargs() const 
         bint empty() const 
         const char * ArgLine() const 
@@ -26,8 +27,8 @@ cdef extern from "ArgList.h":
         void PrintList() const 
         void PrintDebug() const 
         void RemoveFirstArg() 
-        const char * _Command() const 
-        bint _CommandIs(const char *) const 
+        const char * Command() const 
+        bint CommandIs(const char *) const 
         const string& GetStringNext() 
         const string& GetMaskNext() 
         const string& getNextTag() 

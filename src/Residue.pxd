@@ -15,3 +15,7 @@ cdef extern from "Residue.h":
         inline const _NameType& Name() const 
         inline int Num_Atoms() const 
         inline bint NameIsSolvent() const 
+
+cdef class Residue:
+    cdef _Residue* thisptr
+

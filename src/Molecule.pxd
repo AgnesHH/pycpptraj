@@ -9,7 +9,11 @@ cdef extern from "Molecule.h":
         void SetLast(int last)
         void SetSolvent() 
         void SetNoSolvent() 
-        inline int Begin_Atom() const 
-        inline int End_Atom() const 
+        inline int BeginAtom() const 
+        inline int EndAtom() const 
         inline bint IsSolvent() const 
-        inline int Num_Atoms() const 
+        inline int NumAtoms() const 
+
+cdef class Molecule:
+    cdef _Molecule* thisptr
+
