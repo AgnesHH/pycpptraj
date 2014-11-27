@@ -1,5 +1,7 @@
 # distutils: language = c++
 
+from cython.operator cimport dereference as deref
+from cython.operator cimport preincrement as incr
 from libcpp.string cimport string
 from FileName cimport FileName
 from Frame cimport Frame
@@ -11,6 +13,39 @@ cdef class Topology:
 
     def __dealloc__(self):
         del self.thisptr
+
+    # create iterators
+    # anyway combine three methods into ONE?
+    # Template?
+    def atom_generator(self):
+        cdef Atom atom
+        cdef atom_iterator it
+        it = self.thisptr.begin()
+        while it != self.thisptr.end():
+            atom = Atom()
+            atom.thisptr[0] = deref(it)
+            yield atom
+            incr(it)
+
+    def res_generator(self):
+        cdef Residue res
+        cdef res_iterator it
+        it = self.thisptr.ResStart()
+        while it != self.thisptr.ResEnd():
+            res = Residue()
+            res.thisptr[0] = deref(it)
+            yield res
+            incr(it)
+        
+    def mol_generator(self):
+        cdef Molecule mol
+        cdef mol_iterator it
+        it = self.thisptr.MolStart()
+        while it != self.thisptr.MolEnd():
+            mol = Molecule()
+            mol.thisptr[0] = deref(it)
+            yield mol
+            incr(it)
 
     def SetParmName(self, string title, FileName filename):
         self.thisptr.SetParmName(title, filename.thisptr[0])
