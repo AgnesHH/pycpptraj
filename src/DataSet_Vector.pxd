@@ -1,4 +1,5 @@
 # distutils: language = c++
+from libcpp.vector cimport vector
 from DataSet_1D cimport *
 from Vec3 cimport *
 from ComplexArray cimport *
@@ -34,3 +35,8 @@ cdef extern from "DataSet_Vector.h":
         int CalcSphericalHarmonics(int)
         const _ComplexArray& SphericalHarmonics(int) const 
         double SphericalHarmonicsNorm(int)
+
+
+cdef class DataSet_Vector:
+    cdef _DataSet_Vector* thisptr
+

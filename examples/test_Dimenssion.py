@@ -19,6 +19,10 @@ print "d and d2 are the same instance? %s " % (d == d2)
 
 print "create instance d3"
 d3 = Dimension(100, 10, 10000, "d3")
+
+# test wrong inputs
+# d3 = Dimension("test", 100, 10, 10000)
+
 print d3.Min
 print d3.Max
 print d3.Bins

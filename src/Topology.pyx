@@ -18,9 +18,6 @@ cdef class Topology:
     def SetReferenceCoords(self, Frame frameIn):
         self.thisptr.SetReferenceCoords(frameIn.thisptr[0])
 
-    def FinalSoluteRes(self):
-        return self.thisptr.FinalSoluteRes()
-
     def c_str(self):
         return self.thisptr.c_str()
 
@@ -39,8 +36,8 @@ cdef class Topology:
     def FindResidueMaxNatom(self):
         return self.thisptr.FindResidueMaxNatom()
     
-    def SoluteAtoms(self):
-        return self.thisptr.SoluteAtoms()
+    #def SoluteAtoms(self):
+    #    return self.thisptr.SoluteAtoms()
 
     def Summary(self):
         self.thisptr.Summary()
@@ -78,8 +75,8 @@ cdef class Topology:
     def PrintChargeMassInfo(self, string maskString, int idtype):
         self.thisptr.PrintChargeMassInfo(maskString, idtype)
     
-    #def AddTopAtom(self, Atom atomIn, int o_resnum, NameType  resname, double[:] XYZin):
-    #    return self.thisptr.AddTopAtom(atomIn, o_resnum, resname, &XYZin[0])
+    def AddTopAtom(self, Atom atomIn, int o_resnum, NameType resname, double[:] XYZin):
+        return self.thisptr.AddTopAtom(atomIn.thisptr[0], o_resnum, resname.thisptr[0], &XYZin[0])
 
     def StartNewMol(self):
         self.thisptr.StartNewMol()
@@ -96,8 +93,8 @@ cdef class Topology:
     #def NextraPts(self):
     #    pass
 
-    def HasVelInfo(self):
-        return self.thisptr.HasVelInfo()
+    #def HasVelInfo(self):
+    #    return self.thisptr.HasVelInfo()
 
     def OriginalFilename(self):
         cdef FileName fname = FileName()
@@ -108,37 +105,37 @@ cdef class Topology:
         def __get__(self):
             return self.thisptr.Pindex()
 
-    #property Natom:
-    #    def __get__(self):
-    #        return self.thisptr.Natom()
+    property Natom:
+        def __get__(self):
+            return self.thisptr.Natom()
 
-    #property Nres:
-    #    def __get__(self):
-    #        return self.thisptr.Nres()
+    property Nres:
+        def __get__(self):
+            return self.thisptr.Nres()
 
-    #property Nmol:
-    #    def __get__(self):
-    #        return self.thisptr.Nmol()
+    property Nmol:
+        def __get__(self):
+            return self.thisptr.Nmol()
 
-    #property Nsolvent:
-    #    def __get__(self):
-    #        return self.thisptr.Nsolvent()
+    property Nsolvent:
+        def __get__(self):
+            return self.thisptr.Nsolvent()
 
-    #property Nframes:
-    #    def __get__(self):
-    #        return self.thisptr.Nframes()
+    property Nframes:
+        def __get__(self):
+            return self.thisptr.Nframes()
 
-    #property NrepDim:
-    #    def __get__(self):
-    #        return self.thisptr.NrepDim()
+    property NrepDim:
+        def __get__(self):
+            return self.thisptr.NrepDim()
 
-    #property ParmName:
-    #    def __get__(self):
-    #        return self.thisptr.ParmName()
+    property ParmName:
+        def __get__(self):
+            return self.thisptr.ParmName()
 
-    #property GBradiiSet:
-    #    def __get__(self):
-    #        return self.thisptr.GBradiiSet()
+    property GBradiiSet:
+        def __get__(self):
+            return self.thisptr.GBradiiSet()
 
     #property NoRefCoords:
     #    def __get__(self):
@@ -147,7 +144,3 @@ cdef class Topology:
     #property FinalSoluteRes:
     #    def __get__(self):
     #        return self.thisptr.FinalSoluteRes()
-
-    #def __iter__(self):
-    #    """Use generator?"""
-    #    pass

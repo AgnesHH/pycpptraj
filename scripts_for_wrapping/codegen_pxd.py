@@ -54,14 +54,13 @@ for classname in cpp.classes.keys():
     methods = cpp.classes[classname]['methods']['public']
     for method in methods:
         line = Line_codegen(method['debug'])
+        # move to line's methods?
         if 'virtual' in line.myline:
             line.add_sharp()
         line.remove_std_namespace()
-        #line.remove_unsupported()
         line.swap_const()
         line.add_under_score_to_class(classlist)
         line.replace_others()
-        #call swap_const() again to change "vector[int] const& to const vector[int]&"
         line.swap_const()
         line.remove_unsupported()
         line.remove_preassignment()

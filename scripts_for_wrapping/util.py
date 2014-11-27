@@ -55,7 +55,7 @@ class Line_codegen:
 
     def remove_unsupported(self):
         # delete static
-        self.myline = self.myline.replace("static ", "")
+        self.replace("static ", "")
         if self.myline.startswith("~"):
             # dont need to use destructor here
             self.add_sharp()
@@ -69,9 +69,15 @@ class Line_codegen:
         """classlist = list of cpptraj classes"""
         for classname in classlist:
             if classname in self.myline:
-                if not re.search("_" + classname, self.myline):
-                    self.myline = self.myline.replace(
-                        classname, r"_" + classname)
+                cond1 = not re.search("_" + classname, self.myline)
+                #cond2 = re.search(" " + classname, self.myline) 
+                #cond3 = self.myline.startswith(classname+" ")
+                #cond4 = self.myline.startswith(classname+"(")
+                #cond5 = self.myline.startswith(classname+"*")
+
+                #if cond1 and cond2 and cond3 and cond4 and cond5:
+                if cond1:
+                    self.replace(classname, r"_" + classname)
     
     def replace(self, oldp, newp):
         self.myline = self.myline.replace(oldp, newp)
@@ -87,14 +93,14 @@ class Line_codegen:
         table = string.maketrans("<>", "[]")
         self.myline = self.myline.translate(table)
         for key, value in self.replace_dict.iteritems():
-            self.myline = self.myline.replace(key, value)
-        # self.myline = self.myline.replace(r"{", "")
-        # self.myline = self.myline.replace(r";", "")
-        # self.myline = self.myline.replace(r" ,", ",")
-        # self.myline = self.myline.replace(r" ( ", "(")
-        # self.myline = self.myline.replace(r" ) ", ")")
+            self.replace(key, value)
+        # self.replace(r"{", "")
+        # self.replace(r";", "")
+        # self.replace(r" ,", ",")
+        # self.replace(r" ( ", "(")
+        # self.replace(r" ) ", ")")
         # replace "bool" to "bint"
-        # self.myline = self.myline.replace("bool", "bint")
+        # self.replace("bool", "bint")
 
     def replace_waka(self):
         """change <> to []"""
@@ -117,12 +123,12 @@ class Line_codegen:
         for word in words:
             oldp = "vector[%s] const&" % word
             newp = "const vector[%s]&" % word
-            self.myline = self.myline.replace(oldp, newp)
+            self.replace(oldp, newp)
     
     def remove_word(self):
         wlist = [" const", " inline", "const", "inline", "&" ]
         for word in wlist:
-            self.myline = self.myline.replace(word, "")
+            self.replace(word, "")
 
     def remove_preassignment(self):
         """
@@ -142,9 +148,9 @@ class Line_codegen:
         begin, end = self.myline.split("(", 1)
         self.myline = begin + "(self," + end + ":"
         if "(self,)" in self.myline:
-            self.myline = self.myline.replace("(self,)", "(self)")
+            self.replace("(self,)", "(self)")
         # replace ") :" to "):"
-        self.myline = self.myline.replace(") :", "):")
+        self.replace(") :", "):")
 
     def has_ignored_words(self):
         wlist = ["#",]

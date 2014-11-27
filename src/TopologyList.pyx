@@ -17,25 +17,20 @@ cdef class TopologyList:
     def SetDebug(self,int id):
         self.thisptr.SetDebug(id)
 
-    def GetParm_test(self, int idx):
-        cdef Topology top = Topology()
-        del top.thisptr
-        #top.thisptr = self.thisptr.GetParm(idx)
-        top.thisptr[0] = deref(self.thisptr.GetParm(idx))
-        return top
-
     #def Topology * GetParm(self,int):
     # make sure to return correct topology
     def GetParm(self, arg):
         cdef Topology top = Topology()
         cdef int num
         cdef ArgList argIn
-        if isinstance(arg, int):
+
+        del top.thisptr
+
+        if isinstance(arg, (int, long)):
             num = arg
             top.thisptr = self.thisptr.GetParm(num)
         if isinstance(arg, ArgList):
             argIn = arg
-            del top.thisptr
             top.thisptr = self.thisptr.GetParm(argIn.thisptr[0])
         return top
 
@@ -57,4 +52,3 @@ cdef class TopologyList:
         
     def List(self):
         self.thisptr.List()
-

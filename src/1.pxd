@@ -1,4 +1,6 @@
 # distutils: language = c++
+from libcpp.vector cimport vector
+from libcpp.string cimport string
 from Atom cimport *
 from Residue cimport *
 from Molecule cimport *
@@ -6,16 +8,17 @@ from ParameterTypes cimport *
 from AtomMask cimport *
 from Frame cimport *
 from FileName cimport *
+from Range cimport *
 
 
 cdef extern from "Topology.h": 
     cdef cppclass _Topology "Topology":
-        _Topology() 
+        Topology() 
         void SetOffset(double oIn)
         void SetDebug(int dIn)
         void SetIpol(int iIn)
         void SetPindex(int pIn)
-        void Increase_Frames(int fIn)
+        void IncreaseFrames(int fIn)
         void SetTag(const string& t)
         void SetVelInfo(bint v)
         void SetNrepDim(int n)
@@ -37,20 +40,20 @@ cdef extern from "Topology.h":
         const _FileName& OriginalFilename() const 
         const string& GBradiiSet() const 
         bint NoRefCoords() const 
-        int FinalSoluteRes() const 
         const char * c_str() const 
-        #atom_iterator begin() const 
-        #atom_iterator end() const 
+        atom_iterator begin() const 
+        atom_iterator end() const 
         const _Atom& operator[](int idx) const 
         const vector[_Atom]& _Atoms() const 
-        #inline res_iterator ResStart() const 
-        #inline res_iterator ResEnd() const 
+        inline res_iterator ResStart() const 
+        inline res_iterator ResEnd() const 
         const _Residue& Res(int idx) const 
-        _Residue& SetRes(int idx)
-        #inline mol_iterator MolStart() const 
-        #inline mol_iterator MolEnd() const 
+        Residue& SetRes(int idx)
+        Range SoluteResidues() const 
+        inline mol_iterator MolStart() const 
+        inline mol_iterator MolEnd() const 
         const _Molecule& Mol(int idx) const 
-        void Clear_MoleculeInfo() 
+        void ClearMoleculeInfo() 
         const BondArray& Bonds() const 
         const BondArray& BondsH() const 
         const BondParmArray& BondParm() const 
@@ -74,15 +77,14 @@ cdef extern from "Topology.h":
         const _ChamberParmType& Chamber() const 
         void SetChamber(const _ChamberParmType& c)
         inline const vector[double]& Solty() const 
-        inline const vector[_NameType]& Itree() const 
+        inline const vector[NameType]& Itree() const 
         inline const vector[int]& Join() const 
         inline const vector[int]& Irotat() const 
         string TruncResAtomName(int) const 
-        string AtomMaskName(int atom) const 
+        string _AtomMaskName(int atom) const 
         string TruncResNameNum(int) const 
         int FindAtomInResidue(int, const _NameType&) const 
         int FindResidueMaxNatom() const 
-        int SoluteAtoms() const 
         int SetSolvent(const string&)
         void Summary() const 
         void Brief(const char *) const 
@@ -93,24 +95,23 @@ cdef extern from "Topology.h":
         void PrintMoleculeInfo(const string&) const 
         void PrintResidueInfo(const string&) const 
         int PrintChargeMassInfo(const string&, int) const 
-        void PrintBonds(const BondArray&, _AtomMask&, int&) const;
-        void PrintAngles(const AngleArray&, const _AtomMask&, int&) const;
-        void PrintDihedrals(const DihedralArray&, const _AtomMask&, int&) const;
         inline const _Box& Parm_Box() const 
-        inline BoxType _BoxType() const 
+        inline _Box::_BoxType _BoxType() const 
         void Set_Box(const _Box& bIn)
-        int AddTopAtom(const _Atom&, int, const _NameType&, const double *)
+        int AddTop_Atom(const _Atom&, int, const _NameType&, const double *)
         void StartNewMol() 
         int CommonSetup(bint)
-        int SetAmberExtra(const vector[double]&, const vector[_NameType]&, const vector[int]&, const vector[int]&)
+        int SetAmberExtra(const vector[double]&, const vector[NameType]&, const vector[int]&, const vector[int]&)
         bint SetupIntegerMask(_AtomMask&) const 
         bint SetupCharMask(_AtomMask&) const 
         bint SetupIntegerMask(_AtomMask&, const _Frame&) const 
         bint SetupCharMask(_AtomMask&, const _Frame&) const 
         void ScaleDihedralK(double)
-        _Topology * partialModifyStateByMask(const _AtomMask& m) const 
-        _Topology * modifyStateByMask(const _AtomMask& m) const 
-        _Topology * ModifyByMap(const vector[int]& m) const 
+        Topology * partialModifyStateByMask(const _AtomMask& m) const 
+        Topology * modifyStateByMask(const _AtomMask& m) const 
+        Topology * ModifyByMap(const vector[int]& m) const 
+
 
 cdef class Topology:
     cdef _Topology* thisptr
+

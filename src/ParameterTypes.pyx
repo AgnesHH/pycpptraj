@@ -1,5 +1,10 @@
 # distutils: language = c++
 
+# TODO: 
+#     + make convert_objlist_to_vector works right
+#        from cy_utils cimport convert_objlist_to_vector
+#     + uncomment some methods
+# 
 
 cdef class AngleType:
     def __cinit__(self, arg=None):
@@ -31,26 +36,49 @@ cdef class AngleType:
         return self.thisptr.Idx()
 
 cdef class NonbondParmType:
-    def __cinit__(self):
-        self.thisptr = new _NonbondParmType()
+
+    def __cinit__(self, arg=None):
+        """TODO: add and check"""
+        cdef int n
+        cdef vector[int] nbi
+        cdef NonbondArray nba
+        cdef HB_ParmArray hba
+
+        if not arg:
+            self.thisptr = new _NonbondParmType()
+        else:
+            if len(arg) == 4:
+                n, nbi, nba_, hba_ = arg
+            # to be added
+            #nba = convert_objlist_to_vector(BondType, nba_, NonbondArray)
+            #hba = convert_objlist_to_vector(HB_ParmType, hba_, HB_ParmArray)
+            #self.thisptr = new _NonbondParmType(n, nbi, nba, hba)
 
     def __dealloc__(self):
         del self.thisptr
 
-    #def NonbondParmType(self):
-
-    #def NonbondParmType(self,int n, vector[int] nbi, NonbondArray nba, HB_ParmArray hba):
-
     def HasNonbond(self):
         return self.thisptr.HasNonbond()
 
+    @property
     def Ntypes(self):
         return self.thisptr.Ntypes()
 
+    @property 
     def NBindex(self):
         return self.thisptr.NBindex()
 
     #def  NonbondArray NBarray(self):
+    #    """return list of NonbondType instances?"""
+    #    cdef NonbondArray na
+    #    cdef NonbondType nbt
+    #    cdef _NonbondType nbt_
+    #    na = self.thisptr.NBarray()
+    #    nbt_list = []
+    #    for nbt_ in na:
+    #        nbt = NonbondType()
+    #        del nbt.thisptr
+    #        # to be added
 
     #def  HB_ParmArray HBarray(self):
 
