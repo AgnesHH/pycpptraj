@@ -1,5 +1,6 @@
 # distutils: language = c++
 
+from cython.operator cimport dereference as deref
 """
 In [1]: from Matrix_3x3 import Matrix_3x3 as M3x3
 
@@ -221,3 +222,9 @@ cdef class Matrix_3x3:
         result =  Matrix_3x3()
         result.thisptr[0] = self.thisptr.TransposeMult(other.thisptr[0])
         return result 
+
+    def Dptr(self):
+        # Do we need this to be exposed to Python?
+        # numpy?
+        # thisptr.Dptr() return a pointer to 1st element.
+        return deref(self.thisptr.Dptr())
