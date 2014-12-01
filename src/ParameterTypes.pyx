@@ -15,6 +15,8 @@ cdef class AngleType:
             if len(arg) == 4:
                 a1, a2, a3, idx = arg
                 self.thisptr = new _AngleType(a1, a2, a3, idx)
+            else:
+                raise ValueError()
 
     def __dealloc__(self):
         del self.thisptr

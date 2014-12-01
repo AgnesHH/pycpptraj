@@ -1,8 +1,10 @@
-# distutil: language = c++
+# distutils: language = c++
 from libcpp.string cimport string
 from NameType cimport *
 
-cdef extern from "MaskToken.h":
+
+cdef extern from "MaskToken.h": 
+    # MaskToken.h
     ctypedef enum MaskTokenType "MaskToken::MaskTokenType":
         OP_NONE "MaskToken::OP_NONE"
         ResNum "MaskToken::ResNum"
@@ -16,23 +18,24 @@ cdef extern from "MaskToken.h":
         OP_OR "MaskToken::OP_OR"
         OP_NEG "MaskToken::OP_NEG"
         OP_DIST "MaskToken::OP_DIST"
-
     cdef cppclass _MaskToken "MaskToken":
-        _MaskToken()
-        const char* TypeName()
-        void Print()
+        _MaskToken() 
+        const char * TypeName() const 
+        void Print() const 
         int SetToken(MaskTokenType, const string&)
         int SetDistance(string&)
         void SetOperator(MaskTokenType)
+        inline MaskTokenType Type() const 
+        inline int Res1() const 
+        inline int Res2() const 
+        inline const _NameType& Name() const 
+        inline bint OnStack() const 
+        inline bint Within() const 
+        inline bint ByAtom() const 
+        inline double Distance() const 
+        void SetOnStack() 
 
-        inline MaskTokenType Type()
-        inline int Res1()
-        inline int Res2()
-        inline const _NameType& Name()
-        inline bint OnStack()
-        inline bint Within()
-        inline bint ByAtom()
-        inline double Distance()
 
-        void SetOnStack()
+cdef class MaskToken:
+    cdef _MaskToken* thisptr
 

@@ -11,31 +11,43 @@ from AtomMask import AtomMask
 from Frame cimport CRDtype
 from Vec3 cimport Vec3
 
+# this method does not work. Don't know how to use template
+#cdef vector[U] convert_list_to_vector(mylist):
+#    cdef T obj
+#    cdef vector[U] vt
+#
+#    for obj in mylist:
+#        vt.push_back(obj.thisptr[0])
+#    return vt
+
 def check_instance(inst, clsname):
     if not isinstance(inst, clsname):
         raise ValueError("Must be instance of %s") % clsname.__name__
 
 cdef class Frame:
-    def __cinit__(self, int natom=0):
-        self.thisptr = new _Frame(natom)
+    def __cinit__(self, int natom=0, *args):
+        cdef Frame frame
+        cdef AtomMask atmask
+        cdef vector[_Atom] vt
+        if not args:
+            self.thisptr = new _Frame(natom)
+        else:
+            if len(args) == 2:
+                frame, atmask = args
+                self.thisptr = new _Frame(frame, atmask)
+            elif len(args) == 1:
+                if isinstance(args[0], Frame):
+                    frame = args[0]
+                    self.thisptr = new _Frame(frame)
+                else:
+                    atlist = args[0]
+                    vt = convert_list_to_vector(atlis)
+                    self.thisptr = new _Frame(vt)
+            else:
+                raise ValueError()
 
     def __dealloc__(self):
-        if self.thisptr is not NULL:
-            del self.thisptr
-
-    #def Frame(self):
-
-    #def Frame(self, vector[Atom]):
-
-    #def Frame(self, Frame, AtomMask):
-
-    #def Frame(self, Frame):
-
-    #cdef void _SetFromCRD_1(self, CRDtype farray, numCrd, numBoxCrd, hasVel):
-    #     self.thisptr._SetFromCRD_1(farray, numCrd, numBoxCrd, hasVel)
-    #    
-    #cdef void _SetFromCRD_2(self, CRDtype farray, AtomMask mask, numCrd, numBoxCrd, hasVel):
-    #    self.thisptr._SetFromCRD_2(farray, mask.thisptr[0], numCrd, numBoxCrd, hasVel)
+        del self.thisptr
 
     def SetFromCRD(self, CRDtype farray, *args):
         """"""
@@ -46,13 +58,9 @@ cdef class Frame:
 
         if len(args) == 3:
             numCrd, numBoxCrd, hasVel = args
-            #self._SetFromCRD_1(farray, numCrd, numBoxCrd, hasVel)
-            #self.thisptr._SetFromCRD_1(farray, numCrd, numBoxCrd, hasVel)
             self.thisptr.SetFromCRD(farray, numCrd, numBoxCrd, hasVel)
         elif len(args) == 4:
             mask, numCrd, numBoxCrd, hasVel = args
-            #self._SetFromCRD_2(farray, mask, numCrd, numBoxCrd, hasVel)
-            #self.thisptr._SetFromCRD_2(farray, mask.thisptr[0], numCrd, numBoxCrd, hasVel)
             self.thisptr.SetFromCRD(farray, mask.thisptr[0], numCrd, numBoxCrd, hasVel)
         else:
             raise ValueError("Must have only 3 or 4 more arguments")
@@ -89,7 +97,7 @@ cdef class Frame:
         return self.thisptr.HasVelocity()
 
     @property
-    def natom(self):
+    def Natom(self):
        return self.thisptr.Natom()
 
     property size:

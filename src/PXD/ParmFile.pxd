@@ -22,7 +22,7 @@ cdef extern from "ParmFile.h":
         int WritePrefixTopology(const _Topology&, const string&, ParmFormatType, int)
         int WriteTopology(const _Topology&, const string&, const _ArgList&, ParmFormatType, int)
         int WriteTopology(const _Topology& t, const string& n, ParmFormatType f, int d)
-        const _FileName& _ParmFilename() 
+        const _FileName ParmFilename() except +ValueError
 
 
 cdef class ParmFile:

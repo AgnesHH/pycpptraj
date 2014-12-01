@@ -1,6 +1,8 @@
 # distutils: language = c++
 
 from cython.operator cimport dereference as deref
+from cython.operator cimport preincrement as incr
+from libcpp.vector cimport vector
 """
 In [1]: from Matrix_3x3 import Matrix_3x3 as M3x3
 
@@ -154,7 +156,7 @@ cdef class Matrix_3x3:
         if isinstance(other, Vec3) or isinstance(other, Matrix_3x3):
             return self.mul(other)
         else:
-            raise ValueError("Must be either Matrix_3x3 or Vec3")
+            raise ValueError("Must be either Matrix_3x3")
 
 
     def mul(Matrix_3x3 self, MatVecType other):
@@ -182,30 +184,21 @@ cdef class Matrix_3x3:
         result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
         return result
 
-    cdef _CalcRotationMatrix(Matrix_3x3 self, Vec3 vec, double theta):
-        """add doc here
-        Not tested yet
-        """
-        self.thisptr.CalcRotationMatrix(vec.thisptr[0], theta)
-
-    cdef _CalcRotationMatrix_xyz(self, double x, double y, double z):
-        """add doc here
-        Not tested yet
-        """
-        self.thisptr.CalcRotationMatrix(x, y, z)
-
     def CalcRotationMatrix(self, *args):
-        """why not directly combining _CalcRotationMatrix_xyz and _CalcRotationMatrix 
-        in this method?
         """
+        """
+        cdef Vec3 vec
+        cdef double theta
+        cdef double x, y, z
+
         if len(args)== 2:
             vec, theta = args
             if not isinstance(vec, Vec3):
                 raise ValueError("Must be a vector")
-            self._CalcRotationMatrix(vec, theta) 
+            self.thisptr.CalcRotationMatrix(vec.thisptr[0], theta)
         elif len(args) == 3:
             x, y, z = args
-            self._CalcRotationMatrix_xyz(x, y, z)
+            self.thisptr.CalcRotationMatrix(x, y, z)
         else:
             raise ValueError('must be "Vec3, theta" or "x, y, z"')
 
@@ -223,8 +216,22 @@ cdef class Matrix_3x3:
         result.thisptr[0] = self.thisptr.TransposeMult(other.thisptr[0])
         return result 
 
-    def Dptr(self):
-        # Do we need this to be exposed to Python?
-        # numpy?
-        # thisptr.Dptr() return a pointer to 1st element.
-        return deref(self.thisptr.Dptr())
+    def to_list(self):
+        cdef double* ptr = self.thisptr.Dptr()
+        cdef int i
+        cdef vector[double] v
+        for i in range(9):
+            v.push_back(deref(ptr))
+            incr(ptr)
+        # Cython will convert vector to list
+        return v
+
+    def to_numpy_mat(self):
+        """convert to numpy matrix"""
+        try:
+            import numpy as np
+            mat = np.asarray(self.to_list(), dtype=np.float64).reshape((3,3))
+            mat = np.matrix(mat)
+            return mat
+        except:
+            raise ImportError("Must have numpy installed")

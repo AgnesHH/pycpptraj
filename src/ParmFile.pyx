@@ -23,20 +23,21 @@ cdef class ParmFile:
         if len(args) == 3:
             Top, fnameIn, debugIn = args
             return self.thisptr.ReadTopology(Top.thisptr[0], fnameIn, debugIn)
-        elif len(args) == 3:
+        elif len(args) == 4:
             Top, fnameIn, argListIn, debugIn = args
             return self.thisptr.ReadTopology(Top.thisptr[0], fnameIn, argListIn.thisptr[0], debugIn)
         else:
             raise ValueError()
 
-    def ReadTopology(self,Topology Top, string fnameIn, int debugIn):
-        return self.thisptr.ReadTopology(Top.thisptr[0], fnameIn, debugIn)
+    def WritePrefixTopology(self, Topology Top, string prefix, ParmFormatType fmtIn, int debugIn):
+        return self.thisptr.WritePrefixTopology(Top.thisptr[0], prefix, fmtIn, debugIn)
 
-    #def int WritePrefixTopology(self, Topology, string, ParmFormatType, int):
 
-    #def int WriteTopology(self, Topology, string, ArgList, ParmFormatType, int):
+    def WriteTopology(self, Topology Top, string fname, ArgList argListIn, ParmFormatType fmtIn, int debugIn):
+        return self.thisptr.WriteTopology(Top.thisptr[0], fname, argListIn.thisptr[0], fmtIn, debugIn)
 
-    #def int WriteTopology(self, Topology t, string n, ParmFormatType f, int d):
-
-    #def  FileName ParmFilename(self):
-
+    def ParmFilename(self):
+        cdef FileName fname = FileName()
+        del fname.thisptr
+        fname.thisptr[0] = self.thisptr.ParmFilename()
+        return fname
