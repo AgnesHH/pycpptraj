@@ -1,5 +1,0 @@
-from Grid cimport _Grid
-
-cdef _Grid* p = new _Grid()
-
-del p
