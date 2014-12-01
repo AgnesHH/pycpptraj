@@ -19,7 +19,13 @@ mcopy = M3x3()
 mcopy.copy(m)
 mcopy.Print("Create mcopy matrix from m") 
 
-print mcopy.Dptr()
+print "Convert to python list"
+print mcopy.to_list()
+
+print "Convert to numpy matrix"
+mat = mcopy.to_numpy_mat()
+print type(mat)
+print mat
 
 #print "*"*20
 #print "test StringIO"

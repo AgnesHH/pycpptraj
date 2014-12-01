@@ -1,14 +1,16 @@
+import os
 from distutils.core import setup
 from distutils.extension import Extension
-#import numpy as np
 from Cython.Build import cythonize
+
+PXD_include = os.environ['PYCPPTRAJ_HOME'] + "/PXD/"
+cpptraj_include = os.environ['AMBERHOME'] + "/AmberTools/src/cpptraj/src/"
 
 setup(
       ext_modules = cythonize([
-          Extension("*", ["Matrix_3x3.pyx",],
+          Extension("*", ["Molecule.pyx",],
                     libraries=['cpptraj'],
-                    #include_dirs=[np.get_include()])
-                    )
+                    library_dirs=[cpptraj_include,],
+                    include_dirs=[PXD_include, cpptraj_include])
           ])
-     )
-
+     ) 
