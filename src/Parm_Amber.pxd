@@ -15,3 +15,6 @@ cdef extern from "Parm_Amber.h":
         int processWriteArgs(_ArgList&)
         int WriteParm(const string&, const _Topology&)
         void SetDebug(int debugIn)
+
+cdef class Parm_Amber:
+    cdef _Parm_Amber* thisptr
