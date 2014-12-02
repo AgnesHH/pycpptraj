@@ -9,4 +9,7 @@ for sinput in c2:
     print sinput
 
 print "----------------------"
-print c2.ArgLine()
+#print c2.ArgLine()
+
+print c2.CommandIs("test")
+print c2.CommandIs("trajout")

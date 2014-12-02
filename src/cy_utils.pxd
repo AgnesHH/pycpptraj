@@ -2,9 +2,9 @@
 
 from ParameterTypes cimport *
 
-cdef inline convert_objlist_to_vector(fused_pyclass, in_list, fused_v_for_ParameterTypes):
-    cdef fused_pyclass ins              
-    cdef fused_v_for_ParameterTypes v                 
+cdef inline V_ParameterTypes convert_objlist_to_vector(List_ParameterTypes, in_list, V_ParameterTypes):
+    cdef List_ParameterTypes ins              
+    cdef V_ParameterTypes v                 
     for ins in in_list:           
         v.push_back(ins.thisptr[0])
     return v

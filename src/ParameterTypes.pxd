@@ -15,35 +15,35 @@ ctypedef vector[_CmapGridType] CmapGridArray
 ctypedef vector[_CmapType] CmapArray
 
 # should I need to define fused type?
-#ctypedef fused fused_v_for_ParameterTypes:
-#    BondParmArray
-#    BondArray
-#    AngleArray
-#    AngleParmArray
-#    DihedralArray
-#    DihedralParmArray
-#    HB_ParmArray
-#    NonbondArray
-#    LES_Array
-#    CmapArray
-#    CmapGridArray
-#
-#ctypedef fused fused_pyclass:
-#    AngleType
-#    NonbondParmType
-#    LES_AtomType
-#    AngleParmType
-#    CmapType
-#    LES_ParmType
-#    HB_ParmType
-#    NonbondType
-#    ChamberParmType
-#    BondParmType
-#    CmapGridType
-#    DihedralType
-#    BondType
-#    CapParmType
-#    DihedralParmType
+ctypedef fused fused_v_for_ParameterTypes:
+    BondParmArray
+    BondArray
+    AngleArray
+    AngleParmArray
+    DihedralArray
+    DihedralParmArray
+    HB_ParmArray
+    NonbondArray
+    LES_Array
+    CmapArray
+    CmapGridArray
+
+ctypedef fused fused_pyclass:
+    AngleType
+    NonbondParmType
+    LES_AtomType
+    AngleParmType
+    CmapType
+    LES_ParmType
+    HB_ParmType
+    NonbondType
+    ChamberParmType
+    BondParmType
+    CmapGridType
+    DihedralType
+    BondType
+    CapParmType
+    DihedralParmType
 
 cdef extern from "ParameterTypes.h": 
     cdef cppclass _AngleType "AngleType":

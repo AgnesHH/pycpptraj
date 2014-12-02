@@ -95,9 +95,6 @@ cdef class Topology:
     def PrintAngleInfo(self, string maskString):
         self.thisptr.PrintAngleInfo(maskString)
 
-    #def PrintDihedrals(self):
-    #    self.thisptr.PrintDihedrals()
-
     def PrintDihedralInfo(self, string maskString):
         self.thisptr.PrintDihedralInfo(maskString)
 

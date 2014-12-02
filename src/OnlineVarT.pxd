@@ -2,7 +2,7 @@
 from libcpp.map cimport map
 
 cdef extern from "OnlineVarT.h": 
-    ctypedef map[int,double].iterator iterator
+    ctypedef map[int, double].iterator iterator
     cdef cppclass _Stats "Stats" [Float]:
         _Stats()
         void accumulate(const Float)

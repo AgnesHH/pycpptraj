@@ -63,6 +63,10 @@ cdef class Matrix_3x3:
             else: 
                 raise ValueError("Must be array with length of None, 1, 3 or 9")
     
+    def __str__(self):
+        # TODO: write to matrix style rather than a list
+        return ", ".join(str(x) for x in self.to_list())
+
     @classmethod
     def copy_mat(cls, Matrix_3x3 other):
         # create new instance of Matrix_3x3; make copy and return this instance

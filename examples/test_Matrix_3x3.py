@@ -21,6 +21,7 @@ mcopy.Print("Create mcopy matrix from m")
 
 print "Convert to python list"
 print mcopy.to_list()
+print mcopy
 
 print "Convert to numpy matrix"
 mat = mcopy.to_numpy_mat()

@@ -26,5 +26,5 @@ cdef extern from "ActionList.h":
         const string& CmdString(int)
         DispatchAllocatorType ActionAlloc()
 
-#cdef class ActionList:
-#    cdef _ActionList* thisptr
+cdef class ActionList:
+    cdef _ActionList* thisptr

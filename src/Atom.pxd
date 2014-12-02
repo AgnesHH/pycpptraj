@@ -96,10 +96,10 @@ cdef extern from "Atom.h":
         _Atom(const _Atom&)
         void swap(_Atom&, _Atom&)
         #_Atom& operator =(_Atom)
-        #inline bond_iterator bondbegin() const 
-        #inline bond_iterator bondend() const 
-        #inline excluded_iterator excludedbegin() const 
-        #inline excluded_iterator excludedend() const 
+        inline bond_iterator bondbegin() const 
+        inline bond_iterator bondend() const 
+        inline excluded_iterator excludedbegin() const 
+        inline excluded_iterator excludedend() const 
         void SetResNum(int resnumIn)
         void SetMol(int molIn)
         void SetCharge(double qin)

@@ -15,12 +15,12 @@ cdef class DataSet:
     @classmethod
     def copy(cls, DataSet other):
         cdef DataSet dset = DataSet()
-        del dset.thisptr
+        #del dset.thisptr
         dset.thisptr = new _DataSet(other.thisptr[0])
         return dset
 
     def copy(self, DataSet other):
-        del self.thisptr
+        #del self.thisptr
         self.thisptr = new _DataSet(other.thisptr[0])
 
     def SetWidth(self,int widthIn):

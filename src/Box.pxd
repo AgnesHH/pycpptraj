@@ -16,9 +16,9 @@ cdef extern from "Box.h":
         #_Box & operator =(const _Box &)
         const char * TypeName() const 
         void SetBetaLengths(double, double, double, double)
-        void Set_Box(const double *)
+        void SetBox(const double *)
         void SetTruncOct() 
-        void SetNo_Box() 
+        void SetNoBox() 
         void SetMissingInfo(const _Box &)
         double ToRecip(_Matrix_3x3 &, _Matrix_3x3 &)const 
         void SetX(double xin)
@@ -28,16 +28,19 @@ cdef extern from "Box.h":
         void SetBeta(double bin)
         void SetGamma(double gin)
         BoxType Type() const 
-        double _BoxX() const 
-        double _BoxY() const 
-        double _BoxZ() const 
+        double BoxX() const 
+        double BoxY() const 
+        double BoxZ() const 
         double Alpha() const 
         double Beta() const 
         double Gamma() const 
-        bint Has_Box() const 
+        bint HasBox() const 
         _Vec3 Center() const 
         _Vec3 Lengths() const 
         double * boxPtr() 
-        const double * boxPtr() const 
-        const double& operator [ ](int idx)const 
-        double & operator [ ](int idx)
+        #const double * boxPtr() const 
+        #const double& index_opr "operator[]"(int idx)const 
+        double& index_opr "operator[]"(int idx)
+
+cdef class Box:
+    cdef _Box* thisptr

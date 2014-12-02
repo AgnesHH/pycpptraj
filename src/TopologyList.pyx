@@ -24,8 +24,7 @@ cdef class TopologyList:
         cdef int num
         cdef ArgList argIn
 
-        del top.thisptr
-
+        #del top.thisptr
         if isinstance(arg, (int, long)):
             num = arg
             top.thisptr = self.thisptr.GetParm(num)

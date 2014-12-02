@@ -10,7 +10,10 @@ cdef extern from "Trajin_Single.h":
         int SetupTrajRead(const string&, _ArgList &, _Topology *)
         int BeginTraj(bint)
         void EndTraj() 
-        int ReadTraj_Frame(int, _Frame &)
+        int ReadTrajFrame(int, _Frame &)
         void PrintInfo(int)const 
         bint HasVelocity() const 
-        int Nreplica_Dimension() const 
+        int NreplicaDimension() const 
+
+cdef class Trajin_Single:
+    cdef _Trajin_Single* thisptr

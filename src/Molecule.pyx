@@ -1,30 +1,43 @@
 # distutils: language = c++
 
-
 cdef class Molecule:
-    def __cinit__(self):
-        self.thisptr = new _Molecule()
+    def __cinit__(self, *args):
+        cdef int beginidx, endidx
+        if not args:
+            self.thisptr = new _Molecule()
+        elif len(args) == 2:
+            beginidx, endidx = args
+            self.thisptr = new _Molecule(beginidx, endidx)
+        else:
+            raise ValueError("Must have None or 2 integers")
 
     def __dealloc__(self):
         del self.thisptr
 
-    #def Molecule(self):
+    def SetFirst(self,int begin):
+        self.thisptr.SetFirst(begin)
 
-    #def Molecule(self,int begin, int end):
+    def SetLast(self,int last):
+        self.thisptr.SetLast(last)
 
-    #def void SetFirst(self,int begin):
+    def SetSolvent(self):
+        self.thisptr.SetSolvent()
 
-    #def void SetLast(self,int last):
+    def SetNoSolvent(self):
+        self.thisptr.SetNoSolvent()
 
-    #def void SetSolvent(self):
+    @property
+    def BeginAtom(self):
+        return self.thisptr.BeginAtom()
 
-    #def void SetNoSolvent(self):
+    @property
+    def EndAtom(self):
+        return self.thisptr.EndAtom()
 
-    #def  int BeginAtom(self):
+    def IsSolvent(self):
+        return self.thisptr.IsSolvent()
 
-    #def  int EndAtom(self):
-
-    #def  bint IsSolvent(self):
-
-    #def  int NumAtoms(self):
+    @property
+    def NumAtoms(self):
+        return self.thisptr.NumAtoms()
 

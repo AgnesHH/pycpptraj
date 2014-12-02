@@ -38,6 +38,6 @@ cdef class ParmFile:
 
     def ParmFilename(self):
         cdef FileName fname = FileName()
-        del fname.thisptr
+        #del fname.thisptr
         fname.thisptr[0] = self.thisptr.ParmFilename()
         return fname

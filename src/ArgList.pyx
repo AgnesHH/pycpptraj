@@ -43,7 +43,7 @@ cdef class ArgList:
     @classmethod
     def copy(cls, ArgList rhs):
         cdef ArgList arglist = ArgList()
-        del arglist.thisptr
+        #del arglist.thisptr
         arglist.thisptr = new _ArgList(rhs.thisptr[0])
         return arglist
 
@@ -92,10 +92,10 @@ cdef class ArgList:
     def RemoveFirstArg(self):
         self.thisptr.RemoveFirstArg()
 
-    def Command(self):
+    def Command_test(self):
         # got segmentfault when calling this function
         # thisptr.Command() return pointer to 1st arg
-        return self.thisptr.Command()
+        return deref(self.thisptr.Command())
 
     def CommandIs(self, char* cm):
         return self.thisptr.CommandIs(cm)

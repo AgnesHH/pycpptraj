@@ -1,7 +1,6 @@
 # distutils: language = c++
 # TODO: 
-#     + figure out why I can not delcare "ctypedef vector[float] CRDtype"
-#       inside cppclass
+#     + figure out why I can not delcare "ctypedef vector[float] CRDtype" inside cppclass
 #     + add more methods
 # 
 from cython.operator cimport dereference as deref
@@ -29,22 +28,23 @@ cdef class Frame:
         cdef Frame frame
         cdef AtomMask atmask
         cdef vector[_Atom] vt
-        if not args:
-            self.thisptr = new _Frame(natom)
-        else:
-            if len(args) == 2:
-                frame, atmask = args
-                self.thisptr = new _Frame(frame, atmask)
-            elif len(args) == 1:
-                if isinstance(args[0], Frame):
-                    frame = args[0]
-                    self.thisptr = new _Frame(frame)
-                else:
-                    atlist = args[0]
-                    vt = convert_list_to_vector(atlis)
-                    self.thisptr = new _Frame(vt)
-            else:
-                raise ValueError()
+        self.thisptr = new _Frame()
+        #if not args:
+        #    self.thisptr = new _Frame(natom)
+        #else:
+        #    if len(args) == 2:
+        #        frame, atmask = args
+        #        self.thisptr = new _Frame(frame, atmask)
+        #    elif len(args) == 1:
+        #        if isinstance(args[0], Frame):
+        #            frame = args[0]
+        #            self.thisptr = new _Frame(frame)
+        #        else:
+        #            atlist = args[0]
+        #            vt = convert_list_to_vector(atlis)
+        #            self.thisptr = new _Frame(vt)
+        #    else:
+        #        raise ValueError()
 
     def __dealloc__(self):
         del self.thisptr
