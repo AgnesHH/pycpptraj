@@ -29,9 +29,15 @@ Journal of Chemical Theory and Computation 2013 9 (7), 3084-3095
 Install
 =======
 - Install `libcpptraj.so` and move to $AMBERHOME/lib/
+    * Read: INSTALL_libcpptraj.txt
 - Compile Cython files: CFLAGS="-I$PYCPPTRAJHOME/src/ -I$AMBERHOME/AmberTools/src/cpptraj/src/" LDFLAGS="-I$AMBERHOME/lib/ -lgfortran -w" python ./setup.py build_ext -i  
        * example of setup.py: ./src/setup.py
        * shared library ./src/src/*.so
+
+       * "Dirty" way: 
+           cd ./src
+           ./Install_single_file.sh Box.pyx
+           python ../examples/test_Box.py
 
 Usage: 
 =====
