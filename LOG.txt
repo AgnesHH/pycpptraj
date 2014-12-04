@@ -1,5 +1,7 @@
-Oct - Nov 2014: Start writting pycpptraj
+* Oct - Nov 2014: Start writting pycpptraj
 
-Nov-11-2014: Start writing gencode.py to automatically convert cpptraj header file to python (*.pxd and *.pyx) files
+* Nov-11-2014: Start writing gencode.py to automatically convert cpptraj header file to python (*.pxd and *.pyx) files
 
-Nov-14-2014: Finishing importing all (most?) cpptraj functions (most header files) to Cython. Passed 229 tests (./src/tests/test_*.pyx)
+* Nov-14-2014: Finish importing all (most?) cpptraj functions (most header files) to Cython. Passed 229 tests (./src/tests/test_*.pyx)
+
+* Dec-04-2014: Write setup.py and test installing
