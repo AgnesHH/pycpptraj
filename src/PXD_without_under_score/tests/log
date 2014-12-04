@@ -2,699 +2,415 @@
 Error compiling Cython file:
 ------------------------------------------------------------
 ...
-# distutils: language = c++
-
-
-cdef extern from "DispatchObject.h": 
-    cdef cppclass DispatchObject "DispatchObject":
+from DataFileList cimport *
+from DataSetList cimport *
+from Vec3 cimport Vec3
+from AtomMask cimport AtomMask
+from CpptrajFile cimport *
+from OnlineVarT cimport Stats
 ^
 ------------------------------------------------------------
 
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DispatchObject.pxd:6:0: Expected an increase in indentation level
+Action_PairDist.pyx:20:0: 'Stats.pxd' not found
 
 Error compiling Cython file:
 ------------------------------------------------------------
 ...
-[1430] WARN unresolved _iterator
-      ^
+from DataFileList cimport *
+from DataSetList cimport *
+from Vec3 cimport Vec3
+from AtomMask cimport AtomMask
+from CpptrajFile cimport *
+from OnlineVarT cimport Stats
+                       ^
 ------------------------------------------------------------
 
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DataSetList.pxd:1:7: Syntax error in simple statement list
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-# distutils: language = c++
-
-
-cdef extern from "FileIO.h": 
-    cdef cppclass FileIO "FileIO":
-^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/FileIO.pxd:6:0: Expected an increase in indentation level
+Action_PairDist.pyx:20:24: Name 'Stats' not declared in module 'OnlineVarT'
 
 Error compiling Cython file:
 ------------------------------------------------------------
 ...
-        AccessType Access() const 
-        CompressType Compression() const 
-        bint IsOpen() const 
-        const FileName& Filename() const 
-        int IsDos() const 
-        off_t FileSize() const 
-       ^
+from Vec3 cimport Vec3
+from AtomMask cimport AtomMask
+from CpptrajFile cimport *
+from OnlineVarT cimport Stats
+
+cdef class Action_PairDist(ImagedAction):
+    ^
 ------------------------------------------------------------
 
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/CpptrajFile.pxd:53:8: 'off_t' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        bint IsOpen() const 
-        const FileName& Filename() const 
-        int IsDos() const 
-        off_t FileSize() const 
-        bint IsCompressed() 
-        off_t UncompressedSize() 
-       ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/CpptrajFile.pxd:55:8: 'off_t' is not a type identifier
+Action_PairDist.pyx:22:5: 'ImagedAction' is not an extension type
 
 Error compiling Cython file:
 ------------------------------------------------------------
 ...
-        bint IsCompressed() 
-        off_t UncompressedSize() 
-        int Gets(char * buf, int num)
-        int Write(const void * buf, size_t num)
-        int Read(void * buf, size_t num)
-        int Seek(off_t offset)
-                ^
+from Vec3 cimport Vec3
+from AtomMask cimport AtomMask
+from CpptrajFile cimport *
+from OnlineVarT cimport Stats
+
+cdef class Action_PairDist(ImagedAction):
+    ^
 ------------------------------------------------------------
 
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/CpptrajFile.pxd:59:17: 'off_t' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        int Write(const void * buf, size_t num)
-        int Read(void * buf, size_t num)
-        int Seek(off_t offset)
-        int Rewind() 
-        int Flush() 
-        off_t Tell() 
-       ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/CpptrajFile.pxd:62:8: 'off_t' is not a type identifier
+Action_PairDist.pyx:22:5: 'Action_PairDist' redeclared 
 
 Error compiling Cython file:
 ------------------------------------------------------------
 ...
-# distutils: language = c++
-
-
-cdef extern from "BaseIOtype.h": 
-    cdef cppclass BaseIOtype "BaseIOtype":
-^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/BaseIOtype.pxd:6:0: Expected an increase in indentation level
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-
-
-cdef extern from "DataIO.h": 
-    cdef cppclass DataIO "DataIO":
-        DataIO() : valid1d_(false ), valid2d_(false ), valid3d_(false)
-        DataIO(bint v1, bint v2, bint v3): valid1d_(v1 ), valid2d_(v2 ), valid3d_(v3)
-       ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DataIO.pxd:13:8: Function signature does not match previous declaration
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-
-cdef extern from "DataIO.h": 
-    cdef cppclass DataIO "DataIO":
-        DataIO() : valid1d_(false ), valid2d_(false ), valid3d_(false)
-        DataIO(bint v1, bint v2, bint v3): valid1d_(v1 ), valid2d_(v2 ), valid3d_(v3)
-        bint CheckValidFor(const DataSet&) const 
-                                ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DataIO.pxd:14:33: 'DataSet' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-from BaseIOtype cimport *
-from ArgList cimport *
-
-
-cdef extern from "FileTypes.h": 
-    cdef cppclass FileTypes::KeyToken "FileTypes::KeyToken":
-                           ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/FileTypes.pxd:8:28: Expected 'NEWLINE', found ':'
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        DataFormatType GetFormatFromArg(ArgList& a)
-        const char * FormatString(DataFormatType t)
-        const char * FormatString() const 
-        void SetDebug(int)
-        void SetDataFilePrecision(int, int)
-        int ReadDataIn(const string&, const ArgList&, DataSetList&)
-                                                     ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DataFile.pxd:31:54: 'DataSetList' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const char * FormatString() const 
-        void SetDebug(int)
-        void SetDataFilePrecision(int, int)
-        int ReadDataIn(const string&, const ArgList&, DataSetList&)
-        int SetupDatafile(const string&, ArgList&, int)
-        int AddSet(DataSet *)
-                  ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DataFile.pxd:33:19: 'DataSet' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        void SetDebug(int)
-        void SetDataFilePrecision(int, int)
-        int ReadDataIn(const string&, const ArgList&, DataSetList&)
-        int SetupDatafile(const string&, ArgList&, int)
-        int AddSet(DataSet *)
-        int RemoveSet(DataSet *)
-                     ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DataFile.pxd:34:22: 'DataSet' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-from libcpp.string cimport string
-from Dimension cimport *
-
-
-cdef extern from "DataSet.h": 
-    cdef cppclass DataSet::DS_PtrCmp "DataSet::DS_PtrCmp":
-                         ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DataSet.pxd:8:26: Expected 'NEWLINE', found ':'
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-    cdef cppclass DataFileList "DataFileList":
-        DataFileList() 
-        #~DataFileList() 
-        void Clear() 
-        DataFile * RemoveDataFile(DataFile *)
-        void RemoveDataSet(DataSet *)
-                          ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DataFileList.pxd:15:27: 'DataSet' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        void SetDebug(int)
-        void SetEnsembleMode(int mIn)
-        DataFile * GetDataFile(const string&) const 
-        DataFile * AddDataFile(const string&, ArgList&)
-        DataFile * AddDataFile(const string&)
-        DataFile * AddSetToFile(const string&, DataSet *)
-                                              ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/DataFileList.pxd:21:47: 'DataSet' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        inline double GBRadius() const 
-        inline double Screen() const 
-        void AddBond(int)
-        void ClearBonds() 
-        void SortBonds() 
-        void AddExclusionList(set[int] const&)
-                                           ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Atom.pxd:123:44: Expected ')', found '&'
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-
-
-cdef extern from "Residue.h": 
-    cdef cppclass Residue "Residue":
-        Residue() : firstAtom_(0 ), lastAtom_(0 ), resname_("")
-        Residue(int onum, const NameType& resname, int firstAtomIn): firstAtom_(firstAtomIn ), originalResNum_(onum ), resname_(resname)
-       ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Residue.pxd:8:8: Function signature does not match previous declaration
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-
-
-cdef extern from "Molecule.h": 
-    cdef cppclass Molecule "Molecule":
-        Molecule() : beginAtom_(0 ), endAtom_(0 ), isSolvent_(false)
-        Molecule(int begin, int end): beginAtom_(begin ), endAtom_(end ), isSolvent_(false)
-       ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Molecule.pxd:7:8: Function signature does not match previous declaration
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        void SetNatom(int a)
-        int ConvertToCharMask() 
-        int ConvertToIntMask() 
-        void MaskInfo() const 
-        void BriefMaskInfo() const 
-        inline token_iterator begintoken() const 
-              ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/AtomMask.pxd:47:15: 'token_iterator' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        int ConvertToCharMask() 
-        int ConvertToIntMask() 
-        void MaskInfo() const 
-        void BriefMaskInfo() const 
-        inline token_iterator begintoken() const 
-        inline token_iterator endtoken() const 
-              ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/AtomMask.pxd:48:15: 'token_iterator' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        int SetupFrameV(const vector[Atom]&, bint, int)
-        int SetupFrameFromMask(const AtomMask&, const vector[Atom]&)
-        void SetCoordinates(const Frame&, const AtomMask&)
-        void SetCoordinates(const Frame&)
-        void SetFrame(const Frame&, const AtomMask&)
-        void SetCoordinatesByMap(const Frame&, vector[int]const&)
-                                                              ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Frame.pxd:63:63: Expected ')', found '&'
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        void SetTag(const string& t)
-        void SetVelInfo(bint v)
-        void SetNrepDim(int n)
-        void SetGBradiiSet(const string& s)
-        void SetParmName(const string&, const FileName&)
-        void SetReferenceCoords(const Frame&)
-                                     ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:26:38: 'Frame' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const FileName& OriginalFilename() const 
-        const string& GBradiiSet() const 
-        bint NoRefCoords() const 
-        int FinalSoluteRes() const 
-        const char * c_str() const 
-        atom_iterator begin() const 
-       ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:44:8: 'atom_iterator' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const string& GBradiiSet() const 
-        bint NoRefCoords() const 
-        int FinalSoluteRes() const 
-        const char * c_str() const 
-        atom_iterator begin() const 
-        atom_iterator end() const 
-       ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:45:8: 'atom_iterator' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        bint NoRefCoords() const 
-        int FinalSoluteRes() const 
-        const char * c_str() const 
-        atom_iterator begin() const 
-        atom_iterator end() const 
-        const Atom& operator[](int idx) const 
-             ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:46:14: 'Atom' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        int FinalSoluteRes() const 
-        const char * c_str() const 
-        atom_iterator begin() const 
-        atom_iterator end() const 
-        const Atom& operator[](int idx) const 
-        const vector[Atom]& Atoms() const 
-                        ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:47:25: unknown type in template argument
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const char * c_str() const 
-        atom_iterator begin() const 
-        atom_iterator end() const 
-        const Atom& operator[](int idx) const 
-        const vector[Atom]& Atoms() const 
-        inline res_iterator ResStart() const 
-              ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:48:15: 'res_iterator' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        atom_iterator begin() const 
-        atom_iterator end() const 
-        const Atom& operator[](int idx) const 
-        const vector[Atom]& Atoms() const 
-        inline res_iterator ResStart() const 
-        inline res_iterator ResEnd() const 
-              ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:49:15: 'res_iterator' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const vector[Atom]& Atoms() const 
-        inline res_iterator ResStart() const 
-        inline res_iterator ResEnd() const 
-        const Residue& Res(int idx) const 
-        Residue& SetRes(int idx)
-        inline mol_iterator MolStart() const 
-              ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:52:15: 'mol_iterator' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        inline res_iterator ResStart() const 
-        inline res_iterator ResEnd() const 
-        const Residue& Res(int idx) const 
-        Residue& SetRes(int idx)
-        inline mol_iterator MolStart() const 
-        inline mol_iterator MolEnd() const 
-              ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:53:15: 'mol_iterator' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        int SetAngleInfo(const AngleArray&, const AngleArray&, const AngleParmArray&)
-        const DihedralArray& Dihedrals() const 
-        const DihedralArray& DihedralsH() const 
-        const DihedralParmArray& DihedralParm() const 
-        int SetDihedralInfo(const DihedralArray&, const DihedralArray&, const DihedralParmArray&)
-        const NonbondParmType& Nonbond() const 
-             ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:69:14: 'NonbondParmType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const DihedralArray& Dihedrals() const 
-        const DihedralArray& DihedralsH() const 
-        const DihedralParmArray& DihedralParm() const 
-        int SetDihedralInfo(const DihedralArray&, const DihedralArray&, const DihedralParmArray&)
-        const NonbondParmType& Nonbond() const 
-        int SetNonbondInfo(const NonbondParmType&)
-                                ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:70:33: 'NonbondParmType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const DihedralArray& DihedralsH() const 
-        const DihedralParmArray& DihedralParm() const 
-        int SetDihedralInfo(const DihedralArray&, const DihedralArray&, const DihedralParmArray&)
-        const NonbondParmType& Nonbond() const 
-        int SetNonbondInfo(const NonbondParmType&)
-        inline const NonbondType& GetLJparam(int, int) const 
-                    ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:71:21: 'NonbondType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const DihedralParmArray& DihedralParm() const 
-        int SetDihedralInfo(const DihedralArray&, const DihedralArray&, const DihedralParmArray&)
-        const NonbondParmType& Nonbond() const 
-        int SetNonbondInfo(const NonbondParmType&)
-        inline const NonbondType& GetLJparam(int, int) const 
-        const CapParmType& Cap() const 
-             ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:72:14: 'CapParmType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        int SetDihedralInfo(const DihedralArray&, const DihedralArray&, const DihedralParmArray&)
-        const NonbondParmType& Nonbond() const 
-        int SetNonbondInfo(const NonbondParmType&)
-        inline const NonbondType& GetLJparam(int, int) const 
-        const CapParmType& Cap() const 
-        void SetCap(const CapParmType& c)
-                         ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:73:26: 'CapParmType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const NonbondParmType& Nonbond() const 
-        int SetNonbondInfo(const NonbondParmType&)
-        inline const NonbondType& GetLJparam(int, int) const 
-        const CapParmType& Cap() const 
-        void SetCap(const CapParmType& c)
-        const LES_ParmType& LES() const 
-             ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:74:14: 'LES_ParmType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        int SetNonbondInfo(const NonbondParmType&)
-        inline const NonbondType& GetLJparam(int, int) const 
-        const CapParmType& Cap() const 
-        void SetCap(const CapParmType& c)
-        const LES_ParmType& LES() const 
-        void SetLES(const LES_ParmType& l)
-                         ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:75:26: 'LES_ParmType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        inline const NonbondType& GetLJparam(int, int) const 
-        const CapParmType& Cap() const 
-        void SetCap(const CapParmType& c)
-        const LES_ParmType& LES() const 
-        void SetLES(const LES_ParmType& l)
-        const ChamberParmType& Chamber() const 
-             ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:76:14: 'ChamberParmType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        const CapParmType& Cap() const 
-        void SetCap(const CapParmType& c)
-        const LES_ParmType& LES() const 
-        void SetLES(const LES_ParmType& l)
-        const ChamberParmType& Chamber() const 
-        void SetChamber(const ChamberParmType& c)
-                             ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:77:30: 'ChamberParmType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        void PrintAngleInfo(const string&) const 
-        void PrintDihedralInfo(const string&) const 
-        void PrintMoleculeInfo(const string&) const 
-        void PrintResidueInfo(const string&) const 
-        int PrintChargeMassInfo(const string&, int) const 
-        inline const Box& ParmBox() const 
-                    ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:98:21: 'Box' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        void PrintDihedralInfo(const string&) const 
-        void PrintMoleculeInfo(const string&) const 
-        void PrintResidueInfo(const string&) const 
-        int PrintChargeMassInfo(const string&, int) const 
-        inline const Box& ParmBox() const 
-        inline BoxType BoxType() const 
-              ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:99:15: 'BoxType' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        void PrintMoleculeInfo(const string&) const 
-        void PrintResidueInfo(const string&) const 
-        int PrintChargeMassInfo(const string&, int) const 
-        inline const Box& ParmBox() const 
-        inline BoxType BoxType() const 
-        void SetBox(const Box& bIn)
-                         ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:100:26: 'Box' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        void PrintResidueInfo(const string&) const 
-        int PrintChargeMassInfo(const string&, int) const 
-        inline const Box& ParmBox() const 
-        inline BoxType BoxType() const 
-        void SetBox(const Box& bIn)
-        int AddTopAtom(const Atom&, int, const NameType&, const double *)
+from CpptrajFile cimport *
+from OnlineVarT cimport Stats
+
+cdef class Action_PairDist(ImagedAction):
+    cdef:
+          public CpptrajFile output
                             ^
 ------------------------------------------------------------
 
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:101:29: 'Atom' is not a type identifier
+Action_PairDist.pyx:24:29: C attribute of type 'CpptrajFile' cannot be accessed from Python
 
 Error compiling Cython file:
 ------------------------------------------------------------
 ...
-        void StartNewMol() 
-        int CommonSetup(bint)
-        int SetAmberExtra(const vector[double]&, const vector[NameType]&, const vector[int]&, const vector[int]&)
-        bint SetupIntegerMask(AtomMask&) const 
-        bint SetupCharMask(AtomMask&) const 
-        bint SetupIntegerMask(AtomMask&, const Frame&) const 
-                                              ^
+from OnlineVarT cimport Stats
+
+cdef class Action_PairDist(ImagedAction):
+    cdef:
+          public CpptrajFile output
+          public AtomMask mask1
+                         ^
 ------------------------------------------------------------
 
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:107:47: 'Frame' is not a type identifier
-
-Error compiling Cython file:
-------------------------------------------------------------
-...
-        int CommonSetup(bint)
-        int SetAmberExtra(const vector[double]&, const vector[NameType]&, const vector[int]&, const vector[int]&)
-        bint SetupIntegerMask(AtomMask&) const 
-        bint SetupCharMask(AtomMask&) const 
-        bint SetupIntegerMask(AtomMask&, const Frame&) const 
-        bint SetupCharMask(AtomMask&, const Frame&) const 
-                                           ^
-------------------------------------------------------------
-
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Topology.pxd:108:44: 'Frame' is not a type identifier
+Action_PairDist.pyx:25:26: C attribute of type 'AtomMask' cannot be accessed from Python
 
 Error compiling Cython file:
 ------------------------------------------------------------
 ...
 
-
-cdef extern from "ReferenceFrame.h": 
-    cdef cppclass ReferenceFrame "ReferenceFrame":
-        ReferenceFrame() : frame_(0 ), parm_(0 ), num_(0 ), strippedParm_(false)
-        ReferenceFrame(int): frame_(0 ), parm_(0 ), num_(- 1 ), strippedParm_(false)
-       ^
+cdef class Action_PairDist(ImagedAction):
+    cdef:
+          public CpptrajFile output
+          public AtomMask mask1
+          public AtomMask mask2
+                         ^
 ------------------------------------------------------------
 
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/ReferenceFrame.pxd:10:8: Function signature does not match previous declaration
+Action_PairDist.pyx:26:26: C attribute of type 'AtomMask' cannot be accessed from Python
 
 Error compiling Cython file:
 ------------------------------------------------------------
 ...
-cdef extern from "ReferenceFrame.h": 
-    cdef cppclass ReferenceFrame "ReferenceFrame":
-        ReferenceFrame() : frame_(0 ), parm_(0 ), num_(0 ), strippedParm_(false)
-        ReferenceFrame(int): frame_(0 ), parm_(0 ), num_(- 1 ), strippedParm_(false)
-        #~ReferenceFrame() 
-        Frame * Coord() const 
-       ^
+    cdef:
+          public CpptrajFile output
+          public AtomMask mask1
+          public AtomMask mask2
+          public double delta        
+          public vector[Stats[double]] histogram
+                             ^
 ------------------------------------------------------------
 
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/ReferenceFrame.pxd:12:8: 'Frame' is not a type identifier
+Action_PairDist.pyx:28:30: unknown type in template argument
 
 Error compiling Cython file:
 ------------------------------------------------------------
 ...
-    cdef cppclass FrameList "FrameList":
-        FrameList() 
-        #~FrameList() 
-        void Clear() 
-        void SetDebug(int)
-        Frame ActiveReference() const 
-       ^
+    cdef:
+          public CpptrajFile output
+          public AtomMask mask1
+          public AtomMask mask2
+          public double delta        
+          public vector[Stats[double]] histogram
+                                      ^
 ------------------------------------------------------------
 
-/mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/FrameList.pxd:14:8: 'Frame' is not a type identifier
-Compiling test_ActionFrameCounter.pyx because it depends on /mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/ArgList.pxd.
+Action_PairDist.pyx:28:39: C attribute of type '<error>' cannot be accessed from Python
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+
+        self.InitImaging(True)
+
+        if self.output.OpenEnsembleWrite(outfileName, DSL.EnsembleNum()):
+            print("Error")
+            return Action.ERR
+                        ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:59:25: Object of type 'Action' has no attribute 'ERR'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            return Action.ERR
+
+        mask1 = actionArgs.GetStringKey("mask")
+        if mask1.empty():
+            print("Error")
+            return Action.ERR
+                        ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:64:25: Object of type 'Action' has no attribute 'ERR'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                self.same_mask = False
+            else:
+                self.same_mask = True
+
+        self.delta = actionArgs.getKeyDouble("delta", 0.01)
+        return Action.OK
+                    ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:79:21: Object of type 'Action' has no attribute 'OK'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        
+
+    def Setup(self, Topology* currentParm, Topology** parmAddress):
+
+        if currentParm.SetupIntegerMask(self.mask1):
+            return Action.ERR
+                        ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:85:25: Object of type 'Action' has no attribute 'ERR'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            return Action.ERR
+
+        self.mask1.BriefMaskInfo()
+        if self.mask1.None():
+            print("Error")
+            return Action.ERR
+                        ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:90:25: Object of type 'Action' has no attribute 'ERR'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            return Action.ERR
+
+        self.mask2.BriefMaskInfo()
+        if self.mask2.None():
+            print("Error")
+            return Action.ERR
+                        ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:95:25: Object of type 'Action' has no attribute 'ERR'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            print("Error")
+            return Action.ERR
+
+        if self.mask1.MaskExpression() != self.mask2.MaskExpression() and self.mask1.NumAtomsInCommon(self.mask2) > 0:
+            print("Error")
+            return Action.ERR
+                        ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:99:25: Object of type 'Action' has no attribute 'ERR'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+            self.ub2 = self.mask1.Nselected()
+        else:
+            self.ub1 = self.mask1.Nselected()
+            self.ub2 = self.mask2.Nselected()
+
+        SetupImaging(currentParm.BoxType())
+                   ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:108:20: undeclared name not builtin: SetupImaging
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        else:
+            self.ub1 = self.mask1.Nselected()
+            self.ub2 = self.mask2.Nselected()
+
+        SetupImaging(currentParm.BoxType())
+        return Action.OK
+                    ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:109:21: Object of type 'Action' has no attribute 'OK'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        tmp.resize(self.histogram.size()) 
+
+        for i in range(self.ub1):
+            start = i + 1 if self.same_mask else 0
+            for j in range(start, self.ub2):
+                a1 = currentFrame.XYZ(self.mask1[i])
+                                    ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:123:37: Cannot assign type 'const double *' to 'Vec3'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+
+        for i in range(self.ub1):
+            start = i + 1 if self.same_mask else 0
+            for j in range(start, self.ub2):
+                a1 = currentFrame.XYZ(self.mask1[i])
+                a2 = currentFrame.XYZ(self.mask2[j])
+                                    ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:124:37: Cannot assign type 'const double *' to 'Vec3'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+        for i in range(self.ub1):
+            start = i + 1 if self.same_mask else 0
+            for j in range(start, self.ub2):
+                a1 = currentFrame.XYZ(self.mask1[i])
+                a2 = currentFrame.XYZ(self.mask2[j])
+                if ImageType() == NONORTHO:
+                           ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:125:28: undeclared name not builtin: ImageType
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                    #break
+                elif ImageType()  == NOIMAGE:
+                    Dist = DIST2_NoImage(a1, a2)
+                    #break
+
+                binnum = sqrt(Dist) / self.delta
+                            ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:136:29: undeclared name not builtin: sqrt
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+                    self.histogram.resize(self.maxbin + 1)
+                tmp[binnum] += 1
+
+        for i in range(tmp.szie()):
+            self.histogram[i].accumulate(tmp[i])
+        return Action.OK
+                    ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:145:21: Object of type 'Action' has no attribute 'OK'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+from CpptrajFile cimport *
+from OnlineVarT cimport Stats
+
+cdef class Action_PairDist(ImagedAction):
+    cdef:
+          public CpptrajFile output
+                            ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:24:29: Cannot convert 'CpptrajFile' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+from CpptrajFile cimport *
+from OnlineVarT cimport Stats
+
+cdef class Action_PairDist(ImagedAction):
+    cdef:
+          public CpptrajFile output
+                            ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:24:29: Cannot convert Python object to 'CpptrajFile'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+from OnlineVarT cimport Stats
+
+cdef class Action_PairDist(ImagedAction):
+    cdef:
+          public CpptrajFile output
+          public AtomMask mask1
+                         ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:25:26: Cannot convert 'AtomMask' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+from OnlineVarT cimport Stats
+
+cdef class Action_PairDist(ImagedAction):
+    cdef:
+          public CpptrajFile output
+          public AtomMask mask1
+                         ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:25:26: Cannot convert Python object to 'AtomMask'
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+
+cdef class Action_PairDist(ImagedAction):
+    cdef:
+          public CpptrajFile output
+          public AtomMask mask1
+          public AtomMask mask2
+                         ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:26:26: Cannot convert 'AtomMask' to Python object
+
+Error compiling Cython file:
+------------------------------------------------------------
+...
+
+cdef class Action_PairDist(ImagedAction):
+    cdef:
+          public CpptrajFile output
+          public AtomMask mask1
+          public AtomMask mask2
+                         ^
+------------------------------------------------------------
+
+Action_PairDist.pyx:26:26: Cannot convert Python object to 'AtomMask'
+missing cimport in module '.utility': /mnt/raidc/haichit/anaconda/lib/python2.7/site-packages/Cython-0.22pre-py2.7-linux-x86_64.egg/Cython/Includes/libcpp/set.pxd
+missing cimport in module '.utility': /mnt/raidc/haichit/anaconda/lib/python2.7/site-packages/Cython-0.22pre-py2.7-linux-x86_64.egg/Cython/Includes/libcpp/map.pxd
 Compiling test_Box.pyx because it changed.
 Compiling test_Vec3.pyx because it depends on /mnt/raidc2/haichit/Study/Cython/pycpptraj/src/PXD_without_under_score/Vec3.pxd.
 Compiling test_Action.pyx because it changed.
-Cythonizing test_Action.pyx
+Compiling Action_PairDist.pyx because it changed.
+Cythonizing Action_PairDist.pyx
 Traceback (most recent call last):
   File "./setup.py", line 10, in <module>
     include_dirs=[np.get_include()])
@@ -702,4 +418,4 @@ Traceback (most recent call last):
     cythonize_one(*args[1:])
   File "/mnt/raidc/haichit/anaconda/lib/python2.7/site-packages/Cython-0.22pre-py2.7-linux-x86_64.egg/Cython/Build/Dependencies.py", line 959, in cythonize_one
     raise CompileError(None, pyx_file)
-Cython.Compiler.Errors.CompileError: test_Action.pyx
+Cython.Compiler.Errors.CompileError: Action_PairDist.pyx

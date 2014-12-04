@@ -1,7 +1,13 @@
-from Vec3 cimport *
-from Matrix_3x3 cimport *
+# distutils: language = c++
+from Topology cimport atom_iterator, res_iterator, mol_iterator
+from Topology cimport Topology
+from Atom cimport Atom
 
-ctypedef fused MatVecType:
-    Vec3
-    Matrix_3x3
+ctypedef fused CommonClassCpptraj:
+    Atom
+    Topology
 
+ctypedef fused IteratorCpptraj:
+    atom_iterator
+    res_iterator
+    mol_iterator

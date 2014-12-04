@@ -4,5 +4,11 @@
 from TopologyList cimport *
 
 cdef _TopologyList * p = new _TopologyList()
+cdef _Topology* top
 
+p.AddParmFile("../test_PyCpptraj/Tc5b.ff99SB_JSC.mb3.newHmass.dt4fs.top")
+p.AddParmFile("../test_PyCpptraj/HP36.ff99SB_JSC.mb3.top")
+top = p.GetParm(0)
+
+del top
 del p
