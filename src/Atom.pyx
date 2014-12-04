@@ -31,15 +31,17 @@ cdef class Atom:
 
     #def  excluded_iterator excludedend(self):
 
-    property ResNum:
+    property resnum:
         def __set__(self, int resnumIn):
             self.thisptr.SetResNum(resnumIn)
+        def __get__(self):
+            return self.thisptr.ResNum()
 
-    property Mol:
+    property mol:
         def __set__(self,int molIn):
             self.thisptr.SetMol(molIn)
 
-    property Charge:
+    property charge:
         def __set__(self,double qin):
             self.thisptr.SetCharge(qin)
         def __get__(self):
@@ -58,45 +60,42 @@ cdef class Atom:
         return self.thisptr.c_str()
 
     @property
-    def ResNum(self):
-        return self.thisptr.ResNum()
-
-    @property
-    def Element(self):
+    def element(self):
         return self.thisptr.Element()
 
     @property
-    def AtomicNumber(self):
+    def atomic_number(self):
         return self.thisptr.AtomicNumber()
 
     @property
-    def ElementName(self):
+    def element_name(self):
         return self.thisptr.ElementName()
 
-    def Name(self):
+    def name(self):
         cdef NameType nt = NameType()
         nt.thisptr[0] = self.thisptr.Name()
         return nt
 
-    def Type(self):
+    @property
+    def type(self):
         cdef NameType nt = NameType()
         nt.thisptr[0] = self.thisptr.Type()
         return nt
 
     @property
-    def TypeIndex(self):
+    def typeindex(self):
         return self.thisptr.TypeIndex()
 
     @property
-    def MolNum(self):
+    def molnum(self):
         return self.thisptr.MolNum()
 
     @property 
-    def ChainID(self):
+    def chainID(self):
         return self.thisptr.ChainID()
 
     @property
-    def Nbonds(self):
+    def nbonds(self):
         return self.thisptr.Nbonds()
 
     @property
@@ -104,15 +103,15 @@ cdef class Atom:
         return self.thisptr.Nexcluded()
 
     @property
-    def Mass(self):
+    def mass(self):
         return self.thisptr.Mass()
 
     @property
-    def Polar(self):
+    def polar(self):
         return self.thisptr.Polar()
 
     @property
-    def Screen(self):
+    def screen(self):
         return self.thisptr.Screen()
 
     def AddBond(self,int idx):

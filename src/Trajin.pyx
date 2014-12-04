@@ -3,10 +3,13 @@
 
 cdef class Trajin:
     def __cinit__(self):
-        self.thisptr = new _Trajin()
+        pass
+        #self.thisptr = new _Trajin()
 
     def __dealloc__(self):
-        del self.thisptr
+        print "Exiting"
+        if self.thisptr != NULL:
+            del self.thisptr
 
     def CheckFrameArgs(self, ArgList argIn, int maxFrames, int starArg, int stopArg, int offsetArg):
         return self.thisptr.CheckFrameArgs(argIn.thisptr[0], maxFrames, stopArg, stopArg, offsetArg)
@@ -24,8 +27,8 @@ cdef class Trajin:
         self.thisptr.SetTotalFrames(idx)
 
     # TrajectoryIO is an abstract class. Cython does not accept virtual methods
-    #def SetupTrajIO(self, string s, TrajectoryIO trajio, ArgList arglist):
-    #    return self.thisptr.SetupTrajIO(s, trajio.thisptr[0], arglist.thisptr[0])
+    def SetupTrajIO(self, string s, TrajectoryIO trajio, ArgList arglist):
+        return self.thisptr.SetupTrajIO(s, trajio.thisptr[0], arglist.thisptr[0])
 
     def CheckBoxInfo(self, char* parmName, Box parmBox, Box trajBox):
         return self.thisptr.CheckBoxInfo(parmName, parmBox.thisptr[0], trajBox.thisptr[0])

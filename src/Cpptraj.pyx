@@ -14,9 +14,9 @@ cdef class Cpptraj:
         #self.thisptr.RunCpptraj()
 
     def RunCpptraj_2(self, args):
-        cdef Mode cmode = ProcessCmdLineArgs(args)
+        cdef Mode cmode = self.ProcessCmdLineArgs(args)
 
         if cmode == BATCH:
             pass
-        elif:
+        else:
             pass

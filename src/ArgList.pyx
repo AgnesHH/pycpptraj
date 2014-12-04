@@ -34,7 +34,6 @@ cdef class ArgList:
 
     def __iter__(self):
         cdef cppvector[string].const_iterator it
-        #cdef string s_out
         it = self.thisptr.begin()
         while it != self.thisptr.end():
             yield deref(it)
@@ -91,11 +90,6 @@ cdef class ArgList:
 
     def RemoveFirstArg(self):
         self.thisptr.RemoveFirstArg()
-
-    def Command_test(self):
-        # got segmentfault when calling this function
-        # thisptr.Command() return pointer to 1st arg
-        return deref(self.thisptr.Command())
 
     def CommandIs(self, char* cm):
         return self.thisptr.CommandIs(cm)

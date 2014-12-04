@@ -3,10 +3,13 @@
 
 cdef class TrajectoryIO:
     def __cinit__(self):
-        self.thisptr = new _TrajectoryIO()
+        # don't create instance for abstract class
+        pass
+        #self.thisptr = new _TrajectoryIO()
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.thisptr != NULL:
+            del self.thisptr
 
     #def bint HasBox(self):
 

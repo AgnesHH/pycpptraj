@@ -4,24 +4,15 @@
 
 cdef class DataSet:
     def __cinit__(self):
-        self.thisptr = new _DataSet()
+        pass
+        # don't create instance for this abstract class
+        #self.thisptr = new _DataSet()
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.thisptr != NULL:
+            del self.thisptr
 
     #def DataSet(self,DataType, int, int, int):
-
-    # def DataSet(self, DataSet):
-    @classmethod
-    def copy(cls, DataSet other):
-        cdef DataSet dset = DataSet()
-        #del dset.thisptr
-        dset.thisptr = new _DataSet(other.thisptr[0])
-        return dset
-
-    def copy(self, DataSet other):
-        #del self.thisptr
-        self.thisptr = new _DataSet(other.thisptr[0])
 
     def SetWidth(self,int widthIn):
         self.thisptr.SetWidth(widthIn)

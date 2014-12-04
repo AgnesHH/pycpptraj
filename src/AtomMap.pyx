@@ -1,7 +1,5 @@
 # distutils: language = c++
 from AtomMap cimport *
-from Topology_py cimport *
-from Topology_py import *
 
 cdef class AtomMap_py:
     cdef _AtomMap * thisptr

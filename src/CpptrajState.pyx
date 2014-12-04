@@ -43,7 +43,7 @@ cdef class CpptrajState:
     def EmptyState(self):
         return self.thisptr.EmptyState()
 
-    def int AddTrajin(self,ArgList, bint):
+    def AddTrajin(self,ArgList, bint):
         pass
 
     def AddTrajin(self, string s):
@@ -58,37 +58,37 @@ cdef class CpptrajState:
     def  AddTrajout(self, ArgList):
         pass
 
-    def int AddTrajout(self, string):
+    def AddTrajout(self, string):
         pass
 
-    def int AddReference(self,ArgList):
+    def AddReference(self,ArgList):
         pass
 
-    def int AddReference(self, string):
+    def AddReference(self, string):
         pass
 
-    def int AddAction(self,DispatchObject::DispatchAllocatorType, ArgList):
+    def AddAction(self,DispatchObject::DispatchAllocatorType, ArgList):
         pass
 
-    def int AddAnalysis(self,DispatchObject::DispatchAllocatorType, ArgList):
+    def AddAnalysis(self,DispatchObject::DispatchAllocatorType, ArgList):
         pass
 
-    def int WorldSize(self):
+    def WorldSize(self):
         pass
 
-    def int ListAll(self,ArgList):
+    def ListAll(self,ArgList):
         pass
 
-    def int SetListDebug(self,ArgList):
+    def SetListDebug(self,ArgList):
         pass
 
-    def int ClearList(self,ArgList):
+    def ClearList(self,ArgList):
         pass
 
-    def int RemoveDataSet(self,ArgList alist):
+    def RemoveDataSet(self,ArgList alist):
         return self.thisptr.RemoveDataSet(alist.thisptr[0])
 
-    cdef int TrajLength(self, string, vector[string]):
+    cdef TrajLength(self, string, vector[string]):
         pass
 
     def Run(self):

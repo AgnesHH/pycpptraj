@@ -35,11 +35,11 @@ cdef class Residue:
     def OriginalResNum(self):
         return self.thisptr.OriginalResNum()
 
-    def char * c_str(self):
-        # TODO: 
+    def c_str(self):
+        # TODO: return char*
         return self.thisptr.c_str()
 
-    def NameType Name(self):
+    def Name(self):
         cdef NameType nt = NameType()
         nt.thisptr[0] = self.thisptr.Name()
         return nt
