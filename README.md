@@ -44,7 +44,7 @@ Version I am working:
 * Ambertools 14
 * Python 2.7.8 :: Anaconda 2.1.0 (64-bit)
 * Cython 0.21 and 0.22pre
-* CppHeaderParser 2.4.3 (for parsing cpptraj header files)
+* (use for write *.pxd *.pyx files) CppHeaderParser 2.4.3 (for parsing cpptraj header files)
 
 Hacking
 =======
