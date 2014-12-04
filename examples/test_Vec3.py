@@ -1,4 +1,4 @@
-from Vec3 import Vec3
+from pycpptraj.Vec3 import Vec3
 import numpy as np
 
 v1 = Vec3()

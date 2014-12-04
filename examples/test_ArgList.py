@@ -1,4 +1,4 @@
-from ArgList import ArgList as AL
+from pycpptraj.ArgList import ArgList as AL
 
 arglist = """
 trajin ../../output_md1_prod/md1_prod.x 1 20000

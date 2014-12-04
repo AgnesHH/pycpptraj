@@ -1,4 +1,4 @@
-from BufferedLine import BufferedLine
+from pycpptraj.BufferedLine import BufferedLine
 
 b = BufferedLine()
 #print help(b)

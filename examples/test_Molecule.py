@@ -1,4 +1,4 @@
-from Molecule import Molecule
+from pycpptraj.Molecule import Molecule
 
 mol = Molecule(1, 304)
 

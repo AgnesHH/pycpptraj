@@ -1,4 +1,4 @@
-from NameType import NameType
+from pycpptraj.NameType import NameType
 # TODO: write testing 
 
 # test create instance

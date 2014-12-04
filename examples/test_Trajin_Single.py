@@ -1,4 +1,4 @@
-from Trajin_Single import Trajin_Single
+from pycpptraj.Trajin_Single import Trajin_Single
 
 ts = Trajin_Single()
 

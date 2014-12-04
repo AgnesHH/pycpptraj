@@ -1,5 +1,5 @@
-from Topology import Topology
-from FileName import FileName
+from pycpptraj.Topology import Topology
+from pycpptraj.FileName import FileName
 
 top1 = Topology()
 

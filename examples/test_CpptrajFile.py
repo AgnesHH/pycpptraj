@@ -1,6 +1,11 @@
-try:
-    CpptrajFile = __import__("CpptrajFile")
-except ImportError:
-    CpptrajFile = __import__("src.CpptrajFile")
+import os
+from pycpptraj.CpptrajFile import CpptrajFile
 
-#to be added
+cfile = CpptrajFile()
+
+fname = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/md1_prod.x"
+print fname
+cfile.OpenRead(fname)
+cfile.IsCompressed()
+cfile.UncompressedSize()
+cfile.CloseFile()

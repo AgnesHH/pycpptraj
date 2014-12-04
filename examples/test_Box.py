@@ -1,5 +1,5 @@
 import numpy as np
-from Box import Box
+from pycpptraj.Box import Box
 
 boxin = np.array([1., 2., 3., 4. ,5. ,6.])
 # create Box instance from np array

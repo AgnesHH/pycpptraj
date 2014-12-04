@@ -1,4 +1,4 @@
-from Trajin import Trajin
+from pycpptraj.Trajin import Trajin
 
 traj = Trajin()
 

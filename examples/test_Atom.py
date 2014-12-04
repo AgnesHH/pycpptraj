@@ -1,4 +1,4 @@
-from Atom import Atom
+from pycpptraj.Atom import Atom
 
 at = Atom()
 

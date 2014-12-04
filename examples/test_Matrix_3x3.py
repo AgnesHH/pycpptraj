@@ -1,8 +1,8 @@
 from StringIO import StringIO
 import numpy as np
 from copy import deepcopy
-from Matrix_3x3 import Matrix_3x3 as M3x3
-from Vec3 import Vec3
+from pycpptraj.Matrix_3x3 import Matrix_3x3 as M3x3
+from pycpptraj.Vec3 import Vec3
 
 #out = StringIO()
 vec = Vec3(np.array([1., 2., 3.]))

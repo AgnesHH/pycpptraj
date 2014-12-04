@@ -1,4 +1,4 @@
-from Dimension import Dimension
+from pycpptraj.Dimension import Dimension
 
 d = Dimension()
 d.Label = "test"

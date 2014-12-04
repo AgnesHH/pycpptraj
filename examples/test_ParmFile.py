@@ -1,5 +1,5 @@
-from ParmFile import ParmFile
-from Topology import Topology
+from pycpptraj.ParmFile import ParmFile
+from pycpptraj.Topology import Topology
 
 top = Topology()
 parm = ParmFile()
