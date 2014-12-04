@@ -18,7 +18,7 @@ Status:
 Code examples:
 * ./src/Matrix_3x3.pyx
 * ./src/main_cpptraj_py.pyx
-* ./tests/test_*.pyx: test cases
+* ./examples/*.py
 
 cpptraj paper: 
 ==============
