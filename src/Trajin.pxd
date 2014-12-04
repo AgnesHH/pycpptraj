@@ -27,5 +27,5 @@ cdef extern from "Trajin.h":
         void SetEnsemble(bint b)
 
 
-#cdef class Trajin:
-#    cdef _Trajin* thisptr
+cdef class Trajin:
+    cdef _Trajin* thisptr

@@ -9,9 +9,9 @@ cdef extern from "TopologyList.h":
         TopologyList()
         void Clear()
         void SetDebug(int)
-        _Topology* GetParm(int)
+        _Topology* GetParm(int) except +
         _Topology* GetParmByIndex(_ArgList&)
-        _Topology* GetParm(_ArgList&)
+        _Topology* GetParm(_ArgList&) except +
         int AddParmFile(string&)
         int AddParmFile(string&, _ArgList&)
         void List()

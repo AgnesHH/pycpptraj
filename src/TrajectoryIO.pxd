@@ -36,6 +36,6 @@ cdef extern from "TrajectoryIO.h":
         void SetReplicaDims(const _ReplicaDimArray& rIn)
 
 
-#cdef class TrajectoryIO:
-#    cdef _TrajectoryIO* thisptr
+cdef class TrajectoryIO:
+    cdef _TrajectoryIO* thisptr
 

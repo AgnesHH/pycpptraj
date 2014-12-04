@@ -24,11 +24,11 @@ cdef extern from "ClusterDist.h":
         _ClusterDist_Euclid() 
         _ClusterDist_Euclid(const DsArray&)
         void PairwiseDist(_ClusterMatrix&, SievedFrames&)
-        double _FrameDist(int, int)
-        double _CentroidDist(_Centroid *, _Centroid *)
-        double _Frame_CentroidDist(int, _Centroid *)
-        void Calculate_Centroid(_Centroid *, const Cframes&)
-        _Centroid * New_Centroid(const Cframes&)
+        double FrameDist(int, int)
+        double CentroidDist(_Centroid *, _Centroid *)
+        double FrameCentroidDist(int, _Centroid *)
+        void CalculateCentroid(_Centroid *, const Cframes&)
+        _Centroid * NewCentroid(const Cframes&)
         _ClusterDist * Copy() 
     cdef cppclass _Centroid_Num "Centroid_Num":
         _Centroid_Num() 
@@ -38,21 +38,21 @@ cdef extern from "ClusterDist.h":
         _ClusterDist_SRMSD() 
         _ClusterDist_SRMSD(_DataSet *, const _AtomMask&, bint, bint, int)
         void PairwiseDist(_ClusterMatrix&, SievedFrames&)
-        double _FrameDist(int, int)
-        double _CentroidDist(_Centroid *, _Centroid *)
-        double _Frame_CentroidDist(int, _Centroid *)
-        void Calculate_Centroid(_Centroid *, const Cframes&)
+        double FrameDist(int, int)
+        double CentroidDist(_Centroid *, _Centroid *)
+        double FrameCentroidDist(int, _Centroid *)
+        void CalculateCentroid(_Centroid *, const Cframes&)
         _Centroid * New_Centroid(const Cframes&)
         _ClusterDist * Copy() 
     cdef cppclass _ClusterDist_Num "ClusterDist_Num":
         _ClusterDist_Num() 
         _ClusterDist_Num(_DataSet *)
         void PairwiseDist(_ClusterMatrix&, SievedFrames&)
-        double _FrameDist(int, int)
-        double _CentroidDist(_Centroid *, _Centroid *)
-        double _Frame_CentroidDist(int, _Centroid *)
-        void Calculate_Centroid(_Centroid *, const Cframes&)
-        _Centroid * New_Centroid(const Cframes&)
+        double FrameDist(int, int)
+        double CentroidDist(_Centroid *, _Centroid *)
+        double FrameCentroidDist(int, _Centroid *)
+        void CalculateCentroid(_Centroid *, const Cframes&)
+        _Centroid * NewCentroid(const Cframes&)
         _ClusterDist * Copy() 
     cdef cppclass _ClusterDist "ClusterDist":
         pass
@@ -60,11 +60,11 @@ cdef extern from "ClusterDist.h":
         _ClusterDist_DME()
         _ClusterDist_DME(_DataSet *, const _AtomMask&)
         void PairwiseDist(_ClusterMatrix&, SievedFrames&)
-        double _FrameDist(int, int)
-        double _CentroidDist(_Centroid *, _Centroid *)
-        double _Frame_CentroidDist(int, _Centroid *)
-        void Calculate_Centroid(_Centroid *, const Cframes&)
-        _Centroid * New_Centroid(const Cframes&)
+        double FrameDist(int, int)
+        double CentroidDist(_Centroid *, _Centroid *)
+        double FrameCentroidDist(int, _Centroid *)
+        void CalculateCentroid(_Centroid *, const Cframes&)
+        _Centroid * NewCentroid(const Cframes&)
         _ClusterDist * Copy() 
     cdef cppclass _Centroid_Multi "Centroid_Multi":
         _Centroid_Multi() 
@@ -74,9 +74,40 @@ cdef extern from "ClusterDist.h":
         _ClusterDist_RMS() 
         _ClusterDist_RMS(_DataSet *, const _AtomMask&, bint, bint)
         void PairwiseDist(_ClusterMatrix&, SievedFrames&)
-        double _FrameDist(int, int)
-        double _CentroidDist(_Centroid *, _Centroid *)
-        double _Frame_CentroidDist(int, _Centroid *)
-        void Calculate_Centroid(_Centroid *, const Cframes&)
-        _Centroid * New_Centroid(const Cframes&)
+        double FrameDist(int, int)
+        double CentroidDist(_Centroid *, _Centroid *)
+        double FrameCentroidDist(int, _Centroid *)
+        void CalculateCentroid(_Centroid *, const Cframes&)
+        _Centroid * NewCentroid(const Cframes&)
         _ClusterDist * Copy() 
+
+
+cdef class Centroid_Coord:
+    cdef _Centroid_Coord* thisptr
+
+cdef class ClusterDist_Euclid:
+    cdef _ClusterDist_Euclid* thisptr
+
+cdef class Centroid_Num:
+    cdef _Centroid_Num* thisptr
+
+cdef class ClusterDist_SRMSD:
+    cdef _ClusterDist_SRMSD* thisptr
+
+cdef class Centroid:
+    cdef _Centroid* thisptr
+
+cdef class ClusterDist_Num:
+    cdef _ClusterDist_Num* thisptr
+
+cdef class ClusterDist:
+    cdef _ClusterDist* thisptr
+
+cdef class ClusterDist_DME:
+    cdef _ClusterDist_DME* thisptr
+
+cdef class Centroid_Multi:
+    cdef _Centroid_Multi* thisptr
+
+cdef class ClusterDist_RMS:
+    cdef _ClusterDist_RMS* thisptr
