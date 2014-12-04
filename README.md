@@ -29,7 +29,7 @@ Install
     * Read: INSTALL_libcpptraj.txt
 - python ./setup.py install
        * Install idividual module
-           * cd ./src
+           * cd ./pycpptraj
            * ./Install_single_file.sh Box.pyx
            * python ../examples/test_Box.py
 
