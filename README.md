@@ -30,33 +30,24 @@ Install
 =======
 - Install `libcpptraj.so` and move to $AMBERHOME/lib/
     * Read: INSTALL_libcpptraj.txt
-- Compile Cython files: CFLAGS="-I$PYCPPTRAJHOME/src/ -I$AMBERHOME/AmberTools/src/cpptraj/src/" LDFLAGS="-I$AMBERHOME/lib/ -lgfortran -w" python ./setup.py build_ext -i  
-       * example of setup.py: ./src/setup.py
-       * shared library ./src/src/*.so
-
-       * "Dirty" way: 
-           cd ./src
-           ./Install_single_file.sh Box.pyx
-           python ../examples/test_Box.py
+- python ./setup.py install
+       * Install idividual module
+           * cd ./src
+           * ./Install_single_file.sh Box.pyx
+           * python ../examples/test_Box.py
 
 Usage: 
 =====
 - Make sure to export LD_LIBRARY_PATH before using
     + export LD_LIBRARY_PATH="$AMBERHOME/lib/"
-- ./src/PyCpptraj [cpptraj command line] 
-- Using cpptraj lib: (to be added)
-       * ./Examples/
+- Check ./examples/
 
 Version I am working:
 =======
 * Ambertools 14
 * Python 2.7.8 :: Anaconda 2.1.0 (64-bit)
-* Cython 0.21
-* numpy 1.9.0
+* Cython 0.21 and 0.22pre
 * CppHeaderParser 2.4.3 (for parsing cpptraj header files)
-
-May need (to be added)
-*  Matplotlib: for plotting
 
 Hacking
 =======
