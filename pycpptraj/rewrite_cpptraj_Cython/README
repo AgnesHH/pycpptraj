@@ -1,4 +1,0 @@
-1. Aim: this work does not try to duplicate CPPTRAJ program. I just want to translate its C++ code to Cython syntax for learning purpose. That's is.
-
-2. Code example: ./Cluster_DBSCAN_py.pyx
-
