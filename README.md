@@ -27,11 +27,16 @@ Install
 =======
 - Install `libcpptraj.so` and move to $AMBERHOME/lib/
     * Read: INSTALL_libcpptraj.txt
-- python ./setup.py install
-       * Install idividual module
-           * cd ./pycpptraj
-           * ./Install_single_file.sh Box.pyx
-           * python ../examples/test_Box.py
+- Download pycptraj package:
+    * git clone https://github.com/hainm/pycpptraj
+- Change director to pycpptraj
+    * cd pycpptraj/
+- Install
+    * python ./setup.py install
+           * Install idividual module
+               * cd ./pycpptraj
+               * ./Install_single_file.sh Box.pyx
+               * python ../examples/test_Box.py
 
 Usage: 
 =====
