@@ -4,7 +4,7 @@ from pycpptraj.Topology import Topology
 top = Topology()
 parm = ParmFile()
 
-fname = "./test_PyCpptraj/Tc5b.ff99SB_JSC.mb3.newHmass.dt4fs.top"
+fname = "./Tc5b.top"
 
 print "Read topology file and dump to 'top'"
 parm.ReadTopology(top, fname, 1)
