@@ -39,7 +39,7 @@ Install
 Usage: 
 =====
 - Make sure to export LD_LIBRARY_PATH before using
-    + export LD_LIBRARY_PATH="$AMBERHOME/lib/"
+    + export LD_LIBRARY_PATH=$AMBERHOME/lib/:$LD_LIBRARY_PATH
 - Check ./examples/
 
 Version I am working:
