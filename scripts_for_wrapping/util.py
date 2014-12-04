@@ -166,7 +166,7 @@ def Capture_out(f):
     """
     Decorator to capture standard output
     """
-    def captured():
+    def captured(*args, **kwarg):
         import sys
         from cStringIO import StringIO
 
@@ -174,7 +174,7 @@ def Capture_out(f):
         backup = sys.stdout
         try:
             sys.stdout = StringIO()     # capture output
-            f()
+            f(*args, **kwarg)
             out = sys.stdout.getvalue() # release output
         finally:
             sys.stdout.close()  # close the stream 
