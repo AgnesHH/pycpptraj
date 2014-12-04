@@ -1,9 +1,11 @@
+import os
 from pycpptraj.Topology import Topology
 from pycpptraj.FileName import FileName
 
+datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 top1 = Topology()
 
-fname="./test_PyCpptraj/Tc5b.ff99SB_JSC.mb3.newHmass.dt4fs.top"
+fname = datadir + "Tc5b.top"
 f = FileName(fname)
 
 top1.SetParmName("top1", f)
