@@ -1,0 +1,6 @@
+1. *** Error in `python': double free or corruption (!prev):
+Possible reason: list index out of
+
+2. Segmentfault
+Possible reasons:
+    + check pointer 
