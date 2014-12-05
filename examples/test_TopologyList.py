@@ -20,3 +20,6 @@ print t2.GBradiiSet
 print t2.NrepDim
 
 print t2.OriginalFilename()
+
+for atom in t.atom_generator():
+    print atom.name()
