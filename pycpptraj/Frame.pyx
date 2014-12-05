@@ -9,49 +9,50 @@ from AtomMask cimport *
 from AtomMask import AtomMask
 from Frame cimport CRDtype
 from Vec3 cimport Vec3
-
-# this method does not work. Don't know how to use template
-#cdef vector[U] convert_list_to_vector(mylist):
-#    cdef T obj
-#    cdef vector[U] vt
-#
-#    for obj in mylist:
-#        vt.push_back(obj.thisptr[0])
-#    return vt
+from util cimport atomlist_to_vector
 
 def check_instance(inst, clsname):
     if not isinstance(inst, clsname):
         raise ValueError("Must be instance of %s") % clsname.__name__
 
 cdef class Frame:
-    def __cinit__(self, int natom=0, *args):
+    def __cinit__(self, *args):
         cdef Frame frame
         cdef AtomMask atmask
         cdef vector[_Atom] vt
-        self.thisptr = new _Frame()
-        #if not args:
-        #    self.thisptr = new _Frame(natom)
-        #else:
-        #    if len(args) == 2:
-        #        frame, atmask = args
-        #        self.thisptr = new _Frame(frame, atmask)
-        #    elif len(args) == 1:
-        #        if isinstance(args[0], Frame):
-        #            frame = args[0]
-        #            self.thisptr = new _Frame(frame)
-        #        else:
-        #            atlist = args[0]
-        #            vt = convert_list_to_vector(atlis)
-        #            self.thisptr = new _Frame(vt)
-        #    else:
-        #        raise ValueError()
+        cdef Atom at
+        cdef list atlist
+        cdef int natom
+        #self.thisptr = new _Frame()
+        if not args:
+            self.thisptr = new _Frame()
+        else:
+            if len(args) == 2:
+                frame, atmask = args
+                self.thisptr = new _Frame(frame.thisptr[0], atmask.thisptr[0])
+            elif len(args) == 1:
+                # copy Frame
+                if isinstance(args[0], Frame):
+                    frame = args[0]
+                    self.thisptr = new _Frame(frame.thisptr[0])
+                elif isinstance(args[0], (int, long)):
+                    natom = <int> args[0]
+                    self.thisptr = new _Frame(natom)
+                else:
+                    # Create Frame from list of atom mask
+                    atlist = args[0]
+                    for at in atlist:
+                        vt.push_back(at.thisptr[0])
+                    self.thisptr = new _Frame(vt)
+            else:
+                raise ValueError()
 
     def __dealloc__(self):
         del self.thisptr
 
     def SetFromCRD(self, CRDtype farray, *args):
         """"""
-        cdef int numCrd, numBoxCrd
+        cdef numCrd, numBoxCrd
         cdef bint hasVel
         cdef AtomMask mask
         cdef float tmp
@@ -86,7 +87,7 @@ cdef class Frame:
     def SwapAtoms(self, int atom1, int atom2):
         self.thisptr.SwapAtoms(atom1, atom2)
 
-    #def double operator[](self,int idx):
+    #def operator[](self,int idx):
     def __getitem__(self, idx):
         return self.thisptr.index_opr(idx)
 
@@ -113,20 +114,29 @@ cdef class Frame:
             return self.thisptr.Temperature()
 
     #def  double * XYZ(self,int atnum):
+    # Correct yet?
+    def XYZ(self, int atnum):
+        pass
+        # TODO: throw data or memory view from pointer
+        #cdef double[:] xyz = self.thisptr.XYZ(atnum)
+        #return xyz
 
     #def  double * CRD(self,int idx):
 
     #def VXYZ(self,int atnum):
     #    """TODO: not done yet"""
-    #    cdef double[:] darray
-    #    cdef double* dptr
+    #    cdef[:] darray
+    #    cdef* dptr
     #    dptr = self.thisptr.VXYZ(atnum)
     #    pass
 
     def Mass(self,int atnum):
         return self.thisptr.Mass(atnum)
 
-    #def  Box BoxCrd(self):
+    #def BoxCrd(self):
+    #    cdef Box box = Box()
+    #    box.thisptr[0] = self.thisptr.BoxCrd()
+    #    return box
 
     #def  double * xAddress(self):
 
@@ -138,41 +148,50 @@ cdef class Frame:
 
     #def  int * iAddress(self):
 
-    #def  double * xAddress(self):
+    #def SetBoxAngles(self, double *):
 
-    #def  double * vAddress(self):
+    def SetupFrame(self,int natomIn):
+        return self.thisptr.SetupFrame(natomIn)
 
-    #def  double * bAddress(self):
+    def SetupFrameM(self, list atlist):
+        cdef vector[_Atom] v 
+        v = atomlist_to_vector(atlist)
+        return self.thisptr.SetupFrameM(v)
 
-    #def  double * tAddress(self):
+    def SetupFrameXM(self, vector[double] Xin, vector[double] massIn):
+        return self.thisptr.SetupFrameXM(Xin, massIn)
 
-    #def  int * iAddress(self):
+    def SetupFrameV(self, atlist, bint hasVelocity, int nDim):
+        cdef vector[_Atom] v = atomlist_to_vector(atlist)
+        return self.thisptr.SetupFrameV(v, hasVelocity, nDim)
 
-    #def  void SetBoxAngles(self, double *):
+    def SetupFrameFromMask(self, AtomMask atmask, list atlist):
+        cdef vector[_Atom] v = atomlist_to_vector(atlist)
+        return self.thisptr.SetupFrameFromMask(atmask.thisptr[0], v)
 
-    #def int SetupFrame(self,int):
+    def SetCoordinates(self, Frame frame, *args):
+        cdef AtomMask atmask 
+        if not args:
+            self.thisptr.SetCoordinates(frame.thisptr[0])
+        else:
+            atmask = args[0]
+            self.thisptr.SetCoordinates(frame.thisptr[0], atmask.thisptr[0])
+    def SetFrame(self, Frame frame, AtomMask atmask):
+        self.thisptr.SetFrame(frame.thisptr[0], atmask.thisptr[0])
 
-    #def int SetupFrameM(self, vector[Atom]):
+    def SetCoordinatesByMap(self, Frame frame, vector[int] mapIn):
+        self.thisptr.SetCoordinatesByMap(frame.thisptr[0], mapIn)
 
-    #def int SetupFrameXM(self, vector[double], vector[double]):
+    # not in Frame.pxd
+    #def SetReferenceByMap(self, Frame frame, vector[int] mapIn):
+    #    self.thisptr.SetReferenceByMap(frame.thisptr[0], mapIn)
 
-    #def int SetupFrameV(self, vector[Atom], bint, int):
+    # not in Frame.pxd
+    #def SetTargetByMap(self, Frame frame, vector[int] mapIn):
+    #    self.thisptr.SetTargetByMap(frame.thisptr[0], mapIn)
 
-    #def int SetupFrameFromMask(self, AtomMask, vector[Atom]):
-
-    #def void SetCoordinates(self, Frame, AtomMask):
-
-    #def void SetCoordinates(self, Frame):
-
-    #def void SetFrame(self, Frame, AtomMask):
-
-    #def void SetCoordinatesByMap(self, Frame, vector[int]):
-
-    #def void SetReferenceByMap(self, Frame, vector[int]):
-
-    #def void SetTargetByMap(self, Frame, vector[int]):
-
-    #def void ZeroCoords(self):
+    def ZeroCoords(self):
+        self.thisptr.ZeroCoords()
 
     #def Frame operator+=(self, Frame):
 
@@ -184,68 +203,104 @@ cdef class Frame:
 
     #def  Frame operator-(self, Frame):
 
-    #def int Divide(self, Frame, double):
+    #def Divide(self, Frame, double):
 
-    #def void Divide(self,double):
+    def Divide(self, double divisor, *args):
+        cdef Frame frame
+        if not args:
+            self.thisptr.Divide(divisor)
+        else:
+            frame = args[0]
+            return self.thisptr.Divide(frame.thisptr[0], divisor)
 
-    #def void AddByMask(self, Frame, AtomMask):
+    def AddByMask(self, Frame frame, AtomMask atmask):
+        self.thisptr.AddByMask(frame.thisptr[0], atmask.thisptr[0])
 
-    #def  bint CheckCoordsInvalid(self):
+    def CheckCoordsInvalid(self):
+        return self.thisptr.CheckCoordsInvalid()
 
-    #def  Vec3 VCenterOfMass(self, AtomMask):
+    def VCenterOfMass(self, AtomMask atmask):
+        # return Vec3 instance
+        cdef Vec3 v3 = Vec3()
+        v3.thisptr[0] = self.thisptr.VCenterOfMass(atmask.thisptr[0])
+        return v3
 
-    #def  Vec3 VGeometricCenter(self, AtomMask):
+    def  VGeometricCenter(self, AtomMask atmask):
+        # return Vec3 instance
+        cdef Vec3 v3 = Vec3()
+        v3.thisptr[0] = self.thisptr.VGeometricCenter(atmask.thisptr[0])
+        return v3
 
     #def  Vec3 VCenterOfMass(self,int, int):
 
     #def  Vec3 VGeometricCenter(self,int, int):
 
-    #def  void Translate(self, Vec3, int, int):
-    #def  void Translate(self, Vec3, int):
-    #def  void Translate(self, Vec3):
-
     def Translate(self, *args):
-        cdef int firstAtom, lastAtom
+        cdef firstAtom, lastAtom
         cdef Vec3 vec3
         if len(args) == 3:
-            vec3, firstAtom, lastAtom= args
-            check_instance(vec3, Vec3)
-            vec3, firstAtom, lastAtom= args
+            vec3, firstAtom, lastAtom = args
             self.thisptr.Translate(vec3.thisptr[0], firstAtom, lastAtom)
-        if len(args) == 2:
+        elif len(args) == 2:
             vec3, atom = args
             check_instance(vec3, Vec3)
             self.thisptr.Translate(vec3.thisptr[0], atom)
+        elif len(args) == 1:
+            vec3 = args[0]
+            self.thisptr.Translate(vec3.thisptr[0])
+        else:
+            raise ValueError()
 
-    #def  void NegTranslate(self, Vec3):
+    def NegTranslate(self, Vec3 vec):
+        self.thisptr.NegTranslate(vec.thisptr[0])
 
-    #def  void Rotate(self, Matrix_3x3):
+    def  Rotate(self, Matrix_3x3 m3, *args):
+        cdef AtomMask atmask
+        if not args:
+            self.thisptr.Rotate(m3.thisptr[0])
+        elif len(args) == 1:
+            atmask = args[0]
+            self.thisptr.Rotate(m3.thisptr[0], atmask.thisptr[0])
 
-    #def  void Rotate(self, Matrix_3x3, AtomMask):
+    def  Trans_Rot_Trans(self, Vec3 vec3, Matrix_3x3 m3, Vec3 vec3_2):
+        self.thisptr.Trans_Rot_Trans(vec3.thisptr[0], m3.thisptr[0], vec3_2.thisptr[0])
 
-    #def  void Trans_Rot_Trans(self, Vec3, Matrix_3x3, Vec3):
+    #def Scale(self, AtomMask, double, double, double):
 
-    #def void Scale(self, AtomMask, double, double, double):
+    #def Center(self, AtomMask, CenterMode, Vec3, bint):
 
-    #def void Center(self, AtomMask, CenterMode, Vec3, bint):
+    def CenterOnOrigin(self,bint useMassIn):
+        cdef Vec3 v = Vec3()
+        v.thisptr[0] = self.thisptr.CenterOnOrigin(useMassIn)
+        return v
 
-    #def Vec3 CenterOnOrigin(self,bint):
+    def RMSD(self,Frame frame, *args):
+        cdef Matrix_3x3 m3
+        cdef Vec3 v1, v2
+        cdef bint useMassIn
 
-    #def double RMSD(self,Frame, bint):
+        if len(args) == 1:
+            useMassIn = args[0]
+            return self.thisptr.RMSD(frame.thisptr[0], useMassIn)
+        elif len(args) == 4:
+            m3, v1, v2, useMassIn = args
+            return self.thisptr.RMSD(frame.thisptr[0], m3.thisptr[0], v1.thisptr[0], v2.thisptr[0], useMassIn)
 
-    #def double RMSD(self,Frame, Matrix_3x3, Vec3, Vec3, bint):
 
-    #def double RMSD_CenteredRef(self, Frame, bint):
+    #def RMSD_CenteredRef(self, Frame, bint):
 
-    #def double RMSD_CenteredRef(self, Frame, Matrix_3x3, Vec3, bint):
+    #def RMSD_CenteredRef(self, Frame, Matrix_3x3, Vec3, bint):
 
-    #def double RMSD_NoFit(self, Frame, bint):
+    def RMSD_NoFit(self, Frame frame, useMassIn):
+        return self.thisptr.RMSD_NoFit(frame.thisptr[0], useMassIn)
 
-    #def double DISTRMSD(self, Frame):
+    def DISTRMSD(self, Frame frame):
+        return self.thisptr.DISTRMSD(frame.thisptr[0])
 
-    #def Vec3 SetAxisOfRotation(self,int, int):
+    #def SetAxisOfRotation(self,int, int):
 
-    #def Vec3 CalculateInertia(self, AtomMask, Matrix_3x3):
+    #def CalculateInertia(self, AtomMask, Matrix_3x3):
 
-    #def double CalcTemperature(self, AtomMask, int):
+    def CalcTemperature(self, AtomMask mask, int deg_of_freedom):
+        return self.thisptr.CalcTemperature(mask.thisptr[0], deg_of_freedom)
 
