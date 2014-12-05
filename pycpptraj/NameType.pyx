@@ -2,15 +2,22 @@
 
 
 cdef class NameType:
-    def __cinit__(self, arg):
+    def __cinit__(self, *args):
         cdef string s
         cdef NameType rhs
-        if isinstance(arg, basestring):
-            s = arg
-            self.thisptr = new _NameType(s)
-        elif isinstance(arg, NameType):
-            rhs = arg
-            self.thisptr = new _NameType(rhs.thisptr[0])
+        if not args:
+            self.thisptr = new _NameType()
+        elif len(args) == 1:
+            if isinstance(args[0], basestring):
+                s = args[0]
+                self.thisptr = new _NameType(s)
+            elif isinstance(args[0], NameType):
+                rhs = args[0]
+                self.thisptr = new _NameType(rhs.thisptr[0])
+            else:
+                raise ValueError()
+        else:
+            raise ValueError()
 
     def __dealloc__(self):
         del self.thisptr
@@ -45,11 +52,8 @@ cdef class NameType:
                 # == operator
                 return self.thisptr[0] == rhs.thisptr[0]
 
-    #def bint operator ! =(self, char *):
-
     #def  char * operator *(self):
 
-    #def char operator[](self,int):
     def __getitem__(self, int idx):
         return self.thisptr[0][idx]
 
@@ -59,4 +63,3 @@ cdef class NameType:
 
     def ReplaceAsterisk(self):
         self.thisptr.ReplaceAsterisk()
-
