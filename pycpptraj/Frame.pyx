@@ -35,6 +35,7 @@ cdef class Frame:
                 if isinstance(args[0], Frame):
                     frame = args[0]
                     self.thisptr = new _Frame(frame.thisptr[0])
+                # creat a new Frame instance with natom
                 elif isinstance(args[0], (int, long)):
                     natom = <int> args[0]
                     self.thisptr = new _Frame(natom)
@@ -52,10 +53,9 @@ cdef class Frame:
 
     def SetFromCRD(self, CRDtype farray, *args):
         """"""
-        cdef numCrd, numBoxCrd
+        cdef int numCrd, numBoxCrd
         cdef bint hasVel
         cdef AtomMask mask
-        cdef float tmp
 
         if len(args) == 3:
             numCrd, numBoxCrd, hasVel = args
@@ -215,11 +215,18 @@ cdef class Frame:
     #def Frame operator*=(self, Frame):
 
     #def  Frame operator*(self, Frame):
+    def __mul__(Frame self, Frame other):
+        cdef Frame frame = Frame()
+        frame.thisptr[0] = self.thisptr[0] * other.thisptr[0]
+        return frame
 
     #def  Frame operator-(self, Frame):
+    def __sub__(Frame self, Frame other):
+        cdef Frame frame = Frame()
+        frame.thisptr[0] = self.thisptr[0] - other.thisptr[0]
+        return frame
 
     #def Divide(self, Frame, double):
-
     def Divide(self, double divisor, *args):
         cdef Frame frame
         if not args:
@@ -269,7 +276,7 @@ cdef class Frame:
     def NegTranslate(self, Vec3 vec):
         self.thisptr.NegTranslate(vec.thisptr[0])
 
-    def  Rotate(self, Matrix_3x3 m3, *args):
+    def Rotate(self, Matrix_3x3 m3, *args):
         cdef AtomMask atmask
         if not args:
             self.thisptr.Rotate(m3.thisptr[0])
@@ -289,17 +296,17 @@ cdef class Frame:
         v.thisptr[0] = self.thisptr.CenterOnOrigin(useMassIn)
         return v
 
-    def RMSD(self,Frame frame, *args):
+    def RMSD(self,Frame frame, bint use_mass=False, *args):
         cdef Matrix_3x3 m3
         cdef Vec3 v1, v2
-        cdef bint useMassIn
 
-        if len(args) == 1:
-            useMassIn = args[0]
-            return self.thisptr.RMSD(frame.thisptr[0], useMassIn)
-        elif len(args) == 4:
-            m3, v1, v2, useMassIn = args
-            return self.thisptr.RMSD(frame.thisptr[0], m3.thisptr[0], v1.thisptr[0], v2.thisptr[0], useMassIn)
+        if not args:
+            return self.thisptr.RMSD(frame.thisptr[0], use_mass)
+        elif len(args) == 3:
+            m3, v1, v2 = args
+            return self.thisptr.RMSD(frame.thisptr[0], m3.thisptr[0], v1.thisptr[0], v2.thisptr[0], use_mass)
+        else:
+            raise NotImplementedError()
 
 
     #def RMSD_CenteredRef(self, Frame, bint):
