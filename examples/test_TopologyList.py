@@ -14,3 +14,9 @@ t.Summary()
 t2 = tl[1]
 print t == t2
 t2.Summary()
+
+print t2.GBradiiSet
+
+print t2.NrepDim
+
+print t2.OriginalFilename()
