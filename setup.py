@@ -1,6 +1,6 @@
 import os
-import shutil
-from glob import glob
+#import shutil
+#from glob import glob
 from distutils.core import setup
 from distutils.extension import Extension
 import Cython.Distutils.build_ext
