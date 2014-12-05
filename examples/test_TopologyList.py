@@ -22,6 +22,8 @@ print t2.NrepDim
 
 print t2.OriginalFilename()
 t2.PrintResidueInfo(":1-4, 20")
+print
+t2.PrintResidueInfo("@CG")
 
 
 atom1 = t.atom_generator()
