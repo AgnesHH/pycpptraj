@@ -17,6 +17,9 @@ cdef class Residue:
     def __dealloc__(self):
         del self.thisptr
 
+    def __str__(self):
+        return self.thisptr.c_str()
+
     def SetLastAtom(self,int i):
         self.thisptr.SetLastAtom(i)
 
