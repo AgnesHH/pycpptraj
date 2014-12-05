@@ -26,7 +26,6 @@ cdef extern from "CpptrajFile.h":
     cdef cppclass _CpptrajFile "CpptrajFile":
         _CpptrajFile()
         _CpptrajFile(const _CpptrajFile&)
-
         int OpenRead(const string&)
         int SetupRead(const string&, int)
         int OpenWriteNumbered(int)
@@ -41,7 +40,7 @@ cdef extern from "CpptrajFile.h":
         int OpenFile(AccessType)
         void CloseFile()
         void Printf(const char*, ...)
-        string GetLine()
+        string GetLine() except +
         const char* NextLine()
         AccessType Access()
         CompressType Compression()
@@ -51,13 +50,14 @@ cdef extern from "CpptrajFile.h":
         off_t FileSize()
         bint IsCompressed()
         off_t UncompressedSize()
-        int Gets(char*, int)
-        int Write(const void*, size_t)
-        int Read(void*, size_t)
-        int Seek(off_t)
-        int Rewind()
-        int Flush()
-        off_t Tell()
+        int ID_Type(const char* filenameIn)
+        #int Gets(char*, int)
+        #int Write(const void*, size_t)
+        #int Read(void*, size_t)
+        #int Seek(off_t)
+        #int Rewind()
+        #int Flush()
+        #off_t Tell()
 
 cdef class CpptrajFile:
     cdef _CpptrajFile* thisptr

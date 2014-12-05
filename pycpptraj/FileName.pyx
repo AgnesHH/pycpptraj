@@ -11,6 +11,11 @@ cdef class FileName:
     def __dealloc__(self):
         del self.thisptr
 
+    def __str__(self):
+        fname = self.Full()
+        fname = fname.split("/")[-1]
+        return fname
+
     def SetFileName(self, mystring):
         self.thisptr.SetFileName(mystring)
 

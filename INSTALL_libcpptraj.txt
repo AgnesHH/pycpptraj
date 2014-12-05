@@ -9,16 +9,18 @@ How?
     # add -fPIC to enable sharing
     make CUSTOMBUILDFLAGS='-fPIC' install
 
+    # change dir to $AMBERHOME/AmberTools/src/cpptraj/ to do ./configure
+    cd $AMBERHOME/AmberTools/src/cpptraj/
+    ./configure -amberlib gnu
+
     # change dir to cpptraj/src and update `Makefile` file
     cd $AMBERHOME/AmberTools/src/cpptraj/src
          + open Makefile and add these lines:
-     
-         libcpptraj.so: $(OBJECTS) pub_fft.o $(READLINE)
-         $(CXX)  -shared -o libcpptraj.so $(OBJECTS) pub_fft.o $(READLINE) $(LDFLAGS)
-    
+
+                libcpptraj.so: $(OBJECTS) pub_fft.o $(READLINE)
+                        $(CXX)  -shared -o libcpptraj.so $(OBJECTS) pub_fft.o $(READLINE) $(LDFLAGS)
+                        mv libcpptraj.so $(AMBERHOME)/lib
+  
     # make *.so lib
     make CUSTOMBUILDFLAGS='-fPIC' libcpptraj.so
-
-    # move to $AMBERHOME/lib
-    mv libcpptraj.so $AMBERHOME/lib/
 

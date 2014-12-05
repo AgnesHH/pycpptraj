@@ -64,7 +64,7 @@ cdef class Atom:
         return self.thisptr.Element()
 
     @property
-    def atomic_number(self):
+    def AtomicNumber(self):
         return self.thisptr.AtomicNumber()
 
     @property
