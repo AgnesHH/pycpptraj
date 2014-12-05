@@ -48,8 +48,8 @@ setup(
     author="Hai Nguyen",
     author_email="hainm.comp@gmail.com",
     url="https://github.com/hainm/pycpptraj",
-    ext_modules = ext_modules,
-    package_data={"pycpptraj": ["*.pyx", "*.pxd", "./Action/*", "Analysis/*", "*.so"]},
+    packages=['pycpptraj',],
+    package_data={"pycpptraj": ["__init__.py", "*.pyx", "*.pxd", "./Action/*", "Analysis/*"]},
     description="""Python wrapper for cpptraj""",
     long_description=read("README.md"),
     license = "BSD License",
@@ -64,5 +64,6 @@ setup(
                 'Programming Language :: C',
                 'Programming Language :: C++',
                 'Topic :: Scientific/Engineering'],
+    ext_modules = ext_modules,
     cmdclass = {'build_ext': Cython.Distutils.build_ext},
 )
