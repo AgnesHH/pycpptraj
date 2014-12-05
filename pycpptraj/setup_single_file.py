@@ -6,12 +6,12 @@ from Cython.Build import cythonize
 PXD_include = os.environ['PYCPPTRAJ_HOME'] + "pycpptraj"
 cpptraj_include = os.environ['AMBERHOME'] + "/AmberTools/src/cpptraj/src/"
 lib_dir = os.environ['AMBERHOME'] + "/lib/"
-pyxfile = "Frame.pyx"
+pyxfile = "MaskToken.pyx"
 ext = pyxfile.split(".")[0]
 
 setup(
       ext_modules = cythonize([
-          Extension(ext, ["Frame.pyx",],
+          Extension(ext, ["MaskToken.pyx",],
                     libraries=['cpptraj'],
                     library_dirs=[lib_dir,],
                     include_dirs=[PXD_include, cpptraj_include,])

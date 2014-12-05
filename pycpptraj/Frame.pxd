@@ -53,7 +53,7 @@ cdef extern from "Frame.h":
         inline const double * bAddress() const 
         inline const double * tAddress() const 
         inline const int * iAddress() const 
-        inline void Set_BoxAngles(const double *)
+        inline void SetBoxAngles(const double *)
         int SetupFrame(int)
         int SetupFrameM(const vector[_Atom]&)
         int SetupFrameXM(const vector[double]&, const vector[double]&)

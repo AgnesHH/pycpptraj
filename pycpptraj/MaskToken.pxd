@@ -20,6 +20,7 @@ cdef extern from "MaskToken.h":
         OP_DIST "MaskToken::OP_DIST"
     cdef cppclass _MaskToken "MaskToken":
         _MaskToken() 
+        const char* MaskTypeString[]
         const char * TypeName() const 
         void Print() const 
         int SetToken(MaskTokenType, const string&)
