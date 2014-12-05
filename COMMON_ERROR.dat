@@ -1,5 +1,5 @@
 1. *** Error in `python': double free or corruption (!prev):
-Possible reason: list index out of
+Possible reason: list index out of range
 
 2. Segmentfault
 Possible reasons:
