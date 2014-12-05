@@ -87,7 +87,6 @@ cdef class Frame:
     def SwapAtoms(self, int atom1, int atom2):
         self.thisptr.SwapAtoms(atom1, atom2)
 
-    #def operator[](self,int idx):
     def __getitem__(self, idx):
         return self.thisptr.index_opr(idx)
 
@@ -116,14 +115,19 @@ cdef class Frame:
     #def  double * XYZ(self,int atnum):
     # Correct yet?
     def XYZ(self, int atnum):
-        pass
+        # cpptraj: return double*
+        raise NotImplementedError()
         # TODO: throw data or memory view from pointer
         #cdef double[:] xyz = self.thisptr.XYZ(atnum)
         #return xyz
 
-    #def  double * CRD(self,int idx):
+    def CRD(self,int idx):
+        # cpptraj: return double*
+        raise NotImplementedError()
 
-    #def VXYZ(self,int atnum):
+    def VXYZ(self,int atnum):
+        raise NotImplementedError()
+        # cpptraj: return double*
     #    """TODO: not done yet"""
     #    cdef[:] darray
     #    cdef* dptr
@@ -138,17 +142,28 @@ cdef class Frame:
     #    box.thisptr[0] = self.thisptr.BoxCrd()
     #    return box
 
-    #def  double * xAddress(self):
+    def xAddress(self):
+        # cpptraj: return double*
+        raise NotImplementedError()
 
-    #def  double * vAddress(self):
+    def vAddress(self):
+        # cpptraj: return double*
+        raise NotImplementedError()
 
-    #def  double * bAddress(self):
+    def bAddress(self):
+        # cpptraj: return double*
+        raise NotImplementedError()
 
-    #def  double * tAddress(self):
+    def tAddress(self):
+        # cpptraj: return double*
+        raise NotImplementedError()
 
-    #def  int * iAddress(self):
+    def iAddress(self):
+        # cpptraj: return int*
+        raise NotImplementedError()
 
-    #def SetBoxAngles(self, double *):
+    def SetBoxAngles(self, double[:] ain):
+        self.thisptr.SetBoxAngles(&ain[0])
 
     def SetupFrame(self,int natomIn):
         return self.thisptr.SetupFrame(natomIn)
