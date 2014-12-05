@@ -1,4 +1,5 @@
 import os
+import pycpptraj
 from pycpptraj.TopologyList import TopologyList 
 
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
@@ -20,6 +21,10 @@ print t2.GBradiiSet
 print t2.NrepDim
 
 print t2.OriginalFilename()
+t2.PrintResidueInfo(":1-4, 20")
 
-for atom in t.atom_generator():
-    print atom.name()
+
+atom1 = t.atom_generator()
+atom2 = t.atom_generator()
+print atom1 == atom2
+print atom1, atom2
