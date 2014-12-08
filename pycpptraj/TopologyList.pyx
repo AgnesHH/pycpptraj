@@ -52,5 +52,5 @@ cdef class TopologyList:
             fname, arglist = args
             return self.thisptr.AddParmFile(fname, arglist.thisptr[0])
         
-    def List(self):
+    def info(self):
         self.thisptr.List()

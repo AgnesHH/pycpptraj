@@ -33,6 +33,8 @@ else:
 
 ext_modules = []
 for ext_name in pyxfiles:
+    if "/" in ext_name:
+        ext_name = ext_name.replace("/", ".")
     pyxfile = pycpptraj_home + ext_name + ext
     extmod = Extension("pycpptraj." + ext_name,
                     [pyxfile],
@@ -49,7 +51,7 @@ setup(
     author_email="hainm.comp@gmail.com",
     url="https://github.com/hainm/pycpptraj",
     packages=['pycpptraj',],
-    package_data={"pycpptraj": ["__init__.py", "*.pyx", "*.pxd", "./Action/*", "Analysis/*"]},
+    #package_data={"pycpptraj": ["__init__.py", "*.pyx", "*.pxd", "./Action/*", "Analysis/*"]},
     description="""Python wrapper for cpptraj""",
     long_description=read("README.md"),
     license = "BSD License",

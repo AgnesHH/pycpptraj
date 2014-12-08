@@ -1,8 +1,8 @@
 # distutils: language = c++
 
 
-
 cdef class CpptrajFile:
+
     def __cinit__(self, *args):
         cdef CpptrajFile cfile
         if not args:
@@ -15,8 +15,51 @@ cdef class CpptrajFile:
     def __dealloc__(self):
         del self.thisptr
 
+    @classmethod
+    # TODO: make better method's name
+    def typedict(cls, tdict='AccessType'):
+        # Aim: support for enum in cpptraj
+
+        AccessType = {
+                READ : "READ",
+                WRITE : "WRITE",
+                APPEND : "APPEND",
+                UPDATE : "UPDATE",
+        }
+            # CpptrajFile.h
+        CompressType = {
+                NO_COMPRESSION : "NO_COMPRESSION",
+                GZIP : "GZIP",
+                BZIP2 : "BZIP2",
+                ZIP : "ZIP",
+        }
+            # CpptrajFile.h
+        FileType = {
+                UNKNOWN_TYPE : "UNKNOWN_TYPE",
+                STANDARD : "STANDARD",
+                GZIPFILE : "GZIPFILE",
+                BZIP2FILE : "BZIP2FILE",
+                ZIPFILE : "ZIPFILE",
+                MPIFILE : "MPIFILE",
+        }
+        if tdict == 'AccessType':
+            return AccessType
+        elif tdict == 'CompressType':
+            return CompressType
+        elif tdict == 'FileType':
+            return FileType
+        else:
+            raise NotImplementedError()
+
     def OpenRead(self, string nameIn):
-        return self.thisptr.OpenRead(nameIn)
+        cdef bint sucess
+        cdef int result
+        result = self.thisptr.OpenRead(nameIn)
+        if result == 0:
+            sucess = True
+        else:
+            sucess = False
+        return sucess
 
     def SetupRead(self, string nameIn, int debugIn):
         return self.thisptr.SetupRead(nameIn, debugIn)
@@ -96,3 +139,17 @@ cdef class CpptrajFile:
 
     def UncompressedSize(self):
         return self.thisptr.UncompressedSize()
+
+    # STATUS: NOT WORK RIGHT YET
+    #def Read(self, int size):
+    #    cdef char* magic
+    #    cdef int status
+    #    status = self.thisptr.Read(&magic, size)
+    #    return magic, status
+
+    #def Read(self, char* dummy='', int size):
+    #    cdef char* magic2
+    #    cdef int status
+    #    status = self.thisptr.Read(magic, size)
+    #    dummy = magic
+    #    return magic2, status

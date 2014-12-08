@@ -18,3 +18,4 @@ cdef extern from "ImageRoutines.h" namespace "Image":
     void UnwrapNonortho(_Frame&, _Frame&, const PairType&, const _Matrix_3x3&, const _Matrix_3x3&, bint, bint)
     void UnwrapOrtho(_Frame&, _Frame&, const PairType&, bint ,bint)
 
+cdef class ImageRoutines

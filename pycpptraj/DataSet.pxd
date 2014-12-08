@@ -71,9 +71,9 @@ cdef extern from "DataSet.h":
         scalarMode ScalarMode() const 
         scalarType ScalarType() const 
         size_t Ndim() const 
-        _Dimension& Dim(DimIdxType i)
+        #_Dimension& Dim(DimIdxType i)
         _Dimension& Dim(int i)
-        const _Dimension& Dim(int i) const 
+        #const _Dimension& Dim(int i) const 
         inline bint operator<(const _DataSet&) const 
         const char * DataFormat() const 
         scalarMode ModeFromKeyword(const string&)

@@ -44,8 +44,8 @@ cdef class DataSet:
     def ScalarDescription(self):
         self.thisptr.ScalarDescription()
 
-    #def Empty(self):
-    #    return self.thisptr.Empty()
+    def Empty(self):
+        return self.thisptr.Empty()
 
     @property
     def Legend(self):
@@ -83,13 +83,18 @@ cdef class DataSet:
     def Ndim(self):
         return self.thisptr.Ndim()
 
-    #def Dimension Dim(self,DimIdxType i):
-
-    #def Dimension Dim(self,int i):
-
-    #def Dimension Dim(self,int i):
+    def Dim(self,int i):
+        cdef Dimension dim = Dimension()
+        dim.thisptr[0] = self.thisptr.Dim(i)
 
     # def  bint operator[(self, DataSet):
+    def __richcmp__(DataSet self, DataSet other, opt):
+        if opt == 0:
+            # operator "<"
+            return self.thisptr[0] < other.thisptr[0]
+        else:
+            raise NotImplemented()
+
     @property
     def DataFormat(self):
         return self.thisptr.DataFormat()

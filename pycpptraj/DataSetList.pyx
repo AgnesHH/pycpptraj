@@ -10,12 +10,10 @@ cdef class DataSetList:
         if self.thisptr is not NULL:
             del self.thisptr
 
-    #def DataSetList(self):
-
     def Clear(self):
         self.thisptr.Clear()
 
-    #def DataSetList operator + =(self, DataSetList):
+    #def DataSetList operator +=(self, DataSetList):
 
     #def _iterator begin(self):
 
@@ -62,8 +60,11 @@ cdef class DataSetList:
     def GenerateDefaultName(self, char* s):
         return self.thisptr.GenerateDefaultName(s)
 
-    #def DataSet * AddSet(self,DataSet::DataType, string, char *):
-
+    def AddSet(self,DataType dtype, string s, char * c):
+        cdef DataSet dset = DataSet()
+        dset.thisptr[0] = self.thisptr.AddSet(dtype, s, c)[0]
+        return dset
+        
     #def DataSet * AddSetIdx(self,DataSet::DataType, string, int):
 
     #def DataSet * AddSetAspect(self,DataSet::DataType, string, string):
@@ -77,10 +78,11 @@ cdef class DataSetList:
     def List(self):
         self.thisptr.List()
 
+    # don' I need this?
     IF MPI:
         def SynchronizeData(self):
             self.thisptr.SynchronizeData()
-    
+
     #def DataSet * FindSetOfType(self, string, DataSet::DataType):
 
     #def DataSet * FindCoordsSet(self, string):

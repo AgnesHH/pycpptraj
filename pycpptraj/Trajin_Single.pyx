@@ -8,7 +8,7 @@ cdef class Trajin_Single:
     def __dealloc__(self):
         del self.thisptr
 
-    def SetupTrajRead(self,string tnameIn, ArgList argIn, Topology tparmIn, bint checkBox=True):
+    def SetupTrajRead(self, string tnameIn, ArgList argIn, Topology tparmIn, bint checkBox=True):
         return self.thisptr.SetupTrajRead(tnameIn, argIn.thisptr[0], tparmIn.thisptr, checkBox)
 
     def BeginTraj(self, bint showProgress):

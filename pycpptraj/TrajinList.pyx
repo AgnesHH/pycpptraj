@@ -17,32 +17,53 @@ cdef class TrajinList:
     def SetDebug(self,int dIn):
         self.thisptr.SetDebug(dIn)
 
-    def AddTrajin(self, string s, ArgList arglist, TopologyList toplist):
-        return self.thisptr.AddTrajin(s, arglist.thisptr[0], toplist.thisptr[0])
+    def AddTrajin(self, string fname, ArgList arglist, TopologyList toplist):
+        return self.thisptr.AddTrajin(fname, arglist.thisptr[0], toplist.thisptr[0])
 
     def AddEnsemble(self, string s, ArgList arglist, TopologyList toplist):
         return self.thisptr.AddEnsemble(s, arglist.thisptr[0], toplist.thisptr[0])
 
     def __iter__(self):
+        # STATUS: got Segmentation fault (core dumped)
+        # Trajin has abtract methods --> can not create instance. 
         cdef Trajin trajin
         cdef cppvector[_Trajin*].const_iterator it
         it = self.thisptr.begin()
         while it != self.thisptr.end():
             trajin = Trajin()
-            trajin.thisptr = deref(it)
+            trajin.thisptr[0] = deref(deref(it))
             yield trajin
             incr(it)
 
     def empty(self):
         return self.thisptr.empty()
 
-    def Mode(self):
-        return self.thisptr.Mode()
+    def mode(self, updatedmode=False):
+        # Use "updatedmode" in case Dan Roe updates his TrajinList.Mode()
+        
+        TrajModeType_dict = {
+                UNDEFINED : "UNDEFINED",
+                NORMAL : "NORMAL",
+                ENSEMBLE : "ENSEMBLE",
+        }
 
-    #def  Trajin * front(self):
+        if not updatedmode:
+            return TrajModeType_dict[self.thisptr.Mode()]
+        else:
+            raise NotImplementedError()
+
+    def front(self):
+        # STATUS: got Segmentation fault
+        # Trajin has abtract methods --> can not create instance. 
+        # cpptraj: return Trajin*
+
+        cdef Trajin trajin = Trajin()
+        trajin.thisptr[0] = deref(self.thisptr.front())
+        return trajin
+
 
     @property
-    def MaxFrames(self):
+    def max_frames(self):
         return self.thisptr.MaxFrames()
 
     def List(self):

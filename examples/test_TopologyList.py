@@ -1,5 +1,4 @@
 import os
-import pycpptraj
 from pycpptraj.TopologyList import TopologyList 
 
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
@@ -24,7 +23,6 @@ print t2.OriginalFilename()
 t2.PrintResidueInfo(":1-4, 20")
 print
 t2.PrintResidueInfo("@CG")
-
 
 atom1 = t.atom_generator()
 atom2 = t.atom_generator()

@@ -13,6 +13,6 @@ cdef extern from "ReferenceAction.h":
         inline void _ActionRef(const _Frame&, bint, bint)
         bint Previous() const 
         const char * RefModeString() const 
-        const _Frame& Ref_Frame() const 
+        const _Frame& RefFrame() const 
         const _Frame& SelectedRef() const 
         const _Vec3& RefTrans() const 

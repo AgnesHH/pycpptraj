@@ -8,9 +8,12 @@ from ClusterMatrix cimport *
 
 # TODO: double check declaration
 
+ctypedef vector[int] Cframes
+ctypedef vector[_DataSet*] DsArray
+
 cdef extern from "ClusterDist.h": 
-    ctypedef vector[int] Cframes
-    ctypedef vector[_DataSet*] DsArray
+    #ctypedef vector[int] Cframes
+    #ctypedef vector[_DataSet*] DsArray
     #ctypedef  Cframes "ClusterDist::Cframes" Cframes:
     #    pass
     cdef cppclass _Centroid "Centroid":

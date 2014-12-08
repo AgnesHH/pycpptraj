@@ -53,7 +53,7 @@ cdef extern from "CpptrajFile.h":
         int ID_Type(const char* filenameIn)
         #int Gets(char*, int)
         #int Write(const void*, size_t)
-        #int Read(void*, size_t)
+        int Read(void*, size_t)
         #int Seek(off_t)
         #int Rewind()
         #int Flush()

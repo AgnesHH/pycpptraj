@@ -8,18 +8,8 @@ cdef class BufferedFrame:
     def __dealloc__(self):
         del self.thisptr
 
-    def SetupFrameBuffer(self, size_t additionalBytes=0, int offsetIn=0, *args):
-        cdef int Nelts, eltWidthIn, eltsPerLine
-
-        if len(args) == 3:
-            Nelts, eltWidthIn, eltsPerLine = args
-            self.thisptr.SetupFrameBuffer(Nelts, eltWidthIn, eltsPerLine, additionalBytes, offsetIn)
-        else:
-            raise ValueError()
-
-    #def size_t SetupFrameBuffer(self,int, int, int):
-
-    #def size_t SetupFrameBuffer(self,int, int, int, size_t, int):
+    def SetupFrameBuffer(self, size_t additionalBytes=0, int offset=0, int Nelts, int eltWidthIn, int eltsPerLine):
+        self.thisptr.SetupFrameBuffer(Nelts, eltWidthIn, eltsPerLine, additionalBytes, offset)
 
     def ResizeBuffer(self, int delta):
         return self.thisptr.ResizeBuffer(delta)

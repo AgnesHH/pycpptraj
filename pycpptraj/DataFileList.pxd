@@ -20,3 +20,6 @@ cdef extern from "DataFileList.h":
         void WriteAllDF()
         void Remove_DataSet()
         int ProcessDataFileArgs(_ArgList&)
+
+cdef class DataFileList:
+    cdef _DataFileList* thisptr

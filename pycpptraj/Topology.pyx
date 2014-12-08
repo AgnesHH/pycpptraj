@@ -6,10 +6,17 @@ from libcpp.string cimport string
 from FileName cimport FileName
 from Frame cimport Frame
 from NameType cimport NameType
+from TopologyList cimport TopologyList
 
 cdef class Topology:
-    def __cinit__(self):
+    def __cinit__(self, str fname=''):
+        cdef TopologyList toplist = TopologyList()
+        cdef Topology tp
         self.thisptr = new _Topology()
+
+        if fname:
+            toplist.AddParmFile(fname)
+            self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
 
     def __dealloc__(self):
         del self.thisptr

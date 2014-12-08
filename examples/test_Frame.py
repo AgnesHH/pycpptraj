@@ -43,3 +43,4 @@ arrref = np.random.rand(30)
 frameref.SetFromCRD(arr, 30, 0, False)
 
 print "RMSD between frame and frameref = %s" % frame.RMSD(frameref)
+frame.show_my_pxd()

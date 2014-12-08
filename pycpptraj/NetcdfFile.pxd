@@ -4,6 +4,7 @@ from ReplicaDimArray cimport *
 
 
 cdef extern from "NetcdfFile.h": 
+#cdef extern from "NetcdfFile.cpp": 
     # NetcdfFile.h
     ctypedef enum NCTYPE "NetcdfFile::NCTYPE":
         NC_UNKNOWN "NetcdfFile::NC_UNKNOWN"
@@ -14,7 +15,7 @@ cdef extern from "NetcdfFile.h":
         _NetcdfFile() 
         void NetcdfDebug() 
         string GetAttrText(const char *)
-        NCTYPE GetNetcdfConventions() 
+        #NCTYPE GetNetcdfConventions() 
         int NC_openRead(const string&)
         int NC_openWrite(const string&)
         int NC_createReservoir(bint, double, int, int&, int&)

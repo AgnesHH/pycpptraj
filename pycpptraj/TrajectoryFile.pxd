@@ -37,3 +37,22 @@ cdef extern from "TrajectoryFile.h":
         int SetTrajParm(_Topology *)
         _Topology * TrajParm ()const 
         const _FileName & TrajFilename ()const 
+
+
+TrajFormatType_dict = {
+        AMBERNETCDF : "AMBERNETCDF",
+        AMBERRESTARTNC : "AMBERRESTARTNC",
+        PDBFILE : "PDBFILE",
+        MOL2FILE : "MOL2FILE",
+        CIF : "CIF",
+        CHARMMDCD : "CHARMMDCD",
+        GMXTRX : "GMXTRX",
+        BINPOS : "BINPOS",
+        AMBERRESTART : "AMBERRESTART",
+        AMBERTRAJ : "AMBERTRAJ",
+        SQM : "SQM",
+        SDF : "SDF",
+        CONFLIB : "CONFLIB",
+        UNKNOWN_TRAJ : "UNKNOWN_TRAJ",
+}
+

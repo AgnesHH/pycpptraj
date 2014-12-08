@@ -6,8 +6,8 @@ cdef extern from "Trajin_Single.h":
     cdef cppclass _Trajin_Single "Trajin_Single":
         _Trajin_Single() 
         #~_Trajin_Single() 
-        int SetupTrajRead(const string&, _ArgList &, _Topology *, bint)
-        int SetupTrajRead(const string&, _ArgList &, _Topology *)
+        int SetupTrajRead(const string&, _ArgList &, _Topology *, bint) except -1
+        int SetupTrajRead(const string&, _ArgList &, _Topology *) 
         int BeginTraj(bint)
         void EndTraj() 
         int ReadTrajFrame(int, _Frame &)
