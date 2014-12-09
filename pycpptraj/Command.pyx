@@ -40,7 +40,7 @@ cdef class Command:
     def Dispatch(self, CpptrajState state, string cmdin):
         return self.thisptr.Dispatch(state.thisptr[0], cmdin)
 
-    def ProcessInput(self,CpptrajState cppstate, string fnameIn):
+    def ProcessInput(self, CpptrajState cppstate, string fnameIn):
         ret = self.thisptr.ProcessInput(cppstate.thisptr[0], fnameIn)
         for key in self.mode('RetType').keys():
             if self.mode('RetType')[key] == ret:

@@ -1,4 +1,5 @@
 # distutils: language = c++
+import os
 
 
 cdef class Trajin_Single:
@@ -9,7 +10,10 @@ cdef class Trajin_Single:
         del self.thisptr
 
     def SetupTrajRead(self, string tnameIn, ArgList argIn, Topology tparmIn, bint checkBox=True):
-        return self.thisptr.SetupTrajRead(tnameIn, argIn.thisptr[0], tparmIn.thisptr, checkBox)
+        if os.path.isfile(tnameIn):
+            return self.thisptr.SetupTrajRead(tnameIn, argIn.thisptr[0], tparmIn.thisptr, checkBox)
+        else:
+            raise ValueError("File does not exist")
 
     def BeginTraj(self, bint showProgress):
         return self.thisptr.BeginTraj(showProgress)

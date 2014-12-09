@@ -1,13 +1,14 @@
 # distutils: language = c++
+from Trajin_Single cimport _Trajin_Single
 
 
 cdef class Trajin:
     def __cinit__(self):
-        pass
-        #self.thisptr = new _Trajin()
+        # since _Trajin has virtual methods, I need to cast to create _Trajin_Single instance
+        # and cast to _Trajin*
+        self.thisptr = <_Trajin*> new _Trajin_Single()
 
     def __dealloc__(self):
-        print "Exiting"
         if self.thisptr != NULL:
             del self.thisptr
 
@@ -20,8 +21,10 @@ cdef class Trajin:
     def UpdateCounters(self):
         self.thisptr.UpdateCounters()
 
-    def GetNextFrame(self,Frame frame):
-        return self.thisptr.GetNextFrame(frame.thisptr[0])
+    def GetNextFrame(self):
+        cdef Frame frame = Frame()
+        self.thisptr.GetNextFrame(frame.thisptr[0])
+        return frame
 
     def SetTotalFrames(self,int idx):
         self.thisptr.SetTotalFrames(idx)

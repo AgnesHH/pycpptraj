@@ -10,3 +10,6 @@ cdef extern from "ReplicaDimArray.h":
         int Ndims()const 
         const char* Description(int idx)const 
         bint operator !=(const _ReplicaDimArray & rhs)const 
+
+cdef class ReplicaDimArray:
+    cdef _ReplicaDimArray* thisptr

@@ -72,7 +72,7 @@ cdef class Frame:
     def printAtomCoord(self, int atom):
         self.thisptr.printAtomCoord(atom)
 
-    def Info(self, char* msg):
+    def Info(self, char* msg=''):
         self.thisptr.Info(msg)
 
     def ClearAtoms(self):

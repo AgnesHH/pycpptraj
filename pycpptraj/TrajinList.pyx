@@ -58,7 +58,7 @@ cdef class TrajinList:
         # cpptraj: return Trajin*
 
         cdef Trajin trajin = Trajin()
-        trajin.thisptr[0] = deref(self.thisptr.front())
+        trajin.thisptr[0] = deref(<_Trajin*> self.thisptr.front())
         return trajin
 
 

@@ -13,11 +13,11 @@ try:
 except:
     raise EnvironmentError("Must set AMBERHOME")
 
-rootname = "test_enum_to_dict.pyx".split(".")[0]
+rootname = "test_DataSet_Coords_TRJ.pyx".split(".")[0]
 print rootname
 setup(
       ext_modules = cythonize([
-          Extension(rootname, ["test_enum_to_dict.pyx",],
+          Extension(rootname, ["test_DataSet_Coords_TRJ.pyx",],
                     libraries=['cpptraj'],
                     include_dirs=[cpptraj_include, pycpptraj_home],
                     library_dirs=[libdir,],

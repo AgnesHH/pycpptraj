@@ -1,6 +1,7 @@
-trajin md1_prod.r
-#trajin md1_prod.x
-#reference Tc5b.nat.crd
-#rms reference out rmsd_CA_to_nat_res3_18.dat :3-18@CA
+parm Tc5b.top
+trajin md1_prod.Tc5b.r
+trajin md1_prod.Tc5b.x
+reference Tc5b.nat.crd
+rms reference out rmsd_CA_to_nat_res3_18.dat :3-18@CA
 trajout test.pdb pdb
 quit

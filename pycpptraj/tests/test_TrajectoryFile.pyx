@@ -10,3 +10,5 @@ def main():
     p.WriteOptions()
     
     del p
+
+main()

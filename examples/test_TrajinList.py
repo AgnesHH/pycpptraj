@@ -1,4 +1,5 @@
 import os
+from pycpptraj.Frame import Frame
 from pycpptraj.Topology import Topology
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.ArgList import ArgList
@@ -30,6 +31,11 @@ trajlist.AddTrajin("./data/md1_prod.Tc5b.x", argIn, toplist)
 #print trajlist.mode()
 #print trajlist.max_frames
 
-trajin = Trajin()
+# STATUS: got Segmentation fault (core dumped)
+# Reason: can not create Trajin instance (this class in cpptraj has virtual methods)
 trajin = trajlist.front()
-print trajin
+print trajin.TotalFrames
+print trajin.TotalReadFrames
+#frame = trajin.GetNextFrame()
+for traj in trajlist:
+    pass

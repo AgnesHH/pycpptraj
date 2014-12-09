@@ -9,12 +9,12 @@ PXD_include_ana = os.environ['PYCPPTRAJ_HOME'] + "pycpptraj/Analysis/"
 cpptraj_include = os.environ['AMBERHOME'] + "/AmberTools/src/cpptraj/src/"
 amber_include =  os.environ['AMBERHOME'] + "/include/"
 lib_dir = os.environ['AMBERHOME'] + "/lib/"
-pyxfile = "Command.pyx"
+pyxfile = "TrajectoryIO.pyx"
 ext = pyxfile.split(".")[0]
 
 setup(
       ext_modules = cythonize([
-          Extension(ext, ["Command.pyx",],
+          Extension(ext, ["TrajectoryIO.pyx",],
                     libraries=['cpptraj'],
                     library_dirs=[lib_dir,],
                     include_dirs=[PXD_include, PXD_include_ana, PXD_include_action, cpptraj_include, amber_include,])

@@ -1,37 +1,50 @@
 # distutils: language = c++
+from TrajectoryFile cimport _TrajectoryFile
 
 
 cdef class TrajectoryIO:
     def __cinit__(self):
-        # don't create instance for abstract class
-        pass
-        #self.thisptr = new _TrajectoryIO()
+        # _TrajectoryIO class has virtual method
+        # --> create instance of derived class and cast to _TrajectoryIO
+        self.thisptr = <_TrajectoryIO*> new _TrajectoryFile()
 
     def __dealloc__(self):
         if self.thisptr != NULL:
             del self.thisptr
 
-    #def bint HasBox(self):
+    def HasBox(self):
+        return self.thisptr.HasBox()
 
-    #def  Box TrajBox(self):
+    def TrajBox(self):
+        cdef Box box = Box()
+        box.thisptr[0] = self.thisptr.TrajBox()
+        return box
 
-    #def bint HasV(self):
+    def HasV(self):
+        return self.thisptr.HasV()
 
-    #def bint HasT(self):
+    def HasT(self):
+        return self.thisptr.HasT()
 
-    #def  string Title(self):
+    def title(self):
+        return self.thisptr.Title()
 
     #def  ReplicaDimArray ReplicaDimensions(self):
 
-    #def void SetDebug(self,int dIn):
+    def SetDebug(self,int dIn):
+        self.thisptr.SetDebug(dIn)
 
-    #def void SetBox(self, Box bIn):
+    def SetBox(self, Box bIn):
+        self.thisptr.SetBox(bIn.thisptr[0])
 
-    #def void SetVelocity(self,bint vIn):
+    def SetVelocity(self,bint vIn):
+        self.thisptr.SetVelocity(vIn)
 
-    #def void SetTemperature(self,bint tIn):
+    def SetTemperature(self,bint tIn):
+        self.thisptr.SetTemperature(tIn)
 
-    #def void SetTitle(self, string tIn):
+    def SetTitle(self, string tIn):
+        self.thisptr.SetTitle(tIn)
 
-    #def void SetReplicaDims(self, ReplicaDimArray rIn):
+    #def SetReplicaDims(self, ReplicaDimArray rIn):
 

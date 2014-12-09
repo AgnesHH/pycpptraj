@@ -33,7 +33,7 @@ cdef extern from "TrajectoryFile.h":
         TrajFormatType GetTypeFromExtension(const string& e)
         const char * FormatString(TrajFormatType tt)
         void SetDebug(int)
-        void SetTraj_FileName(const string&, bint)
+        void SetTrajFileName(const string&, bint)
         int SetTrajParm(_Topology *)
         _Topology * TrajParm ()const 
         const _FileName & TrajFilename ()const 
@@ -56,3 +56,5 @@ TrajFormatType_dict = {
         UNKNOWN_TRAJ : "UNKNOWN_TRAJ",
 }
 
+cdef class TrajectoryFile:
+    cdef _TrajectoryFile* thisptr

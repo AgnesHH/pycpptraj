@@ -5,3 +5,5 @@ Possible reason: list index out of range
 Possible reasons:
     + check pointer 
         + Did you have: self.thisptr = ... (should be "self.thisptr[0] or deref(self.thisptr)")
+    + Check input file name:
+        Tc5b.Tc5b.nat.crd --> Tc5b.nat.crd (need to have more type-checking)

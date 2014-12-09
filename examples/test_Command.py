@@ -10,6 +10,7 @@ from pycpptraj.Command import Command
 
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 topname = datadir + "Tc5b.top"
+cpptrajin = datadir + "pycpptraj.in"
 trajoutname = datadir + "test.x"
 refname = "./data/Tc5b.nat.crd"
 #trajinname = datadir + "md1_prod.Tc5b.x"
@@ -29,9 +30,7 @@ go
 """
 
 cmmlist = "rms reference out rmsd.dat :3-18@CA"
-
 state = CpptrajState()
-state.TrajLength(topname, trajin_list)
+#state.TrajLength(topname, trajin_list)
 command = Command()
-print command.Dispatch(state, cmmlist)
-
+command.ProcessInput(state, cpptrajin)
