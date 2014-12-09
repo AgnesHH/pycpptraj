@@ -2,12 +2,13 @@
 # TODO: should re-write, looks ugly
 # Note for me: method's name (example)
 # cppframe['methods']['public'][12]['name']
+import os
 import CppHeaderParser
 from util import print_blank_line, Line_codegen
 from util import find_class
 import sys
 
-cpptrajsrc = "/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest.2/AmberTools/src/cpptraj/src/"
+cpptrajsrc = os.environ['AMBERHOME'] + "AmberTools/src/cpptraj/src/"
 file = cpptrajsrc + sys.argv[1]
 indent = " " * 4
 classlist = find_class(cpptrajsrc)
