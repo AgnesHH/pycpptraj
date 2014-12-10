@@ -36,5 +36,5 @@ DataFile
 #DataSetList
 #ActionList
 #Command
-#TrajectoryFile
+TrajectoryFile
 ReplicaDimArray

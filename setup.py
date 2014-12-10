@@ -27,8 +27,8 @@ with open("PYXLIST.txt", 'r') as f:
         if "#" not in line:
             pyxfiles.append(line.split("\n")[0])
 
-USE_CYTHON = True
-if USE_CYTHON == False:
+USE_PYX = True
+if not USE_PYX:
     ext = ".cpp"
 else:
     ext = ".pyx"
@@ -53,7 +53,6 @@ setup(
     author_email="hainm.comp@gmail.com",
     url="https://github.com/hainm/pycpptraj",
     packages=['pycpptraj',],
-    #package_data={"pycpptraj": ["__init__.py", "*.pyx", "*.pxd", "./Action/*", "Analysis/*"]},
     description="""Python wrapper for cpptraj""",
     long_description=read("README.md"),
     license = "BSD License",

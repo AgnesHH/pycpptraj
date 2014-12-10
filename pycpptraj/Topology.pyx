@@ -9,21 +9,26 @@ from NameType cimport NameType
 from TopologyList cimport TopologyList
 
 cdef class Topology:
-    def __cinit__(self, str fname=''):
+    def __cinit__(self, string fname='', *args):
         cdef TopologyList toplist = TopologyList()
         cdef Topology tp
         self.thisptr = new _Topology()
 
-        if fname:
+        if not fname.empty() and not args:
             toplist.AddParmFile(fname)
             self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
+        elif fname.empty() and args:
+            raise NotImplementedError()
+            #pt = args[0]
+            #self.thisptr = new _Topology(tp.thisptr[0])
 
     def __dealloc__(self):
         del self.thisptr
 
-    # create iterators
-    # anyway combine three methods into ONE?
-    # Template?
+    def __getitem__(self, int idx):
+        cdef Atom atom = Atom()
+        pass
+
     def atom_generator(self):
         cdef Atom atom
         cdef atom_iterator it
@@ -54,79 +59,79 @@ cdef class Topology:
             yield mol
             incr(it)
 
-    def SetParmName(self, string title, FileName filename):
+    def set_parm_name(self, string title, FileName filename):
         self.thisptr.SetParmName(title, filename.thisptr[0])
 
-    def SetReferenceCoords(self, Frame frameIn):
+    def set_reference_coords(self, Frame frameIn):
         self.thisptr.SetReferenceCoords(frameIn.thisptr[0])
 
     def c_str(self):
         return self.thisptr.c_str()
 
-    def TruncResAtomName(self, int atom):
+    def trunc_res_atom_name(self, int atom):
         return self.thisptr.TruncResAtomName(atom)
 
-    def AtomMaskName(self, int atom):
+    def atom_mask_name(self, int atom):
         return self.thisptr.AtomMaskName(atom)
 
-    def TruncResNameNum(self, int res):
+    def trunc_res_name_num(self, int res):
         return self.thisptr.TruncResNameNum(res)
 
-    def FindAtomInResidue(self, int res, NameType atname):
+    def find_atom_in_residue(self, int res, NameType atname):
         return self.thisptr.FindAtomInResidue(res, atname.thisptr[0])
     
-    def FindResidueMaxNatom(self):
+    def find_residue_max_natom(self):
         return self.thisptr.FindResidueMaxNatom()
     
     #def SoluteAtoms(self):
     #    return self.thisptr.SoluteAtoms()
 
-    def Summary(self):
+    def summary(self):
         self.thisptr.Summary()
 
-    def Brief(self, char* heading):
+    def brief(self, char* heading):
         self.thisptr.Brief(heading)
 
-    def PrintAtomInfo(self, string maskString):
+    def print_atom_info(self, string maskString):
         self.thisptr.PrintAtomInfo(maskString)
 
     #def PrintBonds(self, BondArray barray, AtomMask maskIn, int nb):
     #    self.thisptr.PrintBonds(barray, maskIn, nb)
 
-    def PrintBondInfo(self, string maskString):
+    def print_bond_info(self, string maskString):
         self.thisptr.PrintBondInfo(maskString)
     
     #def PrintAngles(self):
     #    self.thisptr.PrintAngles()
 
-    def PrintAngleInfo(self, string maskString):
+    def print_angle_info(self, string maskString):
         self.thisptr.PrintAngleInfo(maskString)
 
-    def PrintDihedralInfo(self, string maskString):
+    def print_dihedral_info(self, string maskString):
         self.thisptr.PrintDihedralInfo(maskString)
 
-    def PrintMoleculeInfo(self, maskString):
+    def print_molecule_info(self, maskString):
         self.thisptr.PrintMoleculeInfo(maskString)
 
-    def PrintResidueInfo(self, string maskString):
+    def print_residue_info(self, string maskString):
         self.thisptr.PrintResidueInfo(maskString)
 
-    def PrintChargeMassInfo(self, string maskString, int idtype):
+    def print_charge_mass_info(self, string maskString, int idtype):
         self.thisptr.PrintChargeMassInfo(maskString, idtype)
     
-    def AddTopAtom(self, Atom atomIn, int o_resnum, NameType resname, double[:] XYZin):
+    def add_top_atom(self, Atom atomIn, int o_resnum, NameType resname, double[:] XYZin):
         return self.thisptr.AddTopAtom(atomIn.thisptr[0], o_resnum, resname.thisptr[0], &XYZin[0])
 
-    def StartNewMol(self):
+    def start_new_mol(self):
         self.thisptr.StartNewMol()
 
-    def CommonSetup(self, bint bondsearch):
+    def common_setup(self, bint bondsearch):
         return self.thisptr.CommonSetup(bondsearch)
 
-    def SetOffset(self, double x):
+    def set_offset(self, double x):
         self.thisptr.SetOffset(x)
 
-    def SetIpol(self, int id):
+    def set_ipol(self, int id):
         self.thisptr.SetIpol(id)
 
     #def NextraPts(self):
@@ -135,51 +140,55 @@ cdef class Topology:
     #def HasVelInfo(self):
     #    return self.thisptr.HasVelInfo()
 
-    def OriginalFilename(self):
+    def original_filename(self):
         cdef FileName fname = FileName()
         fname.thisptr[0] = self.thisptr.OriginalFilename()
         return fname
 
-    property Pindex:
+    property p_index:
         def __get__(self):
             return self.thisptr.Pindex()
 
-    property Natom:
+    property n_atoms:
         def __get__(self):
             return self.thisptr.Natom()
 
-    property Nres:
+    property n_res:
         def __get__(self):
             return self.thisptr.Nres()
 
-    property Nmol:
+    property n_mol:
         def __get__(self):
             return self.thisptr.Nmol()
 
-    property Nsolvent:
+    property n_solvent:
         def __get__(self):
             return self.thisptr.Nsolvent()
 
-    property Nframes:
+    property n_frames:
         def __get__(self):
             return self.thisptr.Nframes()
 
-    property NrepDim:
+    property n_repdim:
         def __get__(self):
             return self.thisptr.NrepDim()
 
-    property ParmName:
+    property parm_name:
         def __get__(self):
             return self.thisptr.ParmName()
 
-    property GBradiiSet:
+    property GB_radiiset:
         def __get__(self):
             return self.thisptr.GBradiiSet()
 
-    #property NoRefCoords:
-    #    def __get__(self):
-    #        return self.thisptr.NoRefCoords()
+    def partial_modify_state_by_mask(self, AtomMask m):
+        # TODO: This code does not work correctly. Give None topoplogy instance
+        # cpptraj: return Topology*
+        cdef Topology top = Topology()
+        top.thisptr[0] = self.thisptr.partialModifyStateByMask(m.thisptr[0])[0]
+        return top
 
-    #property FinalSoluteRes:
-    #    def __get__(self):
-    #        return self.thisptr.FinalSoluteRes()
+    #def Topology * modifyStateByMask(self, AtomMask m):
+
+    #def Topology * ModifyByMap(self, vector[int] m):
+
