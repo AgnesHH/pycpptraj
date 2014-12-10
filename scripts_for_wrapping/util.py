@@ -10,9 +10,30 @@ def print_blank_line(num):
     for i in range(num):
         print
 
+def _to_lower_case(word):
+    """convert function name from C/C++ to Python style
+    SetTotalFrames --> set_total_frames
+    """
+    newword = []
+    for i, x in enumerate(word):
+        if x.isupper():
+            # don't add "_" to first letter
+            x = x.lower() if i == 0 else "_" + x.lower()
+        newword.append(x)
+    return "".join(newword)
+
+def func_c_to_py(code):
+    for i, line in enumerate(code):
+        pattern = "    def (.+?)\("
+        foundlist= re.findall(pattern, line)
+        if foundlist:
+            func = foundlist[0]
+            print func
+            newfunc = _to_lower_case(func)
+            code[i] = code[i].replace(func, newfunc, 1)
 
 def find_class(src):
-    p = re.compile(r'#include "(.+?).h"')
+    # p = re.compile(r'#include "(.+?).h"')
     classlist = []
 
     for fname in glob(src + "*.h"):

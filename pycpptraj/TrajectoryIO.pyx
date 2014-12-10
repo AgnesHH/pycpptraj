@@ -12,39 +12,44 @@ cdef class TrajectoryIO:
         if self.thisptr != NULL:
             del self.thisptr
 
-    def HasBox(self):
+    def has_box(self):
         return self.thisptr.HasBox()
 
-    def TrajBox(self):
+    def traj_box(self):
         cdef Box box = Box()
         box.thisptr[0] = self.thisptr.TrajBox()
         return box
 
-    def HasV(self):
+    def has_velocity(self):
         return self.thisptr.HasV()
 
-    def HasT(self):
+    def has_temperature(self):
         return self.thisptr.HasT()
 
+    @property
     def title(self):
         return self.thisptr.Title()
 
-    #def  ReplicaDimArray ReplicaDimensions(self):
-
-    def SetDebug(self,int dIn):
-        self.thisptr.SetDebug(dIn)
-
-    def SetBox(self, Box bIn):
-        self.thisptr.SetBox(bIn.thisptr[0])
-
-    def SetVelocity(self,bint vIn):
-        self.thisptr.SetVelocity(vIn)
-
-    def SetTemperature(self,bint tIn):
-        self.thisptr.SetTemperature(tIn)
-
-    def SetTitle(self, string tIn):
+    title.setter
+    def title(self, string tIn):
         self.thisptr.SetTitle(tIn)
 
-    #def SetReplicaDims(self, ReplicaDimArray rIn):
+    def replica_dim(self):
+        cdef ReplicaDimArray repdim = ReplicaDimArray()
+        repdim.thisptr[0] = self.thisptr.ReplicaDimensions()
+        return repdim
 
+    def set_debug(self,int dIn):
+        self.thisptr.SetDebug(dIn)
+
+    def set_box(self, Box bIn):
+        self.thisptr.SetBox(bIn.thisptr[0])
+
+    def set_velocity(self,bint vIn):
+        self.thisptr.SetVelocity(vIn)
+
+    def set_temperature(self,bint tIn):
+        self.thisptr.SetTemperature(tIn)
+
+    def set_replica_dims(self, ReplicaDimArray rIn):
+        self.thisptr.SetReplicaDims(rIn.thisptr[0])
