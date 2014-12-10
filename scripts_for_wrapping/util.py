@@ -160,26 +160,3 @@ class Line_codegen:
                 return True
         return False
 
-# from http://stackoverflow.com/questions/5136611/capture-stdout-from-a-script-in-python
-# decorator for capturing output
-def Capture_out(f):
-    """
-    Decorator to capture standard output
-    """
-    def captured(*args, **kwarg):
-        import sys
-        from cStringIO import StringIO
-
-        # setup the environment
-        backup = sys.stdout
-        try:
-            sys.stdout = StringIO()     # capture output
-            f(*args, **kwarg)
-            out = sys.stdout.getvalue() # release output
-        finally:
-            sys.stdout.close()  # close the stream 
-            sys.stdout = backup # restore original stdout
-
-        return out # captured output wrapped in a string
-
-    return captured
