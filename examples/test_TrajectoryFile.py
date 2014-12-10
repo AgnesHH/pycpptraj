@@ -27,5 +27,5 @@ go
 """
 
 trajins = TrajectoryFile()
-#trajins.read_options()
+trajins.read_options()
 trajins.write_options()

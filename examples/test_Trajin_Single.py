@@ -23,10 +23,10 @@ print arglist
 
 ts.SetupTrajRead(mdx, arglist, top, checkBox=True)
 ts.BeginTraj(1)
-#frame = Frame()
-#print ts.ReadTrajFrame(10, frame)
+frame = Frame()
+print ts.ReadTrajFrame(10, frame)
 #print frame
 ts.EndTraj()
-ts.PrintInfo(1)
+#ts.PrintInfo(1)
 #print ts.HasVelocity()
 #print ts.NreplicaDimension()

@@ -49,79 +49,79 @@ cdef class ArgList:
     def __getitem__(ArgList self, idx):
         return self.thisptr[0][idx]
 
-    def ClearList(self):
+    def clear_list(self):
         self.thisptr.ClearList()
 
-    def SetList(self, string inputString, char* separator):
+    def set_list(self, string inputString, char* separator):
         return self.thisptr.SetList(inputString, separator)
     
-    def RemainingArgs(self):
+    def remaining_args(self):
         cdef ArgList remain = ArgList()
         remain.thisptr[0] = self.thisptr.RemainingArgs()
         return remain
 
-    def AddArg(self, string minput):
+    def add_arg(self, string minput):
         self.thisptr.AddArg(minput)
 
-    def List(self):
+    def list(self):
         return self.thisptr.List()
 
     @property
-    def Nargs(self):
+    def nargs(self):
         return self.thisptr.Nargs()
 
     def empty(self):
         return self.thisptr.empty()
 
-    def ArgLine(self):
+    def arg_line(self):
         return self.thisptr.ArgLine()
 
-    def MarkArg(self, int arg):
+    def mark_arg(self, int arg):
         self.thisptr.MarkArg(arg)
 
-    def CheckForMoreArgs(self):
+    def check_for_more_args(self):
         return self.thisptr.CheckForMoreArgs()
 
-    def PrintList(self):
+    def print_list(self):
         self.thisptr.PrintList()
 
-    def PrintDebug(self):
+    def print_debug(self):
         self.thisptr.PrintDebug()
 
-    def RemoveFirstArg(self):
+    def remove_first_arg(self):
         self.thisptr.RemoveFirstArg()
 
-    def CommandIs(self, char* cm):
+    def command_is(self, char* cm):
         return self.thisptr.CommandIs(cm)
     
-    def GetStringNext(self):
+    def get_string_next(self):
         return self.thisptr.GetStringNext()
 
-    def GetStringKey(self, char* c):
+    def get_string_key(self, char* c):
         return self.thisptr.GetStringKey(c)
 
-    def GetMaskNext(self):
+    def get_mask_next(self):
         return self.thisptr.GetMaskNext()
 
-    def getNextTag(self):
+    def get_next_tag(self):
         return self.thisptr.getNextTag()
 
-    def getNextInteger(self, defint):
+    def get_next_integer(self, defint):
         return self.thisptr.getNextInteger(defint)
 
-    def getNextDouble(self, double defd):
+    def get_next_double(self, double defd):
         return self.thisptr.getNextDouble(defd)
 
-    def getKeyInt(self, char* key, int defint):
+    def get_key_int(self, char* key, int defint):
         return self.thisptr.getKeyInt(key, defint)
 
-    def getKeyDouble(self, char* key, double defd):
+    def get_key_double(self, char* key, double defd):
         return self.thisptr.getKeyDouble(key, defd)
 
-    def hasKey(self, char* key):
+    def has_key(self, char* key):
         return self.thisptr.hasKey(key)
 
-    def Contains(self, char* key):
+    def contains(self, char* key):
         return self.thisptr.Contains(key)
 
     # those methods exist in ArgList.h but don't in ArgList.cpp 
