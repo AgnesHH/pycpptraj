@@ -1,7 +1,6 @@
 # distutil: language = c++
 
 from DispatchObject cimport *
-from ActionList cimport *
 from Topology cimport *
 from TopologyList cimport *
 from FrameList cimport *

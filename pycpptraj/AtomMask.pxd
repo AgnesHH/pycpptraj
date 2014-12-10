@@ -1,6 +1,8 @@
 # distutils: language = c++
 from MaskToken cimport *
 from libcpp.vector cimport vector
+from vector_pycpptraj cimport vector as cppvector
+from libcpp.string cimport string
 
 
 cdef extern from "AtomMask.h": 
@@ -12,11 +14,11 @@ cdef extern from "AtomMask.h":
         _AtomMask(const _AtomMask &)
         #_AtomMask & operator =(const _AtomMask &)
         const vector [int]& Selected()const 
-        #const_iterator begin()const 
-        #const_iterator end()const 
+        cppvector[int].const_iterator begin()const 
+        cppvector[int].const_iterator end()const 
         int back()const 
         int Nselected()const 
-        const int & operator [ ](int idx)const 
+        const int & index_opr "operator[]"(int idx)const 
         const char * MaskString()const 
         const string& MaskExpression()const 
         bint MaskStringSet()const 
@@ -26,18 +28,18 @@ cdef extern from "AtomMask.h":
         void ClearSelected()
         void InvertMask()
         int NumAtomsInCommon(const _AtomMask&)
-        void AddSelected_Atom(int i)
-        void Add_Atom(int)
-        void Add_Atoms(const vector [int]&)
-        void Add_Atom_Range(int, int)
+        void AddSelectedAtom(int i)
+        void AddAtom(int)
+        void AddAtoms(const vector [int]&)
+        void AddAtomRange(int, int)
         void AddMaskAtPosition(const _AtomMask&, int)
-        void PrintMask_Atoms(const char *)const 
+        void PrintMaskAtoms(const char *)const 
         int SetMaskString(const char *)
         int SetMaskString(const string&)
         void SetupIntMask(const char *, int, int)
         void SetupCharMask(const char *, int, int)
-        bint _AtomInCharMask(int)const 
-        bint _AtomsInCharMask(int, int)const 
+        bint AtomInCharMask(int)const 
+        bint AtomsInCharMask(int, int)const 
         void SetNatom(int a)
         int ConvertToCharMask()
         int ConvertToIntMask()
@@ -45,6 +47,10 @@ cdef extern from "AtomMask.h":
         void BriefMaskInfo()const 
         #inline token_iterator begintoken()const 
         #inline token_iterator endtoken()const 
+
+#ctypedef fused charstring:
+#    char*
+#    string
 
 cdef class AtomMask:
     cdef _AtomMask* thisptr

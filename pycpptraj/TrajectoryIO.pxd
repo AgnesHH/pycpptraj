@@ -1,7 +1,7 @@
 # distutils: language = c++
 from libcpp.string cimport string
 from Topology cimport *
-from ReplicaDimArray cimport *
+#from ReplicaDimArray cimport *
 from CpptrajFile cimport *
 from ArgList cimport *
 from BaseIOtype cimport *
@@ -27,13 +27,13 @@ cdef extern from "TrajectoryIO.h":
         bint HasV() const 
         bint HasT() const 
         const string& Title() const 
-        const _ReplicaDimArray& Replica_Dimensions() const 
+        #const ReplicaDimArray& ReplicaDimensions() const 
         void SetDebug(int dIn)
         void SetBox(const _Box& bIn)
         void SetVelocity(bint vIn)
         void SetTemperature(bint tIn)
         void SetTitle(const string& tIn)
-        void SetReplicaDims(const _ReplicaDimArray& rIn)
+        #void SetReplicaDims(const _ReplicaDimArray& rIn)
 
 
 cdef class TrajectoryIO:
