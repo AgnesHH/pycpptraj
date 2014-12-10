@@ -1,10 +1,12 @@
+# This is a list of finished/workable files
+# setup.py will look at uncomment lines to "cythonize"
 ArgList
 Atom
 AtomMask
 Box
 BufferedLine
 CpptrajFile
-Cpptraj
+#Cpptraj
 CpptrajState
 Dimension
 Matrix_3x3
@@ -25,13 +27,14 @@ FileName
 Frame
 BaseIOtype
 TrajectoryIO
-FrameList
+#FrameList
 DataSet
 DataFile
-DataFileList
+#DataFileList
 #NetcdfFile
-ReferenceFrame
-DataSetList
-ActionList
-Command
-TrajectoryFile
+#ReferenceFrame
+#DataSetList
+#ActionList
+#Command
+#TrajectoryFile
+ReplicaDimArray
