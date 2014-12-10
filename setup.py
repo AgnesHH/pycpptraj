@@ -11,6 +11,8 @@ def read(fname):
 
 rootname = os.getcwd()
 pycpptraj_home = rootname + "/pycpptraj/"
+action_dir = pycpptraj_home + "/Action/"
+ana_dir = pycpptraj_home + "/Analysis/"
 
 try:
     cpptraj_dir = cpptraj_include = os.environ['AMBERHOME'] + "/AmberTools/src/cpptraj/src/"
@@ -41,7 +43,7 @@ for ext_name in pyxfiles:
                     libraries=['cpptraj'],
                     language='c++',
                     library_dirs=[libdir,],
-                    include_dirs=[cpptraj_include, pycpptraj_home])
+                    include_dirs=[cpptraj_include, pycpptraj_home, action_dir, ana_dir])
     ext_modules.append(extmod)
 
 setup(
