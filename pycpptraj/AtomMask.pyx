@@ -1,4 +1,5 @@
 # distutils: language = c++
+from libcpp.vector cimport vector
 
 
 cdef class AtomMask:
@@ -13,9 +14,9 @@ cdef class AtomMask:
                 if isinstance(args[0], basestring):
                     maskstring = args[0]
                     self.thisptr = new _AtomMask(maskstring)
-                if isinstance(args[0], AtomMask):
+                elif isinstance(args[0], AtomMask):
                     rhs_atm = args[0]
-                    self.thisptr = new _AtomMask(rhs_atm)
+                    self.thisptr = new _AtomMask(rhs_atm.thisptr[0])
                 else:
                     atom_num = args[0]
                     self.thisptr = new _AtomMask(atom_num)
@@ -27,92 +28,107 @@ cdef class AtomMask:
                 raise NotImplementedError()
 
     def __dealloc__(self):
-       del self.thisptr
+        if self.thisptr != NULL:
+            del self.thisptr
 
-    def  vector[int] Selected(self):
+    def  Selected(self):
         return self.thisptr.Selected()
 
-
     #def _iterator begin(self):
-
     #def _iterator end(self):
+    def __iter__(self):
+        # Not yet supported
+        raise NotImplementedError()
 
-    def int back(self):
+    def back(self):
         return self.thisptr.back()
 
-    def int Nselected(self):
+    def Nselected(self):
         return self.thisptr.Nselected()
 
     #def  int operator[](self,int idx):
     def __getitem__(self, int idx):
         return self.thisptr.index_opr(idx)
 
-    def  char * MaskString(self):
+    def MaskString(self):
         return self.thisptr.MaskString()
 
-    def  string MaskExpression(self):
+    def MaskExpression(self):
         return self.thisptr.MaskExpression()
 
-    def bint MaskStringSet(self):
+    def MaskStringSet(self):
         return self.thisptr.MaskStringSet()
 
-    def bint None(self):
+    def None(self):
         return self.thisptr.None()
 
-    def bint IsCharMask(self):
+    def IsCharMask(self):
         return self.thisptr.IsCharMask()
 
-
-    def void ResetMask(self):
+    def ResetMask(self):
         self.thisptr.ResetMask()
 
-    def void ClearSelected(self):
+    def ClearSelected(self):
         self.thisptr.ClearSelected()
 
-    def void InvertMask(self):
+    def InvertMask(self):
         self.thisptr.InvertMask()
 
-    def int NumAtomsInCommon(self, AtomMask other_mask):
+    def NumAtomsInCommon(self, AtomMask other_mask):
         return self.thisptr.NumAtomsInCommon(other_mask.thisptr[0])
 
-    def void AddSelectedAtom(self,int i):
-        self.thisptr.args(i)
+    def AddSelectedAtom(self,int i):
+        self.thisptr.AddSelectedAtom(i)
 
-    def void AddAtom(self,int):
+    def AddAtom(self,int atom_num):
         self.thisptr.AddAtom(atom_num)
 
-    def void AddAtoms(self, vector[int]):
-        self.thisptr.AddAtoms()
+    def AddAtoms(self, vector[int] v):
+        self.thisptr.AddAtoms(v)
 
-    #def void AddAtomRange(self,int, int):
+    def AddAtomRange(self, int begin, int end):
+        self.thisptr.AddAtomRange(begin, end)
 
-    #def void AddMaskAtPosition(self, AtomMask, int):
+    def AddMaskAtPosition(self, AtomMask atm, int pos):
+        self.thisptr.AddMaskAtPosition(atm.thisptr[0], pos)
 
-    #def void PrintMaskAtoms(self, char *):
+    def PrintMaskAtoms(self, char* mask):
+        self.thisptr.PrintMaskAtoms(mask)
 
-    #def int SetMaskString(self, char *):
+    def SetMaskString(self, char* mask):
+        return self.thisptr.SetMaskString(mask)
 
-    #def int SetMaskString(self, string):
+    def SetupIntMask(self, char *charmask, int natom, int debug=0):
+        self.thisptr.SetupIntMask(charmask, natom, debug)
 
-    #def void SetupIntMask(self, char *, int, int):
+    def SetupCharMask(self, char* charmask, int natom, int debug=0):
+        self.thisptr.SetupCharMask(charmask, natom, debug)
 
-    #def void SetupCharMask(self, char *, int, int):
+    def AtomsInCharMask(self, *args):
+        cdef atomid, begin, end
+        if len(args) == 1:
+            atomid = args[0]
+            return self.thisptr.AtomInCharMask(atomid)
+        elif len(args) == 2:
+            begin, end = args
+            return self.thisptr.AtomsInCharMask(begin, end)
 
-    #def bint AtomInCharMask(self,int):
+    def SetNatom(self,int a):
+        self.thisptr.SetNatom(a)
 
-    #def bint AtomsInCharMask(self,int, int):
+    def ConvertToCharMask(self):
+        return self.thisptr.ConvertToCharMask()
 
-    #def void SetNatom(self,int a):
+    def ConvertToIntMask(self):
+        return self.thisptr.ConvertToIntMask()
 
-    #def int ConvertToCharMask(self):
+    def MaskInfo(self):
+        self.thisptr.MaskInfo()
 
-    #def int ConvertToIntMask(self):
+    def BriefMaskInfo(self):
+        self.thisptr.BriefMaskInfo()
 
-    #def void MaskInfo(self):
-
-    #def void BriefMaskInfo(self):
-
+    # Not yet support
     #def  token_iterator begintoken(self):
-
     #def  token_iterator endtoken(self):
 

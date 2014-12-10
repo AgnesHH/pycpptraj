@@ -326,14 +326,14 @@ cdef class Frame:
     def CalcTemperature(self, AtomMask mask, int deg_of_freedom):
         return self.thisptr.CalcTemperature(mask.thisptr[0], deg_of_freedom)
 
-    def show_my_pxd(self):
-        """showing pxd file"""
-        try:
-            pycpptraj = __import__('pycpptraj')
-            path = pycpptraj.__path__
-            pxdname = str(self.__class__).split(".")[-2]
-            pxd = path + "/" + pxdname + ".pxd"
-            with open(pxd) as f:
-                print f.read()
-        except:
-            raise ValueError()
+    #def show_my_pxd(self):
+    #    """showing pxd file"""
+    #    try:
+    #        pycpptraj = __import__('pycpptraj')
+    #        path = pycpptraj.__path__
+    #        pxdname = str(self.__class__).split(".")[-2]
+    #        pxd = path + "/" + pxdname + ".pxd"
+    #        with open(pxd) as f:
+    #            print f.read()
+    #    except:
+    #        raise ValueError()
