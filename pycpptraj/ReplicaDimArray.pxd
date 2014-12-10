@@ -4,8 +4,8 @@
 cdef extern from "ReplicaDimArray.h": 
     cdef cppclass _ReplicaDimArray "ReplicaDimArray":
         _ReplicaDimArray()
-        int operator[](int idx)const 
-        void AddRemd_Dimension(int d)
+        int index_opr "operator[]"(int idx)const 
+        void AddRemdDimension(int d)
         void clear()
         int Ndims()const 
         const char* Description(int idx)const 
