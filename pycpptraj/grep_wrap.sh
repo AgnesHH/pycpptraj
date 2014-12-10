@@ -2,5 +2,4 @@
 
 #grep word in cpptraj folder
 
-#cpptrajsrc="/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest.2/AmberTools/src/cpptraj/"
-grep $1 /mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest.2/AmberTools/src/cpptraj/src/$2
+grep $1 $AMBERHOME/AmberTools/src/cpptraj/src/$2
