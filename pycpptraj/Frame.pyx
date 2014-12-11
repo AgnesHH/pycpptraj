@@ -1,9 +1,11 @@
 # distutils: language = c++
-# TODO: 
-#     + figure out why I can not delcare "ctypedef vector[float] CRDtype" inside cppclass
-#     + add more methods
-# 
+
 from cython.operator cimport dereference as deref
+cimport numpy as np
+try:
+    import numpy as np
+except:
+    pass
 from libcpp.vector cimport vector
 from AtomMask cimport *
 from AtomMask import AtomMask
@@ -24,7 +26,7 @@ cdef class Frame:
         cdef Atom at
         cdef list atlist
         cdef int natom
-        #self.thisptr = new _Frame()
+
         if not args:
             self.thisptr = new _Frame()
         else:
@@ -106,7 +108,7 @@ cdef class Frame:
         def __get__(self):
             return self.thisptr.size()
 
-    property NrepDims:
+    property n_repdims:
         def __get__(self):
             return self.thisptr.NrepDims()
 
@@ -116,33 +118,73 @@ cdef class Frame:
 
     #def  double * XYZ(self,int atnum):
     # Correct yet?
-    def x_y_z(self, int atnum):
+    def xyz(self):
         # cpptraj: return double*
-        raise NotImplementedError()
-        # TODO: throw data or memory view from pointer
-        #cdef double[:] xyz = self.thisptr.XYZ(atnum)
-        #return xyz
+        cdef int i
+        cdef natom = self.natom
+        #cdef double[:] _xyz
+        cdef vector[double] v
 
-    def crd(self,int idx):
-        # cpptraj: return double*
-        raise NotImplementedError()
+        for i in range(natom):
+            #_xyz[3 * i]     = self.thisptr.XYZ(i)[0]
+            #_xyz[3 * i]     = self.thisptr.XYZ(i)[1]
+            #_xyz[3 * i + 1] = self.thisptr.XYZ(i)[2]
+            v.push_back(self.thisptr.XYZ(i)[0])
+            v.push_back(self.thisptr.XYZ(i)[1])
+            v.push_back(self.thisptr.XYZ(i)[2])
+        #_xyz = v
+        #return _xyz
+        # TODO: return array instead of vector (Cython will convert vector to list)
+        return v
 
-    def v_x_y_z(self,int atnum):
-        raise NotImplementedError()
-        # cpptraj: return double*
-    #    """TODO: not done yet"""
-    #    cdef[:] darray
-    #    cdef* dptr
-    #    dptr = self.thisptr.VXYZ(atnum)
-    #    pass
+    #def xyz(self):
+    #    # STATUS: return wrong array
+    #    try:
+    #        import numpy as np
+    #    except:
+    #        raise ImportError("where is my numpy?")
+    #    # numpy version
+    #    # cpptraj: return double*
+    #    cdef int i
+    #    cdef natom = self.natom
+    #    cdef double[:] _xyz = np.empty(3 * natom)
+
+    #    for i in range(natom):
+    #        _xyz[3 * i]     = self.thisptr.XYZ(i)[0]
+    #        _xyz[3 * i]     = self.thisptr.XYZ(i)[1]
+    #        _xyz[3 * i + 1] = self.thisptr.XYZ(i)[2]
+    #    return _xyz[:natom]
+
+    #def crd(self,int idx):
+    #    cdef int i
+    #    cdef natom = self.natom
+    #    cdef double[:] _xyz
+
+    #    for i in range(3 * natom):
+    #        _xyz[i]     = self.thisptr.CRD(i)[0]
+    #        _xyz[i + 1] = self.thisptr.CRD(i)[1]
+    #        _xyz[i + 2] = self.thisptr.CRD(i)[2]
+    #    return _xyz[:3*natom]
+
+    #def v_xyz(self,int atnum):
+    #    # cpptraj: return double*
+    #    cdef int i
+    #    cdef natom = self.natom
+    #    cdef double[:] _xyz
+
+    #    for i in range(natom):
+    #        _xyz[3 * i    ] = self.thisptr.VXYZ(i)[0]
+    #        _xyz[3 * i + 1] = self.thisptr.VXYZ(i)[1]
+    #        _xyz[3 * i + 2] = self.thisptr.VXYZ(i)[2]
+    #    return _xyz[:3*natom]
 
     def mass(self,int atnum):
         return self.thisptr.Mass(atnum)
 
-    #def BoxCrd(self):
-    #    cdef Box box = Box()
-    #    box.thisptr[0] = self.thisptr.BoxCrd()
-    #    return box
+    def box_crd(self):
+        cdef Box box = Box()
+        box.thisptr[0] = self.thisptr.BoxCrd()
+        return box
 
     def x_address(self):
         # cpptraj: return double*
@@ -178,9 +220,7 @@ cdef class Frame:
     def setup_frame_x_m(self, vector[double] Xin, vector[double] massIn):
         return self.thisptr.SetupFrameXM(Xin, massIn)
 
-    #def SetupFrameV(self, atlist, bint hasVelocity, int nDim):
     def setup_frame_v(self, Topology top, bint hasVelocity, int nDim):
-        #cdef vector[_Atom] v = atomlist_to_vector(atlist)
         return self.thisptr.SetupFrameV(top.thisptr.Atoms(), hasVelocity, nDim)
 
     def setup_frame_from_mask(self, AtomMask atmask, list atlist):
@@ -194,42 +234,30 @@ cdef class Frame:
         else:
             atmask = args[0]
             self.thisptr.SetCoordinates(frame.thisptr[0], atmask.thisptr[0])
+
     def set_frame(self, Frame frame, AtomMask atmask):
         self.thisptr.SetFrame(frame.thisptr[0], atmask.thisptr[0])
 
     def set_coordinates_by_map(self, Frame frame, vector[int] mapIn):
         self.thisptr.SetCoordinatesByMap(frame.thisptr[0], mapIn)
 
-    # not in Frame.pxd
-    #def SetReferenceByMap(self, Frame frame, vector[int] mapIn):
-    #    self.thisptr.SetReferenceByMap(frame.thisptr[0], mapIn)
-
-    # not in Frame.pxd
-    #def SetTargetByMap(self, Frame frame, vector[int] mapIn):
-    #    self.thisptr.SetTargetByMap(frame.thisptr[0], mapIn)
-
     def zero_coords(self):
         self.thisptr.ZeroCoords()
 
     #def Frame operator+=(self, Frame):
-
     #def Frame operator-=(self, Frame):
-
     #def Frame operator*=(self, Frame):
 
-    #def  Frame operator*(self, Frame):
     def __mul__(Frame self, Frame other):
         cdef Frame frame = Frame()
         frame.thisptr[0] = self.thisptr[0] * other.thisptr[0]
         return frame
 
-    #def  Frame operator-(self, Frame):
     def __sub__(Frame self, Frame other):
         cdef Frame frame = Frame()
         frame.thisptr[0] = self.thisptr[0] - other.thisptr[0]
         return frame
 
-    #def Divide(self, Frame, double):
     def divide(self, double divisor, *args):
         cdef Frame frame
         if not args:
@@ -255,10 +283,6 @@ cdef class Frame:
         cdef Vec3 v3 = Vec3()
         v3.thisptr[0] = self.thisptr.VGeometricCenter(atmask.thisptr[0])
         return v3
-
-    #def  Vec3 VCenterOfMass(self,int, int):
-
-    #def  Vec3 VGeometricCenter(self,int, int):
 
     def translate(self, *args):
         cdef firstAtom, lastAtom
@@ -290,9 +314,11 @@ cdef class Frame:
     def trans_rot_trans(self, Vec3 vec3, Matrix_3x3 m3, Vec3 vec3_2):
         self.thisptr.Trans_Rot_Trans(vec3.thisptr[0], m3.thisptr[0], vec3_2.thisptr[0])
 
-    #def Scale(self, AtomMask, double, double, double):
+    def scale(self, AtomMask atm, double sx, double sy, double sz):
+        self.thisptr.Scale(atm.thisptr[0], sx, sy, sz)
 
-    #def Center(self, AtomMask, CenterMode, Vec3, bint):
+    def center(self, AtomMask atm, CenterMode ctmode, Vec3 v, bint use_mass=False):
+        self.thisptr.Center(atm.thisptr[0], ctmode, v.thisptr[0], use_mass)
 
     def center_on_origin(self,bint useMassIn):
         cdef Vec3 v = Vec3()
@@ -311,32 +337,31 @@ cdef class Frame:
         else:
             raise NotImplementedError()
 
+    def rmsd_centered_ref(self, Frame ref, bint use_mass=False, *args):
+        cdef Matrix_3x3 mat 
+        cdef Vec3 v
 
-    #def RMSD_CenteredRef(self, Frame, bint):
+        if not args:
+            return self.thisptr.RMSD_CenteredRef(ref.thisptr[0], use_mass)
+        else:
+            mat, v = args
+            return self.thisptr.RMSD_CenteredRef(ref.thisptr[0], mat.thisptr[0], v.thisptr[0], use_mass)
 
-    #def RMSD_CenteredRef(self, Frame, Matrix_3x3, Vec3, bint):
-
-    def rmsd__no_fit(self, Frame frame, useMassIn):
+    def rmsd_no_fit(self, Frame frame, useMassIn):
         return self.thisptr.RMSD_NoFit(frame.thisptr[0], useMassIn)
 
     def dist_rmsd(self, Frame frame):
         return self.thisptr.DISTRMSD(frame.thisptr[0])
 
-    #def SetAxisOfRotation(self,int, int):
+    def set_axis_of_rotation(self, int atom1, int atom2):
+        cdef Vec3 vec = Vec3()
+        vec.thisptr[0] = self.thisptr.SetAxisOfRotation(atom1, atom2)
+        return vec
 
-    #def CalculateInertia(self, AtomMask, Matrix_3x3):
+    def calculate_inertia(self, AtomMask atm, Matrix_3x3 Inertia):
+        cdef Vec3 vec = Vec3()
+        vec.thisptr[0] = self.thisptr.CalculateInertia(atm.thisptr[0], Inertia.thisptr[0])
+        return vec
 
     def calc_temperature(self, AtomMask mask, int deg_of_freedom):
         return self.thisptr.CalcTemperature(mask.thisptr[0], deg_of_freedom)
-
-    #def show_my_pxd(self):
-    #    """showing pxd file"""
-    #    try:
-    #        pycpptraj = __import__('pycpptraj')
-    #        path = pycpptraj.__path__
-    #        pxdname = str(self.__class__).split(".")[-2]
-    #        pxd = path + "/" + pxdname + ".pxd"
-    #        with open(pxd) as f:
-    #            print f.read()
-    #    except:
-    #        raise ValueError()

@@ -32,7 +32,7 @@ DataSet
 DataFile
 #DataFileList
 #NetcdfFile
-#ReferenceFrame
+ReferenceFrame
 #DataSetList
 #ActionList
 #Command

@@ -11,6 +11,7 @@ cdef class ReferenceFrame:
     def coord(self):
         cdef Frame frame = Frame()
         frame.thisptr[0] = self.thisptr.Coord()
+        return frame
 
     def parm(self):
         cdef Topology top = Topology()

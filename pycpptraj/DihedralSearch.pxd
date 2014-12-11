@@ -10,7 +10,7 @@ from ArgList cimport *
 cdef extern from "DihedralSearch.h": 
     cdef cppclass _DihedralMask "DihedralSearch::DihedralMask":
         DihedralMask() 
-        DihedralMask(int, int, int, int, int, const string&, _DihedralType)
+        DihedralMask(int, int, int, int, int, const string&, DihedralType2)
         int A0() const 
         int A1() const 
         int A2() const 
@@ -18,11 +18,11 @@ cdef extern from "DihedralSearch.h":
         int ResNum() const 
         const string& Name() const 
         bint None() const 
-        _DihedralType Type() const 
+        DihedralType2 Type() const 
 
 
     # DihedralSearch.h
-    ctypedef enum DihedralType "DihedralSearch::DihedralType":
+    ctypedef enum DihedralType2 "DihedralSearch::DihedralType":
         PHI "DihedralSearch::PHI"
         PSI "DihedralSearch::PSI"
         CHIP "DihedralSearch::CHIP"
@@ -45,8 +45,8 @@ cdef extern from "DihedralSearch.h":
         _DihedralSearch() 
         void ListKnownTypes() 
         void OffsetHelp() 
-        _DihedralType GetType(const string&)
-        int SearchFor(_DihedralType)
+        DihedralType2 GetType(const string&)
+        int SearchFor(DihedralType2)
         void SearchForArgs(_ArgList&)
         int SearchForNewType(int, const string&, const string&, const string&, const string&, const string&)
         int SearchForAll() 
@@ -61,19 +61,13 @@ cdef extern from "DihedralSearch.h":
     #cdef cppclass DihedralToken "DihedralSearch::DihedralToken":
     #    DihedralToken() 
     #    DihedralToken(int, const _NameType&, const _NameType&, const _NameType&, const _NameType&, const string&)
-    #    DihedralToken(const DIH_TYPE&, _DihedralType)
+    #    DihedralToken(const DIH_TYPE&, DihedralType2)
     #    DihedralMask FindDihedral_Atoms(const _Topology&, int)
     #    const string& Name() const 
-    #    _DihedralType Type() const 
+    #    DihedralType2 Type() const 
     #    void Set_AtomName(int i, const _NameType& n)
 
 
-#cdef class DihedralMask:
-#    cdef _DihedralMask* thisptr
-
 cdef class DihedralSearch:
     cdef _DihedralSearch* thisptr
-
-#cdef class DihedralSearch::DihedralToken:
-#    cdef _DihedralSearch::DihedralToken* thisptr
 

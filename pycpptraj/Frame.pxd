@@ -42,7 +42,7 @@ cdef extern from "Frame.h":
         const double * CRD(int idx) const 
         const double * VXYZ(int atnum) const 
         double Mass(int atnum) const 
-        const _Box& _BoxCrd() const 
+        const _Box& BoxCrd() const 
         inline double * xAddress() 
         inline double * vAddress() 
         inline double * bAddress() 

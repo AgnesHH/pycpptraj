@@ -1,4 +1,0 @@
-parm Tc5b.top
-#trajin md1_prod.x
-#trajout test.x
-dihedralinfo out dih_info.dat
