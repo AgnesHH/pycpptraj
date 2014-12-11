@@ -5,9 +5,12 @@ from pycpptraj.FileName import FileName
 
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 fname = "./data/Tc5b.top"
+
 top = Topology(fname=fname)
+top2 = top.modifyStateByMask(AtomMask("!@CA"))
 
 top.summary()
+top.atom_info("@CA")
 
 #print "test atom_iterator"
 #for atom in top.atom_generator():
@@ -24,8 +27,6 @@ top.summary()
 #top.print_atom_info("@CA")
 
 # dummy test for modify top
-top2 = top.modify_by_map(range(1,20))
-top2.summary()
 # test empty file
 #top2 = Topology()
 #top2.summary()
