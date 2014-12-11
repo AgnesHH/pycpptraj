@@ -2,8 +2,9 @@
 from DataSet cimport DataSet
 
 
-cdef class DataSet_Coords(DataSet):
+cdef class DataSet_Coords(DataSet_1D):
     def __cinit__(self):
+        pass
         # abstract class
         #self.thisptr = new _DataSet_Coords()
 

@@ -16,57 +16,57 @@ cdef class DataSet:
 
     #def DataSet(self,DataType, int, int, int):
 
-    def SetWidth(self,int widthIn):
+    def set_width(self,int widthIn):
         self.thisptr.SetWidth(widthIn)
 
-    def SetPrecision(self, int widthIn , int precisionIno):
+    def set_precision(self, int widthIn , int precisionIno):
         self.thisptr.SetPrecision(widthIn, precisionIno)
 
-    def SetupSet(self, string nameIn, int idxIn, string aspectIn):
+    def setup_set(self, string nameIn, int idxIn, string aspectIn):
         return self.thisptr.SetupSet(nameIn, idxIn, aspectIn)
 
-    def SetLegend(self, string lIn):
+    def set_legend(self, string lIn):
         self.thisptr.SetLegend(lIn)
 
-    def SetScalar(self, scalarMode mIn):
+    def set_scalar(self, scalarMode mIn):
         self.thisptr.SetScalar(mIn)
 
-    def SetDim(self,DimIdxType i, Dimension d):
+    def set_dim(self,DimIdxType i, Dimension d):
         self.thisptr.SetDim(i, d.thisptr[0])
 
-    def SetScalar(self,scalarMode mIn, scalarType mT):
+    def set_scalar(self,scalarMode mIn, scalarType mT):
         self.thisptr.SetScalar(mIn, mT)
 
-    def SetDataSetFormat(self, bint leftAlignIn):
+    def set_data_set_format(self, bint leftAlignIn):
         return self.thisptr.SetDataSetFormat(leftAlignIn)
 
-    def Matches(self, string dsname, int idxnum, string aspectIn):
+    def matches(self, string dsname, int idxnum, string aspectIn):
         return self.thisptr.Matches(dsname, idxnum, aspectIn)
 
-    def ScalarDescription(self):
+    def scalar_description(self):
         self.thisptr.ScalarDescription()
 
-    def Empty(self):
+    def empty(self):
         return self.thisptr.Empty()
 
     @property
-    def Legend(self):
+    def legend(self):
         return self.thisptr.Legend()
     
     @property
-    def Name(self):
+    def name(self):
         return self.thisptr.Name()
 
     @property
-    def Idx(self):
+    def idx(self):
         return self.thisptr.Idx()
     
     @property
-    def Aspect(self):
+    def aspect(self):
         return self.thisptr.Aspect()
 
     @property
-    def ColumnWidth(self):
+    def column_width(self):
         return self.thisptr.ColumnWidth()
     
     @property
@@ -74,18 +74,18 @@ cdef class DataSet:
         return self.thisptr.Type()
 
     @property
-    def ScalarMode(self):
+    def scalar_mode(self):
         return self.thisptr.ScalarMode()
 
     @property
-    def ScalarType(self):
+    def scalar_type(self):
         return self.thisptr.ScalarType()
 
     @property 
-    def Ndim(self):
+    def ndim(self):
         return self.thisptr.Ndim()
 
-    def Dim(self,int i):
+    def dim(self,int i):
         cdef Dimension dim = Dimension()
         dim.thisptr[0] = self.thisptr.Dim(i)
 
@@ -98,5 +98,5 @@ cdef class DataSet:
             raise NotImplemented()
 
     @property
-    def DataFormat(self):
+    def data_format(self):
         return self.thisptr.DataFormat()
