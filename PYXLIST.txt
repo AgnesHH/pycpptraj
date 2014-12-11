@@ -39,3 +39,4 @@ DataFile
 TrajectoryFile
 ReplicaDimArray
 DataSet_Coords
+DihedralSearch
