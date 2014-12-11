@@ -40,3 +40,4 @@ TrajectoryFile
 ReplicaDimArray
 DataSet_Coords
 DihedralSearch
+BufferedFrame
