@@ -1,8 +1,10 @@
 import os
+import numpy as np
 from pycpptraj.Frame import Frame
 from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.ArgList import ArgList
 from pycpptraj.Topology import Topology
+from pycpptraj.ReferenceFrame import ReferenceFrame
 
 #from pycpptraj.Trajin_Single
 
@@ -10,6 +12,7 @@ ts = Trajin_Single()
 
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 topname = datadir + "Tc5b.top"
+refname = "./data/Tc5b.nat.crd"
 #mdx = datadir + "Tc5b.nat.crd"
 mdx = "./data/md1_prod.Tc5b.x"
 
@@ -43,16 +46,21 @@ frame = Frame()
 frame.setup_frame_v(top, ts.has_velocity(), ts.nreplica_dimension())
 frame2 = Frame(frame)
 
-ts.begin_traj(False)
-ts.get_next_frame(frame)
-ts.get_next_frame(frame2)
-print frame.empty()
-print frame2.empty()
-print frame.rmsd(frame2)
-print frame.dist_rmsd(frame2)
-print frame2.natom
-print frame.natom
-ts.end_traj()
+# load reference
+ref = ReferenceFrame()
+ref.load_ref(refname, top)
+ref_frame = ref.coord()
+xyz = ref_frame.xyz()
+xyznp = np.asarray(xyz)
+print xyznp[:3]
+print xyznp[3:6]
 
-for i in range(frame2.natom):
-    frame2.print_atom_coord(i)
+ts.begin_traj(False)
+#ts.get_next_frame(frame)
+#xyz = frame.xyz()
+#print xyz
+
+#for i in range(10):
+#    ts.get_next_frame(frame)
+#    print frame.rmsd(ref_frame)
+ts.end_traj()

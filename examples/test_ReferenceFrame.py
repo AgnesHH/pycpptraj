@@ -5,10 +5,16 @@ from pycpptraj.FileName import FileName
 
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 topname = datadir + "Tc5b.top"
-fname = datadir + "Tc5b.Tc5b.nat.crd"
+fname = "./data/Tc5b.nat.crd"
 
 top = Topology(fname=topname)
-#top.Summary()
+top.summary()
 ref = ReferenceFrame()
-top2 = ref.Parm()
-#ref.LoadRef(fname, top, 0)
+ref.load_ref(fname, top)
+top2 = ref.parm()
+top2.summary()
+
+refframe = ref.coord()
+#print help(refframe)
+
+print frame.rmsd(refframe)
