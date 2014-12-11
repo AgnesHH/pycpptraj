@@ -1,13 +1,12 @@
 # distutils: language = c++
-#from TrajectoryFile cimport _TrajectoryFile
+from TrajectoryFile cimport _TrajectoryFile
 
 
 cdef class TrajectoryIO:
     def __cinit__(self):
         # _TrajectoryIO class has virtual method
-        # --> create instance of derived class and cast to _TrajectoryIO
-        #self.thisptr = <_TrajectoryIO*> new _TrajectoryFile()
-        pass
+        #  --> create instance of derived class and cast to _TrajectoryIO
+        self.thisptr = <_TrajectoryIO*> new _TrajectoryFile()
 
     def __dealloc__(self):
         if self.thisptr != NULL:

@@ -9,8 +9,10 @@ cdef class DataSet:
         #self.thisptr = new _DataSet()
 
     def __dealloc__(self):
-        if self.thisptr != NULL:
-            del self.thisptr
+        pass
+        # let sub-class do this job
+        #if self.thisptr != NULL:
+        #    del self.thisptr
 
     #def DataSet(self,DataType, int, int, int):
 

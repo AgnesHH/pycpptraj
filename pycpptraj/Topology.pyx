@@ -86,6 +86,20 @@ cdef class Topology:
     #def SoluteAtoms(self):
     #    return self.thisptr.SoluteAtoms()
 
+    #def atom_list(self):
+    #    # need iterator?
+    #    # do I need this method?
+    #    # return list of atoms
+    #    cdef Atom atom = Atom()
+    #    cdef _Atom at
+    #    cdef atlist = []
+
+    #    # self.thisptr.Atoms() return an _Atom vector
+    #    for at in self.thisptr.Atoms():
+    #        atom.thisptr[0] = at
+    #        atlist.append(atom)
+    #    return atlist
+
     def summary(self):
         self.thisptr.Summary()
 
@@ -185,10 +199,12 @@ cdef class Topology:
         # TODO: This code does not work correctly. Give None topoplogy instance
         # cpptraj: return Topology*
         cdef Topology top = Topology()
-        top.thisptr[0] = self.thisptr.partialModifyStateByMask(m.thisptr[0])[0]
+        top.thisptr[0] = deref(self.thisptr.partialModifyStateByMask(m.thisptr[0]))
         return top
 
     #def Topology * modifyStateByMask(self, AtomMask m):
 
-    #def Topology * ModifyByMap(self, vector[int] m):
-
+    def modify_by_map(self, vector[int] m):
+        cdef Topology top = Topology()
+        top.thisptr[0] = deref(self.thisptr.ModifyByMap(m))
+        return top
