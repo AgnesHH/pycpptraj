@@ -106,31 +106,31 @@ cdef class Topology:
     def brief(self, char* heading):
         self.thisptr.Brief(heading)
 
-    def print_atom_info(self, string maskString):
+    def atom_info(self, string maskString):
         self.thisptr.PrintAtomInfo(maskString)
 
     #def PrintBonds(self, BondArray barray, AtomMask maskIn, int nb):
     #    self.thisptr.PrintBonds(barray, maskIn, nb)
 
-    def print_bond_info(self, string maskString):
+    def bond_info(self, string maskString):
         self.thisptr.PrintBondInfo(maskString)
     
     #def PrintAngles(self):
     #    self.thisptr.PrintAngles()
 
-    def print_angle_info(self, string maskString):
+    def angle_info(self, string maskString):
         self.thisptr.PrintAngleInfo(maskString)
 
-    def print_dihedral_info(self, string maskString):
+    def dihedral_info(self, string maskString):
         self.thisptr.PrintDihedralInfo(maskString)
 
-    def print_molecule_info(self, maskString):
+    def molecule_info(self, maskString):
         self.thisptr.PrintMoleculeInfo(maskString)
 
-    def print_residue_info(self, string maskString):
+    def residue_info(self, string maskString):
         self.thisptr.PrintResidueInfo(maskString)
 
-    def print_charge_mass_info(self, string maskString, int idtype):
+    def charge_mass_info(self, string maskString, int idtype):
         self.thisptr.PrintChargeMassInfo(maskString, idtype)
     
     def add_top_atom(self, Atom atomIn, int o_resnum, NameType resname, double[:] XYZin):
@@ -202,7 +202,10 @@ cdef class Topology:
         top.thisptr[0] = deref(self.thisptr.partialModifyStateByMask(m.thisptr[0]))
         return top
 
-    #def Topology * modifyStateByMask(self, AtomMask m):
+    def modifyStateByMask(self, AtomMask m):
+        cdef Topology top = Topology()
+        top.thisptr[0] = deref(self.thisptr.modifyStateByMask(m.thisptr[0]))
+        return top
 
     def modify_by_map(self, vector[int] m):
         cdef Topology top = Topology()

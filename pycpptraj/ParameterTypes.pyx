@@ -330,25 +330,25 @@ cdef class BondParmType:
         return self.thisptr.Req()
 
 cdef class CmapGridType:
-    def __cinit__(self, arg=None):
+    def __cinit__(self, *args):
         cdef int r
         cdef vector[double] g
-        if not arg:
+        if not args:
             self.thisptr = new _CmapGridType()
         else:
-            if len(arg) == 2:
-                r, g = arg
+            if len(args) == 2:
+                r, g = args
                 self.thisptr = new _CmapGridType(r, g)
 
     def __dealloc__(self):
         del self.thisptr
 
     @property
-    def Resolution(self):
+    def resolution(self):
         return self.thisptr.Resolution()
 
     @property
-    def Grid(self):
+    def grid(self):
         return self.thisptr.Grid()
 
 cdef class DihedralType:
@@ -387,11 +387,11 @@ cdef class DihedralType:
         return self.thisptr.A4()
 
     @property
-    def Type(self):
+    def type(self):
         return self.thisptr.Type()
 
     @property
-    def Idx(self):
+    def idx(self):
         return self.thisptr.Idx()
 
 cdef class BondType:
@@ -442,7 +442,7 @@ cdef class CapParmType:
     def __dealloc__(self):
         del self.thisptr
 
-    def HasWaterCap(self):
+    def has_water_cap(self):
         return self.thisptr.HasWaterCap()
 
     @property

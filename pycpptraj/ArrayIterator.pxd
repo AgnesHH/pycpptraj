@@ -20,3 +20,6 @@ cdef import from "ArrayIterator.h":
         #T* operator->()
         #ArrayIterator& operator+=(int)
         ArrayIterator operator+(int)
+
+cdef class ArrayIterator:
+    cdef _ArrayIterator[T]* thisptr
