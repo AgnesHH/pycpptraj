@@ -22,7 +22,9 @@ top.summary()
 #    pass
 
 #top.print_atom_info("@CA")
-top2 = top.partial_modify_state_by_mask(AtomMask(":1-20@CA"))
+
+# dummy test for modify top
+top2 = top.modify_by_map(range(1,20))
 top2.summary()
 # test empty file
 #top2 = Topology()
