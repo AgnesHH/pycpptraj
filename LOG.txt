@@ -5,3 +5,5 @@
 * Nov-14-2014: Finish importing all (most?) cpptraj functions (most header files) to Cython. Passed 229 tests (./src/tests/test_*.pyx)
 
 * Dec-04-2014: Write setup.py and test installing
+
+* Dec-11-2014: Know how to create wrapper for abstract and sub-class
