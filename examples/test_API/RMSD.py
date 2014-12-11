@@ -1,14 +1,20 @@
 #from pycpptraj
 
-def rmsd(frames, ref, mask, use_mass=True, fit=True):
+def rmsd(traj, ref, mask, indices=[], use_mass=True, fit=True):
     """
     Output: array of rmsd values
+    
     Input:
     =====
-    frames :: FrameList instance
+    traj: Trajin_Single instance
     ref :: Reference instance
     mask :: AtomMask instance
+    indices: index list showing frame id
     use_mase :: bool
     fit :: fit or no_fit
+
     """
-    # Should I use the MDTraj's interface?
+    # get ref_frame (Frame instance)
+    ref_frame = ref.coord()
+    for idx in indices:
+        pass
