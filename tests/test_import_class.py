@@ -23,6 +23,6 @@ for mod in modlist:
     try:
         __import__(classname)
     except ImportError:
-        print "Error mod = %s", % classname
+        print "Error mod = %s" % classname
 
 print "end test importing"
