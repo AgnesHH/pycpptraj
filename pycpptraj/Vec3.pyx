@@ -139,12 +139,13 @@ cdef class Vec3:
     def __isub__(Vec3 self, arg):
         cdef double xIn
         cdef Vec3 rhs
+       
         if isinstance(arg, Vec3):
             rhs = arg
             self.thisptr.subequal(rhs.thisptr[0])
         else:
             xIn = arg
-            self = self.thisptr.addequal(-xIn)
+            self.thisptr.addequal(xIn)
         return self
 
     def Cross(self, Vec3 rhs):
