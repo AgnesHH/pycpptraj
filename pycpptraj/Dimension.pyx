@@ -1,7 +1,6 @@
 # distutils: language = c++
 
 cdef class Dimension:
-
     def __cinit__(self, *args):
         """Add more args to function"""
         # create temp variables
@@ -9,9 +8,11 @@ cdef class Dimension:
         cdef int dstep, dbins
         cdef string label
         cdef Dimension rhs
+
         if not args:
             self.thisptr = new _Dimension()
         elif len(args) == 1:
+            # copy
             rhs = args[0]
             self.thisptr = new _Dimension(rhs.thisptr[0])
         elif len(args) == 3:

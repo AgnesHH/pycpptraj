@@ -14,11 +14,3 @@ cdef class Cpptraj:
         cdef char** c_argv = list_to_char_pp(args)
         cdef int argc = len(args)
         self.thisptr.RunCpptraj(argc, c_argv)
-        
-    #def RunCpptraj_2(self, args):
-    #    cdef Mode cmode = self.ProcessCmdLineArgs(args)
-
-    #    if cmode == BATCH:
-    #        pass
-    #    else:
-    #        pass

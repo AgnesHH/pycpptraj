@@ -1,1 +1,8 @@
-#add README here
+Cpptraj_test
+===========
+* This folder was copied from cpptraj/test folder (https://github.com/mojyt/cpptraj)
+* Aim: To validate pycpptraj output
+
+Folder
+=====
+* ./bin: cpptraj wrapper. (use fake name)

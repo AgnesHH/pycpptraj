@@ -4,8 +4,6 @@ from libcpp.vector cimport vector
 from libcpp.string cimport string
 from CpptrajState cimport *
 
-#cdef enum Mode: BATCH = 0, ERROR, QUIT, INTERACTIVE, SILENT_EXIT
-
 cdef extern from "Cpptraj.h":
     ctypedef enum Mode "Cpptraj::Mode":
         BATCH "Cpptraj::BATCH"
@@ -17,13 +15,6 @@ cdef extern from "Cpptraj.h":
     cdef cppclass _Cpptraj "Cpptraj":
         _Cpptraj()
         int RunCpptraj(int, char**)
-
-        #Dan kep those private now
-        #void Usage()
-        #void Intro()
-        #Mode ProcessCmdLineArgs(int, char**)
-        #int Interactive()
-        #int AmbPDB(int, int, char**)
 
 cdef class Cpptraj:
     cdef _Cpptraj* thisptr

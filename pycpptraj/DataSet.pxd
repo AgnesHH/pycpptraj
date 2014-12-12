@@ -74,7 +74,7 @@ cdef extern from "DataSet.h":
         #_Dimension& Dim(DimIdxType i)
         _Dimension& Dim(int i)
         #const _Dimension& Dim(int i) const 
-        inline bint operator<(const _DataSet&) const 
+        inline bint operator< (const _DataSet&) const 
         const char * DataFormat() const 
         scalarMode ModeFromKeyword(const string&)
         scalarType TypeFromKeyword(const string&, scalarMode&)

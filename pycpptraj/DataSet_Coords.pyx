@@ -4,9 +4,9 @@ from DataSet cimport DataSet
 
 cdef class DataSet_Coords(DataSet_1D):
     def __cinit__(self):
-        pass
-        # abstract class
+        # abstract class, dont' create new object here
         #self.thisptr = new _DataSet_Coords()
+        pass
 
     def __dealloc__(self):
         # abstract class
