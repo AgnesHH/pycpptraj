@@ -1,16 +1,11 @@
-# distutil: language = c++
-from cython.operator cimport dereference as deref
-from cython.operator cimport preincrement as incr
-from libcpp.vector cimport vector
+# distutils: language = c++
 
-def _to_list(self, N):
-    """convert array pointer to list of elements"""
-    cdef double* ptr = self.thisptr.Dptr()
-    cdef int i
-    cdef vector[double] v
+from libc.stdlib cimport malloc 
 
-    for i in range(N):
-        v.push_back(deref(ptr))
-        incr(ptr)
-    # Cython will convert vector to list
-    return v
+cdef inline char** list_to_char_pp(args):
+     cdef char** c_argv
+     args = [str(x) for x in args]
+     c_argv = <char**>malloc(sizeof(char*) * len(args)) 
+     for idx, s in enumerate(args):
+         c_argv[idx] = s
+     return c_argv
