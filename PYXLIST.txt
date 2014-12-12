@@ -29,6 +29,7 @@ BaseIOtype
 TrajectoryIO
 FrameList
 DataSet
+DataSet_1D
 DataFile
 DataFileList
 #NetcdfFile
