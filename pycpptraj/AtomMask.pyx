@@ -11,7 +11,7 @@ cdef class AtomMask:
             self.thisptr = new _AtomMask()
         else:
             if len(args) == 1:
-                if isinstance(args[0], basestring):
+                if isinstance(args[0], str):
                     maskstring = args[0]
                     self.thisptr = new _AtomMask(maskstring)
                 elif isinstance(args[0], AtomMask):

@@ -11,23 +11,25 @@ cdef class TopologyList:
     def __dealloc__(self):
         del self.thisptr
 
-    def Clear(self):
+    def clear(self):
         self.thisptr.Clear()
 
-    def SetDebug(self,int id):
+    def set_debug(self,int id):
         self.thisptr.SetDebug(id)
 
-    def __getitem__(self, idx):
-        return self.GetParm(idx)
+    def __getitem__(self, int idx):
+        try:
+           return self.get_parm(idx)
+        except:
+            raise ValueError("index is out of range? do you have empty list?")
 
     #def Topology * GetParm(self,int):
     # make sure to return correct topology
-    def GetParm(self, arg):
+    def get_parm(self, arg):
         cdef Topology top = Topology()
         cdef int num
         cdef ArgList argIn
 
-        #del top.thisptr
         if isinstance(arg, (int, long)):
             num = arg
             top.thisptr[0] = deref(self.thisptr.GetParm(num))
@@ -37,12 +39,12 @@ cdef class TopologyList:
         return top
 
     #def Topology * GetParmByIndex(self,ArgList):
-    def GetParmByIndex(self, ArgList argIn):
+    def get_parm_by_index(self, ArgList argIn):
         cdef Topology top = Topology()
         top.thisptr = self.thisptr.GetParmByIndex(argIn.thisptr[0])
         return top
 
-    def AddParmFile(self, *args):
+    def add_parm_file(self, *args):
         cdef string fname
         cdef ArgList arglist
         if len(args) == 1:

@@ -1,30 +1,29 @@
 import os
 from pycpptraj.TopologyList import TopologyList 
+from pycpptraj.Topology import Topology
 
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 tl = TopologyList()
-tl.AddParmFile(datadir + "Tc5b.top")
-tl.AddParmFile(datadir + "HP36.top")
-tl.List()
+tl.add_parm_file(datadir + "Tc5b.top")
+tl.add_parm_file(datadir + "HP36.top")
+tl.info()
 
-t = tl.GetParm(1)
-t.Summary()
-#t.PrintAtomInfo("@CA")
+t = tl[1]
+t.summary()
+t.atom_info("@CA")
 
-t2 = tl[1]
-print t == t2
-t2.Summary()
+#tl.clear()
+print tl
+#print t2.GB_radiiset
+#
+#print t2.n_repdim
 
-print t2.GBradiiSet
+#print t2.original_filename()
+#t2.residue_info(":1-4, 20")
+#print
+#t2.residue_info("@CG")
 
-print t2.NrepDim
-
-print t2.OriginalFilename()
-t2.PrintResidueInfo(":1-4, 20")
-print
-t2.PrintResidueInfo("@CG")
-
-atom1 = t.atom_generator()
-atom2 = t.atom_generator()
-print atom1 == atom2
-print atom1, atom2
+#atom1 = t.atom_generator()
+#atom2 = t.atom_generator()
+#print atom1 == atom2
+#print atom1, atom2

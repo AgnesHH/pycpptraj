@@ -15,7 +15,7 @@ cdef class Topology:
         self.thisptr = new _Topology()
 
         if not fname.empty() and not args:
-            toplist.AddParmFile(fname)
+            toplist.add_parm_file(fname)
             self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
         elif fname.empty() and args:
             raise NotImplementedError()
