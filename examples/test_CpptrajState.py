@@ -37,9 +37,9 @@ state = CpptrajState()
 
 # test refFrame
 refFrame = ReferenceFrame()
-refFrame.LoadRef("./data/Tc5b.nat.crd", top, 0)
-topref = refFrame.Parm()
+refFrame.load_ref("./data/Tc5b.nat.crd", top, 0)
+topref = refFrame.parm()
 crd = refFrame.Coord()
 print crd.size/3
-topref.SetReferenceCoords( refFrame.Coord()  )
-topref.PrintResidueInfo(":2-5")
+topref.set_reference_coords( refFrame.Coord()  )
+topref.residue_info(":2-5")

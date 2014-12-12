@@ -1,47 +1,87 @@
+import numpy as np
 from pycpptraj.Topology import Topology
 from pycpptraj.AtomMask import AtomMask
 from pycpptraj.ArgList import ArgList
+from pycpptraj.Frame import Frame
 from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.ReferenceFrame import ReferenceFrame
 
-def rmsd(topname, refname, trajname, mask='', use_mass=True, fit=True):
+def _cpptraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_mass=True, fit=True):
     """
-     TODO: update this doc
+    DEMO API
+    TODO: update this doc
     Output: array of rmsd values
     
     Input:
     =====
-    topname :: Amber topology file name
-    refname :: Reference file name
-    mask :: AtomMask string
-    use_mase :: bool
-    fit :: fit or no_fit
+    topname : Amber topology file name
+    refname : Reference file name
+    trajname : trajectory file name
+    first_nframes : calc rmsd for first_nframes
+    mask : AtomMask string
+    use_mass : bool
+    fit : fit or no_fit
 
     """
-    # get ref_frame (Frame instance)
-    atm = AtomMask(mask)
+    # not yet supported atom mask
+    # atm = AtomMask(mask)
     top = Topology(topname)
-    modtop = top.modifyStateByMask(atm)
-    modtop.summary()
+    # create reference frame
     ref = ReferenceFrame()
     ref.load_ref(refname, top)
-    ref = ref.set_coordinates(ref, atm)
+    refframe = ref.coord()
 
+    # load trajectory file
     trajin = Trajin_Single()
     trajin.setup_traj_read(trajname, ArgList(), top, checkBox=True)
 
-    arr = np.empty(trajnam.total_frames)
+    trajin.begin_traj(0)
 
-    for i in range(trajin.total_frames):
+    #create frame to store data from traj iteration
+    frame = Frame()
+    frame.setup_frame_v(top, 0, 0)
+
+    # do rmsd
+    nframes = first_nframes if first_nframes < trajin.total_frames else trajin.total_frames
+    arr = np.empty(nframes)
+
+    for i in range(nframes):
+        # not added "mask" yet
+        # just for demo
         trajin.get_next_frame(frame)
-        frame = frame.set_coordinates(frame, atm)
-        arr[i] = frame.rmsd(ref)
+        if fit:
+            arr[i] = frame.rmsd(refframe, use_mass)
+        else:
+            arr[i] = frame.rmsd_no_fit(refframe, use_mass)
+    trajin.end_traj()
     return arr
+
+def _mdtraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_mass=True, fit=True):
+    # TODO: how to load *.crd file?
+    import mdtraj as md
+    top = md.load_prmtop(topname)
+    ref = '' 
+    traj = md.load(trajname, top)
+    return md.rmsd(traj, ref, nframe=first_nframes)
+
+def rmsd(topname, refname, trajname, first_nframes=100, mask='', use_mass=True, fit=True, program='cpptraj'):
+    if program == 'cpptraj':
+        return _cpptraj_rmsd(topname, refname, trajname, first_nframes, mask='', use_mass=True, fit=True)
+    elif program == 'mdtraj':
+        return _mdtraj_rmsd(topname, refname, trajname, first_nframes, mask='', use_mass=True, fit=True)
+
 
 if __name__ == '__main__':
     topname = "../data/Tc5b.top"
     refname = "../data/Tc5b.nat.crd"
     trajname = "../data/md1_prod.Tc5b.x"
-    mask = ":3-18@CA"
-    arr = rmsd(topname, refname, trajname, mask)
-    print arr
+    #mask = ":3-18@CA"
+    n_frames = 10
+    arr = rmsd(topname, refname, trajname, first_nframes=n_frames, program='cpptraj')
+    # load first 100 rmsd values from cpptraj calculation
+    rmsd_cpptraj = np.loadtxt("../data/rmsd_allatoms.dat").transpose()[1][:n_frames]
+    # STATUS: can not reproduce cpptraj's calculation
+    # %error ~ 3%
+    print "cpptraj: ", rmsd_cpptraj
+    print "pycpptraj: ", arr
+    print "difference: ", arr - rmsd_cpptraj

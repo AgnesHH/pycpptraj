@@ -2,7 +2,7 @@
 """Get help: python ./PyCpptraj --help"""
 
 import sys
-from pycpptraj.Cpptraj import Cpptraj
+from pycpptraj.cpptraj import cpptraj
 
 print sys.argv[:]
-Cpptraj().run(sys.argv[:])
+cpptraj().run(sys.argv[:])

@@ -1,0 +1,9 @@
+parm Tc5b.top
+trajin md1_prod.Tc5b.x 
+reference Tc5b.nat.crd 
+rmsd reference 
+help
+rms
+help rms
+help rmsd
+exit
