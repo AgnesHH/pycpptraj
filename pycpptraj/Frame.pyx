@@ -1,11 +1,6 @@
 # distutils: language = c++
 
 from cython.operator cimport dereference as deref
-#cimport numpy as np
-#try:
-#    import numpy as np
-#except:
-#    pass
 from libcpp.vector cimport vector
 from AtomMask cimport *
 from AtomMask import AtomMask
@@ -19,6 +14,33 @@ def check_instance(inst, clsname):
         raise ValueError("Must be instance of %s") % clsname.__name__
 
 cdef class Frame:
+    """Cpptraj doc:
+    Class: Frame
+    /// Hold coordinates, perform various operations/transformations on them.
+    /** Intended to hold coordinates e.g. from a trajectory or reference frame,
+      * along with box coordinates (used in imaging calculations), mass information,
+      * and optionally velocity information. Frame can be set up coords only (all 
+      * masses set to 1.0), coords and masses, or coords/masses/velocities. Mass is 
+      * stored since several functions (like COM, RMSD, Inertia etc) have the option
+      * to factor in the mass of the atoms involved, and this avoids having to pass
+      * a mass pointer in, which takes the burden of keeping track of mass away from 
+      * actions etc. Mass is stored when the frame is initially created, and is 
+      * modified if necessary by SetFrame (which is the case when e.g. calculating
+      * per-residue RMSD).
+      *
+      * - Implementation Details:
+      *
+      * In addition to the constructors, there are two classes of routine that
+      * can be used to set up Frames. The SetupX routines do any memory allocation,
+      * and assign masses, and the SetX routines assign coordinates/velocities. The
+      * SetX routines will dynamically adjust the size of the frame up to maxnatom,
+      * but no reallocation will occur so the frame should be set up for the largest
+      * possible # of atoms it will hold. This avoids expensive reallocations.
+      * The representation of coordinates (X) and velocities (V) are double*
+      * instead of STL vectors so as to easily interface with the FileIO routines
+      * which tend to be much faster than iostream ops. 
+      */
+    """
     def __cinit__(self, *args):
         cdef Frame frame
         cdef AtomMask atmask

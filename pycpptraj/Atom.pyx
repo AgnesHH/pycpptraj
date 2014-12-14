@@ -53,7 +53,7 @@ cdef class Atom:
         def __get__(self):
             return self.thisptr.GBRadius()
 
-    def NoMol(self):
+    def no_mol(self):
         return self.thisptr.NoMol()
 
     def c_str(self):
@@ -64,7 +64,7 @@ cdef class Atom:
         return self.thisptr.Element()
 
     @property
-    def AtomicNumber(self):
+    def atomic_number(self):
         return self.thisptr.AtomicNumber()
 
     @property
@@ -91,7 +91,7 @@ cdef class Atom:
         return self.thisptr.MolNum()
 
     @property 
-    def chainID(self):
+    def chain_i_d(self):
         return self.thisptr.ChainID()
 
     @property
@@ -99,7 +99,7 @@ cdef class Atom:
         return self.thisptr.Nbonds()
 
     @property
-    def Nexcluded(self):
+    def nexcluded(self):
         return self.thisptr.Nexcluded()
 
     @property
@@ -114,17 +114,17 @@ cdef class Atom:
     def screen(self):
         return self.thisptr.Screen()
 
-    def AddBond(self,int idx):
+    def add_bond(self,int idx):
         self.thisptr.AddBond(idx)
 
-    def ClearBonds(self):
+    def clear_bonds(self):
         self.thisptr.ClearBonds()
 
-    def SortBonds(self):
+    def sort_bonds(self):
         self.thisptr.SortBonds()
 
-    def AddExclusionList(self,set[int] intset):
+    def add_exclusion_list(self,set[int] intset):
         self.thisptr.AddExclusionList(intset)
 
-    def GetBondLength(self,AtomicElementType id1, AtomicElementType id2):
+    def get_bond_length(self,AtomicElementType id1, AtomicElementType id2):
         return self.thisptr.GetBondLength(id1, id2)
