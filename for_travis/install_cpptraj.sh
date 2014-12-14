@@ -10,7 +10,7 @@ mkdir lib
 wget https://raw.githubusercontent.com/hainm/pycpptraj/master/for_travis/Makefile
 wget https://raw.githubusercontent.com/hainm/pycpptraj/master/for_travis/configure_pycpptraj
 mv Makefile* ./src/
-bash ./configure_pycpptraj -nobzlib  -nomathlib -nozlib -shared gnu
+bash ./configure_pycpptraj -nomathlib -shared gnu
 cd ./src
 make -f Makefile.1 libcpptraj.so
 

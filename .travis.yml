@@ -4,6 +4,7 @@ python:
 before_install:
     - sudo apt-get install libnetcdf-dev
     - sudo apt-get install gfortran
+    - sudo apt-get install -qq libz-dev libbz2-dev
     - ./for_travis/install_cpptraj.sh
 install:
     - pip install cython
