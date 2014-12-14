@@ -50,3 +50,6 @@ cdef class Action_Strip:
 
     def do_action(self, frame_num, Frame current_frame):
         self.new_frame.set_frame(current_frame, self.M1)
+
+    def write_parm(self):
+        pass

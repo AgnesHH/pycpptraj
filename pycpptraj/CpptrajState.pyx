@@ -96,11 +96,11 @@ cdef class CpptrajState:
         else:
             raise NotImplementedError()
 
-    #def AddAction(self,DispatchObject::DispatchAllocatorType, ArgList):
-    #    pass
-
-    #def AddAnalysis(self,DispatchObject::DispatchAllocatorType, ArgList):
-    #    pass
+#    def AddAction(self, DispatchAllocatorType Alloc, ArgList):
+#        pass
+#
+#    def AddAnalysis(self,DispatchAllocatorType Alloc, ArgList):
+#        pass
 
     def world_size(self):
         return self.thisptr.WorldSize()

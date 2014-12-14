@@ -6,7 +6,8 @@ cdef class TrajectoryFile:
         self.thisptr = new _TrajectoryFile()
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.thisptr is not NULL:
+            del self.thisptr
 
     def read_options(self):
         self.thisptr.ReadOptions()
