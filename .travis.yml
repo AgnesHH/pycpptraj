@@ -10,6 +10,7 @@ install:
     - python ./for_travis/setup.py install
 script:
     - export AMBERHOME=`pwd`"/cpptraj"
+    - PYCPPTRAJ_HOME=`pwd`
     - export LD_LIBRARY_PATH=$AMBERHOME/lib:$LD_LIBRARY_PATH
     - python ./for_travis/fake_test.py
     - python ./tests/test_import_class.py
