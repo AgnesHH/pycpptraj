@@ -1,11 +1,11 @@
 # distutils: language = c++
 
 from cython.operator cimport dereference as deref
-cimport numpy as np
-try:
-    import numpy as np
-except:
-    pass
+#cimport numpy as np
+#try:
+#    import numpy as np
+#except:
+#    pass
 from libcpp.vector cimport vector
 from AtomMask cimport *
 from AtomMask import AtomMask
