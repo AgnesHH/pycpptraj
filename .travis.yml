@@ -8,3 +8,5 @@ before_install:
 install:
     - pip install cython
     - python ./for_travis/setup.py install
+script:
+    - python ./for_travis/fake_test.py
