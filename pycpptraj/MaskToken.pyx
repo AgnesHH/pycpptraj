@@ -26,13 +26,13 @@ cdef class MaskToken:
     def Type(self):
         return self.thisptr.Type()
 
-    def  Res1(self):
+    def Res1(self):
         return self.thisptr.Res1()
 
-    def  Res2(self):
+    def Res2(self):
         return self.thisptr.Res2()
 
-    def  Name(self):
+    def Name(self):
         cdef NameType nt = NameType()
         del nt.thisptr
         nt.thisptr[0] = self.thisptr.Name()
@@ -44,10 +44,10 @@ cdef class MaskToken:
     def Within(self): 
         return self.thisptr.Within()
             
-    def  ByAtom(self):
+    def ByAtom(self):
         return self.thisptr.ByAtom()
 
-    def  Distance(self):
+    def Distance(self):
         return self.thisptr.Distance()
 
     def SetOnStack(self):

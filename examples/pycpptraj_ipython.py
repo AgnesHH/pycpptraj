@@ -9,6 +9,7 @@ from pycpptraj.ArgList import ArgList
 from pycpptraj.AtomMask import AtomMask
 
 top = Topology("./data/Tc5b.top")
+atomlist = top.atom_list()
 ref = ReferenceFrame()
 ref.load_ref("./data/Tc5b.nat.crd", top)
 refframe = ref.coord() 

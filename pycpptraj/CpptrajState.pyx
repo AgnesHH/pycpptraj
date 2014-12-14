@@ -10,46 +10,46 @@ cdef class CpptrajState:
         if self.thisptr is not NULL:
             del self.thisptr
 
-    def PFL(self):
+    def get_top_list(self):
         """return TopologyList"""
         cdef TopologyList toplist = TopologyList()
         toplist.thisptr = self.thisptr.PFL()
         return toplist
 
-    def FL(self):
+    def get_frame_list(self):
         """return FrameList"""
         cdef FrameList flist = FrameList()
         flist.thisptr[0] = deref(self.thisptr.FL())
         return flist
 
-    def DSL(self):
+    def get_dataset_list(self):
         """return DataSetList"""
         cdef DataSetList dlist = DataSetList()
         dlist.thisptr[0] = deref(self.thisptr.DSL())
         return dlist
 
-    def DFL(self):
+    def get_datafile_list(self):
         """return DataFileList"""
         cdef DataFileList dflist = DataFileList()
         dflist.thisptr[0] = deref(self.thisptr.DFL())
         return dflist
 
-    def SetNoExitOnError(self):
+    def set_no_exit_on_error(self):
         self.thisptr.SetNoExitOnError()
 
-    def SetNoProgress(self):
+    def set_no_progress(self):
         self.thisptr.SetNoProgress()
 
-    def Debug(self):
+    def debug(self):
         return self.thisptr.Debug()
 
-    def ExitOnError(self):
+    def exit_on_error(self):
         return self.thisptr.ExitOnError()
 
-    def EmptyState(self):
+    def empty_state(self):
         return self.thisptr.EmptyState()
 
-    def AddTrajin(self, arg, isEnsemble=False):
+    def add_trajin(self, arg, isEnsemble=False):
         cdef string fname
         cdef ArgList argIn
         
@@ -62,15 +62,15 @@ cdef class CpptrajState:
         else:
             raise NotImplementedError()
 
-    def RunAnalyses(self):
+    def run_analyses(self):
         return self.thisptr.RunAnalyses()
 
-    def InputTrajList(self):
+    def input_traj_list(self):
         cdef TrajinList trajlist = TrajinList()
         trajlist.thisptr[0] = self.thisptr.InputTrajList()
         return trajlist
 
-    def AddTrajout(self, arg):
+    def add_trajout(self, arg):
         cdef string fname
         cdef ArgList arglist
 
@@ -83,7 +83,7 @@ cdef class CpptrajState:
         else:
             raise NotImplementedError()
 
-    def AddReference(self, arg):
+    def add_reference(self, arg):
         cdef string name
         cdef ArgList arglist
 
@@ -102,34 +102,29 @@ cdef class CpptrajState:
     #def AddAnalysis(self,DispatchObject::DispatchAllocatorType, ArgList):
     #    pass
 
-    def WorldSize(self):
+    def world_size(self):
         return self.thisptr.WorldSize()
 
-    def ListAll(self,ArgList arglist):
+    def list_all(self,ArgList arglist):
         return self.thisptr.ListAll(arglist.thisptr[0])
 
-    def SetListDebug(self,ArgList arglist):
+    def set_list_debug(self,ArgList arglist):
         return self.thisptr.SetListDebug(arglist.thisptr[0])
 
-    def ClearList(self,ArgList arglist):
+    def clear_list(self,ArgList arglist):
         return self.thisptr.ClearList(arglist.thisptr[0])
 
-    def RemoveDataSet(self,ArgList alist):
+    def remove_data_set(self,ArgList alist):
         return self.thisptr.RemoveDataSet(alist.thisptr[0])
 
-    def TrajLength(self, string topnaname, vector[string] trajlist):
+    def traj_length(self, string topnaname, vector[string] trajlist):
         return self.thisptr.TrajLength(topnaname, trajlist)
 
-    def Run(self):
+    def run(self):
         return self.thisptr.Run()
 
-    def MasterDataFileWrite(self):
+    def master_data_file_write(self):
         self.thisptr.MasterDataFileWrite()
 
-    def WorldSize(self):
+    def world_size(self):
         return self.thisptr.WorldSize()
-
-    #def ListsFromArg(self, ArgList argIn, bint allowEnableAll):
-    #    cdef vector[bint] vbint
-    #    vbint = self.thisptr.ListsFromArg(agrIn.thisptr[0], allowEnableAll)
-    #    return vbint
