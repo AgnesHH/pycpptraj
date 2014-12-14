@@ -15,10 +15,14 @@ action_dir = pycpptraj_home + "/Action/"
 ana_dir = pycpptraj_home + "/Analysis/"
 
 try:
-    cpptraj_dir = cpptraj_include = os.environ['AMBERHOME'] + "/AmberTools/src/cpptraj/src/"
-    libdir = os.environ['AMBERHOME'] + "/lib"
+    try:
+        cpptraj_dir = cpptraj_include = os.environ['AMBERHOME'] + "/AmberTools/src/cpptraj/src/"
+        libdir = os.environ['AMBERHOME'] + "/lib"
+    except:
+        cpptraj_dir = cpptraj_include = os.environ['CPPTRAJHOME'] + "/src"
+        libdir = os.environ['CPPTRAJHOME'] + "/lib"
 except:
-    raise EnvironmentError("Must set AMBERHOME")
+    raise EnvironmentError("Must set AMBERHOME or CPPTRAJHOME")
 
 # get *.pyx files
 pyxfiles = []
