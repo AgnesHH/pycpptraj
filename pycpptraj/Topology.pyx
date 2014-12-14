@@ -9,18 +9,29 @@ from NameType cimport NameType
 from TopologyList cimport TopologyList
 
 cdef class Topology:
-    def __cinit__(self, string fname='', *args):
+    def __cinit__(self, *args):
+        """
+        args = filename or Topology instance
+        """
         cdef TopologyList toplist = TopologyList()
         cdef Topology tp
+        cdef string fname
         self.thisptr = new _Topology()
 
-        if not fname.empty() and not args:
-            toplist.add_parm_file(fname)
-            self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
-        elif fname.empty() and args:
-            if len(args) == 1 and isinstance(args[0], Topology):
-                tp = args[0]
-                self =  Topology.copy(tp)
+        if not args:
+            # make empty Topology instance
+            pass
+        else:
+            if len(args) == 1:
+               if isinstance(args[0], basestring):
+                   fname = args[0]
+                   toplist.add_parm_file(fname)
+                   self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
+               elif isinstance(args[0], Topology):
+                   tp = args[0]
+                   self.thisptr[0] =  tp.thisptr[0]
+            else:
+                raise ValueError()
 
     def __dealloc__(self):
         del self.thisptr
