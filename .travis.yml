@@ -9,4 +9,7 @@ install:
     - pip install cython
     - python ./for_travis/setup.py install
 script:
+    - export AMBERHOME=`pwd`"/cpptraj"
+    - export LD_LIBRARY_PATH=$AMBERHOME/lib:$LD_LIBRARY_PATH
     - python ./for_travis/fake_test.py
+    - python ./tests/test_import_class.py
