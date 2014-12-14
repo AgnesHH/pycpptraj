@@ -20,7 +20,7 @@ cdef class Topology:
         elif fname.empty() and args:
             if len(args) == 1 and isinstance(args[0], Topology):
                 tp = args[0]
-                self.thisptr[0] = Topology.copy(tp)
+                self =  Topology.copy(tp)
 
     def __dealloc__(self):
         del self.thisptr
