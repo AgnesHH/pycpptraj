@@ -7,4 +7,4 @@ before_install:
     - ./for_travis/install_cpptraj.sh
 install:
     - pip install cython
-    - python setup.py install
+    - python ./for_travis/setup.py install
