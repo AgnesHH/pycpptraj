@@ -2,75 +2,80 @@
 
 
 cdef class MapAtom:
-    def __cinit__(self):
-        self.thisptr = new _MapAtom()
+    def __cinit__(self, *args):
+        cdef Atom atom
+        cdef MapAtom map_atom
 
-    def MapAtom(self):
-        pass
-
-    # def MapAtom(self, MapAtom):
-
-    def MapAtom(self, Atom):
-        pass
+        if not args:
+            self.thisptr = new _MapAtom()
+        elif len(args) == 1:
+            if isinstance(args[0], Atom):
+                atom = args[0]
+                self.thisptr = new _MapAtom(atom)
+            elif isinstance(args[0], map_atom):
+                map_atom = args[0]
+                self.thisptr = new _MapAtom(map_atom)
+            else:
+                raise ValueError()
+        else:
+            raise ValueError()
 
     @classmethod
-    def copy(cls, MapAtom):
-        pass
+    def copy(cls, MapAtom other):
+        cdef MapAtom matom = MapAtom()
+        matom.thisptr[0] = other.thisptr[0]
+        return matom
 
-    def copy(self, MapAtom other):
-        """copy data from "other"""
-        pass
-
-    def IsChiral(self):
+    def is_chiral(self):
         return self.thisptr.IsChiral()
 
-    def BoundToChiral(self):
+    def bound_to_chiral(self):
         return self.thisptr.BoundToChiral()
 
-    def IsMapped(self):
+    def is_mapped(self):
         return self.thisptr.IsMapped()
 
-    def Complete(self):
+    def complete(self):
         return self.thisptr.Complete()
 
-    def IsUnique(self):
+    def is_unique(self):
         return self.thisptr.IsUnique()
 
-    def Unique(self):
+    def unique(self):
         return self.thisptr.Unique()
 
-    def Nduplicated(self):
+    def n_duplicated(self):
         return self.thisptr.Nduplicated()
 
-    def CharName(self):
+    def char_name(self):
         return self.thisptr.CharName()
 
-    def IsDuplicated(self):
+    def is_duplicated(self):
         self.thisptr.IsDuplicated()
 
-    def SetMapped(self):
+    def set_mapped(self):
         self.thisptr.SetMapped()
 
-    def SetComplete(self):
+    def set_complete(self):
         self.thisptr.SetComplete()
 
-    def SetChiral(self):
+    def set_chiral(self):
         self.thisptr.SetChiral()
 
-    def SetBoundToChiral(self):
+    def set_bound_to_chiral(self):
         self.thisptr.SetBoundToChiral()
 
-    def SetAtomID(self, string s):
+    def set_atom_i_d(self, string s):
         self.thisptr.SetAtomID(s)
 
-    def SetUnique(self, string s):
+    def set_unique(self, string s):
         self.thisptr.SetUnique(s)
 
-    def SetNotMapped(self):
+    def set_not_mapped(self):
         self.thisptr.SetNotMapped()
 
-    def SetNotComplete(self):
+    def set_not_complete(self):
         self.thisptr.SetNotComplete()
 
-    def SetNotChiral(self):
+    def set_not_chiral(self):
         self.thisptr.SetNotChiral()
