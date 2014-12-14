@@ -18,12 +18,18 @@ cdef class Topology:
             toplist.add_parm_file(fname)
             self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
         elif fname.empty() and args:
-            raise NotImplementedError()
-            #pt = args[0]
-            #self.thisptr = new _Topology(tp.thisptr[0])
+            if len(args) == 1 and isinstance(args[0], Topology):
+                tp = args[0]
+                self.thisptr[0] = Topology.copy(tp)
 
     def __dealloc__(self):
         del self.thisptr
+
+    @classmethod
+    def copy(cls, Topology other):
+        cdef Topology tmp = Topology()
+        tmp.thisptr[0] = other.thisptr[0]
+        return tmp
 
     def __getitem__(self, int idx):
         cdef Atom atom = Atom()
