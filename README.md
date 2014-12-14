@@ -6,13 +6,16 @@ Welcom to pycpptraj!
 Aim: Write cpptraj wrapper for Python user
 =========================================
 - Short term goal: expose cpptraj library to Python
-- Long term goal: cpptraj + pycuda for GPU
-- Very very long term goal: glue most of useful library in [AMBER] (http://ambermd.org/) by Python: 
+- Very long term goal: glue most of useful library in [AMBER] (http://ambermd.org/) by Python: 
     * tleap --> pyleap
     * paramfit --> pyparamfit
     * reduce --> pyreduce 
     * ParmedTools
     * (add many more)
+- Why using pycpptraj:
+    * It's fast: it's wrapper of cpptraj, which was written in C++ (by Daniel R. Roe) with years of optimizing
+    * It has clean syntax: Python/Cython are elegant
+    * It's flexible: you can write extension modules in either high (Python) or low (Cython) level
 
 Status: 
 ======
