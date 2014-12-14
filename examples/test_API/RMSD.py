@@ -56,19 +56,20 @@ def _cpptraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_ma
     trajin.end_traj()
     return arr
 
-def _mdtraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_mass=True, fit=True):
+def _mdtraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_mass=False, fit=True):
     # TODO: how to load *.crd file?
     import mdtraj as md
-    top = md.load_prmtop(topname)
-    ref = '' 
-    traj = md.load(trajname, top)
-    return md.rmsd(traj, ref, nframe=first_nframes)
+    pass
+    #top = md.load_prmtop(topname)
+    #ref = '' 
+    #traj = md.load(trajname, top)
+    #return md.rmsd(traj, ref, nframe=first_nframes)
 
-def rmsd(topname, refname, trajname, first_nframes=100, mask='', use_mass=True, fit=True, program='cpptraj'):
+def rmsd(topname, refname, trajname, first_nframes=100, mask='', use_mass=False, fit=True, program='cpptraj'):
     if program == 'cpptraj':
-        return _cpptraj_rmsd(topname, refname, trajname, first_nframes, mask='', use_mass=True, fit=True)
+        return _cpptraj_rmsd(topname, refname, trajname, first_nframes, use_mass, fit)
     elif program == 'mdtraj':
-        return _mdtraj_rmsd(topname, refname, trajname, first_nframes, mask='', use_mass=True, fit=True)
+        return _mdtraj_rmsd(topname, refname, trajname, first_nframes, use_mass, fit)
 
 
 if __name__ == '__main__':
@@ -77,7 +78,7 @@ if __name__ == '__main__':
     trajname = "../data/md1_prod.Tc5b.x"
     #mask = ":3-18@CA"
     n_frames = 10
-    arr = rmsd(topname, refname, trajname, first_nframes=n_frames, program='cpptraj')
+    arr = rmsd(topname, refname, trajname, first_nframes=n_frames, use_mass=False, program='cpptraj')
     # load first 100 rmsd values from cpptraj calculation
     rmsd_cpptraj = np.loadtxt("../data/rmsd_allatoms.dat").transpose()[1][:n_frames]
     # STATUS: can not reproduce cpptraj's calculation

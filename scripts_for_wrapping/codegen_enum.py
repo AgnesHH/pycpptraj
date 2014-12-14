@@ -1,8 +1,10 @@
 # (c) 2014 - Hai Nguyen
+import os
 import sys
 import CppHeaderParser
 from util import find_class
-cpptrajsrc = "/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/"
+
+cpptrajsrc = os.environ['AMBERHOME'] + "AmberTools/src/cpptraj/src/"
 file = cpptrajsrc + sys.argv[1]
 indent = " " * 4
 classlist = find_class(cpptrajsrc)
