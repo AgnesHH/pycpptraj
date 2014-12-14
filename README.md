@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hainm/pycpptraj.svg?branch=master)](https://travis-ci.org/hainm/pycpptraj)
+
 Welcom to pycpptraj!
 ====================
 
