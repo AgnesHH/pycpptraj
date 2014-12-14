@@ -13,7 +13,8 @@ rootname = os.getcwd()
 pycpptraj_home = rootname + "/pycpptraj/"
 action_dir = pycpptraj_home + "/Action/"
 ana_dir = pycpptraj_home + "/Analysis/"
-cpptraj_dir = cpptraj_include = rootname + "/cpptraj/"
+cpptraj_dir = rootname + "/cpptraj/"
+cpptraj_include = cpptraj_dir + "/src/"
 libdir = cpptraj_dir + "/lib/"
 
 # get *.pyx files
