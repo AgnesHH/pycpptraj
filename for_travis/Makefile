@@ -21,7 +21,7 @@ dependclean:
 
 libcpptraj.so: $(OBJECTS) pub_fft.o $(READLINE)
 	    $(CXX)  -shared -o libcpptraj.so $(OBJECTS) pub_fft.o $(READLINE) $(LDFLAGS)
-		mv libcpptraj.so $(AMBERHOME)/lib
+		mv libcpptraj.so $(CPPTRAJHOME)/lib
 
 cpptraj$(SFX): $(OBJECTS) pub_fft.o $(READLINE)
 	$(CXX)  -o cpptraj$(SFX) $(OBJECTS) pub_fft.o $(READLINE) $(LDFLAGS) 
