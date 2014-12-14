@@ -109,15 +109,9 @@ cdef class Topology:
     def atom_info(self, string maskString):
         self.thisptr.PrintAtomInfo(maskString)
 
-    #def PrintBonds(self, BondArray barray, AtomMask maskIn, int nb):
-    #    self.thisptr.PrintBonds(barray, maskIn, nb)
-
     def bond_info(self, string maskString):
         self.thisptr.PrintBondInfo(maskString)
     
-    #def PrintAngles(self):
-    #    self.thisptr.PrintAngles()
-
     def angle_info(self, string maskString):
         self.thisptr.PrintAngleInfo(maskString)
 
@@ -196,13 +190,11 @@ cdef class Topology:
             return self.thisptr.GBradiiSet()
 
     def partial_modify_state_by_mask(self, AtomMask m):
-        # TODO: This code does not work correctly. Give None topoplogy instance
-        # cpptraj: return Topology*
         cdef Topology top = Topology()
         top.thisptr[0] = deref(self.thisptr.partialModifyStateByMask(m.thisptr[0]))
         return top
 
-    def modifyStateByMask(self, AtomMask m):
+    def modify_state_by_mask(self, AtomMask m):
         cdef Topology top = Topology()
         top.thisptr[0] = deref(self.thisptr.modifyStateByMask(m.thisptr[0]))
         return top
