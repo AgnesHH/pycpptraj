@@ -50,6 +50,7 @@ cdef class Topology:
     def atom_generator(self):
         cdef Atom atom
         cdef atom_iterator it
+
         it = self.thisptr.begin()
         while it != self.thisptr.end():
             atom = Atom()
@@ -104,19 +105,22 @@ cdef class Topology:
     #def SoluteAtoms(self):
     #    return self.thisptr.SoluteAtoms()
 
-    #def atom_list(self):
-    #    # need iterator?
-    #    # do I need this method?
-    #    # return list of atoms
-    #    cdef Atom atom = Atom()
-    #    cdef _Atom at
-    #    cdef atlist = []
+    def atom_list(self):
+        """return list of atoms
+        """
+        cdef Atom atom 
+        cdef vector[_Atom].iterator it 
+        cdef vector[_Atom] v
+        cdef list atlist = []
 
-    #    # self.thisptr.Atoms() return an _Atom vector
-    #    for at in self.thisptr.Atoms():
-    #        atom.thisptr[0] = at
-    #        atlist.append(atom)
-    #    return atlist
+        v = self.thisptr.Atoms()
+        it = v.begin()
+        while it != v.end():
+            atom = Atom()
+            atom.thisptr[0] = deref(it)
+            atlist.append(atom)
+            incr(it)
+        return atlist
 
     def summary(self):
         self.thisptr.Summary()
