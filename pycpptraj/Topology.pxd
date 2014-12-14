@@ -47,7 +47,7 @@ cdef extern from "Topology.h":
         const char * c_str() const 
         atom_iterator begin() const 
         atom_iterator end() const 
-        const _Atom& operator[](int idx) const 
+        const _Atom& index_opr "operator[]"(int idx) const 
         const vector[_Atom]& Atoms() const 
         inline res_iterator ResStart() const 
         inline res_iterator ResEnd() const 

@@ -1,5 +1,6 @@
 # distutils: language = c++
 
+from cpython.array cimport array as pyarray
 from cython.operator cimport dereference as deref
 from libcpp.vector cimport vector
 from AtomMask cimport *
@@ -139,24 +140,30 @@ cdef class Frame:
 
     #def  double * XYZ(self,int atnum):
     # Correct yet?
+    @property
     def xyz(self):
         # cpptraj: return double*
         cdef int i
         cdef natom = self.natom
+        cdef pyarray arr = pyarray('d', [])
         #cdef double[:] _xyz
-        cdef vector[double] v
+        #cdef vector[double] v
 
         for i in range(natom):
             #_xyz[3 * i]     = self.thisptr.XYZ(i)[0]
             #_xyz[3 * i]     = self.thisptr.XYZ(i)[1]
             #_xyz[3 * i + 1] = self.thisptr.XYZ(i)[2]
-            v.push_back(self.thisptr.XYZ(i)[0])
-            v.push_back(self.thisptr.XYZ(i)[1])
-            v.push_back(self.thisptr.XYZ(i)[2])
+            #v.push_back(self.thisptr.XYZ(i)[0])
+            #v.push_back(self.thisptr.XYZ(i)[1])
+            #v.push_back(self.thisptr.XYZ(i)[2])
+            arr.append(self.thisptr.XYZ(i)[0])
+            arr.append(self.thisptr.XYZ(i)[1])
+            arr.append(self.thisptr.XYZ(i)[2])
         #_xyz = v
         #return _xyz
         # TODO: return array instead of vector (Cython will convert vector to list)
-        return v
+        #return v
+        return arr
 
     #def xyz(self):
     #    # STATUS: return wrong array
@@ -230,21 +237,21 @@ cdef class Frame:
     def set_box_angles(self, double[:] ain):
         self.thisptr.SetBoxAngles(&ain[0])
 
-    def setup_frame(self,int natomIn):
+    def set_frame(self,int natomIn):
         return self.thisptr.SetupFrame(natomIn)
 
-    def setup_frame_m(self, list atlist):
+    def set_frame_m(self, list atlist):
         cdef vector[_Atom] v 
         v = atomlist_to_vector(atlist)
         return self.thisptr.SetupFrameM(v)
 
-    def setup_frame_x_m(self, vector[double] Xin, vector[double] massIn):
+    def set_frame_x_m(self, vector[double] Xin, vector[double] massIn):
         return self.thisptr.SetupFrameXM(Xin, massIn)
 
-    def setup_frame_v(self, Topology top, bint hasVelocity, int nDim):
+    def set_frame_v(self, Topology top, bint hasVelocity, int nDim):
         return self.thisptr.SetupFrameV(top.thisptr.Atoms(), hasVelocity, nDim)
 
-    def setup_frame_from_mask(self, AtomMask atmask, list atlist):
+    def set_frame_from_mask(self, AtomMask atmask, list atlist):
         cdef vector[_Atom] v = atomlist_to_vector(atlist)
         return self.thisptr.SetupFrameFromMask(atmask.thisptr[0], v)
 

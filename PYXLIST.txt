@@ -43,3 +43,4 @@ ReplicaDimArray
 DataSet_Coords
 DihedralSearch
 BufferedFrame
+Action_Strip

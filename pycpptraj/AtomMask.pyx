@@ -43,7 +43,8 @@ cdef class AtomMask:
     def back(self):
         return self.thisptr.back()
 
-    def nselected(self):
+    @property
+    def n_selected(self):
         return self.thisptr.Nselected()
 
     #def  int operator[](self,int idx):

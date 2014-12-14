@@ -27,7 +27,8 @@ cdef class Topology:
 
     def __getitem__(self, int idx):
         cdef Atom atom = Atom()
-        pass
+        atom.thisptr[0] = self.thisptr.index_opr(idx)
+        return atom
 
     def atom_generator(self):
         cdef Atom atom
@@ -126,6 +127,9 @@ cdef class Topology:
 
     def charge_mass_info(self, string maskString, int idtype):
         self.thisptr.PrintChargeMassInfo(maskString, idtype)
+
+    def has_vel(self):
+        return self.thisptr.HasVelInfo()
     
     def add_top_atom(self, Atom atomIn, int o_resnum, NameType resname, double[:] XYZin):
         return self.thisptr.AddTopAtom(atomIn.thisptr[0], o_resnum, resname.thisptr[0], &XYZin[0])
@@ -188,6 +192,23 @@ cdef class Topology:
     property GB_radiiset:
         def __get__(self):
             return self.thisptr.GBradiiSet()
+
+    #def int SetAmberExtra(self, vector[double], vector[NameType], vector[int], vector[int]):
+
+    def setup_integer_mask(self, AtomMask atm):
+        return self.thisptr.SetupIntegerMask(atm.thisptr[0])
+
+    def setup_char_mask(self, AtomMask atm):
+        return self.thisptr.SetupCharMask(atm.thisptr[0])
+
+    def setup_integer_mask(self,AtomMask atm, Frame frame):
+        return self.thisptr.SetupIntegerMask(atm.thisptr[0], frame.thisptr[0])
+
+    def setup_char_mask(self, AtomMask atm, Frame frame):
+        return self.thisptr.SetupCharMask(atm.thisptr[0], frame.thisptr[0])
+
+    def scale_dihedral_k(self, double value):
+        self.thisptr.ScaleDihedralK(value)
 
     def partial_modify_state_by_mask(self, AtomMask m):
         cdef Topology top = Topology()
