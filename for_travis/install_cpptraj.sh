@@ -4,7 +4,7 @@ set -ex
 git clone https://github.com/mojyt/cpptraj
 cd cpptraj
 export CPPTRAJHOME=`pwd`
-mkidr lib
+mkdir lib
 wget https://raw.githubusercontent.com/hainm/pycpptraj/master/for_travis/Makefile
 wget https://raw.githubusercontent.com/hainm/pycpptraj/master/for_travis/configure_pycpptraj
 mv Makefile ./src/
