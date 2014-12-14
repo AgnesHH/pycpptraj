@@ -2,3 +2,5 @@
 *.pyo
 build
 *.cpp
+nohup.out
+*.swp
