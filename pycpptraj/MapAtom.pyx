@@ -11,10 +11,10 @@ cdef class MapAtom:
         elif len(args) == 1:
             if isinstance(args[0], Atom):
                 atom = args[0]
-                self.thisptr = new _MapAtom(atom)
-            elif isinstance(args[0], map_atom):
+                self.thisptr = new _MapAtom(atom.thisptr[0])
+            elif isinstance(args[0], MapAtom):
                 map_atom = args[0]
-                self.thisptr = new _MapAtom(map_atom)
+                self.thisptr = new _MapAtom(map_atom.thisptr[0])
             else:
                 raise ValueError()
         else:
