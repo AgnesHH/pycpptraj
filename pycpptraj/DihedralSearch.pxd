@@ -72,5 +72,5 @@ cdef extern from "DihedralSearch.h":
 cdef class DihedralSearch:
     cdef _DihedralSearch* thisptr
 
-cdef class DihedralMask: 
-    cdef _DihedralMask* thisptr
+#cdef class DihedralMask: 
+#    cdef _DihedralMask* thisptr

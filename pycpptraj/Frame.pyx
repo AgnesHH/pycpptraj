@@ -16,6 +16,7 @@ def check_instance(inst, clsname):
 
 cdef class Frame:
     """This doc was taken from cpptraj doc (Frame.h) (written by Daniel R. Roe)
+    Doc for pycpptraj will be updated 
     Class: Frame
         Hold coordinates, perform various operations/transformations on them.
         Intended to hold coordinates e.g. from a trajectory or reference frame,
@@ -273,8 +274,20 @@ cdef class Frame:
         self.thisptr.ZeroCoords()
 
     #def Frame operator+=(self, Frame):
-    #def Frame operator-=(self, Frame):
-    #def Frame operator*=(self, Frame):
+    def __iadd__(Frame self, Frame other):
+        self.thisptr[0] = self.thisptr[0].addequal(other.thisptr[0])
+        #self.thisptr[0] += other.thisptr[0]
+        return self
+    
+    def __isub__(Frame self, Frame other):
+        self.thisptr[0] = self.thisptr[0].subequal(other.thisptr[0])
+        #self.thisptr[0] -= other.thisptr[0]
+        return self
+
+    def __imul__(Frame self, Frame other):
+        self.thisptr[0] = self.thisptr[0].mulequal(other.thisptr[0])
+        #self.thisptr[0] *= other.thisptr[0]
+        return self
 
     def __mul__(Frame self, Frame other):
         cdef Frame frame = Frame()
