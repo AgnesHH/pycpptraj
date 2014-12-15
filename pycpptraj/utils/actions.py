@@ -15,3 +15,6 @@ def write_parm(top=None, prefix="temp", parmtype='AMBERPARM'):
     pfile = ParmFile()
     parmtype = ParmFormatDict[parmtype]
     pfile.write_prefix_topology(top, prefix, parmtype, 0)
+
+def strip_parm(top=None, mask=None):
+    pass
