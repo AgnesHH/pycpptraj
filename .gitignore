@@ -4,4 +4,3 @@ build
 *.cpp
 nohup.out
 *.swp
-cpptraj.log

@@ -6,3 +6,4 @@ from pycpptraj.cpptraj import Cpptraj
 
 print sys.argv[:]
 Cpptraj().run(sys.argv[:])
+
