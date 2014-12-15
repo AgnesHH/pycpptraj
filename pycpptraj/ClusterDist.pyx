@@ -58,12 +58,13 @@ cdef class ClusterDist_Euclid:
 
 cdef class Centroid_Num:
     def __cinit__(self, *args):
-        cdef double val
-        if not args:
-            self.thisptr = new _Centroid_Num()
-        else:
-            val = args[0]
-            self.thisptr = new _Centroid_Num(val)
+        pass
+        #cdef double val
+        #if not args:
+        #    self.thisptr = new _Centroid_Num()
+        #else:
+        #    val = args[0]
+        #    self.thisptr = new _Centroid_Num(val)
 
     def __dealloc__(self):
         del self.thisptr
