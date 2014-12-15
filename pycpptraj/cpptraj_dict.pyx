@@ -5,7 +5,6 @@ cpdef get_key(value, dict Dict):
     for key, v in Dict.iteritems():
         if v == value:
             return key
-            break
 
 # Below are dictionary for cpptraj files/types, ...
 # Traj_PDBfile
@@ -160,12 +159,12 @@ DataFormatDict = {
     "UNKNOWN_DATA" : UNKNOWN_DATA, 
     }
 # Analysis_Hist
-from Analysis_Hist cimport *
-NormModeDict = {
-    "NO_NORM" : NO_NORM, 
-    "NORM_SUM" : NORM_SUM, 
-    "NORM_INT" : NORM_INT, 
-    }
+#from Analysis_Hist.Analysis_Hist cimport *
+#NormModeDict = {
+#    "NO_NORM" : NO_NORM, 
+#    "NORM_SUM" : NORM_SUM, 
+#    "NORM_INT" : NORM_INT, 
+#    }
 # Cluster_HierAgglo
 from Cluster_HierAgglo cimport *
 LINKAGETYPEDict = {
@@ -218,12 +217,12 @@ TrajFormatDict = {
     "UNKNOWN_TRAJ" : UNKNOWN_TRAJ, 
     }
 # NetcdfFile
-from NetcdfFile cimport *
-NCTYPEDict = {
-    "NC_UNKNOWN" : NC_UNKNOWN, 
-    "NC_AMBERTRAJ" : NC_AMBERTRAJ, 
-    "NC_AMBERRESTART" : NC_AMBERRESTART, 
-    }
+#from NetcdfFile cimport *
+#NCTYPEDict = {
+#    "NC_UNKNOWN" : NC_UNKNOWN, 
+#    "NC_AMBERTRAJ" : NC_AMBERTRAJ, 
+#    "NC_AMBERRESTART" : NC_AMBERRESTART, 
+#    }
 # Dimension
 from Dimension cimport *
 DimIdxDict = {
@@ -335,7 +334,7 @@ TrajModeDict = {
     "ENSEMBLE" : ENSEMBLE, 
     }
 # Analysis
-from Analysis cimport *
+#from Analysis cimport *
 RetDict = {
     "OK" : OK, 
     "ERR" : ERR, 

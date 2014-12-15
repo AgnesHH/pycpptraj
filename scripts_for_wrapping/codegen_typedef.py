@@ -1,7 +1,8 @@
+import os
 from util import Line_codegen
 import sys
 
-cpp_src = "/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest.2/AmberTools/src/cpptraj/src/"
+cpp_src = os.environ['AMBERHOME'] + "AmberTools/src/cpptraj/src/"
 fname = cpp_src + sys.argv[1]
 
 with open(fname, 'r') as fh:

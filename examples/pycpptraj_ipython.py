@@ -39,3 +39,4 @@ farray.append(refframe)
 # Cluster_DBSCAN
 db = Cluster_DBSCAN()
 
+#from pycpptraj import cpptraj_dict

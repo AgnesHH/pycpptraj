@@ -46,7 +46,9 @@ DihedralSearch
 BufferedFrame
 Action_Strip
 #utils.Actions
-#cpptraj_dict
+cpptraj_dict
+PDBfile
+Traj_Mol2File
 ClusterList
 #DataSet_RemLog
 ClusterDist
