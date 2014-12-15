@@ -13,12 +13,18 @@ def print_blank_line(num):
 def _to_lower_case(word):
     """convert function name from C/C++ to Python style
     SetTotalFrames --> set_total_frames
+    SetFromCRD -> set_from_crd
     """
     newword = []
     for i, x in enumerate(word):
         if x.isupper():
             # don't add "_" to first letter
-            x = x.lower() if i == 0 else "_" + x.lower()
+            try:
+                if i == 0:
+                    x = x.lower()  
+                elif i != 0 and word[i+1].islower():
+                    x = "_" + x.lower()
+            except: pass
         newword.append(x)
     return "".join(newword)
 

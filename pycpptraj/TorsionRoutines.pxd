@@ -7,4 +7,3 @@ cdef extern from "TorsionRoutines.h":
     double Pucker_CP(const double*, const double*, const double*, const double*, 
                              const double*, const double*, int, double&, double&)
     double CalcAngle(const double*, const double*, const double*)
-

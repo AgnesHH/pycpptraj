@@ -21,5 +21,5 @@ cdef import from "ArrayIterator.h":
         #ArrayIterator& operator+=(int)
         ArrayIterator operator+(int)
 
-cdef class ArrayIterator:
-    cdef _ArrayIterator[T]* thisptr
+#cdef class ArrayIterator:
+#    cdef _ArrayIterator[T]* thisptr

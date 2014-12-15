@@ -2,12 +2,13 @@
 #!/usr/bin/env python
 #python ./find_class_name.py filename
 
+import os
 import sys
 import re
 from glob import glob
 
 def find_class():
-    src = "/mnt/raidc/haichit/AMBER14_official.naga84.forPythonTest/AmberTools/src/cpptraj/src/"
+    src = os.environ['AMBERHOME'] + '/AmberTools/src/cpptraj/src/'
     p = re.compile(r'#include "(.+?).h"')
     classlist = []
     

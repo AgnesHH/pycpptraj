@@ -56,7 +56,7 @@ setup(
     author="Hai Nguyen",
     author_email="hainm.comp@gmail.com",
     url="https://github.com/hainm/pycpptraj",
-    packages=['pycpptraj',],
+    packages=['pycpptraj', 'pycpptraj.utils'],
     description="""Python wrapper for cpptraj""",
     long_description=read("README.md"),
     license = "BSD License",
