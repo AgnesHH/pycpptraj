@@ -16,7 +16,7 @@ cdef extern from "DataSetList.h":
         int EnsembleNum() const 
         #void RemoveSet(const_iterator)
         void RemoveSet(_DataSet *)
-        _DataSet * operator[](int didx)
+        _DataSet * index_opr "operator[]"(int didx)
         void SetDebug(int)
         void SetEnsembleNum(int i)
         void AllocateSets(long int)

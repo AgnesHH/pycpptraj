@@ -1,5 +1,7 @@
 # distutils: language = c++
 include "config.pxi"
+from cython.operator cimport dereference as deref
+from cython.operator cimport preincrement as incr
 
 
 cdef class DataSetList:
@@ -14,9 +16,7 @@ cdef class DataSetList:
         self.thisptr.Clear()
 
     #def DataSetList operator +=(self, DataSetList):
-
     #def _iterator begin(self):
-
     #def _iterator end(self):
 
     def empty(self):
@@ -30,10 +30,13 @@ cdef class DataSetList:
         return self.thisptr.EnsembleNum()
 
     #def void RemoveSet(self,_iterator):
-
     #def void RemoveSet(self,DataSet *):
 
     #def DataSet * operator[](self,int didx):
+    def __getitem__(self, int idx):
+        cdef DataSet dset = DataSet()
+        dset.thisptr[0] = deref(self.thisptr.index_opr(idx))
+        return dset
 
     def SetDebug(self,int id):
         self.thisptr.SetDebug(id)
@@ -77,11 +80,6 @@ cdef class DataSetList:
 
     def List(self):
         self.thisptr.List()
-
-    # don' I need this?
-    IF MPI:
-        def SynchronizeData(self):
-            self.thisptr.SynchronizeData()
 
     #def DataSet * FindSetOfType(self, string, DataSet::DataType):
 

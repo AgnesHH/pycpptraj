@@ -1,4 +1,5 @@
 # distutils: language = c++
+from cython.operator cimport dereference as deref
 
 
 cdef class DataFileList:
@@ -8,31 +9,54 @@ cdef class DataFileList:
     def __dealloc__(self):
         del self.thisptr
 
-    #def DataFileList(self):
+    def clear(self):
+        self.thisptr.Clear()
 
-    #def void Clear(self):
+    def remove_data_file(self, DataFile dfIn):
+        cdef DataFile dfile = DataFile()
+        dfile.thisptr[0] = deref(self.thisptr.RemoveDataFile(dfIn.thisptr))
+        return dfile
 
-    #def DataFile * RemoveDataFile(self,DataFile *):
+    def remove_data_set(self,DataSet dsIn):
+        self.thisptr.RemoveDataSet(dsIn.thisptr)
+        
+    def set_debug(self, int debug):
+        self.thisptr.SetDebug(debug)
 
-    #def void RemoveDataSet(self,DataSet *):
+    # this method is for MPI. 
+    #def set_ensemble_mode(self,int mIn):
+    #    self.thisptr.SetEnsembleNum(mIn)
 
-    #def void SetDebug(self,int):
+    def get_data_file(self, string nameIn):
+        cdef DataFile dfile = DataFile()
+        dfile.thisptr[0] = deref(self.thisptr.GetDataFile(nameIn))
+        return dfile
 
-    #def void SetEnsembleMode(self,int mIn):
+    def add_data_file(self, string nameIn, *args):
+        cdef DataFile dfile = DataFile()
+        cdef ArgList argIn
 
-    #def DataFile * GetDataFile(self, string):
+        if not args:
+            dfile.thisptr[0] = deref(self.thisptr.AddDataFile(nameIn))
+        else:
+            argIn = args[0]
+            dfile.thisptr[0] = deref(self.thisptr.AddDataFile(nameIn, argIn.thisptr[0]))
+        return dfile
 
-    #def DataFile * AddDataFile(self, string, ArgList):
+    def add_set_to_file(self, string nameIn, DataSet dsetIn):
+        cdef DataFile dfile = DataFile()
+        dfile.thisptr[0] = deref(self.thisptr.AddSetToFile(nameIn, dsetIn.thisptr))
+        return dfile
 
-    #def DataFile * AddDataFile(self, string):
+    def list(self):
+        self.thisptr.List()
 
-    #def DataFile * AddSetToFile(self, string, DataSet *):
+    def write_allDF(self):
+        self.thisptr.WriteAllDF()
 
-    #def void List(self):
+    def reset_write_status(self):
+        self.thisptr.ResetWriteStatus()
 
-    #def void WriteAllDF(self):
-
-    #def void ResetWriteStatus(self):
-
-    #def int ProcessDataFileArgs(self,ArgList):
+    def process_data_file_args(self, ArgList argIn):
+        return self.thisptr.ProcessDataFileArgs(argIn.thisptr[0])
 

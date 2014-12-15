@@ -11,31 +11,31 @@ cdef class DataFile:
         if self.thisptr is not NULL:
             del self.thisptr
 
-    def write_help(self):
+    def WriteHelp(self):
         self.thisptr.WriteHelp()
 
-    def read_options(self):
+    def ReadOptions(self):
         self.thisptr.ReadOptions()
 
-    def write_options(self):
+    def WriteOptions(self):
         self.thisptr.WriteOptions()
 
-    def get_format_from_arg(self,ArgList a):
+    def GetFormatFromArg(self,ArgList a):
         return self.thisptr.GetFormatFromArg(a.thisptr[0])
 
-    def format_string(self,DataFormatType t=DATAFILE):
+    def FormatString(self,DataFormatType t=DATAFILE):
         return self.thisptr.FormatString(t)
 
-    def set_debug(self,int i):
+    def SetDebug(self,int i):
         self.thisptr.SetDebug(i)
 
-    def set_data_file_precision(self, int widthIn, int precisionIn):
+    def SetDataFilePrecision(self, int widthIn, int precisionIn):
         self.thisptr.SetDataFilePrecision(widthIn, precisionIn)
 
-    def read_data_in(self, string fnameIn, ArgList argListIn, DataSetList datasetlist):
+    def ReadDataIn(self, string fnameIn, ArgList argListIn, DataSetList datasetlist):
         return self.thisptr.ReadDataIn(fnameIn.thisptr[0], argListIn.thisptr[0], datasetlist.thisptr[0])
 
-    def setup_datafile(self, string fnameIn, ArgList argIn, int debugIn):
+    def SetupDatafile(self, string fnameIn, ArgList argIn, int debugIn):
         return self.thisptr.SetupDatafile(fnameIn, argIn.thisptr[0], debugIn)
 
     #def AddSet(self,DataSet dataIn):
@@ -46,7 +46,7 @@ cdef class DataFile:
     #def RemoveSet(self,DataSet dataIn):
     #    return self.thisptr.RemoveSet(dataIn.thisptr)
 
-    def process_args(self, arg):
+    def ProcessArgs(self, arg):
         cdef string s
         cdef ArgList argIn
 
@@ -59,16 +59,16 @@ cdef class DataFile:
         else:
             raise ValueError()
 
-    def write_data(self):
+    def WriteData(self):
         self.thisptr.WriteData()
 
-    def data_set_names(self):
+    def DataSetNames(self):
         self.thisptr.DataSetNames()
 
-    def setDF_lwrite(self,bint fIn):
+    def SetDFLwrite(self,bint fIn):
         self.thisptr.SetDFLwrite(fIn)
 
-    def dF_lwrite(self):
+    def DFLwrite(self):
         return self.thisptr.DFLwrite()
 
     property data_format_type:

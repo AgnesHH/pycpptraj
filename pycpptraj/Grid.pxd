@@ -3,7 +3,7 @@
 from ArrayIterator cimport *
 
 cdef extern from "Grid.h":
-    ctypedef GridIterator "Grid::ArrayIterator[T]" iterator
+    #ctypedef GridIterator "Grid::ArrayIterator[T]" iterator
     cdef cppclass _Grid "Grid" [T]:
         _Grid()
         #~Grid() 
@@ -21,5 +21,5 @@ cdef extern from "Grid.h":
         void setGrid(int, int, int, const T &)
         const T& element(int, int, int)const 
         long int CalcIndex(int x, int y, int z)const 
-        iterator begin() 
-        iterator end() 
+        #iterator begin() 
+        #iterator end() 
