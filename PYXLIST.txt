@@ -50,7 +50,7 @@ cpptraj_dict
 PDBfile
 Traj_Mol2File
 ClusterList
-#DataSet_RemLog
+DataSet_RemLog
 ClusterDist
 Cluster_DBSCAN
 MapAtom
