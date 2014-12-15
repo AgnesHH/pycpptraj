@@ -23,16 +23,14 @@ AccessDict = {
     "APPEND" : APPEND, 
     "UPDATE" : UPDATE, 
     }
-# CpptrajFile
-from CpptrajFile cimport *
+
 CompressDict = {
     "NO_COMPRESSION" : NO_COMPRESSION, 
     "GZIP" : GZIP, 
     "BZIP2" : BZIP2, 
     "ZIP" : ZIP, 
     }
-# CpptrajFile
-from CpptrajFile cimport *
+
 FileDict = {
     "UNKNOWN_TYPE" : UNKNOWN_TYPE, 
     "STANDARD" : STANDARD, 
@@ -41,6 +39,7 @@ FileDict = {
     "ZIPFILE" : ZIPFILE, 
     "MPIFILE" : MPIFILE, 
     }
+
 # MaskToken
 from MaskToken cimport *
 MaskTokenDict = {
@@ -57,6 +56,7 @@ MaskTokenDict = {
     "OP_NEG" : OP_NEG, 
     "OP_DIST" : OP_DIST, 
     }
+
 # Atom
 from Atom cimport *
 AtomicElementDict = {
@@ -137,6 +137,7 @@ AtomicElementDict = {
     "LUTETIUM" : LUTETIUM, 
     "EXTRAPT" : EXTRAPT, 
     }
+
 # Traj_Mol2File
 from Traj_Mol2File cimport *
 MOL2WRITEMODEDict = {
@@ -145,6 +146,7 @@ MOL2WRITEMODEDict = {
     "MOL" : MOL, 
     "MULTI" : MULTI, 
     }
+
 # DataFile
 from DataFile cimport *
 DataFormatDict = {
@@ -165,6 +167,7 @@ DataFormatDict = {
 #    "NORM_SUM" : NORM_SUM, 
 #    "NORM_INT" : NORM_INT, 
 #    }
+
 # Cluster_HierAgglo
 from Cluster_HierAgglo cimport *
 LINKAGETYPEDict = {
@@ -172,6 +175,7 @@ LINKAGETYPEDict = {
     "AVERAGELINK" : AVERAGELINK, 
     "COMPLETELINK" : COMPLETELINK, 
     }
+
 # Mol2File
 from Mol2File cimport *
 TRIPOSTAGDict = {
@@ -180,6 +184,7 @@ TRIPOSTAGDict = {
     "BOND" : BOND, 
     "SUBSTRUCT" : SUBSTRUCT, 
     }
+
 # ReplicaDimArray
 from ReplicaDimArray cimport *
 RemDimDict = {
@@ -189,6 +194,7 @@ RemDimDict = {
     "HAMILTONIAN" : HAMILTONIAN, 
     "PH" : PH, 
     }
+
 # Box
 from Box cimport *
 BoxDict = {
@@ -198,6 +204,7 @@ BoxDict = {
     "RHOMBIC" : RHOMBIC, 
     "NONORTHO" : NONORTHO, 
     }
+
 # TrajectoryFile
 from TrajectoryFile cimport *
 TrajFormatDict = {
@@ -216,6 +223,7 @@ TrajFormatDict = {
     "CONFLIB" : CONFLIB, 
     "UNKNOWN_TRAJ" : UNKNOWN_TRAJ, 
     }
+
 # NetcdfFile
 #from NetcdfFile cimport *
 #NCTYPEDict = {
@@ -224,12 +232,13 @@ TrajFormatDict = {
 #    "NC_AMBERRESTART" : NC_AMBERRESTART, 
 #    }
 # Dimension
-from Dimension cimport *
-DimIdxDict = {
-    "X" : X, 
-    "Y" : Y, 
-    "Z" : Z, 
-    }
+#from Dimension cimport *
+#DimIdxDict = {
+#    "X" : X, 
+#    "Y" : Y, 
+#    "Z" : Z, 
+#    }
+
 # DataSet_2D
 from DataSet_2D cimport *
 MatrixDict = {
@@ -244,20 +253,21 @@ MatrixDict = {
     "DIHCOVAR" : DIHCOVAR, 
     "NMAT" : NMAT, 
     }
-# DataSet_2D
-from DataSet_2D cimport *
+
 MatrixKindDict = {
     "FULL" : FULL, 
     "HALF" : HALF, 
     "TRI" : TRI, 
     }
-# ClusterSieve
-from ClusterSieve cimport *
-SieveDict = {
-    "NONE" : NONE, 
-    "REGULAR" : REGULAR, 
-    "RANDOM" : RANDOM, 
-    }
+
+## ClusterSieve
+#from ClusterSieve cimport *
+#SieveDict = {
+#    "NONE" : NONE, 
+#    "REGULAR" : REGULAR, 
+#    "RANDOM" : RANDOM, 
+#    }
+
 # PDBfile
 from PDBfile cimport *
 PDB_RECTYPEDict = {
@@ -270,14 +280,16 @@ PDB_RECTYPEDict = {
     "END_OF_FILE" : END_OF_FILE, 
     "UNKNOWN" : UNKNOWN, 
     }
+
 # Action
-from Action cimport *
-RetDict = {
-    "OK" : OK, 
-    "ERR" : ERR, 
-    "USEORIGINALFRAME" : USEORIGINALFRAME, 
-    "SUPPRESSCOORDOUTPUT" : SUPPRESSCOORDOUTPUT, 
-    }
+#from Action cimport *
+#RetDict = {
+#    "OK" : OK, 
+#    "ERR" : ERR, 
+#    "USEORIGINALFRAME" : USEORIGINALFRAME, 
+#    "SUPPRESSCOORDOUTPUT" : SUPPRESSCOORDOUTPUT, 
+#    }
+
 # Frame
 from Frame cimport *
 CenterModeDict = {
@@ -285,6 +297,7 @@ CenterModeDict = {
     "BOXCTR" : BOXCTR, 
     "POINT" : POINT, 
     }
+
 # ParmFile
 from ParmFile cimport *
 ParmFormatDict = {
@@ -296,12 +309,14 @@ ParmFormatDict = {
     "SDFFILE" : SDFFILE, 
     "UNKNOWN_PARM" : UNKNOWN_PARM, 
     }
+
 # ClusterList
 from ClusterList cimport *
 DistModeDict = {
     "USE_FRAMES" : USE_FRAMES, 
     "USE_FILE" : USE_FILE, 
     }
+
 # ClusterList
 from ClusterList cimport *
 DistMetricDict = {
@@ -318,6 +333,7 @@ DistMetricDict = {
 #    "MASKCENTER" : MASKCENTER, 
 #    "SPECIFIEDCENTER" : SPECIFIEDCENTER, 
 #    }
+
 # Trajin_Multi
 from Trajin_Multi cimport *
 TargetDict = {
@@ -326,6 +342,7 @@ TargetDict = {
     "INDICES" : INDICES, 
     "CRDIDX" : CRDIDX, 
     }
+
 # TrajinList
 from TrajinList cimport *
 TrajModeDict = {
@@ -333,9 +350,10 @@ TrajModeDict = {
     "NORMAL" : NORMAL, 
     "ENSEMBLE" : ENSEMBLE, 
     }
+
 # Analysis
-#from Analysis cimport *
-RetDict = {
-    "OK" : OK, 
-    "ERR" : ERR, 
-    }
+##from Analysis cimport *
+#RetDict = {
+#    "OK" : OK, 
+#    "ERR" : ERR, 
+#    }
