@@ -15,7 +15,7 @@ trajoutname = datadir + "test.x"
 refname = "./data/Tc5b.nat.crd"
 trajinname = datadir + "md1_prod.Tc5b.x"
 toplist = TopologyList()
-toplist.AddParmFile(datadir + "Tc5b.top")
+toplist.add_parm_file(datadir + "Tc5b.top")
 top = toplist[0]
 
 #creat TrajinList instance
@@ -39,7 +39,7 @@ state = CpptrajState()
 refFrame = ReferenceFrame()
 refFrame.load_ref("./data/Tc5b.nat.crd", top, 0)
 topref = refFrame.parm()
-crd = refFrame.Coord()
+crd = refFrame.coord()
 print crd.size/3
-topref.set_reference_coords( refFrame.Coord()  )
+topref.set_reference_coords( refFrame.coord()  )
 topref.residue_info(":2-5")

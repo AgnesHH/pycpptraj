@@ -13,7 +13,7 @@ trajoutname = "./data/test.x"
 refname = "./data/Tc5b.nat.crd"
 trajinname = "./data/md1_prod.Tc5b.x"
 toplist = TopologyList()
-toplist.AddParmFile(topname)
+toplist.add_parm_file(topname)
 
 #creat TrajinList instance
 trajininput= """
@@ -27,15 +27,15 @@ go
 """
 argIn = ArgList(trajininput)
 trajlist = TrajinList()
-trajlist.AddTrajin("./data/md1_prod.Tc5b.x", argIn, toplist)
+trajlist.add_trajin("./data/md1_prod.Tc5b.x", argIn, toplist)
 #print trajlist.mode()
 #print trajlist.max_frames
 
 # STATUS: got Segmentation fault (core dumped)
 # Reason: can not create Trajin instance (this class in cpptraj has virtual methods)
-trajin = trajlist.front()
-print trajin.TotalFrames
-print trajin.TotalReadFrames
-#frame = trajin.GetNextFrame()
-for traj in trajlist:
-    pass
+#trajin = trajlist.front()
+#print trajin.total_frames
+#print trajin.total_read_frames
+#frame = trajin.get_next_frame()
+#for traj in trajlist:
+#    pass

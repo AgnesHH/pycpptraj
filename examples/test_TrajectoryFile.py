@@ -13,7 +13,7 @@ trajoutname = "./data/test.x"
 refname = "./data/Tc5b.nat.crd"
 trajinname = "./data/md1_prod.Tc5b.x"
 #toplist = TopologyList()
-#toplist.AddParmFile(topname)
+#toplist.add_parm_file(topname)
 
 #creat TrajinList instance
 trajininput= """

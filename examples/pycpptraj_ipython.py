@@ -7,6 +7,7 @@ from pycpptraj.ReferenceFrame import ReferenceFrame
 from pycpptraj.Trajin_Single import Trajin_Single 
 from pycpptraj.ArgList import ArgList
 from pycpptraj.AtomMask import AtomMask
+from pycpptraj.FrameArray import FrameArray
 
 top = Topology("./data/Tc5b.top")
 atomlist = top.atom_list()
@@ -28,3 +29,7 @@ strip @H outprefix teststrip
 
 strip.init(ArgList(input))
 strip.setup(top)
+
+farray = FrameArray()
+farray.append(frame)
+farray.append(refframe)

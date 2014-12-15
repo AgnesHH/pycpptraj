@@ -76,7 +76,7 @@ cdef class Frame:
     def __dealloc__(self):
         del self.thisptr
 
-    def set_from_c_r_d(self, CRDtype farray, *args):
+    def set_from_crd(self, CRDtype farray, *args):
         """"""
         cdef int numCrd, numBoxCrd
         cdef bint hasVel
@@ -91,7 +91,7 @@ cdef class Frame:
         else:
             raise ValueError("Must have only 3 or 4 more arguments")
 
-    def convert_to_c_r_d(self, int numBoxCrd, bint hasVel):
+    def convert_to_crd(self, int numBoxCrd, bint hasVel):
         return self.thisptr.ConvertToCRD(numBoxCrd, hasVel)
         
     def print_atom_coord(self, int atom):
@@ -123,7 +123,7 @@ cdef class Frame:
         return self.thisptr.HasVelocity()
 
     @property
-    def natom(self):
+    def n_atoms(self):
        return self.thisptr.Natom()
 
     property size:
@@ -134,7 +134,7 @@ cdef class Frame:
         def __get__(self):
             return self.thisptr.NrepDims()
 
-    property Temperature:
+    property temperature:
         def __get__(self):
             return self.thisptr.Temperature()
 
@@ -144,7 +144,7 @@ cdef class Frame:
     def xyz(self):
         # cpptraj: return double*
         cdef int i
-        cdef natom = self.natom
+        cdef natom = self.n_atoms
         cdef pyarray arr = pyarray('d', [])
         #cdef double[:] _xyz
         #cdef vector[double] v
@@ -174,7 +174,7 @@ cdef class Frame:
     #    # numpy version
     #    # cpptraj: return double*
     #    cdef int i
-    #    cdef natom = self.natom
+    #    cdef natom = self.n_atoms
     #    cdef double[:] _xyz = np.empty(3 * natom)
 
     #    for i in range(natom):
@@ -185,7 +185,7 @@ cdef class Frame:
 
     #def crd(self,int idx):
     #    cdef int i
-    #    cdef natom = self.natom
+    #    cdef natom = self.n_atoms
     #    cdef double[:] _xyz
 
     #    for i in range(3 * natom):
@@ -197,7 +197,7 @@ cdef class Frame:
     #def v_xyz(self,int atnum):
     #    # cpptraj: return double*
     #    cdef int i
-    #    cdef natom = self.natom
+    #    cdef natom = self.n_atoms
     #    cdef double[:] _xyz
 
     #    for i in range(natom):

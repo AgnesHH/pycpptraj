@@ -4,4 +4,4 @@ at = Atom()
 
 #print help(at)
 at.c_str()
-print at.AtomicNumber
+print at.atomic_number

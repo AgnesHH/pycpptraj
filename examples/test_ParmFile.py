@@ -7,10 +7,10 @@ parm = ParmFile()
 fname = "./Tc5b.top"
 
 print "Read topology file and dump to 'top'"
-parm.ReadTopology(top, fname, 1)
-print top.Natom
+parm.read_topology(top, fname, 1)
+print top.n_atoms
 print "Summary:"
-top.Summary()
+top.summary()
 
 print "\natom_iterator for top"
 for atom in top.atom_generator():
@@ -28,11 +28,11 @@ for mol in top.mol_generator():
     #print mol
 
 for i in range(304):
-    top.AtomMaskName(i)
+    top.atom_mask_name(i)
 
 #print "\nAtom info"
 #top.PrintAtomInfo("@CA")
 #top.PrintBondInfo("@C*")
-top.PrintChargeMassInfo("@CA", 2)
+top.print_charge_mass_info("@CA", 2)
 pfname = parm.ParmFilename()
 print pfname.full()

@@ -7,13 +7,13 @@ frameref = Frame(10)
 arr = np.random.rand(30)
 print arr.__len__()
 print arr
-frame.SetFromCRD(arr, 30, 0, False)
-print frame.Natom
+frame.set_from_crd(arr, 30, 0, False)
+print frame.n_atoms
 print frame.size
-print frame.Temperature
+print frame.temperature
 
 #for i in range(9):
-#    frame.printAtomCoord(i)
+#    frame.print_atom_coord(i)
 
 # indexing
 print
@@ -23,24 +23,23 @@ print frame[1]
 print frame[2]
 print frame[3]
 
-# frame.Info('frame info')
+# frame.info('frame info')
 print "before swapping 1 - 8"
-frame.printAtomCoord(1)
-frame.printAtomCoord(8)
-frame.SwapAtoms(1, 8)
+frame.print_atom_coord(1)
+frame.print_atom_coord(8)
+frame.swap_atoms(1, 8)
 
 print "after swapping 1 - 8"
-frame.printAtomCoord(1)
-frame.printAtomCoord(8)
+frame.print_atom_coord(1)
+frame.print_atom_coord(8)
 
 print "deviding Frame"
-frame.Divide(2.)
-frame.printAtomCoord(1)
-frame.printAtomCoord(8)
+frame.divide(2.)
+frame.print_atom_coord(1)
+frame.print_atom_coord(8)
 
 
 arrref = np.random.rand(30)
-frameref.SetFromCRD(arr, 30, 0, False)
+frameref.set_from_crd(arr, 30, 0, False)
 
-print "RMSD between frame and frameref = %s" % frame.RMSD(frameref)
-frame.show_my_pxd()
+print "RMSD between frame and frameref = %s" % frame.rmsd(frameref)
