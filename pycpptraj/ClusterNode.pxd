@@ -1,7 +1,7 @@
 # distutils: language = c++
 from ClusterDist cimport *
 
-
+#ctypedef Cframes.const_iterator frame_iterator
 cdef extern from "ClusterNode.h": 
     cdef cppclass _ClusterNode "ClusterNode":
         _ClusterNode() 
@@ -27,4 +27,4 @@ cdef extern from "ClusterNode.h":
         void SetAvgDist(double avg)
         void Add_FrameToCluster(int fnum)
         void SetNum(int numIn)
-        void Sort_FrameList() 
+        void SortFrameList() 

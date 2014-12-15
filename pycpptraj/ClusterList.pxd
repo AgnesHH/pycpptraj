@@ -1,10 +1,12 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 from libcpp.string cimport string
+from libcpp.list cimport list
 from ArgList cimport *
 from ClusterNode cimport *
 
-
+#ctypedef list[_ClusterNode].const_iterator cluster_iterator
+ctypedef list[_ClusterNode].iterator cluster_it
 cdef extern from "ClusterList.h": 
     # ClusterList.h
     ctypedef enum DistModeType "ClusterList::DistModeType":
@@ -31,8 +33,8 @@ cdef extern from "ClusterList.h":
         #virtual int SetupCluster(_ArgList&)= 0 
         #virtual void ClusteringInfo() = 0 
         #virtual int Cluster() = 0 
-        const cluster_iterator begincluster() const 
-        const cluster_iterator endcluster() const 
+        #const cluster_iterator begincluster() const 
+        #const cluster_iterator endcluster() const 
 
 
 cdef class ClusterList:
