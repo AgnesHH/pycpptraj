@@ -8,9 +8,11 @@ from ArgList cimport *
 
 
 cdef extern from "DihedralSearch.h": 
+    # Note: _DihedralMask is private class of DihedralSearch
+    # Don't use
     cdef cppclass _DihedralMask "DihedralSearch::DihedralMask":
-        DihedralMask() 
-        DihedralMask(int, int, int, int, int, const string&, DihedralType2)
+        _DihedralMask() 
+        _DihedralMask(int, int, int, int, int, const string&, DihedralType2)
         int A0() const 
         int A1() const 
         int A2() const 
@@ -19,7 +21,6 @@ cdef extern from "DihedralSearch.h":
         const string& Name() const 
         bint None() const 
         DihedralType2 Type() const 
-
 
     # DihedralSearch.h
     ctypedef enum DihedralType2 "DihedralSearch::DihedralType":
@@ -71,3 +72,5 @@ cdef extern from "DihedralSearch.h":
 cdef class DihedralSearch:
     cdef _DihedralSearch* thisptr
 
+cdef class DihedralMask: 
+    cdef _DihedralMask* thisptr
