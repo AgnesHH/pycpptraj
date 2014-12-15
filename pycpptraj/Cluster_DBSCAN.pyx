@@ -1,30 +1,31 @@
 # distutils: language = c++
 
 
-cdef class Cluster_DBSCAN:
+cdef class Cluster_DBSCAN (ClusterList):
     def __cinit__(self):
         # self.thisptr: from ClusterList
         self.thisptr = new _Cluster_DBSCAN()
+        self.ptr = <_Cluster_DBSCAN*>self.thisptr
 
     def __dealloc__(self):
-        #del (<_Cluster_DBSCAN*>self.thisptr)
+        #del ptr
         del self.thisptr
 
-    def Help(self):
-        (<_Cluster_DBSCAN*>self.thisptr).Help()
+    def help(self):
+        self.ptr.Help()
 
-    def SetupCluster(self,ArgList arglist):
-        return (<_Cluster_DBSCAN*>self.thisptr).SetupCluster(arglist.thisptr[0])
+    def setup_cluster(self,ArgList arglist):
+        return self.ptr.SetupCluster(arglist.thisptr[0])
 
-    def ClusteringInfo(self):
-        (<_Cluster_DBSCAN*>self.thisptr).ClusteringInfo()
+    def clustering_info(self):
+        self.ptr.ClusteringInfo()
 
-    def Cluster(self):
-        return (<_Cluster_DBSCAN*>self.thisptr).Cluster()
+    def cluster(self):
+        return self.ptr.Cluster()
 
-    def AddSievedFrames(self):
-        (<_Cluster_DBSCAN*>self.thisptr).AddSievedFrames()
+    def add_sieved_frames(self):
+        self.ptr.AddSievedFrames()
 
-    def ClusterResults(self,CpptrajFile cpptrajfile):
-        (<_Cluster_DBSCAN*>self.thisptr).ClusterResults(cpptrajfile.thisptr[0])
+    def cluster_results(self,CpptrajFile cpptrajfile):
+        self.ptr.ClusterResults(cpptrajfile.thisptr[0])
 

@@ -14,4 +14,4 @@ cdef extern from "Cluster_DBSCAN.h":
 
 
 cdef class Cluster_DBSCAN (ClusterList):
-    pass
+    cdef _Cluster_DBSCAN* ptr
