@@ -1,3 +1,13 @@
+# distutils: language = c++
+
+cpdef get_key(value, dict Dict):
+    """return the first key having Dict[key] == value"""
+    for key, v in Dict.iteritems():
+        if v == value:
+            return key
+            break
+
+# Below are dictionary for cpptraj files/types, ...
 # Traj_PDBfile
 from Traj_PDBfile cimport *
 PDBWRITEMODEDict = {
@@ -302,13 +312,13 @@ DistMetricDict = {
     "DATA" : DATA, 
     }
 # GridAction
-from GridAction cimport *
-GridModeDict = {
-    "ORIGIN" : ORIGIN, 
-    "BOX" : BOX, 
-    "MASKCENTER" : MASKCENTER, 
-    "SPECIFIEDCENTER" : SPECIFIEDCENTER, 
-    }
+#from GridAction cimport *
+#GridModeDict = {
+#    "ORIGIN" : ORIGIN, 
+#    "BOX" : BOX, 
+#    "MASKCENTER" : MASKCENTER, 
+#    "SPECIFIEDCENTER" : SPECIFIEDCENTER, 
+#    }
 # Trajin_Multi
 from Trajin_Multi cimport *
 TargetDict = {
