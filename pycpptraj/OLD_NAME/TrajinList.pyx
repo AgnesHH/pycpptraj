@@ -11,16 +11,16 @@ cdef class TrajinList:
     def __dealloc__(self):
         del self.thisptr
 
-    def clear(self):
+    def Clear(self):
         self.thisptr.Clear()
 
-    def set_debug(self,int dIn):
+    def SetDebug(self,int dIn):
         self.thisptr.SetDebug(dIn)
 
-    def add_trajin(self, string fname, ArgList arglist, TopologyList toplist):
+    def AddTrajin(self, string fname, ArgList arglist, TopologyList toplist):
         return self.thisptr.AddTrajin(fname, arglist.thisptr[0], toplist.thisptr[0])
 
-    def add_ensemble(self, string s, ArgList arglist, TopologyList toplist):
+    def AddEnsemble(self, string s, ArgList arglist, TopologyList toplist):
         return self.thisptr.AddEnsemble(s, arglist.thisptr[0], toplist.thisptr[0])
 
     def __iter__(self):
@@ -56,16 +56,15 @@ cdef class TrajinList:
         # STATUS: got Segmentation fault
         # Trajin has abtract methods --> can not create instance. 
         # cpptraj: return Trajin*
-        pass
 
-        #cdef Trajin trajin = Trajin()
-        #trajin.thisptr[0] = deref(<_Trajin*> self.thisptr.front())
-        #return trajin
+        cdef Trajin trajin = Trajin()
+        trajin.thisptr[0] = deref(<_Trajin*> self.thisptr.front())
+        return trajin
 
 
     @property
     def max_frames(self):
         return self.thisptr.MaxFrames()
 
-    def list(self):
+    def List(self):
         self.thisptr.List()
