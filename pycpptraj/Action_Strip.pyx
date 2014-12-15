@@ -9,7 +9,7 @@ from Box cimport Box
 from AtomMask cimport AtomMask
 from Topology cimport Topology
 from Frame cimport Frame
-from ParmFile cimport ParmFile
+from ParmFile cimport *
 
 cdef class Action_Strip:
     cdef public Topology old_parm, new_parm
@@ -51,7 +51,6 @@ cdef class Action_Strip:
     def do_action(self, frame_num, Frame current_frame):
         self.new_frame.set_frame(current_frame, self.M1)
 
-    def write_parm(self, top=top, prefix=prefix, parmtype=AMBERPARM):
-        cdef ParmFile pfile
-        pfile.write_prefix_topology(top, prefix, parmtype, 0)
-
+    def write_parm(self, top=None, prefix="temp", parmtype=AMBERPARM):
+        cdef ParmFile pfile = ParmFile()
+        pfile.write_prefix_topology(<Topology>top, <string>prefix, parmtype, 0)

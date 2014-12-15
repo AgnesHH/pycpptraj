@@ -25,6 +25,7 @@ Trajin_Single
 Vec3
 FileName
 Frame
+FrameArray
 BaseIOtype
 TrajectoryIO
 FrameList
@@ -44,3 +45,5 @@ DataSet_Coords
 DihedralSearch
 BufferedFrame
 Action_Strip
+#utils.Actions
+cpptraj_dict
