@@ -11,44 +11,87 @@ cdef class DihedralSearch:
     #def mask_it begin(self):
     #def mask_it end(self):
 
-    def Ndihedrals(self):
+    def n_dihedrals(self):
         return self.thisptr.Ndihedrals()
 
-    def ListKnownTypes(self):
+    def list_known_types(self):
         self.thisptr.ListKnownTypes()
 
-    def OffsetHelp(self):
+    def offset_help(self):
         self.thisptr.OffsetHelp()
 
-    def DihedralType GetType(self, string typein):
+    def get_type(self, string typein):
         return self.thisptr.GetType(typein)
 
-    def SearchFor(self, DihedralType dhtype):
+    def search_for(self, DihedralType2 dhtype):
         return self.thisptr.SearchFor(dhtype)
 
-    def SearchForArgs(self, ArgList arglist):
+    def search_for_args(self, ArgList arglist):
         self.thisptr.SearchForArgs(arglist.thisptr[0])
 
-    def SearchForNewType(self, int off, string an0, string an1, string an2, string an3, string name):
+    def search_for_new_type(self, int off, string an0, string an1, string an2, string an3, string name):
         return self.SearchForNewType(off, an0, an1, an2, an3, name)
 
-    def SearchForAll(self):
+    def search_for_all(self):
         return self.thisptr.SearchForAll()
 
-    def FindDihedrals(self, Topology, Range):
-        return self.thisptr.FindDihedrals(top.thisptr[0], r.thisptr[0])
+#    def find_dihedrals(self, Topology, Range):
+#        return self.thisptr.FindDihedrals(top.thisptr[0], r.thisptr[0])
 
-    def Clear(self):
+    def clear(self):
         self.thisptr.Clear()
 
-    def ClearFound(self):
+    def clear_found(self):
         self.thisptr.ClearFound()
 
-    def PrintTypes(self):
+    def print_types(self):
         self.thisptr.PrintTypes()
 
-    def MovingAtoms(self, Topology, int atom0, int atom1):
+    def moving_atoms(self, Topology top, int atom0, int atom1):
         cdef AtomMask atm = AtomMask()
         atm.thisptr[0] = self.thisptr.MovingAtoms(top.thisptr[0],atom0, atom1)
         return atm
+
+cdef class DihedralMask:
+    def __cinit__(self, *args):
+        """DihedralMask() 
+        or DihedralMask(a0, a1, a2, a3, res, name, dhtype)
+        """
+        cdef int a0, a1, a2, a3, res
+        cdef string name
+        cdef DihedralType dhtype
+        
+        if not args:
+            self.thisptr = new _DihedralMask()
+        elif len(args) == 7:
+            a0, a1, a2, a3, res, name, dhtype = args
+            self.thisptr = new _DihedralMask(a0, a1, a2, a3, res, name, dhtype)
+
+    def __dealloc__(self):
+        del self.thisptr
+
+    def A0(self):
+        return self.thisptr.A0()
+
+    def A1(self):
+        return self.thisptr.A1()
+
+    def A2(self):
+        return self.thisptr.A2()
+
+    def A3(self):
+        return self.thisptr.A3()
+
+    def ResNum(self):
+        return self.thisptr.ResNum()
+
+    def Name(self):
+        return self.thisptr.Name()
+
+    def None(self):
+        return self.thisptr.None()
+
+    def Type(self):
+        return self.thisptr.Type()
+
 
