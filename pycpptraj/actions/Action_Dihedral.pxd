@@ -1,6 +1,6 @@
 # distutils: language = c++
 from Action cimport *
-from ..FunctPtr cimport FunctPtr
+#from .._FunctPtr cimport FunctPtr
 
 cdef extern from "Action_Dihedral.h": 
     cdef cppclass _Action_Dihedral "Action_Dihedral" (_Action):

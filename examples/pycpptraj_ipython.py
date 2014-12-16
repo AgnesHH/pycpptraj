@@ -17,7 +17,7 @@ from pycpptraj.actions.Action_Rmsd import Action_Rmsd
 from pycpptraj.Cluster_DBSCAN import Cluster_DBSCAN
 from pycpptraj.ActionList import ActionList
 from pycpptraj.CpptrajState import CpptrajState
-#from pycpptraj.FuncPtr import FuncPtr
+from pycpptraj._FunctPtr import FunctPtr
 
 top = Topology("./data/Tc5b.top")
 atomlist = top.atom_list()
@@ -38,6 +38,8 @@ strip @H outprefix teststrip
 """
 
 input2 = """
+parm ./data/Tc5b.top
+reference ./data/Tc5b.nat.crd
 out test.out :1-20@CA
 """
 
@@ -63,13 +65,13 @@ armsd = Action_Rmsd()
 #    action.help()
 
 alist = ActionList()
-alist.add_action (armsd.alloc(), ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
-alist.add_action (adih.alloc(), ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
-
+toplist = TopologyList("./data/Tc5b.top")
+print "test ActionList"
+alist.add_action(armsd, ArgList(), toplist, FrameList(), DataSetList(), DataFileList())
+#alist.add_action(adih, ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
 
 # 
+print "Test CpptrajState"
 cppstate = CpptrajState()
-cppstate.add_action(adih.alloc(), arglist)
-cppstate.add_action_2(adih, arglist)
-cppstate.add_action(armsd.alloc(), arglist)
+cppstate.add_action(armsd, arglist)
 cppstate.run()

@@ -3,7 +3,7 @@ from Action cimport *
 from ..Range cimport *
 from ..ReferenceAction cimport *
 from ..DataSet_1D cimport *
-from ..FunctPtr cimport FunctPtr
+#from .._FunctPtr cimport FunctPtr
 
 
 cdef extern from "Action_Rmsd.h": 

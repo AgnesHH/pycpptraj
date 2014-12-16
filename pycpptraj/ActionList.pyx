@@ -1,5 +1,5 @@
 # distutils: language = c++
-from FunctPtr cimport FunctPtr
+from _FunctPtr cimport FunctPtr
 from cython.operator cimport dereference as deref
 
 # Do we really need this class in Python?
@@ -23,7 +23,7 @@ cdef class ActionList:
     def debug(self):
         return self.thisptr.Debug()
 
-    def add_action(self, FunctPtr func, ArgList arglist, TopologyList toplist, 
+    def add_action(self, obj, ArgList arglist, TopologyList toplist, 
                          FrameList flist, DataSetList dlist, DataFileList dflist):
         """
         Add action to ActionList
@@ -37,7 +37,7 @@ cdef class ActionList:
         dlist :: DataSetList 
         dflist :: DataFileList
         """
-
+        cdef FunctPtr func = <FunctPtr> obj.alloc()
         # add function pointer: How?
         return self.thisptr.AddAction(func.ptr, arglist.thisptr[0], 
                                       toplist.thisptr, flist.thisptr, 
