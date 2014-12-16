@@ -47,6 +47,7 @@ BufferedFrame
 Action
 Action_Strip
 Action_Dihedral
+Action_Rmsd
 DispatchObject
 #utils.Actions
 cpptraj_dict

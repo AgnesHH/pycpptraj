@@ -114,8 +114,11 @@ cdef class Frame:
         self.thisptr.SwapAtoms(atom1, atom2)
 
     def __getitem__(self, idx):
-        """return: ?"""
-        return self.thisptr.index_opr(idx)
+        "Return coordinate"
+        if idx <= 0:
+            raise ValueError("Frame size must be larger than 0")
+        else:
+            return self.thisptr.index_opr(idx)
 
     def empty(self):
         return self.thisptr.empty()
