@@ -1,6 +1,7 @@
 # distutils: language = c++
 
 from libc.stdlib cimport malloc 
+from libcpp.vector cimport vector
 
 cdef inline char** list_to_char_pp(args):
      cdef char** c_argv

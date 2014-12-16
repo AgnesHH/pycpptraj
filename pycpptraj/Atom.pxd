@@ -1,6 +1,6 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from libcpp.set cimport set
+#from libcpp.set cimport set
 from NameType cimport *
 from vector_pycpptraj cimport vector as cppvector
 
@@ -125,7 +125,7 @@ cdef extern from "Atom.h":
         void AddBond(int)
         void ClearBonds() 
         void SortBonds() 
-        void AddExclusionList(const set[int]&)
+        #void AddExclusionList(const set[int]&)
         double GetBondLength(AtomicElementType, AtomicElementType)
 
 

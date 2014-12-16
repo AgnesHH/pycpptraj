@@ -123,8 +123,8 @@ cdef class Atom:
     def sort_bonds(self):
         self.thisptr.SortBonds()
 
-    def add_exclusion_list(self,set[int] intset):
-        self.thisptr.AddExclusionList(intset)
+    #def add_exclusion_list(self,set[int] intset):
+    #    self.thisptr.AddExclusionList(intset)
 
     def get_bond_length(self,AtomicElementType id1, AtomicElementType id2):
         return self.thisptr.GetBondLength(id1, id2)
