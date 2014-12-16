@@ -1,6 +1,6 @@
 # distutils: language = c++
 from vector_pycpptraj cimport vector as cppvector
-from libcpp.set cimport set
+#from libcpp.set cimport set
 from Atom cimport *
 from Residue cimport *
 from Molecule cimport *
@@ -12,7 +12,7 @@ from FileName cimport *
 ctypedef cppvector[_Atom].const_iterator atom_iterator
 ctypedef cppvector[_Residue].const_iterator res_iterator
 ctypedef cppvector[_Molecule].const_iterator mol_iterator
-ctypedef cppvector[set[AtomicElementType]] BP_mapType
+#ctypedef cppvector[set[AtomicElementType]] BP_mapType
 
 cdef extern from "Topology.h": 
     cdef cppclass _Topology "Topology":

@@ -33,7 +33,6 @@ In [8]: n.Print("3x3 matrix n: ")
 #import numpy as np
 #cimport numpy as np
 from Vec3 cimport Vec3
-from FusedType cimport MatVecType 
 
 #check memory leaked
 
@@ -163,30 +162,30 @@ cdef class Matrix_3x3:
             raise ValueError("Must be either Matrix_3x3")
 
 
-    def mul(Matrix_3x3 self, MatVecType other):
-        """ 
-        Note: for some reason this code does not work yet.
-        (works fine with regular method "mult", but not with __mul__)
-        Multiply two matrices or a matrix with a vector
+    #def mul(Matrix_3x3 self, MatVecType other):
+    #    """ 
+    #    Note: for some reason this code does not work yet.
+    #    (works fine with regular method "mult", but not with __mul__)
+    #    Multiply two matrices or a matrix with a vector
 
-        Parameters
-        ----------
-        self: Matrix_3x3 instance
-        other: Matrix_3x3 instance or Vec3 instance
+    #    Parameters
+    #    ----------
+    #    self: Matrix_3x3 instance
+    #    other: Matrix_3x3 instance or Vec3 instance
 
-        Output
-        ------
-        new Matrix_3x3 instance or Vec3 instance
-        """
-        cdef MatVecType result
-        if isinstance(other, Vec3):
-            result = Vec3()
-        elif isinstance(other, Matrix_3x3):
-            result = Matrix_3x3()
-        else:
-            raise ValueError("Must be a Matrix_3x3 or a Vec3 instance")
-        result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
-        return result
+    #    Output
+    #    ------
+    #    new Matrix_3x3 instance or Vec3 instance
+    #    """
+    #    cdef MatVecType result
+    #    if isinstance(other, Vec3):
+    #        result = Vec3()
+    #    elif isinstance(other, Matrix_3x3):
+    #        result = Matrix_3x3()
+    #    else:
+    #        raise ValueError("Must be a Matrix_3x3 or a Vec3 instance")
+    #    result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
+    #    return result
 
     def CalcRotationMatrix(self, *args):
         """

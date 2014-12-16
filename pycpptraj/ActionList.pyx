@@ -1,5 +1,4 @@
 # distutils: language = c++
-from FusedType cimport FusedAction
 from FunctPtr cimport FunctPtr
 from cython.operator cimport dereference as deref
 
