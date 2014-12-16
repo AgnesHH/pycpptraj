@@ -25,7 +25,19 @@ cdef class ActionList:
         return self.thisptr.Debug()
 
     def add_action(self, FunctPtr func, ArgList arglist, TopologyList toplist, 
-                           FrameList flist, DataSetList dlist, DataFileList dflist):
+                         FrameList flist, DataSetList dlist, DataFileList dflist):
+        """
+        Add action to ActionList
+
+        Parameters:
+        ==========
+        func :: FunctPtr instance, holding function pointer
+        arglist :: ArgList instance
+        toplist :: TopologyList instance
+        flist :: FrameList instance
+        dlist :: DataSetList 
+        dflist :: DataFileList
+        """
 
         # add function pointer: How?
         return self.thisptr.AddAction(func.ptr, arglist.thisptr[0], 
@@ -43,7 +55,7 @@ cdef class ActionList:
     def empty(self):
         return self.thisptr.Empty()
 
-    def naction(self):
+    def n_actions(self):
         return self.thisptr.Naction()
 
     def cmd_string(self,int i):
