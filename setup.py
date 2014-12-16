@@ -1,18 +1,17 @@
 import os
-#import shutil
-#from glob import glob
 from distutils.core import setup
 from distutils.extension import Extension
 import Cython.Distutils.build_ext
 from Cython.Build import cythonize
 
+# this setup.py file was adapted from setup.py file in Cython package
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 rootname = os.getcwd()
 pycpptraj_home = rootname + "/pycpptraj/"
-action_dir = pycpptraj_home + "/Action/"
-ana_dir = pycpptraj_home + "/Analysis/"
+#action_dir = pycpptraj_home + "/Action/"
+#ana_dir = pycpptraj_home + "/Analysis/"
 
 try:
     try:
@@ -47,8 +46,31 @@ for ext_name in pyxfiles:
                     libraries=['cpptraj'],
                     language='c++',
                     library_dirs=[libdir,],
-                    include_dirs=[cpptraj_include, pycpptraj_home, action_dir, ana_dir])
+                    include_dirs=[cpptraj_include, pycpptraj_home])
     ext_modules.append(extmod)
+
+pxd_include_dirs = [
+        directory for directory, dirs, files in os.walk('pycpptraj')
+        if '__init__.pyx' in files or '__init__.pxd' in files
+        or '__init__.py' in files
+        ]
+
+pxd_include_patterns = [
+        p+'/*.pxd' for p in pxd_include_dirs ] + [
+        p+'/*.pyx' for p in pxd_include_dirs ]
+         
+
+setup_args = {}
+packages = [
+        'pycpptraj',
+        'pycpptraj.utils',
+        'pycpptraj.actions',
+        'pycpptraj.analyses',
+        ]
+
+setup_args['package_data'] = {
+        'pycpptraj' : [p[10:] for p in pxd_include_patterns],
+        }
 
 setup(
     name="PyCpptraj",
@@ -56,11 +78,11 @@ setup(
     author="Hai Nguyen",
     author_email="hainm.comp@gmail.com",
     url="https://github.com/hainm/pycpptraj",
-    packages=['pycpptraj', 'pycpptraj.utils'],
+    packages=packages,
     description="""Python wrapper for cpptraj""",
     long_description=read("README.md"),
     license = "BSD License",
-    platform = "I don't know yet",
+    platform = "",
     classifiers=[
                 'Development Status :: Beta',
                 'Operating System :: Linux',
@@ -73,4 +95,5 @@ setup(
                 'Topic :: Scientific/Engineering'],
     ext_modules = ext_modules,
     cmdclass = {'build_ext': Cython.Distutils.build_ext},
+    **setup_args
 )
