@@ -12,6 +12,9 @@ print frame.n_atoms
 print frame.size
 print frame.temperature
 
+print frame.xyz(0)
+#print frame.xyz
+
 #for i in range(9):
 #    frame.print_atom_coord(i)
 

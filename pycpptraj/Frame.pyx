@@ -139,73 +139,33 @@ cdef class Frame:
         def __get__(self):
             return self.thisptr.Temperature()
 
-    #def  double * XYZ(self,int atnum):
-    # Correct yet?
-    @property
-    def xyz(self):
+    # need to validate xyz, crd and v_xyz method
+    def xyz(self, int atomnum):
+        # return XYZ for atomnum
         # cpptraj: return double*
+        # use python array to store double*
         cdef int i
         cdef natom = self.n_atoms
         cdef pyarray arr = pyarray('d', [])
-        #cdef double[:] _xyz
-        #cdef vector[double] v
 
-        for i in range(natom):
-            #_xyz[3 * i]     = self.thisptr.XYZ(i)[0]
-            #_xyz[3 * i]     = self.thisptr.XYZ(i)[1]
-            #_xyz[3 * i + 1] = self.thisptr.XYZ(i)[2]
-            #v.push_back(self.thisptr.XYZ(i)[0])
-            #v.push_back(self.thisptr.XYZ(i)[1])
-            #v.push_back(self.thisptr.XYZ(i)[2])
-            arr.append(self.thisptr.XYZ(i)[0])
-            arr.append(self.thisptr.XYZ(i)[1])
-            arr.append(self.thisptr.XYZ(i)[2])
-        #_xyz = v
-        #return _xyz
-        # TODO: return array instead of vector (Cython will convert vector to list)
-        #return v
+        arr.append(self.thisptr.XYZ(3*atomnum)[0])
+        arr.append(self.thisptr.XYZ(3*atomnum)[1])
+        arr.append(self.thisptr.XYZ(3*atomnum)[2])
         return arr
 
-    #def xyz(self):
-    #    # STATUS: return wrong array
-    #    try:
-    #        import numpy as np
-    #    except:
-    #        raise ImportError("where is my numpy?")
-    #    # numpy version
-    #    # cpptraj: return double*
-    #    cdef int i
-    #    cdef natom = self.n_atoms
-    #    cdef double[:] _xyz = np.empty(3 * natom)
+    def crd(self,int idx):
+        cdef int i
+        return self.thisptr.CRD(idx)[0]
 
-    #    for i in range(natom):
-    #        _xyz[3 * i]     = self.thisptr.XYZ(i)[0]
-    #        _xyz[3 * i]     = self.thisptr.XYZ(i)[1]
-    #        _xyz[3 * i + 1] = self.thisptr.XYZ(i)[2]
-    #    return _xyz[:natom]
+    def v_xyz(self,int atnum):
+        cdef int i
+        cdef natom = self.n_atoms
+        cdef pyarray arr = pyarray('d', [])
 
-    #def crd(self,int idx):
-    #    cdef int i
-    #    cdef natom = self.n_atoms
-    #    cdef double[:] _xyz
-
-    #    for i in range(3 * natom):
-    #        _xyz[i]     = self.thisptr.CRD(i)[0]
-    #        _xyz[i + 1] = self.thisptr.CRD(i)[1]
-    #        _xyz[i + 2] = self.thisptr.CRD(i)[2]
-    #    return _xyz[:3*natom]
-
-    #def v_xyz(self,int atnum):
-    #    # cpptraj: return double*
-    #    cdef int i
-    #    cdef natom = self.n_atoms
-    #    cdef double[:] _xyz
-
-    #    for i in range(natom):
-    #        _xyz[3 * i    ] = self.thisptr.VXYZ(i)[0]
-    #        _xyz[3 * i + 1] = self.thisptr.VXYZ(i)[1]
-    #        _xyz[3 * i + 2] = self.thisptr.VXYZ(i)[2]
-    #    return _xyz[:3*natom]
+        arr.append(self.thisptr.VXYZ(3*atnum)[0])
+        arr.append(self.thisptr.VXYZ(3*atnum)[1])
+        arr.append(self.thisptr.VXYZ(3*atnum)[2])
+        return arr
 
     def mass(self,int atnum):
         return self.thisptr.Mass(atnum)
@@ -273,20 +233,22 @@ cdef class Frame:
     def zero_coords(self):
         self.thisptr.ZeroCoords()
 
-    #def Frame operator+=(self, Frame):
     def __iadd__(Frame self, Frame other):
-        self.thisptr[0] = self.thisptr[0].addequal(other.thisptr[0])
-        #self.thisptr[0] += other.thisptr[0]
+        # either of two methods are correct
+        #self.thisptr[0] = self.thisptr[0].addequal(other.thisptr[0])
+        self.thisptr[0] += other.thisptr[0]
         return self
     
     def __isub__(Frame self, Frame other):
-        self.thisptr[0] = self.thisptr[0].subequal(other.thisptr[0])
-        #self.thisptr[0] -= other.thisptr[0]
+        # either of two methods are correct
+        #self.thisptr[0] = self.thisptr[0].subequal(other.thisptr[0])
+        self.thisptr[0] -= other.thisptr[0]
         return self
 
     def __imul__(Frame self, Frame other):
-        self.thisptr[0] = self.thisptr[0].mulequal(other.thisptr[0])
-        #self.thisptr[0] *= other.thisptr[0]
+        # either of two methods are correct
+        #self.thisptr[0] = self.thisptr[0].mulequal(other.thisptr[0])
+        self.thisptr[0] *= other.thisptr[0]
         return self
 
     def __mul__(Frame self, Frame other):

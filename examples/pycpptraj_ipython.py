@@ -1,5 +1,6 @@
 from copy import copy
 from pycpptraj.Action_Strip import Action_Strip
+from pycpptraj.Action_Dihedral import Action_Dihedral
 from pycpptraj.Topology import Topology
 from pycpptraj.ParmFile import ParmFile
 from pycpptraj.Frame import Frame
@@ -40,3 +41,5 @@ farray.append(refframe)
 db = Cluster_DBSCAN()
 
 from pycpptraj import cpptraj_dict
+
+adih = Action_Dihedral()

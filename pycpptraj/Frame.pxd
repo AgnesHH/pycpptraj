@@ -67,8 +67,11 @@ cdef extern from "Frame.h":
         void ModifyByMap(const _Frame&, const vector[int]&)
         void ZeroCoords() 
         _Frame& addequal "operator +=" (const _Frame&)
+        #_Frame& operator +=(const _Frame&)
         _Frame& subequal "operator -=" (const _Frame&)
+        #_Frame& operator -= (const _Frame&)
         _Frame& mulequal "operator *=" (const _Frame&)
+        #_Frame& operator *= (const _Frame&)
         const _Frame operator *(const _Frame&) const 
         const _Frame operator -(const _Frame&) const 
         int Divide(const _Frame&, double)
