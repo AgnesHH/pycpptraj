@@ -11,12 +11,12 @@ cdef class Action_Rmsd (Action):
         if self.thisptr is not NULL:
             del self.thisptr
 
-    def alloc(cls):
+    def alloc(self):
         cdef DispatchObject dpobject = DispatchObject()
         dpobject.thisptr[0] = deref(self.ptr.Alloc())
         return dpobject
 
-    def help(cls):
+    def help(self):
         self.ptr.Help()
 
     #@classmethod
