@@ -282,13 +282,17 @@ PDB_RECTYPEDict = {
     }
 
 # Action
-#from Action cimport *
-#RetDict = {
-#    "OK" : OK, 
-#    "ERR" : ERR, 
-#    "USEORIGINALFRAME" : USEORIGINALFRAME, 
-#    "SUPPRESSCOORDOUTPUT" : SUPPRESSCOORDOUTPUT, 
-#    }
+#from actions.Action cimport RetDict
+#from actions.Action cimport OK, ERR as A_OK, A_ERR  
+#from actions.Action cimport USEORIGINALFRAME, SUPPRESSCOORDOUTPUT as A_USEORIGINALFRAME, A_SUPPRESSCOORDOUTPUT
+from actions cimport Action
+
+RetDict = {
+    "OK" : Action.OK, 
+    "ERR" : Action.ERR, 
+    "USEORIGINALFRAME" : Action.USEORIGINALFRAME, 
+    "SUPPRESSCOORDOUTPUT" : Action.SUPPRESSCOORDOUTPUT, 
+    }
 
 # Frame
 from Frame cimport *
