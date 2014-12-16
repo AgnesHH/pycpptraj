@@ -14,4 +14,4 @@ cdef extern from "Action_Rmsd.h":
 
 cdef class Action_Rmsd(Action):
     cdef _Action_Rmsd* ptr
-    cdef DispatchAllocatorType func
+    #cdef DispatchAllocatorType func

@@ -16,6 +16,7 @@ from pycpptraj.FrameArray import FrameArray
 from pycpptraj.actions.Action_Rmsd import Action_Rmsd
 from pycpptraj.Cluster_DBSCAN import Cluster_DBSCAN
 from pycpptraj.ActionList import ActionList
+from pycpptraj.CpptrajState import CpptrajState
 #from pycpptraj.FuncPtr import FuncPtr
 
 top = Topology("./data/Tc5b.top")
@@ -36,6 +37,11 @@ input = """
 strip @H outprefix teststrip
 """
 
+input2 = """
+out test.out :1-20@CA
+"""
+
+arglist = ArgList(input2)
 strip.init(ArgList(input))
 strip.setup(top)
 
@@ -51,10 +57,19 @@ from pycpptraj import cpptraj_dict
 adih = Action_Dihedral()
 #adih.Init(ArgList(":1@C :2@CC :2@N :2C "), TopologyList() , FrameList(), DataSetList(), DataFileList () , 0)
 armsd = Action_Rmsd()
+armsd = Action_Rmsd()
 
 #for action in [adih, armsd]:
 #    action.help()
 
 alist = ActionList()
-func = armsd.get_funcptr()
-alist.add_action (func, ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
+alist.add_action (armsd.alloc(), ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
+alist.add_action (adih.alloc(), ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
+
+
+# 
+cppstate = CpptrajState()
+cppstate.add_action(adih.alloc(), arglist)
+cppstate.add_action_2(adih, arglist)
+cppstate.add_action(armsd.alloc(), arglist)
+cppstate.run()

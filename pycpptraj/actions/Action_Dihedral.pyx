@@ -1,5 +1,6 @@
 # distutils: language = c++
 from cython.operator cimport dereference as deref
+#from FunctPtr cimport FunctPtr
 
 
 cdef class Action_Dihedral (Action):
@@ -8,12 +9,15 @@ cdef class Action_Dihedral (Action):
         self.ptr = <_Action_Dihedral*> self.thisptr
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.thisptr is not NULL:
+            del self.thisptr
 
-    def Alloc(self):
-        cdef DispatchObject dpobject = DispatchObject()
-        dpobject.thisptr[0] = deref(self.ptr.Alloc())
-        return dpobject
+    def alloc(self):
+        """return a function-pointer object to be used with ActionList class
+        """
+        cdef FunctPtr func = FunctPtr()
+        func.ptr = &(self.ptr.Alloc)
+        return func
 
-    def Help(self):
+    def help(self):
         self.ptr.Help()

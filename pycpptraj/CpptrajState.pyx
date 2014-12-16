@@ -10,25 +10,25 @@ cdef class CpptrajState:
         if self.thisptr is not NULL:
             del self.thisptr
 
-    def get_top_list(self):
+    def get_toplist(self):
         """return TopologyList"""
         cdef TopologyList toplist = TopologyList()
         toplist.thisptr = self.thisptr.PFL()
         return toplist
 
-    def get_frame_list(self):
+    def get_framelist(self):
         """return FrameList"""
         cdef FrameList flist = FrameList()
         flist.thisptr[0] = deref(self.thisptr.FL())
         return flist
 
-    def get_dataset_list(self):
+    def get_datasetlist(self):
         """return DataSetList"""
         cdef DataSetList dlist = DataSetList()
         dlist.thisptr[0] = deref(self.thisptr.DSL())
         return dlist
 
-    def get_datafile_list(self):
+    def get_datafilelist(self):
         """return DataFileList"""
         cdef DataFileList dflist = DataFileList()
         dflist.thisptr[0] = deref(self.thisptr.DFL())
@@ -65,7 +65,7 @@ cdef class CpptrajState:
     def run_analyses(self):
         return self.thisptr.RunAnalyses()
 
-    def input_traj_list(self):
+    def input_trajlist(self):
         cdef TrajinList trajlist = TrajinList()
         trajlist.thisptr[0] = self.thisptr.InputTrajList()
         return trajlist
@@ -96,11 +96,19 @@ cdef class CpptrajState:
         else:
             raise NotImplementedError()
 
-#    def AddAction(self, DispatchAllocatorType Alloc, ArgList):
-#        pass
-#
-#    def AddAnalysis(self,DispatchAllocatorType Alloc, ArgList):
-#        pass
+    #def add_action(self, FunctPtr alloc_funct, ArgList arglist):
+    # don't need this method, see below
+    #    return self.thisptr.AddAction(alloc_funct.ptr, arglist.thisptr[0])
+
+    def add_action(self, obj, ArgList arglist):
+        # need to explicit casting to FunctPtr because self.thisptr.AddAction need to know type 
+        # of variables
+        cdef FunctPtr alloc_funct = <FunctPtr> obj.alloc()
+        return self.thisptr.AddAction(alloc_funct.ptr, arglist.thisptr[0])
+
+    def add_analysis(self, obj, ArgList arglist):
+        cdef FunctPtr alloc_funct = <FunctPtr> obj.alloc()
+        return self.thisptr.AddAnalysis(alloc_funct.ptr, arglist.thisptr[0])
 
     def world_size(self):
         return self.thisptr.WorldSize()
