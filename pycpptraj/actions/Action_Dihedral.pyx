@@ -2,13 +2,12 @@
 from cython.operator cimport dereference as deref
 
 
-cdef class Action_Rmsd (Action):
+cdef class Action_Dihedral (Action):
     def __cinit__(self):
-        self.thisptr = <_Action*> new _Action_Rmsd()
-        self.ptr = <_Action_Rmsd*> self.thisptr
+        self.thisptr = <_Action*> new _Action_Dihedral()
+        self.ptr = <_Action_Dihedral*> self.thisptr
 
     def __dealloc__(self):
-        #print "bye bye"
         del self.thisptr
 
     def Alloc(self):
