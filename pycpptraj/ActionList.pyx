@@ -61,7 +61,7 @@ cdef class ActionList:
     def cmd_string(self,int i):
         return self.thisptr.CmdString(i)
 
-    def ActionAlloc(self, int i):
+    def action_alloc(self, int i):
         # return func_ptr
         cdef FunctPtr func = FunctPtr()
         func.ptr = self.thisptr.ActionAlloc(i)

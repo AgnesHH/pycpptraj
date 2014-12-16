@@ -15,7 +15,8 @@ from pycpptraj.AtomMask import AtomMask
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.actions.Action_Rmsd import Action_Rmsd
 from pycpptraj.Cluster_DBSCAN import Cluster_DBSCAN
-from pycpptraj.FuncPtr import FuncPtr
+from pycpptraj.ActionList import ActionList
+#from pycpptraj.FuncPtr import FuncPtr
 
 top = Topology("./data/Tc5b.top")
 atomlist = top.atom_list()
@@ -53,3 +54,7 @@ armsd = Action_Rmsd()
 
 #for action in [adih, armsd]:
 #    action.help()
+
+alist = ActionList()
+func = armsd.get_funcptr()
+alist.add_action (func, ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
