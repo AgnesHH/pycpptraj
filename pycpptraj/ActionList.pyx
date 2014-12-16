@@ -1,6 +1,9 @@
 # distutils: language = c++
+from FusedType cimport FusedAction
+from FunctPtr cimport FunctPtr
+from cython.operator cimport dereference as deref
 
-
+# Do we really need this class in Python?
 cdef class ActionList:
     def __cinit__(self):
         self.thisptr = new _ActionList()
@@ -8,31 +11,46 @@ cdef class ActionList:
     def __dealloc__(self):
         del self.thisptr
 
-    #def ActionList(self):
+    def clear(self):
+        self.thisptr.Clear()
 
-    #def void Clear(self):
+    def set_debug(self,int debug):
+        self.thisptr.SetDebug(debug)
 
-    #def void SetDebug(self,int):
+    # where?
+    #def SetSilent(self,bint b):
+    #    self.thisptr.SetSilent(b)
 
-    #def void SetSilent(self,bint b):
+    def debug(self):
+        return self.thisptr.Debug()
 
-    #def int Debug(self):
+    def add_action(self, FunctPtr func, ArgList arglist, TopologyList toplist, 
+                           FrameList flist, DataSetList dlist, DataFileList dflist):
 
-    #def int AddAction(self,DispatchObject::DispatchAllocatorType, ArgList, TopologyList *, FrameList *, DataSetList *, DataFileList *):
+        # add function pointer: How?
+        return self.thisptr.AddAction(func.ptr, arglist.thisptr[0], 
+                                      toplist.thisptr, flist.thisptr, 
+                                      dlist.thisptr, dflist.thisptr)
+    #def int SetupActions(self,Topology **):
+    #def bint DoActions(self,Frame **, int):
 
-    #def int SetupActions(self,Topology * *):
+    def print_list(self):
+        self.thisptr.Print()
 
-    #def bint DoActions(self,Frame * *, int):
+    def list(self):
+        self.thisptr.List()
 
-    #def void Print(self):
+    def empty(self):
+        return self.thisptr.Empty()
 
-    #def void List(self):
+    def naction(self):
+        return self.thisptr.Naction()
 
-    #def bint Empty(self):
+    def cmd_string(self,int i):
+        return self.thisptr.CmdString(i)
 
-    #def int Naction(self):
-
-    #def  string CmdString(self,int i):
-
-    #def DispatchObject::DispatchAllocatorType ActionAlloc(self,int i):
-
+    def ActionAlloc(self, int i):
+        # return func_ptr
+        cdef FunctPtr func = FunctPtr()
+        func.ptr = self.thisptr.ActionAlloc(i)
+        return func

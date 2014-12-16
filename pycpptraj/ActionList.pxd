@@ -6,6 +6,7 @@ from TopologyList cimport *
 from FrameList cimport *
 from DataSetList cimport *
 from DataFileList cimport *
+from FusedType cimport FusedAction
 
 cdef extern from "ActionList.h":
     cdef cppclass _ActionList "ActionList":
@@ -23,7 +24,10 @@ cdef extern from "ActionList.h":
         bint Empty()
         int Naction()
         const string& CmdString(int)
-        DispatchAllocatorType ActionAlloc()
+        DispatchAllocatorType ActionAlloc(int i)
 
 cdef class ActionList:
     cdef _ActionList* thisptr
+    #cdef AddAction(self, FusedAction action, ArgList arglist, TopologyList toplist,
+    #               FrameList flist, DataSetList dlist, DataFileList dflist)
+    #cdef DispatchAllocatorType ActionAlloc(self,int i)

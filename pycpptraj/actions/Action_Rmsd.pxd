@@ -3,6 +3,7 @@ from Action cimport *
 from ..Range cimport *
 from ..ReferenceAction cimport *
 from ..DataSet_1D cimport *
+from ..FunctPtr cimport FunctPtr
 
 
 cdef extern from "Action_Rmsd.h": 
@@ -13,3 +14,4 @@ cdef extern from "Action_Rmsd.h":
 
 cdef class Action_Rmsd(Action):
     cdef _Action_Rmsd* ptr
+    cdef DispatchAllocatorType func

@@ -6,27 +6,23 @@ cdef class Action_Rmsd (Action):
     def __cinit__(self):
         self.thisptr = <_Action*> new _Action_Rmsd()
         self.ptr = <_Action_Rmsd*> self.thisptr
+        self.func = FunctPtr().ptr
 
     def __dealloc__(self):
         if self.thisptr is not NULL:
             del self.thisptr
 
-    def alloc(self):
-        cdef DispatchObject dpobject = DispatchObject()
-        dpobject.thisptr[0] = deref(self.ptr.Alloc())
-        return dpobject
-
-    def help(self):
-        self.ptr.Help()
-
-    #@classmethod
-    #def alloc(cls):
-    # got "Invalid operand type for '*' (Python object)"
-    # deref(cls.ptr.Alloc())
+    #def alloc(self):
     #    cdef DispatchObject dpobject = DispatchObject()
-    #    dpobject.thisptr[0] = deref(cls.ptr.Alloc())
+    #    dpobject.thisptr[0] = deref(self.ptr.Alloc())
     #    return dpobject
 
-    #@classmethod
-    #def help(cls):
-    #    cls.ptr.Help()
+    def get_funcptr(self):
+        """return a function pointer object to be used with ActionList class
+        """
+        cdef FunctPtr func = FunctPtr()
+        func.ptr = &(self.ptr.Alloc)
+        return func
+        
+    def help(self):
+        self.ptr.Help()
