@@ -9,7 +9,7 @@ from DataSetList cimport *
 from DataFileList cimport *
 from ActionList cimport *
 from AnalysisList cimport *
-from FunctPtr cimport FunctPtr
+from _FunctPtr cimport FunctPtr
 
 
 cdef extern from "CpptrajState.h": 
