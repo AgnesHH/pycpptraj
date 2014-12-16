@@ -5,11 +5,11 @@
 
 from copy import copy
 from libcpp.string cimport string
-from Box cimport Box
-from AtomMask cimport AtomMask
-from Topology cimport Topology
-from Frame cimport Frame
-from ParmFile cimport *
+from ..Box cimport Box
+from ..AtomMask cimport AtomMask
+from ..Topology cimport Topology
+from ..Frame cimport Frame
+from ..ParmFile cimport *
 
 cdef class Action_Strip:
     cdef public Topology old_parm, new_parm

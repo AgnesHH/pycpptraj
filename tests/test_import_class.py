@@ -20,6 +20,8 @@ except:
 for mod in modlist:
     #print "test import pycpptraj.%s" % mod
     classname = ".".join(['pycpptraj', mod])
+    if "/" in classname:
+        classname = classname.replace("/", ".")
     try:
         __import__(classname)
     except ImportError:
