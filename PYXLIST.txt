@@ -44,7 +44,10 @@ ReplicaDimArray
 DataSet_Coords
 DihedralSearch
 BufferedFrame
+Action
 Action_Strip
+Action_Dihedral
+DispatchObject
 #utils.Actions
 cpptraj_dict
 PDBfile
