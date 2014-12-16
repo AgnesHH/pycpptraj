@@ -8,13 +8,14 @@ cdef class Action_Rmsd (Action):
         self.ptr = <_Action_Rmsd*> self.thisptr
 
     def __dealloc__(self):
-        #print "bye bye"
         del self.thisptr
 
-    def Alloc(self):
+    @classmethod
+    def alloc(cls):
         cdef DispatchObject dpobject = DispatchObject()
         dpobject.thisptr[0] = deref(self.ptr.Alloc())
         return dpobject
 
-    def Help(self):
+    @classmethod
+    def help(cls):
         self.ptr.Help()
