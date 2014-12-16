@@ -43,6 +43,9 @@ cdef class Frame:
         which tend to be much faster than iostream ops. 
     """
     def __cinit__(self, *args):
+        # Should I include topology in Frame?
+        # May by not: memory
+        # Include topology in Trajectory instance? 
         cdef Frame frame
         cdef AtomMask atmask
         cdef vector[_Atom] vt
@@ -151,9 +154,9 @@ cdef class Frame:
         cdef natom = self.n_atoms
         cdef pyarray arr = pyarray('d', [])
 
-        arr.append(self.thisptr.XYZ(3*atomnum)[0])
-        arr.append(self.thisptr.XYZ(3*atomnum)[1])
-        arr.append(self.thisptr.XYZ(3*atomnum)[2])
+        arr.append(self.thisptr.XYZ(atomnum)[0])
+        arr.append(self.thisptr.XYZ(atomnum)[1])
+        arr.append(self.thisptr.XYZ(atomnum)[2])
         return arr
 
     def crd(self,int idx):
@@ -165,9 +168,9 @@ cdef class Frame:
         cdef natom = self.n_atoms
         cdef pyarray arr = pyarray('d', [])
 
-        arr.append(self.thisptr.VXYZ(3*atnum)[0])
-        arr.append(self.thisptr.VXYZ(3*atnum)[1])
-        arr.append(self.thisptr.VXYZ(3*atnum)[2])
+        arr.append(self.thisptr.VXYZ(atnum)[0])
+        arr.append(self.thisptr.VXYZ(atnum)[1])
+        arr.append(self.thisptr.VXYZ(atnum)[2])
         return arr
 
     def mass(self,int atnum):
