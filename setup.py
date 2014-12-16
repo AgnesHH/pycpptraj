@@ -38,9 +38,12 @@ else:
 
 ext_modules = []
 for ext_name in pyxfiles:
+    pyxfile = pycpptraj_home + ext_name + ext
+
+    # replace "/" by "." got get module
     if "/" in ext_name:
         ext_name = ext_name.replace("/", ".")
-    pyxfile = pycpptraj_home + ext_name + ext
+
     extmod = Extension("pycpptraj." + ext_name,
                     [pyxfile],
                     libraries=['cpptraj'],
