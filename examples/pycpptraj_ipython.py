@@ -18,6 +18,8 @@ from pycpptraj.Cluster_DBSCAN import Cluster_DBSCAN
 from pycpptraj.ActionList import ActionList
 from pycpptraj.CpptrajState import CpptrajState
 from pycpptraj._FunctPtr import FunctPtr
+from pycpptraj.actions.Action import Action
+from pycpptraj.PointerVec import TopVec, FrameVec
 
 top = Topology("./data/Tc5b.top")
 atomlist = top.atom_list()
@@ -66,6 +68,7 @@ armsd = Action_Rmsd()
 
 alist = ActionList()
 toplist = TopologyList("./data/Tc5b.top")
+print toplist
 print "test ActionList"
 alist.add_action(armsd, ArgList(), toplist, FrameList(), DataSetList(), DataFileList())
 #alist.add_action(adih, ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
@@ -75,3 +78,17 @@ print "Test CpptrajState"
 cppstate = CpptrajState()
 cppstate.add_action(armsd, arglist)
 cppstate.run()
+
+# testing PointerVector
+import numpy as np
+
+frame = Frame(10)
+arr = np.random.rand(30)
+print arr.__len__()
+print arr
+
+frame.set_from_crd(arr, 30, 0, False)
+fvec = FrameVec()
+fvec.append(frame)
+fvec.append(frame)
+fvec.append(frame)

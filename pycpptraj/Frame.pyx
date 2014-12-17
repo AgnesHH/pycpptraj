@@ -15,8 +15,8 @@ def check_instance(inst, clsname):
         raise ValueError("Must be instance of %s") % clsname.__name__
 
 cdef class Frame:
-    """This doc was taken from cpptraj doc (Frame.h) (written by Daniel R. Roe)
-    Doc for pycpptraj will be updated 
+    """Original cpptraj doc (Frame.h) (written by Daniel R. Roe)
+    (pycpptraj doc will be updated) 
     Class: Frame
         Hold coordinates, perform various operations/transformations on them.
         Intended to hold coordinates e.g. from a trajectory or reference frame,

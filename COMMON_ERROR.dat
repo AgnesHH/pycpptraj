@@ -8,3 +8,6 @@ Possible reasons:
         + Did you delete the pointer twice or delete unallocated one?
     + Check input file name:
         Tc5b.Tc5b.nat.crd --> Tc5b.nat.crd (need to have more type-checking)
+
+3. Getting elemenet from vector: return NoneType
+    + Make sure to "return" something in __getitem__(self, idx) method

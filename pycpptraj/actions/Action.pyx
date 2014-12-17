@@ -8,7 +8,7 @@ cdef class Action:
         #self.thisptr = new _Action()
 
     def __dealloc__(self):
-        # should I del pointe here or in subclass? 
+        # should I del pointer here or in subclass? 
         #del self.thisptr
         pass
 
@@ -21,3 +21,10 @@ cdef class Action:
 
     #def Do_Action(int, _Frame *, _Frame * *):
     #    pass
+
+    # Do we really need this method?
+    @classmethod
+    def get_action_from_functptr(cls, FunctPtr funct):
+        cdef Action act = Action()
+        act.thisptr = <_Action*> funct.ptr()
+        return act
