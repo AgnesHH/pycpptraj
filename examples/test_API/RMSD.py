@@ -25,7 +25,9 @@ def _cpptraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_ma
     """
     # not yet supported atom mask
     # atm = AtomMask(mask)
+    # make topology instance
     top = Topology(topname)
+
     # create reference frame
     ref = ReferenceFrame()
     ref.load_ref(refname, top)
@@ -33,18 +35,18 @@ def _cpptraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_ma
 
     # load trajectory file
     trajin = Trajin_Single()
-    trajin.setup_traj_read(trajname, ArgList(), top, checkBox=True)
-
-    trajin.begin_traj(0)
+    trajin.load(trajname, ArgList(), top)
+    trajin.prepare_for_read(True)
 
     #create frame to store data from traj iteration
     frame = Frame()
-    frame.setup_frame_v(top, 0, 0)
+    frame.set_frame_v(top, trajin.has_velocity(), trajin.nreplica_dimension())
 
     # do rmsd
     nframes = first_nframes if first_nframes < trajin.total_frames else trajin.total_frames
     arr = np.empty(nframes)
 
+    trajin.begin_traj(0)
     for i in range(nframes):
         # not added "mask" yet
         # just for demo
@@ -78,7 +80,7 @@ if __name__ == '__main__':
     trajname = "../data/md1_prod.Tc5b.x"
     #mask = ":3-18@CA"
     n_frames = 10
-    arr = rmsd(topname, refname, trajname, first_nframes=n_frames, use_mass=False, program='cpptraj')
+    arr = rmsd(topname, refname, trajname, first_nframes=n_frames, use_mass=True, program='cpptraj')
     # load first 100 rmsd values from cpptraj calculation
     rmsd_cpptraj = np.loadtxt("../data/rmsd_allatoms.dat").transpose()[1][:n_frames]
     # STATUS: can not reproduce cpptraj's calculation

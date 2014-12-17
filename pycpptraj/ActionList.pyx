@@ -42,10 +42,14 @@ cdef class ActionList:
         return self.thisptr.AddAction(func.ptr, arglist.thisptr[0], 
                                       toplist.thisptr, flist.thisptr, 
                                       dlist.thisptr, dflist.thisptr)
-    def setup_actions(self, TopologyList toplist, int idx):
-        cdef _Topology* topptr
-        topptr = toplist.thisptr.GetParm(idx)
-        return self.thisptr.SetupActions(&topptr)
+
+    #def setup_actions(self, TopologyList toplist, int idx):
+    #    cdef _Topology* topptr
+    #    topptr = toplist.thisptr.GetParm(idx)
+    #    return self.thisptr.SetupActions(&topptr)
+
+    def setup_actions(self, Topology top):
+        return self.thisptr.SetupActions(&(top.thisptr))
 
     def do_actions(self, FrameArray framearr, int idx):
         cdef _Frame* frame_ptr

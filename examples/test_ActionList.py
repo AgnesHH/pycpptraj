@@ -57,5 +57,6 @@ traj.end_traj()
 
 print "test ActionList"
 alist.add_action(armsd, ArgList(), toplist, framelist, DataSetList(), DataFileList())
-alist.setup_actions(toplist, 0)
+print "test setup_actions"
+alist.setup_actions(top)
 #alist.do_actions(farray, 0)

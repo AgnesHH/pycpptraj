@@ -21,15 +21,15 @@ cdef class Action:
     def __cinit__(self):
         # don't directly create instance of this ABC class.
         pass
-        #self.thisptr = new _Action()
+        #self.baseptr = new _Action()
 
     def __dealloc__(self):
         # should I del pointer here or in subclass? 
-        #del self.thisptr
+        #del self.baseptr
         pass
 
     def Init(self, ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug):
-        return self.thisptr.Init(argIn.thisptr[0], toplist.thisptr, flist.thisptr, dslist.thisptr, dflist.thisptr,
+        return self.baseptr.Init(argIn.thisptr[0], toplist.thisptr, flist.thisptr, dslist.thisptr, dflist.thisptr,
                 debug)
 
     #def Setup(_Topology *, _Topology * *):
@@ -44,5 +44,5 @@ cdef class Action:
         cdef Action act = Action()
         if funct.ptr() == NULL:
             raise ValueError("NULL pointer")
-        act.thisptr = <_Action*> funct.ptr()
+        act.baseptr = <_Action*> funct.ptr()
         return act

@@ -23,4 +23,4 @@ cdef extern from "Action.h":
 
 
 cdef class Action:
-    cdef _Action* thisptr
+    cdef _Action* baseptr

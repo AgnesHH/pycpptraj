@@ -28,8 +28,8 @@ go
 argIn = ArgList(trajininput)
 trajlist = TrajinList()
 trajlist.add_trajin("./data/md1_prod.Tc5b.x", argIn, toplist)
-#print trajlist.mode()
-#print trajlist.max_frames
+print trajlist.mode()
+print trajlist.max_frames
 
 # STATUS: got Segmentation fault (core dumped)
 # Reason: can not create Trajin instance (this class in cpptraj has virtual methods)
@@ -37,5 +37,21 @@ trajlist.add_trajin("./data/md1_prod.Tc5b.x", argIn, toplist)
 #print trajin.total_frames
 #print trajin.total_read_frames
 #frame = trajin.get_next_frame()
-#for traj in trajlist:
-#    pass
+trajs = []
+for traj in trajlist:
+    trajs.append(traj)
+
+traj = trajs[0]
+print "current frame: ", traj.current_frame
+print traj.num_frames_processed
+print traj.offset
+print traj.total_frames
+print traj.total_read_frames
+#traj.print_frame_info()
+traj.start()
+print "current frame: ", traj.current_frame
+frame = Frame()
+top = Topology(topname)
+#frame.set_frame_v(top, 0, 0)
+#traj.get_next_frame(frame)
+#print frame.crd(0)

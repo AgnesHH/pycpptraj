@@ -24,17 +24,18 @@ cdef class TrajinList:
         return self.thisptr.AddEnsemble(s, arglist.thisptr[0], toplist.thisptr[0])
 
     def __iter__(self):
-        # STATUS: got Segmentation fault (core dumped)
-        # Trajin has abtract methods --> can not create instance. 
         cdef Trajin trajin
         cdef cppvector[_Trajin*].const_iterator it
         it = self.thisptr.begin()
         while it != self.thisptr.end():
             trajin = Trajin()
-            trajin.thisptr[0] = deref(deref(it))
+            trajin.thisptr = deref(it)
             yield trajin
             incr(it)
 
+    #def __next__(self):
+    #    pass
+        
     def empty(self):
         return self.thisptr.empty()
 

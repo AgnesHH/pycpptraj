@@ -10,5 +10,5 @@ cdef extern from "Action_Dihedral.h":
 
 
 cdef class Action_Dihedral(Action):
-    cdef _Action_Dihedral* ptr
+    cdef _Action_Dihedral* thisptr
 

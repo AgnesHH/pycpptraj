@@ -1,5 +1,7 @@
 # distutils: language = c++
 #from Trajin_Single cimport _Trajin_Single
+import os
+from utils.decfunc import is_base_class
 
 
 cdef class Trajin:
@@ -10,71 +12,111 @@ cdef class Trajin:
     def __dealloc__(self):
         # let derived class taking of free memory
         pass
-        #if self.thisptr is not NULL:
+        #if self.baseptr is not NULL:
         #    print "Delete %s" % self.__class__.__name__
-        #    del self.thisptr
+        #    del self.baseptr
 
     def check_frame_args(self, ArgList argIn, int maxFrames, int starArg, int stopArg, int offsetArg):
-        return self.thisptr.CheckFrameArgs(argIn.thisptr[0], maxFrames, stopArg, stopArg, offsetArg)
+        return self.baseptr.CheckFrameArgs(argIn.thisptr[0], maxFrames, stopArg, stopArg, offsetArg)
 
     def check_finished(self):
-        return self.thisptr.CheckFinished()
+        return self.baseptr.CheckFinished()
 
     def update_counters(self):
-        self.thisptr.UpdateCounters()
+        self.baseptr.UpdateCounters()
 
     def get_next_frame(self, Frame frame):
         #cdef Frame frame = Frame()
-        self.thisptr.GetNextFrame(frame.thisptr[0])
+        self.baseptr.GetNextFrame(frame.thisptr[0])
         #return frame
 
     def set_total_frames(self,int idx):
-        self.thisptr.SetTotalFrames(idx)
+        self.baseptr.SetTotalFrames(idx)
 
-    def setup_traj_i_o(self, string s, TrajectoryIO trajio, ArgList arglist):
-        return self.thisptr.SetupTrajIO(s, trajio.thisptr[0], arglist.thisptr[0])
+    def setup_traj_io(self, string s, TrajectoryIO trajio, ArgList arglist):
+        return self.baseptr.SetupTrajIO(s, trajio.thisptr[0], arglist.thisptr[0])
 
     def check_box_info(self, char* parmName, Box parmBox, Box trajBox):
-        return self.thisptr.CheckBoxInfo(parmName, parmBox.thisptr[0], trajBox.thisptr[0])
+        return self.baseptr.CheckBoxInfo(parmName, parmBox.thisptr[0], trajBox.thisptr[0])
 
     def setup_frame_info(self):
-        return self.thisptr.setupFrameInfo()
+        return self.baseptr.setupFrameInfo()
 
     def prepare_for_read(self,bint b):
-        self.thisptr.PrepareForRead(b)
+        self.baseptr.PrepareForRead(b)
 
     def print_info_line(self):
-        self.thisptr.PrintInfoLine()
+        self.baseptr.PrintInfoLine()
 
     def print_frame_info(self):
-        self.thisptr.PrintFrameInfo()
+        self.baseptr.PrintFrameInfo()
 
     @property
     def total_frames(self):
-        return self.thisptr.TotalFrames()
+        return self.baseptr.TotalFrames()
 
     @property
     def total_read_frames(self):
-        return self.thisptr.TotalReadFrames()
+        return self.baseptr.TotalReadFrames()
 
     @property
     def current_frame(self):
-        return self.thisptr.CurrentFrame()
+        return self.baseptr.CurrentFrame()
 
     def start(self):
-        return self.thisptr.Start()
+        return self.baseptr.Start()
 
     @property
     def offset(self):
-        return self.thisptr.Offset()
+        return self.baseptr.Offset()
 
     @property
     def num_frames_processed(self):
-        return self.thisptr.NumFramesProcessed()
+        return self.baseptr.NumFramesProcessed()
 
     def is_ensemble(self):
-        return self.thisptr.IsEnsemble()
+        return self.baseptr.IsEnsemble()
 
     def set_ensemble(self,bint b):
-        self.thisptr.SetEnsemble(b)
+        self.baseptr.SetEnsemble(b)
 
+    # Those are virtual methods. Only implement in sub-class
+    @is_base_class('Trajin')
+    def load(self, string tnameIn, ArgList argIn, Topology tparmIn):
+        """
+        Load trajectory from file.
+
+        Parameters:
+        filename :: string (trajectory file's name)
+        ArgList instance
+        Topology instance
+        """
+        if os.path.isfile(tnameIn):
+            return self.baseptr.SetupTrajRead(tnameIn, argIn.thisptr[0], tparmIn.thisptr)
+        else:
+            raise ValueError("File does not exist")
+
+    @is_base_class('Trajin')
+    def begin_traj(self, bint showProgress):
+        return self.baseptr.BeginTraj(showProgress)
+
+    @is_base_class('Trajin')
+    def end_traj(self):
+        self.baseptr.EndTraj()
+
+    @is_base_class('Trajin')
+    def read_traj_frame(self, int currentFrame, Frame frameIn):
+        return self.baseptr.ReadTrajFrame(currentFrame, frameIn.thisptr[0])
+
+    @is_base_class('Trajin')
+    def print_info(self,int showExtended):
+        self.baseptr.PrintInfo(showExtended)
+
+    @is_base_class('Trajin')
+    def has_velocity(self):
+        return self.baseptr.HasVelocity()
+
+    @is_base_class('Trajin')
+    def nreplica_dimension(self):
+        return self.baseptr.NreplicaDimension()
+    # end virtual methods

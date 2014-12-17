@@ -5,7 +5,19 @@ from ProgressBar cimport *
 
 cdef extern from "Trajin.h": 
     cdef cppclass _Trajin "Trajin":
-        _Trajin() 
+        _Trajin()        
+
+        #virtual ~_Trajin() 
+        # star virtual methods
+        int SetupTrajRead(const string&, _ArgList&, _Topology *)
+        int ReadTrajFrame(int, _Frame&)
+        int BeginTraj(bint)
+        void EndTraj() 
+        void PrintInfo(int) const 
+        bint HasVelocity() const 
+        int NreplicaDimension() const 
+        # end virtual methods
+
         int CheckFrameArgs(_ArgList &, int, int &, int &, int &)
         inline bint CheckFinished() 
         inline void UpdateCounters() 
@@ -28,4 +40,4 @@ cdef extern from "Trajin.h":
 
 
 cdef class Trajin:
-    cdef _Trajin* thisptr
+    cdef _Trajin* baseptr

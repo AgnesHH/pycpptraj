@@ -18,6 +18,4 @@ cdef extern from "Trajin_Single.h":
         int NreplicaDimension() const 
 
 cdef class Trajin_Single(Trajin):
-    pass
-#cdef class Trajin_Single:
-#    cdef _Trajin_Single* thisptr2
+    cdef _Trajin_Single* thisptr
