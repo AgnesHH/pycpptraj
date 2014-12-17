@@ -33,6 +33,10 @@ cdef class FrameArray:
         #    i += 1
         #    incr(it)
         
+    @property
+    def size(self):
+        return len(self)
+
     def __len__(FrameArray self):
         cdef int i = 0
         cdef Frame frame
