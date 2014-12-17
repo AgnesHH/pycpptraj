@@ -84,7 +84,7 @@ setup(
     url="https://github.com/hainm/pycpptraj",
     packages=packages,
     description="""Python wrapper for cpptraj""",
-    long_description=read("README.md"),
+    long_description=read("../README.md"),
     license = "BSD License",
     platform = "",
     classifiers=[
