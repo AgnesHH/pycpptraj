@@ -5,8 +5,12 @@ from ArgList cimport ArgList
 
 
 cdef class TopologyList:
-    def __cinit__(self):
+    def __cinit__(self, *args):
+        cdef string fname
         self.thisptr = new _TopologyList()
+        if args:
+            fname = args[0]
+            self.add_parm_file(fname)
 
     def __dealloc__(self):
         del self.thisptr
