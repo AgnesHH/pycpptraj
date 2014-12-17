@@ -89,7 +89,7 @@ cdef class ArgList:
         return self.thisptr.List()
 
     @property
-    def nargs(self):
+    def n_args(self):
         return self.thisptr.Nargs()
 
     def empty(self):
