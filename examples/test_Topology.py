@@ -6,7 +6,7 @@ from pycpptraj.FileName import FileName
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 fname = "./data/Tc5b.top"
 
-top = Topology(fname=fname)
+top = Topology(fname)
 top2 = top.modifyStateByMask(AtomMask("!@CA"))
 
 top.summary()

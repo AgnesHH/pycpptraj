@@ -16,7 +16,7 @@ refname = "./data/Tc5b.nat.crd"
 #mdx = datadir + "Tc5b.nat.crd"
 mdx = "./data/md1_prod.Tc5b.x"
 
-top = Topology(fname=topname)
+top = Topology(topname)
 #print top
 
 trajin = """
@@ -25,7 +25,7 @@ trajin = """
 #arglist = ArgList(trajin)
 #print arglist
 
-ts.setup_traj_read(mdx, ArgList(), top, checkBox=True)
+ts.load(mdx, ArgList(), top, checkBox=True)
 #ts.start()
 #ts.begin_traj()
 #ts.is_ensemble()
@@ -43,14 +43,14 @@ ts.setup_traj_read(mdx, ArgList(), top, checkBox=True)
 #print "current frame:", ts.current_frame
 ts.prepare_for_read(True)
 frame = Frame()
-frame.setup_frame_v(top, ts.has_velocity(), ts.nreplica_dimension())
+frame.set_frame_v(top, ts.has_velocity(), ts.nreplica_dimension())
 frame2 = Frame(frame)
 
 # load reference
 ref = ReferenceFrame()
 ref.load_ref(refname, top)
 ref_frame = ref.coord()
-xyz = ref_frame.xyz()
+xyz = ref_frame.xyz(0)
 xyznp = np.asarray(xyz)
 print xyznp[:3]
 print xyznp[3:6]

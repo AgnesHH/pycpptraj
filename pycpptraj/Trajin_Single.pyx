@@ -15,7 +15,17 @@ cdef class Trajin_Single(Trajin):
             # print "delete %s" % self.__class__.__name__
             del self.thisptr
 
-    def setup_traj_read(self, string tnameIn, ArgList argIn, Topology tparmIn, bint checkBox=True):
+    #def setup_traj_read(self, string tnameIn, ArgList argIn, Topology tparmIn, bint checkBox=True):
+    def load(self, string tnameIn, ArgList argIn, Topology tparmIn, bint checkBox=True):
+        """
+        Load trajectory from file.
+
+        Parameters:
+        filename :: string (trajectory file's name)
+        ArgList instance
+        Topology instance
+        chexbox :: (default = True)
+        """
         if os.path.isfile(tnameIn):
             return (<_Trajin_Single*>self.thisptr).SetupTrajRead(tnameIn, argIn.thisptr[0], tparmIn.thisptr, checkBox)
         else:

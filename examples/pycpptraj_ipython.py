@@ -29,7 +29,7 @@ refframe = ref.coord()
 mdx = "./data/md1_prod.Tc5b.x"
 
 ts = Trajin_Single()
-ts.setup_traj_read(mdx, ArgList(), top, checkBox=True)
+ts.load(mdx, ArgList(), top, checkBox=True)
 frame = Frame()
 atm = AtomMask()
 
@@ -71,35 +71,37 @@ toplist = TopologyList("./data/Tc5b.top")
 print toplist
 print "test ActionList"
 alist.add_action(armsd, ArgList(), toplist, FrameList(), DataSetList(), DataFileList())
+alist.setup_actions(toplist, 0)
+alist.do_actions(FrameArray(), 0)
 #alist.add_action(adih, ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
 
 # 
-print "Test CpptrajState"
-cppstate = CpptrajState()
-cppstate.add_action(armsd, arglist)
-cppstate.run()
-
-# testing PointerVector
-import numpy as np
-
-frame = Frame(10)
-arr = np.random.rand(30)
-print arr.__len__()
-print arr
-
-frame.set_from_crd(arr, 30, 0, False)
-fvec = FrameVec()
-fvec.append(frame)
-fvec.append(frame)
-fvec.append(frame)
-
-alist.action_alloc(0)
-act = Action_Rmsd.get_action_from_functptr(alist.action_alloc(0))
-armsd.help()
-act.help()
-print act
-
-# try to get out of range index.
-print alist.n_actions
-act = Action_Rmsd.get_action_from_functptr(alist.action_alloc(1000))
-act.help()
+#print "Test CpptrajState"
+#cppstate = CpptrajState()
+#cppstate.add_action(armsd, arglist)
+#cppstate.run()
+#
+## testing PointerVector
+#import numpy as np
+#
+#frame = Frame(10)
+#arr = np.random.rand(30)
+#print arr.__len__()
+#print arr
+#
+#frame.set_from_crd(arr, 30, 0, False)
+#fvec = FrameVec()
+#fvec.append(frame)
+#fvec.append(frame)
+#fvec.append(frame)
+#
+#alist.action_alloc(0)
+#act = Action_Rmsd.get_action_from_functptr(alist.action_alloc(0))
+#armsd.help()
+#act.help()
+#print act
+#
+## try to get out of range index.
+#print alist.n_actions
+#act = Action_Rmsd.get_action_from_functptr(alist.action_alloc(1000))
+#act.help()

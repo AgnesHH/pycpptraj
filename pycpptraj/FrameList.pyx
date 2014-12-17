@@ -33,6 +33,7 @@ cdef class FrameList:
     def get_frame_by_name(self, string name):
         cdef ReferenceFrame ref = ReferenceFrame()
         ref.thisptr[0] = self.thisptr.GetFrameByName(name)
+        return ref
 
     def list(self):
         self.thisptr.List()

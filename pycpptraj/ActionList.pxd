@@ -6,6 +6,7 @@ from TopologyList cimport *
 from FrameList cimport *
 from DataSetList cimport *
 from DataFileList cimport *
+from FrameArray cimport FrameArray
 #from PointerVec cimport TopVec
 
 cdef extern from "ActionList.h":

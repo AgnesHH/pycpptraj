@@ -2,6 +2,22 @@
 
 
 cdef class Action:
+    """
+    Original cpptraj doc:
+    ====================
+        The abstract base class that all other actions inherit. 
+        By convention actions have 3 main phases: Init, Setup, and DoAction.
+        Init is used to initialize the action, make sure that all arguments
+        for the action are correct, and add any DataSets/DataFiles which will
+        be used by the action. Setup will set up the action for a specific
+        Topology file. DoAction will perform the action on a given frame.
+        A fourth function, Print, is for any additional calculations or output 
+        the action may require once all frames are processed.
+
+    pycpptraj doc:
+    =============
+    Adding get_action_from_functptr
+    """
     def __cinit__(self):
         # don't directly create instance of this ABC class.
         pass

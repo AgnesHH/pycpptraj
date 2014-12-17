@@ -3,6 +3,13 @@ from cython.operator cimport dereference as deref
 
 
 cdef class CpptrajState:
+    """
+    Original cpptraj doc:
+    ====================
+
+    pycpptraj doc:
+    ============
+    """
     def __cinit__(self):
         self.thisptr = new _CpptrajState()
 

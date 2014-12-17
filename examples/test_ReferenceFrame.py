@@ -7,14 +7,13 @@ datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 topname = datadir + "Tc5b.top"
 fname = "./data/Tc5b.nat.crd"
 
-top = Topology(fname=topname)
-top.summary()
+top = Topology(topname)
+#top.summary()
 ref = ReferenceFrame()
 ref.load_ref(fname, top)
 top2 = ref.parm()
 top2.summary()
-
 refframe = ref.coord()
 #print help(refframe)
 
-print frame.rmsd(refframe)
+#print frame.rmsd(refframe)

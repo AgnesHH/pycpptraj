@@ -47,7 +47,12 @@ cdef class ActionList:
         topptr = toplist.thisptr.GetParm(idx)
         return self.thisptr.SetupActions(&topptr)
 
-    #def bint DoActions(self,Frame **, int):
+    def do_actions(self, FrameArray framearr, int idx):
+        cdef _Frame* frame_ptr
+        if idx >= framearr.size:
+            raise IndexError()
+        frame_ptr = &(framearr.thisptr.index_opr(idx))
+        return self.thisptr.DoActions(&frame_ptr, idx)
 
     def print_list(self):
         self.thisptr.Print()

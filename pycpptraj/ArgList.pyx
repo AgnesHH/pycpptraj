@@ -6,6 +6,27 @@ from cython.operator cimport preincrement as incr
 #from FunctPtr cimport FunctPtr
 
 cdef class ArgList:
+    """
+    Original doc from cpptraj:
+    ========================
+    Class: ArgList
+        Hold a list of string arguments and keeps track of their usage.
+        Can be set from an input line using SetList(), with arguments separated 
+        by a specified delimiter, or arguments can be added one-by-one with AddArg.
+        Arguments can be accessed with the various getX routines,
+        where X is specific to certain types, e.g. getNextDouble returns
+        the next double, getNextMask returns an atom mask expression (i.e.
+        it has :, @, % characters etc). All of the getX routines (along with
+        the hasKey routine) mark the argument they access as used, so that
+        subsequent calls with these functions will not return the same
+        argument over and over. 
+
+    pycpptraj doc:
+    =============
+    change cpptraj method's name to python style's name
+    (hasKey --> has_key)
+    """
+    
     def __cinit__(self, *args):
         # TODO: need to read cpptraj code for construtor
         cdef string  sinput
