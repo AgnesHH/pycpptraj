@@ -42,7 +42,11 @@ cdef class ActionList:
         return self.thisptr.AddAction(func.ptr, arglist.thisptr[0], 
                                       toplist.thisptr, flist.thisptr, 
                                       dlist.thisptr, dflist.thisptr)
-    #def int SetupActions(self,Topology **):
+    def setup_actions(self, TopologyList toplist, int idx):
+        cdef _Topology* topptr
+        topptr = toplist.thisptr.GetParm(idx)
+        return self.thisptr.SetupActions(&topptr)
+
     #def bint DoActions(self,Frame **, int):
 
     def print_list(self):
@@ -54,6 +58,7 @@ cdef class ActionList:
     def empty(self):
         return self.thisptr.Empty()
 
+    @property
     def n_actions(self):
         return self.thisptr.Naction()
 
@@ -63,5 +68,7 @@ cdef class ActionList:
     def action_alloc(self, int i):
         # return func_ptr
         cdef FunctPtr func = FunctPtr()
+        if i >= self.n_actions:
+            raise IndexError("index must be < " + str(self.n_actions)) 
         func.ptr = self.thisptr.ActionAlloc(i)
         return func

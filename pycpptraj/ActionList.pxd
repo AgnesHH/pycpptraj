@@ -6,6 +6,7 @@ from TopologyList cimport *
 from FrameList cimport *
 from DataSetList cimport *
 from DataFileList cimport *
+#from PointerVec cimport TopVec
 
 cdef extern from "ActionList.h":
     cdef cppclass _ActionList "ActionList":

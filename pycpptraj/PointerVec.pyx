@@ -29,6 +29,7 @@ cdef class TopVec:
         return self.ptrvec.size()
 
 
+# Do we really need thi class while having FrameArray?
 cdef class FrameVec:
     def __init__(self):
         pass

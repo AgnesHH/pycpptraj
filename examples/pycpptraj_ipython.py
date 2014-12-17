@@ -92,3 +92,14 @@ fvec = FrameVec()
 fvec.append(frame)
 fvec.append(frame)
 fvec.append(frame)
+
+alist.action_alloc(0)
+act = Action_Rmsd.get_action_from_functptr(alist.action_alloc(0))
+armsd.help()
+act.help()
+print act
+
+# try to get out of range index.
+print alist.n_actions
+act = Action_Rmsd.get_action_from_functptr(alist.action_alloc(1000))
+act.help()

@@ -26,5 +26,7 @@ cdef class Action:
     @classmethod
     def get_action_from_functptr(cls, FunctPtr funct):
         cdef Action act = Action()
+        if funct.ptr() == NULL:
+            raise ValueError("NULL pointer")
         act.thisptr = <_Action*> funct.ptr()
         return act

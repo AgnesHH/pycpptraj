@@ -15,6 +15,8 @@ cdef class FrameArray:
         self.thisptr.resize(nIn)
 
     def __getitem__(FrameArray self, int idx):
+        if len(self) == 0:
+            raise ValueError("Your FrameArray is empty, how can I index it?")
         cdef Frame frame = Frame()
         frame.thisptr[0] = self.thisptr.index_opr(idx)
         return frame
