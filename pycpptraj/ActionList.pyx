@@ -51,12 +51,8 @@ cdef class ActionList:
     def setup_actions(self, Topology top):
         return self.thisptr.SetupActions(&(top.thisptr))
 
-    def do_actions(self, FrameArray framearr, int idx):
-        cdef _Frame* frame_ptr
-        if idx >= framearr.size:
-            raise IndexError()
-        frame_ptr = &(framearr.thisptr.index_opr(idx))
-        return self.thisptr.DoActions(&frame_ptr, idx)
+    def do_actions(self, Frame frame, int idx):
+        return self.thisptr.DoActions(&(frame.thisptr), idx)
 
     def print_list(self):
         self.thisptr.Print()
