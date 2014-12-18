@@ -29,7 +29,7 @@ cdef class TrajinList:
         it = self.thisptr.begin()
         while it != self.thisptr.end():
             trajin = Trajin()
-            trajin.thisptr = deref(it)
+            trajin.baseptr = deref(it)
             yield trajin
             incr(it)
 
