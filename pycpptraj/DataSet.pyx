@@ -3,6 +3,21 @@
 # can't not compile since _DataSet is abstract class
 
 cdef class DataSet:
+    """
+    Original doc from cpptraj:
+    =========================
+    Class: DataSet
+        Base class that all DataSet types will inherit.
+        DataSets are given certain attributes to make DataSet selection easier; 
+        these are name, index, and aspect. Name is typically associated with the
+        action that creates the DataSet, e.g. RMSD or distance. Index is used
+        when and action outputs subsets of data, e.g. with RMSD it is possible to 
+        output per-residue RMSD, where the DataSet index corresponds to the residue
+        number. Aspect is used to further subdivide output data type; e.g. with 
+        nucleic acid analysis each base pair (divided by index) has shear,
+        stagger etc calculated.
+    """
+
     def __cinit__(self):
         pass
         # don't create instance for this abstract class
@@ -86,10 +101,10 @@ cdef class DataSet:
         return self.thisptr.Ndim()
 
     def dim(self,int i):
+        # TODO: what does this do?
         cdef Dimension dim = Dimension()
         dim.thisptr[0] = self.thisptr.Dim(i)
 
-    # def  bint operator[(self, DataSet):
     def __richcmp__(DataSet self, DataSet other, opt):
         if opt == 0:
             # operator "<"

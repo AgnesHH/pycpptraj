@@ -1,4 +1,5 @@
 import os
+from pycpptraj.actions.Action_Dihedral import Action_Dihedral
 from pycpptraj.Topology import Topology
 from pycpptraj.Frame import Frame
 from pycpptraj.TopologyList import TopologyList
@@ -9,6 +10,7 @@ from pycpptraj.CpptrajFile import CpptrajFile
 from pycpptraj.Trajin import Trajin
 from pycpptraj.TrajinList import TrajinList
 from pycpptraj.ReferenceFrame import ReferenceFrame
+from pycpptraj.Command import Command
 
 # setup filenames
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
@@ -18,15 +20,16 @@ refname = "./data/Tc5b.nat.crd"
 trajinname = datadir + "md1_prod.Tc5b.x"
 
 # create top list and topology
-toplist = TopologyList()
-toplist.add_parm_file(datadir + "Tc5b.top")
-top = toplist[0]
-top.summary()
+#toplist = TopologyList()
+#toplist.add_parm_file(datadir + "Tc5b.top")
+#top = toplist[0]
+#top.summary()
 
 #creat TrajinList instance
 trajininput= """
 parm ./data/Tc5b.top
 trajin ./data/md1_prod.Tc5b.x
+dih :1@C :2@N :2@CA :2@C
 """
 
 argIn = ArgList(trajininput)
@@ -36,9 +39,9 @@ argIn = ArgList(trajininput)
 #print trajlist.max_frames
 #end TrajinList
 
-state = CpptrajState()
-state.toplist.add_parm_file(topname)
-state.toplist.info()
+#state = CpptrajState()
+#state.toplist.add_parm_file(topname)
+#state.toplist.info()
 #state.add_trajin(argIn)
 #state.add_trajin(trajinname)
 #state.Run()
@@ -54,3 +57,21 @@ def test_ref():
     topref.set_reference_coords( refFrame.frame  )
     topref.residue_info(":2-5")
 
+def test_process_input():
+    state = CpptrajState()
+    command = Command()
+    fname = "./data/pycpptraj.in"
+    command.process_input(state, fname)
+    #state.add_action(Action_Dihedral(), argIn)
+    print state.trajlist
+    state.trajlist.mode
+    state.trajlist.list()
+    #print help(state)
+    #state.toplist.info()
+
+print "test_process_input"
+state2 = CpptrajState()
+state2.traj_length("./data/Tc5b.top", ["./data/md1_prod.Tc5b.x",])
+#state2.add_trajin("./data/md1_prod.Tc5b.x")
+#state2.add_trajin("./data/md1_prod.Tc5b.x")
+#test_process_input()

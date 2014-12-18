@@ -51,7 +51,7 @@ cdef class DataFileList:
     def list(self):
         self.thisptr.List()
 
-    def write_allDF(self):
+    def write_all_datafiles(self):
         self.thisptr.WriteAllDF()
 
     def reset_write_status(self):
