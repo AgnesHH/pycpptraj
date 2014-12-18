@@ -13,37 +13,20 @@ cdef class CpptrajState:
     def __cinit__(self):
         self.thisptr = new _CpptrajState()
 
+        self.framelist = FrameList()
+        self.datafilelist = DataFileList()
+        self.datasetlist = DataSetList()
+        self.toplist = TopologyList()
+
+        # get framelist, datasetlist, datasetlist and toplist
+        self.framelist.thisptr[0] = deref(self.thisptr.FL())
+        self.datafilelist.thisptr[0] = deref(self.thisptr.DFL())
+        self.datasetlist.thisptr[0] = deref(self.thisptr.DSL())
+        self.toplist.thisptr[0] = deref(self.thisptr.PFL())
+
     def __dealloc__(self):
         if self.thisptr is not NULL:
             del self.thisptr
-
-    @property
-    def toplist(self):
-        """return TopologyList"""
-        cdef TopologyList toplist = TopologyList()
-        toplist.thisptr = self.thisptr.PFL()
-        return toplist
-
-    @property
-    def framelist(self):
-        """return FrameList"""
-        cdef FrameList flist = FrameList()
-        flist.thisptr[0] = deref(self.thisptr.FL())
-        return flist
-
-    @property
-    def datasetlist(self):
-        """return DataSetList"""
-        cdef DataSetList dlist = DataSetList()
-        dlist.thisptr[0] = deref(self.thisptr.DSL())
-        return dlist
-
-    @property
-    def datafilelist(self):
-        """return DataFileList"""
-        cdef DataFileList dflist = DataFileList()
-        dflist.thisptr[0] = deref(self.thisptr.DFL())
-        return dflist
 
     def set_no_exit_on_error(self):
         self.thisptr.SetNoExitOnError()

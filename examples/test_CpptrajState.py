@@ -37,8 +37,10 @@ argIn = ArgList(trajininput)
 #end TrajinList
 
 state = CpptrajState()
+state.toplist.add_parm_file(topname)
+state.toplist.info()
 #state.add_trajin(argIn)
-state.add_trajin(trajinname)
+#state.add_trajin(trajinname)
 #state.Run()
 #state.RunAnalyses()
 

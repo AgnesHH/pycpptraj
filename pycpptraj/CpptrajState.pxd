@@ -45,4 +45,7 @@ cdef extern from "CpptrajState.h":
 
 cdef class CpptrajState:
     cdef _CpptrajState* thisptr
-
+    cdef public FrameList framelist
+    cdef public DataFileList datafilelist
+    cdef public DataSetList datasetlist
+    cdef public TopologyList toplist 
