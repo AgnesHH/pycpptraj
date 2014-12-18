@@ -38,4 +38,4 @@ ts.end_traj()
 
 
 print "test basetraj"
-basetraj.load(mdx, ArgList(), top)
+#basetraj.load(mdx, ArgList(), top)

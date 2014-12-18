@@ -1,10 +1,11 @@
 # distutils: language = c++
 #from Trajin_Single cimport _Trajin_Single
 import os
-from utils.decfunc import is_base_class
-
+from abc import ABCMeta, abstractmethod
 
 cdef class Trajin:
+    __metaclass__ = ABCMeta
+
     def __cinit__(self):
         # do not create instance for this abstract class
         pass
@@ -81,7 +82,7 @@ cdef class Trajin:
         self.baseptr.SetEnsemble(b)
 
     # Those are virtual methods. Only implement in sub-class
-    @is_base_class('Trajin')
+    @abstractmethod
     def load(self, string tnameIn, ArgList argIn, Topology tparmIn):
         """
         Load trajectory from file.
@@ -96,27 +97,27 @@ cdef class Trajin:
         else:
             raise ValueError("File does not exist")
 
-    @is_base_class('Trajin')
+    @abstractmethod('Trajin')
     def begin_traj(self, bint showProgress):
         return self.baseptr.BeginTraj(showProgress)
 
-    @is_base_class('Trajin')
+    @abstractmethod('Trajin')
     def end_traj(self):
         self.baseptr.EndTraj()
 
-    @is_base_class('Trajin')
+    @abstractmethod('Trajin')
     def read_traj_frame(self, int currentFrame, Frame frameIn):
         return self.baseptr.ReadTrajFrame(currentFrame, frameIn.thisptr[0])
 
-    @is_base_class('Trajin')
+    @abstractmethod('Trajin')
     def print_info(self,int showExtended):
         self.baseptr.PrintInfo(showExtended)
 
-    @is_base_class('Trajin')
+    @abstractmethod('Trajin')
     def has_velocity(self):
         return self.baseptr.HasVelocity()
 
-    @is_base_class('Trajin')
+    @abstractmethod('Trajin')
     def nreplica_dimension(self):
         return self.baseptr.NreplicaDimension()
     # end virtual methods
