@@ -39,7 +39,7 @@ ReferenceFrame
 DataSetList
 ActionList
 AnalysisList
-#Command
+Command
 TrajectoryFile
 ReplicaDimArray
 DataSet_Coords
