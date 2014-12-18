@@ -17,25 +17,29 @@ cdef class CpptrajState:
         if self.thisptr is not NULL:
             del self.thisptr
 
-    def get_toplist(self):
+    @property
+    def toplist(self):
         """return TopologyList"""
         cdef TopologyList toplist = TopologyList()
         toplist.thisptr = self.thisptr.PFL()
         return toplist
 
-    def get_framelist(self):
+    @property
+    def framelist(self):
         """return FrameList"""
         cdef FrameList flist = FrameList()
         flist.thisptr[0] = deref(self.thisptr.FL())
         return flist
 
-    def get_datasetlist(self):
+    @property
+    def datasetlist(self):
         """return DataSetList"""
         cdef DataSetList dlist = DataSetList()
         dlist.thisptr[0] = deref(self.thisptr.DSL())
         return dlist
 
-    def get_datafilelist(self):
+    @property
+    def datafilelist(self):
         """return DataFileList"""
         cdef DataFileList dflist = DataFileList()
         dflist.thisptr[0] = deref(self.thisptr.DFL())
@@ -72,7 +76,8 @@ cdef class CpptrajState:
     def run_analyses(self):
         return self.thisptr.RunAnalyses()
 
-    def input_trajlist(self):
+    @property
+    def trajlist(self):
         cdef TrajinList trajlist = TrajinList()
         trajlist.thisptr[0] = self.thisptr.InputTrajList()
         return trajlist
@@ -103,10 +108,6 @@ cdef class CpptrajState:
         else:
             raise NotImplementedError()
 
-    #def add_action(self, FunctPtr alloc_funct, ArgList arglist):
-    # don't need this method, see below
-    #    return self.thisptr.AddAction(alloc_funct.ptr, arglist.thisptr[0])
-
     def add_action(self, obj, ArgList arglist):
         # need to explicit casting to FunctPtr because self.thisptr.AddAction need to know type 
         # of variables
@@ -120,16 +121,16 @@ cdef class CpptrajState:
     def world_size(self):
         return self.thisptr.WorldSize()
 
-    def list_all(self,ArgList arglist):
+    def list_all(self, ArgList arglist):
         return self.thisptr.ListAll(arglist.thisptr[0])
 
-    def set_list_debug(self,ArgList arglist):
+    def set_list_debug(self, ArgList arglist):
         return self.thisptr.SetListDebug(arglist.thisptr[0])
 
-    def clear_list(self,ArgList arglist):
+    def clear_list(self, ArgList arglist):
         return self.thisptr.ClearList(arglist.thisptr[0])
 
-    def remove_data_set(self,ArgList alist):
+    def remove_data_set(self, ArgList alist):
         return self.thisptr.RemoveDataSet(alist.thisptr[0])
 
     def traj_length(self, string topnaname, vector[string] trajlist):

@@ -13,11 +13,11 @@ cdef extern from "GridAction.h":
         MASKCENTER "GridAction::MASKCENTER"
         SPECIFIEDCENTER "GridAction::SPECIFIEDCENTER"
     cdef cppclass _GridAction "GridAction":
-        Grid_Action() : increment_(1.0)
-        _DataSet_GridFlt * GridInit(const char *, _ArgList&, _DataSetList&)
+        Grid_Action()
+        _DataSet_GridFlt* GridInit(const char *, _ArgList&, _DataSetList&)
         void GridInfo(const _DataSet_GridFlt&)
         int GridSetup(const _Topology&)
-        inline void Grid_Frame(const _Frame&, const _AtomMask&, _DataSet_GridFlt&)
+        inline void GridFrame(const _Frame&, const _AtomMask&, _DataSet_GridFlt&)
         GridModeType GridMode() const 
         const _AtomMask& CenterMask() const 
         float Increment() const 

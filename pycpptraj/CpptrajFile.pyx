@@ -2,7 +2,12 @@
 
 
 cdef class CpptrajFile:
+    """
+    Original cpptraj doc:
+    Class to abstract handling of basic file routines.
 
+
+    """
     def __cinit__(self, *args):
         cdef CpptrajFile cfile
         if not args:
@@ -13,90 +18,56 @@ cdef class CpptrajFile:
                 self.thisptr = new _CpptrajFile(cfile.thisptr[0])
 
     def __dealloc__(self):
-        del self.thisptr
+        """ This is virtual method"""
+        #del self.thisptr
+        pass
 
-    @classmethod
-    # TODO: make better method's name
-    def typedict(cls, tdict='AccessType'):
-        # Aim: support for enum in cpptraj
-
-        AccessType = {
-                READ : "READ",
-                WRITE : "WRITE",
-                APPEND : "APPEND",
-                UPDATE : "UPDATE",
-        }
-            # CpptrajFile.h
-        CompressType = {
-                NO_COMPRESSION : "NO_COMPRESSION",
-                GZIP : "GZIP",
-                BZIP2 : "BZIP2",
-                ZIP : "ZIP",
-        }
-            # CpptrajFile.h
-        FileType = {
-                UNKNOWN_TYPE : "UNKNOWN_TYPE",
-                STANDARD : "STANDARD",
-                GZIPFILE : "GZIPFILE",
-                BZIP2FILE : "BZIP2FILE",
-                ZIPFILE : "ZIPFILE",
-                MPIFILE : "MPIFILE",
-        }
-        if tdict == 'AccessType':
-            return AccessType
-        elif tdict == 'CompressType':
-            return CompressType
-        elif tdict == 'FileType':
-            return FileType
-        else:
-            raise NotImplementedError()
-
-    def OpenRead(self, string nameIn):
+    def open_read(self, string fname):
         cdef bint sucess
         cdef int result
-        result = self.thisptr.OpenRead(nameIn)
+        result = self.thisptr.OpenRead(fname)
         if result == 0:
             sucess = True
         else:
             sucess = False
         return sucess
 
-    def SetupRead(self, string nameIn, int debugIn):
-        return self.thisptr.SetupRead(nameIn, debugIn)
+    def setup_read(self, string fname, int debug):
+        return self.thisptr.SetupRead(fname, debug)
 
-    def OpenWriteNumbered(self, int numIn):
+    def open_write_numbered(self, int numIn):
         return self.thisptr.OpenWriteNumbered(numIn)
 
-    def OpenWrite(self, string nameIn):
-        return self.thisptr.OpenWrite(nameIn)
+    def open_write(self, string fname):
+        return self.thisptr.OpenWrite(fname)
 
-    def OpenEnsembleWrite(self, string nameIn, int debugIn):
-        return self.thisptr.OpenEnsembleWrite(nameIn, debugIn)
+    def open_ensemble_write(self, string fname, int debug):
+        return self.thisptr.OpenEnsembleWrite(fname, debug)
 
-    def SetupWrite(self, *args):
+    def setup_write(self, *args):
         cdef string fname
         cdef FileType ftype
-        cdef int debugIn
+        cdef int debug
 
         if len(args) == 3:
-            fname, ftype, debugIn = args
-            return self.thisptr.SetupWrite(fname, ftype, debugIn)
+            fname, ftype, debug = args
+            return self.thisptr.SetupWrite(fname, ftype, debug)
         elif len(args) == 2:
-            fname, debugIn = args
-            return self.thisptr.SetupWrite(fname, debugIn)
+            fname, debug = args
+            return self.thisptr.SetupWrite(fname, debug)
         else:
             raise ValueError()
            
-    def OpenAppend(self, string nameIn):
-        return self.thisptr.OpenAppend(nameIn)
+    def open_append(self, string fname):
+        return self.thisptr.OpenAppend(fname)
 
-    def OpenEnsembleAppend(self, string nameIn, int debugIn):
-        return self.thisptr.OpenEnsembleAppend(nameIn, debugIn)
+    def open_ensemble_append(self, string fname, int debug):
+        return self.thisptr.OpenEnsembleAppend(fname, debug)
 
-    def SetupAppend(self, string nameIn, int debugIn):
-        return self.thisptr.SetupAppend(nameIn, debugIn)
+    def setup_append(self, string fname, int debug):
+        return self.thisptr.SetupAppend(fname, debug)
 
-    def OpenFile(self, *args):
+    def open_file(self, *args):
         cdef AccessType accessIn
         if not args:
             return self.thisptr.OpenFile()
@@ -104,40 +75,42 @@ cdef class CpptrajFile:
             accessIn =args[0]
             return self.thisptr.OpenFile(accessIn)
         
-    def CloseFile(self):
+    def close_file(self):
         self.thisptr.CloseFile()
 
+    # How to wrap Printf(char*, ...) C++ function in Cython?
+    # Explicitly put args?
     #def Printf(self, char * formart, *args):
     #    self.thisptr.Printf(formart, *args)
 
-    def GetLine(self):
+    def get_line(self):
         return self.thisptr.GetLine()
 
-    def NextLine(self):
+    def next_line(self):
         # return char*
         return self.thisptr.NextLine()
 
-    def Access(self):
+    def access(self):
         return self.thisptr.Access()
 
-    def Compression(self):
+    def compression(self):
         return self.thisptr.Compression()
 
-    def IsOpen(self):
+    def is_open(self):
         return self.thisptr.IsOpen()
 
-    def Filename(self):
+    def filename(self):
         cdef FileName fname = FileName()
         fname.thisptr[0] = self.thisptr.Filename()
         return fname
 
-    def FileSize(self):
+    def file_size(self):
         return self.thisptr.FileSize()
 
-    def IsCompressed(self):
+    def is_compressed(self):
         return self.thisptr.IsCompressed()
 
-    def UncompressedSize(self):
+    def uncompressed_size(self):
         return self.thisptr.UncompressedSize()
 
     # STATUS: NOT WORK RIGHT YET
