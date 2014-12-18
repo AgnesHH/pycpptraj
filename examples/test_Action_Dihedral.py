@@ -1,1 +1,1 @@
-from pycpptraj.Action_Dihedral import Action_Dihedral
+from pycpptraj.actions.Action_Dihedral import Action_Dihedral
