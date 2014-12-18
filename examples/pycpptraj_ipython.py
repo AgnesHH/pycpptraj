@@ -1,6 +1,7 @@
 from copy import copy
 from pycpptraj.FrameList import FrameList
 from pycpptraj.actions.Action_Strip import Action_Strip
+from pycpptraj.actions.Action import Action
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList
 from pycpptraj.DataSetList import DataSetList
@@ -29,7 +30,7 @@ refframe = ref.coord()
 mdx = "./data/md1_prod.Tc5b.x"
 
 ts = Trajin_Single()
-ts.load(mdx, ArgList(), top, checkBox=True)
+ts.load(mdx, ArgList(), top)
 frame = Frame()
 atm = AtomMask()
 
@@ -59,20 +60,22 @@ db = Cluster_DBSCAN()
 
 from pycpptraj import cpptraj_dict
 adih = Action_Dihedral()
-#adih.Init(ArgList(":1@C :2@CC :2@N :2C "), TopologyList() , FrameList(), DataSetList(), DataFileList () , 0)
+#adih.init(ArgList(":1@C :2@CC :2@N :2C "), TopologyList() , FrameList(), DataSetList(), DataFileList () , 0)
 armsd = Action_Rmsd()
-armsd = Action_Rmsd()
+armsd.init(ArgList(input2), TopologyList() , FrameList(), DataSetList(), DataFileList () , 0)
+armsd.setup(top)
+armsd.do_action(refframe)
 
 #for action in [adih, armsd]:
 #    action.help()
 
-alist = ActionList()
+#alist = ActionList()
 toplist = TopologyList("./data/Tc5b.top")
 print toplist
 print "test ActionList"
-alist.add_action(armsd, ArgList(), toplist, FrameList(), DataSetList(), DataFileList())
-alist.setup_actions(toplist, 0)
-alist.do_actions(FrameArray(), 0)
+#alist.add_action(armsd, ArgList(), toplist, FrameList(), DataSetList(), DataFileList())
+#alist.setup_actions(toplist, 0)
+#alist.do_actions(FrameArray(), 0)
 #alist.add_action(adih, ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
 
 # 
