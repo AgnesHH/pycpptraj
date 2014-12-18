@@ -67,7 +67,8 @@ def _mdtraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_mas
     #traj = md.load(trajname, top)
     #return md.rmsd(traj, ref, nframe=first_nframes)
 
-def rmsd(topname, refname, trajname, first_nframes=100, mask='', use_mass=False, fit=True, program='cpptraj'):
+def rmsd(topname, refname, trajname, first_nframes=100, mask='', 
+         use_mass=False, fit=True, program='cpptraj'):
     if program == 'cpptraj':
         return _cpptraj_rmsd(topname, refname, trajname, first_nframes, use_mass, fit)
     elif program == 'mdtraj':
