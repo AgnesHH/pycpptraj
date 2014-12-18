@@ -41,10 +41,10 @@ cdef class Action:
         return self.baseptr.DoAction(idx, frame.thisptr, &(frame.thisptr))
 
     # Do we really need this method?
-    @classmethod
-    def get_action_from_functptr(cls, FunctPtr funct):
-        cdef Action act = Action()
-        if funct.ptr() == NULL:
-            raise ValueError("NULL pointer")
-        act.baseptr = <_Action*> funct.ptr()
-        return act
+    #@classmethod
+    #def get_action_from_functptr(cls, FunctPtr funct):
+    #    cdef Action act = Action()
+    #    if funct.ptr() == NULL:
+    #        raise ValueError("NULL pointer")
+    #    act.baseptr = <_Action*> funct.ptr()
+    #    return act

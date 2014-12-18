@@ -36,19 +36,16 @@ atm = AtomMask()
 
 # test Action_Strip
 strip = Action_Strip()
+strip.help()
 input = """
-strip @H outprefix teststrip
+:1-20@CA outprefix teststrip nobox
 """
 
 input2 = """
-parm ./data/Tc5b.top
-reference ./data/Tc5b.nat.crd
-out test.out :1-20@CA
+strip :1-20@CA
 """
 
-arglist = ArgList(input2)
-strip.init(ArgList(input))
-strip.setup(top)
+arglist = ArgList(input)
 
 farray = FrameArray()
 farray.append(frame)
@@ -62,21 +59,21 @@ from pycpptraj import cpptraj_dict
 adih = Action_Dihedral()
 #adih.init(ArgList(":1@C :2@CC :2@N :2C "), TopologyList() , FrameList(), DataSetList(), DataFileList () , 0)
 armsd = Action_Rmsd()
-armsd.init(ArgList(input2), TopologyList() , FrameList(), DataSetList(), DataFileList () , 0)
+toplist = TopologyList()
+toplist.add_parm_file("./data/Tc5b.top")
+strip.init(arglist, toplist, FrameList(), DataSetList(), DataFileList () , 0)
 armsd.setup(top)
-armsd.do_action(refframe)
+#armsd.do_action(1, refframe)
 
 #for action in [adih, armsd]:
 #    action.help()
 
-#alist = ActionList()
-toplist = TopologyList("./data/Tc5b.top")
-print toplist
-print "test ActionList"
-#alist.add_action(armsd, ArgList(), toplist, FrameList(), DataSetList(), DataFileList())
-#alist.setup_actions(toplist, 0)
-#alist.do_actions(FrameArray(), 0)
-#alist.add_action(adih, ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
+alist = ActionList()
+alist.add_action(armsd, arglist, toplist, FrameList(), DataSetList(), DataFileList())
+alist.setup_actions(top)
+#alist.do_actions(refframe, 1)
+alist.add_action(adih, ArgList(), TopologyList(), FrameList(), DataSetList(), DataFileList())
+alist.setup_actions(top)
 
 # 
 #print "Test CpptrajState"
@@ -91,12 +88,6 @@ print "test ActionList"
 #arr = np.random.rand(30)
 #print arr.__len__()
 #print arr
-#
-#frame.set_from_crd(arr, 30, 0, False)
-#fvec = FrameVec()
-#fvec.append(frame)
-#fvec.append(frame)
-#fvec.append(frame)
 #
 #alist.action_alloc(0)
 #act = Action_Rmsd.get_action_from_functptr(alist.action_alloc(0))
