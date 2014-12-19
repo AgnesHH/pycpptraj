@@ -2,4 +2,4 @@
 
 #grep word in cpptraj folder
 
-grep $1 $AMBERHOME/AmberTools/src/cpptraj/src/$2
+grep $1 $CPPTRAJHOME/src/$2

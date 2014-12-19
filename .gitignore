@@ -8,3 +8,4 @@ nohup.out
 *.swp
 test*.pyx
 temp.*
+tests/Cpptraj_test/Test*

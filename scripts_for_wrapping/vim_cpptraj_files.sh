@@ -1,6 +1,6 @@
 #!/bin/sh
 
 rootname=$1
-cpptrajsrc="$AMBERHOME/AmberTools/src/cpptraj/src/"
+cpptrajsrc="$CPPTRAJHOME/src"
 
 vim $cpptrajsrc/$rootname 
