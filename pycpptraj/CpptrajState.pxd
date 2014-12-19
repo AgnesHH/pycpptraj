@@ -45,3 +45,4 @@ cdef extern from "CpptrajState.h":
 
 cdef class CpptrajState:
     cdef _CpptrajState* thisptr
+    cdef public TopologyList toplist

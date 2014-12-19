@@ -2,7 +2,7 @@
 include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
-from cpptraj_dict import DataTypeDict
+
 
 cdef class DataSetList:
     def __cinit__(self):
@@ -12,25 +12,13 @@ cdef class DataSetList:
         if self.thisptr is not NULL:
             del self.thisptr
 
-    def clear(self):
+    def Clear(self):
         self.thisptr.Clear()
 
-    def __iadd__(self, DataSetList other):
+    #def DataSetList operator +=(self, DataSetList):
+    #def _iterator begin(self):
+    #def _iterator end(self):
 
-        self.thisptr.addequal(other.thisptr[0])
-        return self
-
-    def __iter__(self):
-        cdef const_iterator it
-        cdef DataSet dtset
-        it = self.thisptr.begin()
-
-        while it != self.thisptr.end():
-            dtset = DataSet()
-            dtset.thisptr[0] = deref(deref(it))
-            yield dtset
-            incr(it)
-            
     def empty(self):
         return self.thisptr.empty()
 
@@ -38,43 +26,44 @@ cdef class DataSetList:
         def __get__(self):
             return self.thisptr.size()
 
-    def ensemble_num(self):
+    def EnsembleNum(self):
         return self.thisptr.EnsembleNum()
 
-    def remove_set(self, DataSet dtset):
-        self.thisptr.RemoveSet(dtset.thisptr)
+    #def void RemoveSet(self,_iterator):
+    #def void RemoveSet(self,DataSet *):
 
+    #def DataSet * operator[](self,int didx):
     def __getitem__(self, int idx):
         cdef DataSet dset = DataSet()
         dset.thisptr[0] = deref(self.thisptr.index_opr(idx))
         return dset
 
-    def set_debug(self,int id):
+    def SetDebug(self,int id):
         self.thisptr.SetDebug(id)
 
-    def set_ensemble_num(self,int i):
+    def SetEnsembleNum(self,int i):
         self.thisptr.SetEnsembleNum(i)
 
-    def allocate_sets(self,long int i):
+    def AllocateSets(self,long int i):
         self.thisptr.AllocateSets(i)
 
-    def set_precision_of_data_sets(self, string nameIn, int widthIn, int precisionIn):
+    def SetPrecisionOfDataSets(self, string nameIn, int widthIn, int precisionIn):
         self.thisptr.SetPrecisionOfDataSets(nameIn, widthIn, precisionIn)
 
     #def DataSet * GetSet(self, string, int, string):
 
     #def DataSet * GetDataSet(self, string):
 
-    def get_multiple_sets(self, string s):
+    def GetMultipleSets(self, string s):
         """TODO: double-check cpptraj"""
         cdef DataSetList dlist = DataSetList()
         dlist.thisptr[0] = self.thisptr.GetMultipleSets(s)
         return dlist
 
-    def generate_default_name(self, char* s):
+    def GenerateDefaultName(self, char* s):
         return self.thisptr.GenerateDefaultName(s)
 
-    def add_set(self,DataType dtype, string s, char * c):
+    def AddSet(self,DataType dtype, string s, char * c):
         cdef DataSet dset = DataSet()
         dset.thisptr[0] = self.thisptr.AddSet(dtype, s, c)[0]
         return dset
@@ -89,16 +78,9 @@ cdef class DataSetList:
 
     #def void AddCopyOfSet(self,DataSet *):
 
-    def list(self):
+    def List(self):
         self.thisptr.List()
 
-    def find_set_of_type(self, string fname, string key):
-        cdef DataType dtype = <DataType> DataTypeDict[key]
-        cdef DataSet dtset = DataSet()
-        dtset.thisptr[0] = deref(self.thisptr.FindSetOfType(fname, dtype))
-        return dtset
+    #def DataSet * FindSetOfType(self, string, DataSet::DataType):
 
-    def find_coords_set(self, string fname):
-        cdef DataSet dtset = DataSet()
-        dtset.thisptr[0] = deref(self.thisptr.FindCoordsSet(fname))
-        return dtset
+    #def DataSet * FindCoordsSet(self, string):

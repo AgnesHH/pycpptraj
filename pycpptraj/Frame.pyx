@@ -326,8 +326,9 @@ cdef class Frame:
     def scale(self, AtomMask atm, double sx, double sy, double sz):
         self.thisptr.Scale(atm.thisptr[0], sx, sy, sz)
 
-    def center(self, AtomMask atm, CenterMode ctmode, Vec3 v, bint use_mass=False):
-        self.thisptr.Center(atm.thisptr[0], ctmode, v.thisptr[0], use_mass)
+    # Not in cpptraj anymore
+    #def center(self, AtomMask atm, CenterMode ctmode, Vec3 v, bint use_mass=False):
+    #    self.thisptr.Center(atm.thisptr[0], ctmode, v.thisptr[0], use_mass)
 
     def center_on_origin(self,bint useMassIn):
         cdef Vec3 v = Vec3()

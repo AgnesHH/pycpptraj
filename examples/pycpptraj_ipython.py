@@ -26,7 +26,7 @@ top = Topology("./data/Tc5b.top")
 atomlist = top.atom_list()
 ref = ReferenceFrame()
 ref.load_ref("./data/Tc5b.nat.crd", top)
-refframe = ref.coord() 
+refframe = ref.frame
 mdx = "./data/md1_prod.Tc5b.x"
 
 ts = Trajin_Single()

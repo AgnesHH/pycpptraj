@@ -64,14 +64,18 @@ def test_process_input():
     command.process_input(state, fname)
     #state.add_action(Action_Dihedral(), argIn)
     print state.trajlist
-    state.trajlist.mode
-    state.trajlist.list()
+    print state.trajlist.mode
+    print state.trajlist.list()
     #print help(state)
     #state.toplist.info()
 
 print "test_process_input"
 state2 = CpptrajState()
-state2.traj_length("./data/Tc5b.top", ["./data/md1_prod.Tc5b.x",])
-#state2.add_trajin("./data/md1_prod.Tc5b.x")
+toplist = state2.toplist
+toplist.add_parm_file("./data/Tc5b.top")
+toplist.add_parm_file("./data/HP36.top")
+#state2.list_all(argIn)
+#state2.traj_length("./data/Tc5b.top", ["./data/md1_prod.Tc5b.x",])
+state2.add_trajin("./data/md1_prod.Tc5b.x")
 #state2.add_trajin("./data/md1_prod.Tc5b.x")
 #test_process_input()

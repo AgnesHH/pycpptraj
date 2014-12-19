@@ -13,7 +13,9 @@ cdef class TopologyList:
             self.add_parm_file(fname)
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.thisptr is not NULL:
+            #print "delete ", self.__class__
+            del self.thisptr
 
     def clear(self):
         self.thisptr.Clear()

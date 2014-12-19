@@ -90,7 +90,9 @@ cdef extern from "Frame.h":
         inline void Rotate(const _Matrix_3x3&, const _AtomMask&)
         inline void Trans_Rot_Trans(const _Vec3&, const _Matrix_3x3&, const _Vec3&)
         void Scale(const _AtomMask&, double, double, double)
+        # Not in cpptraj anymore
         void Center(const _AtomMask&, CenterMode, const _Vec3&, bint)
+
         _Vec3 CenterOnOrigin(bint)
         double RMSD(_Frame&, bint)
         double RMSD(_Frame&, _Matrix_3x3&, _Vec3&, _Vec3&, bint)

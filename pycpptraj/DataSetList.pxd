@@ -1,20 +1,23 @@
 # distutils: language = c++
 from DataSet cimport *
 from libcpp.string cimport string
+from vector_pycpptraj cimport vector as cppvector
 
+ctypedef cppvector[_DataSet*] DataListType
+ctypedef cppvector[_DataSet*].const_iterator const_iterator
 
 cdef extern from "DataSetList.h": 
     cdef cppclass _DataSetList "DataSetList":
         _DataSetList() 
         #~_DataSetList() 
         void Clear() 
-        #_DataSetList& operator + =(const _DataSetList&)
-        #const_iterator begin() const 
-        #const_iterator end() const 
+        _DataSetList& addequal "operator +="(const _DataSetList&)
+        const_iterator begin() const 
+        const_iterator end() const 
         bint empty() const 
         size_t size() const 
         int EnsembleNum() const 
-        #void RemoveSet(const_iterator)
+        void RemoveSet(const_iterator)
         void RemoveSet(_DataSet *)
         _DataSet * index_opr "operator[]"(int didx)
         void SetDebug(int)

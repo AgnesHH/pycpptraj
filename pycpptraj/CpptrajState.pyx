@@ -3,6 +3,7 @@ from cython.operator cimport dereference as deref
 
 
 cdef class CpptrajState:
+    #cdef public TopologyList toplist
     """
     Original cpptraj doc:
     ====================
@@ -12,17 +13,22 @@ cdef class CpptrajState:
     """
     def __cinit__(self):
         self.thisptr = new _CpptrajState()
+        self.toplist = TopologyList()
+        #del self.toplist.thisptr
+        self.toplist.thisptr = self.thisptr.PFL()
+        #self.toplist.thisptr[0] = deref(self.thisptr.PFL())
 
     def __dealloc__(self):
         if self.thisptr is not NULL:
+            #print "delete", self.__class__
             del self.thisptr
 
-    @property
-    def toplist(self):
-        """return TopologyList"""
-        cdef TopologyList toplist = TopologyList()
-        toplist.thisptr[0] = deref(self.thisptr.PFL())
-        return toplist
+    #@property
+    #def toplist(self):
+    #    """return TopologyList"""
+    #    cdef TopologyList toplist = TopologyList()
+    #    toplist.thisptr[0] = deref(self.thisptr.PFL())
+    #    return toplist
 
     @property
     def framelist(self):
