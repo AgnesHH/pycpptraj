@@ -7,10 +7,10 @@ datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 fname = "./data/Tc5b.top"
 
 top = Topology(fname)
-top2 = top.modifyStateByMask(AtomMask("!@CA"))
-
-top.summary()
-top.atom_info("@CA")
+top2 = top.modify_state_by_mask(AtomMask("!@CA"))
+#
+#top.summary()
+#top.atom_info("@CA")
 
 #print "test atom_iterator"
 #for atom in top.atom_generator():

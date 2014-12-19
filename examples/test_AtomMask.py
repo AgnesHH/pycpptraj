@@ -27,5 +27,5 @@ mask1 = AtomMask()
 mask1.set_mask_string(arglist.get_mask_next())
 mask1.brief_mask_info()
 
-top = Topology("./data/Tc5b.top")
-top.setup_integer_mask(mask1)
+#top = Topology("./data/Tc5b.top")
+#top.setup_integer_mask(mask1)

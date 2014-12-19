@@ -71,8 +71,9 @@ cdef class DataSetList:
         dlist.thisptr[0] = self.thisptr.GetMultipleSets(s)
         return dlist
 
-    def generate_default_name(self, char* s):
-        return self.thisptr.GenerateDefaultName(s)
+    # why need this?
+    #def generate_default_name(self, char* s):
+    #    return self.thisptr.GenerateDefaultName(s)
 
     def add_set(self,DataType dtype, string s, char * c):
         cdef DataSet dset = DataSet()

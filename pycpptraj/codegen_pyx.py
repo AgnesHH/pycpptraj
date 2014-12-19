@@ -8,7 +8,7 @@ from util import print_blank_line, Line_codegen
 from util import find_class
 import sys
 
-cpptrajsrc = os.environ['CPPTRAJHOME'] + "/src/"
+cpptrajsrc = os.environ['AMBERHOME'] + "AmberTools/src/cpptraj/src/"
 file = cpptrajsrc + sys.argv[1]
 indent = " " * 4
 classlist = find_class(cpptrajsrc)

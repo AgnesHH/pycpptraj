@@ -29,7 +29,7 @@ frame2 = Frame(frame)
 # load reference
 ref = ReferenceFrame()
 ref.load_ref(refname, top)
-ref_frame = ref.coord()
+ref_frame = ref.frame
 
 ts.begin_traj(False)
 for i in range(10):

@@ -29,8 +29,6 @@ cdef class TopologyList:
         except:
             raise ValueError("index is out of range? do you have empty list?")
 
-    #def Topology * GetParm(self,int):
-    # make sure to return correct topology
     def get_parm(self, arg):
         cdef Topology top = Topology()
         cdef int num
@@ -44,7 +42,6 @@ cdef class TopologyList:
             top.thisptr[0] = deref(self.thisptr.GetParm(argIn.thisptr[0]))
         return top
 
-    #def Topology * GetParmByIndex(self,ArgList):
     def get_parm_by_index(self, ArgList argIn):
         cdef Topology top = Topology()
         top.thisptr = self.thisptr.GetParmByIndex(argIn.thisptr[0])

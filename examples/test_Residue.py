@@ -22,7 +22,7 @@ print "last atom: %s" % res1.last_atom
 print res1.original_res_num
 #print res1.c_str()
 #print res1.Name()
-print res1.NAtoms
+print res1.n_atoms
 #print res1.NameIsSolvent()
 
 # print all residue's name in top file

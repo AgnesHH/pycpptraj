@@ -7,13 +7,13 @@ tl = TopologyList()
 tl.add_parm_file(datadir + "Tc5b.top")
 tl.add_parm_file(datadir + "HP36.top")
 tl.info()
-
+#
 t = tl[1]
 t.summary()
 t.atom_info("@CA")
-
-#tl.clear()
-print tl
+#
+##tl.clear()
+#print tl
 #print t2.GB_radiiset
 #
 #print t2.n_repdim

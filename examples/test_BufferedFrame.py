@@ -1,2 +1,1 @@
-from pycpptraj.B
-cfferedFrame import BufferedFrame
+from pycpptraj.BufferedFrame import BufferedFrame

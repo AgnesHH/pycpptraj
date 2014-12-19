@@ -1,4 +1,6 @@
 # distutils: language = c++
+from libcpp.vector cimport vector
+from libcpp.string cimport string
 from MapAtom cimport *
 from Topology cimport *
 
@@ -8,16 +10,16 @@ cdef extern from "AtomMap.h":
         _AtomMap() 
         _MapAtom& operator[](int)
         const _MapAtom& operator[](int i) const 
-        int Natom() 
-        void SetDebug(int)
+        int Natom() const 
+        void SetDebug(int d)
         int Setup(const _Topology&)
         int SetupResidue(const _Topology&, int)
         void ResetMapping() 
-        bint BondIsRepeated(int, int)
-        void DetermineAtomIDs() 
+        bint BondIsRepeated(int, int) const 
+        void Determine_AtomIDs() 
         void MarkAtomComplete(int, bint)
         void CheckForComplete_Atoms() 
-        int CheckBonds() 
+        #int SymmetricAtoms(const _Topology&, _AtomIndexArray&, int)
 
 
 cdef class AtomMap:

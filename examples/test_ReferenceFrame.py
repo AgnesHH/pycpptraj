@@ -11,9 +11,9 @@ top = Topology(topname)
 #top.summary()
 ref = ReferenceFrame()
 ref.load_ref(fname, top)
-top2 = ref.parm()
+top2 = ref.top
 top2.summary()
-refframe = ref.coord()
+refframe = ref.frame
 #print help(refframe)
 
 #print frame.rmsd(refframe)
