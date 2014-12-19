@@ -239,6 +239,24 @@ TrajFormatDict = {
 #    "Z" : Z, 
 #    }
 
+# DataSet.h
+from DataSet cimport *
+DataTypeDict = {
+        "UNKNOWN_DATA " : UNKNOWN_DATA,  
+        "DOUBLE" : DOUBLE, 
+        "FLOAT" : FLOAT,
+        "INTEGER" : INTEGER,
+        "STRING" : STRING, 
+        "MATRIX_DBL" : MATRIX_DBL, 
+        "MATRIX_FLT" : MATRIX_FLT,
+        "COORDS" : COORDS, 
+        "VECTOR" : VECTOR,
+        "MODES" : MODES,
+        "GRID_FLT" : GRID_FLT,
+        "REMLOG" : REMLOG, 
+        "XYMESH" : XYMESH, 
+        "TRAJ" : TRAJ, 
+    }
 # DataSet_2D
 from DataSet_2D cimport *
 MatrixDict = {
@@ -295,12 +313,13 @@ RetDict = {
     }
 
 # Frame
-from Frame cimport *
-CenterModeDict = {
-    "ORIGIN" : ORIGIN, 
-    "BOXCTR" : BOXCTR, 
-    "POINT" : POINT, 
-    }
+# not in cpptraj Frame.h anymore
+#from Frame cimport *
+#CenterModeDict = {
+#    "ORIGIN" : ORIGIN, 
+#    "BOXCTR" : BOXCTR, 
+#    "POINT" : POINT, 
+#    }
 
 # ParmFile
 from ParmFile cimport *
