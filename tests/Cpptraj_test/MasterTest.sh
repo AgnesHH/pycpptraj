@@ -454,12 +454,13 @@ if [[ $CLEAN -eq 0 ]] ; then
   # If using AMBERHOME/bin binary use DACDIF for test comparisons,
   # otherwise diff will be used.
   DACDIF=""
-  if [[ -z $CPPTRAJ ]] ; then
-    if [[ ! -z $CPPTRAJHOME ]] ; then
-      CPPTRAJ=$CPPTRAJHOME/bin/cpptraj$SFX
-    else
-      CPPTRAJ=../../bin/cpptraj$SFX
-    fi
+#  if [[ -z $CPPTRAJ ]] ; then
+#    if [[ ! -z $CPPTRAJHOME ]] ; then
+#      CPPTRAJ=$CPPTRAJHOME/bin/cpptraj$SFX
+#    else
+#      CPPTRAJ=../../bin/cpptraj$SFX
+#    fi
+  CPPTRAJ=../../bin/cpptraj
 #    if [[ $STANDALONE -eq 0 && ! -z $AMBERHOME ]] ; then
 #      DACDIF=$AMBERHOME/AmberTools/test/dacdif
 #      if [[ ! -e $DACDIF ]] ; then
