@@ -99,6 +99,7 @@ cdef extern from "Frame.h":
         double RMSD_CenteredRef(const _Frame&, bint)
         double RMSD_CenteredRef(const _Frame&, _Matrix_3x3&, _Vec3&, bint)
         double RMSD_NoFit(const _Frame&, bint) const 
+        double RMSD_FitToRef(const _Frame&, const _Vec3&)
         double DISTRMSD(const _Frame&) const 
         _Vec3 SetAxisOfRotation(int, int)
         _Vec3 CalculateInertia(const _AtomMask&, _Matrix_3x3&) const 

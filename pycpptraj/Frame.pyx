@@ -360,6 +360,9 @@ cdef class Frame:
     def rmsd_no_fit(self, Frame frame, useMassIn):
         return self.thisptr.RMSD_NoFit(frame.thisptr[0], useMassIn)
 
+    def rmsd_fit_to_ref(self, Frame frame, Vec3 vec):
+        return self.thisptr.RMSD_FitToRef(frame.thisptr[0], vec.thisptr[0])
+
     def dist_rmsd(self, Frame frame):
         return self.thisptr.DISTRMSD(frame.thisptr[0])
 
