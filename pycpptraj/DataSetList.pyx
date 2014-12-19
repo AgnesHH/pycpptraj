@@ -2,7 +2,7 @@
 include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
-from cpptraj_dict import DataTypeDict
+#from cpptraj_dict import DataTypeDict
 
 cdef class DataSetList:
     def __cinit__(self):
@@ -93,11 +93,12 @@ cdef class DataSetList:
     def list(self):
         self.thisptr.List()
 
-    def find_set_of_type(self, string fname, string key):
-        cdef DataType dtype = <DataType> DataTypeDict[key]
-        cdef DataSet dtset = DataSet()
-        dtset.thisptr[0] = deref(self.thisptr.FindSetOfType(fname, dtype))
-        return dtset
+    # got segfault
+    #def find_set_of_type(self, string fname, string key):
+    #    cdef DataType dtype = <DataType> DataTypeDict[key]
+    #    cdef DataSet dtset = DataSet()
+    #    dtset.thisptr[0] = deref(self.thisptr.FindSetOfType(fname, dtype))
+    #    return dtset
 
     def find_coords_set(self, string fname):
         cdef DataSet dtset = DataSet()

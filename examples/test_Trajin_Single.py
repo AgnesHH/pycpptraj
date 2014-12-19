@@ -6,6 +6,7 @@ from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.Trajin import Trajin
 from pycpptraj.ArgList import ArgList
 from pycpptraj.Topology import Topology
+from pycpptraj.TopologyList import TopologyList
 from pycpptraj.ReferenceFrame import ReferenceFrame
 
 ts = Trajin_Single()
@@ -43,4 +44,4 @@ print "test basetraj"
 
 print "Test_Action_Rmsd"
 armsd = Action_Rmsd()
-armsd.init(arglist, TopologyList(), )
+#armsd.init(ArgList(), TopologyList(), )
