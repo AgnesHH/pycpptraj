@@ -24,4 +24,4 @@ cdef extern from "FrameList.h":
 cdef class FrameList:
     cdef _FrameList* thisptr
     cdef public const char* info
-
+    cdef bint py_free_mem

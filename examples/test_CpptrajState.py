@@ -1,5 +1,6 @@
 import os
 from pycpptraj.actions.Action_Dihedral import Action_Dihedral
+from pycpptraj.actions.Action_Rmsd import Action_Rmsd
 from pycpptraj.Topology import Topology
 from pycpptraj.Frame import Frame
 from pycpptraj.TopologyList import TopologyList
@@ -61,8 +62,8 @@ def test_process_input():
     state = CpptrajState()
     command = Command()
     fname = "./data/pycpptraj.in"
-    command.process_input(state, fname)
-    #state.add_action(Action_Dihedral(), argIn)
+    #command.process_input(state, fname)
+    state.add_action(Action_Dihedral(), argIn)
     print state.trajlist
     print state.trajlist.mode
     print state.trajlist.list()
@@ -73,9 +74,14 @@ print "test_process_input"
 state2 = CpptrajState()
 toplist = state2.toplist
 toplist.add_parm_file("./data/Tc5b.top")
-toplist.add_parm_file("./data/HP36.top")
-#state2.list_all(argIn)
-#state2.traj_length("./data/Tc5b.top", ["./data/md1_prod.Tc5b.x",])
 state2.add_trajin("./data/md1_prod.Tc5b.x")
+state2.add_reference("./data/Tc5b.nat.crd")
+state2.add_action(Action_Rmsd(), ArgList("@CA out test.dat"))
+#state2.add_action(Action_Dihedral(), ArgList("@CA"))
+state2.set_no_progress()
+state2.run()
+
+#state2.traj_length("./data/Tc5b.top", ["./data/md1_prod.Tc5b.x",])
+#state2.add_trajin("./data/md1_prod.Tc5b.x")
 #state2.add_trajin("./data/md1_prod.Tc5b.x")
 #test_process_input()

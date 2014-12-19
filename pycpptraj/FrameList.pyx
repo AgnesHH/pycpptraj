@@ -2,11 +2,13 @@
 
 
 cdef class FrameList:
-    def __cinit__(self):
+    def __cinit__(self, py_free_mem=True):
         self.thisptr = new _FrameList()
+        self.py_free_mem = py_free_mem
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.py_free_mem:
+            del self.thisptr
 
     def clear(self):
         self.thisptr.Clear()

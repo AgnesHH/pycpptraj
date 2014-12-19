@@ -28,4 +28,4 @@ cdef extern from "DataFileList.h":
 
 cdef class DataFileList:
     cdef _DataFileList* thisptr
-
+    cdef bint py_free_mem

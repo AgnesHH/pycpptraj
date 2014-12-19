@@ -13,16 +13,25 @@ cdef class CpptrajState:
     """
     def __cinit__(self):
         self.thisptr = new _CpptrajState()
-        self.toplist = TopologyList()
-        #del self.toplist.thisptr
+        self.toplist = TopologyList(py_free_mem=False)
+        self.framelist = FrameList(py_free_mem=False)
+        self.datafilelist = DataFileList(py_free_mem=False)
+        self.datasetlist = DataSetList(py_free_mem=False)
+
+        # cpptraj will take care of mem freeing
+        # from self.thisptr.PFL(FL, DSL, DFL)
+        # so don't free mem again (example: self.toplist.thisptr and 
+        # self.thisptr.PFL() point to the same address)
         self.toplist.thisptr = self.thisptr.PFL()
-        #self.toplist.thisptr[0] = deref(self.thisptr.PFL())
+        self.framelist.thisptr = self.thisptr.FL()
+        self.datasetlist.thisptr = self.thisptr.DSL()
+        self.datafilelist.thisptr = self.thisptr.DFL()
 
     def __dealloc__(self):
         if self.thisptr is not NULL:
-            #print "delete", self.__class__
             del self.thisptr
-
+    
+    # turn off those since I need pointer, not a copy of instance
     #@property
     #def toplist(self):
     #    """return TopologyList"""
@@ -30,26 +39,26 @@ cdef class CpptrajState:
     #    toplist.thisptr[0] = deref(self.thisptr.PFL())
     #    return toplist
 
-    @property
-    def framelist(self):
-        """return FrameList"""
-        cdef FrameList flist = FrameList()
-        flist.thisptr[0] = deref(self.thisptr.FL())
-        return flist
+    #@property
+    #def framelist(self):
+    #    """return FrameList"""
+    #    cdef FrameList flist = FrameList()
+    #    flist.thisptr[0] = deref(self.thisptr.FL())
+    #    return flist
 
-    @property
-    def datasetlist(self):
-        """return DataSetList"""
-        cdef DataSetList dlist = DataSetList()
-        dlist.thisptr[0] = deref(self.thisptr.DSL())
-        return dlist
+    #@property
+    #def datasetlist(self):
+    #    """return DataSetList"""
+    #    cdef DataSetList dlist = DataSetList()
+    #    dlist.thisptr[0] = deref(self.thisptr.DSL())
+    #    return dlist
 
-    @property
-    def datafilelist(self):
-        """return DataFileList"""
-        cdef DataFileList dflist = DataFileList()
-        dflist.thisptr[0] = deref(self.thisptr.DFL())
-        return dflist
+    #@property
+    #def datafilelist(self):
+    #    """return DataFileList"""
+    #    cdef DataFileList dflist = DataFileList()
+    #    dflist.thisptr[0] = deref(self.thisptr.DFL())
+    #    return dflist
 
     def set_no_exit_on_error(self):
         self.thisptr.SetNoExitOnError()

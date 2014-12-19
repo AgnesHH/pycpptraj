@@ -84,7 +84,7 @@ cdef class Topology:
     def set_reference_coords(self, Frame frameIn):
         self.thisptr.SetReferenceCoords(frameIn.thisptr[0])
 
-    def c_str(self):
+    def file_path(self):
         return self.thisptr.c_str()
 
     def trunc_res_atom_name(self, int atom):

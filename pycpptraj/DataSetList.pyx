@@ -5,11 +5,15 @@ from cython.operator cimport preincrement as incr
 #from cpptraj_dict import DataTypeDict
 
 cdef class DataSetList:
-    def __cinit__(self):
+    def __cinit__(self, py_free_mem=True):
+        # py_free_mem is a flag to tell pycpptraj should free memory or let 
+        # cpptraj does
+        # check ./CpptrajState.pyx
         self.thisptr = new _DataSetList()
+        self.py_free_mem = py_free_mem
 
     def __dealloc__(self):
-        if self.thisptr is not NULL:
+        if self.py_free_mem:
             del self.thisptr
 
     def clear(self):

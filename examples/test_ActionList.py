@@ -25,12 +25,12 @@ from pycpptraj.PointerVec import TopVec, FrameVec
 top = Topology("./data/Tc5b.top")
 ref = ReferenceFrame()
 ref.load_ref("./data/Tc5b.nat.crd", top)
-refframe = ref.coord() 
+refframe = ref.frame
 mdx = "./data/md1_prod.Tc5b.x"
 
 farray = FrameArray()
 traj = Trajin_Single()
-traj.load(mdx, ArgList(), top, checkBox=True)
+traj.load(mdx, ArgList(), top)
 frame = Frame()
 frame.set_frame_v(top, traj.has_velocity(), traj.nreplica_dimension())
 atm = AtomMask(":1-20@CA")
@@ -41,7 +41,7 @@ rmsd reference out test.out :1-20@CA
 """
 
 arglist = ArgList(input2)
-traj.load(mdx, arglist, top, checkBox=True)
+traj.load(mdx, arglist, top)
 alist = ActionList()
 armsd = Action_Rmsd()
 toplist = TopologyList("./data/Tc5b.top")

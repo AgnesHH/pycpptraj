@@ -1,5 +1,5 @@
 from pycpptraj.DihedralSearch import DihedralSearch
-from pycpptraj import Topology
+from pycpptraj.Topology import Topology
 
 top = Topology("./data/Tc5b.top")
 

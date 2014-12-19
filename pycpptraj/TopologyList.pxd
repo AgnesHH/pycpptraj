@@ -19,4 +19,4 @@ cdef extern from "TopologyList.h":
 
 cdef class TopologyList:
     cdef _TopologyList* thisptr
-
+    cdef bint py_free_mem

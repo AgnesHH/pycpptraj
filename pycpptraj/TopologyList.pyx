@@ -5,15 +5,20 @@ from ArgList cimport ArgList
 
 
 cdef class TopologyList:
-    def __cinit__(self, *args):
+    def __cinit__(self, py_free_mem=True, *args):
+        # py_free_mem is a flag to tell pycpptraj should free memory or let
+        # cpptraj does
+        # check ./CpptrajState.pyx
+
         cdef string fname
         self.thisptr = new _TopologyList()
+        self.py_free_mem = py_free_mem
         if args:
             fname = args[0]
             self.add_parm_file(fname)
 
     def __dealloc__(self):
-        if self.thisptr is not NULL:
+        if self.py_free_mem == True:
             #print "delete ", self.__class__
             del self.thisptr
 

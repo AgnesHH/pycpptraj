@@ -14,6 +14,7 @@ toplist.info()
 mylist = FrameList()
 mylist.add_ref_frame(arglist, toplist)
 aref = mylist.active_reference()
+mylist.list()
 #help(aref)
 #print mylist.info
 
