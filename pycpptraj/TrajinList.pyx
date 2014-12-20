@@ -33,9 +33,6 @@ cdef class TrajinList:
             yield trajin
             incr(it)
 
-    #def __next__(self):
-    #    pass
-        
     def empty(self):
         return self.thisptr.empty()
 
@@ -54,15 +51,10 @@ cdef class TrajinList:
             raise NotImplementedError()
 
     def front(self):
-        # STATUS: got Segmentation fault
-        # Trajin has abtract methods --> can not create instance. 
-        # cpptraj: return Trajin*
-        pass
-
-        #cdef Trajin trajin = Trajin()
-        #trajin.thisptr[0] = deref(<_Trajin*> self.thisptr.front())
-        #return trajin
-
+        # TODO: add doc
+        cdef Trajin trajin = Trajin()
+        trajin.baseptr = <_Trajin*> self.thisptr.front()
+        return trajin
 
     @property
     def max_frames(self):

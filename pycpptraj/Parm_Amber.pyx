@@ -9,30 +9,30 @@ cdef class Parm_Amber:
         if self.thisptr != NULL:
             del self.thisptr
 
-    def Alloc(self):
+    def alloc(self):
         cdef BaseIOtype baseio = BaseIOtype()
         #def BaseIOtype * Alloc(self):
+        # let cpptraj free memory
         baseio.thisptr = self.thisptr.Alloc()
         return baseio
 
-    def WriteHelp(self):
+    def write_help(self):
         self.thisptr.WriteHelp()
 
-    def ID_ParmFormat(self, CpptrajFile fileIn):
+    def id_parm_format(self, CpptrajFile fileIn):
         return self.thisptr.ID_ParmFormat(fileIn.thisptr[0])
 
-    def processReadArgs(self,ArgList arglist):
+    def process_read_args(self,ArgList arglist):
         return self.thisptr.processReadArgs(arglist.thisptr[0])
 
-    def ReadParm(self, string fname, Topology TopIn):
+    def read_parm(self, string fname, Topology TopIn):
         return self.thisptr.ReadParm(fname, TopIn.thisptr[0])
 
-    def processWriteArgs(self, ArgList argIn):
+    def process_write_args(self, ArgList argIn):
         self.thisptr.processWriteArgs(argIn.thisptr[0])
 
-    def WriteParm(self, string fname, Topology parmIn):
+    def write_parm(self, string fname, Topology parmIn):
         return self.thisptr.WriteParm(fname, parmIn.thisptr[0])
 
-    def SetDebug(self,int debugIn):
+    def set_debug(self,int debugIn):
         self.thisptr.SetDebug(debugIn)
-

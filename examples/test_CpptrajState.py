@@ -12,6 +12,7 @@ from pycpptraj.Trajin import Trajin
 from pycpptraj.TrajinList import TrajinList
 from pycpptraj.ReferenceFrame import ReferenceFrame
 from pycpptraj.Command import Command
+from pycpptraj.FrameList import FrameList
 
 # setup filenames
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
@@ -76,10 +77,12 @@ toplist = state2.toplist
 toplist.add_parm_file("./data/Tc5b.top")
 state2.add_trajin("./data/md1_prod.Tc5b.x")
 state2.add_reference("./data/Tc5b.nat.crd")
-state2.add_action(Action_Rmsd(), ArgList("@CA out test.dat"))
+state2.add_action(Action_Rmsd(), ArgList("@CA"))
+state2.framelist.set_active_ref(0)
 #state2.add_action(Action_Dihedral(), ArgList("@CA"))
 state2.set_no_progress()
-state2.run()
+print state2.trajlist
+#state2.run()
 
 #state2.traj_length("./data/Tc5b.top", ["./data/md1_prod.Tc5b.x",])
 #state2.add_trajin("./data/md1_prod.Tc5b.x")

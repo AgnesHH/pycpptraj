@@ -15,6 +15,7 @@ with open(pylist, 'r') as fh:
             except: pass
 
 actions.remove("Action")
+actions.remove("ActionFrameCounter")
 
 # get Help from actionlist
 for act_name in actions:

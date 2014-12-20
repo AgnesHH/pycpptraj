@@ -2,7 +2,7 @@
 include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
-#from cpptraj_dict import DataTypeDict
+from cpptraj_dict import DataTypeDict
 
 cdef class DataSetList:
     def __cinit__(self, py_free_mem=True):
@@ -31,7 +31,7 @@ cdef class DataSetList:
 
         while it != self.thisptr.end():
             dtset = DataSet()
-            dtset.thisptr[0] = deref(deref(it))
+            dtset.baseptr = deref(it)
             yield dtset
             incr(it)
             
@@ -46,12 +46,12 @@ cdef class DataSetList:
         return self.thisptr.EnsembleNum()
 
     def remove_set(self, DataSet dtset):
-        self.thisptr.RemoveSet(dtset.thisptr)
+        self.thisptr.RemoveSet(dtset.baseptr)
 
     def __getitem__(self, int idx):
         cdef DataSet dset = DataSet()
         # get memoryview
-        dset.thisptr = self.thisptr.index_opr(idx)
+        dset.baseptr = self.thisptr.index_opr(idx)
         return dset
 
     def set_debug(self,int id):
@@ -81,8 +81,9 @@ cdef class DataSetList:
     #    return self.thisptr.GenerateDefaultName(s)
 
     def add_set(self,DataType dtype, string s, char * c):
+        # TODO: check cpptraj for this method
         cdef DataSet dset = DataSet()
-        dset.thisptr[0] = self.thisptr.AddSet(dtype, s, c)[0]
+        dset.baseptr = self.thisptr.AddSet(dtype, s, c)
         return dset
         
     #def DataSet * AddSetIdx(self,DataSet::DataType, string, int):
@@ -99,13 +100,14 @@ cdef class DataSetList:
         self.thisptr.List()
 
     # got segfault
-    #def find_set_of_type(self, string fname, string key):
-    #    cdef DataType dtype = <DataType> DataTypeDict[key]
-    #    cdef DataSet dtset = DataSet()
-    #    dtset.thisptr[0] = deref(self.thisptr.FindSetOfType(fname, dtype))
-    #    return dtset
+    def find_set_of_type(self, string fname, string key):
+        cdef DataType dtype = <DataType> DataTypeDict[key]
+        cdef DataSet dtset = DataSet()
+        dtset.baseptr = self.thisptr.FindSetOfType(fname, dtype)
+        return dtset
 
     def find_coords_set(self, string fname):
         cdef DataSet dtset = DataSet()
-        dtset.thisptr[0] = deref(self.thisptr.FindCoordsSet(fname))
+        #dtset.baseptr = self.thisptr.FindCoordsSet(fname)
+        dtset.baseptr[0] = (self.thisptr.FindCoordsSet(fname))[0]
         return dtset

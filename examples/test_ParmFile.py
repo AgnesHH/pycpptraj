@@ -33,6 +33,5 @@ for i in range(304):
 #print "\nAtom info"
 #top.PrintAtomInfo("@CA")
 #top.PrintBondInfo("@C*")
-top.print_charge_mass_info("@CA", 2)
-pfname = parm.ParmFilename()
+pfname = parm.parm_filename()
 print pfname.full()

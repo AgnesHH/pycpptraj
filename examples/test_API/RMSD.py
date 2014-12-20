@@ -31,7 +31,7 @@ def _cpptraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_ma
     # create reference frame
     ref = ReferenceFrame()
     ref.load_ref(refname, top)
-    refframe = ref.coord()
+    refframe = ref.frame
 
     # load trajectory file
     trajin = Trajin_Single()

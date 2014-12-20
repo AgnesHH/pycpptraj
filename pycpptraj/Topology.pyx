@@ -9,7 +9,7 @@ from NameType cimport NameType
 from TopologyList cimport TopologyList
 
 cdef class Topology:
-    def __cinit__(self, py_free_mem=True, *args):
+    def __cinit__(self, *args):
         """
         args = filename or Topology instance
         """
@@ -17,17 +17,24 @@ cdef class Topology:
         cdef Topology tp
         cdef string fname
         self.thisptr = new _Topology()
-        self.py_free_mem = py_free_mem
+
+        # I dont make default py_free_mem (True) in __cinit__ since
+        # when passing something like top = Topology(fname), Python/Cython
+        # would think "fname" is value of py_free_mem
+        self.py_free_mem = True
 
         if not args:
+            print "there is no args" # for debug
             # make empty Topology instance
             pass
         else:
+            print args
             if len(args) == 1:
                if isinstance(args[0], basestring):
                    fname = args[0]
                    toplist.add_parm_file(fname)
                    self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
+                   print "test top from Topology.pyx"
                elif isinstance(args[0], Topology):
                    tp = args[0]
                    self.thisptr[0] =  tp.thisptr[0]

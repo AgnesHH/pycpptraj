@@ -21,97 +21,97 @@ cdef class DataSet:
     def __cinit__(self):
         pass
         # don't create instance for this abstract class
-        #self.thisptr = new _DataSet()
+        #self.baseptr = new _DataSet()
 
     def __dealloc__(self):
         pass
         # let sub-class do this job
-        #if self.thisptr != NULL:
-        #    del self.thisptr
+        #if self.baseptr != NULL:
+        #    del self.baseptr
 
     #def DataSet(self,DataType, int, int, int):
 
     def set_width(self,int widthIn):
-        self.thisptr.SetWidth(widthIn)
+        self.baseptr.SetWidth(widthIn)
 
     def set_precision(self, int widthIn , int precisionIno):
-        self.thisptr.SetPrecision(widthIn, precisionIno)
+        self.baseptr.SetPrecision(widthIn, precisionIno)
 
     def setup_set(self, string nameIn, int idxIn, string aspectIn):
-        return self.thisptr.SetupSet(nameIn, idxIn, aspectIn)
+        return self.baseptr.SetupSet(nameIn, idxIn, aspectIn)
 
     def set_legend(self, string lIn):
-        self.thisptr.SetLegend(lIn)
+        self.baseptr.SetLegend(lIn)
 
     def set_scalar(self, scalarMode mIn):
-        self.thisptr.SetScalar(mIn)
+        self.baseptr.SetScalar(mIn)
 
     def set_dim(self,DimIdxType i, Dimension d):
-        self.thisptr.SetDim(i, d.thisptr[0])
+        self.baseptr.SetDim(i, d.thisptr[0])
 
     def set_scalar(self,scalarMode mIn, scalarType mT):
-        self.thisptr.SetScalar(mIn, mT)
+        self.baseptr.SetScalar(mIn, mT)
 
     def set_data_set_format(self, bint leftAlignIn):
-        return self.thisptr.SetDataSetFormat(leftAlignIn)
+        return self.baseptr.SetDataSetFormat(leftAlignIn)
 
     def matches(self, string dsname, int idxnum, string aspectIn):
-        return self.thisptr.Matches(dsname, idxnum, aspectIn)
+        return self.baseptr.Matches(dsname, idxnum, aspectIn)
 
     def scalar_description(self):
-        self.thisptr.ScalarDescription()
+        self.baseptr.ScalarDescription()
 
     def empty(self):
-        return self.thisptr.Empty()
+        return self.baseptr.Empty()
 
     @property
     def legend(self):
-        return self.thisptr.Legend()
+        return self.baseptr.Legend()
     
     @property
     def name(self):
-        return self.thisptr.Name()
+        return self.baseptr.Name()
 
     @property
     def idx(self):
-        return self.thisptr.Idx()
+        return self.baseptr.Idx()
     
     @property
     def aspect(self):
-        return self.thisptr.Aspect()
+        return self.baseptr.Aspect()
 
     @property
     def column_width(self):
-        return self.thisptr.ColumnWidth()
+        return self.baseptr.ColumnWidth()
     
     @property
     def data_type(self):
-        return self.thisptr.Type()
+        return self.baseptr.Type()
 
     @property
     def scalar_mode(self):
-        return self.thisptr.ScalarMode()
+        return self.baseptr.ScalarMode()
 
     @property
     def scalar_type(self):
-        return self.thisptr.ScalarType()
+        return self.baseptr.ScalarType()
 
     @property 
     def ndim(self):
-        return self.thisptr.Ndim()
+        return self.baseptr.Ndim()
 
     def dim(self,int i):
         # TODO: what does this do?
         cdef Dimension dim = Dimension()
-        dim.thisptr[0] = self.thisptr.Dim(i)
+        dim.thisptr[0] = self.baseptr.Dim(i)
 
     def __richcmp__(DataSet self, DataSet other, opt):
         if opt == 0:
             # operator "<"
-            return self.thisptr[0] < other.thisptr[0]
+            return self.baseptr[0] < other.baseptr[0]
         else:
             raise NotImplemented()
 
     @property
     def data_format(self):
-        return self.thisptr.DataFormat()
+        return self.baseptr.DataFormat()
