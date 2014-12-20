@@ -1,21 +1,22 @@
 # distutils: language = c++
+from cython.operator cimport dereference as deref
 
-from Action_Distance cimport *
 
-cdef class Action_Distance_py:
-    cdef _Action_Distance* thisptr
-    cdef char* NOE_Help
-
+cdef class Action_Distance (Action):
     def __cinit__(self):
-        self.thisptr = new _Action_Distance()
+        self.baseptr = <_Action*> new _Action_Distance()
+        self.thisptr = <_Action_Distance*> self.baseptr
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.baseptr is not NULL:
+            del self.baseptr
 
-    property NOE_Help:
-        def __get__(self):
-            return self._NOE_Help()
-
-    def _NOE_Help(self):
-        return self.thisptr.NOE_Help
-
+    def alloc(self):
+        """return a function-pointer object to be used with ActionList class
+        """
+        cdef FunctPtr func = FunctPtr()
+        func.ptr = &(self.thisptr.Alloc)
+        return func
+        
+    def help(self):
+        self.thisptr.Help()

@@ -1,12 +1,16 @@
-# distutil: language = c++ 
-
+# distutils: language = c++
 from Action cimport *
 from ImagedAction cimport *
-from ArgList cimport *
 
-cdef extern from "Action_Distance.h":
-    cdef cppclass _Action_Distance "Action_Distance":
-        _Action_Distance()
-        const char* NOE_Help
-        void Help()
-        int NOE_Args(_ArgList&, double&, double&, double&)
+
+cdef extern from "Action_Distance.h": 
+    cdef cppclass _Action_Distance "Action_Distance" (_Action):
+        _Action_Distance() 
+        _DispatchObject * Alloc() 
+        void Help() 
+        int NOE_Args(_ArgList& argIn, double&, double&, double&)
+
+
+cdef class Action_Distance (Action):
+    cdef _Action_Distance* thisptr
+

@@ -1,13 +1,22 @@
 # distutils: language = c++
+from cython.operator cimport dereference as deref
 
-from xxx cimport *
 
-cdef class ArgList:
-    cdef _yyy  *thisptr
-
+cdef class Action_Volmap (Action):
     def __cinit__(self):
-        self.thisptr = new _yyy()
+        self.baseptr = <_Action*> new _Action_Volmap()
+        self.thisptr = <_Action_Volmap*> self.baseptr
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.baseptr is not NULL:
+            del self.baseptr
 
+    def alloc(self):
+        """return a function-pointer object to be used with ActionList class
+        """
+        cdef FunctPtr func = FunctPtr()
+        func.ptr = &(self.thisptr.Alloc)
+        return func
+        
+    def help(self):
+        self.thisptr.Help()

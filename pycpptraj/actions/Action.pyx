@@ -30,14 +30,29 @@ cdef class Action:
         #del self.baseptr
         pass
 
-    def init(self, ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug):
+    def read_input(self, ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug):
+        """
+        temp doc: 
+        Input: ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug):       
+        """
         return self.baseptr.Init(argIn.thisptr[0], toplist.thisptr, flist.thisptr, dslist.thisptr, dflist.thisptr,
                 debug)
 
-    def setup(self, Topology top): 
+    def process(self, Topology top): 
+        """
+        Input: 
+        ====
+        top :: Topology instance
+        """
         return self.baseptr.Setup(top.thisptr, &(top.thisptr))
 
     def do_action(self, int idx, Frame frame):
+        """
+        Input:
+        ====
+        idx :: frame id
+        frame :: Frame instance
+        """
         return self.baseptr.DoAction(idx, frame.thisptr, &(frame.thisptr))
 
     # Do we really need this method?
