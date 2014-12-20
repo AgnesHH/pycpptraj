@@ -49,10 +49,7 @@ actions/Action
 actions/Action_Strip
 actions/Action_Dihedral
 actions/Action_Rmsd
-#Action
-#Action_Strip
-#Action_Dihedral
-#Action_Rmsd
+actions/Action_Radgyr
 DispatchObject
 #utils.Actions
 cpptraj_dict
