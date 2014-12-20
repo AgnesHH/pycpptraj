@@ -13,8 +13,8 @@ cdef extern from "Analysis.h":
         ERR "Analysis::ERR"
     cdef cppclass _Analysis "Analysis":
         #virtual ~_Analysis() 
-        #virtual RetType Setup(_ArgList&, _DataSetList *, _TopologyList *, _DataFileList *, int)
-        #virtual RetType Analyze() = 0 
+        RetType Setup(_ArgList&, _DataSetList *, _TopologyList *, _DataFileList *, int)
+        RetType Analyze()
 
 
 cdef class Analysis:
