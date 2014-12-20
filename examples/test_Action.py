@@ -1,13 +1,8 @@
 import os
 import pycpptraj
 from importlib import import_module
-#from pycpptraj.actions.Action_Dihedral import Action_Dihedral
-#from pycpptraj.actions.Action_Radgyr import Action_Radgyr
-#from pycpptraj.actions.Action_Strip import Action_Strip
-#from pycpptraj.actions.Action_Rmsd import Action_Rmsd
 
-#Action_Radgyr().help()
-
+# get action list
 pylist = os.environ['PYCPPTRAJ_HOME'] + "/PYXLIST.txt"
 
 actions = []
@@ -21,6 +16,7 @@ with open(pylist, 'r') as fh:
 
 actions.remove("Action")
 
+# get Help from actionlist
 for act_name in actions:
     module = '.actions.' + act_name
     mod = import_module(module, package='pycpptraj')

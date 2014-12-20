@@ -29,22 +29,36 @@ cdef class TopologyList:
         self.thisptr.SetDebug(id)
 
     def __getitem__(self, int idx):
+        """return a copy of topology in TopologyList with index idx
+        Input:
+        =====
+        idx : int
+        """
+
         try:
            return self.get_parm(idx)
         except:
             raise ValueError("index is out of range? do you have empty list?")
 
     def get_parm(self, arg):
-        cdef Topology top = Topology()
+        """Return a Topology instance as a view to Topology instance in TopologyList
+        If you made change to this topology, TopologyList would update this change too.
+        """
+
+        cdef Topology top = Topology(py_mem_free=False)
         cdef int num
         cdef ArgList argIn
 
         if isinstance(arg, (int, long)):
             num = arg
-            top.thisptr[0] = deref(self.thisptr.GetParm(num))
+            #top.thisptr[0] = deref(self.thisptr.GetParm(num))
+            # use memoryview instead making a copy
+            top.thisptr = self.thisptr.GetParm(num)
         if isinstance(arg, ArgList):
             argIn = arg
-            top.thisptr[0] = deref(self.thisptr.GetParm(argIn.thisptr[0]))
+            # use memoryview instead making a copy
+            top.thisptr = self.thisptr.GetParm(argIn.thisptr[0])
+            #top.thisptr[0] = deref(self.thisptr.GetParm(argIn.thisptr[0]))
         return top
 
     def get_parm_by_index(self, ArgList argIn):

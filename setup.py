@@ -75,28 +75,29 @@ setup_args['package_data'] = {
         'pycpptraj' : [p[10:] for p in pxd_include_patterns],
         }
 
-setup(
-    name="PyCpptraj",
-    version="0.1",
-    author="Hai Nguyen",
-    author_email="hainm.comp@gmail.com",
-    url="https://github.com/hainm/pycpptraj",
-    packages=packages,
-    description="""Python wrapper for cpptraj""",
-    long_description=read("README.md"),
-    license = "BSD License",
-    platform = "",
-    classifiers=[
-                'Development Status :: Beta',
-                'Operating System :: Linux',
-                'Intended Audience :: Science/Research',
-                'License :: BSD License',
-                'Programming Language :: Python',
-                'Programming Language :: Cython',
-                'Programming Language :: C',
-                'Programming Language :: C++',
-                'Topic :: Scientific/Engineering'],
-    ext_modules = ext_modules,
-    cmdclass = {'build_ext': Cython.Distutils.build_ext},
-    **setup_args
-)
+if __name__ == "__main__":
+    setup(
+        name="PyCpptraj",
+        version="0.1",
+        author="Hai Nguyen",
+        author_email="hainm.comp@gmail.com",
+        url="https://github.com/hainm/pycpptraj",
+        packages=packages,
+        description="""Python wrapper for cpptraj""",
+        long_description=read("README.md"),
+        license = "BSD License",
+        platform = "",
+        classifiers=[
+                    'Development Status :: Beta',
+                    'Operating System :: Linux',
+                    'Intended Audience :: Science/Research',
+                    'License :: BSD License',
+                    'Programming Language :: Python',
+                    'Programming Language :: Cython',
+                    'Programming Language :: C',
+                    'Programming Language :: C++',
+                    'Topic :: Scientific/Engineering'],
+        ext_modules = ext_modules,
+        cmdclass = {'build_ext': Cython.Distutils.build_ext},
+        **setup_args
+    )

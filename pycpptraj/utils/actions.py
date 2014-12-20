@@ -31,10 +31,11 @@ def load_parm(topname):
 def load_traj(top, trajfile):
     pass
 
-def load_crd(top, crdfile):
-    pass
+def load_crd(top, arglist):
+    state = CpptrajState()
 
-def calculate(action='', input):
+
+def calculate(input, action=''):
     """
     Output : raw data from cpptraj
 

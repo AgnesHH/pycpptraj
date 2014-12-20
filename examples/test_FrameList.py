@@ -13,15 +13,8 @@ toplist.info()
 
 mylist = FrameList()
 mylist.add_ref_frame(arglist, toplist)
-aref = mylist.active_reference()
+aref = mylist.get_active_reference()
 mylist.list()
-#help(aref)
-#print mylist.info
+print mylist.n_frames
 
-# create new frame with atomamask
-
-atmask = AtomMask("@CA")
-#help(atmask)
-frame2 = Frame()
-frame2.set_coordinates(aref, atmask)
-frame2.info()
+print aref.xyz(0)

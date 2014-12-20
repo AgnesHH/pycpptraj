@@ -120,3 +120,4 @@ cdef extern from "Topology.h":
 
 cdef class Topology:
     cdef _Topology* thisptr
+    cdef bint py_mem_free
