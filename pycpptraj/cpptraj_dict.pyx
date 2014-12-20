@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-cpdef get_key(value, dict Dict):
+def get_key(value, dict Dict):
     """return the first key having Dict[key] == value"""
     for key, v in Dict.iteritems():
         if v == value:

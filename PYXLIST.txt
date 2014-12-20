@@ -1,5 +1,6 @@
 # This is a list of finished/workable files
 # setup.py will look at uncomment lines to "cythonize"
+DataFile
 _FunctPtr
 ArgList
 Atom
@@ -15,6 +16,7 @@ MaskToken
 Molecule
 NameType
 Parm_Amber
+ParmIO
 ParameterTypes
 ParmFile
 Residue
@@ -26,13 +28,15 @@ Trajin_Single
 Vec3
 FileName
 Frame
+Array1D
 FrameArray
 BaseIOtype
 TrajectoryIO
 FrameList
 DataSet
 DataSet_1D
-DataFile
+DataSet_Coords
+DataSet_Coords_CRD
 DataFileList
 #NetcdfFile
 ReferenceFrame
@@ -42,17 +46,20 @@ AnalysisList
 Command
 TrajectoryFile
 ReplicaDimArray
-DataSet_Coords
 DihedralSearch
 BufferedFrame
 actions/Action
+actions/Action_AtomMap
 actions/Action_Strip
 actions/Action_Dihedral
 actions/Action_Rmsd
 actions/Action_Radgyr
 actions/Action_Vector
 actions/Action_Matrix
+actions/Action_RandomizeIons
 actions/ActionFrameCounter
+actions/Action_RandomizeIons
+actions/Action_Distance
 #actions/Action_Projection #can not find ArgList???
 #actions/Action_Grid
 DispatchObject
@@ -69,3 +76,4 @@ Cluster_DBSCAN
 MapAtom
 AtomMap
 PointerVec
+ImagedAction
