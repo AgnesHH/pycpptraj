@@ -45,7 +45,7 @@ cdef class TopologyList:
         If you made change to this topology, TopologyList would update this change too.
         """
 
-        cdef Topology top = Topology(py_mem_free=False)
+        cdef Topology top = Topology(py_free_mem=False)
         cdef int num
         cdef ArgList argIn
 
@@ -62,7 +62,7 @@ cdef class TopologyList:
         return top
 
     def get_parm_by_index(self, ArgList argIn):
-        cdef Topology top = Topology()
+        cdef Topology top = Topology(py_free_mem=False)
         top.thisptr = self.thisptr.GetParmByIndex(argIn.thisptr[0])
         return top
 

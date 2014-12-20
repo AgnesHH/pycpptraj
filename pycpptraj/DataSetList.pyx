@@ -50,7 +50,8 @@ cdef class DataSetList:
 
     def __getitem__(self, int idx):
         cdef DataSet dset = DataSet()
-        dset.thisptr[0] = deref(self.thisptr.index_opr(idx))
+        # get memoryview
+        dset.thisptr = self.thisptr.index_opr(idx)
         return dset
 
     def set_debug(self,int id):

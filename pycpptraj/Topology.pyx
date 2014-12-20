@@ -9,7 +9,7 @@ from NameType cimport NameType
 from TopologyList cimport TopologyList
 
 cdef class Topology:
-    def __cinit__(self, py_mem_free=True, *args):
+    def __cinit__(self, py_free_mem=True, *args):
         """
         args = filename or Topology instance
         """
@@ -17,7 +17,7 @@ cdef class Topology:
         cdef Topology tp
         cdef string fname
         self.thisptr = new _Topology()
-        self.py_mem_free = py_mem_free
+        self.py_free_mem = py_free_mem
 
         if not args:
             # make empty Topology instance
@@ -35,7 +35,7 @@ cdef class Topology:
                 raise ValueError()
 
     def __dealloc__(self):
-        if self.py_mem_free:
+        if self.py_free_mem:
             del self.thisptr
 
     @classmethod
