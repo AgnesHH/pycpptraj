@@ -10,6 +10,15 @@ import sys
 
 cpptrajsrc = os.environ['CPPTRAJHOME'] + "/src/"
 file = cpptrajsrc + sys.argv[1]
+#try:
+#    # virtual or not?
+#    option = sys.argv[2]
+#    if option == 'virtual':
+#        include_virtual = True
+#except:
+#    include_virtual = False
+include_virtual = True
+
 indent = " " * 4
 classlist = find_class(cpptrajsrc)
 cpp = CppHeaderParser.CppHeader(file)
@@ -33,7 +42,8 @@ for classname in cpp.classes.keys():
     methods = cpp.classes[classname]['methods']['public']
     for method in methods:
         line = Line_codegen(method['debug'])
-        if 'virtual' not in line.myline:
+        #if 'virtual' not in line.myline:
+        if include_virtual:
             line.remove_std_namespace()
             #line.remove_unsupported()
             line.swap_const()

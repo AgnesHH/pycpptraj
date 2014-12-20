@@ -4,11 +4,12 @@ from ArgList cimport ArgList
 from DataSetList cimport DataSetList
 
 cdef class DataFile:
-    def __cinit__(self):
+    def __cinit__(self, py_free_mem=True):
         self.thisptr = new _DataFile()
+        self.py_free_mem = py_free_mem
 
     def __dealloc__(self):
-        if self.thisptr is not NULL:
+        if self.py_free_mem:
             del self.thisptr
 
     def write_help(self):

@@ -1,19 +1,28 @@
-# distutil: language = c++
+# distutils: language = c++
 from DataSet cimport *
 from CpptrajFile cimport *
 
-cdef extern from "DataSet_1D.h":
-    cdef cppclass _DataSet_1D "DataSet_1D" (_DataSet):
-        pass
-        #_DataSet_1D()
-        #_DataSet_1D(_DataSet_1D.DataType, int, int)
-        #inline bint IsTorsionArray()
-        #double Avg()
-        #double Avg(double&)
-        #double Min()
-        #double Max()
-        #int CrossCorr(const _DataSet_1D, _DataSet_1D, int, bint, bint)
-        #double CorrCoeff(const _DataSet_1D&)
 
-cdef class DataSet_1D(DataSet):
-    pass
+cdef extern from "DataSet_1D.h": 
+    cdef cppclass _DataSet_1D "DataSet_1D":
+        _DataSet_1D() 
+        _DataSet_1D(_DataSet)
+        # virtual methods
+        #virtual ~_DataSet_1D() 
+        int Allocate1D(size_t)
+        void WriteBuffer(_CpptrajFile&, size_t) const
+        double Dval(size_t) const
+        double Xcrd(size_t) const
+        # end virtual methods
+        inline bint IsTorsionArray() const 
+        double Avg() const 
+        double Avg(double& sd) const 
+        double Min() const 
+        double Max() const 
+        int CrossCorr(const _DataSet_1D&, _DataSet_1D&, int, bint, bint) const 
+        double CorrCoeff(const _DataSet_1D&) const 
+
+
+cdef class DataSet_1D:
+    cdef _DataSet_1D* baseptr
+

@@ -1,6 +1,7 @@
 import os
 from pycpptraj.actions.Action_Dihedral import Action_Dihedral
 from pycpptraj.actions.Action_Rmsd import Action_Rmsd
+from pycpptraj.actions.Action_Distance import Action_Distance
 from pycpptraj.Topology import Topology
 from pycpptraj.Frame import Frame
 from pycpptraj.TopologyList import TopologyList
@@ -76,13 +77,13 @@ state2 = CpptrajState()
 toplist = state2.toplist
 toplist.add_parm_file("./data/Tc5b.top")
 state2.add_trajin("./data/md1_prod.Tc5b.x")
-state2.add_reference("./data/Tc5b.nat.crd")
-state2.add_action(Action_Rmsd(), ArgList("@CA"))
-state2.framelist.set_active_ref(0)
+#state2.add_reference("./data/Tc5b.nat.crd")
+state2.add_action(Action_Distance(), ArgList(":2@CA :10@CA"))
+##state2.framelist.set_active_ref(0)
 #state2.add_action(Action_Dihedral(), ArgList("@CA"))
-state2.set_no_progress()
-print state2.trajlist
-#state2.run()
+#state2.set_no_progress()
+#print state2.trajlist
+state2.run()
 
 #state2.traj_length("./data/Tc5b.top", ["./data/md1_prod.Tc5b.x",])
 #state2.add_trajin("./data/md1_prod.Tc5b.x")

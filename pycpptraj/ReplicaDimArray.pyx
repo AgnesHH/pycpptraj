@@ -8,7 +8,6 @@ cdef class ReplicaDimArray:
     def __dealloc__(self):
         del self.thisptr
 
-    #def int operator[](self,int idx):
     def __getitem__(self, int idx):
         return self.thisptr.index_opr(idx)
 

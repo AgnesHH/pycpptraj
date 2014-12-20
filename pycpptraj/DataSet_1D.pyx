@@ -2,17 +2,26 @@
 
 
 cdef class DataSet_1D:
+    # TODO: correct argument's name
     def __cinit__(self):
         pass
-        #self.thisptr = new _DataSet_1D()
 
     def __dealloc__(self):
-        #del self.thisptr
         pass
 
-    #def DataSet_1D(self):
-
     #def DataSet_1D(self,DataSet:
+
+    #def Allocate1D(self, size_t sizet):
+    #    return self.basepptr.Allocate1D(sizet)
+
+    #def WriteBuffer(self, CpptrajFile cppfile, size_t sizet):
+    #    self.basepptr.WriteBuffer(cppfile.thisptr[0], sizet)
+
+    #def Dval(self, size_t sizet):
+    #    return self.basepptr.Dval(sizet)
+
+    #def Xcrd(self, size_t sizet):
+    #    return self.basepptr.Xcrd(sizet)
 
     #def  bint IsTorsionArray(self):
 

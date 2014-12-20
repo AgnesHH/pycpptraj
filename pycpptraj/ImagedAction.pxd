@@ -10,3 +10,6 @@ cdef extern from "ImagedAction.h":
         bint ImagingEnabled(self)
         bint UseImage()
         ImageType()
+
+cdef class ImagedAction:
+    cdef _ImagedAction* thisptr

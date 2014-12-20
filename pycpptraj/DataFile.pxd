@@ -44,4 +44,5 @@ cdef extern from "DataFile.h":
 
 cdef class DataFile:
     cdef _DataFile* thisptr
+    cdef bint py_free_mem
 

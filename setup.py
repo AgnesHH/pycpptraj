@@ -98,6 +98,7 @@ if __name__ == "__main__":
                     'Programming Language :: C++',
                     'Topic :: Scientific/Engineering'],
         ext_modules = ext_modules,
+        #ext_modules = cythonize(ext_modules),
         cmdclass = {'build_ext': Cython.Distutils.build_ext},
         **setup_args
     )

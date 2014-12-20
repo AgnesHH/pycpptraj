@@ -2,6 +2,7 @@ from copy import copy
 from pycpptraj.FrameList import FrameList
 from pycpptraj import cpptraj_dict
 from pycpptraj.actions.Action_Strip import Action_Strip
+from pycpptraj.actions.Action_Distance import Action_Distance
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList
 from pycpptraj.DataSetList import DataSetList
@@ -37,6 +38,7 @@ atm = AtomMask(":1-20@CA")
 
 input2 = """
 reference ./data/Tc5b.nat.crd
+distance d1 :2@CA :10@CA
 rmsd reference out test.out :1-20@CA
 """
 
@@ -44,6 +46,7 @@ arglist = ArgList(input2)
 traj.load(mdx, arglist, top)
 alist = ActionList()
 armsd = Action_Rmsd()
+distact = Action_Distance()
 toplist = TopologyList("./data/Tc5b.top")
 framelist = FrameList()
 framelist.add_ref_frame(arglist, toplist)
@@ -57,6 +60,7 @@ traj.end_traj()
 
 print "test ActionList"
 alist.add_action(armsd, ArgList(), toplist, framelist, DataSetList(), DataFileList())
+alist.add_action(distact, ArgList(), toplist, framelist, DataSetList(), DataFileList())
 print "test setup_actions"
 alist.setup_actions(top)
 #alist.do_actions(farray, 0)

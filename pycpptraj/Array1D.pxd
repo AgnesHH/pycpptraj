@@ -20,7 +20,7 @@ cdef extern from "Array1D.h":
         #const_iterator end() const 
         size_t size() const 
         void clear() 
-        void Sort_Array1D() 
+        void SortArray1D() 
         int AddDataSets(const _DataSetList&)
         int AddTorsionSets(const _DataSetList&)
         int AddSetsFromArgs(const _ArgList&, const _DataSetList&)
