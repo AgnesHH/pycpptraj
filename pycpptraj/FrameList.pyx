@@ -42,4 +42,3 @@ cdef class FrameList:
 
     def n_frames(self):
         return self.thisptr.NumFrames()
-

@@ -1,4 +1,5 @@
 # (c) 2014 Hai Nguyen
+
 # TODO: should re-write, looks ugly
 import os
 import CppHeaderParser
@@ -9,9 +10,20 @@ import sys
 #cpptrajsrc = os.environ['AMBERHOME'] + "AmberTools/src/cpptraj/src/"
 cpptrajsrc = os.environ['CPPTRAJHOME'] + "/src/"
 filename = cpptrajsrc + sys.argv[1]
+short_filename = filename.split("/")[-1]
 indent = " " * 4
 classlist = find_class(cpptrajsrc)
 cpp = CppHeaderParser.CppHeader(filename)
+
+# check if need extract line for Action_*.pyx or Analysis_*.pyx classes
+need_extra_line = False
+if short_filename.startswith("Action") or short_filename.startswith("Analysis"):
+    need_extra_line = True
+    # get Action's name from short_filename
+    # Action_Rmsd.h --> Action_Rmsd
+    action = short_filename.split(".")[0]
+    # actionroot = "Action" or "Analysis"?
+    actionroot = action.split("_")[0]
 
 # print header line "c++" so Cython know it is c++ code
 # (adding to setup.py seems not work)
@@ -25,16 +37,16 @@ with open(filename, 'r') as fh:
         if word in linelist:
             print "from libcpp.%s cimport %s" % (word, word)
 
-for finclude in cpp.includes:
+for f_include in cpp.includes:
     # remove "
-    if finclude.startswith('"'):
-        finclude = finclude.split('"')[1]
+    if f_include.startswith('"'):
+        f_include = f_include.split('"')[1]
     # import stuff (in cpptraj header files, need to add libcpp.* too)
-    if not finclude.startswith("<"):
-        print "from %s cimport *" % (finclude.split(".")[0])
+    if not f_include.startswith("<"):
+        print "from %s cimport *" % (f_include.split(".")[0])
 
 print_blank_line(2)
-print 'cdef extern from "%s": ' % filename.split("/")[-1]
+print 'cdef extern from "%s": ' % short_filename
 
 # make assumption that there's only one class in header file
 for classname in cpp.classes.keys():
@@ -52,7 +64,10 @@ for classname in cpp.classes.keys():
     
     # declare cpp class
     extcl = "_" + classname
-    print '%scdef cppclass %s "%s":' % (indent, extcl, classname)
+    if not need_extra_line:
+        print '%scdef cppclass %s "%s":' % (indent, extcl, classname)
+    else:
+        print '%scdef cppclass %s "%s" (_%s):' % (indent, extcl, classname, actionroot)
     methods = cpp.classes[classname]['methods']['public']
     for method in methods:
         line = Line_codegen(method['debug'])
@@ -70,6 +85,9 @@ for classname in cpp.classes.keys():
     print_blank_line(2)
 
 for classname in cpp.classes.keys():
-    print "cdef class %s:" %classname
+    if not need_extra_line:
+        print "cdef class %s:" %classname
+    else:
+        print "cdef class %s (%s):" %(classname, actionroot)
     print "%scdef _%s* thisptr" %(indent, classname)
     print 
