@@ -46,7 +46,8 @@ def _cpptraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_ma
     nframes = first_nframes if first_nframes < trajin.total_frames else trajin.total_frames
     arr = np.empty(nframes)
 
-    trajin.begin_traj(0)
+    trajin.begin_traj(False)
+    trajin.print_info_line()
     for i in range(nframes):
         # not added "mask" yet
         # just for demo

@@ -1,5 +1,7 @@
 # distutils: language = c++
 
+include "test.pxi"
+
 
 cdef class Command:
     def __cinit__(self):
@@ -23,9 +25,10 @@ cdef class Command:
     #cdef Token&& CmdToken(self, int idx):
     #    return self.thisptr.CmdToken(idx)
 
-    #def load_crd(self, CpptrajState state, ArgList arglist, obj):
-    #    """temp doc: load_crd(self, CpptrajState state, ArgList arglist, obj)
-    #    obj :: action or analysis object
-    #    """
-    #    cdef FunctPtr func = <FunctPtr> obj.alloc()
-    #    LoadCrd(state.thisptr[0], arglist.thisptr[0], func.ptr)
+    @classmethod
+    def load_crd(self, CpptrajState state, ArgList arglist, obj):
+        """temp doc: load_crd(self, CpptrajState state, ArgList arglist, obj)
+        obj :: action or analysis object
+        """
+        cdef FunctPtr func = <FunctPtr> obj.alloc()
+        LoadCrd(state.thisptr[0], arglist.thisptr[0], func.ptr)

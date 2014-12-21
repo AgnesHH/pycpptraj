@@ -56,4 +56,6 @@ from pycpptraj.PointerVec import TopVec, FrameVec
 dist_act = Action_Distance()
 funct_ptr = dist_act.alloc()
 act = Action.get_action_from_functptr(funct_ptr)
-act.read_input(ArgList(":2@CA :10@CA"), TopologyList(), FrameList(), DataSetList(), DataFileList(), 0)
+toplist = TopologyList()
+toplist.add_parm_file("./data/Tc5b.top")
+act.read_input(ArgList(":2@CA :10@CA"), toplist, FrameList(), DataSetList(), DataFileList(), 0)

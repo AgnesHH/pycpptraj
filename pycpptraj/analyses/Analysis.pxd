@@ -19,4 +19,3 @@ cdef extern from "Analysis.h":
 
 cdef class Analysis:
     cdef _Analysis* baseptr
-
