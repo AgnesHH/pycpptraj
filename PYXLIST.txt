@@ -65,7 +65,8 @@ analyses/Analysis
 #actions/Action_Grid
 DispatchObject
 #utils.Actions
-cpptraj_dict
+#cpptraj_dict # can not pass cpptraj_dict data to Python (but sometimes can,
+#why?)
 PDBfile
 Traj_Mol2File
 ClusterList
