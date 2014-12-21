@@ -43,7 +43,7 @@ ReferenceFrame
 DataSetList
 ActionList
 AnalysisList
-Command
+#Command
 TrajectoryFile
 ReplicaDimArray
 DihedralSearch
@@ -60,6 +60,7 @@ actions/Action_RandomizeIons
 actions/ActionFrameCounter
 actions/Action_RandomizeIons
 actions/Action_Distance
+analyses/Analysis
 #actions/Action_Projection #can not find ArgList???
 #actions/Action_Grid
 DispatchObject
@@ -77,3 +78,4 @@ MapAtom
 AtomMap
 PointerVec
 ImagedAction
+#utils/test

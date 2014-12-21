@@ -1,7 +1,5 @@
 # distutils: language = c++
 
-include "test.pxi"
-
 
 cdef class Command:
     def __cinit__(self):

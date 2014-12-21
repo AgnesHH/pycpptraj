@@ -66,9 +66,20 @@ cdef class DataSetList:
     def set_precision_of_data_sets(self, string nameIn, int widthIn, int precisionIn):
         self.thisptr.SetPrecisionOfDataSets(nameIn, widthIn, precisionIn)
 
-    #def DataSet * GetSet(self, string, int, string):
+    def GetSet(self, string dsname, int idx, string attr_arg):
+        cdef DataSet dset = DataSet()
+        dset.baseptr = self.thisptr.GetSet(dsname, idx, attr_arg)
 
-    #def DataSet * GetDataSet(self, string):
+    def GetDataSet(self, string nameIn):
+        """
+        return DataSet instance
+        Input:
+        =====
+        filename :: str
+        """
+        cdef DataSet dset = DataSet()
+        dset.baseptr = self.thisptr.GetDataSet(nameIn)
+        return dset
 
     def get_multiple_sets(self, string s):
         """TODO: double-check cpptraj"""
@@ -82,8 +93,9 @@ cdef class DataSetList:
 
     def add_set(self,DataType dtype, string s, char * c):
         # TODO: check cpptraj for this method
+        cdef DataType dt = <DataType> DataTypeDict[dtype] 
         cdef DataSet dset = DataSet()
-        dset.baseptr = self.thisptr.AddSet(dtype, s, c)
+        dset.baseptr = self.thisptr.AddSet(dt, s, c)
         return dset
         
     #def DataSet * AddSetIdx(self,DataSet::DataType, string, int):
@@ -94,7 +106,8 @@ cdef class DataSetList:
 
     #def DataSet * AddSetIdxAspect(self,DataSet::DataType, string, int, string, string):
 
-    #def void AddCopyOfSet(self,DataSet *):
+    def AddCopyOfSet(self, DataSet dset):
+        self.thisptr.AddCopyOfSet(dset.baseptr)
 
     def list(self):
         self.thisptr.List()
