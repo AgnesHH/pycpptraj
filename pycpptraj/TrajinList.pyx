@@ -29,6 +29,7 @@ cdef class TrajinList:
         it = self.thisptr.begin()
         while it != self.thisptr.end():
             trajin = Trajin()
+            # use memoryview rather making instance copy
             trajin.baseptr = deref(it)
             yield trajin
             incr(it)

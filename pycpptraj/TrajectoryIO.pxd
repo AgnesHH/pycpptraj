@@ -8,20 +8,24 @@ from BaseIOtype cimport *
 
 
 cdef extern from "TrajectoryIO.h": 
-    cdef cppclass _TrajectoryIO "TrajectoryIO":
+    cdef cppclass _TrajectoryIO "TrajectoryIO" (_BaseIOtype):
         _TrajectoryIO() 
         #virtual ~_TrajectoryIO() 
-        #virtual bint ID_TrajFormat(_CpptrajFile&)= 0 
-        #virtual int setupTrajin(const string&, _Topology *)= 0 
-        #virtual int setupTrajout(const string&, _Topology *, int, bint)= 0 
-        #virtual int openTrajin() = 0 
-        #virtual int readFrame(int, _Frame&)= 0 
-        #virtual int readVelocity(int, _Frame&)= 0 
-        #virtual int writeFrame(int, const _Frame&)= 0 
-        #virtual void closeTraj() = 0 
-        #virtual void Info() = 0 
-        #virtual int processWriteArgs(_ArgList&)= 0 
-        #virtual int processReadArgs(_ArgList&)= 0 
+
+        # virtual methods
+        bint ID_TrajFormat(_CpptrajFile&) 
+        int setupTrajin(const string&, _Topology *) 
+        int setupTrajout(const string&, _Topology *, int, bint) 
+        int openTrajin()  
+        int readFrame(int, _Frame&) 
+        int readVelocity(int, _Frame&) 
+        int writeFrame(int, const _Frame&) 
+        void closeTraj()  
+        void Info()  
+        int processWriteArgs(_ArgList&) 
+        int processReadArgs(_ArgList&) 
+        # end virtual methods
+
         bint HasBox() const 
         const _Box& TrajBox() const 
         bint HasV() const 
@@ -36,5 +40,5 @@ cdef extern from "TrajectoryIO.h":
         void SetReplicaDims(const _ReplicaDimArray& rIn)
 
 
-cdef class TrajectoryIO:
-    cdef _TrajectoryIO* thisptr
+cdef class TrajectoryIO (BaseIOtype):
+    cdef _TrajectoryIO* baseptr_1
