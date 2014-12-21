@@ -2,7 +2,12 @@
 include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
-from cpptraj_dict import DataTypeDict
+#from .utils.PyCpptrajError import PyCpptrajError
+
+# can not import cpptraj_dict here
+# if doing this, we introduce circle-import since cpptraj_dict already imported
+# DataSet
+#from pycpptraj.cpptraj_dict import DataTypeDict
 
 cdef class DataSetList:
     def __cinit__(self, py_free_mem=True):
@@ -31,7 +36,7 @@ cdef class DataSetList:
 
         while it != self.thisptr.end():
             dtset = DataSet()
-            dtset.baseptr = deref(it)
+            dtset.baseptr0 = deref(it)
             yield dtset
             incr(it)
             
@@ -46,12 +51,12 @@ cdef class DataSetList:
         return self.thisptr.EnsembleNum()
 
     def remove_set(self, DataSet dtset):
-        self.thisptr.RemoveSet(dtset.baseptr)
+        self.thisptr.RemoveSet(dtset.baseptr0)
 
     def __getitem__(self, int idx):
         cdef DataSet dset = DataSet()
         # get memoryview
-        dset.baseptr = self.thisptr.index_opr(idx)
+        dset.baseptr0 = self.thisptr.index_opr(idx)
         return dset
 
     def set_debug(self,int id):
@@ -66,11 +71,11 @@ cdef class DataSetList:
     def set_precision_of_data_sets(self, string nameIn, int widthIn, int precisionIn):
         self.thisptr.SetPrecisionOfDataSets(nameIn, widthIn, precisionIn)
 
-    def GetSet(self, string dsname, int idx, string attr_arg):
+    def get_set(self, string dsname, int idx, string attr_arg):
         cdef DataSet dset = DataSet()
-        dset.baseptr = self.thisptr.GetSet(dsname, idx, attr_arg)
+        dset.baseptr0 = self.thisptr.GetSet(dsname, idx, attr_arg)
 
-    def GetDataSet(self, string nameIn):
+    def get_dataset(self, string nameIn):
         """
         return DataSet instance
         Input:
@@ -78,7 +83,7 @@ cdef class DataSetList:
         filename :: str
         """
         cdef DataSet dset = DataSet()
-        dset.baseptr = self.thisptr.GetDataSet(nameIn)
+        dset.baseptr0 = self.thisptr.GetDataSet(nameIn)
         return dset
 
     def get_multiple_sets(self, string s):
@@ -91,14 +96,18 @@ cdef class DataSetList:
     #def generate_default_name(self, char* s):
     #    return self.thisptr.GenerateDefaultName(s)
 
-    def add_set(self,DataType dtype, string s, char * c):
+    def add_set(self, DataType dtype, string s, char * c):
         # TODO: check cpptraj for this method
-        cdef DataType dt = <DataType> DataTypeDict[dtype] 
         cdef DataSet dset = DataSet()
-        dset.baseptr = self.thisptr.AddSet(dt, s, c)
+        dset.baseptr0 = self.thisptr.AddSet(dtype, s, c)
         return dset
         
-    #def DataSet * AddSetIdx(self,DataSet::DataType, string, int):
+    def add_set_idx(self, DataType inType, string nameIn, int idx):
+        cdef DataSet dset = DataSet()
+        dset.baseptr0 = self.thisptr.AddSetIdx(inType, nameIn, idx)
+        if not dset.baseptr0:
+            raise MemoryError("Can not initialize pointer")
+        return dset
 
     #def DataSet * AddSetAspect(self,DataSet::DataType, string, string):
 
@@ -106,21 +115,22 @@ cdef class DataSetList:
 
     #def DataSet * AddSetIdxAspect(self,DataSet::DataType, string, int, string, string):
 
-    def AddCopyOfSet(self, DataSet dset):
-        self.thisptr.AddCopyOfSet(dset.baseptr)
+    def add_copy_of_set(self, DataSet dset):
+        self.thisptr.AddCopyOfSet(dset.baseptr0)
 
     def list(self):
         self.thisptr.List()
 
     # got segfault
-    def find_set_of_type(self, string fname, string key):
-        cdef DataType dtype = <DataType> DataTypeDict[key]
+    def find_set_of_type(self, string fname, DataType dtype):
         cdef DataSet dtset = DataSet()
-        dtset.baseptr = self.thisptr.FindSetOfType(fname, dtype)
+        dtset.baseptr0 = self.thisptr.FindSetOfType(fname, dtype)
         return dtset
 
     def find_coords_set(self, string fname):
         cdef DataSet dtset = DataSet()
-        #dtset.baseptr = self.thisptr.FindCoordsSet(fname)
-        dtset.baseptr[0] = (self.thisptr.FindCoordsSet(fname))[0]
+        dtset.baseptr0 = self.thisptr.FindCoordsSet(fname)
+        if not dtset.baseptr0:
+            raise MemoryError("Can not initialize pointer")
+        #dtset.baseptr0[0] = (self.thisptr.FindCoordsSet(fname))[0]
         return dtset

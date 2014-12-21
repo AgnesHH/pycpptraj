@@ -20,7 +20,7 @@ cdef class DataFileList:
         return dfile
 
     def remove_data_set(self,DataSet dsIn):
-        self.thisptr.RemoveDataSet(dsIn.baseptr)
+        self.thisptr.RemoveDataSet(dsIn.baseptr0)
         
     def set_debug(self, int debug):
         self.thisptr.SetDebug(debug)
@@ -48,7 +48,7 @@ cdef class DataFileList:
 
     def add_set_to_file(self, string nameIn, DataSet dsetIn):
         cdef DataFile dfile = DataFile()
-        dfile.thisptr[0] = deref(self.thisptr.AddSetToFile(nameIn, dsetIn.baseptr))
+        dfile.thisptr[0] = deref(self.thisptr.AddSetToFile(nameIn, dsetIn.baseptr0))
         return dfile
 
     def list(self):

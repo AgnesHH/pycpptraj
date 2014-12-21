@@ -9,7 +9,7 @@ def get_key(value, dict Dict):
 # Below are dictionary for cpptraj files/types, ...
 # Traj_PDBfile
 from Traj_PDBfile cimport *
-PDBWRITEMODEDict = {
+cdef dict PDBWRITEMODEDict = {
     "NONE" : NONE, 
     "SINGLE" : SINGLE, 
     "MODEL" : MODEL, 
@@ -240,8 +240,10 @@ TrajFormatDict = {
 #    }
 
 # DataSet.h
-from DataSet cimport *
-DataTypeDict = {
+#from DataSet cimport *
+from .DataSet cimport (UNKNOWN_DATA, DOUBLE, FLOAT, INTEGER, STRING, MATRIX_DBL, MATRIX_FLT,
+                       COORDS, VECTOR, MODES, GRID_FLT, REMLOG, XYMESH, TRAJ)
+cdef dict DataTypeDict = {
         "UNKNOWN_DATA " : UNKNOWN_DATA,  
         "DOUBLE" : DOUBLE, 
         "FLOAT" : FLOAT,

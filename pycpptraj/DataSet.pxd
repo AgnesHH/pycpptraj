@@ -82,6 +82,6 @@ cdef extern from "DataSet.h":
 
 
 cdef class DataSet:
-    cdef _DataSet* baseptr
+    cdef _DataSet* baseptr0
     # Don't need py_free_mem flag since there's no __dealloc__ in this class
     #cdef bint py_free_mem

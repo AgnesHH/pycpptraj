@@ -1,6 +1,5 @@
 import numpy as np
 from pycpptraj.Frame import Frame
-from pycpptraj.utils.test import LoadCrd
 
 frame = Frame(10)
 frameref = Frame(10)
