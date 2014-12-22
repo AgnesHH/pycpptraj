@@ -3,7 +3,8 @@
 #wrap vim for openning two files
 
 #rootname=$1
-cpptrajsrc=$AMBERHOME"/AmberTools/src/cpptraj/src/"
+#cpptrajsrc=$AMBERHOME"/AmberTools/src/cpptraj/src/"
+cpptrajsrc=$CPPTRAJHOME/src/
 
 #if [ ! -f ${rootname}.pyx ]; then
 #  cat PYX_template.dat > ${rootname}.pyx
