@@ -1,8 +1,11 @@
 # distutil: language = c++
 
+ctypedef _BaseIOtype* (*AllocatorType)()
+ctypedef void (*HelpType)()
+
 cdef extern from "BaseIOtype.h":
-    ctypedef _BaseIOtype* (*AllocatorType)()
-    ctypedef void (*HelpType)()
+    #ctypedef _BaseIOtype* (*AllocatorType)()
+    #ctypedef void (*HelpType)()
     cdef cppclass _BaseIOtype "BaseIOtype":
         pass
 

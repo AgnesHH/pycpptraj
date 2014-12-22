@@ -16,17 +16,10 @@ ctypedef vector[_CmapType] CmapArray
 
 # should I need to define fused type?
 ctypedef fused ptype:
-    BondParmArray
-    BondArray
-    AngleArray
-    AngleParmArray
-    DihedralArray
-    DihedralParmArray
-    HB_ParmArray
-    NonbondArray
-    LES_Array
-    CmapArray
-    CmapGridArray
+    _BondParmType
+    _BondType
+    _AngleParmType
+    _DihedralParmType
 
 cdef extern from "ParameterTypes.h": 
     cdef cppclass _AngleType "AngleType":
