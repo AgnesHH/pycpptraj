@@ -30,29 +30,29 @@ cdef class Box:
             yield self[i]
 
     @property
-    def TypeName(self):
+    def type_name(self):
         return self.thisptr.TypeName()
     
-    def SetBetaLengths(self, double beta, double xin, double yin, double zin):
+    def set_beta_lengths(self, double beta, double xin, double yin, double zin):
         self.thisptr.SetBetaLengths(beta, xin, yin, zin)
 
-    def SetBox(self, double[:] boxIn):
+    def set_box(self, double[:] boxIn):
         self.thisptr.SetBox(&boxIn[0])
 
-    def SetTruncOct(self):
+    def set_trunc_oct(self):
         self.thisptr.SetTruncOct()
 
-    def SetNoBox(self):
+    def set_no_box(self):
         self.thisptr.SetNoBox()
 
-    def SetMissingInfo(self, Box boxinst):
+    def set_missing_info(self, Box boxinst):
         self.thisptr.SetMissingInfo(boxinst.thisptr[0])
 
-    def ToRecip(self,Matrix_3x3 ucell, Matrix_3x3 recip):
+    def to_recip(self,Matrix_3x3 ucell, Matrix_3x3 recip):
         return self.thisptr.ToRecip(ucell.thisptr[0], recip.thisptr[0])
 
     @property
-    def Type(self):
+    def type(self):
         return self.thisptr.Type()
 
     property BoxX:
@@ -91,17 +91,17 @@ cdef class Box:
         def __set__(self, double value):
             self.thisptr.SetGamma(value)
 
-    def HasBox(self):
+    def has_box(self):
         return self.thisptr.HasBox()
 
     @property
-    def Center(self):
+    def center(self):
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.Center()
         return vec
 
     @property
-    def Lengths(self):
+    def lengths(self):
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.Lengths()
         return vec
