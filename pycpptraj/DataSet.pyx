@@ -31,6 +31,10 @@ cdef class DataSet:
 
     #def DataSet(self,DataType, int, int, int):
 
+    def _recast_pointer(self):
+        """if DataSet has sub-classes, need to re-case pointers in some cases"""
+        pass
+
     def set_width(self,int widthIn):
         self.baseptr0.SetWidth(widthIn)
 

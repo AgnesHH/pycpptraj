@@ -22,5 +22,6 @@ cdef extern from "DataSet_Coords.h":
 
 
 cdef class DataSet_Coords (DataSet_1D):
-    # DataSet_1D has baseptr
+    # DataSet has baseptr0
+    # DataSet_1D has baseptr_1
     cdef _DataSet_Coords* baseptr_2

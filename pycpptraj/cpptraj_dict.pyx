@@ -243,7 +243,7 @@ TrajFormatDict = {
 ##from DataSet cimport *
 #from .DataSet cimport (UNKNOWN_DATA, DOUBLE, FLOAT, INTEGER, STRING, MATRIX_DBL, MATRIX_FLT,
 #                       COORDS, VECTOR, MODES, GRID_FLT, REMLOG, XYMESH, TRAJ)
-cdef dict DataTypeDict = {
+DataTypeDict = {
         "UNKNOWN_DATA " : UNKNOWN_DATA,  
         "DOUBLE" : DOUBLE, 
         "FLOAT" : FLOAT,

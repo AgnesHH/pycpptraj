@@ -7,7 +7,7 @@ from cython.operator cimport preincrement as incr
 # can not import cpptraj_dict here
 # if doing this, we introduce circle-import since cpptraj_dict already imported
 # DataSet
-#from pycpptraj.cpptraj_dict import DataTypeDict
+from pycpptraj.cpptraj_dict import DataTypeDict
 
 cdef class DataSetList:
     def __cinit__(self, py_free_mem=True):
@@ -25,7 +25,6 @@ cdef class DataSetList:
         self.thisptr.Clear()
 
     def __iadd__(self, DataSetList other):
-
         self.thisptr.addequal(other.thisptr[0])
         return self
 
@@ -122,7 +121,8 @@ cdef class DataSetList:
         self.thisptr.List()
 
     # got segfault
-    def find_set_of_type(self, string fname, DataType dtype):
+    def find_set_of_type(self, string fname, string key):
+        cdef DataType dtype = <DataType> DataTypeDict[key]
         cdef DataSet dtset = DataSet()
         dtset.baseptr0 = self.thisptr.FindSetOfType(fname, dtype)
         return dtset
