@@ -73,6 +73,7 @@ cpptraj_dict
 _utils
 #ParameterTypeVec
 Timer
+Energy
 PDBfile
 Traj_Mol2File
 ClusterList

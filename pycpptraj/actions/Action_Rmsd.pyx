@@ -18,5 +18,6 @@ cdef class Action_Rmsd (Action):
         func.ptr = &(self.thisptr.Alloc)
         return func
         
-    def help(self):
-        self.thisptr.Help()
+    @classmethod
+    def help(cls):
+        cls.thisptr.Help()
