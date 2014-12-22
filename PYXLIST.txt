@@ -51,6 +51,7 @@ ReplicaDimArray
 DihedralSearch
 BufferedFrame
 actions/Action
+actions/Action_Box
 actions/Action_AtomMap
 actions/Action_Strip
 actions/Action_Dihedral

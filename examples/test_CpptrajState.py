@@ -1,4 +1,5 @@
 import os
+from pycpptraj.actions.Action_Box import Action_Box
 from pycpptraj.DataSet_1D import DataSet_1D
 from pycpptraj.DataFileList import DataFileList
 from pycpptraj._cast import cast_dataset
@@ -40,6 +41,7 @@ import unittest
 
 class TestCpptrajState(unittest.TestCase):
     def test_ref(self):
+        return
         refFrame = ReferenceFrame()
         refFrame.load_ref("./data/Tc5b.nat.crd", Topology(topname), 0)
         topref = refFrame.top
@@ -49,6 +51,7 @@ class TestCpptrajState(unittest.TestCase):
         topref.residue_info(":2-5")
     
     def test_process_input(self):
+        return
         state = CpptrajState()
         toplist = state.toplist
         toplist.add_parm_file("./data/Tc5b.top")
@@ -59,6 +62,7 @@ class TestCpptrajState(unittest.TestCase):
         print state.trajlist.list()
     
     def test_run(self):
+        return
         print "test_process_input"
         state2 = CpptrajState()
         toplist = state2.toplist
@@ -87,24 +91,31 @@ class TestCpptrajState(unittest.TestCase):
 
     def test_action(self):
         distaction = Action_Distance()
+        boxaction = Action_Box()
+        boxaction.help()
         toplist = TopologyList()
         framelist = FrameList()
         dsetlist = DataSetList()
         dflist = DataFileList()
 
         # add stuff
-        print dsetlist
         toplist.add_parm_file("./data/Tc5b.top")
         framelist.add_reference(ArgList("./data/Tc5b.nat.crd"), toplist)
-        distaction.read_input(ArgList(":2@CA :10@CA"), toplist, framelist, dsetlist, dflist, 0)
-        distaction.process(toplist[0])
+        #distaction.read_input(ArgList(":2@CA :10@CA"), toplist, framelist, dsetlist, dflist, 0)
+        boxaction.read_input(ArgList("x 1000. y 1000. alpha 500."), toplist, framelist, dsetlist, dflist, 0)
+        #distaction.process(toplist[0])
         from test_Trajin_Single import get_frame_array
         farray = get_frame_array()
-        print farray
+        #print farray
         idx = 0
         print "Do action:"
         print "============================="
-        distaction.do_action(idx, farray[idx])
+        #distaction.do_action(idx, farray[idx])
+        frame0 = farray[idx]
+        # update Frame instance with new Box info
+        boxaction.do_action(idx, frame0)
+        boxnew = frame0.b_address()
+        print boxnew.boxarr
         # how to get output?
 
 if __name__ == "__main__":
