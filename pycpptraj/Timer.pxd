@@ -9,3 +9,6 @@ cdef extern from "Timer.h":
         double Total() const 
         void WriteTiming(int, const char *, double)const 
         void WriteTiming(int i, const char * h)const 
+
+cdef class Timer:
+    cdef _Timer* thisptr

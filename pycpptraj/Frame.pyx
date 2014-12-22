@@ -41,6 +41,10 @@ cdef class Frame:
         The representation of coordinates (X) and velocities (V) are double*
         instead of STL vectors so as to easily interface with the FileIO routines
         which tend to be much faster than iostream ops. 
+
+        pycpptraj doc
+        ============
+        Should Frame hold topology infor?
     """
     def __cinit__(self, *args):
         # Should I include topology in Frame?

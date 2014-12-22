@@ -1,4 +1,5 @@
 import os
+from pycpptraj.Timer import Timer
 from pycpptraj.actions.Action_Box import Action_Box
 from pycpptraj.DataSet_1D import DataSet_1D
 from pycpptraj.DataFileList import DataFileList
@@ -120,3 +121,4 @@ class TestCpptrajState(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
