@@ -67,7 +67,7 @@ analyses/Analysis
 #actions/Action_Grid
 DispatchObject
 #utils.Actions
-#cpptraj_dict # can not pass cpptraj_dict data to Python (but sometimes can,
+cpptraj_dict
 #why?)
 _utils
 #ParameterTypeVec

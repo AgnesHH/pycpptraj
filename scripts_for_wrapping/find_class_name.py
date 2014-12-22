@@ -7,8 +7,9 @@ import sys
 import re
 from glob import glob
 
-def find_class():
-    src = os.environ['AMBERHOME'] + '/AmberTools/src/cpptraj/src/'
+CPPTRAJSRC = os.environ['CPPTRAJHOME'] + "/src/"
+def find_class(src=CPPTRAJSRC):
+    #src = os.environ['AMBERHOME'] + '/AmberTools/src/cpptraj/src/'
     p = re.compile(r'#include "(.+?).h"')
     classlist = []
     
