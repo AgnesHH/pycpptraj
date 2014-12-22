@@ -28,4 +28,5 @@ go
 
 trajins = TrajectoryFile()
 trajins.read_options()
-trajins.write_options()
+print trajins.traj_parm()
+#trajins.write_options()

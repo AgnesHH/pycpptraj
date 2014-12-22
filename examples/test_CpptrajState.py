@@ -12,7 +12,6 @@ from pycpptraj.CpptrajFile import CpptrajFile
 from pycpptraj.Trajin import Trajin
 from pycpptraj.TrajinList import TrajinList
 from pycpptraj.ReferenceFrame import ReferenceFrame
-from pycpptraj.Command import Command
 from pycpptraj.FrameList import FrameList
 
 # setup filenames

@@ -5,7 +5,19 @@ from ArgList cimport *
 
 
 cdef extern from "FileTypes.h": 
-    ctypedef int FileFormatType
+    ctypedef int FileFormatType "FileTypes::FileFormatType"
+
+    ctypedef struct AllocToken "FileTypes::AllocToken":
+        const char* Description
+        _BaseIOtype.HelpType ReadHelp
+        _BaseIOtype.HelpType WriteHelp
+        _BaseIOtype.AllocatorType Alloc
+
+    ctypedef struct KeyToken "FileTypes::KeyToken":
+        FileFormatType Type
+        const char* Key
+        const char* Extension
+
     cdef cppclass _FileTypes "FileTypes":
         FileFormatType GetFormatFromArg(KeyPtr, _ArgList&, FileFormatType)
         FileFormatType GetFormatFromString(KeyPtr, const string&, FileFormatType)
