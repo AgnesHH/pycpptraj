@@ -122,6 +122,9 @@ cdef class DataSetList:
 
     # got segfault
     def find_set_of_type(self, string fname, string key):
+        # make sure to use upper case and there is no blank around
+        # "MyString  " --> "MYSTRING"
+        key = key.upper().split()[0]
         cdef DataType dtype = <DataType> DataTypeDict[key]
         cdef DataSet dtset = DataSet()
         dtset.baseptr0 = self.thisptr.FindSetOfType(fname, dtype)

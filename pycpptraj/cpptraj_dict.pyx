@@ -1,5 +1,7 @@
 # distutils: language = c++
 
+# need to check if cpptraj updates new enum values
+
 def get_key(value, dict Dict):
     """return the first key having Dict[key] == value"""
     for key, v in Dict.iteritems():
