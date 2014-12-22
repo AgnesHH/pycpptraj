@@ -4,7 +4,7 @@ from ProgressBar cimport *
 
 
 cdef extern from "Trajin.h": 
-    cdef cppclass _Trajin "Trajin":
+    cdef cppclass _Trajin "Trajin" (_TrajectoryFile):
         _Trajin()        
 
         #virtual ~_Trajin() 
@@ -39,5 +39,6 @@ cdef extern from "Trajin.h":
         void SetEnsemble(bint b)
 
 
-cdef class Trajin:
-    cdef _Trajin* baseptr
+cdef class Trajin (TrajectoryFile):
+    # baseptr0 is from TrajectoryFile
+    cdef _Trajin* baseptr_1

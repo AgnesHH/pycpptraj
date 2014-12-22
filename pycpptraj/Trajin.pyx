@@ -3,83 +3,78 @@
 import os
 #from abc import ABCMeta, abstractmethod
 
-cdef class Trajin:
-    #__metaclass__ = ABCMeta
+cdef class Trajin (TrajectoryFile):
 
     def __cinit__(self):
-        # do not create instance for this abstract class
+        self.baseptr_1 = <_Trajin*> self.baseptr0
         pass
 
     def __dealloc__(self):
-        # let derived class taking of free memory
         pass
-        #if self.baseptr is not NULL:
-        #    print "Delete %s" % self.__class__.__name__
-        #    del self.baseptr
 
     def check_frame_args(self, ArgList argIn, int maxFrames, int starArg, int stopArg, int offsetArg):
-        return self.baseptr.CheckFrameArgs(argIn.thisptr[0], maxFrames, stopArg, stopArg, offsetArg)
+        return self.baseptr_1.CheckFrameArgs(argIn.thisptr[0], maxFrames, stopArg, stopArg, offsetArg)
 
     def check_finished(self):
-        return self.baseptr.CheckFinished()
+        return self.baseptr_1.CheckFinished()
 
     def update_counters(self):
-        self.baseptr.UpdateCounters()
+        self.baseptr_1.UpdateCounters()
 
     def get_next_frame(self, Frame frame):
         #cdef Frame frame = Frame()
-        self.baseptr.GetNextFrame(frame.thisptr[0])
+        self.baseptr_1.GetNextFrame(frame.thisptr[0])
         #return frame
 
     def set_total_frames(self,int idx):
-        self.baseptr.SetTotalFrames(idx)
+        self.baseptr_1.SetTotalFrames(idx)
 
-    def setup_traj_io(self, string s, TrajectoryIO trajio, ArgList arglist):
-        return self.baseptr.SetupTrajIO(s, trajio.thisptr[0], arglist.thisptr[0])
+    def setup_trajio(self, string s, TrajectoryIO trajio, ArgList arglist):
+        return self.baseptr_1.SetupTrajIO(s, trajio.baseptr_1[0], arglist.thisptr[0])
 
     def check_box_info(self, char* parmName, Box parmBox, Box trajBox):
-        return self.baseptr.CheckBoxInfo(parmName, parmBox.thisptr[0], trajBox.thisptr[0])
+        return self.baseptr_1.CheckBoxInfo(parmName, parmBox.thisptr[0], trajBox.thisptr[0])
 
     def setup_frame_info(self):
-        return self.baseptr.setupFrameInfo()
+        return self.baseptr_1.setupFrameInfo()
 
     def prepare_for_read(self,bint b):
-        self.baseptr.PrepareForRead(b)
+        self.baseptr_1.PrepareForRead(b)
 
     def print_info_line(self):
-        self.baseptr.PrintInfoLine()
+        self.baseptr_1.PrintInfoLine()
 
     def print_frame_info(self):
-        self.baseptr.PrintFrameInfo()
+        self.baseptr_1.PrintFrameInfo()
 
     @property
     def total_frames(self):
-        return self.baseptr.TotalFrames()
+        return self.baseptr_1.TotalFrames()
 
     @property
     def total_read_frames(self):
-        return self.baseptr.TotalReadFrames()
+        return self.baseptr_1.TotalReadFrames()
 
     @property
     def current_frame(self):
-        return self.baseptr.CurrentFrame()
+        return self.baseptr_1.CurrentFrame()
 
     def start(self):
-        return self.baseptr.Start()
+        return self.baseptr_1.Start()
 
     @property
     def offset(self):
-        return self.baseptr.Offset()
+        return self.baseptr_1.Offset()
 
     @property
     def num_frames_processed(self):
-        return self.baseptr.NumFramesProcessed()
+        return self.baseptr_1.NumFramesProcessed()
 
     def is_ensemble(self):
-        return self.baseptr.IsEnsemble()
+        return self.baseptr_1.IsEnsemble()
 
     def set_ensemble(self,bint b):
-        self.baseptr.SetEnsemble(b)
+        self.baseptr_1.SetEnsemble(b)
 
     # Those are virtual methods. Only implement in sub-class
     #@abstractmethod
@@ -93,31 +88,32 @@ cdef class Trajin:
         Topology instance
         """
         if os.path.isfile(tnameIn):
-            return self.baseptr.SetupTrajRead(tnameIn, argIn.thisptr[0], tparmIn.thisptr)
+            return self.baseptr_1.SetupTrajRead(tnameIn, argIn.thisptr[0], tparmIn.thisptr)
         else:
             raise ValueError("File does not exist")
 
     #@abstractmethod('Trajin')
     def begin_traj(self, bint showProgress):
-        return self.baseptr.BeginTraj(showProgress)
+        return self.baseptr_1.BeginTraj(showProgress)
 
     #@abstractmethod('Trajin')
     def end_traj(self):
-        self.baseptr.EndTraj()
+        self.baseptr_1.EndTraj()
 
     #@abstractmethod('Trajin')
     def read_traj_frame(self, int currentFrame, Frame frameIn):
-        return self.baseptr.ReadTrajFrame(currentFrame, frameIn.thisptr[0])
+        return self.baseptr_1.ReadTrajFrame(currentFrame, frameIn.thisptr[0])
 
     #@abstractmethod('Trajin')
     def print_info(self,int showExtended):
-        self.baseptr.PrintInfo(showExtended)
+        self.baseptr_1.PrintInfo(showExtended)
 
     #@abstractmethod('Trajin')
-    def has_velocity(self):
-        return self.baseptr.HasVelocity()
+    def has_vel(self):
+        return self.baseptr_1.HasVelocity()
 
     #@abstractmethod('Trajin')
-    def nreplica_dimension(self):
-        return self.baseptr.NreplicaDimension()
+    @property
+    def n_repdim(self):
+        return self.baseptr_1.NreplicaDimension()
     # end virtual methods

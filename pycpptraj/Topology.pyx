@@ -24,11 +24,10 @@ cdef class Topology:
         self.py_free_mem = True
 
         if not args:
-            print "there is no args" # for debug
+            #print "there is no args" # for debug
             # make empty Topology instance
             pass
         else:
-            print args
             if len(args) == 1:
                if isinstance(args[0], basestring):
                    fname = args[0]

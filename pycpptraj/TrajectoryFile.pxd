@@ -57,4 +57,4 @@ TrajFormatType_dict = {
 }
 
 cdef class TrajectoryFile:
-    cdef _TrajectoryFile* thisptr
+    cdef _TrajectoryFile* baseptr0

@@ -55,7 +55,7 @@ farray.append(refframe)
 # Cluster_DBSCAN
 db = Cluster_DBSCAN()
 
-from pycpptraj import cpptraj_dict
+#from pycpptraj import cpptraj_dict
 adih = Action_Dihedral()
 #adih.read_input(ArgList(":1@C :2@CC :2@N :2C "), TopologyList() , FrameList(), DataSetList(), DataFileList () , 0)
 armsd = Action_Rmsd()

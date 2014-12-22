@@ -3,8 +3,8 @@
 
 cdef class BaseIOtype:
     def __cinit__(self):
-        self.thisptr = new _BaseIOtype()
+        pass
 
     def __dealloc__(self):
-        del self.thisptr
+        pass
 

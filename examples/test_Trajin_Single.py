@@ -24,7 +24,7 @@ trajin = """
 ts.load(mdx, ArgList(), top)
 ts.prepare_for_read(True)
 frame = Frame()
-frame.set_frame_v(top, ts.has_velocity(), ts.nreplica_dimension())
+frame.set_frame_v(top, ts.has_vel(), ts.n_repdim)
 frame2 = Frame(frame)
 
 # load reference

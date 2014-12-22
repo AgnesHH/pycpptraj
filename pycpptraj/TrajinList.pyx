@@ -30,7 +30,7 @@ cdef class TrajinList:
         while it != self.thisptr.end():
             trajin = Trajin()
             # use memoryview rather making instance copy
-            trajin.baseptr = deref(it)
+            trajin.baseptr_1 = deref(it)
             yield trajin
             incr(it)
 
@@ -54,7 +54,7 @@ cdef class TrajinList:
     def front(self):
         # TODO: add doc
         cdef Trajin trajin = Trajin()
-        trajin.baseptr = <_Trajin*> self.thisptr.front()
+        trajin.baseptr_1 = <_Trajin*> self.thisptr.front()
         return trajin
 
     @property

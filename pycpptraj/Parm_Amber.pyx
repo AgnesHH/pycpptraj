@@ -1,4 +1,4 @@
-#:W distutils: language = c++
+# distutils: language = c++
 
 
 cdef class Parm_Amber:
@@ -11,9 +11,8 @@ cdef class Parm_Amber:
 
     def alloc(self):
         cdef BaseIOtype baseio = BaseIOtype()
-        #def BaseIOtype * Alloc(self):
         # let cpptraj free memory
-        baseio.thisptr = self.thisptr.Alloc()
+        baseio.baseptr0 = self.thisptr.Alloc()
         return baseio
 
     def write_help(self):

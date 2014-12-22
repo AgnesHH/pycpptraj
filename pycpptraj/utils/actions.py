@@ -32,7 +32,7 @@ def load_traj(top, trajfile):
     pass
 
 # translated from cpptraj (Command.cpp)
-def load_crd(top, arglist):
+def load_crd(arglist):
     state = CpptrajState()
     parm = state.toplist.get_parm(arglist)
     trajin = Trajin_Single()
@@ -46,8 +46,11 @@ def load_crd(top, arglist):
     coords = state.datasetlist.find_set_of_type(setname, DataSetDict["COORDS"]) 
     if coords.empty():
         coords = state.datasetlist.addset("COORDS", setname, "__DCRD__")
-    coords.set_topology(parm)
-
+        coords.set_topology(parm)
+    # check n_atoms in coords and parm
+    if not parm.n_atoms == coords.top.n_atoms:
+        raise ValueErro("parm and coords need to have the same n_atom")
+    return state
 
 def calculate(input, action=''):
     """

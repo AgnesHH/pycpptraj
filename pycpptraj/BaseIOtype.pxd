@@ -7,4 +7,4 @@ cdef extern from "BaseIOtype.h":
         pass
 
 cdef class BaseIOtype:
-    cdef _BaseIOtype* thisptr
+    cdef _BaseIOtype* baseptr0
