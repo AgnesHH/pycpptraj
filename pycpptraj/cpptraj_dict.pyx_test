@@ -8,15 +8,14 @@ def get_key(value, dict Dict):
 
 # Below are dictionary for cpptraj files/types, ...
 # Traj_PDBfile
-#from Traj_PDBfile cimport *
 cdef dict PDBWRITEMODEDict = {
     "NONE" : NONE, 
     "SINGLE" : SINGLE, 
     "MODEL" : MODEL, 
     "MULTI" : MULTI, 
     }
+
 # CpptrajFile
-#from CpptrajFile cimport *
 AccessDict = {
     "READ" : READ, 
     "WRITE" : WRITE, 
@@ -41,7 +40,6 @@ FileDict = {
     }
 
 # MaskToken
-#from MaskToken cimport *
 MaskTokenDict = {
     "OP_NONE" : OP_NONE, 
     "ResNum" : ResNum, 
@@ -58,7 +56,6 @@ MaskTokenDict = {
     }
 
 # Atom
-#from Atom cimport *
 AtomicElementDict = {
     "UNKNOWN_ELEMENT" : UNKNOWN_ELEMENT, 
     "HYDROGEN" : HYDROGEN, 
@@ -139,7 +136,6 @@ AtomicElementDict = {
     }
 
 # Traj_Mol2File
-#from Traj_Mol2File cimport *
 MOL2WRITEMODEDict = {
     "NONE" : NONE, 
     "SINGLE" : SINGLE, 
@@ -148,7 +144,6 @@ MOL2WRITEMODEDict = {
     }
 
 # DataFile
-#from DataFile cimport *
 DataFormatDict = {
     "DATAFILE" : DATAFILE, 
     "XMGRACE" : XMGRACE, 
@@ -161,7 +156,6 @@ DataFormatDict = {
     "UNKNOWN_DATA" : UNKNOWN_DATA, 
     }
 # Analysis_Hist
-##from Analysis_Hist.Analysis_Hist cimport *
 #NormModeDict = {
 #    "NO_NORM" : NO_NORM, 
 #    "NORM_SUM" : NORM_SUM, 
@@ -169,7 +163,6 @@ DataFormatDict = {
 #    }
 
 # Cluster_HierAgglo
-#from Cluster_HierAgglo cimport *
 LINKAGETYPEDict = {
     "SINGLELINK" : SINGLELINK, 
     "AVERAGELINK" : AVERAGELINK, 
@@ -177,7 +170,6 @@ LINKAGETYPEDict = {
     }
 
 # Mol2File
-#from Mol2File cimport *
 TRIPOSTAGDict = {
     "MOLECULE" : MOLECULE, 
     "ATOM" : ATOM, 
@@ -186,7 +178,6 @@ TRIPOSTAGDict = {
     }
 
 # ReplicaDimArray
-#from ReplicaDimArray cimport *
 RemDimDict = {
     "UNKNOWN" : UNKNOWN, 
     "TEMPERATURE" : TEMPERATURE, 
@@ -196,7 +187,6 @@ RemDimDict = {
     }
 
 # Box
-#from Box cimport *
 BoxDict = {
     "NOBOX" : NOBOX, 
     "ORTHO" : ORTHO, 
@@ -206,7 +196,6 @@ BoxDict = {
     }
 
 # TrajectoryFile
-#from TrajectoryFile cimport *
 TrajFormatDict = {
     "AMBERNETCDF" : AMBERNETCDF, 
     "AMBERRESTARTNC" : AMBERRESTARTNC, 
@@ -225,14 +214,12 @@ TrajFormatDict = {
     }
 
 # NetcdfFile
-##from NetcdfFile cimport *
 #NCTYPEDict = {
 #    "NC_UNKNOWN" : NC_UNKNOWN, 
 #    "NC_AMBERTRAJ" : NC_AMBERTRAJ, 
 #    "NC_AMBERRESTART" : NC_AMBERRESTART, 
 #    }
 # Dimension
-##from Dimension cimport *
 #DimIdxDict = {
 #    "X" : X, 
 #    "Y" : Y, 
@@ -240,9 +227,7 @@ TrajFormatDict = {
 #    }
 
 # DataSet.h
-##from DataSet cimport *
-#from .DataSet cimport (UNKNOWN_DATA, DOUBLE, FLOAT, INTEGER, STRING, MATRIX_DBL, MATRIX_FLT,
-#                       COORDS, VECTOR, MODES, GRID_FLT, REMLOG, XYMESH, TRAJ)
+                       COORDS, VECTOR, MODES, GRID_FLT, REMLOG, XYMESH, TRAJ)
 cdef dict DataTypeDict = {
         "UNKNOWN_DATA " : UNKNOWN_DATA,  
         "DOUBLE" : DOUBLE, 
@@ -260,7 +245,6 @@ cdef dict DataTypeDict = {
         "TRAJ" : TRAJ, 
     }
 # DataSet_2D
-#from DataSet_2D cimport *
 MatrixDict = {
     "NO_OP" : NO_OP, 
     "DIST" : DIST, 
@@ -281,7 +265,6 @@ MatrixKindDict = {
     }
 
 ## ClusterSieve
-##from ClusterSieve cimport *
 #SieveDict = {
 #    "NONE" : NONE, 
 #    "REGULAR" : REGULAR, 
@@ -289,7 +272,6 @@ MatrixKindDict = {
 #    }
 
 # PDBfile
-#from PDBfile cimport *
 PDB_RECTYPEDict = {
     "ATOM" : ATOM, 
     "HETATM" : HETATM, 
@@ -302,21 +284,16 @@ PDB_RECTYPEDict = {
     }
 
 # Action
-##from actions.Action cimport RetDict
-##from actions.Action cimport OK, ERR as A_OK, A_ERR  
-##from actions.Action cimport USEORIGINALFRAME, SUPPRESSCOORDOUTPUT as A_USEORIGINALFRAME, A_SUPPRESSCOORDOUTPUT
-#from actions cimport Action
 
 RetDict = {
-    "OK" : OK, 
-    "ERR" : ERR, 
-    "USEORIGINALFRAME" : USEORIGINALFRAME, 
-    "SUPPRESSCOORDOUTPUT" : SUPPRESSCOORDOUTPUT, 
+    "OK" : Action.OK, 
+    "ERR" : Action.ERR, 
+    "USEORIGINALFRAME" : Action.USEORIGINALFRAME, 
+    "SUPPRESSCOORDOUTPUT" : Action.SUPPRESSCOORDOUTPUT, 
     }
 
 # Frame
 # not in cpptraj Frame.h anymore
-##from Frame cimport *
 #CenterModeDict = {
 #    "ORIGIN" : ORIGIN, 
 #    "BOXCTR" : BOXCTR, 
@@ -324,7 +301,6 @@ RetDict = {
 #    }
 
 # ParmFile
-#from ParmFile cimport *
 ParmFormatDict = {
     "AMBERPARM" : AMBERPARM, 
     "PDBFILE" : PDBFILE, 
@@ -336,14 +312,12 @@ ParmFormatDict = {
     }
 
 # ClusterList
-#from ClusterList cimport *
 DistModeDict = {
     "USE_FRAMES" : USE_FRAMES, 
     "USE_FILE" : USE_FILE, 
     }
 
 # ClusterList
-#from ClusterList cimport *
 DistMetricDict = {
     "RMS" : RMS, 
     "DME" : DME, 
@@ -351,7 +325,6 @@ DistMetricDict = {
     "DATA" : DATA, 
     }
 # GridAction
-##from GridAction cimport *
 #GridModeDict = {
 #    "ORIGIN" : ORIGIN, 
 #    "BOX" : BOX, 
@@ -360,7 +333,6 @@ DistMetricDict = {
 #    }
 
 # Trajin_Multi
-#from Trajin_Multi cimport *
 TargetDict = {
     "NONE" : NONE, 
     "TEMP" : TEMP, 
@@ -369,7 +341,6 @@ TargetDict = {
     }
 
 # TrajinList
-#from TrajinList cimport *
 TrajModeDict = {
     "UNDEFINED" : UNDEFINED, 
     "NORMAL" : NORMAL, 
@@ -377,7 +348,6 @@ TrajModeDict = {
     }
 
 # Analysis
-###from Analysis cimport *
 #RetDict = {
 #    "OK" : OK, 
 #    "ERR" : ERR, 
