@@ -2,13 +2,13 @@
 from _FunctPtr cimport FunctPtr
 from cython.operator cimport dereference as deref
 
-# Do we really need this class in Python?
 cdef class ActionList:
     def __cinit__(self):
         self.thisptr = new _ActionList()
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.thisptr:
+            del self.thisptr
 
     def clear(self):
         self.thisptr.Clear()
@@ -23,26 +23,27 @@ cdef class ActionList:
     def debug(self):
         return self.thisptr.Debug()
 
-    def add_action(self, obj, ArgList arglist, TopologyList toplist, 
+    def add_action(self, actionobj, ArgList arglist, TopologyList toplist, 
                          FrameList flist, DataSetList dlist, DataFileList dflist):
         """
         Add action to ActionList
 
         Parameters:
         ==========
-        func :: FunctPtr instance, holding function pointer
+        actionobj :: Action object
         arglist :: ArgList instance
         toplist :: TopologyList instance
         flist :: FrameList instance
         dlist :: DataSetList 
         dflist :: DataFileList
         """
-        cdef FunctPtr func = <FunctPtr> obj.alloc()
+        cdef FunctPtr func = <FunctPtr> actionobj.alloc()
         # add function pointer: How?
         return self.thisptr.AddAction(func.ptr, arglist.thisptr[0], 
                                       toplist.thisptr, flist.thisptr, 
                                       dlist.thisptr, dflist.thisptr)
 
+    # Why put comment those?
     #def setup_actions(self, TopologyList toplist, int idx):
     #    cdef _Topology* topptr
     #    topptr = toplist.thisptr.GetParm(idx)

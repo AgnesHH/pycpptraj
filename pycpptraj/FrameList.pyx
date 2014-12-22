@@ -39,7 +39,7 @@ cdef class FrameList:
         """
         return self.thisptr.SetActiveRef(numIn)
 
-    def add_ref_frame(self,ArgList arglist, TopologyList toplist):
+    def add_reference(self,ArgList arglist, TopologyList toplist):
         """
         Input:
         =====

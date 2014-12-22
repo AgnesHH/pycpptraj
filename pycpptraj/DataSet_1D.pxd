@@ -4,7 +4,7 @@ from CpptrajFile cimport *
 
 
 cdef extern from "DataSet_1D.h": 
-    cdef cppclass _DataSet_1D "DataSet_1D":
+    cdef cppclass _DataSet_1D "DataSet_1D" (_DataSet):
         _DataSet_1D() 
         _DataSet_1D(_DataSet)
         # virtual methods
@@ -23,6 +23,6 @@ cdef extern from "DataSet_1D.h":
         double CorrCoeff(const _DataSet_1D&) const 
 
 
-cdef class DataSet_1D:
-    cdef _DataSet_1D* baseptr
-
+cdef class DataSet_1D (DataSet):
+    # baseptr0 is from DataSet
+    cdef _DataSet_1D* baseptr_1

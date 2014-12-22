@@ -1,4 +1,9 @@
 import os
+from pycpptraj.DataSet_1D import DataSet_1D
+from pycpptraj.DataFileList import DataFileList
+from pycpptraj._cast import cast_dataset
+from pycpptraj.DataSetList import DataSetList
+from pycpptraj.DataSet import DataSet
 from pycpptraj.actions.Action_Dihedral import Action_Dihedral
 from pycpptraj.actions.Action_Rmsd import Action_Rmsd
 from pycpptraj.actions.Action_Distance import Action_Distance
@@ -21,11 +26,6 @@ trajoutname = datadir + "test.x"
 refname = "./data/Tc5b.nat.crd"
 trajinname = datadir + "md1_prod.Tc5b.x"
 
-# create top list and topology
-#toplist = TopologyList()
-#toplist.add_parm_file(datadir + "Tc5b.top")
-#top = toplist[0]
-#top.summary()
 
 #creat TrajinList instance
 trajininput= """
@@ -35,56 +35,77 @@ dih :1@C :2@N :2@CA :2@C
 """
 
 argIn = ArgList(trajininput)
-#trajlist = TrajinList()
-#trajlist.add_trajin("./data/md1_prod.Tc5b.x", argIn, toplist)
-#print trajlist.mode()
-#print trajlist.max_frames
-#end TrajinList
 
-#state = CpptrajState()
-#state.toplist.add_parm_file(topname)
-#state.toplist.info()
-#state.add_trajin(argIn)
-#state.add_trajin(trajinname)
-#state.Run()
-#state.RunAnalyses()
+import unittest
 
-# test refFrame
-def test_ref():
-    refFrame = ReferenceFrame()
-    refFrame.load_ref("./data/Tc5b.nat.crd", top, 0)
-    topref = refFrame.top
-    crd = refFrame.frame
-    print crd.size/3
-    topref.set_reference_coords( refFrame.frame  )
-    topref.residue_info(":2-5")
+class TestCpptrajState(unittest.TestCase):
+    def test_ref(self):
+        refFrame = ReferenceFrame()
+        refFrame.load_ref("./data/Tc5b.nat.crd", Topology(topname), 0)
+        topref = refFrame.top
+        crd = refFrame.frame
+        print crd.size/3
+        topref.set_reference_coords( refFrame.frame  )
+        topref.residue_info(":2-5")
+    
+    def test_process_input(self):
+        state = CpptrajState()
+        toplist = state.toplist
+        toplist.add_parm_file("./data/Tc5b.top")
+        fname = "./data/pycpptraj.in"
+        state.add_action(Action_Dihedral(), ArgList(":1@C  :2@N  :2@CA :2@C"))
+        print state.trajlist
+        print state.trajlist.mode
+        print state.trajlist.list()
+    
+    def test_run(self):
+        print "test_process_input"
+        state2 = CpptrajState()
+        toplist = state2.toplist
+        toplist.add_parm_file("./data/Tc5b.top")
+        state2.add_trajin("./data/md1_prod.Tc5b.x")
+        state2.add_reference("./data/Tc5b.nat.crd")
+        #state2.add_action(Action_Rmsd(), ArgList())
+        #state2.add_action(Action_Distance(), ArgList(":2@CA :10@CA"))
+        #state2.framelist.set_active_ref(0)
+        #print "test framelist.list()"
+        #state2.framelist.list()
+        #state2.run()
+        #dslist = state2.datasetlist
 
-def test_process_input():
-    state = CpptrajState()
-    command = Command()
-    fname = "./data/pycpptraj.in"
-    #command.process_input(state, fname)
-    state.add_action(Action_Dihedral(), argIn)
-    print state.trajlist
-    print state.trajlist.mode
-    print state.trajlist.list()
-    #print help(state)
-    #state.toplist.info()
+        ## get 1st dataset from datasetlist
+        #dset0 = dspylist[0]
+        #print "empty? ", dset0.empty()
+        #print "dtype? ", dset0.data_type
+        #dset_1d = cast_dataset(dset0, dtype="dataset_1d")
+        #print dset_1d.min()
+        #print dset_1d.max()
+        #print dset_1d.avg()
+        #print dset_1d.d_val(1000)
+        #print dset_1d.data_type
+        #print dset_1d.empty()
 
-print "test_process_input"
-state2 = CpptrajState()
-toplist = state2.toplist
-toplist.add_parm_file("./data/Tc5b.top")
-state2.add_trajin("./data/md1_prod.Tc5b.x")
-#state2.add_reference("./data/Tc5b.nat.crd")
-state2.add_action(Action_Distance(), ArgList(":2@CA :10@CA"))
-##state2.framelist.set_active_ref(0)
-#state2.add_action(Action_Dihedral(), ArgList("@CA"))
-#state2.set_no_progress()
-#print state2.trajlist
-state2.run()
+    def test_action(self):
+        distaction = Action_Distance()
+        toplist = TopologyList()
+        framelist = FrameList()
+        dsetlist = DataSetList()
+        dflist = DataFileList()
 
-#state2.traj_length("./data/Tc5b.top", ["./data/md1_prod.Tc5b.x",])
-#state2.add_trajin("./data/md1_prod.Tc5b.x")
-#state2.add_trajin("./data/md1_prod.Tc5b.x")
-#test_process_input()
+        # add stuff
+        print dsetlist
+        toplist.add_parm_file("./data/Tc5b.top")
+        framelist.add_reference(ArgList("./data/Tc5b.nat.crd"), toplist)
+        distaction.read_input(ArgList(":2@CA :10@CA"), toplist, framelist, dsetlist, dflist, 0)
+        distaction.process(toplist[0])
+        from test_Trajin_Single import get_frame_array
+        farray = get_frame_array()
+        print farray
+        idx = 0
+        print "Do action:"
+        print "============================="
+        distaction.do_action(idx, farray[idx])
+        # how to get output?
+
+if __name__ == "__main__":
+    unittest.main()

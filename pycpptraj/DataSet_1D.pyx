@@ -1,39 +1,55 @@
 # distutils: language = c++
 
 
-cdef class DataSet_1D:
-    # TODO: correct argument's name
+cdef class DataSet_1D (DataSet):
     def __cinit__(self):
-        pass
+        # make sure two pointers pointing to the same address
+        self.baseptr_1 = <_DataSet_1D*> self.baseptr0
 
     def __dealloc__(self):
         pass
 
-    #def DataSet_1D(self,DataSet:
+    def _recast_pointers(self):
+        """
+        Since we use >=2 pointers pointing to the same address,
+        we need to recast after each pointer assignment
+        """
+        self.baseptr_1 = <_DataSet_1D*> self.baseptr0
 
-    #def Allocate1D(self, size_t sizet):
-    #    return self.basepptr.Allocate1D(sizet)
+    def copy(self, DataSet dset):
+        raise NotImplementedError("Not yet implemented")
 
-    #def WriteBuffer(self, CpptrajFile cppfile, size_t sizet):
-    #    self.basepptr.WriteBuffer(cppfile.thisptr[0], sizet)
+    def allocate_1D(self, size_t sizet):
+        return self.baseptr_1.Allocate1D(sizet)
 
-    #def Dval(self, size_t sizet):
-    #    return self.basepptr.Dval(sizet)
+    def write_buffer(self, CpptrajFile cppfile, size_t sizet):
+        self.baseptr_1.WriteBuffer(cppfile.thisptr[0], sizet)
 
-    #def Xcrd(self, size_t sizet):
-    #    return self.basepptr.Xcrd(sizet)
+    def d_val(self, size_t sizet):
+        return self.baseptr_1.Dval(sizet)
 
-    #def  bint IsTorsionArray(self):
+    def xcrd(self, size_t sizet):
+        return self.baseptr_1.Xcrd(sizet)
 
-    #def double Avg(self):
+    def is_torsion_array(self):
+        return self.baseptr_1.IsTorsionArray()
 
-    #def double Avg(self,double sd):
+    def avg(self, *args):
+        if not args:
+            return self.baseptr_1.Avg()
+        else:
+            sd = args[0]
+            return self.baseptr_1.Avg(sd)
 
-    #def double Min(self):
+    def min(self):
+        return self.baseptr_1.Min()
 
-    #def double Max(self):
+    def max(self):
+        return self.baseptr_1.Max()
 
-    #def int CrossCorr(self, DataSet_1D, DataSet_1D, int, bint, bint):
+    def cross_corr(self, DataSet_1D D2, DataSet_1D Ct, int lagmaxIn, bint calccovar, bint usefft):
+        return self.baseptr_1.CrossCorr(D2.baseptr_1[0], Ct.baseptr_1[0], lagmaxIn, calccovar, usefft)
 
-    #def double CorrCoeff(self, DataSet_1D):
+    def corr_coeff(self, DataSet_1D other):
+        return self.baseptr_1.CorrCoeff(other.baseptr_1[0])
 

@@ -10,6 +10,11 @@ cdef class CpptrajState:
 
     pycpptraj doc:
     ============
+    CpptrajState hold instances of:
+    + TopologyList
+    + FrameList (having reference frames)
+    + DataSetList (having output data)
+    + DataFileList
     """
     def __cinit__(self):
         self.thisptr = new _CpptrajState()
@@ -18,10 +23,10 @@ cdef class CpptrajState:
         self.datafilelist = DataFileList(py_free_mem=False)
         self.datasetlist = DataSetList(py_free_mem=False)
 
-        # cpptraj will take care of mem freeing
-        # from self.thisptr.PFL(FL, DSL, DFL)
-        # so don't free mem again (example: self.toplist.thisptr and 
-        # self.thisptr.PFL() point to the same address)
+        # cpptraj will take care of memory deallocating from self.thisptr.PFL(FL, DSL, DFL)
+        # We don't free memory again (example: self.toplist.thisptr and self.thisptr.PFL() point to the same address)
+
+        # create memory view
         self.toplist.thisptr = self.thisptr.PFL()
         self.framelist.thisptr = self.thisptr.FL()
         self.datasetlist.thisptr = self.thisptr.DSL()
@@ -31,35 +36,6 @@ cdef class CpptrajState:
         if self.thisptr is not NULL:
             del self.thisptr
     
-    # turn off those since I need pointer, not a copy of instance
-    #@property
-    #def toplist(self):
-    #    """return TopologyList"""
-    #    cdef TopologyList toplist = TopologyList()
-    #    toplist.thisptr[0] = deref(self.thisptr.PFL())
-    #    return toplist
-
-    #@property
-    #def framelist(self):
-    #    """return FrameList"""
-    #    cdef FrameList flist = FrameList()
-    #    flist.thisptr[0] = deref(self.thisptr.FL())
-    #    return flist
-
-    #@property
-    #def datasetlist(self):
-    #    """return DataSetList"""
-    #    cdef DataSetList dlist = DataSetList()
-    #    dlist.thisptr[0] = deref(self.thisptr.DSL())
-    #    return dlist
-
-    #@property
-    #def datafilelist(self):
-    #    """return DataFileList"""
-    #    cdef DataFileList dflist = DataFileList()
-    #    dflist.thisptr[0] = deref(self.thisptr.DFL())
-    #    return dflist
-
     def set_no_exit_on_error(self):
         self.thisptr.SetNoExitOnError()
 
@@ -76,6 +52,7 @@ cdef class CpptrajState:
         return self.thisptr.EmptyState()
 
     def add_trajin(self, arg, isEnsemble=False):
+        # TODO: add trajector instance?
         cdef string fname
         cdef ArgList argIn
         
@@ -138,8 +115,8 @@ cdef class CpptrajState:
         return self.thisptr.AddAnalysis(alloc_funct.ptr, arglist.thisptr[0])
 
     # what is it?
-    def world_size(self):
-        return self.thisptr.WorldSize()
+    #def world_size(self):
+    #    return self.thisptr.WorldSize()
 
     def list_all(self, ArgList arglist):
         return self.thisptr.ListAll(arglist.thisptr[0])
