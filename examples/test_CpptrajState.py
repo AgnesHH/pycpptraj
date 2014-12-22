@@ -65,25 +65,25 @@ class TestCpptrajState(unittest.TestCase):
         toplist.add_parm_file("./data/Tc5b.top")
         state2.add_trajin("./data/md1_prod.Tc5b.x")
         state2.add_reference("./data/Tc5b.nat.crd")
-        #state2.add_action(Action_Rmsd(), ArgList())
-        #state2.add_action(Action_Distance(), ArgList(":2@CA :10@CA"))
-        #state2.framelist.set_active_ref(0)
-        #print "test framelist.list()"
-        #state2.framelist.list()
-        #state2.run()
-        #dslist = state2.datasetlist
+        state2.add_action(Action_Rmsd(), ArgList())
+        state2.add_action(Action_Distance(), ArgList(":2@CA :10@CA"))
+        state2.framelist.set_active_ref(0)
+        print "test framelist.list()"
+        state2.framelist.list()
+        state2.run()
+        dslist = state2.datasetlist
 
-        ## get 1st dataset from datasetlist
-        #dset0 = dspylist[0]
-        #print "empty? ", dset0.empty()
-        #print "dtype? ", dset0.data_type
-        #dset_1d = cast_dataset(dset0, dtype="dataset_1d")
-        #print dset_1d.min()
-        #print dset_1d.max()
-        #print dset_1d.avg()
-        #print dset_1d.d_val(1000)
-        #print dset_1d.data_type
-        #print dset_1d.empty()
+        # get 1st dataset from datasetlist
+        dset0 = dspylist[0]
+        print "empty? ", dset0.empty()
+        print "dtype? ", dset0.data_type
+        dset_1d = cast_dataset(dset0, dtype="dataset_1d")
+        print dset_1d.min()
+        print dset_1d.max()
+        print dset_1d.avg()
+        print dset_1d.d_val(1000)
+        print dset_1d.data_type
+        print dset_1d.empty()
 
     def test_action(self):
         distaction = Action_Distance()

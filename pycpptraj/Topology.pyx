@@ -33,7 +33,6 @@ cdef class Topology:
                    fname = args[0]
                    toplist.add_parm_file(fname)
                    self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
-                   print "test top from Topology.pyx"
                elif isinstance(args[0], Topology):
                    tp = args[0]
                    self.thisptr[0] =  tp.thisptr[0]

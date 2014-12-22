@@ -2,6 +2,7 @@
 # setup.py will look at uncomment lines to "cythonize"
 DataFile
 _FunctPtr
+_cast
 ArgList
 Atom
 AtomMask
@@ -68,7 +69,7 @@ DispatchObject
 #utils.Actions
 #cpptraj_dict # can not pass cpptraj_dict data to Python (but sometimes can,
 #why?)
-#_utils
+_utils
 #ParameterTypeVec
 PDBfile
 Traj_Mol2File

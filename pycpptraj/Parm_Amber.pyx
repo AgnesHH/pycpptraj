@@ -4,6 +4,7 @@
 cdef class Parm_Amber:
     def __cinit__(self):
         self.thisptr = new _Parm_Amber()
+        self.set_debug(0)
 
     def __dealloc__(self):
         if self.thisptr != NULL:
@@ -33,5 +34,5 @@ cdef class Parm_Amber:
     def write_parm(self, string fname, Topology parmIn):
         return self.thisptr.WriteParm(fname, parmIn.thisptr[0])
 
-    def set_debug(self,int debugIn):
+    def set_debug(self, int debugIn):
         self.thisptr.SetDebug(debugIn)
