@@ -32,6 +32,7 @@ Array1D
 FrameArray
 BaseIOtype
 TrajectoryIO
+Traj_AmberCoord
 FrameList
 DataSet
 DataSet_1D
@@ -67,6 +68,8 @@ DispatchObject
 #utils.Actions
 #cpptraj_dict # can not pass cpptraj_dict data to Python (but sometimes can,
 #why?)
+#_utils
+#ParameterTypeVec
 PDBfile
 Traj_Mol2File
 ClusterList
