@@ -40,7 +40,7 @@ def _cpptraj_rmsd(topname, refname, trajname, first_nframes=100, mask='', use_ma
 
     #create frame to store data from traj iteration
     frame = Frame()
-    frame.set_frame_v(top, trajin.has_velocity(), trajin.nreplica_dimension())
+    frame.set_frame_v(top, trajin.has_vel(), trajin.n_repdim)
 
     # do rmsd
     nframes = first_nframes if first_nframes < trajin.total_frames else trajin.total_frames

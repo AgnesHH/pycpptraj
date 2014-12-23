@@ -37,6 +37,8 @@ ref_frame = ref.frame
 # create FrameArray to store Frame
 def get_frame_array():
     farray = FrameArray()
+    frame = Frame()
+    frame.set_frame_v(top, ts.has_vel(), ts.n_repdim)
     ts.begin_traj(False)
     for i in range(10):
         ts.get_next_frame(frame)

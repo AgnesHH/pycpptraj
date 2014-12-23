@@ -7,9 +7,11 @@ from Trajin cimport Trajin
 cdef class TrajinList:
     def __cinit__(self):
         self.thisptr = new _TrajinList()
+        self.py_free_mem = True
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.py_free_mem:
+            del self.thisptr
 
     def clear(self):
         self.thisptr.Clear()

@@ -41,84 +41,86 @@ argIn = ArgList(trajininput)
 import unittest
 
 class TestCpptrajState(unittest.TestCase):
-    def test_ref(self):
-        return
-        refFrame = ReferenceFrame()
-        refFrame.load_ref("./data/Tc5b.nat.crd", Topology(topname), 0)
-        topref = refFrame.top
-        crd = refFrame.frame
-        print crd.size/3
-        topref.set_reference_coords( refFrame.frame  )
-        topref.residue_info(":2-5")
-    
-    def test_process_input(self):
-        return
-        state = CpptrajState()
-        toplist = state.toplist
-        toplist.add_parm_file("./data/Tc5b.top")
-        fname = "./data/pycpptraj.in"
-        state.add_action(Action_Dihedral(), ArgList(":1@C  :2@N  :2@CA :2@C"))
-        print state.trajlist
-        print state.trajlist.mode
-        print state.trajlist.list()
-    
+#    def test_ref(self):
+#        refFrame = ReferenceFrame()
+#        refFrame.load_ref("./data/Tc5b.nat.crd", Topology(topname), 0)
+#        topref = refFrame.top
+#        crd = refFrame.frame
+#        print crd.size/3
+#        topref.set_reference_coords( refFrame.frame  )
+#        topref.residue_info(":2-5")
+#    
+#    def test_process_input(self):
+#        state = CpptrajState()
+#        toplist = state.toplist
+#        toplist.add_parm_file("./data/Tc5b.top")
+#        fname = "./data/pycpptraj.in"
+#        state.add_action(Action_Dihedral(), ArgList(":1@C  :2@N  :2@CA :2@C"))
+#        print state.trajinlist
+#        print state.trajinlist.mode
+#        print state.trajinlist.list()
+#    
     def test_run(self):
-        return
         print "test_process_input"
         state2 = CpptrajState()
         toplist = state2.toplist
         toplist.add_parm_file("./data/Tc5b.top")
         state2.add_trajin("./data/md1_prod.Tc5b.x")
         state2.add_reference("./data/Tc5b.nat.crd")
-        state2.add_action(Action_Rmsd(), ArgList())
-        state2.add_action(Action_Distance(), ArgList(":2@CA :10@CA"))
+        state2.add_action(Action_Distance(), ArgList("distance :2@CA :10@CA"))
         state2.framelist.set_active_ref(0)
         print "test framelist.list()"
         state2.framelist.list()
-        state2.run()
+        #state2.run()
         dslist = state2.datasetlist
+        d0 = dslist[0]
+        print "d0 is empty? ", d0.empty()
+        state2.run()
+        print "d0 is empty? ", d0.empty()
+        #state2.get_trajinlist().list()
 
-        # get 1st dataset from datasetlist
-        dset0 = dspylist[0]
-        print "empty? ", dset0.empty()
-        print "dtype? ", dset0.data_type
-        dset_1d = cast_dataset(dset0, dtype="dataset_1d")
-        print dset_1d.min()
-        print dset_1d.max()
-        print dset_1d.avg()
-        print dset_1d.d_val(1000)
-        print dset_1d.data_type
-        print dset_1d.empty()
+        ## get_trajinlist() will return an instance copy of TrajinList
+        #state2.get_trajinlist().add_trajin("./data/md1_prod.Tc5b.x", ArgList(), toplist)
 
-    def test_action(self):
-        distaction = Action_Distance()
-        boxaction = Action_Box()
-        boxaction.help()
-        toplist = TopologyList()
-        framelist = FrameList()
-        dsetlist = DataSetList()
-        dflist = DataFileList()
+        #print "TEST: state2.trajinlist.list()"
+        #state2.get_trajinlist().list()
+        #print "TEST: state2.trajinlist.list() using state"
+        #for i in range(10):
+        #    state2.add_trajin("./data/md1_prod.Tc5b.x")
+        #state2.get_trajinlist().list()
 
-        # add stuff
-        toplist.add_parm_file("./data/Tc5b.top")
-        framelist.add_reference(ArgList("./data/Tc5b.nat.crd"), toplist)
-        #distaction.read_input(ArgList(":2@CA :10@CA"), toplist, framelist, dsetlist, dflist, 0)
-        boxaction.read_input(ArgList("x 1000. y 1000. alpha 500."), toplist, framelist, dsetlist, dflist, 0)
-        #distaction.process(toplist[0])
-        from test_Trajin_Single import get_frame_array
-        farray = get_frame_array()
-        #print farray
-        idx = 0
-        print "Do action:"
-        print "============================="
-        #distaction.do_action(idx, farray[idx])
-        frame0 = farray[idx]
-        # update Frame instance with new Box info
-        boxaction.do_action(idx, frame0)
-        boxnew = frame0.b_address()
-        print boxnew.boxarr
-        # how to get output?
 
+#    def test_action(self):
+#        distaction = Action_Distance()
+#        boxaction = Action_Box()
+#        boxaction.help()
+#        toplist = TopologyList()
+#        framelist = FrameList()
+#        dsetlist = DataSetList()
+#        dflist = DataFileList()
+#
+#        # add stuff
+#        toplist.add_parm_file("./data/Tc5b.top")
+#        framelist.add_reference(ArgList("./data/Tc5b.nat.crd"), toplist)
+#        distaction.read_input(ArgList(":2@CA :10@CA"), toplist, framelist, dsetlist, dflist, 0)
+#        boxaction.read_input(ArgList("x 1000. y 1000. alpha 500."), toplist, framelist, dsetlist, dflist, 0)
+#        distaction.process(toplist[0])
+#        from test_Trajin_Single import get_frame_array
+#        farray = get_frame_array()
+#        #print farray
+#        idx = 0
+#        print "Do action:"
+#        print "============================="
+#        distaction.do_action(idx, farray[idx])
+#        frame0 = farray[idx]
+#        # update Frame instance with new Box info
+#        boxaction.do_action(idx, frame0)
+#        boxnew = frame0.b_address()
+#        #print boxnew.boxarr
+#        boxaction.print_output()
+#        distaction.print_output()
+#        # how to get output?
+#
 if __name__ == "__main__":
     unittest.main()
 

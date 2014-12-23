@@ -68,11 +68,25 @@ cdef class CpptrajState:
     def run_analyses(self):
         return self.thisptr.RunAnalyses()
 
-    @property
-    def trajlist(self):
+    def get_trajinlist(self):
+        """Return a copy of CpptrajState's TrajinList instance"""
         cdef TrajinList trajlist = TrajinList()
-        trajlist.thisptr[0] = self.thisptr.InputTrajList()
-        return trajlist
+
+        # we need to let Cython know that cpptraj will free memory 
+        # if I don't use this flag, the program will get segmentfault
+        # Maybe Cython will try free memory of trajlist.thisptr twice? 
+        # Reason? cpptraj does not have assignment operator for TrajinList class
+        # --> ?
+
+        # We used "get_trajlist" as method's name to remind that this will return an instance copy
+        # Should we update other *.pyx files too?
+        trajlist.py_free_mem = False
+        
+        if self.thisptr:
+            trajlist.thisptr[0] = self.thisptr.InputTrajList()
+            return trajlist
+        else:
+            raise MemoryError("")
 
     def add_trajout(self, arg):
         cdef string fname

@@ -1,1 +1,0 @@
-# load prmtop file

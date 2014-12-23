@@ -62,3 +62,4 @@ ref = ReferenceFrame()
 ref.load_ref("./data/Tc5b.nat.crd", toplist[0])
 refframe = ref.frame
 dist_act.do_action(0, refframe)
+#dist.print_output()

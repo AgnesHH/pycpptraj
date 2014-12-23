@@ -53,6 +53,10 @@ cdef class DataSetList:
         self.thisptr.RemoveSet(dtset.baseptr0)
 
     def __getitem__(self, int idx):
+        """return a DataSet instance
+        Memory view is applied (which mean this new insance is just alias of self[idx])
+        Should we use a copy instead?
+        """
         cdef DataSet dset = DataSet()
         # get memoryview
         dset.baseptr0 = self.thisptr.index_opr(idx)
