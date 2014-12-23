@@ -13,10 +13,12 @@ cdef class FrameArray:
         self.frame_v.resize(sizet)
 
     def __getitem__(FrameArray self, int idx):
-        """Return a Frame 'view'
+        """Return a copy of FrameArray[idx]
         """
         cdef Frame frame = Frame()
         frame.py_free_mem = False
+        # debug
+        print "I am getting an item"
 
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
@@ -55,4 +57,5 @@ cdef class FrameArray:
             incr(it)
 
     def append(self, Frame framein):
-        self.frame_v.push_back(framein.thisptr)
+        cdef Frame frame = Frame(framein)
+        self.frame_v.push_back(frame.thisptr)
