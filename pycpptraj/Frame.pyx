@@ -8,7 +8,7 @@ from AtomMask import AtomMask
 from Frame cimport CRDtype
 from Topology cimport Topology
 from Vec3 cimport Vec3
-from util cimport atomlist_to_vector
+#from util cimport atomlist_to_vector
 
 def check_instance(inst, clsname):
     if not isinstance(inst, clsname):
@@ -218,10 +218,10 @@ cdef class Frame:
     def set_frame(self,int natomIn):
         return self.thisptr.SetupFrame(natomIn)
 
-    def set_frame_m(self, list atlist):
-        cdef vector[_Atom] v 
-        v = atomlist_to_vector(atlist)
-        return self.thisptr.SetupFrameM(v)
+    #def set_frame_m(self, list atlist):
+    #    cdef vector[_Atom] v 
+    #    v = atomlist_to_vector(atlist)
+    #    return self.thisptr.SetupFrameM(v)
 
     def set_frame_x_m(self, vector[double] Xin, vector[double] massIn):
         return self.thisptr.SetupFrameXM(Xin, massIn)
@@ -229,9 +229,9 @@ cdef class Frame:
     def set_frame_v(self, Topology top, bint hasVelocity, int nDim):
         return self.thisptr.SetupFrameV(top.thisptr.Atoms(), hasVelocity, nDim)
 
-    def set_frame_from_mask(self, AtomMask atmask, list atlist):
-        cdef vector[_Atom] v = atomlist_to_vector(atlist)
-        return self.thisptr.SetupFrameFromMask(atmask.thisptr[0], v)
+    #def set_frame_from_mask(self, AtomMask atmask, list atlist):
+    #    cdef vector[_Atom] v = atomlist_to_vector(atlist)
+    #    return self.thisptr.SetupFrameFromMask(atmask.thisptr[0], v)
 
     def set_coordinates(self, Frame frame, *args):
         cdef AtomMask atmask 
