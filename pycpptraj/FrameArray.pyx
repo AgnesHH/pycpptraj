@@ -34,11 +34,7 @@ cdef class FrameArray:
         self.erase(idx)
 
     def erase(self, int idx):
-        # TODO: need to re-indexing
-        cdef _Frame* ptr
-        ptr = self.frame_v[idx]
         self.frame_v.erase(self.frame_v.begin() + idx)
-        del ptr
         
     @property
     def size(self):

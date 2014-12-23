@@ -50,8 +50,14 @@ print farray[5].xyz(10)
 print farray.size
 farray[5].swap_atoms(9, 10)
 print farray[5].xyz(9) 
-del farray[5]
-print farray[5].xyz(9) 
+farray.erase(5)
+print farray[5].xyz(10)
+print farray.size
+
+frame = Frame(farray[5])
+del frame
+print farray[5].xyz(10)
+#print frame == farray[5]
         
 if __name__ == "__main__":
     unittest.main()
