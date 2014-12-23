@@ -5,56 +5,56 @@ from Topology cimport Topology
 
 
 cdef class FrameArray:
+    """FrameArray: Holding array of Frame pointers"""
     def __cinit__(self):
-        self.thisptr = new _FrameArray()
+        pass
 
-    def __dealloc__(self):
-        del self.thisptr
-
-    def resize(self,int nIn):
-        self.thisptr.resize(nIn)
+    def resize(self, int sizet):
+        self.frame_v.resize(sizet)
 
     def __getitem__(FrameArray self, int idx):
+        """Return a Frame 'view'
+        """
+        cdef Frame frame = Frame()
+
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
-        cdef Frame frame = Frame()
-        frame.thisptr[0] = self.thisptr.index_opr(idx)
+        frame.thisptr = self.frame_v[idx]
         return frame
 
-    def __setitem__(FrameArray self, int idx, Frame value):
-        raise NotImplementedError()
-        # does not work since there is no assigment in cpptraj
-        #cdef int i = 0
-        #cdef iterator it = self.thisptr.begin()
-        #while it != self.thisptr.end():
-        #    if i == idx:
-        #        deref(it) = value.thisptr[0]
-        #        break
-        #    i += 1
-        #    incr(it)
+    def __setitem__(FrameArray self, int idx, Frame other):
+        cdef _Frame* ptr
+        if len(self) == 0:
+            raise ValueError("Your FrameArray is empty, how can I index it?")
+        ptr = self.frame_v[idx]
+        ptr[0] = other.thisptr[0]
+
+    def __delitime__(FrameArray self, int idx):
+        self.erase(idx)
+
+    def erase(self, int idx):
+        cdef _Frame* ptr
+        ptr = self.frame_v[idx]
+        self.frame_v.erase(self.frame_v.begin() + idx)
+        del ptr
         
     @property
     def size(self):
-        return len(self)
+        return self.frame_v.size()
 
-    def __len__(FrameArray self):
-        cdef int i = 0
-        cdef Frame frame
-        for frame in self:
-            i += 1
-        return i
+    def __len__(self):
+        return self.size
 
     def __iter__(self):
-        cdef iterator it = self.thisptr.begin()
+        """return an copy of Frame instance"""
+        cdef vector[_Frame*].iterator it  = self.frame_v.begin()
         cdef Frame frame 
-        while it != self.thisptr.end():
+
+        while it != self.frame_v.end():
             frame = Frame()
-            frame.thisptr[0] = deref(it)
+            frame.thisptr[0] = deref(deref(it))
             yield frame
             incr(it)
 
-    def append(self, Frame fIn):
-        self.thisptr.AddFrame(fIn.thisptr[0])
-
-    def set_frames(self, Topology top,  bint hasV, int Ndim):
-        self.thisptr.SetupFrames(top.thisptr.Atoms(), hasV, Ndim)
+    def append(self, Frame framein):
+        self.frame_v.push_back(framein.thisptr)
