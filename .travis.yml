@@ -8,6 +8,7 @@ before_install:
     - ./for_travis/install_cpptraj.sh
 install:
     - pip install cython
+    - pip install numpy
     - python ./for_travis/setup.py install
 script:
     - export AMBERHOME=`pwd`"/cpptraj"
@@ -15,6 +16,9 @@ script:
     - export LD_LIBRARY_PATH=$AMBERHOME/lib:$LD_LIBRARY_PATH
     - python ./for_travis/fake_test.py
     - python ./tests/test_import_class.py
+    - cd ./examples
+    - python ./API_test.py
+    - echo "Kool"
     ## - cd $PYCPPTRAJ_HOME/tests/Cpptraj_test/
     ## - make test.complete
 
