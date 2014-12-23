@@ -46,13 +46,12 @@ def get_frame_array():
     return farray
 
 farray = get_frame_array()
-print farray.size
-#farray[5] = Frame()
-#frame = farray[5]
-#print frame.xyz(10)
 print farray[5].xyz(10) 
-#farray.resize(5)
-#print farray.size
+print farray.size
+farray[5].swap_atoms(9, 10)
+print farray[5].xyz(9) 
+del farray[5]
+print farray[5].xyz(9) 
         
 if __name__ == "__main__":
     unittest.main()

@@ -57,6 +57,8 @@ cdef class Frame:
         cdef list atlist
         cdef int natom
 
+        self.py_free_mem = True
+
         if not args:
             self.thisptr = new _Frame()
         else:
@@ -82,7 +84,8 @@ cdef class Frame:
                 raise ValueError()
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.py_free_mem and self.thisptr:
+            del self.thisptr
 
     def set_from_crd(self, CRDtype farray, *args):
         """"""
@@ -365,8 +368,9 @@ cdef class Frame:
     def rmsd_no_fit(self, Frame frame, useMassIn):
         return self.thisptr.RMSD_NoFit(frame.thisptr[0], useMassIn)
 
-    def rmsd_fit_to_ref(self, Frame frame, Vec3 vec):
-        return self.thisptr.RMSD_FitToRef(frame.thisptr[0], vec.thisptr[0])
+    # deprecated?
+    #def rmsd_fit_to_ref(self, Frame frame, Vec3 vec):
+    #    return self.thisptr.RMSD_FitToRef(frame.thisptr[0], vec.thisptr[0])
 
     def dist_rmsd(self, Frame frame):
         return self.thisptr.DISTRMSD(frame.thisptr[0])

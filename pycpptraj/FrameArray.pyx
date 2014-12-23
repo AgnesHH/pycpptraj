@@ -16,6 +16,7 @@ cdef class FrameArray:
         """Return a Frame 'view'
         """
         cdef Frame frame = Frame()
+        frame.py_free_mem = False
 
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
@@ -28,11 +29,12 @@ cdef class FrameArray:
             raise ValueError("Your FrameArray is empty, how can I index it?")
         ptr = self.frame_v[idx]
         ptr[0] = other.thisptr[0]
-
-    def __delitime__(FrameArray self, int idx):
+        
+    def __delitem__(FrameArray self, int idx):
         self.erase(idx)
 
     def erase(self, int idx):
+        # TODO: need to re-indexing
         cdef _Frame* ptr
         ptr = self.frame_v[idx]
         self.frame_v.erase(self.frame_v.begin() + idx)

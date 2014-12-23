@@ -108,4 +108,5 @@ cdef extern from "Frame.h":
 
 cdef class Frame:
     cdef _Frame* thisptr
+    cdef bint py_free_mem
 
