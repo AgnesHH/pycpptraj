@@ -37,6 +37,7 @@ Traj_AmberCoord
 FrameList
 DataSet
 DataSet_1D
+DataSet_double
 DataSet_Coords
 DataSet_Coords_CRD
 DataFileList

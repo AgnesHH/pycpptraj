@@ -77,6 +77,9 @@ class TestCpptrajState(unittest.TestCase):
         print "d0 is empty? ", d0.empty()
         state2.run()
         print "d0 is empty? ", d0.empty()
+        d1 = cast_dataset(d0, dtype="dataset_double")
+        print d1.empty()
+        print d1.data[0:10]
         #state2.get_trajinlist().list()
 
         ## get_trajinlist() will return an instance copy of TrajinList

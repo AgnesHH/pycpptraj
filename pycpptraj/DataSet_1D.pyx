@@ -9,12 +9,17 @@ cdef class DataSet_1D (DataSet):
     def __dealloc__(self):
         pass
 
-    def _recast_pointers(self):
+    def _recast_pointers(self, idx=0):
         """
         Since we use >=2 pointers pointing to the same address,
         we need to recast after each pointer assignment
         """
-        self.baseptr_1 = <_DataSet_1D*> self.baseptr0
+        if idx == 0:
+            self.baseptr_1 = <_DataSet_1D*> self.baseptr0
+        elif idx == 1:
+            self.baseptr0 = <_DataSet*> self.baseptr_1
+        else:
+            raise ValueError("idx must be 0 or 1")
 
     def copy(self, DataSet dset):
         raise NotImplementedError("Not yet implemented")
