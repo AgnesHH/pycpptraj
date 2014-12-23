@@ -152,15 +152,18 @@ cdef class Frame:
         def __get__(self):
             return self.thisptr.Temperature()
 
-    # need to validate xyz, crd and v_xyz method
     def xyz(self, int atomnum):
+        """return xyz coordinates of idx-th atom"""
         # return XYZ for atomnum
         # cpptraj: return double*
         # use python array to store double*
+        # can we change it?
+
         cdef int i
         cdef natom = self.n_atoms
         cdef pyarray arr = pyarray('d', [])
 
+        # check if this is not empty Frame
         arr.append(self.thisptr.XYZ(atomnum)[0])
         arr.append(self.thisptr.XYZ(atomnum)[1])
         arr.append(self.thisptr.XYZ(atomnum)[2])

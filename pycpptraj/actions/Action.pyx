@@ -55,7 +55,7 @@ cdef class Action:
         """
         return self.baseptr.DoAction(idx, frame.thisptr, &(frame.thisptr))
 
-    def _print(self):
+    def print_output(self):
         self.baseptr.Print()
 
     # Do we really need this method?

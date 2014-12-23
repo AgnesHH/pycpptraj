@@ -9,28 +9,31 @@ cdef class FrameArray:
     def __cinit__(self):
         pass
 
-    def resize(self, int sizet):
-        self.frame_v.resize(sizet)
+    def copy(self):
+        "Return a copy of FrameArray"
+        cdef FrameArray other = FrameArray()
+        cdef _Frame _frame
+        for _frame in self.frame_v:
+            other.frame_v.push_back(_frame)
+        return other
 
     def __getitem__(FrameArray self, int idx):
         """Return a copy of FrameArray[idx]
         """
         cdef Frame frame = Frame()
-        frame.py_free_mem = False
         # debug
-        print "I am getting an item"
+        #print "I am getting an item"
 
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
-        frame.thisptr = self.frame_v[idx]
+        frame.thisptr[0] = self.frame_v[idx]
         return frame
 
     def __setitem__(FrameArray self, int idx, Frame other):
         cdef _Frame* ptr
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
-        ptr = self.frame_v[idx]
-        ptr[0] = other.thisptr[0]
+        self.frame_v[idx] = other.thisptr[0]
         
     def __delitem__(FrameArray self, int idx):
         self.erase(idx)
@@ -47,15 +50,15 @@ cdef class FrameArray:
 
     def __iter__(self):
         """return an copy of Frame instance"""
-        cdef vector[_Frame*].iterator it  = self.frame_v.begin()
+        cdef vector[_Frame].iterator it  = self.frame_v.begin()
         cdef Frame frame 
 
         while it != self.frame_v.end():
             frame = Frame()
-            frame.thisptr[0] = deref(deref(it))
+            frame.thisptr[0] = deref(it)
             yield frame
             incr(it)
 
     def append(self, Frame framein):
         cdef Frame frame = Frame(framein)
-        self.frame_v.push_back(frame.thisptr)
+        self.frame_v.push_back(frame.thisptr[0])
