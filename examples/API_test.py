@@ -3,6 +3,7 @@ from pycpptraj.actions.Action_Distance import Action_Distance
 from test_API.TestAPI import create_state, do_calculation
 
 state = create_state(top="./data/Tc5b.top", trajin="./data/md1_prod.Tc5b.x", ref=None)
+state.set_no_progress()
 distance = do_calculation(action=Action_Distance(), input="distance :2@CA :10@CA", state=state)
 
 print distance[:10]

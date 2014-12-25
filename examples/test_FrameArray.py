@@ -92,7 +92,6 @@ class TestFrameArray(unittest.TestCase):
         #farray.erase(5)
         del farray[5]
 
-
         print 
         print "10th atom of farray[4 or 5 or 6] after erasing farray[5]"
         print 
@@ -111,9 +110,11 @@ class TestFrameArray(unittest.TestCase):
         print farray.size
         print farray[5].xyz(10)
         assert farray_cp.size != farray.size
-
-        #print farray[5].b_address()
-
+        print farray[5].b_address()
+        
+        print farray[5].xyz(10)
+        farray[5].xyz(10)[0] = 1.0
+        print farray[5].xyz(10)
 
 if __name__ == "__main__":
     unittest.main()

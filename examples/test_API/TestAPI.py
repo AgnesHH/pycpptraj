@@ -26,6 +26,8 @@ def create_state(top=None, trajin=None, ref=None):
     state = CpptrajState()
     state.toplist.add_parm_file(top)
     state.add_trajin(trajin)
+    state.set_action_silence(True)
+    state.set_no_progress()
 
     if ref:
         state.add_reference(ref)

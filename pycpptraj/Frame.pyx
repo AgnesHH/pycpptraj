@@ -152,6 +152,14 @@ cdef class Frame:
         def __get__(self):
             return self.thisptr.Temperature()
 
+    # does not work since XYZ return const double*
+    #def update_atom(self, int idx, double[:] xyz):
+    #    if len(xyz) > 3:
+    #        raise IndexError("")
+    #    self.thisptr.XYZ(idx)[0] = xyz[0]
+    #    self.thisptr.XYZ(idx)[1] = xyz[1]
+    #    self.thisptr.XYZ(idx)[2] = xyz[2]
+
     def xyz(self, int atomnum):
         """return xyz coordinates of idx-th atom"""
         # return XYZ for atomnum

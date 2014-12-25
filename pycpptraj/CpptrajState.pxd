@@ -21,6 +21,7 @@ cdef extern from "CpptrajState.h":
         _DataFileList * DFL()
         void SetNoExitOnError()
         void SetNoProgress()
+        void SetActionSilence(bint b)
         int Debug()const 
         bint ExitOnError()const 
         bint EmptyState()const 

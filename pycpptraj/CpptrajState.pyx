@@ -42,6 +42,9 @@ cdef class CpptrajState:
     def set_no_progress(self):
         self.thisptr.SetNoProgress()
 
+    def set_action_silence(self, bint b):
+        self.thisptr.SetActionSilence(b)
+
     def debug(self):
         return self.thisptr.Debug()
 

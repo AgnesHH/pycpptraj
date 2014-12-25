@@ -22,6 +22,7 @@ def cast_dataset(DataSet dset, dtype=None):
         # since we introduce memory view, we let cpptraj free memory
         newset_double.py_free_mem = False
         newset_double.baseptr0 = dset.baseptr0
+        # make sure other pointers pointing to the same address
         newset_double.baseptr_1 = <_DataSet_1D*> dset.baseptr0
         newset_double.thisptr = <_DataSet_double*> dset.baseptr0
         return newset_double

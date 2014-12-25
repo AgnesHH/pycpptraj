@@ -66,3 +66,6 @@ cdef class Action:
             raise ValueError("NULL pointer")
         act.baseptr = <_Action*> funct.ptr()
         return act
+
+    #def help(self):
+    #    raise NotImplementedError("Abstract Base Class")
