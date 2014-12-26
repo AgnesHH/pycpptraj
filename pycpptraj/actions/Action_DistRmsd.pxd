@@ -1,6 +1,6 @@
 # distutils: language = c++
 from Action cimport *
-from ReferenceAction cimport *
+#from ReferenceAction cimport *
 
 
 cdef extern from "Action_DistRmsd.h": 

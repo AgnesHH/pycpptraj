@@ -1,8 +1,8 @@
 # distutils: language = c++
 from Action cimport *
-from ..Range cimport *
-from ..ReferenceAction cimport *
-from ..DataSet_1D cimport *
+#from ..Range cimport *
+#from ..ReferenceAction cimport *
+#from ..DataSet_1D cimport *
 #from .._FunctPtr cimport FunctPtr
 
 

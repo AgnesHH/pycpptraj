@@ -1,6 +1,6 @@
 # distutils: language = c++
 from Action cimport *
-from ImagedAction cimport *
+#from ImagedAction cimport *
 
 
 cdef extern from "Action_DNAionTracker.h": 

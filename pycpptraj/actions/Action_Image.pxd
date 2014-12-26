@@ -1,6 +1,6 @@
 # distutils: language = c++
 from Action cimport *
-from ImageTypes cimport *
+#from ImageTypes cimport *
 
 
 cdef extern from "Action_Image.h": 

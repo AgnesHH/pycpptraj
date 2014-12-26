@@ -1,8 +1,8 @@
 # distutils: language = c++
-from libcpp.vector cimport vector
+#from libcpp.vector cimport vector
 from Action cimport *
-from Trajout cimport *
-from DataSet_1D cimport *
+#from Trajout cimport *
+#from DataSet_1D cimport *
 
 
 cdef extern from "Action_Outtraj.h": 

@@ -1,8 +1,8 @@
 # distutils: language = c++
-from libcpp.vector cimport vector
+#from libcpp.vector cimport vector
 from Action cimport *
-from ImagedAction cimport *
-from OnlineVarT cimport *
+#from ImagedAction cimport *
+#from OnlineVarT cimport *
 
 
 cdef extern from "Action_PairDist.h": 

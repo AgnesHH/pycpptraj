@@ -1,7 +1,7 @@
 # distutils: language = c++
 from Action cimport *
-from ReferenceAction cimport *
-from SymmetricRmsdCalc cimport *
+#from ReferenceAction cimport *
+#from SymmetricRmsdCalc cimport *
 
 
 cdef extern from "Action_SymmetricRmsd.h": 

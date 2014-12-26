@@ -1,7 +1,7 @@
 # distutils: language = c++
-from libcpp.vector cimport vector
+#from libcpp.vector cimport vector
 from Action cimport *
-from molsurf cimport *
+#from molsurf cimport *
 
 
 cdef extern from "Action_Molsurf.h": 
