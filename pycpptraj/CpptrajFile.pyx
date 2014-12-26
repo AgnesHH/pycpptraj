@@ -5,8 +5,6 @@ cdef class CpptrajFile:
     """
     Original cpptraj doc:
     Class to abstract handling of basic file routines.
-
-
     """
     def __cinit__(self, *args):
         cdef CpptrajFile cfile

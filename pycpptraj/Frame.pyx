@@ -207,7 +207,7 @@ cdef class Frame:
         # cpptraj: return double*
         raise NotImplementedError()
 
-    def b_address(self):
+    def get_box(self):
         cdef Box box = Box()
         box.thisptr.SetBox(self.thisptr.bAddress())
         return box

@@ -21,10 +21,10 @@ print frame.xyz(0)
 # indexing
 print
 print "test indexing"
-#print frame[0]
-#print frame[1]
-#print frame[2]
-#print frame[3]
+print frame[0]
+print frame[1]
+print frame[2]
+print frame[3]
 i = 0
 print "xyz[0]: ", frame.xyz(0)
 print "xyz[1]: ", frame.xyz(1)
