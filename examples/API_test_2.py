@@ -1,18 +1,28 @@
+import os
 import numpy as np
+from pycpptraj import ArgList
+from pycpptraj._cast import cast_dataset
 from pycpptraj.actions.Action_Radgyr import Action_Radgyr
 from pycpptraj.actions.Action_Molsurf import Action_Molsurf
 from pycpptraj.actions.Action_Matrix import Action_Matrix
+from pycpptraj.actions.Action_Strip import Action_Strip
 from pycpptraj.actions.Action_ClusterDihedral import Action_ClusterDihedral
 from pycpptraj.CpptrajState import CpptrajState
 from test_API.TestAPI import create_state, do_calculation
 
-state = create_state(top="./data/Tc5b.top", trajin="./data/md1_prod.Tc5b.x", ref=None)
-state.set_action_silence(True)
-radgyr = do_calculation(action=Action_Radgyr(), input="gyr @CA", state=state)
+testdir = os.environ['PYCPPTRAJ_HOME'] + "/tests/Cpptraj_test/"
+topfile = testdir + "DPDP.parm7"
+trajinfile = testdir + "DPDP.nc"
 
-print radgyr[:10]
-# make sure to reprodce cpptraj output
+state = create_state(top=topfile, trajin=trajinfile, ref=None)
+state.add_action(Action_Molsurf(), ArgList("surf"))
+state.add_action(Action_Molsurf(), ArgList("surf @CA"))
+state.run()
 
-state = create_state(top="./data/Tc5b.top", trajin="./data/md1_prod.Tc5b.x", ref=None)
-mat = do_calculation(action=Action_Matrix(), input="matrix @CA", state=state)
-print mat[:10]
+d1 = cast_dataset(state.datasetlist[0], dtype="dataset_double")
+d2 = cast_dataset(state.datasetlist[1], dtype="dataset_double")
+
+d1np = np.asarray(d1.data)
+d2np = np.asarray(d2.data)
+print d1np
+print d2np
