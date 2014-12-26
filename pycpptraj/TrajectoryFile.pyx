@@ -64,7 +64,7 @@ cdef class TrajectoryFile:
 
     def trajfilename(self):
         cdef FileName fname = FileName()
-        if not fname.thisptr or nor self.baseptr0.TrajFilename():
+        if not fname.thisptr:
             raise MemoryError("Can not get Filename instance")
         fname.thisptr[0] = self.baseptr0.TrajFilename()
         return fname
