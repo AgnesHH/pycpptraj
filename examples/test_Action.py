@@ -14,8 +14,9 @@ with open(pylist, 'r') as fh:
                 actions.append(line.split("/")[-1].split()[0])
             except: pass
 
-actions.remove("Action")
-actions.remove("ActionFrameCounter")
+removedList = ["Action", "ActionFrameCounter", "Action_CreateReservoir"]
+for removedAction in removedList:
+    actions.remove(removedAction)
 
 # get Help from actionlist
 def get_help():
