@@ -125,8 +125,8 @@ cdef class Frame:
 
     def __getitem__(self, idx):
         "Return coordinate"
-        if idx <= 0:
-            raise ValueError("Frame size must be larger than 0")
+        if idx < 0:
+            raise ValueError("index must be >= 0")
         else:
             return self.thisptr.index_opr(idx)
 
@@ -241,7 +241,7 @@ cdef class Frame:
     #    cdef vector[_Atom] v = atomlist_to_vector(atlist)
     #    return self.thisptr.SetupFrameFromMask(atmask.thisptr[0], v)
 
-    def set_coordinates(self, Frame frame, *args):
+    def set_coord(self, Frame frame, *args):
         cdef AtomMask atmask 
         if not args:
             self.thisptr.SetCoordinates(frame.thisptr[0])
@@ -313,8 +313,14 @@ cdef class Frame:
         return v3
 
     def translate(self, *args):
+        """
+        Args:
+            (Vec3, first_atom_idx, last_atom_idx)
+        TODO: add doc
+        """
         cdef firstAtom, lastAtom
         cdef Vec3 vec3
+
         if len(args) == 3:
             vec3, firstAtom, lastAtom = args
             self.thisptr.Translate(vec3.thisptr[0], firstAtom, lastAtom)
