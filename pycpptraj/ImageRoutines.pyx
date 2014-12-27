@@ -1,6 +1,6 @@
 # distutil: language = c++
 
-cdef CreatePairList(const _Topology&, Mode mod, _AtomMask atm):
+cdef CreatePairList(const _Topology&, Mode mode, _AtomMask atm):
     return CreatePairList(top.thisptr[0], mode, atm.thisptr)
 
 _Vec3 SetupTruncoct(const _Frame&, _AtomMask* , bint, bint)

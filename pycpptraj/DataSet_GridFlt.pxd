@@ -4,7 +4,7 @@ from Grid cimport *
 
 
 cdef extern from "DataSet_GridFlt.h": 
-    cdef cppclass _DataSet_GridFlt "DataSet_GridFlt":
+    cdef cppclass _DataSet_GridFlt "DataSet_GridFlt" (_DataSet_3D):
         _DataSet_GridFlt()
         float& operator[](size_t idx)
         _DataSet * Alloc() 
@@ -27,3 +27,6 @@ cdef extern from "DataSet_GridFlt.h":
         inline long int Increment(int, int, int, float)
         float GridVal(int x, int y, int z) const 
         long int CalcIndex(int i, int j, int k) const 
+
+cdef class DataSet_GridFlt (DataSet_3D):
+    cdef _DataSet_GridFlt* thisptr
