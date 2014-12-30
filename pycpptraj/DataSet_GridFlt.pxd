@@ -30,3 +30,4 @@ cdef extern from "DataSet_GridFlt.h":
 
 cdef class DataSet_GridFlt (DataSet_3D):
     cdef _DataSet_GridFlt* thisptr
+    cdef public bint py_free_mem

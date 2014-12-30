@@ -6,9 +6,11 @@ cdef class DataSet_GridFlt:
         self.baseptr0 = <_DataSet*> new _DataSet_GridFlt()
         self.baseptr_1 = <_DataSet_3D*> self.baseptr0
         self.thisptr = <_DataSet_GridFlt*> self.baseptr0
+        self.py_free_mem = True
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.py_free_mem:
+            del self.thisptr
 
     #def float operator[](self,size_t idx):
     def __getitem__(self, size_t idx):

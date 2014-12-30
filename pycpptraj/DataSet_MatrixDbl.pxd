@@ -7,7 +7,7 @@ from Matrix cimport *
 ctypedef vector[double] Darray
 
 cdef extern from "DataSet_MatrixDbl.h": 
-    cdef cppclass _DataSet_MatrixDbl "DataSet_MatrixDbl":
+    cdef cppclass _DataSet_MatrixDbl "DataSet_MatrixDbl" (_DataSet_2D):
         _DataSet_MatrixDbl() 
         double& operator[](size_t idx)
         _DataSet * Alloc() 
@@ -24,6 +24,7 @@ cdef extern from "DataSet_MatrixDbl.h":
         double * MatrixArray() const 
         MatrixKind Kind() const 
         MatrixType Type() const 
+
         double& Element(size_t x, size_t y)
         int AddElement(double d)
         void SetElement(size_t x, size_t y, double d)
@@ -39,6 +40,7 @@ cdef extern from "DataSet_MatrixDbl.h":
         const Darray& Mass() const 
 
 
-cdef class DataSet_MatrixDbl:
+cdef class DataSet_MatrixDbl (DataSet_2D):
     cdef _DataSet_MatrixDbl* thisptr
+    cdef bint py_free_mem
 

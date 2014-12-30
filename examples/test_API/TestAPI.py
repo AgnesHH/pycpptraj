@@ -24,7 +24,7 @@ def create_state(top=None, trajin=None, ref=None):
     ref :: reference filename (or ReferenceFrame instance or either?)
     """
     state = CpptrajState()
-    state.toplist.add_parm_file(top)
+    state.toplist.add_parm(top)
     state.add_trajin(trajin)
     state.set_action_silence(True)
     state.set_no_progress()

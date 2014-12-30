@@ -1,8 +1,7 @@
 # distutils: language = c++
-from ArgList cimport *
 from DataSetList cimport *
+from FrameList cimport *
 from DataSet_GridFlt cimport *
-from Topology cimport *
 
 
 cdef extern from "GridAction.h": 
@@ -13,11 +12,16 @@ cdef extern from "GridAction.h":
         MASKCENTER "GridAction::MASKCENTER"
         SPECIFIEDCENTER "GridAction::SPECIFIEDCENTER"
     cdef cppclass _GridAction "GridAction":
-        Grid_Action()
-        _DataSet_GridFlt* GridInit(const char *, _ArgList&, _DataSetList&)
+        Grid_Action() 
+        _DataSet_GridFlt * GridInit(const char *, _ArgList&, _DataSetList&, const _FrameList&)
         void GridInfo(const _DataSet_GridFlt&)
         int GridSetup(const _Topology&)
         inline void GridFrame(const _Frame&, const _AtomMask&, _DataSet_GridFlt&)
         GridModeType GridMode() const 
         const _AtomMask& CenterMask() const 
         float Increment() const 
+
+
+cdef class GridAction:
+    cdef _GridAction* thisptr
+

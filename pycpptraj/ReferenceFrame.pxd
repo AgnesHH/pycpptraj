@@ -7,9 +7,9 @@ from ArgList cimport *
 
 cdef extern from "ReferenceFrame.h": 
     cdef cppclass _ReferenceFrame "ReferenceFrame":
-        _Reference_Frame() 
-        _Reference_Frame(int)
-        #~_Reference_Frame() 
+        _ReferenceFrame() 
+        _ReferenceFrame(int)
+        #~_ReferenceFrame() 
         const _Frame& Coord() const 
         const _Topology& Parm() const 
         bint error() const 

@@ -6,11 +6,11 @@ cdef class DataSet_3D (DataSet):
         self.baseptr_1 = <_DataSet_3D*> self.baseptr0
 
     def __dealloc__(self):
+        # since this is ABC, don't __dealloc__ here
         pass
 
-    #def virtual ~DataSet_3D(self):
 
-    #def DataSet_3D(self,DataSet:
+    #_DataSet_2D(DataType tIn, int wIn, int pIn)
 
     #def virtual void Write3D(self,CpptrajFile, int, int, int) = 0 :
 

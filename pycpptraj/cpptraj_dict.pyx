@@ -354,12 +354,12 @@ DistMetricDict = {
     }
 # GridAction
 ##from GridAction cimport *
-#GridModeDict = {
-#    "ORIGIN" : ORIGIN, 
-#    "BOX" : BOX, 
-#    "MASKCENTER" : MASKCENTER, 
-#    "SPECIFIEDCENTER" : SPECIFIEDCENTER, 
-#    }
+GridModeDict = {
+    "ORIGIN" : ORIGIN, 
+    "BOX" : BOX, 
+    "MASKCENTER" : MASKCENTER, 
+    "SPECIFIEDCENTER" : SPECIFIEDCENTER, 
+    }
 
 # Trajin_Multi
 #from Trajin_Multi cimport *

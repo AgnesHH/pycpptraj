@@ -53,7 +53,7 @@ class TestCpptrajState(unittest.TestCase):
 #    def test_process_input(self):
 #        state = CpptrajState()
 #        toplist = state.toplist
-#        toplist.add_parm_file("./data/Tc5b.top")
+#        toplist.add_parm("./data/Tc5b.top")
 #        fname = "./data/pycpptraj.in"
 #        state.add_action(Action_Dihedral(), ArgList(":1@C  :2@N  :2@CA :2@C"))
 #        print state.trajinlist
@@ -64,7 +64,7 @@ class TestCpptrajState(unittest.TestCase):
         print "test_process_input"
         state2 = CpptrajState()
         toplist = state2.toplist
-        toplist.add_parm_file("./data/Tc5b.top")
+        toplist.add_parm("./data/Tc5b.top")
         state2.add_trajin("./data/md1_prod.Tc5b.x")
         state2.add_reference("./data/Tc5b.nat.crd")
         state2.add_action(Action_Distance(), ArgList("distance :2@CA :10@CA"))
@@ -103,7 +103,7 @@ class TestCpptrajState(unittest.TestCase):
 #        dflist = DataFileList()
 #
 #        # add stuff
-#        toplist.add_parm_file("./data/Tc5b.top")
+#        toplist.add_parm("./data/Tc5b.top")
 #        framelist.add_reference(ArgList("./data/Tc5b.nat.crd"), toplist)
 #        distaction.read_input(ArgList(":2@CA :10@CA"), toplist, framelist, dsetlist, dflist, 0)
 #        boxaction.read_input(ArgList("x 1000. y 1000. alpha 500."), toplist, framelist, dsetlist, dflist, 0)

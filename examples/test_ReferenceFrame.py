@@ -6,30 +6,20 @@ from pycpptraj.FileName import FileName
 from pycpptraj.Frame import Frame
 from pycpptraj.CpptrajState import CpptrajState
 from pycpptraj.Energy import Energy_Amber
+from pycpptraj.ArgList import ArgList
 
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 topname = datadir + "Tc5b.top"
-fname = "./data/Tc5b.nat.crd"
+fname = "./data/md1_prod.Tc5b.x"
 
 top = Topology(topname)
 #top.summary()
 ref = ReferenceFrame()
-ref.load_ref(fname, top)
-#top2 = ref.top
-#top2.summary()
-refframe = ref.frame
-
-# 
-top.set_reference_coords(refframe)
-top.summary()
-print top.setup_integer_mask(AtomMask(":1-20@CA"))
-
-# 
-state = CpptrajState()
-print state.traj_length(topname, ["./data/md1_prod.Tc5b.x", ])
-
-# calculate Energy
-energy = Energy_Amber()
-
-# just wrong
-print energy.E_torsion(refframe, top, AtomMask(":1-20@CA"))
+#ref.load_ref(filename=fname, top=top, debug=0, arglist=ArgList(), mask="@CA")
+ref.load_ref(fname, top, arglist=ArgList(), mask="@CA")
+ref.top.summary()
+print ref.frame
+name = ref.frame_name()
+assert name.full_name == fname
+#assert name.ext == '.crd'
+ref.info()

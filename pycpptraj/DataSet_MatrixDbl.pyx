@@ -1,12 +1,14 @@
 # distutils: language = c++
 
 
-cdef class DataSet_MatrixDbl:
+cdef class DataSet_MatrixDbl (DataSet_2D):
     def __cinit__(self):
         self.thisptr = new _DataSet_MatrixDbl()
+        self.py_free_mem = True
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.py_free_mem:
+            del self.thisptr
 
     #def DataSet_MatrixDbl(self):
 
@@ -31,16 +33,14 @@ cdef class DataSet_MatrixDbl:
     #def double GetElement(self,size_t x, size_t y):
 
     #def size_t Nrows(self):
-
     #def size_t Ncols(self):
 
     #def double * MatrixArray(self):
-
     #def MatrixKind Kind(self):
-
     #def MatrixType Type(self):
 
-    #def double Element(self,size_t x, size_t y):
+    def element(self, size_t x, size_t y):
+        return self.thisptr.Element(x, y)
 
     #def int AddElement(self,double d):
 
@@ -50,7 +50,8 @@ cdef class DataSet_MatrixDbl:
 
     #def iterator end(self):
 
-    #def  Darray Vect(self):
+    def vect(self):
+        return self.thisptr.Vect()
 
     #def Darray V1(self):
 

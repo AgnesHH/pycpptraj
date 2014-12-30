@@ -37,6 +37,8 @@ Traj_AmberCoord
 FrameList
 DataSet
 DataSet_1D
+DataSet_2D
+DataSet_3D
 DataSet_double
 DataSet_Coords
 DataSet_Coords_CRD
@@ -86,6 +88,7 @@ DataSet_MatrixDbl
 DataSet_RemLog
 ClusterDist
 Cluster_DBSCAN
+GridAction
 MapAtom
 AtomMap
 PointerVec

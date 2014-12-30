@@ -36,24 +36,22 @@ cdef class ReferenceFrame:
         return self.thisptr.empty()
 
     def frame_name(self):
+        """Return FileName instance
+        TODO: Should we really need FileName class?
+        """
         cdef FileName fn = FileName()
         fn.thisptr[0] = self.thisptr.FrameName()
+        return fn
 
-    def load_ref(self, string fname, Topology parmIn, debug=0, *args):
+    def load_ref(self, string filename="", Topology top=Topology(), int debug=0, ArgList arglist=ArgList(), string mask=""):
         """Temp doc: load_ref(self, string fname, Topology parmIn, debug=0, *args)"""
-        cdef ArgList argIn
-        cdef string maskexpr
-        if not args:
-            return self.thisptr.LoadRef(fname, parmIn.thisptr, debug)
-        elif len(args) == 2:
-             argIn, maskexpr = args
-             return self.thisptr.LoadRef(fname, argIn.thisptr[0], parmIn.thisptr,maskexpr, debug)
+        return self.thisptr.LoadRef(filename, arglist.thisptr[0], top.thisptr, mask, debug)
 
     def strip_ref(self, AtomMask atm):
         """temp doc: strip_ref(self, AtomMask atm)"""
         return self.thisptr.StripRef(atm.thisptr[0])
 
-    def ref_info(self):
+    def info(self):
         self.thisptr.RefInfo()
 
     def clear_ref(self):

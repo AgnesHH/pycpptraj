@@ -10,7 +10,7 @@ cdef class FileName:
         del self.thisptr
 
     def __str__(self):
-        fname = self.Full()
+        fname = self.thisptr.Full()
         fname = fname.split("/")[-1]
         return fname
 
@@ -36,7 +36,7 @@ cdef class FileName:
 
     property ext:
         def __get__(self):
-            return self.Ext()
+            return self.thisptr.Ext()
 
     def empty(self):
         return self.thisptr.empty()

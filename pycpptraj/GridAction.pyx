@@ -1,5 +1,5 @@
 # distutils: language = c++
-from .cpptraj_dict import GridModeDict, get_key
+from pycpptraj.cpptraj_dict import GridModeDict, get_key
 
 
 cdef class GridAction:
@@ -9,23 +9,28 @@ cdef class GridAction:
     def __dealloc__(self):
         del self.thisptr
 
-    #def DataSet_GridFlt * GridInit(self, char *, ArgList arglist, DataSetList dslist, FrameList flist):
+    def init(self, char* callingRoutine, ArgList arglist, DataSetList dslist, FrameList flist):
+        cdef DataSet_GridFlt dset_gf = DataSet_GridFlt()
+        # since we use memory view, we let cpptraj free memory
+        dset_gf.py_free_mem = False
+        dset_gf.thisptr = self.thisptr.GridInit(callingRoutine, arglist.thisptr[0], dslist.thisptr[0], flist.thisptr[0])
+        return dset_gf
 
-    def GridInfo(self, DataSet_GridFlt dset_gf):
+    def info(self, DataSet_GridFlt dset_gf):
         self.thisptr.GridInfo(dset_gf.thisptr[0])
 
-    def GridSetup(self, Topology top):
+    def process(self, Topology top):
         return self.thisptr.GridSetup(top.thisptr[0])
 
-    def GridFrame(self, Frame frame, AtomMask atm, DataSet_GridFlt dset_gf):
+    def frame(self, Frame frame, AtomMask atm, DataSet_GridFlt dset_gf):
         self.thisptr.GridFrame(frame.thisptr[0], atm.thisptr[0], dset_gf.thisptr[0])
 
-    def GridMode(self):
+    def mode(self):
         return get_key(self.thisptr.GridMode(), GridModeDict)
 
-    def CenterMask(self):
+    def center_mask(self):
         cdef AtomMask atm = AtomMask()
         atm.thisptr[0] = self.thisptr.CenterMask()
 
-    def Increment(self):
+    def increment(self):
         return self.thisptr.Increment()
