@@ -9,15 +9,15 @@ cdef class GridAction:
     def __dealloc__(self):
         del self.thisptr
 
-    #def DataSet_GridFlt * GridInit(self, char *, ArgList arglis, DataSetList dslist, FrameList flist):
+    #def DataSet_GridFlt * GridInit(self, char *, ArgList arglist, DataSetList dslist, FrameList flist):
 
     def GridInfo(self, DataSet_GridFlt dset_gf):
         self.thisptr.GridInfo(dset_gf.thisptr[0])
 
-    def int GridSetup(self, Topology top):
+    def GridSetup(self, Topology top):
         return self.thisptr.GridSetup(top.thisptr[0])
 
-    def  void GridFrame(self, Frame frame, AtomMask atm, DataSet_GridFlt dset_gf):
+    def GridFrame(self, Frame frame, AtomMask atm, DataSet_GridFlt dset_gf):
         self.thisptr.GridFrame(frame.thisptr[0], atm.thisptr[0], dset_gf.thisptr[0])
 
     def GridMode(self):
@@ -29,4 +29,3 @@ cdef class GridAction:
 
     def Increment(self):
         return self.thisptr.Increment()
-

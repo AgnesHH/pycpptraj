@@ -81,6 +81,7 @@ PDBfile
 Traj_Mol2File
 ClusterList
 DataSet_Vector
+DataSet_GridFlt
 DataSet_MatrixDbl
 DataSet_RemLog
 ClusterDist

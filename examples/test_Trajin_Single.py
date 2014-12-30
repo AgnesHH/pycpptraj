@@ -10,6 +10,8 @@ from pycpptraj.ArgList import ArgList
 from pycpptraj.Topology import Topology
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.ReferenceFrame import ReferenceFrame
+from pycpptraj.Energy import Energy_Amber
+from pycpptraj.AtomMask import AtomMask
 
 ts = Trajin_Single()
 basetraj = Trajin()
@@ -59,7 +61,16 @@ print farray.size
 frame = Frame(farray[5])
 del frame
 print farray[5].xyz(10)
+
+energy = Energy_Amber()
+print energy.E_torsion(farray[0], top, AtomMask("*"))
+
+print ts.top.brief("@CA")
+print ts.top.brief("@CA")
+print ts.top
+print ts.top
+
 #print frame == farray[5]
         
-if __name__ == "__main__":
-    unittest.main()
+#if __name__ == "__main__":
+#    unittest.main()

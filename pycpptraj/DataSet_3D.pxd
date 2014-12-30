@@ -24,3 +24,6 @@ cdef extern from "DataSet_3D.h":
         inline double MZ() const 
         inline _Vec3 BinCorner(int, int, int)
         inline _Vec3 BinCenter(int, int, int)
+
+cdef class DataSet_3D (DataSet):
+    cdef _DataSet_3D* baseptr_1

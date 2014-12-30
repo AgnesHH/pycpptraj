@@ -58,3 +58,4 @@ TrajFormatType_dict = {
 
 cdef class TrajectoryFile:
     cdef _TrajectoryFile* baseptr0
+    cdef Topology topology

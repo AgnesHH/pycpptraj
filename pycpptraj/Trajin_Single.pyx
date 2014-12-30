@@ -7,8 +7,9 @@ cdef class Trajin_Single(Trajin):
     def __cinit__(self):
         # thisptr is from Trajin class
         # now it points to derived class
-        self.baseptr_1 = <_Trajin*> new _Trajin_Single()
-        self.thisptr = <_Trajin_Single*> self.baseptr_1
+        self.baseptr0 = <_TrajectoryFile*> new _Trajin_Single()
+        self.baseptr_1 = <_Trajin*> self.baseptr0
+        self.thisptr = <_Trajin_Single*> self.baseptr0
 
     def __dealloc__(self):
         if self.thisptr:

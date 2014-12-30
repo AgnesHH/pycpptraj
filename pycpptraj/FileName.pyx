@@ -1,7 +1,5 @@
 # distutils: language = c++
 
-from FileName cimport *
-
 cdef class FileName:
 
     def __cinit__(self, myname=''):
@@ -28,9 +26,11 @@ cdef class FileName:
     def match_full_or_base(self, mystring):
         return self.thisptr.MatchFullOrBase(mystring)
 
-    def full(self):
+    @property
+    def full_name(self):
         return self.thisptr.Full()
 
+    @property
     def base(self):
         return self.thisptr.Base()
 
@@ -38,17 +38,12 @@ cdef class FileName:
         def __get__(self):
             return self.Ext()
 
-    def ext(self):
-        return self.thisptr.Ext()
-
     def empty(self):
         return self.thisptr.empty()
 
+    @property
     def compress(self):
         return self.thisptr.Compress()
 
     def dir_prefix(self):
         return self.thisptr.DirPrefix()
-    
-    def full(self):
-        self.thisptr.full()

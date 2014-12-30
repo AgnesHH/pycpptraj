@@ -20,10 +20,15 @@ cdef class MapAtom:
         else:
             raise ValueError()
 
-    @classmethod
-    def copy(cls, MapAtom other):
+    def copy(self):
+        """Return a copy of instance
+        >>>from pycpptraj.MapAtom import MapAtom
+        >>>ma1 = MapAtom()
+        >>>ma2 = ma1.copy()
+        >>>print ma1 == ma2
+        """
         cdef MapAtom matom = MapAtom()
-        matom.thisptr[0] = other.thisptr[0]
+        matom.thisptr[0] = self.thisptr[0]
         return matom
 
     def is_chiral(self):

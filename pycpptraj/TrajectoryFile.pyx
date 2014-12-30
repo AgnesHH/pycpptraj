@@ -21,7 +21,16 @@ cdef class TrajectoryFile:
 
     def __cinit__(self):
         # ABC
-        pass
+        self.topology = Topology()
+
+        # let cpptraj free memory for self.topology
+        self.topology.py_free_mem = False
+
+        # we don't need to initialize self.topology here
+        # check "property" section
+        # set memory view for self.topology.thisptr
+        #if self.baseptr0.TrajParm():
+        #    self.topology.thisptr = self.baseptr0.TrajParm()
 
     def __dealloc__(self):
         # ABC
@@ -54,13 +63,35 @@ cdef class TrajectoryFile:
     def set_trajfilename(self, string fname, bint is_read=True):
         self.baseptr0.SetTrajFileName(fname, is_read)
 
-    def set_traj_parm(self,Topology top):
-        return self.baseptr0.SetTrajParm(top.thisptr)
+    # this decorator does not work
+    # Python complains that 'property' is not callable
+    # check the below solution
+    #@property
+    #def top(self):
+    #    self.topology.thisptr = self.baseptr0.TrajParm()
+    #    return self.topology
 
-    def traj_parm(self):
-        cdef Topology top = Topology()
-        top.thisptr[0] = self.baseptr0.TrajParm()[0]
-        return top
+    #@top.setter
+    #def top(self, Topology other):
+    #    self.baseptr0.SetTrajParm(other.thisptr)
+
+    property top:
+        def __get__(self):
+            self.topology.thisptr = self.baseptr0.TrajParm()
+            return self.topology
+
+        def __set__(self, Topology other):
+            self.baseptr0.SetTrajParm(other.thisptr)
+        
+    # don't need this method. use "top" property
+    #def set_traj_parm(self,Topology top):
+    #    return self.baseptr0.SetTrajParm(top.thisptr)
+
+    # don't need this method. use "top" property
+    #def traj_parm(self):
+    #    cdef Topology top = Topology()
+    #    top.thisptr[0] = self.baseptr0.TrajParm()[0]
+    #    return top
 
     def trajfilename(self):
         cdef FileName fname = FileName()
