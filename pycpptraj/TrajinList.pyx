@@ -33,6 +33,8 @@ cdef class TrajinList:
             trajin = Trajin()
             # use memoryview rather making instance copy
             trajin.baseptr_1 = deref(it)
+            # recast trajin.baseptr0 too
+            trajin.baseptr0 = <_TrajectoryFile*> trajin.baseptr_1
             yield trajin
             incr(it)
 
@@ -56,7 +58,10 @@ cdef class TrajinList:
     def front(self):
         # TODO: add doc
         cdef Trajin trajin = Trajin()
+        # create memoryview
         trajin.baseptr_1 = <_Trajin*> self.thisptr.front()
+        # make sure two pointers pointing to the same address
+        trajin.baseptr0 = <_TrajectoryFile*> trajin.baseptr_1
         return trajin
 
     @property

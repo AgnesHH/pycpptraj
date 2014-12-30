@@ -1,7 +1,5 @@
 # distutils: language = c++
-#from Trajin_Single cimport _Trajin_Single
 import os
-#from abc import ABCMeta, abstractmethod
 
 cdef class Trajin (TrajectoryFile):
 

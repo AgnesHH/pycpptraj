@@ -15,29 +15,35 @@ cdef class TopologyList:
         self.py_free_mem = py_free_mem
 
     def __dealloc__(self):
-        if self.py_free_mem == True:
+        if self.py_free_mem:
             #print "delete ", self.__class__
             del self.thisptr
 
     def clear(self):
         self.thisptr.Clear()
 
-    def set_debug(self,int id):
+    def set_debug(self, int id):
         self.thisptr.SetDebug(id)
 
     def __getitem__(self, int idx):
-        """return a copy of topology in TopologyList with index idx
+        """return a copy of topology instance in TopologyList with index idx
         Input:
         =====
         idx : int
         """
 
         try:
-           return self.get_parm(idx)
+           return (self.get_parm(idx)).copy()
         except:
             raise ValueError("index is out of range? do you have empty list?")
 
+    def __setitem__(self, int idx, Topology other):
+        cdef _Topology* topptr
+        topptr = self.thisptr.GetParm(idx)
+        topptr[0] = other.thisptr[0]
+
     def get_parm(self, arg):
+        # TODO: checkbound
         """Return a Topology instance as a view to Topology instance in TopologyList
         If you made change to this topology, TopologyList would update this change too.
         """
@@ -46,12 +52,13 @@ cdef class TopologyList:
         cdef int num
         cdef ArgList argIn
         # Explicitly del this pointer since we later let cpptraj frees memory
-        # (we are use memoery view, not gettting a copy)
+        # (we are use memoryview, not gettting a copy)
         del top.thisptr
 
         # since we pass C++ pointer to top.thisptr, we let cpptraj take care of 
         # freeing memory
         top.py_free_mem = False
+
         if isinstance(arg, (int, long)):
             num = arg
             #top.thisptr[0] = deref(self.thisptr.GetParm(num))
@@ -65,27 +72,37 @@ cdef class TopologyList:
         return top
 
     def get_parm_by_index(self, ArgList argIn):
+        """TODO: what is the difference between get_parm_by_index and  get_parm?"""
         cdef Topology top = Topology()
         top.py_free_mem = False
         top.thisptr = self.thisptr.GetParmByIndex(argIn.thisptr[0])
         return top
 
-    def add_parm_file(self, *args):
-        """Add parm file from file or from arglist
+    def add_parm(self, *args):
+        """Add parm file from file or from arglist or from Topology instance
         Input:
         =====
         filename :: str
         or
         arglist :: ArgList instance
         """
+        # TODO: what's about adding Topology instance to TopologyList?
         cdef string fname
         cdef ArgList arglist
+        cdef Topology top
+
         if len(args) == 1:
-            fname = args[0]
-            return self.thisptr.AddParmFile(fname)
+            if isinstance(args[0], basestring):
+                fname = args[0]
+                self.thisptr.AddParmFile(fname)
+            elif isinstance(args[0], Topology):
+                top = args[0]
+                # let cpptraj frees memory since we pass a pointer
+                top.py_free_mem = False
+                self.thisptr.AddParm(top.thisptr)
         elif len(args) == 2:
             fname, arglist = args
-            return self.thisptr.AddParmFile(fname, arglist.thisptr[0])
+            self.thisptr.AddParmFile(fname, arglist.thisptr[0])
         
     def info(self):
         self.thisptr.List()

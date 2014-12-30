@@ -31,7 +31,7 @@ cdef class Topology:
             if len(args) == 1:
                if isinstance(args[0], basestring):
                    fname = args[0]
-                   toplist.add_parm_file(fname)
+                   toplist.add_parm(fname)
                    self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
                elif isinstance(args[0], Topology):
                    tp = args[0]
@@ -41,13 +41,25 @@ cdef class Topology:
 
     def __dealloc__(self):
         if self.py_free_mem:
+            # debug
+            #print "Top is freeing memory"
+            # end debug
             del self.thisptr
 
-    @classmethod
-    def copy(cls, Topology other):
-        cdef Topology tmp = Topology()
-        tmp.thisptr[0] = other.thisptr[0]
-        return tmp
+    def copy(self, *args):
+        """return a copy of 'self' or copy from 'other' to 'self'"""
+        cdef Topology tmp
+        cdef Topology other
+
+        if not args:
+            # make a copy of 'self'
+            tmp = Topology()
+            tmp.thisptr[0] = self.thisptr[0]
+            return tmp
+        elif isinstance(args[0], Topology):
+            # copy other Topology instance to "self"
+            other = args[0]
+            self.thisptr[0] = other.thisptr[0]
 
     def __getitem__(self, int idx):
         cdef Atom atom = Atom()

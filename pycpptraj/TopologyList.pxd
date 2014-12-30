@@ -15,6 +15,7 @@ cdef extern from "TopologyList.h":
         _Topology* GetParm(_ArgList&) except +IndexError
         int AddParmFile(string&)
         int AddParmFile(string&, _ArgList&)
+        void AddParm(_Topology * pIn)
         void List()
 
 cdef class TopologyList:

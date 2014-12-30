@@ -17,12 +17,17 @@ trajinfile = testdir + "DPDP.nc"
 state = create_state(top=topfile, trajin=trajinfile, ref=None)
 state.add_action(Action_Molsurf(), ArgList("surf"))
 state.add_action(Action_Molsurf(), ArgList("surf @CA"))
-state.run()
+#state.run()
 
-d1 = cast_dataset(state.datasetlist[0], dtype="dataset_double")
-d2 = cast_dataset(state.datasetlist[1], dtype="dataset_double")
+#d1 = cast_dataset(state.datasetlist[0], dtype="dataset_double")
+#d2 = cast_dataset(state.datasetlist[1], dtype="dataset_double")
+#
+#d1np = np.asarray(d1.data)
+#d2np = np.asarray(d2.data)
+#print d1np
+#print d2np
 
-d1np = np.asarray(d1.data)
-d2np = np.asarray(d2.data)
-print d1np
-print d2np
+trajinlist = state.get_trajinlist()
+t1 = trajinlist.front()
+print t1.top
+t1.top.summary()
