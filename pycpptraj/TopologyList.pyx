@@ -42,6 +42,18 @@ cdef class TopologyList:
         topptr = self.thisptr.GetParm(idx)
         topptr[0] = other.thisptr[0]
 
+    def __iter__(TopologyList self):
+        cdef Topology top
+        cdef int idx
+
+        for i in range(self.size):
+            top = self[idx]
+            yield top
+
+    @property
+    def size(self):
+        return self.thisptr.Size()
+
     def get_parm(self, arg):
         # TODO: checkbound
         """Return a Topology instance as a view to Topology instance in TopologyList
@@ -64,12 +76,19 @@ cdef class TopologyList:
             #top.thisptr[0] = deref(self.thisptr.GetParm(num))
             # use memoryview instead making a copy
             top.thisptr = self.thisptr.GetParm(num)
+            if not top.thisptr:
+                raise IndexError("Out of bound indexing or empty list")
         if isinstance(arg, ArgList):
             argIn = arg
             # use memoryview instead making a copy
             top.thisptr = self.thisptr.GetParm(argIn.thisptr[0])
             #top.thisptr[0] = deref(self.thisptr.GetParm(argIn.thisptr[0]))
         return top
+
+    def get_parm_from_pylist(self, list listin):
+        cdef Topology top
+        for top in listin:
+            self.add_parm(top)
 
     def get_parm_by_index(self, ArgList argIn):
         """TODO: what is the difference between get_parm_by_index and  get_parm?"""
