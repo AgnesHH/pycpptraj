@@ -19,7 +19,7 @@ cdef extern from "TopologyList.h":
         void List()
 
         # Hai: add Size
-        int Size()
+        #int Size()
 
 cdef class TopologyList:
     cdef _TopologyList* thisptr

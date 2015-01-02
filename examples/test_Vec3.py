@@ -4,9 +4,9 @@ import numpy as np
 v1 = Vec3()
 v1.Print("")
 v1.SetVec(1., 2., 3.)
-v1.Print("updated v1")
+#v1.Print("updated v1")
 print v1
-print v1.to_list()
+assert v1.to_list() == [1.0, 2.0, 3.0]
 
 print "v1 * 12 = %s" % (v1*12)
 
@@ -37,3 +37,12 @@ v4 = Vec3(v3)
 print "v4 = %s" % v4
 
 print "v3 and v4 are the same Vec3 instance? %s" % (v3 == v4)
+
+import unittest
+
+class Test(unittest.TestCase):
+    def test_1(self):
+        pass
+
+if __name__ == "__main__":
+    unittest.main()

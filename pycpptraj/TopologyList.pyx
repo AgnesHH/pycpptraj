@@ -42,17 +42,17 @@ cdef class TopologyList:
         topptr = self.thisptr.GetParm(idx)
         topptr[0] = other.thisptr[0]
 
-    def __iter__(TopologyList self):
-        cdef Topology top
-        cdef int idx
+    #def __iter__(TopologyList self):
+    #    cdef Topology top
+    #    cdef int idx
 
-        for i in range(self.size):
-            top = self[idx]
-            yield top
+    #    for i in range(self.size):
+    #        top = self[idx]
+    #        yield top
 
-    @property
-    def size(self):
-        return self.thisptr.Size()
+    #@property
+    #def size(self):
+    #    return self.thisptr.Size()
 
     def get_parm(self, arg):
         # TODO: checkbound
