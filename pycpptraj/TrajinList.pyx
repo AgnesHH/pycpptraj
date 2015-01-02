@@ -19,7 +19,7 @@ cdef class TrajinList:
     def set_debug(self,int dIn):
         self.thisptr.SetDebug(dIn)
 
-    def add_trajin(self, string fname, ArgList arglist, TopologyList toplist):
+    def add_traj(self, string fname, ArgList arglist, TopologyList toplist):
         return self.thisptr.AddTrajin(fname, arglist.thisptr[0], toplist.thisptr[0])
 
     def add_ensemble(self, string s, ArgList arglist, TopologyList toplist):
@@ -47,6 +47,47 @@ cdef class TrajinList:
             s += 1
             incr(it)
         return s
+
+    def __getitem__(self, int idx):
+        """return Trajin instance
+        TODO: return Trajin or Trajin_Single instance?
+        """
+        cdef Trajin trajin
+        cdef cppvector[_Trajin*].const_iterator it
+        it = self.thisptr.begin()
+
+        if idx < 0 or idx >= self.size:
+            raise ValueError("index is out of range")
+
+        s = 0
+        while it != self.thisptr.end():
+            if idx == s:
+                trajin = Trajin()
+                # use memoryview rather making instance copy
+                trajin.baseptr_1 = deref(it)
+                # recast trajin.baseptr0 too
+                trajin.baseptr0 = <_TrajectoryFile*> trajin.baseptr_1
+                return trajin
+            s += 1
+            incr(it)
+        return Trajin()
+
+    def __setitem__(self, int idx, Trajin other):
+        "TODO: validate"
+        cdef cppvector[_Trajin*].const_iterator it
+        cdef _Trajin* _trajinptr
+        it = self.thisptr.begin()
+
+        if idx < 0 or idx >= self.size:
+            raise ValueError("index is out of range")
+
+        s = 0
+        while it != self.thisptr.end():
+            if idx == s:
+                _trajinptr = deref(it)
+                _trajinptr[0] = other.baseptr_1[0]
+            s += 1
+            incr(it)
 
     def empty(self):
         return self.thisptr.empty()

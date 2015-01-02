@@ -1,24 +1,17 @@
 import os
-from pycpptraj.Frame import Frame
-from pycpptraj.Topology import Topology
-from pycpptraj.TopologyList import TopologyList
-from pycpptraj.ArgList import ArgList
-from pycpptraj.FileName import FileName
-from pycpptraj.CpptrajState import CpptrajState
-from pycpptraj.Trajin import Trajin
-from pycpptraj.TrajinList import TrajinList
+from pycpptraj.base import *
 
 topname = "./data/Tc5b.top"
 trajoutname = "./data/test.x"
 refname = "./data/Tc5b.nat.crd"
 trajinname = "./data/md1_prod.Tc5b.x"
 toplist = TopologyList()
-toplist.add_parm_file(topname)
+toplist.add_parm(topname)
 toplist.info()
 
 top = toplist[0]
-print top
-top.summary()
+#print top
+#top.summary()
 
 #creat TrajinList instance
 trajininput= """
@@ -32,10 +25,13 @@ go
 """
 argIn = ArgList(trajininput)
 trajlist = TrajinList()
-trajlist.add_trajin("./data/md1_prod.Tc5b.x", argIn, toplist)
-trajlist.list()
+trajlist.add_traj("./data/md1_prod.Tc5b.x", argIn, toplist)
 trajin = trajlist.front()
-print trajin.has_vel()
+print trajlist[0]
+print trajin
+print trajlist[0].max_frames 
+trajlist[0] = Trajin_Single()
+print trajlist[0].max_frames
 #trajin.load(trajinname, argIn, toplist[0])
 #print help(trajin)
 #print trajlist.mode()

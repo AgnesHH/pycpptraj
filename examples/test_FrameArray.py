@@ -20,10 +20,10 @@ top = Topology(topname)
 trajin = """
 """
 
-ts.load(mdx, ArgList(), top)
+ts.load(mdx, top)
 ts.prepare_for_read(True)
 frame = Frame()
-frame.set_frame_v(top, ts.has_vel(), ts.n_repdim)
+frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
 frame2 = Frame(frame)
 
 # load reference
@@ -110,7 +110,7 @@ class TestFrameArray(unittest.TestCase):
         print farray.size
         print farray[5].xyz(10)
         assert farray_cp.size != farray.size
-        print farray[5].b_address()
+        #print farray[5].b_address()
         
         print farray[5].xyz(10)
         farray[5].xyz(10)[0] = 1.0
