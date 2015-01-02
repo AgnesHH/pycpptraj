@@ -16,7 +16,7 @@ cdef class Trajin_Single(Trajin):
             del self.thisptr
 
     # Let base-class Trajin take care those methods?
-    def load(self, string tnameIn, Topology tparmIn, ArgList argIn=ArgList(), bint checkBox=True):
+    def load(Trajin_Single self, string tnameIn, Topology tparmIn, ArgList argIn=ArgList(), bint checkBox=True):
         """
         Load trajectory from file.
 
@@ -26,8 +26,11 @@ cdef class Trajin_Single(Trajin):
         Topology instance
         chexbox :: (default = True)
         """
+        # Currently we can not assigne self.top to tparmIn.copy() since Cython does not know self.top type
+        # need to use self._topology since we declare it in TrajectoryFile.pxd
+        self._topology = tparmIn.copy()
         if os.path.isfile(tnameIn):
-            return self.thisptr.SetupTrajRead(tnameIn, argIn.thisptr[0], tparmIn.thisptr, checkBox)
+            return self.thisptr.SetupTrajRead(tnameIn, argIn.thisptr[0], self._topology.thisptr, checkBox)
         else:
             raise ValueError("File does not exist")
 

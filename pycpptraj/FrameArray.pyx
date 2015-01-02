@@ -59,17 +59,21 @@ cdef class FrameArray:
         cdef Frame frame = Frame(framein)
         self.frame_v.push_back(frame.thisptr[0])
 
-    def get_frames(self, Trajin_Single ts, update_top=False):
+    def get_frames(self, ts, update_top=False):
         """get frames from Trajin instance
         Parameters:
         ----------
-        traj : Trajin instance
+        traj : Trajin or Trajing_Single or Trajectory instance
 
         Note:
         ----
         Have not support indices yet. Get max_frames from trajetory
         """
         cdef int i
+
+        if update_top:
+            self.top = ts.top.copy()
+
         if self.top.n_atoms != ts.top.n_atoms:
             raise ValueError("FrameArray.top.n_atoms should be equal to Trajin_Single.top.n_atoms or set update_top=True")
 
@@ -80,5 +84,3 @@ cdef class FrameArray:
             ts.get_next_frame(frame)
             self.append(frame)
         ts.end_traj()
-        if update_top:
-            self.top = ts.top.copy()

@@ -22,10 +22,10 @@ trajinfile = testdir + "md1_prod.Tc5b.x"
 state = create_state(top=topfile, trajin=trajinfile, ref=None)
 #state.add_action(Action_Molsurf(), ArgList("surf"))
 #state.add_action(Action_Molsurf(), ArgList("surf @CA"))
-state.add_action(Action_Strip(), ArgList("strip @H"))
+state.add_action(Action_Strip(), ArgList("strip !@CA"))
 state.run()
 trajlist = state.get_trajinlist()
-#print trajlist.size
+print trajlist.size
 traj = trajlist.__iter__().next()
 
 farray = FrameArray()
@@ -41,5 +41,3 @@ print "crd"
 print farray[0].crd(0)
 print farray[0].crd(911)
 print farray[0].coords.__len__()
-
-

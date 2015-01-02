@@ -11,16 +11,16 @@ cdef class TrajectoryFile:
 
     def __cinit__(self):
         # ABC
-        self.topology = Topology()
+        self._topology = Topology()
 
-        # let cpptraj free memory for self.topology
-        self.topology.py_free_mem = False
+        # let cpptraj free memory for self._topology
+        self._topology.py_free_mem = False
 
-        # we don't need to initialize self.topology here
+        # we don't need to initialize self._topology here
         # check "property" section
-        # set memory view for self.topology.thisptr
+        # set memory view for self._topology.thisptr
         #if self.baseptr0.TrajParm():
-        #    self.topology.thisptr = self.baseptr0.TrajParm()
+        #    self._topology.thisptr = self.baseptr0.TrajParm()
 
     def __dealloc__(self):
         # ABC
@@ -79,8 +79,8 @@ cdef class TrajectoryFile:
     # check the below solution
     #@property
     #def top(self):
-    #    self.topology.thisptr = self.baseptr0.TrajParm()
-    #    return self.topology
+    #    self._topology.thisptr = self.baseptr0.TrajParm()
+    #    return self._topology
 
     #@top.setter
     #def top(self, Topology other):
@@ -88,12 +88,17 @@ cdef class TrajectoryFile:
 
     property top:
         def __get__(self):
-            self.topology.thisptr = self.baseptr0.TrajParm()
-            return self.topology
+            self._topology.thisptr = self.baseptr0.TrajParm()
+            return self._topology
 
         def __set__(self, Topology other):
-            self.baseptr0.SetTrajParm(other.thisptr)
-        
+            # make a copy
+            cdef Topology newtop = other.copy()
+            # since we will pass a pointer to SetTrajParm method,
+            # we let cpptraj frees memory
+            newtop.py_free_mem = False
+
+            self.baseptr0.SetTrajParm(newtop.thisptr)
 
     def trajfilename(self):
         cdef FileName fname = FileName()

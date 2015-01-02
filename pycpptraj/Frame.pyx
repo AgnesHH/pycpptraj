@@ -206,6 +206,15 @@ cdef class Frame:
             arr.append(deref(self.thisptr.CRD(i)))
         return arr
 
+    @property
+    def np_coords_reshape(self):
+        """return numpy array if available"""
+        try:
+            import numpy as np
+            return np.asarray(self.coords).reshape(self.size/3, 3)
+        except:
+            raise ImportError("need numpy")
+
     def crd(self, int idx):
         if idx > (3 * self.n_atoms - 1):
             raise ValueError("index is out of range")
