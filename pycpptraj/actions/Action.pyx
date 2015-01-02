@@ -1,6 +1,7 @@
 # distutils: language = c++
 from ..Topology cimport Topology
 from ..Frame cimport Frame
+from ..FrameArray cimport FrameArray
 
 
 cdef class Action:
@@ -30,7 +31,12 @@ cdef class Action:
         #del self.baseptr
         pass
 
-    def read_input(self, ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug):
+    #def read_input(self, ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug=0):
+    def read_input(self, ArgList argIn, TopologyList toplist, 
+                   FrameList flist=FrameList(), 
+                   DataSetList dslist=DataSetList(), 
+                   DataFileList dflist=DataFileList(), 
+                   int debug=0):
         """
         temp doc: 
         Input: ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug):       
@@ -38,22 +44,53 @@ cdef class Action:
         return self.baseptr.Init(argIn.thisptr[0], toplist.thisptr, flist.thisptr, dslist.thisptr, dflist.thisptr,
                 debug)
 
-    def process(self, Topology top): 
+    def process(self, Topology oldtop, Topology newtop): 
         """
+        TODO : rename this method
         Input: 
         ====
         top :: Topology instance
         """
-        return self.baseptr.Setup(top.thisptr, &(top.thisptr))
+        return self.baseptr.Setup(oldtop.thisptr, &(newtop.thisptr))
 
-    def do_action(self, int idx, Frame frame):
+    #def do_action(self, int idx, Frame oldframe, Frame newframe):
+    def do_action(self, Frame frame, int idx=0):
         """
         Input:
         ====
         idx :: frame id
         frame :: Frame instance
         """
+        # debug
+        #oldframe.py_free_mem = newframe.py_free_mem = False
+        frame.py_free_mem = False
+        # got double-free memory error when not using above flag
+        # end debug
+        #return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
         return self.baseptr.DoAction(idx, frame.thisptr, &(frame.thisptr))
+
+    def do_action_2(self, Frame frame, FrameArray farray=FrameArray(), int idx=0):
+        """
+        TEST
+        Input:
+        ====
+        idx :: frame id
+        frame :: Frame instance
+        """
+        # debug
+        #oldframe.py_free_mem = newframe.py_free_mem = False
+        #frame.py_free_mem = False
+        # got double-free memory error when not using above flag
+        # end debug
+        #return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
+        cdef Frame tmp1 = Frame(frame)
+        cdef Frame tmp2 = Frame()
+
+        # need to use this flag to avoid double-free mem
+        tmp2.py_free_mem = False
+
+        self.baseptr.DoAction(idx, tmp1.thisptr, &(tmp2.thisptr))
+        farray.append(tmp2)
 
     def print_output(self):
         self.baseptr.Print()

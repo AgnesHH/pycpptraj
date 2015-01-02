@@ -38,6 +38,16 @@ cdef class TrajinList:
             yield trajin
             incr(it)
 
+    @property
+    def size(self):
+        cdef cppvector[_Trajin*].const_iterator it
+        it = self.thisptr.begin()
+        s = 0
+        while it != self.thisptr.end():
+            s += 1
+            incr(it)
+        return s
+
     def empty(self):
         return self.thisptr.empty()
 

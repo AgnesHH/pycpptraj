@@ -35,7 +35,7 @@ cdef class DihedralSearch:
     def search_for_all(self):
         return self.thisptr.SearchForAll()
 
-#    def find_dihedrals(self, Topology, Range):
+#    def find_dihedrals(self, Topology top, Range r):
 #        return self.thisptr.FindDihedrals(top.thisptr[0], r.thisptr[0])
 
     def clear(self):

@@ -16,7 +16,7 @@ cdef class Trajin_Single(Trajin):
             del self.thisptr
 
     # Let base-class Trajin take care those methods?
-    def load(self, string tnameIn, ArgList argIn, Topology tparmIn, bint checkBox=True):
+    def load(self, string tnameIn, Topology tparmIn, ArgList argIn=ArgList(), bint checkBox=True):
         """
         Load trajectory from file.
 

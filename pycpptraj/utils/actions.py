@@ -16,7 +16,10 @@ def write_parm(top=None, prefix="temp", parmtype='AMBERPARM'):
     parmtype = ParmFormatDict[parmtype]
     pfile.write_prefix_topology(top, prefix, parmtype, 0)
 
-def strip_parm(top=None, mask=None):
+def strip(top=None, traj=None, mask=None):
+    """strip top and traj
+    return : new stripped top and stripped traj
+    """
     pass
 
 def load_parm(topname):
@@ -29,6 +32,7 @@ def load_parm(topname):
     return top
 
 def load_traj(top, trajfile):
+    """return what?"""
     pass
 
 # translated from cpptraj (Command.cpp)

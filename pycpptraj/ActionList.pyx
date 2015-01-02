@@ -50,9 +50,12 @@ cdef class ActionList:
     #    return self.thisptr.SetupActions(&topptr)
 
     def setup_actions(self, Topology top):
+        # let cpptraj free mem
+        top.py_free_mem = False
         return self.thisptr.SetupActions(&(top.thisptr))
 
-    def do_actions(self, Frame frame, int idx):
+    def do_actions(self, Frame frame, int idx=0):
+        frame.py_free_mem = False
         return self.thisptr.DoActions(&(frame.thisptr), idx)
 
     def print_list(self):

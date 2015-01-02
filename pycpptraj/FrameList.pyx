@@ -39,12 +39,12 @@ cdef class FrameList:
         """
         return self.thisptr.SetActiveRef(numIn)
 
-    def add_reference(self,ArgList arglist, TopologyList toplist):
+    def add_reference(self, ArgList arglist, TopologyList toplist):
         """
         Input:
         =====
         arglist :: ArgList instance
-        toplist :: TopologyList instance:w
+        toplist :: TopologyList instance
         """
         return self.thisptr.AddRefFrame(arglist.thisptr[0], toplist.thisptr[0])
 

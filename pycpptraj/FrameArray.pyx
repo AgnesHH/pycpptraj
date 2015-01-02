@@ -5,9 +5,8 @@ from Topology cimport Topology
 
 
 cdef class FrameArray:
-    """FrameArray: Holding array of Frame pointers"""
-    def __cinit__(self):
-        pass
+    def __cinit__(self, top=Topology()):
+        self.top = top
 
     def copy(self):
         "Return a copy of FrameArray"
@@ -18,11 +17,9 @@ cdef class FrameArray:
         return other
 
     def __getitem__(FrameArray self, int idx):
-        """Return a copy of FrameArray[idx]
+        """Return a reference of FrameArray[idx]
         """
         cdef Frame frame = Frame()
-        # debug
-        #print "I am getting an item"
 
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
@@ -30,7 +27,6 @@ cdef class FrameArray:
         return frame
 
     def __setitem__(FrameArray self, int idx, Frame other):
-        cdef _Frame* ptr
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
         self.frame_v[idx] = other.thisptr[0]
@@ -62,3 +58,27 @@ cdef class FrameArray:
     def append(self, Frame framein):
         cdef Frame frame = Frame(framein)
         self.frame_v.push_back(frame.thisptr[0])
+
+    def get_frames(self, Trajin_Single ts, update_top=False):
+        """get frames from Trajin instance
+        Parameters:
+        ----------
+        traj : Trajin instance
+
+        Note:
+        ----
+        Have not support indices yet. Get max_frames from trajetory
+        """
+        cdef int i
+        if self.top.n_atoms != ts.top.n_atoms:
+            raise ValueError("FrameArray.top.n_atoms should be equal to Trajin_Single.top.n_atoms or set update_top=True")
+
+        frame = Frame()
+        frame.set_frame_v(ts.top, ts.has_vel(), ts.n_repdims)
+        ts.begin_traj()
+        for i in range(ts.max_frames):
+            ts.get_next_frame(frame)
+            self.append(frame)
+        ts.end_traj()
+        if update_top:
+            self.top = ts.top.copy()

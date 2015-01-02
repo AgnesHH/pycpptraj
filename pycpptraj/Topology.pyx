@@ -221,7 +221,7 @@ cdef class Topology:
         def __get__(self):
             return self.thisptr.Nframes()
 
-    property n_repdim:
+    property n_repdims:
         def __get__(self):
             return self.thisptr.NrepDim()
 

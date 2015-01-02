@@ -50,6 +50,17 @@ cdef class Frame:
         # Should I include topology in Frame?
         # May by not: memory
         # Include topology in Trajectory instance? 
+        """
+        TODO: add doc
+        >>> from pycpptraj.Frame import Frame
+        >>> # created empty Frame instance
+        >>> frame0 = Frame()
+        >>> # create Frame instance with 304 atoms
+        >>> frame1 = Frame(304)
+        >>> # create a copy of frame1
+        >>> frame2 = Frame(frame1)
+        >>> # add more examples
+        """
         cdef Frame frame
         cdef AtomMask atmask
         cdef vector[_Atom] vt
@@ -87,6 +98,12 @@ cdef class Frame:
         if self.py_free_mem and self.thisptr:
             del self.thisptr
 
+    def copy(self):
+        """return a copy"""
+        cdef Frame frame = Frame()
+        frame.thisptr[0] = self.thisptr[0]
+        return frame
+
     def set_from_crd(self, CRDtype farray, *args):
         """"""
         cdef int numCrd, numBoxCrd
@@ -102,8 +119,8 @@ cdef class Frame:
         else:
             raise ValueError("Must have only 3 or 4 more arguments")
 
-    def convert_to_crd(self, int numBoxCrd, bint hasVel):
-        return self.thisptr.ConvertToCRD(numBoxCrd, hasVel)
+    def convert_to_crd(self, int numBoxCrd, bint has_vel=False):
+        return self.thisptr.ConvertToCRD(numBoxCrd, has_vel)
         
     def print_atom_coord(self, int atom):
         self.thisptr.printAtomCoord(atom)
@@ -133,20 +150,20 @@ cdef class Frame:
     def empty(self):
         return self.thisptr.empty()
 
-    def has_velocity(self):
+    def has_vel(self):
         return self.thisptr.HasVelocity()
 
     @property
     def n_atoms(self):
        return self.thisptr.Natom()
 
-    property size:
-        def __get__(self):
-            return self.thisptr.size()
+    @property
+    def size(self):
+        return self.thisptr.size()
 
-    property n_repdims:
-        def __get__(self):
-            return self.thisptr.NrepDims()
+    @property
+    def n_repdims(self):
+        return self.thisptr.NrepDims()
 
     property temperature:
         def __get__(self):
@@ -168,22 +185,36 @@ cdef class Frame:
         # can we change it?
 
         cdef int i
-        cdef natom = self.n_atoms
         cdef pyarray arr = pyarray('d', [])
 
-        # check if this is not empty Frame
+        if atomnum >= self.n_atoms or atomnum < 0:
+            raise ValueError("Index is out of range")
+
+        # TODO: check if this is not empty Frame
         arr.append(self.thisptr.XYZ(atomnum)[0])
         arr.append(self.thisptr.XYZ(atomnum)[1])
         arr.append(self.thisptr.XYZ(atomnum)[2])
         return arr
 
-    def crd(self,int idx):
+    @property
+    def coords(self):
+        """return self.crd(0) to self.crd(self.n_atoms-1)"""
+        cdef pyarray arr = pyarray('d', [])
         cdef int i
+
+        for  i in range(3 * self.thisptr.Natom()):
+            arr.append(deref(self.thisptr.CRD(i)))
+        return arr
+
+    def crd(self, int idx):
+        if idx > (3 * self.n_atoms - 1):
+            raise ValueError("index is out of range")
+        elif idx < 0:
+            raise ValueError("Not supported negative index yet")
         return self.thisptr.CRD(idx)[0]
 
-    def v_xyz(self,int atnum):
+    def v_xyz(self, int atnum):
         cdef int i
-        cdef natom = self.n_atoms
         cdef pyarray arr = pyarray('d', [])
 
         arr.append(self.thisptr.VXYZ(atnum)[0])
@@ -198,6 +229,11 @@ cdef class Frame:
         cdef Box box = Box()
         box.thisptr[0] = self.thisptr.BoxCrd()
         return box
+
+    @property
+    def _xyz(self):
+        """return mutable coords"""
+        raise NotImplementedError()
 
     def x_address(self):
         # cpptraj: return double*

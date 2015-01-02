@@ -24,7 +24,7 @@ cdef class Trajin (TrajectoryFile):
         self.baseptr_1.GetNextFrame(frame.thisptr[0])
         #return frame
 
-    def set_total_frames(self,int idx):
+    def set_max_frames(self,int idx):
         self.baseptr_1.SetTotalFrames(idx)
 
     def setup_trajio(self, string s, TrajectoryIO trajio, ArgList arglist):
@@ -46,7 +46,7 @@ cdef class Trajin (TrajectoryFile):
         self.baseptr_1.PrintFrameInfo()
 
     @property
-    def total_frames(self):
+    def max_frames(self):
         return self.baseptr_1.TotalFrames()
 
     @property
@@ -91,7 +91,7 @@ cdef class Trajin (TrajectoryFile):
             raise ValueError("File does not exist")
 
     #@abstractmethod('Trajin')
-    def begin_traj(self, bint showProgress):
+    def begin_traj(self, bint showProgress=False):
         return self.baseptr_1.BeginTraj(showProgress)
 
     #@abstractmethod('Trajin')
@@ -112,6 +112,6 @@ cdef class Trajin (TrajectoryFile):
 
     #@abstractmethod('Trajin')
     @property
-    def n_repdim(self):
+    def n_repdims(self):
         return self.baseptr_1.NreplicaDimension()
     # end virtual methods
