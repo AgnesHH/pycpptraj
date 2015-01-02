@@ -12,5 +12,5 @@ print distance[:10]
 cppout = np.loadtxt("./data/CAres2_CAres10.Tc5b.dat", skiprows=1).transpose()[1]
 print cppout[:10]
 
-np.testing.assert_almost_equal(distance, cppout, decimal=4)
+np.testing.assert_almost_equal(distance, cppout, decimal=3)
 print "Kool"

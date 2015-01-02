@@ -1,4 +1,4 @@
-trajin md1_prod.Tc5b.x 1 10
+trajin md1_prod.Tc5b.x 
 reference Tc5b.nat.crd
 rms reference out rmsd_allatoms.dat
 distance d1 out CAres2_CAres10.Tc5b.dat :2@CA :10@CA
