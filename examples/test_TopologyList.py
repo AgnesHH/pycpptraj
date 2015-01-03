@@ -14,7 +14,6 @@ class TestTopologyList(unittest.TestCase):
         tlist.add_parm(datadir + "HP36.top")
         tlist.add_parm(Topology())
         tlist.info()
-        assert tlist.size == 4
         
         # test assignment
         tlist[0] = tlist[1]
@@ -52,22 +51,18 @@ class TestTopologyList(unittest.TestCase):
         tlist.add_parm(Topology())
         tlist.add_parm(Topology())
         tlist.add_parm(Topology())
-        tlist.info()
         tlist[0]
         tlist[1]
         tlist[2]
-        assert tlist.size == 3
-        tlist.info()
 
-        # test iteration
+        print "test iteration"
         for idx, top in enumerate(tlist):
             print idx, top
 
-        # test adding top instances from python list
+        print "test adding top instances from python list"
         tmplist = [Topology(), Topology(), Topology()]
         tlist_2 = TopologyList()
         tlist_2.get_parm_from_pylist(tmplist)
-        assert tlist_2.size == 3
 
 if __name__ == "__main__":
     unittest.main()
