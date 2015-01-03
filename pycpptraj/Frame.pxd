@@ -1,8 +1,10 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
+from libcpp.string cimport string
 from Atom cimport *
 from AtomMask cimport *
 from Box cimport *
+from Topology cimport Topology
 
 ctypedef vector[float] CRDtype
 ctypedef vector[double] Darray
@@ -109,3 +111,4 @@ cdef extern from "Frame.h":
 cdef class Frame:
     cdef _Frame* thisptr
     cdef bint py_free_mem
+    cdef void _strip_atoms(Frame self, Topology top, string m, bint has_box)

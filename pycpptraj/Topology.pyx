@@ -228,7 +228,7 @@ cdef class Topology:
 
     property n_repdims:
         def __get__(self):
-            return self.thisptr.NrepDim()
+            return self.thisptr.NrepDims()
 
     property parm_name:
         def __get__(self):
@@ -240,20 +240,23 @@ cdef class Topology:
 
     #def int SetAmberExtra(self, vector[double], vector[NameType], vector[int], vector[int]):
 
-    def setup_integer_mask(self, AtomMask atm):
+    def set_integer_mask(self, AtomMask atm):
         return self.thisptr.SetupIntegerMask(atm.thisptr[0])
 
-    def setup_char_mask(self, AtomMask atm):
+    def set_char_mask(self, AtomMask atm):
         return self.thisptr.SetupCharMask(atm.thisptr[0])
 
-    def setup_integer_mask(self,AtomMask atm, Frame frame):
+    def set_integer_mask(self,AtomMask atm, Frame frame):
         return self.thisptr.SetupIntegerMask(atm.thisptr[0], frame.thisptr[0])
 
-    def setup_char_mask(self, AtomMask atm, Frame frame):
+    def set_char_mask(self, AtomMask atm, Frame frame):
         return self.thisptr.SetupCharMask(atm.thisptr[0], frame.thisptr[0])
 
     def scale_dihedral_k(self, double value):
         self.thisptr.ScaleDihedralK(value)
+
+    def set_box(self, Box boxin):
+        self.thisptr.SetBox(boxin.thisptr[0])
 
     def partial_modify_state_by_mask(self, AtomMask m):
         cdef Topology top = Topology()

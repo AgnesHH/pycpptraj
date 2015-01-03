@@ -39,7 +39,7 @@ cdef extern from "Topology.h":
         int Nframes() const 
         int NextraPts() const 
         bint HasVelInfo() const 
-        int NrepDim() const 
+        int NrepDims "NrepDim"() const 
         const string& ParmName() const 
         const _FileName& OriginalFilename() const 
         const string& GBradiiSet() const 

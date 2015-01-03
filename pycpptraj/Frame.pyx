@@ -4,11 +4,9 @@ from cpython.array cimport array as pyarray
 from cython.operator cimport dereference as deref
 from libcpp.vector cimport vector
 from AtomMask cimport *
-from AtomMask import AtomMask
 from Frame cimport CRDtype
 from Topology cimport Topology
 from Vec3 cimport Vec3
-#from util cimport atomlist_to_vector
 
 def check_instance(inst, clsname):
     if not isinstance(inst, clsname):
@@ -291,13 +289,16 @@ cdef class Frame (object):
     def set_box_angles(self, double[:] ain):
         self.thisptr.SetBoxAngles(&ain[0])
 
-    def set_frame(self,int natomIn):
-        return self.thisptr.SetupFrame(natomIn)
+    def set_frame(self, Frame frame, AtomMask atm):
+        self.thisptr.SetFrame(frame.thisptr[0], atm.thisptr[0])
 
     #def set_frame_m(self, list atlist):
     #    cdef vector[_Atom] v 
     #    v = atomlist_to_vector(atlist)
     #    return self.thisptr.SetupFrameM(v)
+
+    def setup_frame(self, int atomnum):
+        self.thisptr.SetupFrame(atomnum)
 
     def set_frame_x_m(self, vector[double] Xin, vector[double] massIn):
         return self.thisptr.SetupFrameXM(Xin, massIn)
@@ -492,3 +493,30 @@ cdef class Frame (object):
 
     def calc_temperature(self, AtomMask mask, int deg_of_freedom):
         return self.thisptr.CalcTemperature(mask.thisptr[0], deg_of_freedom)
+
+    # use Action_Strip here?
+    cdef void _strip_atoms(Frame self, Topology top, string m, bint has_box):
+        """this method is too slow vs cpptraj"""
+        cdef Topology newtop = Topology()
+        newtop.py_free_mem = False
+        cdef AtomMask mask = AtomMask()
+        cdef Frame tmpframe = Frame() 
+
+        del tmpframe.thisptr
+
+        tmpframe.thisptr = new _Frame(self.thisptr[0])
+        
+        mask.thisptr.SetMaskString(m)
+        mask.thisptr.InvertMask()
+        top.thisptr.SetupIntegerMask(mask.thisptr[0])
+        #newtop.thisptr[0] = top.thisptr.modifyStateByMask(mask.thisptr[0])
+        newtop.thisptr = top.thisptr.modifyStateByMask(mask.thisptr[0])
+        if not has_box:
+            newtop.thisptr.SetBox(_Box())
+        tmpframe.thisptr.SetupFrameV(newtop.thisptr.Atoms(), newtop.thisptr.HasVelInfo(), 
+                                     newtop.thisptr.NrepDims()) 
+        tmpframe.thisptr.SetFrame(self.thisptr[0], mask.thisptr[0])
+        self.thisptr[0] = tmpframe.thisptr[0]
+
+    def strip_atoms(Frame self, Topology top, string m, bint has_box=False):
+        self._strip_atoms(top, m, has_box)
