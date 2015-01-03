@@ -2,6 +2,7 @@ from pycpptraj.base import *
 from pycpptraj.actions.Action_Strip import Action_Strip
 from pycpptraj.actions import Action
 from pycpptraj.misc import strip
+from pycpptraj.Trajin_Single import Trajin_Single
 
 farray = FrameArray(Topology("./data/Tc5b.top"))
 
@@ -9,7 +10,9 @@ print "newtop"
 newtop = farray.top.copy()
 newtop2 = newtop.copy()
 trajin = Trajectory()
-trajin.load("./data/md1_prod.Tc5b.x", newtop)
+#trajin.check_frame_args(ArgList("trajin 1 100 10"), 10, 1, 100, 10)
+trajin.set_max_frames(100)
+trajin.load("./data/md1_prod.Tc5b.x", newtop, ArgList("trajin ./data/md1_prod.Tc5b.x 1 100 10"))
 print trajin.max_frames
 farray.get_frames(trajin)
 farray2 = farray.copy()

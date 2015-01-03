@@ -25,10 +25,10 @@ top = Topology(topname)
 trajin = """
 """
 
-ts.load(mdx, ArgList(), top)
+ts.load(mdx, top, ArgList("trajin 1 100 10"))
 ts.prepare_for_read(True)
 frame = Frame()
-frame.set_frame_v(top, ts.has_vel(), ts.n_repdim)
+frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
 frame2 = Frame(frame)
 
 # load reference
@@ -40,7 +40,7 @@ ref_frame = ref.frame
 def get_frame_array():
     farray = FrameArray()
     frame = Frame()
-    frame.set_frame_v(top, ts.has_vel(), ts.n_repdim)
+    frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
     ts.begin_traj(False)
     for i in range(10):
         ts.get_next_frame(frame)

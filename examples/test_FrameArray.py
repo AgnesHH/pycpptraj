@@ -20,7 +20,7 @@ top = Topology(topname)
 trajin = """
 """
 
-ts.load(mdx, top)
+ts.load(mdx, top, ArgList("trajin 1 100 10"))
 ts.prepare_for_read(True)
 frame = Frame()
 frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)

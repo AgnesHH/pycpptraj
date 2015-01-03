@@ -115,6 +115,9 @@ cdef class TrajinList:
         trajin.baseptr0 = <_TrajectoryFile*> trajin.baseptr_1
         return trajin
 
+    def append(self, Trajin trajin):
+        raise NotImplementedError("not yet")
+
     @property
     def max_frames(self):
         return self.thisptr.MaxFrames()

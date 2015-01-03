@@ -76,7 +76,7 @@ cdef class Trajin (TrajectoryFile):
 
     # Those are virtual methods. Only implement in sub-class
     #@abstractmethod
-    def load(self, string tnameIn, ArgList argIn, Topology tparmIn):
+    def load(self, string tnameIn, Topology tparmIn, ArgList argIn):
         """
         Load trajectory from file.
 
