@@ -14,7 +14,7 @@ def check_instance(inst, clsname):
     if not isinstance(inst, clsname):
         raise ValueError("Must be instance of %s") % clsname.__name__
 
-cdef class Frame:
+cdef class Frame (object):
     """Original cpptraj doc (Frame.h) (written by Daniel R. Roe)
     (pycpptraj doc will be updated) 
     Class: Frame
@@ -119,8 +119,10 @@ cdef class Frame:
         else:
             raise ValueError("Must have only 3 or 4 more arguments")
 
-    def convert_to_crd(self, int numBoxCrd, bint has_vel=False):
-        return self.thisptr.ConvertToCRD(numBoxCrd, has_vel)
+    def convert_to_crd(self, int num_box_crd=0, bint has_vel=False):
+        """convert_to_crd(self, int num_box_crd=0, bint has_vel=False):
+        """
+        return self.thisptr.ConvertToCRD(num_box_crd, has_vel)
         
     def print_atom_coord(self, int atom):
         self.thisptr.printAtomCoord(atom)
@@ -147,6 +149,22 @@ cdef class Frame:
         else:
             return self.thisptr.index_opr(idx)
 
+    def __setitem__(self, int idx, value):
+        "Return coordinate"
+        cdef double* ptr = self.thisptr.xAddress()
+        if idx < 0 or idx >= self.size:
+            raise ValueError("0 <= index < self.size")
+        else:
+            ptr[idx] = <double> value
+
+    def __iter__(self):
+        cdef int i
+        for i in range(self.thisptr.size()):
+            yield self.thisptr.CRD(i)[0]
+
+    def __len__(self):
+        return self.size
+
     def empty(self):
         return self.thisptr.empty()
 
@@ -165,17 +183,18 @@ cdef class Frame:
     def n_repdims(self):
         return self.thisptr.NrepDims()
 
-    property temperature:
-        def __get__(self):
-            return self.thisptr.Temperature()
+    @property 
+    def temperature(self):
+        return self.thisptr.Temperature()
 
     # does not work since XYZ return const double*
-    #def update_atom(self, int idx, double[:] xyz):
-    #    if len(xyz) > 3:
-    #        raise IndexError("")
-    #    self.thisptr.XYZ(idx)[0] = xyz[0]
-    #    self.thisptr.XYZ(idx)[1] = xyz[1]
-    #    self.thisptr.XYZ(idx)[2] = xyz[2]
+    def update_atom(self, int idx, double[:] xyz):
+        cdef double* ptr = self.thisptr.xAddress() + 3 * idx
+        if len(xyz) > 3:
+            raise IndexError("")
+        ptr[0] = xyz[0]
+        ptr[1] = xyz[1]
+        ptr[2] = xyz[2]
 
     def xyz(self, int atomnum):
         """return xyz coordinates of idx-th atom"""
@@ -198,7 +217,9 @@ cdef class Frame:
 
     @property
     def coords(self):
-        """return self.crd(0) to self.crd(self.n_atoms-1)"""
+        """
+        return a copy of frame coords (python array)
+        """
         cdef pyarray arr = pyarray('d', [])
         cdef int i
 
@@ -208,7 +229,8 @@ cdef class Frame:
 
     @property
     def np_coords_reshape(self):
-        """return numpy array if available"""
+        """TODO: need this?
+        return numpy array if available"""
         try:
             import numpy as np
             return np.asarray(self.coords).reshape(self.size/3, 3)
@@ -216,6 +238,7 @@ cdef class Frame:
             raise ImportError("need numpy")
 
     def crd(self, int idx):
+        """TODO: need this method?"""
         if idx > (3 * self.n_atoms - 1):
             raise ValueError("index is out of range")
         elif idx < 0:
@@ -239,10 +262,10 @@ cdef class Frame:
         box.thisptr[0] = self.thisptr.BoxCrd()
         return box
 
-    @property
-    def _xyz(self):
-        """return mutable coords"""
-        raise NotImplementedError()
+    #@property
+    #def _xyz(self):
+    #    """return mutable coords"""
+    #    cdef double[self.size] xyz
 
     def x_address(self):
         # cpptraj: return double*
@@ -297,7 +320,7 @@ cdef class Frame:
     def set_frame(self, Frame frame, AtomMask atmask):
         self.thisptr.SetFrame(frame.thisptr[0], atmask.thisptr[0])
 
-    def set_coordinates_by_map(self, Frame frame, vector[int] mapIn):
+    def set_coords_by_map(self, Frame frame, vector[int] mapIn):
         self.thisptr.SetCoordinatesByMap(frame.thisptr[0], mapIn)
 
     def zero_coords(self):
@@ -308,7 +331,12 @@ cdef class Frame:
         #self.thisptr[0] = self.thisptr[0].addequal(other.thisptr[0])
         self.thisptr[0] += other.thisptr[0]
         return self
-    
+
+    def __sub__(Frame self, Frame other):
+        cdef Frame frame = Frame()
+        frame.thisptr[0] = self.thisptr[0] - other.thisptr[0]
+        return frame
+
     def __isub__(Frame self, Frame other):
         # either of two methods are correct
         #self.thisptr[0] = self.thisptr[0].subequal(other.thisptr[0])
@@ -326,11 +354,6 @@ cdef class Frame:
         frame.thisptr[0] = self.thisptr[0] * other.thisptr[0]
         return frame
 
-    def __sub__(Frame self, Frame other):
-        cdef Frame frame = Frame()
-        frame.thisptr[0] = self.thisptr[0] - other.thisptr[0]
-        return frame
-
     def divide(self, double divisor, *args):
         cdef Frame frame
         if not args:
@@ -345,13 +368,13 @@ cdef class Frame:
     def check_coords_invalid(self):
         return self.thisptr.CheckCoordsInvalid()
 
-    def v_center_of_mass(self, AtomMask atmask):
+    def VCenterOfMass(self, AtomMask atmask):
         # return Vec3 instance
         cdef Vec3 v3 = Vec3()
         v3.thisptr[0] = self.thisptr.VCenterOfMass(atmask.thisptr[0])
         return v3
 
-    def v_geometric_center(self, AtomMask atmask):
+    def VGeometricCenter(self, AtomMask atmask):
         # return Vec3 instance
         cdef Vec3 v3 = Vec3()
         v3.thisptr[0] = self.thisptr.VGeometricCenter(atmask.thisptr[0])
@@ -360,10 +383,12 @@ cdef class Frame:
     def translate(self, *args):
         """
         Args:
-            (Vec3, first_atom_idx, last_atom_idx)
+               (Vec3, first_atom_idx, last_atom_idx)
+            or (Vec3, atom_idx) 
+            or (Vec3)
         TODO: add doc
         """
-        cdef firstAtom, lastAtom
+        cdef firstAtom, lastAtom, atom
         cdef Vec3 vec3
 
         if len(args) == 3:
@@ -396,16 +421,20 @@ cdef class Frame:
     def scale(self, AtomMask atm, double sx, double sy, double sz):
         self.thisptr.Scale(atm.thisptr[0], sx, sy, sz)
 
-    # Not in cpptraj anymore
-    #def center(self, AtomMask atm, CenterMode ctmode, Vec3 v, bint use_mass=False):
-    #    self.thisptr.Center(atm.thisptr[0], ctmode, v.thisptr[0], use_mass)
-
     def center_on_origin(self,bint useMassIn):
         cdef Vec3 v = Vec3()
         v.thisptr[0] = self.thisptr.CenterOnOrigin(useMassIn)
         return v
 
     def rmsd(self,Frame frame, bint use_mass=False, *args):
+        """Calculate rmsd betwen two frames
+        Parameters:
+        ----------
+        frame : Frame instance
+        use_mass : bool, default = False
+        *args :  optional, 3 args (Matrix_3x3 instance, Vec3 instance, Vec3 instance)
+        """
+
         cdef Matrix_3x3 m3
         cdef Vec3 v1, v2
 
@@ -418,6 +447,13 @@ cdef class Frame:
             raise NotImplementedError()
 
     def rmsd_centered_ref(self, Frame ref, bint use_mass=False, *args):
+        """Calculate rmsd betwen two frames
+        Parameters:
+        ----------
+        frame : Frame instance
+        use_mass : bool, default = False
+        *args :  optional, 2 args (Matrix_3x3 instance, Vec3 instance)
+        """
         cdef Matrix_3x3 mat 
         cdef Vec3 v
 
@@ -427,14 +463,21 @@ cdef class Frame:
             mat, v = args
             return self.thisptr.RMSD_CenteredRef(ref.thisptr[0], mat.thisptr[0], v.thisptr[0], use_mass)
 
-    def rmsd_no_fit(self, Frame frame, useMassIn):
-        return self.thisptr.RMSD_NoFit(frame.thisptr[0], useMassIn)
-
-    # deprecated?
-    #def rmsd_fit_to_ref(self, Frame frame, Vec3 vec):
-    #    return self.thisptr.RMSD_FitToRef(frame.thisptr[0], vec.thisptr[0])
+    def rmsd_no_fit(self, Frame frame, bint use_mass=False):
+        """Calculate rmsd betwen two frames without fitting
+        Parameters:
+        ----------
+        frame : Frame instance
+        use_mass : bool, default = False
+        """
+        return self.thisptr.RMSD_NoFit(frame.thisptr[0], use_mass)
 
     def dist_rmsd(self, Frame frame):
+        """Calculate dist_rmsd betwen two frames
+        Parameters:
+        ----------
+        frame : Frame instance
+        """
         return self.thisptr.DISTRMSD(frame.thisptr[0])
 
     def set_axis_of_rotation(self, int atom1, int atom2):
@@ -442,7 +485,7 @@ cdef class Frame:
         vec.thisptr[0] = self.thisptr.SetAxisOfRotation(atom1, atom2)
         return vec
 
-    def calculate_inertia(self, AtomMask atm, Matrix_3x3 Inertia):
+    def calc_inertia(self, AtomMask atm, Matrix_3x3 Inertia):
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.CalculateInertia(atm.thisptr[0], Inertia.thisptr[0])
         return vec

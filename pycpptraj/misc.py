@@ -1,12 +1,13 @@
-# check ./utils/actions.py
+#check ./utils/actions.py
 from pycpptraj.base import *
 from pycpptraj.actions.Action_Strip import Action_Strip
 
 def load_parm():
     pass
 
-def strip(top, farray, mask):
+def strip(arg, mask):
     """
+    TODO: can not modify oldtop, Python to pass it as value
     Modify top and farray
 
     Strip atoms
@@ -18,20 +19,25 @@ def strip(top, farray, mask):
     ----
     Return : None
     """
-    if top.n_atoms != farray.top.n_atoms:
-        raise ValueError("top.n_atoms must be equal to farray.top.n_atoms")
+    if isinstance(arg, Topology):
+        top = arg.copy()
+    elif isinstance(arg, FrameArray):
+        top = arg.top.copy()
 
     toplist = TopologyList()
     toplist.add_parm(top)
+
     stripact = Action_Strip()
     stripact.read_input(ArgList("strip " + mask), toplist)
     stripact.process(toplist[0], top)
 
-    for i in range(farray.size):
-        tmp = farray[i]
-        stripact.do_action(tmp, i)
-        farray[i] = tmp
+    if isinstance(arg, FrameArray):
+        for i in range(arg.size):
+            tmp = arg[i]
+            stripact.do_action(tmp, i)
+            arg[i] = tmp
+        # need to update arg.top
+        arg.top = top.copy()
 
-    # not sure why we need to re-copy top 
-    # if not, get  weird n_atoms
-    farray.top = top.copy()
+    if isinstance(arg, Topology):
+        return top.copy()

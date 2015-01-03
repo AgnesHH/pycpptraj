@@ -1,5 +1,5 @@
 # distutils: language = c++
-
+include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 from libcpp.string cimport string
@@ -13,6 +13,8 @@ cdef class Topology:
         """
         args = filename or Topology instance
         """
+        IF DEBUG:
+            self.instance_num += 1
         cdef TopologyList toplist = TopologyList()
         cdef Topology tp
         cdef string fname
@@ -41,6 +43,9 @@ cdef class Topology:
 
     def __dealloc__(self):
         if self.py_free_mem:
+            IF DEBUG:
+                print self
+                print "I am out. I am the %s th-top instance"  % (self.instance_num)
             # debug
             #print "Top is freeing memory"
             # end debug

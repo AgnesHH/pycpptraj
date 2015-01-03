@@ -51,6 +51,11 @@ cdef class Action:
         ====
         top :: Topology instance
         """
+        if "Strip" in self.__class__.__name__:
+            # since `Action_Strip` will copy a modified version of `oldtop` and 
+            # store in newtop, then __dealloc__ (from cpptraj)
+            # we need to see py_free_mem to False
+            newtop.py_free_mem = False
         return self.baseptr.Setup(oldtop.thisptr, &(newtop.thisptr))
 
     #def do_action(self, int idx, Frame oldframe, Frame newframe):

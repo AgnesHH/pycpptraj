@@ -14,6 +14,8 @@ cdef class FrameArray:
         cdef _Frame _frame
         for _frame in self.frame_v:
             other.frame_v.push_back(_frame)
+        # copy self.top too
+        other.top = self.top.copy()
         return other
 
     def __getitem__(FrameArray self, int idx):

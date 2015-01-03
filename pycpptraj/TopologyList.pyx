@@ -109,6 +109,7 @@ cdef class TopologyList:
         cdef string fname
         cdef ArgList arglist
         cdef Topology top
+        cdef Topology newtop
 
         if len(args) == 1:
             if isinstance(args[0], basestring):
@@ -117,8 +118,9 @@ cdef class TopologyList:
             elif isinstance(args[0], Topology):
                 top = args[0]
                 # let cpptraj frees memory since we pass a pointer
-                top.py_free_mem = False
-                self.thisptr.AddParm(top.thisptr)
+                newtop = top.copy()
+                newtop.py_free_mem = False
+                self.thisptr.AddParm(newtop.thisptr)
         elif len(args) == 2:
             fname, arglist = args
             self.thisptr.AddParmFile(fname, arglist.thisptr[0])

@@ -68,7 +68,7 @@ class TestFrameArray(unittest.TestCase):
         print farray[5].xyz(10)
         assert frame.xyz(10) == farray[5].xyz(10)
 
-        print "do some calculation with 'frame', make sure this does not affect farray[5]"
+        print "do some calculation with 'frame', make sure this will not affect farray[5]"
         print 
         frame += frame
         print frame.xyz(10) 
@@ -115,6 +115,9 @@ class TestFrameArray(unittest.TestCase):
         print farray[5].xyz(10)
         farray[5].xyz(10)[0] = 1.0
         print farray[5].xyz(10)
+
+        # make sure copy topology too
+        assert farray_cp.top.n_atoms == farray.top.n_atoms
 
 if __name__ == "__main__":
     unittest.main()

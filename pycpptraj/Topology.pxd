@@ -1,4 +1,5 @@
 # distutils: language = c++
+include "config.pxi"
 from vector_pycpptraj cimport vector as cppvector
 #from libcpp.set cimport set
 from Atom cimport *
@@ -120,4 +121,6 @@ cdef extern from "Topology.h":
 
 cdef class Topology:
     cdef _Topology* thisptr
-    cdef bint py_free_mem
+    cdef public bint py_free_mem
+    IF DEBUG:
+        cdef unsigned int instance_num
