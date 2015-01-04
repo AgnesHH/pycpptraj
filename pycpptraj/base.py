@@ -19,10 +19,12 @@ from pycpptraj.ActionList import ActionList
 from pycpptraj._cast import cast_dataset
 from pycpptraj import cpptraj_dict
 from pycpptraj.Trajectory import Trajectory
+from pycpptraj.Parm_Amber import Parm_Amber
 
 __all__ = ['Topology', 'TopologyList', 'Frame', 'FrameArray', 'ReferenceFrame', 'AtomMask', 'ArgList', 'CpptrajState', 
            'FrameList', 'Trajin_Single', 'DataSetList', 'DataFileList', 'ActionList',
            'Trajin', 'TrajinList',
            'Trajectory',
+           'Parm_Amber', 
            'cast_dataset',
            'cpptraj_dict']

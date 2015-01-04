@@ -3,6 +3,7 @@ import unittest
 from pycpptraj.Topology import Topology
 from pycpptraj.AtomMask import AtomMask
 from pycpptraj.FileName import FileName
+from pycpptraj.base import *
 
 class TestTopology(unittest.TestCase):
     def test_1(self):
@@ -21,6 +22,9 @@ class TestTopology(unittest.TestCase):
         top.summary()
         top.atom_info("@CA")
         top.atom_info("@H")
+
+        print "test Parm_Amber for write"
+        Parm_Amber().write_parm("test_write.top", top)
         
         #print "test atom_iterator"
         #for atom in top.atom_generator():
