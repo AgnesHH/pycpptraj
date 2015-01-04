@@ -111,4 +111,4 @@ cdef extern from "Frame.h":
 cdef class Frame:
     cdef _Frame* thisptr
     cdef bint py_free_mem
-    cdef void _strip_atoms(Frame self, Topology top, string m, bint has_box)
+    cdef void _strip_atoms(Frame self, Topology top, string m, bint update_top, bint has_box)

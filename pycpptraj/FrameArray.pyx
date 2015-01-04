@@ -86,3 +86,23 @@ cdef class FrameArray:
             ts.get_next_frame(frame)
             self.append(frame)
         ts.end_traj()
+
+    def strip_atoms(self, mask=None, update_top=True, bint has_box=False):
+        cdef vector[_Frame].iterator it
+        cdef Frame frame = Frame()
+        cdef Topology tmptop
+
+        frame.py_free_mem = False
+        it = self.frame_v.begin()
+        while it != self.frame_v.end():
+            # do not dealloc since we use memoryview for _Frame
+            frame.thisptr = &(deref(it))
+            # we need to update topology since _strip_atoms will modify it
+            tmptop = self.top.copy()
+            frame._strip_atoms(tmptop, mask, update_top, has_box)
+            # debug
+            #print "tmptop.n_atoms:", tmptop.n_atoms
+            # debug
+            incr(it)
+        if update_top:
+            self.top = tmptop.copy()

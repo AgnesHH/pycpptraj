@@ -14,6 +14,13 @@ class TestTopology(unittest.TestCase):
         #
         top.summary()
         top.atom_info("@CA")
+
+        print "test strip_atoms: strip all but CA"
+        top.strip_atoms("!@CA")
+        assert top.n_atoms == 20
+        top.summary()
+        top.atom_info("@CA")
+        top.atom_info("@H")
         
         #print "test atom_iterator"
         #for atom in top.atom_generator():

@@ -495,7 +495,7 @@ cdef class Frame (object):
         return self.thisptr.CalcTemperature(mask.thisptr[0], deg_of_freedom)
 
     # use Action_Strip here?
-    cdef void _strip_atoms(Frame self, Topology top, string m, bint has_box):
+    cdef void _strip_atoms(Frame self, Topology top, string m, bint update_top, bint has_box):
         """this method is too slow vs cpptraj"""
         cdef Topology newtop = Topology()
         newtop.py_free_mem = False
@@ -517,6 +517,8 @@ cdef class Frame (object):
                                      newtop.thisptr.NrepDims()) 
         tmpframe.thisptr.SetFrame(self.thisptr[0], mask.thisptr[0])
         self.thisptr[0] = tmpframe.thisptr[0]
+        if update_top:
+            top.thisptr[0] = newtop.thisptr[0]
 
-    def strip_atoms(Frame self, Topology top, string m, bint has_box=False):
-        self._strip_atoms(top, m, has_box)
+    def strip_atoms(Frame self, Topology top, string m, bint update_top=False, bint has_box=False):
+        self._strip_atoms(top, m, update_top, has_box)

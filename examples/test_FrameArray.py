@@ -20,7 +20,7 @@ top = Topology(topname)
 trajin = """
 """
 
-ts.load(mdx, top, ArgList("trajin 1 100 10"))
+ts.load(mdx, top)
 ts.prepare_for_read(True)
 frame = Frame()
 frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
@@ -32,19 +32,21 @@ ref.load_ref(refname, top)
 ref_frame = ref.frame
 
 # create FrameArray to store Frame
-def get_frame_array():
+def get_frame_array(N=10):
     farray = FrameArray()
     ts.begin_traj(False)
-    for i in range(10):
+    for i in range(N):
         ts.get_next_frame(frame)
         farray.append(frame)
         #print frame.rmsd(ref_frame)
     ts.end_traj()
+    farray.top = ts.top.copy()
     return farray
 
 class TestFrameArray(unittest.TestCase):
     def test_1(self):
-        farray = get_frame_array()
+        N = 10
+        farray = get_frame_array(N)
         # store 10th atom coord of 5th frame for comparison
         # make getting results after printing 3 times
         print
@@ -56,7 +58,7 @@ class TestFrameArray(unittest.TestCase):
         ## framearray size = 10
         print
         print "test FrameArray size"
-        assert farray.size == 10
+        assert farray.size == N
         assert len(farray) == farray.size
         assert farray.__len__() == farray.size
 
@@ -98,7 +100,7 @@ class TestFrameArray(unittest.TestCase):
         print farray[4].xyz(10)
         print farray[5].xyz(10)
         print farray[6].xyz(10)
-        assert farray.size == 9
+        assert farray.size == N - 1
 
         assert farray[5].xyz(10) != frame.xyz(10)
         assert frame.xyz(10) != farray[5].xyz(10)
@@ -118,6 +120,13 @@ class TestFrameArray(unittest.TestCase):
 
         # make sure copy topology too
         assert farray_cp.top.n_atoms == farray.top.n_atoms
+
+        print farray_cp.top.n_atoms
+        print "test strip atoms"
+        farray_cp.strip_atoms("!@CA")
+        print farray_cp.top.n_atoms
+        print farray_cp[0].coords
+        print farray_cp[1].coords
 
 if __name__ == "__main__":
     unittest.main()

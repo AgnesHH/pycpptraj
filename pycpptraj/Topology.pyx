@@ -272,3 +272,14 @@ cdef class Topology:
         cdef Topology top = Topology()
         top.thisptr[0] = deref(self.thisptr.ModifyByMap(m))
         return top
+
+    def strip_atoms(Topology self, string mask):
+        """strip atoms with given mask"""
+        cdef AtomMask atm = AtomMask()
+        cdef Topology tmptop = Topology()
+
+        atm.thisptr.SetMaskString(mask)
+        atm.thisptr.InvertMask()
+        self.thisptr.SetupIntegerMask(atm.thisptr[0])
+        tmptop.thisptr = self.thisptr.modifyStateByMask(atm.thisptr[0])
+        self.thisptr[0] = tmptop.thisptr[0]
