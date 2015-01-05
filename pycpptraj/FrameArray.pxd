@@ -4,6 +4,7 @@ from .Frame cimport *
 from .Topology cimport Topology
 from .Trajin_Single cimport Trajin_Single
 from .Trajin cimport Trajin, _Trajin
+from FrameArray2 cimport FrameArray2
 
 ctypedef vector[_Frame].iterator iterator
 

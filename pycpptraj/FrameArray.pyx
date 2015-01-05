@@ -3,6 +3,9 @@ from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 from Topology cimport Topology
 
+# python level
+from pycpptraj import Trajectory
+
 
 cdef class FrameArray:
     def __cinit__(self, top=Topology()):
@@ -79,7 +82,8 @@ cdef class FrameArray:
             frame.thisptr = framein.thisptr
         self.frame_v.push_back(frame.thisptr[0])
 
-    def get_frames(self, ts, update_top=False):
+    def get_frames(self, ts, indices=None, update_top=False):
+        # TODO : fater loading?
         """get frames from Trajin instance
         Parameters:
         ----------
@@ -90,6 +94,7 @@ cdef class FrameArray:
         Have not support indices yet. Get max_frames from trajetory
         """
         cdef int i
+        cdef Frame frame
 
         if update_top:
             self.top = ts.top.copy()
@@ -97,13 +102,23 @@ cdef class FrameArray:
         if self.top.n_atoms != ts.top.n_atoms:
             raise ValueError("FrameArray.top.n_atoms should be equal to Trajin_Single.top.n_atoms or set update_top=True")
 
-        frame = Frame()
-        frame.set_frame_v(ts.top, ts.has_vel(), ts.n_repdims)
-        ts.begin_traj()
-        for i in range(ts.max_frames):
-            ts.get_next_frame(frame)
-            self.append(frame)
-        ts.end_traj()
+        if isinstance(ts, Trajin_Single) or isinstance(ts, Trajectory):
+            if indices:
+                # TODO : add __str__ for ts
+                print "Can not use indices for %s instance" % ts.__class__.__name__
+            frame = Frame()
+            frame.set_frame_v(ts.top, ts.has_vel(), ts.n_repdims)
+            ts.begin_traj()
+            for i in range(ts.max_frames):
+                ts.get_next_frame(frame)
+                self.append(frame)
+            ts.end_traj()
+
+        elif isinstance(ts, FrameArray2):
+            # TODO : rename FrameArray2
+            for i in indices:
+                # TODO : make indices as an array?
+                self.append(ts[i])
 
     def strip_atoms(self, mask=None, update_top=True, bint has_box=False):
         cdef vector[_Frame].iterator it
