@@ -11,7 +11,7 @@ from pycpptraj.AtomMask import AtomMask
 from pycpptraj.CpptrajState import CpptrajState
 from pycpptraj.FrameList import FrameList
 from pycpptraj.Trajin_Single import Trajin_Single
-from pycpptraj.Trajin_Single import Trajectory
+from pycpptraj.Trajin_Single import Trajin_Single as Trajectory
 from pycpptraj.Trajin import Trajin
 from pycpptraj.TrajinList import TrajinList
 from pycpptraj.TopologyList import TopologyList
