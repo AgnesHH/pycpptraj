@@ -26,5 +26,5 @@ cdef extern from "DataSet_Coords_TRJ.h":
         void _GetFrame "GetFrame"(int idx, _Frame& fIn, const _AtomMask& mIn)
 
 
-cdef class DataSet_Coords_TRJ (DataSet_Coords):
+cdef class FrameArray2(DataSet_Coords):
     cdef _DataSet_Coords_TRJ* thisptr

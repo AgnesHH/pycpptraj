@@ -1,7 +1,7 @@
 # distutils: language = c++
 
 
-cdef class DataSet_Coords_TRJ (DataSet_Coords):
+cdef class FrameArray2(DataSet_Coords):
     def __cinit__(self):
         # TODO : do we really need to epoxe _DataSet and _DataSet_1D?
         self.baseptr0 = <_DataSet*> new _DataSet_Coords_TRJ()
@@ -23,7 +23,7 @@ cdef class DataSet_Coords_TRJ (DataSet_Coords):
         dset.baseptr0 = self.thisptr.Alloc()
         return dset
 
-    def load(DataSet_Coords_TRJ self, string fname, Topology top=Topology(), ArgList arglist=ArgList()):
+    def load(FrameArray2 self, string fname, Topology top=Topology(), ArgList arglist=ArgList()):
         if top.is_empty():
             if not self.top.is_empty():
                 top = self.top

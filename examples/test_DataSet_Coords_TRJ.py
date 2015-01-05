@@ -6,8 +6,7 @@ print dir(traj)
 print traj.top.is_empty()
 traj.top = Topology("data/Tc5b.top")
 
-#traj.load("./data/md1_prod.Tc5b.x")
-traj.load("./data/md1_prod.Tc5b.r")
+traj.load("./data/md1_prod.Tc5b.x")
 
 print traj.data_format
 print traj.data_type

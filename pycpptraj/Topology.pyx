@@ -60,6 +60,9 @@ cdef class Topology:
                 )
         return tmp
 
+    def __repr__(self):
+        return self.__str__()
+
     def copy(self, *args):
         """return a copy of 'self' or copy from 'other' to 'self'"""
         cdef Topology tmp
