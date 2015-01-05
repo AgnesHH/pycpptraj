@@ -23,7 +23,7 @@ cdef class DataSet_Coords_TRJ (DataSet_Coords):
         dset.baseptr0 = self.thisptr.Alloc()
         return dset
 
-    def add_single_trajin(DataSet_Coords_TRJ self, string fname, Topology top=Topology(), ArgList arglist=ArgList()):
+    def load(DataSet_Coords_TRJ self, string fname, Topology top=Topology(), ArgList arglist=ArgList()):
         if top.is_empty():
             if not self.top.is_empty():
                 top = self.top
@@ -37,13 +37,16 @@ cdef class DataSet_Coords_TRJ (DataSet_Coords):
     def add_input_trajin(self,Trajin trajin):
         self.thisptr.AddInputTraj(trajin.baseptr_1)
 
-    #def size_t Size(self):
+    @property
+    def size(self):
+        return self.thisptr.Size()
 
-    #def int Sync(self):
+    def info(self):
+        self.thisptr.Info()
 
-    #def void Info(self):
-
-    #def int Allocate1D(self,size_t):
+    # use base class?
+    #def allocate1D(self,size_t t):
+    #    self.thisptr.Allocate1D(t)
 
     #def void Add(self,size_t, void *):
 
