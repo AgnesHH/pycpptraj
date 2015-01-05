@@ -68,3 +68,4 @@ cdef class DataSet_Coords_TRJ (DataSet_Coords):
         else:
             atm_in = args[0]
             self.thisptr._GetFrame(idx, frame_in.thisptr[0], atm_in.thisptr[0])
+
