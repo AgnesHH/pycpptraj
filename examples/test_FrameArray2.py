@@ -1,7 +1,7 @@
 from pycpptraj.base import *
-from pycpptraj.DataSet_Coords_TRJ import DataSet_Coords_TRJ as TRAJ
+from pycpptraj.FrameArray2 import FrameArray2
 
-traj = TRAJ()
+traj = FrameArray2()
 print dir(traj)
 print traj.top.is_empty()
 traj.top = Topology("data/Tc5b.top")
