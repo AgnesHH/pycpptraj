@@ -7,6 +7,7 @@ from FileName cimport FileName
 from Frame cimport Frame
 from NameType cimport NameType
 from TopologyList cimport TopologyList
+from pycpptraj.Parm_Amber import Parm_Amber
 
 cdef class Topology:
     def __cinit__(self, *args):
@@ -283,3 +284,6 @@ cdef class Topology:
         self.thisptr.SetupIntegerMask(atm.thisptr[0])
         tmptop.thisptr = self.thisptr.modifyStateByMask(atm.thisptr[0])
         self.thisptr[0] = tmptop.thisptr[0]
+
+    def write_parm(self, name):
+        Parm_Amber().write_parm(name, self)

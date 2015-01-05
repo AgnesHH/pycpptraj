@@ -1,4 +1,5 @@
-from pycpptraj.ArgList import ArgList as ArgList
+from pycpptraj.base import *
+from pycpptraj.TrajectoryIO import TrajectoryIO
 
 arglist = """
 parm Tc5b.top
@@ -19,8 +20,11 @@ print actionArgs.get_string_key("out")
 print actionArgs.get_string_key("out")
 print actionArgs.get_string_key("out")
 
-#if "dihedral" in actionArgs:
-#    print "True"
+traj = Trajectory()
+print traj.check_frame_args(ArgList("1 100 10"), 9999)
+print traj.setup_frame_info() 
 
-#if "dihedral" in actionArgs.arg_line():
-#    print True
+top = Topology("data/Tc5b.top")
+#trajio = TrajectoryIO()
+#print trajio.total_frames("./data/md1_prod.Tc5b.x", top)
+help(traj)

@@ -74,5 +74,11 @@ class TestFrame(unittest.TestCase):
         arrref = np.random.rand(30)
         frameref.set_from_crd(arr, 30, 0, False)
 
+        frame.update_atoms(array('i', [0, 3]), array('d', [0., 0., 0.1, 1.1, 2.3, 3.]))
+        print type(frame.xyz(0))
+        print frame.xyz(0)
+        assert frame.xyz(0) == array('d', [0., 0., 0.1])
+        assert frame.xyz(3) ==  array('d', [1.1, 2.3, 3.])
+
 if __name__ == "__main__":
     unittest.main()

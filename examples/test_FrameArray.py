@@ -1,13 +1,10 @@
 import os
+from time import time
 import unittest
 import numpy as np
-from pycpptraj.Frame import Frame
-from pycpptraj.ArgList import ArgList
-from pycpptraj.FrameArray import FrameArray
-from pycpptraj.Trajin_Single import Trajin_Single
-from pycpptraj.Topology import Topology
-from pycpptraj.TopologyList import TopologyList
-from pycpptraj.ReferenceFrame import ReferenceFrame
+from pycpptraj.base import *
+from pycpptraj.Timer import Timer
+from load_traj import load
 
 ts = Trajin_Single()
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
@@ -45,8 +42,9 @@ def get_frame_array(N=10):
 
 class TestFrameArray(unittest.TestCase):
     def test_1(self):
-        N = 10
+        N = 10000
         farray = get_frame_array(N)
+        assert farray.size == N
         # store 10th atom coord of 5th frame for comparison
         # make getting results after printing 3 times
         print
@@ -123,10 +121,23 @@ class TestFrameArray(unittest.TestCase):
 
         print farray_cp.top.n_atoms
         print "test strip atoms"
+        #t0 = time()
+        t = Timer()
+        t.start()
         farray_cp.strip_atoms("!@CA")
+        t.stop()
+        print "time for stripping atoms of %s frames is %s" % (N, t.total())
         print farray_cp.top.n_atoms
         print farray_cp[0].coords
         print farray_cp[1].coords
+
+        arr = load("./data/stripAllButCA.Tc5b.x", (10, 60))
+        np.testing.assert_almost_equal(arr[0], farray_cp[0].coords, decimal=3)
+
+        print "Test printing __str__"
+        print farray_cp.size
+        print farray
+        print farray_cp
 
 if __name__ == "__main__":
     unittest.main()

@@ -13,8 +13,8 @@ cdef extern from "DataSet_Coords.h":
         # virtual methods
         void AddFrame(const _Frame&) 
         void SetCRD(int, const _Frame&) 
-        void GetFrame(int, _Frame&) 
-        void GetFrame(int, _Frame&, const _AtomMask&) 
+        #void GetFrame(int, _Frame&) 
+        #void GetFrame(int, _Frame&, const _AtomMask&) 
         # end virtual methods
 
         void SetTopology(const _Topology&)
@@ -25,3 +25,4 @@ cdef class DataSet_Coords (DataSet_1D):
     # DataSet has baseptr0
     # DataSet_1D has baseptr_1
     cdef _DataSet_Coords* baseptr_2
+    cdef Topology _top

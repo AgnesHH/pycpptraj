@@ -36,6 +36,11 @@ cdef class FrameArray:
     def __delitem__(FrameArray self, int idx):
         self.erase(idx)
 
+    def __str__(FrameArray self):
+        name = self.__class__.__name__
+        tmps = "%s instance with %s frames, %s atoms/frame" % (name, self.size, self.top.n_atoms)
+        return tmps
+
     def erase(self, int idx):
         self.frame_v.erase(self.frame_v.begin() + idx)
         

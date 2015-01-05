@@ -30,7 +30,7 @@ refframe = ref.frame
 mdx = "./data/md1_prod.Tc5b.x"
 
 ts = Trajin_Single()
-ts.load(mdx, ArgList(), top)
+ts.load(mdx, top)
 frame = Frame()
 atm = AtomMask()
 
@@ -48,8 +48,7 @@ strip :1-20@CA
 arglist = ArgList(input)
 
 farray = FrameArray()
-farray.append(frame)
-farray.append(refframe)
+farray.get_frames(ts, update_top=True)
 
 
 # Cluster_DBSCAN
@@ -60,9 +59,9 @@ adih = Action_Dihedral()
 #adih.read_input(ArgList(":1@C :2@CC :2@N :2C "), TopologyList() , FrameList(), DataSetList(), DataFileList () , 0)
 armsd = Action_Rmsd()
 toplist = TopologyList()
-toplist.add_parm_file("./data/Tc5b.top")
+toplist.add_parm("./data/Tc5b.top")
 strip.read_input(arglist, toplist, FrameList(), DataSetList(), DataFileList () , 0)
-armsd.process(top)
+armsd.process(top, top.copy())
 #armsd.do_action(1, refframe)
 
 #for action in [adih, armsd]:

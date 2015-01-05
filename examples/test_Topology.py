@@ -24,7 +24,8 @@ class TestTopology(unittest.TestCase):
         top.atom_info("@H")
 
         print "test Parm_Amber for write"
-        Parm_Amber().write_parm("test_write.top", top)
+        #Parm_Amber().write_parm("test_write.top", top)
+        #top.write_parm("test_write2.top")
         
         #print "test atom_iterator"
         #for atom in top.atom_generator():

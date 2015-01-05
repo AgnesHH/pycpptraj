@@ -9,6 +9,7 @@ cdef class DataSet_Coords(DataSet_1D):
         # make sure that two pointers pointing to the same address
         self.baseptr0 = <_DataSet*> self.baseptr_2
         self.baseptr_1 = <_DataSet_1D*> self.baseptr_2
+        self._top = Topology()
 
     def __dealloc__(self):
         # abstract class
@@ -22,11 +23,13 @@ cdef class DataSet_Coords(DataSet_1D):
     def set_topology(self, Topology top):
         self.baseptr_2.SetTopology(top.thisptr[0])
 
-    @property
-    def top(self):
-        cdef Topology top = Topology()
-        top.thisptr[0] = self.baseptr_2.Top()
-        return top
+    property top:
+        def __get__(self):
+            self._top.thisptr[0] = self.baseptr_2.Top()
+            return self._top
+
+        def __set__(self, Topology other):
+            self.baseptr_2.SetTopology(other.thisptr[0])
 
     # TODO: add more virtual methods
 

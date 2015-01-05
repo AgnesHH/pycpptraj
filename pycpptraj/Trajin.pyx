@@ -10,8 +10,10 @@ cdef class Trajin (TrajectoryFile):
     def __dealloc__(self):
         pass
 
-    def check_frame_args(self, ArgList argIn, int maxFrames, int starArg, int stopArg, int offsetArg):
-        return self.baseptr_1.CheckFrameArgs(argIn.thisptr[0], maxFrames, stopArg, stopArg, offsetArg)
+    def check_frame_args(self, ArgList argIn, int maxFrames):
+        cdef int startArg, stopArg, offsetArg
+        self.baseptr_1.CheckFrameArgs(argIn.thisptr[0], maxFrames, startArg, stopArg, offsetArg)
+        return startArg, stopArg, offsetArg
 
     def check_finished(self):
         return self.baseptr_1.CheckFinished()

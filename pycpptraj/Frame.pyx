@@ -1,5 +1,6 @@
 # distutils: language = c++
 
+cimport cython
 from cpython.array cimport array as pyarray
 from cython.operator cimport dereference as deref
 from libcpp.vector cimport vector
@@ -193,6 +194,32 @@ cdef class Frame (object):
         ptr[0] = xyz[0]
         ptr[1] = xyz[1]
         ptr[2] = xyz[2]
+
+    def update_atoms(self, indices, xyz):
+        """TODO: add doc"""
+        if len(indices) != len(xyz)/3:
+            raise ValueError("TODO: add doc")
+        self._update_atoms(pyarray('i', indices), pyarray('d', xyz), len(indices))
+
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    cdef _update_atoms(self, int[:] indices, double[:] xyz, int N):
+        """Update atom coordinates with indices and given xyz array
+        Parameters:
+        ----------
+        indices : int[:]
+        xyz : double[:]
+        N : int (len of indices)
+        """
+        cdef double* ptr
+        cdef int i, idx
+
+        for i in range(N):
+            idx = indices[i]
+            ptr = self.thisptr.xAddress() + 3 * idx
+            ptr[0] = xyz[3*i + 0]
+            ptr[1] = xyz[3*i + 1]
+            ptr[2] = xyz[3*i + 2]
 
     def xyz(self, int atomnum):
         """return xyz coordinates of idx-th atom"""

@@ -1,8 +1,9 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from Frame cimport *
-from Topology cimport Topology
-from Trajin_Single cimport Trajin_Single
+from .Frame cimport *
+from .Topology cimport Topology
+from .Trajin_Single cimport Trajin_Single
+from .Trajin cimport Trajin, _Trajin
 
 ctypedef vector[_Frame].iterator iterator
 

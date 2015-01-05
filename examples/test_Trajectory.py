@@ -4,6 +4,8 @@ from pycpptraj.base import *
 class TestTrajectory(unittest.TestCase):
     def test_1(self):
         traj = Trajectory()
+        #traj.top = Topology("./data/Tc5b.top")
+        #traj.top.summary()
 
         traj.load("./data/md1_prod.Tc5b.x", Topology("./data/Tc5b.top"))
 
@@ -14,8 +16,8 @@ class TestTrajectory(unittest.TestCase):
         frames = FrameArray()
         frames.get_frames(traj, update_top=True)
         print frames.size
-        print frames[0].coords
-        print frames[1].coords
+        #print frames[0].coords
+        #print frames[1].coords
 
 if __name__ == "__main__":
     unittest.main()
