@@ -4,8 +4,7 @@ from cython.operator cimport preincrement as incr
 from Topology cimport Topology
 
 # python level
-from pycpptraj import Trajectory
-
+from pycpptraj.Trajectory import Trajectory
 
 cdef class FrameArray:
     def __cinit__(self, top=Topology()):
@@ -116,9 +115,15 @@ cdef class FrameArray:
 
         elif isinstance(ts, FrameArray2):
             # TODO : rename FrameArray2
-            for i in indices:
-                # TODO : make indices as an array?
-                self.append(ts[i])
+            # use try and except?
+            if not indices:
+                for i in range(ts.size):
+                    # TODO : make indices as an array?
+                    self.append(ts[i])
+            else:
+                for i in indices:
+                    # TODO : make indices as an array?
+                    self.append(ts[i])
 
     def strip_atoms(self, mask=None, update_top=True, bint has_box=False):
         cdef vector[_Frame].iterator it
