@@ -102,6 +102,7 @@ cdef class Trajin (TrajectoryFile):
 
     #@abstractmethod('Trajin')
     def read_traj_frame(self, int currentFrame, Frame frameIn):
+        # TODO : add checking frame.n_atoms == self.top.n_atoms?
         return self.baseptr_1.ReadTrajFrame(currentFrame, frameIn.thisptr[0])
 
     #@abstractmethod('Trajin')

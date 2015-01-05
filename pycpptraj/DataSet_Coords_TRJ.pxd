@@ -20,7 +20,7 @@ cdef extern from "DataSet_Coords_TRJ.h":
         double Dval(size_t) const 
         double Xcrd(size_t idx) const 
         void WriteBuffer(_CpptrajFile&, size_t) const 
-        void AddFrame(const _Frame& fIn)
+        void _AddFrame "AddFrame"(const _Frame& fIn)
         void SetCRD(int idx, const _Frame& fIn)
         void _GetFrame "GetFrame"(int idx, _Frame& fIn)
         void _GetFrame "GetFrame"(int idx, _Frame& fIn, const _AtomMask& mIn)

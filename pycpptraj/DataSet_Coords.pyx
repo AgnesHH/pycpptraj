@@ -20,7 +20,8 @@ cdef class DataSet_Coords(DataSet_1D):
         frame.thisptr[0] = self.baseptr_2.AllocateFrame()
         return frame
 
-    def set_topology(self, Topology top):
+    # do we need this method?
+    def _set_topology(self, Topology top):
         self.baseptr_2.SetTopology(top.thisptr[0])
 
     property top:
@@ -30,7 +31,4 @@ cdef class DataSet_Coords(DataSet_1D):
 
         def __set__(self, Topology other):
             self.baseptr_2.SetTopology(other.thisptr[0])
-
-    # TODO: add more virtual methods
-
- 
+    # TODO: add more virtual methods?

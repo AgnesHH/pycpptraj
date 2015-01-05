@@ -4,5 +4,6 @@ from pycpptraj.DataSet import DataSet
 
 #print DataTypeDict
 dlist = DataSetList()
-dset = dlist.find_coords_set("./data/md1_prod.Tc5b.x")
-#print dset.idx
+dset = dlist.find_set_of_type("./data/md1_prod.Tc5b.x", "TRAJ")
+print dset.data_format
+print dir(dset)

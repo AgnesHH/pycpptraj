@@ -2,7 +2,6 @@
 include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
-#from .utils.PyCpptrajError import PyCpptrajError
 
 # can not import cpptraj_dict here
 # if doing this, we introduce circle-import since cpptraj_dict already imported
@@ -124,14 +123,21 @@ cdef class DataSetList:
     def list(self):
         self.thisptr.List()
 
-    # got segfault
     def find_set_of_type(self, string fname, string key):
         # make sure to use upper case and there is no blank around
         # "MyString  " --> "MYSTRING"
+        # TODO : segmentfault
+        # TODO : add more type
+        # currently work with "TRAJ"
         key = key.upper().split()[0]
         cdef DataType dtype = <DataType> DataTypeDict[key]
-        cdef DataSet dtset = DataSet()
-        dtset.baseptr0 = self.thisptr.FindSetOfType(fname, dtype)
+        #cdef DataSet dtset = DataSet()
+        cdef DataSet_Coords_TRJ dtset = DataSet_Coords_TRJ()
+        dtset.thisptr = <_DataSet_Coords_TRJ*> self.thisptr.FindSetOfType(fname, dtype)
+        #print <_DataSet_Coords_TRJ*> self.thisptr.FindSetOfType(fname, dtype)
+        # add py_free_mem?
+        # make sure that all pointers pointing to the same addresses
+        dtset._recast()
         return dtset
 
     def find_coords_set(self, string fname):

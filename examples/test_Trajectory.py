@@ -2,15 +2,24 @@ import unittest
 from pycpptraj.base import *
 from decorator import no_test
 
+TRAJ = Trajectory()
+TRAJ.top = Topology("./data/Tc5b.top")
+TRAJ.load("./data/md1_prod.Tc5b.x")
+
 class TestTrajectory(unittest.TestCase):
+    def test_info(self):
+        print "test_info"
+        print TRAJ.has_vel()
+        print TRAJ.n_repdims
+
     def test_trj_top(self):
         traj = Trajectory()
         #traj = Trajin_Single()
-        print traj.top.empty()
-        assert traj.top.empty() == True
+        print traj.top.is_empty()
+        assert traj.top.is_empty() == True
         traj.top = Topology("./data/Tc5b.top")
         #traj.top.summary()
-        assert traj.top.empty() == False
+        assert traj.top.is_empty() == False
         traj.load("./data/md1_prod.Tc5b.x")
         #traj.load("./data/md1_prod.Tc5b.x", Topology("./data/Tc5b.top"))
         print traj.max_frames

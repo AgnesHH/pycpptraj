@@ -299,6 +299,6 @@ cdef class Topology:
     def tag(self):
         return self.thisptr.Tag()
 
-    def empty(self):
+    def is_empty(self):
         s = self.file_path()
         return s == ""

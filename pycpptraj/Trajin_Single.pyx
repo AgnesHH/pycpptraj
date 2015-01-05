@@ -28,8 +28,8 @@ cdef class Trajin_Single(Trajin):
         chexbox :: (default = True)
         """
         # Currently we can not assigne self.top to parm_in.copy() since Cython does not know self.top type
-        # need to use self._topology since we declare it in TrajectoryFile.pxd
-        if not parm_in.empty():
+        # need to use self._top since we declare it in TrajectoryFile.pxd
+        if not parm_in.is_empty():
             print "update Topology for %s instance" % (self.__class__.__name__)
-            self._topology = parm_in.copy()
-        return self.thisptr.SetupTrajRead(trajfile, arglist.thisptr[0], self._topology.thisptr, check_box)
+            self._top = parm_in.copy()
+        return self.thisptr.SetupTrajRead(trajfile, arglist.thisptr[0], self._top.thisptr, check_box)

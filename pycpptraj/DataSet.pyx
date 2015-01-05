@@ -1,6 +1,6 @@
 # distutils: language = c++
+from pycpptraj.cpptraj_dict import DataTypeDict, get_key
 
-# can't not compile since _DataSet is abstract class
 
 cdef class DataSet:
     """
@@ -70,7 +70,7 @@ cdef class DataSet:
     def scalar_description(self):
         self.baseptr0.ScalarDescription()
 
-    def empty(self):
+    def is_empty(self):
         return self.baseptr0.Empty()
 
     @property
@@ -95,7 +95,7 @@ cdef class DataSet:
     
     @property
     def data_type(self):
-        return self.baseptr0.Type()
+        return get_key(self.baseptr0.Type(), DataTypeDict)
 
     @property
     def scalar_mode(self):

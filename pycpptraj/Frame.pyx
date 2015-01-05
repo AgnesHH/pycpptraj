@@ -64,6 +64,7 @@ cdef class Frame (object):
         cdef Frame frame
         cdef AtomMask atmask
         cdef vector[_Atom] vt
+        cdef Topology top
         cdef Atom at
         cdef list atlist
         cdef int natom
@@ -85,6 +86,10 @@ cdef class Frame (object):
                 elif isinstance(args[0], (int, long)):
                     natom = <int> args[0]
                     self.thisptr = new _Frame(natom)
+                #elif isinstance(args[0], Topology):
+                #    top = <Topology> args[0]
+                #    # get Command terminated error
+                #    self.thisptr.SetupFrameV(top.thisptr.Atoms(), False, 0)
                 else:
                     # Create Frame from list of atom mask
                     atlist = args[0]
@@ -103,6 +108,9 @@ cdef class Frame (object):
         cdef Frame frame = Frame()
         frame.thisptr[0] = self.thisptr[0]
         return frame
+
+    def is_empty(self):
+        return self.size == 0
 
     def set_from_crd(self, CRDtype farray, *args):
         """"""
@@ -346,10 +354,10 @@ cdef class Frame (object):
     def set_frame_x_m(self, vector[double] Xin, vector[double] massIn):
         return self.thisptr.SetupFrameXM(Xin, massIn)
 
-    def set_frame_v(self, Topology top, bint hasVelocity, int nDim):
+    def set_frame_v(self, Topology top, bint has_vel=False, int n_repdims=0):
         """TODO: add doc
         """
-        return self.thisptr.SetupFrameV(top.thisptr.Atoms(), hasVelocity, nDim)
+        return self.thisptr.SetupFrameV(top.thisptr.Atoms(), has_vel, n_repdims)
 
     #def set_frame_from_mask(self, AtomMask atmask, list atlist):
     #    cdef vector[_Atom] v = atomlist_to_vector(atlist)
@@ -401,6 +409,7 @@ cdef class Frame (object):
         return frame
 
     def divide(self, double divisor, *args):
+        # TODO : check
         cdef Frame frame
         if not args:
             self.thisptr.Divide(divisor)
@@ -565,5 +574,5 @@ cdef class Frame (object):
         if update_top:
             top.thisptr[0] = newtop.thisptr[0]
 
-    def strip_atoms(Frame self, Topology top, string m, bint update_top=False, bint has_box=False):
-        self._strip_atoms(top, m, update_top, has_box)
+    def strip_atoms(Frame self, Topology top, string mask, bint update_top=False, bint has_box=False):
+        self._strip_atoms(top, mask, update_top, has_box)
