@@ -20,12 +20,16 @@ cdef class FrameArray:
 
     def __getitem__(FrameArray self, int idx):
         """Return a reference of FrameArray[idx]
+        To get a copy
+        >>>frame = FrameArray_instance[10].copy()
+        TODO : add negative indexing
         """
         cdef Frame frame = Frame()
+        frame.py_free_mem = False
 
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
-        frame.thisptr[0] = self.frame_v[idx]
+        frame.thisptr = &(self.frame_v[idx])
         return frame
 
     def __setitem__(FrameArray self, int idx, Frame other):
@@ -52,18 +56,27 @@ cdef class FrameArray:
         return self.size
 
     def __iter__(self):
-        """return an copy of Frame instance"""
+        """return a reference of Frame instance"""
         cdef vector[_Frame].iterator it  = self.frame_v.begin()
         cdef Frame frame 
 
         while it != self.frame_v.end():
             frame = Frame()
-            frame.thisptr[0] = deref(it)
+            # use memoryview, don't let python free memory of this instance
+            frame.py_free_mem = False
+            frame.thisptr = &(deref(it))
             yield frame
             incr(it)
 
-    def append(self, Frame framein):
-        cdef Frame frame = Frame(framein)
+    def append(self, Frame framein, copy=True):
+        cdef Frame frame = Frame() 
+        if copy:
+            frame = framein.copy()
+        else:
+            # create memory view
+            # need to set `py_free_mem` to False
+            frame.py_free_mem = False
+            frame.thisptr = framein.thisptr
         self.frame_v.push_back(frame.thisptr[0])
 
     def get_frames(self, ts, update_top=False):

@@ -88,7 +88,8 @@ cdef class TrajectoryFile:
 
     property top:
         def __get__(self):
-            self._topology.thisptr = self.baseptr0.TrajParm()
+            if not self._topology.empty():
+                self._topology.thisptr = self.baseptr0.TrajParm()
             return self._topology
 
         def __set__(self, Topology other):
@@ -99,6 +100,7 @@ cdef class TrajectoryFile:
             newtop.py_free_mem = False
 
             self.baseptr0.SetTrajParm(newtop.thisptr)
+            self._topology.thisptr = self.baseptr0.TrajParm()
 
     def trajfilename(self):
         cdef FileName fname = FileName()

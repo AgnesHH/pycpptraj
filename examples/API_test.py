@@ -14,3 +14,4 @@ print cppout[:10]
 
 np.testing.assert_almost_equal(distance, cppout, decimal=3)
 print "Kool"
+

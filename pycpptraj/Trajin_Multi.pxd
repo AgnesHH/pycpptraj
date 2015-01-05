@@ -17,7 +17,7 @@ cdef extern from "Trajin_Multi.h":
         int SetupTrajRead(const string&, _ArgList&, _Topology *)
         int BeginTraj(bint)
         void EndTraj() 
-        int ReadTraj_Frame(int, _Frame&)
+        int ReadTrajFrame(int, _Frame&)
         void PrintInfo(int) const 
         bint HasVelocity() const 
         int Nreplica_Dimension() const 
@@ -25,10 +25,14 @@ cdef extern from "Trajin_Multi.h":
         int EnsembleSetup(_FrameArray&)
         int GetNextEnsemble(_FrameArray&)
         int EnsembleSize() const 
-        int Ensemble_FrameNum() const 
-        double MPI_AllgatherTime() const 
-        double MPI_SendRecvTime() const 
+        int EnsembleFrameNum() const 
+        # we don't need MPI here
+        #double MPI_AllgatherTime() const 
+        #double MPI_SendRecvTime() const 
         int EnsemblePosition(int member) const 
         bint BadEnsemble() const 
         TargetType TargetMode() const 
         string FinalCrdIndices() const 
+
+cdef class Trajin_Multi:
+    cdef _Trajin_Multi* thisptr

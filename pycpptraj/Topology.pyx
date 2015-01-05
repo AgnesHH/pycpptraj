@@ -43,7 +43,7 @@ cdef class Topology:
                 raise ValueError()
 
     def __dealloc__(self):
-        if self.py_free_mem:
+        if self.py_free_mem and self.thisptr:
             IF DEBUG:
                 print self
                 print "I am out. I am the %s th-top instance"  % (self.instance_num)
@@ -51,6 +51,14 @@ cdef class Topology:
             #print "Top is freeing memory"
             # end debug
             del self.thisptr
+
+    def __str__(self):
+        tmp = "%s instance with %s atoms. ID = %s" % (
+                self.__class__.__name__,
+                self.n_atoms,
+                hex(id(self))
+                )
+        return tmp
 
     def copy(self, *args):
         """return a copy of 'self' or copy from 'other' to 'self'"""
@@ -287,3 +295,10 @@ cdef class Topology:
 
     def write_parm(self, name):
         Parm_Amber().write_parm(name, self)
+
+    def tag(self):
+        return self.thisptr.Tag()
+
+    def empty(self):
+        s = self.file_path()
+        return s == ""

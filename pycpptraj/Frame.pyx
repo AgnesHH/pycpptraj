@@ -43,7 +43,8 @@ cdef class Frame (object):
 
         pycpptraj doc
         ============
-        Should Frame hold topology infor?
+        Should Frame hold topology info? (may be NOT, it's expesive)
+        TODO : should we really need all methods here?
     """
     def __cinit__(self, *args):
         # Should I include topology in Frame?
@@ -116,15 +117,21 @@ cdef class Frame (object):
             mask, numCrd, numBoxCrd, hasVel = args
             self.thisptr.SetFromCRD(farray, mask.thisptr[0], numCrd, numBoxCrd, hasVel)
         else:
-            raise ValueError("Must have only 3 or 4 more arguments")
+            # TODO : shape checking
+            numCrd = len(farray)
+            self.thisptr.SetFromCRD(farray, numCrd, 0, False)
 
-    def convert_to_crd(self, int num_box_crd=0, bint has_vel=False):
-        """convert_to_crd(self, int num_box_crd=0, bint has_vel=False):
-        """
-        return self.thisptr.ConvertToCRD(num_box_crd, has_vel)
+    # don't need this method since we have self.coords_copy()
+    #def convert_to_crd(self, int num_box_crd=0, bint has_vel=False):
+    #    """convert_to_crd(self, int num_box_crd=0, bint has_vel=False):
+    #    TODO : do we need this method?
+    #    """
+    #    return self.thisptr.ConvertToCRD(num_box_crd, has_vel)
         
-    def print_atom_coord(self, int atom):
-        self.thisptr.printAtomCoord(atom)
+    # don't need this since we can use `print self.xyz(atom_num)`
+    #def print_atom_coord(self, int atom):
+    #    """"""
+    #    self.thisptr.printAtomCoord(atom)
 
     def info(self, char* msg=''):
         self.thisptr.Info(msg)
@@ -141,20 +148,37 @@ cdef class Frame (object):
     def swap_atoms(self, int atom1, int atom2):
         self.thisptr.SwapAtoms(atom1, atom2)
 
+    def __str__(self):
+        tmp = "%s instance with %s atoms. ID = %s" % (
+                self.__class__.__name__,
+                self.n_atoms,
+                hex(id(self))
+                )
+        return tmp
+
     def __getitem__(self, idx):
         "Return coordinate"
+        # TODO : add fancy indexing
         if idx < 0:
-            raise ValueError("index must be >= 0")
-        else:
-            return self.thisptr.index_opr(idx)
+            idx = self.size + idx
+            if idx < 0:
+                raise ValueError("index is out of range")
+        if idx >= self.size:
+            raise ValueError("index is out of range")
+        # return ptr[idx]? (cdef double* ptr = self.thisptr.xAddress())
+        return self.thisptr.index_opr(idx)
 
     def __setitem__(self, int idx, value):
         "Return coordinate"
+        # TODO : add fancy indexing
         cdef double* ptr = self.thisptr.xAddress()
-        if idx < 0 or idx >= self.size:
-            raise ValueError("0 <= index < self.size")
-        else:
-            ptr[idx] = <double> value
+        if idx < 0:
+            idx = self.size + idx
+            if idx < 0:
+                raise ValueError("index is out of range")
+        if idx >= self.size:
+            raise ValueError("index is out of range")
+        ptr[idx] = <double> value
 
     def __iter__(self):
         cdef int i
@@ -186,7 +210,6 @@ cdef class Frame (object):
     def temperature(self):
         return self.thisptr.Temperature()
 
-    # does not work since XYZ return const double*
     def update_atom(self, int idx, double[:] xyz):
         cdef double* ptr = self.thisptr.xAddress() + 3 * idx
         if len(xyz) > 3:
@@ -221,7 +244,7 @@ cdef class Frame (object):
             ptr[1] = xyz[3*i + 1]
             ptr[2] = xyz[3*i + 2]
 
-    def xyz(self, int atomnum):
+    def atom_xyz(self, int atomnum):
         """return xyz coordinates of idx-th atom"""
         # return XYZ for atomnum
         # cpptraj: return double*
@@ -240,8 +263,7 @@ cdef class Frame (object):
         arr.append(self.thisptr.XYZ(atomnum)[2])
         return arr
 
-    @property
-    def coords(self):
+    def coords_copy(self):
         """
         return a copy of frame coords (python array)
         """
@@ -262,15 +284,17 @@ cdef class Frame (object):
         except:
             raise ImportError("need numpy")
 
-    def crd(self, int idx):
-        """TODO: need this method?"""
-        if idx > (3 * self.n_atoms - 1):
-            raise ValueError("index is out of range")
-        elif idx < 0:
-            raise ValueError("Not supported negative index yet")
-        return self.thisptr.CRD(idx)[0]
+    # don't need this method since we we have self.coords and __getitem__
+    #def crd(self, int idx):
+    #    """TODO: need this method?"""
+    #    if idx > (3 * self.n_atoms - 1):
+    #        raise ValueError("index is out of range")
+    #    elif idx < 0:
+    #        raise ValueError("Not supported negative index yet")
+    #    return self.thisptr.CRD(idx)[0]
 
     def v_xyz(self, int atnum):
+        """return a copy of velocity"""
         cdef int i
         cdef pyarray arr = pyarray('d', [])
 
@@ -280,21 +304,13 @@ cdef class Frame (object):
         return arr
 
     def mass(self,int atnum):
+        """return `mass` of atnum-th atom"""
         return self.thisptr.Mass(atnum)
 
     def box_crd(self):
         cdef Box box = Box()
         box.thisptr[0] = self.thisptr.BoxCrd()
         return box
-
-    #@property
-    #def _xyz(self):
-    #    """return mutable coords"""
-    #    cdef double[self.size] xyz
-
-    def x_address(self):
-        # cpptraj: return double*
-        raise NotImplementedError()
 
     def v_address(self):
         # cpptraj: return double*
@@ -331,6 +347,8 @@ cdef class Frame (object):
         return self.thisptr.SetupFrameXM(Xin, massIn)
 
     def set_frame_v(self, Topology top, bint hasVelocity, int nDim):
+        """TODO: add doc
+        """
         return self.thisptr.SetupFrameV(top.thisptr.Atoms(), hasVelocity, nDim)
 
     #def set_frame_from_mask(self, AtomMask atmask, list atlist):

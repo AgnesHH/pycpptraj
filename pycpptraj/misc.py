@@ -8,6 +8,7 @@ def load_parm():
 def strip(arg, mask):
     """
     TODO: can not modify oldtop, Python to pass it as value
+    TODO: validate
     Modify top and farray
 
     Strip atoms

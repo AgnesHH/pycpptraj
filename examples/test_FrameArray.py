@@ -12,6 +12,7 @@ topname = datadir + "Tc5b.top"
 refname = "./data/Tc5b.nat.crd"
 mdx = "./data/md1_prod.Tc5b.x"
 ts = Trajin_Single()
+print ts.top.tag
 
 top = Topology(topname)
 trajin = """
@@ -22,11 +23,6 @@ ts.prepare_for_read(True)
 frame = Frame()
 frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
 frame2 = Frame(frame)
-
-# load reference
-ref = ReferenceFrame()
-ref.load_ref(refname, top)
-ref_frame = ref.frame
 
 # create FrameArray to store Frame
 def get_frame_array(N=10):
