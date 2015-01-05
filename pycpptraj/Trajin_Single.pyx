@@ -5,7 +5,7 @@ from Trajin import Trajin
 include "config.pxi"
 
 cdef class Trajin_Single(Trajin):
-    def __cinit__(self):
+    def __cinit__(self, *args):
         # thisptr is from Trajin class
         # now it points to derived class
         self.baseptr0 = <_TrajectoryFile*> new _Trajin_Single()

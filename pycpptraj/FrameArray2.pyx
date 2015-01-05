@@ -2,7 +2,7 @@
 
 
 cdef class FrameArray2(DataSet_Coords):
-    def __cinit__(self):
+    def __cinit__(self, *args):
         # TODO : do we really need to epoxe _DataSet and _DataSet_1D?
         self.baseptr0 = <_DataSet*> new _DataSet_Coords_TRJ()
         # recast
@@ -12,6 +12,24 @@ cdef class FrameArray2(DataSet_Coords):
 
     def __dealloc__(self):
         del self.thisptr
+    
+    def __iter__(FrameArray2 self):
+        """iterately getting Frame instance
+        TODO : get memoery view or copy?
+        """
+        cdef int i 
+        cdef Frame frame
+        frame = self.allocate_frame()
+
+        for i in range(self.size):
+            self.thisptr._GetFrame(i, frame.thisptr[0])
+            yield frame
+
+    def __getitem__(FrameArray2 self, int idx):
+        cdef Frame frame
+        frame = self.allocate_frame()
+        self.thisptr._GetFrame(idx, frame.thisptr[0])
+        return frame
 
     def _recast(self):
         self.baseptr0 = <_DataSet*> self.thisptr
@@ -56,8 +74,6 @@ cdef class FrameArray2(DataSet_Coords):
 
     #def void WriteBuffer(self,CpptrajFile, size_t):
 
-    def add_frame(self, Frame fIn):
-        self.thisptr._AddFrame(fIn.thisptr[0])
 
     def set_crd(self,int idx, Frame fIn): 
         pass

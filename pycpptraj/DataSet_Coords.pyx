@@ -32,3 +32,9 @@ cdef class DataSet_Coords(DataSet_1D):
         def __set__(self, Topology other):
             self.baseptr_2.SetTopology(other.thisptr[0])
     # TODO: add more virtual methods?
+
+    def add_frame(self, Frame fIn):
+        raise NotImplementedError()
+
+    def append(self, Frame fIn):
+        raise NotImplementedError()
