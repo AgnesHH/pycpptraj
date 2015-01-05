@@ -11,7 +11,8 @@ cdef class Trajin (TrajectoryFile):
         pass
 
     def check_frame_args(self, ArgList argIn, int maxFrames):
-        cdef int startArg, stopArg, offsetArg
+        cdef int startArg, stopArg, offsetArg 
+        startArg = stopArg = offsetArg = 0
         self.baseptr_1.CheckFrameArgs(argIn.thisptr[0], maxFrames, startArg, stopArg, offsetArg)
         return startArg, stopArg, offsetArg
 
