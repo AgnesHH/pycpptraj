@@ -2,6 +2,7 @@
 
 
 cdef class FrameArray2(DataSet_Coords):
+    """TODO : how to change internal data for this cpptraj class"""
     def __cinit__(self, *args):
         # TODO : do we really need to epoxe _DataSet and _DataSet_1D?
         self.baseptr0 = <_DataSet*> new _DataSet_Coords_TRJ()
@@ -12,6 +13,11 @@ cdef class FrameArray2(DataSet_Coords):
 
     def __dealloc__(self):
         del self.thisptr
+
+    def copy(FrameArray2 self, warning=True):
+        # TODO : make sure to change class's name here if you every want to
+        # have better name
+        raise NotImplementedError()
     
     def __iter__(FrameArray2 self):
         """iterately getting Frame instance
@@ -26,6 +32,12 @@ cdef class FrameArray2(DataSet_Coords):
             yield frame
 
     def __getitem__(FrameArray2 self, int idx):
+        """return a copy of Frame
+        NOTE : self[idx].buffer does not work (got zero coords if using
+        np.asarray(self[idx]) where `self` is FrameArray2 instance
+        ). Solution: creat a frame instance to hold self[idx], like frame = self[ixd]. 
+        Now you can use memoryview
+        """
         cdef Frame frame
         frame = self.allocate_frame()
         self.thisptr._GetFrame(idx, frame.thisptr[0])

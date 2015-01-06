@@ -181,9 +181,12 @@ cdef class Frame (object):
 
     @property
     def buffer(self):
-        """return memory view for xyz
+        """return memory view for Frame coordinates
         TODO : rename?
         """
+        # debug
+        print "from calling buffer: py_free_mem = ", self.py_free_mem
+        # end debug
         def _buffer(N):
             cdef double* ptr = self.thisptr.xAddress()
             cdef view.array my_arr
@@ -203,6 +206,7 @@ cdef class Frame (object):
 
     @property
     def size(self):
+        """don't change the name of this method"""
         return self.thisptr.size()
 
     @property
@@ -276,25 +280,6 @@ cdef class Frame (object):
         for  i in range(3 * self.thisptr.Natom()):
             arr.append(deref(self.thisptr.CRD(i)))
         return arr
-
-    @property
-    def np_coords_reshape(self):
-        """TODO: need this?
-        return numpy array if available"""
-        try:
-            import numpy as np
-            return np.asarray(self.coords).reshape(self.size/3, 3)
-        except:
-            raise ImportError("need numpy")
-
-    # don't need this method since we we have self.coords and __getitem__
-    #def crd(self, int idx):
-    #    """TODO: need this method?"""
-    #    if idx > (3 * self.n_atoms - 1):
-    #        raise ValueError("index is out of range")
-    #    elif idx < 0:
-    #        raise ValueError("Not supported negative index yet")
-    #    return self.thisptr.CRD(idx)[0]
 
     def v_xyz(self, int atnum):
         """return a copy of velocity"""
@@ -376,6 +361,7 @@ cdef class Frame (object):
         self.thisptr.ZeroCoords()
 
     def __iadd__(Frame self, Frame other):
+        # += 
         # either of two methods are correct
         #self.thisptr[0] = self.thisptr[0].addequal(other.thisptr[0])
         self.thisptr[0] += other.thisptr[0]
@@ -387,12 +373,14 @@ cdef class Frame (object):
         return frame
 
     def __isub__(Frame self, Frame other):
+        # -= 
         # either of two methods are correct
         #self.thisptr[0] = self.thisptr[0].subequal(other.thisptr[0])
         self.thisptr[0] -= other.thisptr[0]
         return self
 
     def __imul__(Frame self, Frame other):
+        # *=
         # either of two methods are correct
         #self.thisptr[0] = self.thisptr[0].mulequal(other.thisptr[0])
         self.thisptr[0] *= other.thisptr[0]
@@ -476,7 +464,8 @@ cdef class Frame (object):
         v.thisptr[0] = self.thisptr.CenterOnOrigin(useMassIn)
         return v
 
-    def rmsd(self,Frame frame, bint use_mass=False, *args):
+    def rmsd(self, Frame frame, bint use_mass=False, *args):
+        # TODO : add mask
         """Calculate rmsd betwen two frames
         Parameters:
         ----------

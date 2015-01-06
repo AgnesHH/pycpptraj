@@ -5,6 +5,7 @@ import numpy as np
 from pycpptraj.base import *
 from pycpptraj.Timer import Timer
 from load_traj import load
+from decorator import no_test
 
 ts = Trajin_Single()
 datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
@@ -36,7 +37,20 @@ def get_frame_array(N=10):
     farray.top = ts.top.copy()
     return farray
 
+FARRAY = get_frame_array()
+
 class TestFrameArray(unittest.TestCase):
+    def test_indexing_and_buffer(self):
+        farray = FARRAY.copy()
+        print farray.size
+        print farray[0].buffer
+        print farray[0].buffer
+        np_arrview = np.asarray(farray[0].buffer)
+        print np_arrview[:20]
+        print farray[0].coords_copy()[:20]
+        np.testing.assert_almost_equal(np_arrview, farray[0].coords_copy())
+
+    @no_test
     def test_1(self):
         N = 10000
         farray = get_frame_array(N)
