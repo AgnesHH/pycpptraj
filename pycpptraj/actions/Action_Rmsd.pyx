@@ -1,7 +1,6 @@
 # distutils: language = c++
 import StringIO
 from cython.operator cimport dereference as deref
-from ..utils.decorator import stdout_redirect
 
 
 cdef class Action_Rmsd (Action):
@@ -22,8 +21,3 @@ cdef class Action_Rmsd (Action):
         cdef FunctPtr func = FunctPtr()
         func.ptr = &(self.thisptr.Alloc)
         return func
-        
-    def help(self):
-        with stdout_redirect(StringIO.StringIO()) as helpout:
-            self.thisptr.Help()
-        return helpout.getvalue()

@@ -5,6 +5,7 @@ from cython cimport view
 from cpython.array cimport array as pyarray
 from cython.operator cimport dereference as deref
 from libcpp.vector cimport vector
+from .decorators import for_testing
 from AtomMask cimport *
 from Frame cimport CRDtype
 from Topology cimport Topology
@@ -270,6 +271,7 @@ cdef class Frame (object):
         arr.append(self.thisptr.XYZ(atomnum)[2])
         return arr
 
+    @for_testing
     def coords_copy(self):
         """
         return a copy of frame coords (python array)
