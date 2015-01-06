@@ -50,7 +50,6 @@ class TestFrameArray(unittest.TestCase):
         print farray[0].coords_copy()[:20]
         np.testing.assert_almost_equal(np_arrview, farray[0].coords_copy())
 
-    @no_test
     def test_1(self):
         N = 10000
         farray = get_frame_array(N)
