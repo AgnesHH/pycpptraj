@@ -51,7 +51,7 @@ cdef class CpptrajState:
     def exit_on_error(self):
         return self.thisptr.ExitOnError()
 
-    def empty_state(self):
+    def is_empty(self):
         return self.thisptr.EmptyState()
 
     def add_trajin(self, arg, isEnsemble=False):
