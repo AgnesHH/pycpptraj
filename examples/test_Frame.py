@@ -16,17 +16,27 @@ FRAME_orig = FRAME.copy()
 
 class TestFrame(unittest.TestCase):
     def test_buffer(self):
-        print "test_buffer"
+        print "+++++start test_buffer+++++++"
         print FRAME.coords_copy()
         print FRAME.buffer
+
         FRAME.buffer[0] = 199.
         print FRAME.coords_copy()[0]
         print FRAME[0]
+        assert FRAME[0] == FRAME.buffer[0] == FRAME.coords_copy()[0]
+
         FRAME[0] = 0.1
         assert FRAME[0] == FRAME.buffer[0] == FRAME.coords_copy()[0]
         assert FRAME.buffer[-1] == FRAME[-1] == 29.
+
+        print "test slices"
         print FRAME[0:10:2] 
-        arr = np.asarray(FRAME[0:10:2]) 
+
+        print "test memoryview for slices"
+        start = 0
+        stop = 10
+        strip = 2
+        arr = np.asarray(FRAME[start:stop:strip]) 
         print arr
         arr[0] = 100.
         print arr
@@ -34,6 +44,18 @@ class TestFrame(unittest.TestCase):
         FRAME[0] += 1000.
         print FRAME[0]
         print "FRAME.atom_xyz(0)", FRAME.atom_xyz(0)
+        for i, idx in enumerate(range(start, stop, strip)):
+            assert arr[i] == FRAME[idx]
+
+        arr[:] = [1., 1.3, 1.4, 5., 7.]
+        for i, idx in enumerate(range(start, stop, strip)):
+            assert arr[i] == FRAME[idx]
+        print FRAME.coords_copy()
+
+        arr2 = np.asarray(FRAME.buffer)
+        arr2 += arr2
+        print FRAME.coords_copy()
+        print "+++++end test_buffer+++++++"
 
     def test_iter(self):
         print "test iteration"
