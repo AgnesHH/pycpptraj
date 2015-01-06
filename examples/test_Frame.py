@@ -12,22 +12,42 @@ N_ATOMS = 10
 FRAME = Frame(N_ATOMS)
 arr = np.arange(3 * N_ATOMS)
 FRAME.set_from_crd(arr)
+FRAME_orig = FRAME.copy()
 
 class TestFrame(unittest.TestCase):
-    @no_test
+    def test_buffer(self):
+        print "test_buffer"
+        print FRAME.coords_copy()
+        print FRAME.buffer
+        FRAME.buffer[0] = 199.
+        print FRAME.coords_copy()[0]
+        print FRAME[0]
+        FRAME[0] = 0.1
+        assert FRAME[0] == FRAME.buffer[0] == FRAME.coords_copy()[0]
+        assert FRAME.buffer[-1] == FRAME[-1] == 29.
+        print FRAME[0:10:2] 
+        arr = np.asarray(FRAME[0:10:2]) 
+        print arr
+        arr[0] = 100.
+        print arr
+        print np.asarray(FRAME[0:10:2]) 
+
     def test_iter(self):
         print "test iteration"
         alist = []
-        for x in FRAME:
+        frame = FRAME_orig.copy()
+        for x in frame:
             alist.append(int(x))
+        print alist
         assert alist == range(3 * N_ATOMS)
 
         print "test enumerate"
         alist = []
-        for idx, x in enumerate(FRAME):
+        for idx, x in enumerate(frame):
             alist.append(int(x))
         assert alist == range(3 * N_ATOMS)
         print alist
+        print "====================end test_iter"
 
     def test_indexing(self):
         # create a Frame instance with N_ATOMS atoms
@@ -37,25 +57,29 @@ class TestFrame(unittest.TestCase):
         frame.set_from_crd(arr)
         print frame.coords_copy()
 
-        print "test negative indexing"
+        #print "test negative indexing"
         print frame[-1]
         assert frame[-1] == 29.
+        print frame[-2]
+        assert frame[-2] == frame[N_ATOMS*3-2]
+        assert frame[-2] == frame[N_ATOMS*3-2]
+        assert frame[-2] == 28.
 
         frame[-1] = 100.
         assert frame[-1] == 100.
-        print frame[-1]
+        #print frame[-1]
 
-        frame[-2] = 101.
-        assert frame[-2] == frame[N_ATOMS*3 - 2] == 101.
+        #frame[-2] = 101.
+        #assert frame[-2] == frame[N_ATOMS*3 - 2] == 101.
 
+        print frame[0:10]
+        frame[0] = 100.
         print frame[0]
 
-    @no_test
     def test_other_stuff(self):
         print "print FRAME"
         print FRAME
 
-    @no_test
     def test_long(self):
         N_ATOMS = 10
         # create frame instance with 10 atoms
@@ -74,14 +98,9 @@ class TestFrame(unittest.TestCase):
         assert_almost_equal(frame[0], arr[0])
 
         # frame.info('frame info')
-        print "before swapping 1 - 8"
-        frame.print_atom_coord(1)
-        frame.print_atom_coord(8)
         frame.swap_atoms(1, 8)
         
         print "after swapping 1 - 8"
-        frame.print_atom_coord(1)
-        frame.print_atom_coord(8)
 
         print "update coords_copy for atom 1"
         frame.update_atom(1, array('d', [1., 1000., 3000.]))
@@ -93,8 +112,6 @@ class TestFrame(unittest.TestCase):
         
         print "deviding Frame"
         frame.divide(2.)
-        frame.print_atom_coord(1)
-        frame.print_atom_coord(8)
 
         print "test iteration"
         count = 0

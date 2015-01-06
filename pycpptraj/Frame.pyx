@@ -1,6 +1,7 @@
 # distutils: language = c++
 
 cimport cython
+from cython cimport view
 from cpython.array cimport array as pyarray
 from cython.operator cimport dereference as deref
 from libcpp.vector cimport vector
@@ -164,42 +165,11 @@ cdef class Frame (object):
                 )
         return tmp
 
-    def __getitem__(self, indices_):
-        "Return coordinate"
-        # TODO : add fancy indexing
-        cdef int idx, i
-        cdef pyarray arr = pyarray('d', [])
-        cdef pyarray indices = pyarray('i', indices_)
+    def __getitem__(self, idx):
+        return self.buffer[idx]
 
-        for i in range(len(indices)):
-            idx = indices[i]
-            if idx < 0:
-                idx = self.size + idx
-                if idx < 0:
-                    raise ValueError("index is out of range")
-            if idx >= self.size:
-                raise ValueError("index is out of range")
-            # return ptr[idx]? (cdef double* ptr = self.thisptr.xAddress())
-            arr.append(self.thisptr.index_opr(idx))
-
-    def __setitem__(self, int indices_, values_in):
-        "Return coordinate"
-        # TODO : add fancy indexing
-        cdef double* ptr = self.thisptr.xAddress()
-        cdef int idx
-        cdef pyarray values = pyarray('d', values_in)
-        cdef pyarray indices = pyarray('i', indices_)
-
-        for i in range(len(indices)):
-            idx = indices[i]
-            value = values[i]
-            if idx < 0:
-                idx = self.size + idx
-                if idx < 0:
-                    raise ValueError("index is out of range")
-            if idx >= self.size:
-                raise ValueError("index is out of range")
-            ptr[idx] = <double> value
+    def __setitem__(self, idx, value):
+        self.buffer[idx] = value
 
     def __iter__(self):
         cdef int i
@@ -209,6 +179,18 @@ cdef class Frame (object):
     def __len__(self):
         return self.size
 
+    @property
+    def buffer(self):
+        """return memory view for xyz
+        TODO : rename?
+        """
+        def _buffer(N):
+            cdef double* ptr = self.thisptr.xAddress()
+            cdef view.array my_arr
+            my_arr = <double[:N]> ptr
+            return my_arr
+        return _buffer(self.size)
+        
     def empty(self):
         return self.thisptr.empty()
 
