@@ -14,7 +14,7 @@ class TestFrameArray2(unittest.TestCase):
         farray.get_frames(TRAJ, update_top=True)
         #farray.get_frames(TRAJ, indices=(1, 3, 5, 7,), update_top=True)
         t0 = time()
-        farray.strip_atoms(":2-10!@CA && @H")
+        farray.strip_atoms(":2-10@CA")
         print time() - t0
         print farray.size
 

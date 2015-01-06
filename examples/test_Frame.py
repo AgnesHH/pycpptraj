@@ -31,6 +31,9 @@ class TestFrame(unittest.TestCase):
         arr[0] = 100.
         print arr
         print np.asarray(FRAME[0:10:2]) 
+        FRAME[0] += 1000.
+        print FRAME[0]
+        print "FRAME.atom_xyz(0)", FRAME.atom_xyz(0)
 
     def test_iter(self):
         print "test iteration"

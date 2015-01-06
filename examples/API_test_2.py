@@ -23,7 +23,7 @@ trajinfile = testdir + "md1_prod.Tc5b.x"
 state = create_state(top=topfile, trajin=trajinfile, ref=None)
 #state.add_action(Action_Molsurf(), ArgList("surf"))
 #state.add_action(Action_Molsurf(), ArgList("surf @CA"))
-state.add_action(Action_Strip(), ArgList("strip !@CA"))
+state.add_action(Action_Strip(), ArgList("strip :2-10@CA"))
 t0 = time()
 state.run()
 print "stripping time, ", time() - t0
