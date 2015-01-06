@@ -14,6 +14,7 @@ arr = np.arange(3 * N_ATOMS)
 FRAME.set_from_crd(arr)
 
 class TestFrame(unittest.TestCase):
+    @no_test
     def test_iter(self):
         print "test iteration"
         alist = []
@@ -47,6 +48,9 @@ class TestFrame(unittest.TestCase):
         frame[-2] = 101.
         assert frame[-2] == frame[N_ATOMS*3 - 2] == 101.
 
+        print frame[0]
+
+    @no_test
     def test_other_stuff(self):
         print "print FRAME"
         print FRAME

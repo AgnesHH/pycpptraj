@@ -68,17 +68,15 @@ class TestCpptrajState(unittest.TestCase):
         state2.add_trajin("./data/md1_prod.Tc5b.x")
         state2.add_reference("./data/Tc5b.nat.crd")
         state2.add_action(Action_Distance(), ArgList("distance :2@CA :10@CA"))
+        state2.add_action(Action_Distance(), ArgList("distance :4@CA :10@CA"))
         state2.framelist.set_active_ref(0)
         print "test framelist.list()"
-        state2.framelist.list()
-        #state2.run()
+        state2.run()
         dslist = state2.datasetlist
         d0 = dslist[0]
-        print "d0 is empty? ", d0.empty()
-        state2.run()
-        print "d0 is empty? ", d0.empty()
+        print "d0 is empty? ", d0.is_empty()
         d1 = cast_dataset(d0, dtype="dataset_double")
-        print d1.empty()
+        print "d1 is empty? ", d1.is_empty()
         print d1.data[0:10]
         #state2.get_trajinlist().list()
 
