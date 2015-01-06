@@ -34,7 +34,7 @@ class TestTrajectory(unittest.TestCase):
             arr[i] = farray[0].rmsd(farray[i])
         print arr[:10]
         np.testing.assert_almost_equal(arr, cpptraj_rmsd, decimal=3)
-
+        print "Kool, reproduce cpptraj output"
 
     def test_trj_top(self):
         traj = Trajectory()
