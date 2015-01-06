@@ -2,7 +2,10 @@
 
 
 cdef class FrameArray2(DataSet_Coords):
-    """TODO : how to change internal data for this cpptraj class"""
+    # TODO : how to change internal data for this cpptraj class
+    """Readonly FrameArray2
+    This class is actually just alias of DataSet_Coords_TRJ class
+    """
     def __cinit__(self, *args):
         # TODO : do we really need to epoxe _DataSet and _DataSet_1D?
         self.baseptr0 = <_DataSet*> new _DataSet_Coords_TRJ()

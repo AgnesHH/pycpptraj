@@ -185,7 +185,7 @@ cdef class Frame (object):
         TODO : rename?
         """
         # debug
-        print "from calling buffer: py_free_mem = ", self.py_free_mem
+        #print "from calling buffer: py_free_mem = ", self.py_free_mem
         # end debug
         def _buffer(N):
             cdef double* ptr = self.thisptr.xAddress()

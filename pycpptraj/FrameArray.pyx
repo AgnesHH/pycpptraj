@@ -20,6 +20,20 @@ cdef class FrameArray:
         other.top = self.top.copy()
         return other
 
+    def __dealloc__(FrameArray self):
+        """should we free memory for Frame instances here?
+        (we set frame.py_free_mem = False in __getitem__)
+        """
+        for frame in self:
+            # we don't __dealloc__ here.
+            # just turn py_free_mem on to let Frame class frees memory
+            # work?
+            # NO : Error in `python': double free or corruption (out)`
+            # --> don't need this method. We still have the commented code here to 
+            # remind not need to add in future.
+            #frame.py_free_mem = True
+            pass
+
     def __getitem__(FrameArray self, int idx):
         """Return a reference of FrameArray[idx]
         To get a copy
