@@ -1,4 +1,5 @@
 import os
+from time import time
 from array import array
 from pycpptraj import ArgList
 from pycpptraj._cast import cast_dataset
@@ -23,7 +24,9 @@ state = create_state(top=topfile, trajin=trajinfile, ref=None)
 #state.add_action(Action_Molsurf(), ArgList("surf"))
 #state.add_action(Action_Molsurf(), ArgList("surf @CA"))
 state.add_action(Action_Strip(), ArgList("strip !@CA"))
+t0 = time()
 state.run()
+print "stripping time, ", time() - t0
 trajlist = state.get_trajinlist()
 print trajlist.size
 traj = trajlist.__iter__().next()
@@ -34,10 +37,3 @@ farray.top.summary()
 print farray.top
 print traj.top 
 print traj.top == farray.top
-print farray[0].xyz(0)
-print farray[0].xyz(303)
-
-print "crd"
-print farray[0].crd(0)
-print farray[0].crd(911)
-print farray[0].coords.__len__()

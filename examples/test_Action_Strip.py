@@ -4,6 +4,8 @@ from pycpptraj.actions import Action
 from pycpptraj.misc import strip
 from pycpptraj.Trajin_Single import Trajin_Single
 
+print dir(Action_Strip())
+
 farray = FrameArray(Topology("./data/Tc5b.top"))
 
 print "newtop"
@@ -17,17 +19,17 @@ print trajin.max_frames
 farray.get_frames(trajin)
 farray2 = farray.copy()
 print 'farray.size: ', farray.size
-print "farray[0].xyz(0)", farray[0].xyz(0)
 print 'farray2.size: ', farray2.size
 
-#toplist = TopologyList()
-#toplist.add_parm(newtop)
-#dslist = DataSetList()
-#dflist = DataFileList()
+toplist = TopologyList()
+toplist.add_parm(newtop)
+dslist = DataSetList()
+dflist = DataFileList()
 #
-#stripact = Action_Strip()
-#stripact.read_input(ArgList("strip !@CA"), toplist)
-#stripact.process(toplist[0], newtop)
+stripact = Action_Strip()
+stripact.read_input(ArgList("strip !@CA"), toplist)
+stripact.process(toplist[0], newtop)
+stripact.do_action()
 #print "toplist"
 #print "toplist[0].n_atom ", toplist[0].n_atoms
 #print "end toplist"
@@ -39,7 +41,6 @@ strip(farray, "!@CA")
 print farray.top.n_atoms
 print "After stripping, farray2.top"
 farray.top.summary()
-print farray[0].coords
 
 newtop2 = strip(farray2.top, "!@CA")
 print "After stripping, newtop2"
@@ -52,4 +53,3 @@ for i in range(farray2.size):
     tmp.strip_atoms(farray2.top.copy(), "!@CA")
     farray2[i] = tmp
 
-print farray2[0].coords
