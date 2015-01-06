@@ -83,6 +83,7 @@ cdef class CpptrajState:
 
         # We used "get_trajlist" as method's name to remind that this will return an instance copy
         # Should we update other *.pyx files too?
+        # so why do we need py_free_mem = False here?
         trajlist.py_free_mem = False
         
         if self.thisptr:
