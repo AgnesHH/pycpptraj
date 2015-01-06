@@ -1,5 +1,6 @@
 import unittest
 from pycpptraj.base import *
+import numpy as np
 from decorator import no_test
 
 TRAJ = Trajectory()
@@ -24,6 +25,16 @@ class TestTrajectory(unittest.TestCase):
         farray.top.summary()
         assert farray.size == TRAJ.max_frames
         print "rmsd to first = ", farray[0].rmsd(farray[1])
+        arr = np.zeros(farray.size)
+        cpptraj_rmsd = np.loadtxt("./data/rmsd_to_firstFrame_CA_allres.Tc5b.dat", skiprows=1).transpose()[1]
+        print cpptraj_rmsd[:10]
+
+        # caculate rmsd to 1st frame
+        for i in range(farray.size):
+            arr[i] = farray[0].rmsd(farray[i])
+        print arr[:10]
+        np.testing.assert_almost_equal(arr, cpptraj_rmsd, decimal=3)
+
 
     def test_trj_top(self):
         traj = Trajectory()

@@ -18,6 +18,7 @@ script:
     - python ./tests/test_import_class.py
     - cd ./examples
     - python ./API_test.py
+    - sh ./TestListTravis.sh
     - echo "Kool"
     ## - cd $PYCPPTRAJ_HOME/tests/Cpptraj_test/
     ## - make test.complete
