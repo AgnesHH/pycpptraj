@@ -37,8 +37,23 @@ cdef class DataSetList:
             dtset.baseptr0 = deref(it)
             yield dtset
             incr(it)
+
+    def __len__(self):
+        cdef const_iterator it
+        cdef DataSet dtset
+        cdef int i
+        it = self.thisptr.begin()
+
+        i = 0
+        while it != self.thisptr.end():
+            i += 1
+            incr(it)
+        return i
+
+    def len(self):
+        return self.__len__()
             
-    def empty(self):
+    def is_empty(self):
         return self.thisptr.empty()
 
     property size:
@@ -57,6 +72,8 @@ cdef class DataSetList:
         Should we use a copy instead?
         """
         cdef DataSet dset = DataSet()
+        if idx >= len(self):
+            raise ValueError("index is out of range")
         # get memoryview
         dset.baseptr0 = self.thisptr.index_opr(idx)
         return dset

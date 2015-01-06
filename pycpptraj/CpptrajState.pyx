@@ -51,7 +51,7 @@ cdef class CpptrajState:
     def exit_on_error(self):
         return self.thisptr.ExitOnError()
 
-    def empty_state(self):
+    def is_empty(self):
         return self.thisptr.EmptyState()
 
     def add_trajin(self, arg, isEnsemble=False):
@@ -83,6 +83,7 @@ cdef class CpptrajState:
 
         # We used "get_trajlist" as method's name to remind that this will return an instance copy
         # Should we update other *.pyx files too?
+        # so why do we need py_free_mem = False here?
         trajlist.py_free_mem = False
         
         if self.thisptr:
