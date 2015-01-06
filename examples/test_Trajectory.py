@@ -7,8 +7,23 @@ TRAJ.top = Topology("./data/Tc5b.top")
 TRAJ.load("./data/md1_prod.Tc5b.x")
 
 class TestTrajectory(unittest.TestCase):
-    def test_info(self):
+    def test_iter(self):
+        farray = FrameArray()
+        farray.top = TRAJ.top
         print "test_info"
+        i = 0
+        for frame in TRAJ:
+            i +=1
+            frame.strip_atoms(TRAJ.top.copy(), mask="!@CA")
+            farray.append(frame)
+        assert i == TRAJ.size == TRAJ.max_frames
+        assert frame.size == TRAJ.top.n_res * 3
+        farray.top.strip_atoms("!@CA")
+        print "farray.top.n_atoms= ", farray.top.n_atoms
+        assert farray.top.n_atoms == TRAJ.top.n_res 
+        farray.top.summary()
+        assert farray.size == TRAJ.max_frames
+        print "rmsd to first = ", farray[0].rmsd(farray[1])
 
     def test_trj_top(self):
         traj = Trajectory()

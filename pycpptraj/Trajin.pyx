@@ -96,6 +96,11 @@ cdef class Trajin (TrajectoryFile):
             return 0
 
     @property
+    def size(self):
+        # alias of max_frames
+        return self.max_frames
+
+    @property
     def total_read_frames(self):
         self.check_allocated()
         return self.baseptr_1.TotalReadFrames()
