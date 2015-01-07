@@ -4,6 +4,7 @@ magicmemoryview
 DataFile
 _FunctPtr
 _cast
+_utils
 ArgList
 Atom
 AtomMask

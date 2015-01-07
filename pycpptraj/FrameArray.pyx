@@ -117,15 +117,19 @@ cdef class FrameArray:
 
         if isinstance(ts, Trajin_Single) or isinstance(ts, Trajectory):
             if indices:
-                # TODO : add __str__ for ts
-                print "Can not use indices for %s instance" % ts.__class__.__name__
-            frame = Frame()
-            frame.set_frame_v(ts.top, ts.has_vel(), ts.n_repdims)
-            ts.begin_traj()
-            for i in range(ts.max_frames):
-                ts.get_next_frame(frame)
-                self.append(frame)
-            ts.end_traj()
+                # slow method
+                # TODO : use `for idx in leng(indices)`?
+                for i in indices:
+                    self.append(ts[i])
+            else:    
+                # get whole traj
+                frame = Frame()
+                frame.set_frame_v(ts.top, ts.has_vel(), ts.n_repdims)
+                ts.begin_traj()
+                for i in range(ts.max_frames):
+                    ts.get_next_frame(frame)
+                    self.append(frame)
+                ts.end_traj()
 
         elif isinstance(ts, FrameArray2):
             # TODO : rename FrameArray2
