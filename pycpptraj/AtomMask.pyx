@@ -3,6 +3,7 @@ from libcpp.vector cimport vector
 
 
 cdef class AtomMask:
+    # TODO : rename methods, add doc
     def __cinit__(self, *args):
         cdef int begin_atom, end_atom, atom_num
         cdef string maskstring

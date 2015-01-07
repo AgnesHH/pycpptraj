@@ -1,31 +1,18 @@
-from pycpptraj.Frame import Frame
-from pycpptraj.Topology import Topology
-from pycpptraj.AtomMask import AtomMask
-from pycpptraj.ArgList import ArgList
+import unittest
+from pycpptraj.base import *
 
-#atm = AtomMask("@CA")
-#atm.mask_info()
-#atm.add_atom_range(0, 10)
-#atm.mask_info()
-#print atm.mask_string_set()
+class TestAtomMask(unittest.TestCase):
+    def test_0(self):
+        atm = AtomMask("@CA")
+        print atm.n_selected
+        top = Topology("./data/Tc5b.top")
+        print dir(atm)
+        print dir(top)
+        top.set_integer_mask(atm)
+        print atm.n_selected
+        atm.brief_mask_info()
+        print atm.mask_string()
 
-trajinput = """
-noprogress
-parm ../tz2.ortho.parm7
-trajin ../tz2.ortho.nc 1 1
-mask "(:5 <:3.0) & :WAT" maskout mask.out maskpdb mask.pdb
-"""
+if __name__ == "__main__":
+    unittest.main()
 
-arglist = ArgList(trajinput)
-maskFilename = arglist.get_string_key("maskout")
-print maskFilename
-
-maskpdb = arglist.get_string_key("maskpdb")
-print maskpdb
-
-mask1 = AtomMask()
-mask1.set_mask_string(arglist.get_mask_next())
-mask1.brief_mask_info()
-
-#top = Topology("./data/Tc5b.top")
-#top.setup_integer_mask(mask1)
