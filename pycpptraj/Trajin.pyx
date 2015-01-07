@@ -2,6 +2,7 @@
 import os
 from .Frame cimport Frame, _Frame
 from ._utils cimport get_positive_idx
+from .FrameArray cimport FrameArray
 
 cdef class Trajin (TrajectoryFile):
 
@@ -32,30 +33,76 @@ cdef class Trajin (TrajectoryFile):
             yield frame
         self.end_traj()
 
-    def __getitem__(self, int idx):
-        """indexing TRAJ
-        NOTE : this method is expensive.
-        Should only use with one or few frames
-        """
-
+    def __getitem__(self, idxs):
         cdef Frame frame = Frame(self.top.n_atoms)
-        cdef int i = 0 
-        cdef idx_
+        cdef FrameArray farray
+        cdef int start, stop, step
+        cdef int i
+        cdef idx_1, idx_2
 
-        idx_ = get_positive_idx(idx, self.size)
-        # raise index out of range
-        if idx != 0 and idx_ == 0:
-            raise ValueError("index is out of range")
+        if not isinstance(idxs, slice):
+            idx_1 = get_positive_idx(idxs, self.size)
+            # raise index out of range
+            if idxs != 0 and idx_1 == 0:
+                raise ValueError("index is out of range")
 
-        self.begin_traj()
-        for i in range(self.baseptr_1.TotalFrames()):
-            # don't use Python method to avoid overhead
-            self.baseptr_1.GetNextFrame(frame.thisptr[0])
-            if idx_ == i:
-                break
-        self.end_traj()
-        return frame
-        
+            self.begin_traj()
+            for i in range(self.baseptr_1.TotalFrames()):
+                # don't use Python method to avoid overhead
+                self.baseptr_1.GetNextFrame(frame.thisptr[0])
+                if idx_1 == i:
+                    break
+            self.end_traj()
+            return frame
+        else:
+            print idxs
+            farray = FrameArray()
+            farray.top = self.top
+            if idxs.step == None:
+                step = 1
+            else:
+                step = idxs.step
+            if idxs.stop == None:
+                stop = self.size
+            else:
+                stop = idxs.stop
+            if idxs.start == None:
+                start = 0
+            else:
+                start = idxs.start
+
+            for idx_1 in range(start, stop, step):
+                idx_2 = get_positive_idx(idx_1, self.size)
+                # raise index out of range
+                if idx_1 != 0 and idx_2 == 0:
+                    raise ValueError("index is out of range")
+                farray.append(self[idx_2])
+            return farray
+
+    #def __getitem__(self, int idx):
+    #    """indexing TRAJ
+    #    NOTE : this method is expensive.
+    #    Should only use with one or few frames
+    #    """
+
+    #    cdef Frame frame = Frame(self.top.n_atoms)
+    #    cdef int i = 0 
+    #    cdef idx_
+
+    #    idx_ = get_positive_idx(idx, self.size)
+    #    # raise index out of range
+    #    if idx != 0 and idx_ == 0:
+    #        raise ValueError("index is out of range")
+
+    #    self.begin_traj()
+    #    for i in range(self.baseptr_1.TotalFrames()):
+    #        # don't use Python method to avoid overhead
+    #        self.baseptr_1.GetNextFrame(frame.thisptr[0])
+    #        if idx_ == i:
+    #            break
+    #    self.end_traj()
+    #    return frame
+
     def is_empty(self):
         return self.max_frames == 0
 

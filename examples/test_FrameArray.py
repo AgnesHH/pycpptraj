@@ -40,6 +40,45 @@ def get_frame_array(N=10):
 FARRAY = get_frame_array()
 
 class TestFrameArray(unittest.TestCase):
+    def test_joining(self):
+        farray0 = FrameArray()
+        farray1 = FrameArray()
+        farray0.get_frames(FARRAY, (0, 2, 4, 6), update_top=True)
+        farray1.get_frames(FARRAY, (1, 3, 5, 7), update_top=True)
+        farray0cp = farray0.copy()
+        assert farray0cp.size == farray0.size
+        print "farray0cp.size", farray0cp.size
+
+        old_size0 = farray0.size
+        print farray1.size
+        print "joining two arrays"
+        farray0.join(farray1)
+        assert farray0.size == (old_size0 + farray1.size)
+        assert farray0[4].coords == farray1[0].coords
+
+        print "farray1.size", farray1.size
+        print "farray0cp.size", farray0cp.size
+        farray0cp += farray1
+        print farray0cp
+
+        assert farray0cp.size == farray0.size
+        for i in range(farray0.size):
+            assert farray0cp[i].coords == farray0[i].coords
+
+        farray0cp.strip_atoms("!@CA")
+        print farray0cp
+        print farray0cp.top
+
+        for i in range(farray0.size):
+            assert farray0cp[i].coords != farray0[i].coords
+
+        frame0cp = farray0cp[0]
+        frame0cp_1 = farray0cp[0].copy()
+        frame0cp[0] = 1000.
+        print farray0cp[0].coords[0]
+        print frame0cp_1[0]
+
+    @no_test
     def test_indexing_and_buffer(self):
         farray = FARRAY.copy()
         print farray.size
@@ -50,6 +89,7 @@ class TestFrameArray(unittest.TestCase):
         print farray[0].coords_copy()[:20]
         np.testing.assert_almost_equal(np_arrview, farray[0].coords_copy())
 
+    @no_test
     def test_1(self):
         N = 10000
         farray = get_frame_array(N)

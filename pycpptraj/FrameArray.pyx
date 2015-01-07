@@ -62,6 +62,7 @@ cdef class FrameArray:
         return tmps
 
     def erase(self, int idx):
+        # TODO : massive erase (idx_0, idx_1), slice(0:3:1)...
         self.frame_v.erase(self.frame_v.begin() + idx)
         
     @property
@@ -84,6 +85,19 @@ cdef class FrameArray:
             yield frame
             incr(it)
 
+    def __iadd__(self, FrameArray other):
+        """
+        append `other`'s frames to `self`
+        frame0 += other
+        """
+        cdef _Frame _frame
+        if self.top.n_atoms != other.top.n_atoms:
+            raise ValueError("n_atoms of two arrays do not match")
+
+        for _frame in other.frame_v:
+            self.frame_v.push_back(_frame)
+        return self
+
     def append(self, Frame framein, copy=True):
         cdef Frame frame = Frame() 
         if copy:
@@ -94,6 +108,14 @@ cdef class FrameArray:
             frame.py_free_mem = False
             frame.thisptr = framein.thisptr
         self.frame_v.push_back(frame.thisptr[0])
+
+    def join(self, FrameArray other):
+        # TODO : do we need this method when we have `get_frames`
+        if self.top.n_atoms != other.top.n_atoms:
+            raise ValueError("n_atoms of two arrays do not match")
+        self.frame_v.reserve(self.frame_v.size() + other.frame_v.size())
+        self.frame_v.insert(self.frame_v.end(), 
+                            other.frame_v.begin(), other.frame_v.end())
 
     def get_frames(self, ts, indices=None, update_top=False):
         # TODO : fater loading?
@@ -107,20 +129,29 @@ cdef class FrameArray:
         Have not support indices yet. Get max_frames from trajetory
         """
         cdef int i
+        cdef int start, stop, step
         cdef Frame frame
 
         if update_top:
             self.top = ts.top.copy()
 
-        if self.top.n_atoms != ts.top.n_atoms:
-            raise ValueError("FrameArray.top.n_atoms should be equal to Trajin_Single.top.n_atoms or set update_top=True")
+        if not update_top:
+            if self.top.n_atoms != ts.top.n_atoms:
+                raise ValueError("FrameArray.top.n_atoms should be equal to Trajin_Single.top.n_atoms or set update_top=True")
 
         if isinstance(ts, Trajin_Single) or isinstance(ts, Trajectory):
             if indices:
                 # slow method
                 # TODO : use `for idx in leng(indices)`?
-                for i in indices:
-                    self.append(ts[i])
+                if isinstance(indices, slice):
+                    # use slice for saving memory
+                    start, stop, step = indices.start, indices.stop, indices.step
+                    for i in range(start, stop, step):
+                        self.append(ts[i])
+                else:
+                    # regular list, tuple, array,...
+                    for i in indices:
+                        self.append(ts[i])
             else:    
                 # get whole traj
                 frame = Frame()
@@ -131,7 +162,7 @@ cdef class FrameArray:
                     self.append(frame)
                 ts.end_traj()
 
-        elif isinstance(ts, FrameArray2):
+        elif isinstance(ts, FrameArray2) or isinstance(ts, FrameArray):
             # TODO : rename FrameArray2
             # use try and except?
             if not indices:

@@ -13,6 +13,17 @@ class TestAtomMask(unittest.TestCase):
         atm.brief_mask_info()
         print atm.mask_string()
 
+    def test_1(self):
+        print "test_1"
+        atm = AtomMask(10)
+        atm.brief_mask_info()
+        print "end test_1"
+
+    def test_2(self):
+        print "heavy"
+        print "Oxygen"
+        print "hydrogen"
+
 if __name__ == "__main__":
     unittest.main()
 

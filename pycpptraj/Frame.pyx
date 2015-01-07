@@ -273,6 +273,10 @@ cdef class Frame (object):
 
     @for_testing
     def coords_copy(self):
+        return self.coords
+
+    @property
+    def coords(self):
         """
         return a copy of frame coords (python array)
         """

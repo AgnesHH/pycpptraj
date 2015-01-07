@@ -10,7 +10,35 @@ TRAJ.load("./data/md1_prod.Tc5b.x")
 print "TRAJ.size", TRAJ.size
 
 class TestTrajectory(unittest.TestCase):
+    def test_slice(self):
+        print "test_slice"
+        TRAJ2 = Trajectory()
+        TRAJ2.top = Topology("./data/Tc5b.top")
+        TRAJ2.load("./data/md1_prod.Tc5b.x")
+        print TRAJ2.size
+        farray0 = TRAJ2[0:3:1]
 
+        print "after slicing"
+        print TRAJ2[10:1000:50][0].n_atoms
+        print farray0.size
+        print farray0[0].n_atoms
+        
+        print "test dummy slicing"
+        print TRAJ2[0:3]
+        farray1 = TRAJ2[0:3]
+        print farray1[0].n_atoms
+        print farray1
+        print "end test dummy slicing"
+
+        print "test dummy slicing 2"
+        print TRAJ2[:3]
+        print TRAJ2[:3:1]
+        print TRAJ2[:3:2]
+        print TRAJ2[:3:-1]
+        print TRAJ2[::1000]
+        print TRAJ2[1::10]
+
+    @no_test
     def test_indexing_0(self):
         print "test_indexing_0"
         TRAJ2 = Trajectory()
