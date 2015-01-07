@@ -5,7 +5,9 @@ from decorator import no_test
 
 TRAJ = Trajectory()
 TRAJ.top = Topology("./data/Tc5b.top")
+#TRAJ.load("./data/md1_prod.Tc5b.x", TRAJ.top, ArgList("1 100 10"))
 TRAJ.load("./data/md1_prod.Tc5b.x")
+print "TRAJ.size", TRAJ.size
 
 class TestTrajectory(unittest.TestCase):
     def test_iter(self):
