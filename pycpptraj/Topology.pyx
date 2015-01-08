@@ -7,7 +7,7 @@ from FileName cimport FileName
 from Frame cimport Frame
 from NameType cimport NameType
 from TopologyList cimport TopologyList
-from parms.Parm_Amber import Parm_Amber
+from pycpptraj.parms.Parm_Amber import Parm_Amber
 
 cdef class Topology:
     def __cinit__(self, *args):

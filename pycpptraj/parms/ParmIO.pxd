@@ -1,8 +1,8 @@
 # distutils: language = c++
 from libcpp.string cimport string
 from ArgList cimport _ArgList, ArgList
-from Topology cimport *
-from CpptrajFile cimport *
+from Topology cimport Topology, _Topology
+from CpptrajFile cimport _CpptrajFile, CpptrajFile
 from BaseIOtype cimport *
 
 
