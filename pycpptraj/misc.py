@@ -3,11 +3,26 @@ from pycpptraj.base import *
 from pycpptraj._iterload import _iterload
 from pycpptraj.actions.Action_Strip import Action_Strip
 from pycpptraj.Trajin_Single import Trajin_Single
+from pycpptraj.FrameArray import FrameArray
+from pycpptraj.Topology import Topology
 
 def iterload(top=None, traj=None, start=0, chunk=None):
     '''Iterately return Frame instance'''
-    print top, traj, start, chunk
+    if not isinstance(top, Topology):
+        # string
+        top = Topology(top)
     return _iterload(top, traj, start, chunk)
+
+def load(top=None, traj=None, readonly=True):
+    if not isinstance(top, Topology):
+        # string
+        top = Topology(top)
+    if readonly:
+        ts = Trajin_Single()
+    else:
+        ts = FrameArray()
+    ts.load(traj, top)
+    return ts
 
 def strip(arg, mask):
     """

@@ -191,7 +191,12 @@ cdef class FrameArray:
             framein.py_free_mem = False
             self.frame_v.push_back(framein.thisptr[0])
 
-    def join(self, FrameArray other):
+    def join(self, *args):
+        """join multiple FrameArray instances"""
+        for arg in args:
+            self._join(arg)
+
+    def _join(self, FrameArray other):
         # TODO : do we need this method when we have `get_frames`
         if self.top.n_atoms != other.top.n_atoms:
             raise ValueError("n_atoms of two arrays do not match")
