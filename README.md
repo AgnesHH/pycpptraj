@@ -31,7 +31,7 @@ Journal of Chemical Theory and Computation 2013 9 (7), 3084-3095
 Install
 =======
 - Install `libcpptraj.so` and move to $AMBERHOME/lib/
-    * Read: INSTALL_libcpptraj.txt
+    * Read: install.txt
 - Download pycptraj package:
     * git clone https://github.com/hainm/pycpptraj
 - Change director to pycpptraj
