@@ -540,7 +540,14 @@ cdef class Frame (object):
 
     # use Action_Strip here?
     cdef void _strip_atoms(Frame self, Topology top, string m, bint update_top, bint has_box):
-        """this method is too slow vs cpptraj"""
+        """this method is too slow vs cpptraj
+        if you use memory for numpy, you need to update after resizing Frame
+        >>> arr0 = np.asarray(frame.buffer)
+        >>> frame.strip_atoms(top,"!@CA")
+        >>> # update view
+        >>> arr0 = np.asarray(frame.buffer)
+        """
+
         cdef Topology newtop = Topology()
         newtop.py_free_mem = False
         cdef AtomMask mask = AtomMask()

@@ -112,7 +112,12 @@ cdef class FrameArray:
 
     def __str__(FrameArray self):
         name = self.__class__.__name__
-        tmps = "%s instance with %s frames, %s atoms/frame" % (name, self.size, self.top.n_atoms)
+        tmps = """%s instance with %s frames, %s atoms/frame
+                  ID = %s
+               """ % (
+                name, self.size, self.top.n_atoms,
+                hex(id(self))
+                )
         return tmps
 
     def erase(self, int idx):
@@ -229,9 +234,18 @@ cdef class FrameArray:
                     self.append(ts[i])
 
     def strip_atoms(self, mask=None, update_top=True, bint has_box=False):
+        """if you use memory for numpy, you need to update after resizing Frame
+        >>> arr0 = np.asarray(frame.buffer)
+        >>> frame.strip_atoms(top,"!@CA")
+        >>> # update view
+        >>> arr0 = np.asarray(frame.buffer)
+        """
+
         cdef vector[_Frame].iterator it
         cdef Frame frame = Frame()
         cdef Topology tmptop
+
+        if mask == None: return 
 
         frame.py_free_mem = False
         it = self.frame_v.begin()

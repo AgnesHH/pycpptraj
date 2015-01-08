@@ -32,7 +32,41 @@ FRAMENUM=100
 FARRAY = ts[:FRAMENUM]
 
 class TestFrameArray(unittest.TestCase):
+    def test_buffer_none(self):
+        FARRAYcp = FARRAY.copy()
+        print FARRAYcp[0].buffer
+        arr0 = np.asarray(FARRAYcp[0].buffer)
+        print arr0[:10]
+        
+        # what happen if we assign arr0 to `None`?
+        arr0 = None
+        print FARRAYcp[0].coords[:10]
+        print arr0
+        
+    @no_test
+    def test_strip_atoms(self):
+        FARRAYcp = FARRAY.copy()
+        arr0 = np.asarray(FARRAYcp[0].buffer)
+        buff0 = FARRAYcp[0].buffer
+        print arr0[:20]
+        FARRAYcp.strip_atoms("!@CA")
+        print FARRAYcp.top
+
+        # memory is blown up
+        print arr0[:20]
+
+        arr1 = np.asarray(FARRAYcp[0].buffer)
+        print arr1[:10]
+        print FARRAYcp[0].coords[:10]
+        buff1 = FARRAYcp[0].buffer
+        print buff0, buff1
+        print buff0[0], buff1[0]
+        print FARRAYcp[0].buffer
+        print FARRAYcp[0][0]
+
+    @no_test
     def test_memoryview(self):
+        print "test_memoryview"
         tmp = 100.
         FARRAYcp = FARRAY.copy()
         print FARRAYcp
@@ -48,6 +82,7 @@ class TestFrameArray(unittest.TestCase):
 
         # test memoryview for sub-array
         subfarray = FARRAYcp[:2]
+        print "subfarray: ", subfarray
         assert subfarray[0][0] == 2 * tmp
         subfarray[0][0] = 4 * tmp
         assert subfarray[0][0] == 4 * tmp
@@ -65,11 +100,21 @@ class TestFrameArray(unittest.TestCase):
         # what's about re-assign subfarray with wrong size?
         # (subfarray used to be a view of FARRAYcp[:2])
         subfarray = FARRAYcp[50:60]
+        print "test *= "
+        print subfarray[0][0]
         assert subfarray.size == 10
         assert FARRAYcp.size == FRAMENUM
-        print subfarray[0][0]
+        print "subfarray: ", subfarray
+
+        # doing Frame calculation
+        print "test *= "
+        tmp = subfarray[0][0]
+        subfarray[0]*= subfarray[0]
+        assert subfarray[0][0] == tmp*tmp
+
+        #subfarray[0] /= subfarray[0]
         
-    #@no_test
+    @no_test
     def test_fancy_indexing(self):
         FARRAYcp = FARRAY.copy()
         FARRAY_sub0 = FARRAYcp[:3]
@@ -136,7 +181,7 @@ class TestFrameArray(unittest.TestCase):
     @no_test
     def test_1(self):
         N = 10000
-        farray = get_frame_array(N)
+        farray = ts[:N]
         assert farray.size == N
         # store 10th atom coord of 5th frame for comparison
         # make getting results after printing 3 times
