@@ -5,7 +5,7 @@ from cython cimport view
 from cpython.array cimport array as pyarray
 from cython.operator cimport dereference as deref
 from libcpp.vector cimport vector
-from .decorators import for_testing
+from .decorators import for_testing, iter_warning
 from AtomMask cimport *
 from Frame cimport CRDtype
 from Topology cimport Topology

@@ -1,9 +1,11 @@
 #check ./utils/actions.py
 from pycpptraj.base import *
+from pycpptraj._iterload import _iterload
 from pycpptraj.actions.Action_Strip import Action_Strip
 
-def load_parm():
-    pass
+def iterload(top=None, traj=None):
+    '''Iterately return Frame instance'''
+    return _iterload(top, traj)
 
 def strip(arg, mask):
     """

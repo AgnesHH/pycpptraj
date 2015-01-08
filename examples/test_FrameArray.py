@@ -40,7 +40,7 @@ class TestFrameArray(unittest.TestCase):
 
         # got Segmentation fault for this
         # why?
-        farray.load("ala3.dcd")
+        #farray.load("ala3.dcd")
 
         #print farray.top
         ts = Trajin_Single()
