@@ -1,8 +1,8 @@
 # distutils: language = c++
-
+from pycpptraj.cpptraj_dict import get_key, AtomicElementDict
 
 cdef class Atom:
-    def __cinit__(self):
+    def __cinit__(self, *args):
         self.thisptr = new _Atom()
 
     def __dealloc__(self):
@@ -20,7 +20,7 @@ cdef class Atom:
 
     # def Atom(self, Atom):
 
-    def swap(self,Atom at1, Atom at2):
+    def swap(self, Atom at1, Atom at2):
         self.thisptr.swap(at1.thisptr[0], at2.thisptr[0])
 
     #def  bond_iterator bondbegin(self):
@@ -56,28 +56,29 @@ cdef class Atom:
     def no_mol(self):
         return self.thisptr.NoMol()
 
-    def c_str(self):
+    def __str__(self):
         return self.thisptr.c_str()
 
     @property
     def element(self):
-        return self.thisptr.Element()
+        return get_key(self.thisptr.Element(), AtomicElementDict)
 
     @property
     def atomic_number(self):
         return self.thisptr.AtomicNumber()
 
     @property
-    def element_name(self):
+    def element_short_name(self):
         return self.thisptr.ElementName()
 
     def name(self):
+        # TODO : do we need this method?
         cdef NameType nt = NameType()
         nt.thisptr[0] = self.thisptr.Name()
         return nt
 
     @property
-    def type(self):
+    def atype(self):
         cdef NameType nt = NameType()
         nt.thisptr[0] = self.thisptr.Type()
         return nt
@@ -91,7 +92,7 @@ cdef class Atom:
         return self.thisptr.MolNum()
 
     @property 
-    def chain_i_d(self):
+    def chainID(self):
         return self.thisptr.ChainID()
 
     @property
@@ -123,8 +124,9 @@ cdef class Atom:
     def sort_bonds(self):
         self.thisptr.SortBonds()
 
-    #def add_exclusion_list(self,set[int] intset):
+    #def add_exclusion_list(self, list[int] intset):
+    #    cdef set[int] tmp = intset
     #    self.thisptr.AddExclusionList(intset)
 
-    def get_bond_length(self,AtomicElementType id1, AtomicElementType id2):
+    def get_bond_length(self, AtomicElementType id1, AtomicElementType id2):
         return self.thisptr.GetBondLength(id1, id2)

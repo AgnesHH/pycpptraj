@@ -141,7 +141,8 @@ cdef class Topology:
     #def SoluteAtoms(self):
     #    return self.thisptr.SoluteAtoms()
 
-    def atom_list(self):
+    @property
+    def atomlist(self):
         """return list of atoms
         """
         cdef Atom atom 
@@ -157,6 +158,13 @@ cdef class Topology:
             atlist.append(atom)
             incr(it)
         return atlist
+
+    @property
+    def residuelist(self):
+        reslist = []
+        for res in self.res_generator():
+            reslist.append(res)
+        return reslist
 
     def summary(self):
         self.thisptr.Summary()
