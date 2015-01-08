@@ -9,8 +9,10 @@ from .Trajin cimport Trajin
 from pycpptraj.Trajectory import Trajectory
 
 cdef class FrameArray:
-    def __cinit__(self, top=Topology()):
+    def __cinit__(self, string fname='', top=Topology(), indices=None):
         self.top = top
+        if not fname.empty():
+            self.load(fname=fname, indices=indices)
 
     def copy(self):
         "Return a copy of FrameArray"

@@ -2,19 +2,12 @@
 from pycpptraj.base import *
 from pycpptraj._iterload import _iterload
 from pycpptraj.actions.Action_Strip import Action_Strip
-from pycpptraj.Trajing_Single import Trajing_Single
+from pycpptraj.Trajin_Single import Trajin_Single
 
 def iterload(top=None, traj=None, start=0, chunk=None):
     '''Iterately return Frame instance'''
-    if chunk is None:
-        return _iterload(top, traj)
-    else:
-        ts = Trajing_Single()
-        ts.load(top, traj)
-        newstart = start
-        while newstart <= ts.size-chunk:
-            yield ts[newstart:newstart+chunk]
-            newstart += chunk
+    print top, traj, start, chunk
+    return _iterload(top, traj, start, chunk)
 
 def strip(arg, mask):
     """
