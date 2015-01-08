@@ -28,7 +28,7 @@ frame2 = Frame(frame)
 # create FrameArray to store Frame
 FARRAY = FrameArray()
 #FARRAY.get_frames(ts, update_top=True)
-FRAMENUM=100
+FRAMENUM=10000
 FARRAY = ts[:FRAMENUM]
 
 class TestFrameArray(unittest.TestCase):
