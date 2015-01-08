@@ -18,9 +18,6 @@ cdef extern from "TopologyList.h":
         void AddParm(_Topology * pIn)
         void List()
 
-        # Hai: add Size
-        #int Size()
-
 cdef class TopologyList:
     cdef _TopologyList* thisptr
     cdef bint py_free_mem

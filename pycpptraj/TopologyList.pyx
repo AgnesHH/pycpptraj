@@ -16,7 +16,6 @@ cdef class TopologyList:
 
     def __dealloc__(self):
         if self.py_free_mem:
-            #print "delete ", self.__class__
             del self.thisptr
 
     def clear(self):

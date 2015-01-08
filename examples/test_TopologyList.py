@@ -54,6 +54,7 @@ class TestTopologyList(unittest.TestCase):
         tlist[0]
         tlist[1]
         tlist[2]
+        print tlist.size
 
         print "test iteration"
         for idx, top in enumerate(tlist):

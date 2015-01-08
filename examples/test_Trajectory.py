@@ -12,7 +12,7 @@ class TestTrajectory(unittest.TestCase):
     def test_slice_basic(self):
         print "test_slice_basic"
         TRAJ2 = Trajectory()
-        TRAJ2.debug = True
+        #TRAJ2.debug = True
         TRAJ2.top = Topology("./data/Tc5b.top")
         TRAJ2.load("./data/md1_prod.Tc5b.x")
         print TRAJ2[::]
@@ -27,7 +27,7 @@ class TestTrajectory(unittest.TestCase):
     def test_slice(self):
         print "test_slice"
         TRAJ2 = Trajectory()
-        TRAJ2.debug = True
+        #TRAJ2.debug = True
         TRAJ2.top = Topology("./data/Tc5b.top")
         TRAJ2.load("./data/md1_prod.Tc5b.x")
         print TRAJ2.size
