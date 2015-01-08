@@ -1,25 +1,40 @@
 import unittest
-from pycpptraj.base import *
 import numpy as np
+from pycpptraj.base import *
 from decorator import no_test
 
 TRAJ = Trajectory()
 TRAJ.top = Topology("./data/Tc5b.top")
-#TRAJ.load("./data/md1_prod.Tc5b.x", TRAJ.top, ArgList("1 100 10"))
 TRAJ.load("./data/md1_prod.Tc5b.x")
 print "TRAJ.size", TRAJ.size
 
 class TestTrajectory(unittest.TestCase):
+    def test_slice_basic(self):
+        print "test_slice_basic"
+        TRAJ2 = Trajectory()
+        TRAJ2.debug = True
+        TRAJ2.top = Topology("./data/Tc5b.top")
+        TRAJ2.load("./data/md1_prod.Tc5b.x")
+        print TRAJ2[::]
+        farray = TRAJ2[::]
+        print farray
+        print farray[::][0].n_atoms
+
+        # TODO : got segmentfault
+        #print TRAJ2[::][0].n_atoms
+
+    @no_test
     def test_slice(self):
         print "test_slice"
         TRAJ2 = Trajectory()
+        TRAJ2.debug = True
         TRAJ2.top = Topology("./data/Tc5b.top")
         TRAJ2.load("./data/md1_prod.Tc5b.x")
         print TRAJ2.size
         farray0 = TRAJ2[0:3:1]
 
         print "after slicing"
-        print TRAJ2[10:1000:50][0].n_atoms
+        print "n_atoms = ", TRAJ2[10:1000:50][0].n_atoms
         print farray0.size
         print farray0[0].n_atoms
         
@@ -37,6 +52,16 @@ class TestTrajectory(unittest.TestCase):
         print TRAJ2[:3:-1]
         print TRAJ2[::1000]
         print TRAJ2[1::10]
+
+        print TRAJ2[100:0:-1]
+        print TRAJ2[::1]
+        print TRAJ2[::]
+
+        farray2 = FrameArray()
+        indices = range(TRAJ2.size)
+        farray2.get_frames(TRAJ2, update_top=True)
+        farray3 = FrameArray()
+        farray3.get_frames(farray2, update_top=True)
 
     @no_test
     def test_indexing_0(self):
@@ -89,6 +114,12 @@ class TestTrajectory(unittest.TestCase):
         print TRAJ2[-1].coords_copy()[0] 
         print TRAJ2[10406].coords_copy()[0]
         assert TRAJ2[-1].coords_copy()[0] == TRAJ2[10406].coords_copy()[0]
+
+    #@no_test
+    def test_iter_basic(self):
+        print "test_iter_basic"
+        for frame in TRAJ:
+            pass
 
     @no_test
     def test_iter(self):

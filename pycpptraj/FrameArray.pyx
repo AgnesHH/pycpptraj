@@ -1,13 +1,17 @@
 # distutils: language = c++
+cimport cython
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 from Topology cimport Topology
+from .Trajin cimport Trajin
 
 # python level
 from pycpptraj.Trajectory import Trajectory
 
 cdef class FrameArray:
     def __cinit__(self, top=Topology()):
+        # test
+        #self.__setattr__('__getitem__', Trajin().__getitem__)
         self.top = top
 
     def copy(self):
@@ -34,19 +38,65 @@ cdef class FrameArray:
             #frame.py_free_mem = True
             pass
 
-    def __getitem__(FrameArray self, int idx):
-        """Return a reference of FrameArray[idx]
-        To get a copy
-        >>>frame = FrameArray_instance[10].copy()
-        TODO : add negative indexing
-        """
-        cdef Frame frame = Frame()
-        frame.py_free_mem = False
+    @cython.boundscheck(False)
+    @cython.wraparound(False)
+    def __getitem__(self, idxs):
+        # TODO : same as Trajin class
+        # should combine or inherit or ?
+        #"""Return a reference of FrameArray[idx]
+        #To get a copy
+        #>>>frame = FrameArray_instance[10].copy()
+
+        cdef Frame frame = Frame(self.top.n_atoms)
+        cdef FrameArray farray
+        cdef int start, stop, step
+        cdef int i
+        cdef int idx_1, idx_2
 
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
-        frame.thisptr = &(self.frame_v[idx])
-        return frame
+        if not isinstance(idxs, slice):
+            idx_1 = get_positive_idx(idxs, self.size)
+            # raise index out of range
+            if idxs != 0 and idx_1 == 0:
+                raise ValueError("index is out of range")
+            # get memoryview
+            frame.py_free_mem = False
+            frame.thisptr = &(self.frame_v[idx_1])
+            return frame
+        else:
+            farray = FrameArray()
+            farray.top = self.top
+            if idxs.step == None:
+                step = 1
+            else:
+                step = idxs.step
+            if idxs.stop == None:
+                stop = self.size
+            else:
+                stop = idxs.stop
+            if idxs.start == None:
+                start = 0
+            else:
+                start = idxs.start
+                
+            for i in range(start, stop, step):
+                farray.append(self[i])
+            return farray
+
+    #def __getitem__(FrameArray self, int idx):
+    #    """Return a reference of FrameArray[idx]
+    #    To get a copy
+    #    >>>frame = FrameArray_instance[10].copy()
+    #    TODO : add negative indexing
+    #    """
+    #    cdef Frame frame = Frame()
+    #    frame.py_free_mem = False
+
+    #    if len(self) == 0:
+    #        raise ValueError("Your FrameArray is empty, how can I index it?")
+    #    frame.thisptr = &(self.frame_v[idx])
+    #    return frame
 
     def __setitem__(FrameArray self, int idx, Frame other):
         if len(self) == 0:
@@ -187,9 +237,6 @@ cdef class FrameArray:
             # we need to update topology since _strip_atoms will modify it
             tmptop = self.top.copy()
             frame._strip_atoms(tmptop, mask, update_top, has_box)
-            # debug
-            #print "tmptop.n_atoms:", tmptop.n_atoms
-            # debug
             incr(it)
         if update_top:
             self.top = tmptop.copy()

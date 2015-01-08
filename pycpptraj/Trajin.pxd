@@ -42,3 +42,4 @@ cdef extern from "Trajin.h":
 cdef class Trajin (TrajectoryFile):
     # baseptr0 is from TrajectoryFile
     cdef _Trajin* baseptr_1
+    cdef public bint debug

@@ -26,51 +26,53 @@ trajin = """
 """
 
 ts.load(mdx, top, ArgList("trajin 1 100 10"))
-ts.prepare_for_read(True)
-frame = Frame()
-frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
-frame2 = Frame(frame)
-
-# load reference
-ref = ReferenceFrame()
-ref.load_ref(refname, top)
-ref_frame = ref.frame
-
-# create FrameArray to store Frame
-def get_frame_array():
-    farray = FrameArray()
-    frame = Frame()
-    frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
-    ts.begin_traj(False)
-    for i in range(10):
-        ts.get_next_frame(frame)
-        farray.append(frame)
-        #print frame.rmsd(ref_frame)
-    ts.end_traj()
-    return farray
-
-farray = get_frame_array()
-print farray[5].xyz(10) 
-print farray.size
-farray[5].swap_atoms(9, 10)
-print farray[5].xyz(9) 
-farray.erase(5)
-print farray[5].xyz(10)
-print farray.size
-
-frame = Frame(farray[5])
-del frame
-print farray[5].xyz(10)
-
-energy = Energy_Amber()
-print energy.E_torsion(farray[0], top, AtomMask("*"))
-
-print ts.top.brief("@CA")
-print ts.top.brief("@CA")
-print ts.top
-print ts.top
-
-#print frame == farray[5]
-        
-#if __name__ == "__main__":
-#    unittest.main()
+frame = Frame(ts.top.n_atoms)
+#ts.begin_traj()
+with ts:
+    ts.read_traj_frame(100, frame)
+    print frame
+#ts.end_traj()
+#ts.prepare_for_read(True)
+#frame = Frame()
+#frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
+#frame2 = Frame(frame)
+#
+## load reference
+#ref = ReferenceFrame()
+#ref.load_ref(refname, top)
+#ref_frame = ref.frame
+#
+## create FrameArray to store Frame
+#def get_frame_array():
+#    farray = FrameArray()
+#    frame = Frame()
+#    frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
+#    ts.begin_traj(False)
+#    for i in range(10):
+#        ts.get_next_frame(frame)
+#        farray.append(frame)
+#        #print frame.rmsd(ref_frame)
+#    ts.end_traj()
+#    return farray
+#
+#farray = get_frame_array()
+#print farray[5].xyz(10) 
+#print farray.size
+#farray[5].swap_atoms(9, 10)
+#print farray[5].xyz(9) 
+#farray.erase(5)
+#print farray[5].xyz(10)
+#print farray.size
+#
+#frame = Frame(farray[5])
+#del frame
+#print farray[5].xyz(10)
+#
+#energy = Energy_Amber()
+#print energy.E_torsion(farray[0], top, AtomMask("*"))
+#
+#print ts.top.brief("@CA")
+#print ts.top.brief("@CA")
+#print ts.top
+#print ts.top
+#
