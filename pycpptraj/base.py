@@ -5,6 +5,7 @@ import baseclasses for pycpptraj
 from pycpptraj.Frame import Frame
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.FrameArray2 import FrameArray2
+from pycpptraj.FrameArray2 import FrameArray2 as TrajectoryReadOnly
 from pycpptraj.ReferenceFrame import ReferenceFrame
 from pycpptraj.Topology import Topology
 from pycpptraj.ArgList import ArgList
@@ -29,6 +30,7 @@ __all__ = ['Topology', 'TopologyList', 'Frame', 'FrameArray', 'ReferenceFrame', 
            'FrameList', 'Trajin_Single', 'DataSetList', 'DataFileList', 'ActionList',
            'Trajin', 'TrajinList',
            'Trajectory',
+           'TrajectoryReadOnly',
            'FrameArray2',
            'Parm_Amber', 
            'cast_dataset',
