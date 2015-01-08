@@ -32,6 +32,33 @@ FRAMENUM=10000
 FARRAY = ts[:FRAMENUM]
 
 class TestFrameArray(unittest.TestCase):
+    def test_load_CHARMM(sefl):
+        datadir = os.environ['PYCPPTRAJ_HOME'] + "/tests/Cpptraj_test/Test_Charmm/"
+        print "test_load_CHARMM"
+        farray = FrameArray()
+        farray.top = Topology(datadir + "ala3.psf")
+
+        # got Segmentation fault for this
+        # why?
+        farray.load("ala3.dcd")
+
+        #print farray.top
+        ts = Trajin_Single()
+        ts.top = farray.top
+        ts.load("ala3.dcd")
+        print ts.size
+        print ts[0]
+
+    def test_load_crd(self):
+        print "test_load_crd"
+        farray = FrameArray()
+        farray.top = Topology(datadir + "Tc5b.top")
+        farray.load("./data/Tc5b.nat.crd")
+        print farray.size
+        print farray[-1]
+        print farray[0][0]
+        print farray[0].coords[:10]
+
     def test_load(self):
         farray = FrameArray()
         farray.top = Topology(datadir + "Tc5b.top")

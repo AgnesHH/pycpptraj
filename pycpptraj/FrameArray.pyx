@@ -10,8 +10,6 @@ from pycpptraj.Trajectory import Trajectory
 
 cdef class FrameArray:
     def __cinit__(self, top=Topology()):
-        # test
-        #self.__setattr__('__getitem__', Trajin().__getitem__)
         self.top = top
 
     def copy(self):
@@ -40,17 +38,22 @@ cdef class FrameArray:
 
     def load(self, fname='', Topology top=None, indices=None):
         # TODO : add more test cases
-        cdef Trajin_Single ts = Trajin_Single()
+        cdef Trajin_Single ts
         cdef int idx
 
         if isinstance(fname, basestring):
+            ts = Trajin_Single()
             if top is not None:
-                ts.load(fname, top, warning=False)
+                ts.top = top.copy()
+                ts.load(fname)
                 # update top for self too
+                if not self.top.is_empty():
+                    print "updating FrameArray topology"
                 self.top = top.copy()
             else:
                 # use self.top
-                ts.load(fname, self.top)
+                ts.top = self.top.copy()
+                ts.load(fname)
 
             if indices is None:
                 # load all frames
@@ -89,7 +92,10 @@ cdef class FrameArray:
             idx_1 = get_positive_idx(idxs, self.size)
             # raise index out of range
             if idxs != 0 and idx_1 == 0:
-                raise ValueError("index is out of range")
+                # need to check if array has only 1 element. 
+                # arr[0] is  arr[-1]
+                if idxs != -1:
+                    raise ValueError("index is out of range")
             # get memoryview
             frame.thisptr = &(self.frame_v[idx_1])
             return frame
