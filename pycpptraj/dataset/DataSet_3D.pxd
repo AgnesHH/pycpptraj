@@ -1,5 +1,5 @@
 # distutils: language = c++
-from DataSet cimport *
+from dataset.DataSet cimport *
 from CpptrajFile cimport *
 from Vec3 cimport *
 

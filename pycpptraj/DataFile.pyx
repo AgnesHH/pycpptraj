@@ -1,7 +1,7 @@
 # distutils: language = c++
 
 from ArgList cimport ArgList
-from DataSetList cimport DataSetList
+from dataset.DataSetList cimport DataSetList
 
 cdef class DataFile:
     def __cinit__(self, py_free_mem=True):

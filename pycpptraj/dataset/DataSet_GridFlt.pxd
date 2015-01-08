@@ -1,5 +1,5 @@
 # distutils: language = c++
-from DataSet_3D cimport *
+from dataset.DataSet_3D cimport *
 from Grid cimport *
 
 

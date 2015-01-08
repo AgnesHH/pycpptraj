@@ -1,6 +1,6 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from DataSet_1D cimport *
+from dataset.DataSet_1D cimport *
 
 
 cdef extern from "DataSet_double.h": 
