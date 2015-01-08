@@ -53,6 +53,8 @@ cdef class FrameArray:
         cdef int i
         cdef int idx_1, idx_2
 
+        frame.py_free_mem = False
+
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
         if not isinstance(idxs, slice):
@@ -61,10 +63,10 @@ cdef class FrameArray:
             if idxs != 0 and idx_1 == 0:
                 raise ValueError("index is out of range")
             # get memoryview
-            frame.py_free_mem = False
             frame.thisptr = &(self.frame_v[idx_1])
             return frame
         else:
+            # creat a subset array of `FrameArray`
             farray = FrameArray()
             farray.top = self.top
             if idxs.step == None:
@@ -81,7 +83,8 @@ cdef class FrameArray:
                 start = idxs.start
                 
             for i in range(start, stop, step):
-                farray.append(self[i])
+                # turn `copy` to `False` to have memoryview
+                farray.append(self[i], copy=False)
             return farray
 
     #def __getitem__(FrameArray self, int idx):
@@ -99,6 +102,7 @@ cdef class FrameArray:
     #    return frame
 
     def __setitem__(FrameArray self, int idx, Frame other):
+        # make a copy
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
         self.frame_v[idx] = other.thisptr[0]
@@ -152,12 +156,12 @@ cdef class FrameArray:
         cdef Frame frame = Frame() 
         if copy:
             frame = framein.copy()
+            self.frame_v.push_back(frame.thisptr[0])
         else:
             # create memory view
             # need to set `py_free_mem` to False
-            frame.py_free_mem = False
-            frame.thisptr = framein.thisptr
-        self.frame_v.push_back(frame.thisptr[0])
+            framein.py_free_mem = False
+            self.frame_v.push_back(framein.thisptr[0])
 
     def join(self, FrameArray other):
         # TODO : do we need this method when we have `get_frames`

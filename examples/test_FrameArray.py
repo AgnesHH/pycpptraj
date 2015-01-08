@@ -26,20 +26,64 @@ frame.set_frame_v(top, ts.has_vel(), ts.n_repdims)
 frame2 = Frame(frame)
 
 # create FrameArray to store Frame
-def get_frame_array(N=10):
-    farray = FrameArray()
-    ts.begin_traj(False)
-    for i in range(N):
-        ts.get_next_frame(frame)
-        farray.append(frame)
-        #print frame.rmsd(ref_frame)
-    ts.end_traj()
-    farray.top = ts.top.copy()
-    return farray
-
-FARRAY = get_frame_array()
+FARRAY = FrameArray()
+#FARRAY.get_frames(ts, update_top=True)
+FRAMENUM=100
+FARRAY = ts[:FRAMENUM]
 
 class TestFrameArray(unittest.TestCase):
+    def test_memoryview(self):
+        tmp = 100.
+        FARRAYcp = FARRAY.copy()
+        print FARRAYcp
+        frame0 = FARRAYcp[0]
+        frame0[0] = tmp 
+        assert frame0[0] == tmp
+        assert FARRAYcp[0][0] == tmp
+        arr = np.asarray(FARRAYcp[0].buffer)
+        assert arr[0] == tmp
+        arr[0] = 2 * tmp
+        assert frame0[0] == 2 * tmp
+        assert FARRAYcp[0][0] == 2 * tmp
+
+        # test memoryview for sub-array
+        subfarray = FARRAYcp[:2]
+        assert subfarray[0][0] == 2 * tmp
+        subfarray[0][0] = 4 * tmp
+        assert subfarray[0][0] == 4 * tmp
+        arr[0] = 4 * tmp
+        print subfarray
+
+        subfarray_cp = subfarray.copy()
+        print "make sure we DO a copy, not a memoryview"
+        subfarray_cp[0][0] = 0.1
+        assert subfarray_cp[0][0] == 0.1
+        assert subfarray[0][0] != 0.1
+        assert arr[0] != 0.1
+        assert subfarray[0][0] != 0.1
+
+        # what's about re-assign subfarray with wrong size?
+        # (subfarray used to be a view of FARRAYcp[:2])
+        subfarray = FARRAYcp[50:60]
+        assert subfarray.size == 10
+        assert FARRAYcp.size == FRAMENUM
+        print subfarray[0][0]
+        
+    #@no_test
+    def test_fancy_indexing(self):
+        FARRAYcp = FARRAY.copy()
+        FARRAY_sub0 = FARRAYcp[:3]
+        print FARRAY_sub0
+        tmp = 10000. 
+        FARRAY_sub0[0][100] = tmp
+        assert FARRAY_sub0[0][100] == tmp
+        FARRAY_sub0 = FARRAYcp[:3]
+        print FARRAY_sub0
+        print FARRAY_sub0[0].py_free_mem 
+        print FARRAYcp[0][100]
+        assert FARRAY_sub0[0].n_atoms == 304
+
+    @no_test
     def test_joining(self):
         farray0 = FrameArray()
         farray1 = FrameArray()
