@@ -18,7 +18,7 @@ from pycpptraj.trajs.Trajin import Trajin
 from pycpptraj.TrajinList import TrajinList
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList
-from pycpptraj.datasets.DataSetList import DataSetList
+from pycpptraj.DataSetList import DataSetList
 from pycpptraj.actions.ActionList import ActionList
 from pycpptraj._cast import cast_dataset
 from pycpptraj._iterload import _iterload

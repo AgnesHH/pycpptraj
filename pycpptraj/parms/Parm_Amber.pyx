@@ -1,6 +1,4 @@
 # distutils: language = c++
-from ArgList cimport ArgList
-
 
 cdef class Parm_Amber:
     def __cinit__(self):
