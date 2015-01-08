@@ -69,8 +69,10 @@ packages = [
         'pycpptraj.utils',
         'pycpptraj.actions',
         'pycpptraj.analyses',
-        'pycpptraj.dataset',
+        'pycpptraj.datasets',
         'pycpptraj.parms',
+        'pycpptraj.clusters',
+        'pycpptraj.trajs',
         ]
 
 setup_args['package_data'] = {

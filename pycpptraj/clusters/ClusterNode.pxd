@@ -1,5 +1,5 @@
 # distutils: language = c++
-from ClusterDist cimport *
+from clusters.ClusterDist cimport *
 
 #ctypedef Cframes.const_iterator frame_iterator
 cdef extern from "ClusterNode.h": 

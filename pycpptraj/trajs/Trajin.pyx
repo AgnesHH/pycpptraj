@@ -2,9 +2,9 @@
 import os
 cimport cython
 from cpython.array cimport array as pyarray
-from .Frame cimport Frame, _Frame
-from ._utils cimport get_positive_idx
-from .FrameArray cimport FrameArray
+from Frame cimport Frame, _Frame
+from _utils cimport get_positive_idx
+from FrameArray cimport FrameArray
 
 cdef class Trajin (TrajectoryFile):
 

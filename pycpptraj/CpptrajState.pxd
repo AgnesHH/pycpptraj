@@ -5,7 +5,7 @@ from TrajoutList cimport *
 from ArgList cimport *
 from FrameList cimport *
 from TopologyList cimport *
-from dataset.DataSetList cimport *
+from DataSetList cimport *
 from DataFileList cimport *
 from actions.ActionList cimport *
 from analyses.AnalysisList cimport *

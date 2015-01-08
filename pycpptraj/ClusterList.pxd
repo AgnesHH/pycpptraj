@@ -3,7 +3,7 @@ from libcpp.vector cimport vector
 from libcpp.string cimport string
 from libcpp.list cimport list
 from ArgList cimport *
-from ClusterNode cimport *
+from clusters.ClusterNode cimport *
 
 #ctypedef list[_ClusterNode].const_iterator cluster_iterator
 ctypedef list[_ClusterNode].iterator cluster_it

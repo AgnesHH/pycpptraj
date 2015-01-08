@@ -4,10 +4,9 @@ from DispatchObject cimport *
 from Topology cimport *
 from TopologyList cimport *
 from FrameList cimport *
-from ..dataset.DataSetList cimport *
+from DataSetList cimport *
 from DataFileList cimport *
 from FrameArray cimport FrameArray
-#from PointerVec cimport TopVec
 
 cdef extern from "ActionList.h":
     cdef cppclass _ActionList "ActionList":

@@ -14,7 +14,7 @@ from pycpptraj.CpptrajState import CpptrajState
 from pycpptraj.FrameList import FrameList
 from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.FrameArray import FrameArray as Trajectory
-from pycpptraj.Trajin import Trajin
+from pycpptraj.trajs.Trajin import Trajin
 from pycpptraj.TrajinList import TrajinList
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList

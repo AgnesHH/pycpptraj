@@ -1,7 +1,7 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 from DataSetList cimport *
-from DataSet_1D cimport *
+from datasets.DataSet_1D cimport *
 from ArgList cimport *
 
 

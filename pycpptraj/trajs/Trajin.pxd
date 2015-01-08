@@ -1,5 +1,5 @@
 # distutils: language = c++
-from TrajectoryFile cimport *
+from trajs.TrajectoryFile cimport *
 from ProgressBar cimport *
 
 

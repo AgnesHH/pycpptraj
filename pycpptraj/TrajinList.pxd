@@ -1,6 +1,6 @@
 # distutils: language = c++
 from vector_pycpptraj cimport vector as cppvector
-from Trajin cimport *
+from trajs.Trajin cimport *
 from TopologyList cimport *
 
 

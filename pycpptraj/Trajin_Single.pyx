@@ -1,7 +1,5 @@
 # distutils: language = c++
 import os
-from Trajin cimport _Trajin
-from Trajin import Trajin
 include "config.pxi"
 
 cdef class Trajin_Single(Trajin):

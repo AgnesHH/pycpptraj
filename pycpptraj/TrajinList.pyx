@@ -1,7 +1,6 @@
 # distutils: language = c++
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
-from Trajin cimport Trajin
 
 
 cdef class TrajinList:
