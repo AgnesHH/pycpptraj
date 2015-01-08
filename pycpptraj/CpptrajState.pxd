@@ -7,8 +7,8 @@ from FrameList cimport *
 from TopologyList cimport *
 from DataSetList cimport *
 from DataFileList cimport *
-from actions.ActionList cimport *
-from analyses.AnalysisList cimport *
+from ActionList cimport *
+from AnalysisList cimport *
 from _FunctPtr cimport FunctPtr
 
 
