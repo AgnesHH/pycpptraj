@@ -1,4 +1,5 @@
 # distutils: language = c++
+from DispatchObject cimport DispatchAllocatorType
 from libcpp.vector cimport vector
 from TrajinList cimport *
 from TrajoutList cimport *
