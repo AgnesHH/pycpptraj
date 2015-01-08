@@ -3,7 +3,6 @@
 from vector_pycpptraj cimport vector as cppvector
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
-#from FunctPtr cimport FunctPtr
 
 cdef class ArgList:
     """
