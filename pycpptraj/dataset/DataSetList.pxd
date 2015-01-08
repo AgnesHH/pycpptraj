@@ -1,7 +1,7 @@
 # distutils: language = c++
 from .DataSet cimport *
 from libcpp.string cimport string
-from .vector_pycpptraj cimport vector as cppvector
+from vector_pycpptraj cimport vector as cppvector
 #from .DataSet_Coords_TRJ cimport DataSet_Coords_TRJ, _DataSet_Coords_TRJ
 
 ctypedef cppvector[_DataSet*] DataListType
