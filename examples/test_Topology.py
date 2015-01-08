@@ -10,11 +10,11 @@ class TestTopology(unittest.TestCase):
     def test_empty_top(self):
         top = Topology()
         print top.file_path()
-        assert top.empty() == True
+        assert top.is_empty() == True
         fname = "./data/Tc5b.top"
         top = Topology(fname)
         print top.file_path()
-        assert top.empty() == False
+        assert top.is_empty() == False
 
     @no_test
     def test_1(self):
