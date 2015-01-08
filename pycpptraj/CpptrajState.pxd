@@ -1,15 +1,16 @@
 # distutils: language = c++
+from libcpp.string cimport string
 from DispatchObject cimport DispatchAllocatorType
 from libcpp.vector cimport vector
-from TrajinList cimport *
-from TrajoutList cimport *
-from ArgList cimport *
-from FrameList cimport *
-from TopologyList cimport *
-from DataSetList cimport *
-from DataFileList cimport *
-from ActionList cimport *
-from AnalysisList cimport *
+from TrajinList cimport _TrajinList, TrajinList
+#from TrajoutList cimport _TrajoutList, TrajoutList
+from ArgList cimport _ArgList, ArgList
+from FrameList cimport _FrameList, FrameList
+from TopologyList cimport _TopologyList, TopologyList
+from DataSetList cimport _DataSetList, DataSetList
+from DataFileList cimport _DataFileList, DataFileList
+from ActionList cimport _ActionList, ActionList
+from AnalysisList cimport _AnalysisList, AnalysisList
 from _FunctPtr cimport FunctPtr
 
 
