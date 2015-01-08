@@ -1,4 +1,4 @@
-How?
+1. Install libcpptraj
     # export AMBERHOME before installing anything. 
     # You might need to "make clean" before doing following steps
     cd $AMBERHOME/
