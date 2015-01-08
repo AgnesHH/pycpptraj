@@ -2,6 +2,7 @@
 from libcpp.string cimport string
 from ParmIO cimport *
 from FileTypes cimport *
+from FileName cimport _FileName, FileName
 
 
 cdef extern from "ParmFile.h": 
