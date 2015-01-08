@@ -2,9 +2,9 @@
 from libcpp.vector cimport vector
 from libcpp.string cimport string
 from SymmetricRmsdCalc cimport *
-from DataSet_Coords cimport *
-from DataSet_1D cimport *
-from ClusterMatrix cimport *
+from dataset.DataSet_Coords cimport *
+from dataset.DataSet_1D cimport *
+from cluster.ClusterMatrix cimport *
 
 # TODO: double check declaration
 

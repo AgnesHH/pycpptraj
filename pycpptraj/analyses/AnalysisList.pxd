@@ -1,6 +1,5 @@
 # distutils: language = c++
-#from .Analysis.Analysis cimport *
-from .analyses.Analysis cimport *
+from analyses.Analysis cimport *
 
 
 cdef extern from "AnalysisList.h": 

@@ -1,7 +1,7 @@
 # distutils: language = c++
-from DataSetList cimport *
+from dataset.DataSetList cimport *
 from FrameList cimport *
-from DataSet_GridFlt cimport *
+from dataset.DataSet_GridFlt cimport *
 
 
 cdef extern from "GridAction.h": 

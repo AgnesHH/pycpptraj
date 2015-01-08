@@ -4,7 +4,7 @@ from DispatchObject cimport *
 from Topology cimport *
 from TopologyList cimport *
 from FrameList cimport *
-from DataSetList cimport *
+from ..dataset.DataSetList cimport *
 from DataFileList cimport *
 from FrameArray cimport FrameArray
 #from PointerVec cimport TopVec

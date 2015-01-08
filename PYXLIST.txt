@@ -1,7 +1,7 @@
 # This is a list of finished/workable files
 # setup.py will look at uncomment lines to "cythonize"
 magicmemoryview
-dataset/DataFile
+DataFile
 _FunctPtr
 _cast
 _utils
@@ -51,7 +51,7 @@ DataFileList
 ReferenceFrame
 dataset/DataSetList
 actions/ActionList
-AnalysisList
+analyses/AnalysisList
 #Command
 TrajectoryFile
 ReplicaDimArray
@@ -79,7 +79,7 @@ actions/GridAction
 MapAtom
 AtomMap
 PointerVec
-ImagedAction
+actions/ImagedAction
 actions/Action_Angle
 actions/Action_AtomicCorr
 actions/Action_AtomicFluct

@@ -1,9 +1,9 @@
 # distutils: language = c++
-from ..DispatchObject cimport *
-from ..ArgList cimport *
-from ..DataSetList cimport *
-from ..DataFileList cimport *
-from ..TopologyList cimport *
+from DispatchObject cimport *
+from ArgList cimport *
+from dataset.DataSetList cimport *
+from DataFileList cimport *
+from TopologyList cimport *
 
 
 cdef extern from "Analysis.h": 
