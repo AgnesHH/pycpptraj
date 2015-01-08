@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from DataSet_Coords cimport *
+from datasets.DataSet_Coords cimport *
 
 
 cdef extern from "DataSet_Coords_CRD.h": 
