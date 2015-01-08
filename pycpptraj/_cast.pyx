@@ -1,9 +1,9 @@
 # distutils: language = c++
-from dataset.DataSet_1D cimport DataSet_1D, _DataSet_1D
-from dataset.DataSet_2D cimport DataSet_2D, _DataSet_2D
-from dataset.DataSet_double cimport DataSet_double, _DataSet_double
-from dataset.DataSet_MatrixDbl cimport DataSet_MatrixDbl, _DataSet_MatrixDbl
-from dataset.DataSet cimport DataSet, _DataSet
+from datasets.DataSet_1D cimport DataSet_1D, _DataSet_1D
+from datasets.DataSet_2D cimport DataSet_2D, _DataSet_2D
+from datasets.DataSet_double cimport DataSet_double, _DataSet_double
+from datasets.DataSet_MatrixDbl cimport DataSet_MatrixDbl, _DataSet_MatrixDbl
+from datasets.DataSet cimport DataSet, _DataSet
 
 def cast_dataset(DataSet dset, dtype=None):
     """create memory for DataSet instance"""
