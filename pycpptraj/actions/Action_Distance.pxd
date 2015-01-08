@@ -1,6 +1,6 @@
 # distutils: language = c++
-from .Action cimport *
-from ..ImagedAction cimport *
+from actions.Action cimport *
+from actions.ImagedAction cimport *
 
 
 cdef extern from "Action_Distance.h": 

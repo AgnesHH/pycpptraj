@@ -3,6 +3,7 @@ from distutils.core import setup
 from distutils.extension import Extension
 import Cython.Distutils.build_ext
 from Cython.Build import cythonize
+from random import shuffle
 
 # this setup.py file was adapted from setup.py file in Cython package
 def read(fname):
@@ -29,6 +30,8 @@ with open("PYXLIST.txt", 'r') as f:
     for line in f.readlines():
         if "#" not in line:
             pyxfiles.append(line.split("\n")[0])
+
+shuffle(pyxfiles)
 
 USE_PYX = True
 if not USE_PYX:

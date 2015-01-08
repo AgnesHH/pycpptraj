@@ -1,7 +1,7 @@
 # distutils: language = c++
 from ArgList cimport *
-from dataset.DataSet cimport *
-from dataset.DataSetList cimport *
+from datasets.DataSet cimport *
+from DataSetList cimport *
 from CpptrajFile cimport *
 from BaseIOtype cimport *
 

@@ -69,12 +69,12 @@ Energy
 PDBfile
 trajs/Traj_Mol2File
 ClusterList
-cluster/ClusterDist
+clusters/ClusterDist
 datasets/DataSet_Vector
 datasets/DataSet_GridFlt
 datasets/DataSet_MatrixDbl
 datasets/DataSet_RemLog
-cluster/Cluster_DBSCAN
+clusters/Cluster_DBSCAN
 actions/GridAction
 MapAtom
 AtomMap

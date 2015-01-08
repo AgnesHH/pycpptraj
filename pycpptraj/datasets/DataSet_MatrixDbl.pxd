@@ -1,6 +1,6 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from dataset.DataSet_2D cimport *
+from datasets.DataSet_2D cimport *
 from Matrix cimport *
 
 #ctypedef Matrix[double].iterator iterator

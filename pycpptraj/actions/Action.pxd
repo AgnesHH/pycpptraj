@@ -1,11 +1,11 @@
 # distutils: language = c++
-from ..DispatchObject cimport *
-from ..ArgList cimport *
-from ..DataFileList cimport *
-from ..DataSetList cimport *
-from ..FrameList cimport *
-from ..TopologyList cimport *
-from .._FunctPtr cimport FunctPtr
+from DispatchObject cimport *
+from ArgList cimport *
+from DataFileList cimport *
+from DataSetList cimport *
+from FrameList cimport *
+from TopologyList cimport *
+from _FunctPtr cimport FunctPtr
 
 cdef extern from "Action.h": 
     # Action.h

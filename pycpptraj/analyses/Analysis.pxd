@@ -1,7 +1,7 @@
 # distutils: language = c++
 from DispatchObject cimport *
 from ArgList cimport *
-from dataset.DataSetList cimport *
+from DataSetList cimport *
 from DataFileList cimport *
 from TopologyList cimport *
 

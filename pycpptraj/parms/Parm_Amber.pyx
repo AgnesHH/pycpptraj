@@ -1,4 +1,5 @@
 # distutils: language = c++
+from ArgList cimport ArgList
 
 
 cdef class Parm_Amber:
@@ -22,7 +23,7 @@ cdef class Parm_Amber:
     def id_parm_format(self, CpptrajFile fileIn):
         return self.thisptr.ID_ParmFormat(fileIn.thisptr[0])
 
-    def process_read_args(self,ArgList arglist):
+    def process_read_args(self, ArgList arglist):
         return self.thisptr.processReadArgs(arglist.thisptr[0])
 
     def read_parm(self, string fname, Topology TopIn):

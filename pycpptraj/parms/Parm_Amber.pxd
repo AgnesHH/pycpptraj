@@ -1,6 +1,6 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from ParmIO cimport *
+from parms.ParmIO cimport *
 
 
 cdef extern from "Parm_Amber.h": 
