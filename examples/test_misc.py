@@ -28,6 +28,8 @@ for range in genobj:
     i += 1
 print i
 
+farray_gen = iterload(top, "./data/md1_prod.Tc5b.x", chunk=50)
+print  farray_gen
 #print genobj.next()[0]
 #print genobj.next()[0]
 #print genobj.next()[0]

@@ -31,6 +31,8 @@ frame = Frame(ts.top.n_atoms)
 with ts:
     ts.read_traj_frame(100, frame)
     print frame
+
+print ts[:10]
 #ts.end_traj()
 #ts.prepare_for_read(True)
 #frame = Frame()
