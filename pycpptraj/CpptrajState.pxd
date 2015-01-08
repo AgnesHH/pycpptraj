@@ -5,10 +5,10 @@ from TrajoutList cimport *
 from ArgList cimport *
 from FrameList cimport *
 from TopologyList cimport *
-from DataSetList cimport *
+from dataset.DataSetList cimport *
 from DataFileList cimport *
-from ActionList cimport *
-from AnalysisList cimport *
+from actions.ActionList cimport *
+from analyses.AnalysisList cimport *
 from _FunctPtr cimport FunctPtr
 
 
