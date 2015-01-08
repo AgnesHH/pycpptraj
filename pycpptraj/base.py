@@ -22,12 +22,15 @@ from pycpptraj.DataSetList import DataSetList
 from pycpptraj.ActionList import ActionList
 from pycpptraj._cast import cast_dataset
 from pycpptraj import cpptraj_dict
-#from pycpptraj.Trajectory import Trajectory
 from pycpptraj.Parm_Amber import Parm_Amber
 
 # `Trajectory` is alias of `FrameArray`
-__all__ = ['Topology', 'TopologyList', 'Frame', 'FrameArray', 'ReferenceFrame', 'AtomMask', 'ArgList', 'CpptrajState', 
-           'FrameList', 'Trajin_Single', 'DataSetList', 'DataFileList', 'ActionList',
+__all__ = ['Topology', 'TopologyList', 
+           'Frame', 'FrameArray', 
+           'ReferenceFrame', 'AtomMask', 
+           'ArgList', 'CpptrajState', 
+           'FrameList', 'Trajin_Single', 
+           'DataSetList', 'DataFileList', 'ActionList',
            'Trajin', 'TrajinList',
            'Trajectory',
            'TrajectoryReadOnly',
