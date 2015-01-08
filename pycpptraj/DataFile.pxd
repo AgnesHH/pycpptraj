@@ -2,7 +2,7 @@
 from datasets.DataIO cimport *
 from FileTypes cimport *
 from ArgList cimport *
-from DataSetList cimport _DataSetList
+from DataSetList cimport _DataSetList, DataSetList
 
 
 cdef extern from "DataFile.h": 
