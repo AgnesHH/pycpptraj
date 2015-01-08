@@ -195,7 +195,7 @@ cdef class Frame (object):
             return my_arr
         return _buffer(self.size)
         
-    def empty(self):
+    def is_empty(self):
         return self.thisptr.empty()
 
     def has_vel(self):
@@ -326,16 +326,23 @@ cdef class Frame (object):
     def set_box_angles(self, double[:] ain):
         self.thisptr.SetBoxAngles(&ain[0])
 
-    def set_frame(self, Frame frame, AtomMask atm):
-        self.thisptr.SetFrame(frame.thisptr[0], atm.thisptr[0])
-
     #def set_frame_m(self, list atlist):
     #    cdef vector[_Atom] v 
     #    v = atomlist_to_vector(atlist)
     #    return self.thisptr.SetupFrameM(v)
 
-    def setup_frame(self, int atomnum):
-        self.thisptr.SetupFrame(atomnum)
+    def set_frame(self, *args):
+        cdef int atomnum 
+        cdef AtomMask atm
+        cdef Frame frame
+
+        if isinstance(args[0], Frame) and isinstance(args[1], AtomMask):
+            frame = args[0]
+            atm = args[1]
+            self.thisptr.SetFrame(frame.thisptr[0], atm.thisptr[0])
+        elif isinstance(args, (int, long)):
+            atomnum = <int> args[0]
+            self.thisptr.SetupFrame(atomnum)
 
     def set_frame_x_m(self, vector[double] Xin, vector[double] massIn):
         return self.thisptr.SetupFrameXM(Xin, massIn)
@@ -356,9 +363,6 @@ cdef class Frame (object):
         else:
             atmask = args[0]
             self.thisptr.SetCoordinates(frame.thisptr[0], atmask.thisptr[0])
-
-    def set_frame(self, Frame frame, AtomMask atmask):
-        self.thisptr.SetFrame(frame.thisptr[0], atmask.thisptr[0])
 
     def set_coords_by_map(self, Frame frame, vector[int] mapIn):
         self.thisptr.SetCoordinatesByMap(frame.thisptr[0], mapIn)

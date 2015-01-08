@@ -3,7 +3,7 @@ import numpy as np
 from pycpptraj.base import *
 from decorator import no_test
 
-TRAJ = Trajectory()
+TRAJ = Trajin_Single()
 TRAJ.top = Topology("./data/Tc5b.top")
 TRAJ.load("./data/md1_prod.Tc5b.x")
 print "TRAJ.size", TRAJ.size

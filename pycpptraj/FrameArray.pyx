@@ -38,6 +38,34 @@ cdef class FrameArray:
             #frame.py_free_mem = True
             pass
 
+    def load(self, fname='', Topology top=None, indices=None):
+        # TODO : add more test cases
+        cdef Trajin_Single ts = Trajin_Single()
+        cdef int idx
+
+        if isinstance(fname, basestring):
+            if top is not None:
+                ts.load(fname, top, warning=False)
+                # update top for self too
+                self.top = top.copy()
+            else:
+                # use self.top
+                ts.load(fname, self.top)
+
+            if indices is None:
+                # load all frames
+                self.join(ts[:])
+
+            elif isinstance(indices, slice):
+                self.join(ts[indices])
+            else:
+                # indices is tuple, list, array, ...
+                for idx in indices:
+                    self.append(ts[idx])
+        elif isinstance(fname, list):
+            for fh in fname:
+                self.load(fh, top, indices)
+
     @cython.boundscheck(False)
     @cython.wraparound(False)
     def __getitem__(self, idxs):
@@ -87,21 +115,8 @@ cdef class FrameArray:
                 farray.append(self[i], copy=False)
             return farray
 
-    #def __getitem__(FrameArray self, int idx):
-    #    """Return a reference of FrameArray[idx]
-    #    To get a copy
-    #    >>>frame = FrameArray_instance[10].copy()
-    #    TODO : add negative indexing
-    #    """
-    #    cdef Frame frame = Frame()
-    #    frame.py_free_mem = False
-
-    #    if len(self) == 0:
-    #        raise ValueError("Your FrameArray is empty, how can I index it?")
-    #    frame.thisptr = &(self.frame_v[idx])
-    #    return frame
-
     def __setitem__(FrameArray self, int idx, Frame other):
+        # TODO : add slice
         # make a copy
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")

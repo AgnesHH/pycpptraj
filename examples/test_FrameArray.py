@@ -32,6 +32,25 @@ FRAMENUM=10000
 FARRAY = ts[:FRAMENUM]
 
 class TestFrameArray(unittest.TestCase):
+    def test_load(self):
+        farray = FrameArray()
+        farray.top = Topology(datadir + "Tc5b.top")
+        farray.load(fname="./data/md1_prod.Tc5b.x")
+        # add more frame
+        farray.load(fname="./data/md1_prod.Tc5b.x", top=ts.top)
+        # add slice
+        farray.load(fname="./data/md1_prod.Tc5b.x", top=ts.top, indices=slice(0, ts.size, 2))
+        farray.load(fname="./data/md1_prod.Tc5b.x", top=ts.top, indices=slice(0, ts.size, 2))
+        farray.load(fname="./data/md1_prod.Tc5b.x", top=ts.top, indices=(1, 3, 10000, 500))
+
+        # load list of files
+        flist = ["./data/md1_prod.Tc5b.x", "./data/md1_prod.Tc5b.x"]
+        farray2 = FrameArray()
+        farray2.top = ts.top
+        farray2.load(flist, indices=(1, 3, 10000, 500))
+        print farray2
+
+    @no_test
     def test_buffer_none(self):
         FARRAYcp = FARRAY.copy()
         print FARRAYcp[0].buffer
@@ -43,7 +62,7 @@ class TestFrameArray(unittest.TestCase):
         print FARRAYcp[0].coords[:10]
         print arr0
         
-    #@no_test
+    @no_test
     def test_strip_atoms(self):
         FARRAYcp = FARRAY.copy()
         arr0 = np.asarray(FARRAYcp[0].buffer)
@@ -64,7 +83,7 @@ class TestFrameArray(unittest.TestCase):
         print FARRAYcp[0].buffer
         print FARRAYcp[0][0]
 
-    #@no_test
+    @no_test
     def test_memoryview(self):
         print "test_memoryview"
         tmp = 100.
@@ -114,7 +133,7 @@ class TestFrameArray(unittest.TestCase):
 
         #subfarray[0] /= subfarray[0]
         
-    #@no_test
+    @no_test
     def test_fancy_indexing(self):
         FARRAYcp = FARRAY.copy()
         FARRAY_sub0 = FARRAYcp[:3]
@@ -128,7 +147,7 @@ class TestFrameArray(unittest.TestCase):
         print FARRAYcp[0][100]
         assert FARRAY_sub0[0].n_atoms == 304
 
-    #@no_test
+    @no_test
     def test_joining(self):
         farray0 = FrameArray()
         farray1 = FrameArray()
@@ -167,7 +186,7 @@ class TestFrameArray(unittest.TestCase):
         print farray0cp[0].coords[0]
         print frame0cp_1[0]
 
-    #@no_test
+    @no_test
     def test_indexing_and_buffer(self):
         farray = FARRAY.copy()
         print farray.size
@@ -178,7 +197,7 @@ class TestFrameArray(unittest.TestCase):
         print farray[0].coords_copy()[:20]
         np.testing.assert_almost_equal(np_arrview, farray[0].coords_copy())
 
-    #@no_test
+    @no_test
     def test_1(self):
         N = 10000
         farray = ts[:N]

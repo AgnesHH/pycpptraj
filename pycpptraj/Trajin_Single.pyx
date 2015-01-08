@@ -17,7 +17,9 @@ cdef class Trajin_Single(Trajin):
             del self.thisptr
 
     # Let base-class Trajin take care those methods?
-    def load(Trajin_Single self, string trajfile, Topology parm_in=Topology(), ArgList arglist=ArgList(), bint check_box=True):
+    def load(Trajin_Single self, string trajfile, Topology parm_in=Topology(), 
+             ArgList arglist=ArgList(), bint check_box=True,
+             warning=True):
         """
         Load trajectory from file.
 
@@ -30,6 +32,7 @@ cdef class Trajin_Single(Trajin):
         # Currently we can not assigne self.top to parm_in.copy() since Cython does not know self.top type
         # need to use self._top since we declare it in TrajectoryFile.pxd
         if not parm_in.is_empty():
-            print "update Topology for %s instance" % (self.__class__.__name__)
+            if warning:
+                print "update Topology for %s instance" % (self.__class__.__name__)
             self._top = parm_in.copy()
         return self.thisptr.SetupTrajRead(trajfile, arglist.thisptr[0], self._top.thisptr, check_box)
