@@ -57,6 +57,8 @@ class TestFrame(unittest.TestCase):
         print FRAME.coords_copy()
         print "+++++end test_buffer+++++++"
 
+        print "tes matrix"
+
     def test_iter(self):
         print "test iteration"
         alist = []

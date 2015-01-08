@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from ArgList cimport ArgList
+#from ArgList cimport ArgList
 
 cdef class DataFile:
     def __cinit__(self, py_free_mem=True):
@@ -20,7 +20,7 @@ cdef class DataFile:
     def write_options(self):
         self.thisptr.WriteOptions()
 
-    def get_format_from_arg(self,ArgList a):
+    def get_format_from_arg(self, ArgList a):
         return self.thisptr.GetFormatFromArg(a.thisptr[0])
 
     def format_string(self,DataFormatType t=DATAFILE):

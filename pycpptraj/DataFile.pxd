@@ -1,7 +1,8 @@
 # distutils: language = c++
 from datasets.DataIO cimport *
 from FileTypes cimport *
-from DataSetList cimport *
+from ArgList cimport *
+from DataSetList cimport _DataSetList
 
 
 cdef extern from "DataFile.h": 

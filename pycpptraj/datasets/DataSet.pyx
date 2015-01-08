@@ -1,5 +1,5 @@
 # distutils: language = c++
-from pycpptraj.cpptraj_dict import DataTypeDict, get_key
+from cpptraj_dict import DataTypeDict, get_key
 
 
 cdef class DataSet:
