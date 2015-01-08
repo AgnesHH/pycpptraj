@@ -3,8 +3,7 @@ cimport cython
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 from Topology cimport Topology
-from .Trajin cimport Trajin
-from ._utils cimport get_positive_idx
+from _utils cimport get_positive_idx
 
 # python level
 from pycpptraj.Trajectory import Trajectory
