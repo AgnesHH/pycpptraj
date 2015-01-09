@@ -1,8 +1,8 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from DataSetList cimport *
-from datasets.DataSet_1D cimport *
-from ArgList cimport *
+from pycpptraj.DataSetList cimport *
+from pycpptraj.datasets.DataSet_1D cimport *
+from pycpptraj.ArgList cimport *
 
 
 cdef extern from "Array1D.h": 
