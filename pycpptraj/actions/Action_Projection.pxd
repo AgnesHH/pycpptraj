@@ -1,6 +1,6 @@
 # distutils: language = c++
 #from libcpp.vector cimport vector
-from actions.Action cimport *
+from pycpptraj.actions.Action cimport *
 #from ..DataSet_Modes cimport *
 #from .ActionFrameCounter cimport *
 #from ..Array1D cimport *

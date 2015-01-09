@@ -1,5 +1,6 @@
 # This is a list of finished/workable files
 # setup.py will look at uncomment lines to "cythonize"
+ComplexArray
 trajs/Trajin
 ArgList
 DispatchObject
