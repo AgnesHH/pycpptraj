@@ -133,9 +133,9 @@ cdef class Trajin (TrajectoryFile):
         self.check_allocated()
         return self.baseptr_1.SetupTrajIO(s, trajio.baseptr_1[0], arglist.thisptr[0])
 
-    def check_box_info(self, char* parmName, Box parmBox, Box trajBox):
-        self.check_allocated()
-        return self.baseptr_1.CheckBoxInfo(parmName, parmBox.thisptr[0], trajBox.thisptr[0])
+    #def check_box_info(self, char* parmName, Box parmBox, Box trajBox):
+    #    self.check_allocated()
+    #    return self.baseptr_1.CheckBoxInfo(parmName, parmBox.thisptr[0], trajBox.thisptr[0])
 
     def setup_frame_info(self):
         self.check_allocated()

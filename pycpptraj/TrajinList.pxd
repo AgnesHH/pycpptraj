@@ -1,7 +1,7 @@
 # distutils: language = c++
 from vector_pycpptraj cimport vector as cppvector
-from trajs.Trajin cimport *
-from TopologyList cimport *
+from pycpptraj.trajs.Trajin cimport *
+from pycpptraj.TopologyList cimport *
 
 
 cdef extern from "TrajinList.h": 

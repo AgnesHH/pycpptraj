@@ -1,6 +1,6 @@
 # distutils: language = c++
-from datasets.DataSet cimport _DataSet, DataSet, DataType
 from libcpp.string cimport string
+from pycpptraj.datasets.DataSet cimport _DataSet, DataSet, DataType
 from pycpptraj.vector_pycpptraj cimport vector as cppvector
 
 ctypedef cppvector[_DataSet*] DataListType

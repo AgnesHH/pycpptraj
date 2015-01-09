@@ -12,6 +12,8 @@ from pycpptraj.DataFileList cimport _DataFileList, DataFileList
 from pycpptraj.ActionList cimport _ActionList, ActionList
 from pycpptraj.AnalysisList cimport _AnalysisList, AnalysisList
 from pycpptraj._FunctPtr cimport FunctPtr
+from pycpptraj.DataFile cimport _DataFile, DataFile
+from pycpptraj.FileName cimport _FileName, FileName
 
 
 cdef extern from "CpptrajState.h": 

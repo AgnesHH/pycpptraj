@@ -1,9 +1,9 @@
 # distutils: language = c++
-from ArgList cimport *
-from datasets.DataSet cimport *
-#from DataSetList cimport *
-from CpptrajFile cimport *
-from BaseIOtype cimport *
+from pycpptraj.ArgList cimport _ArgList, ArgList
+from pycpptraj.datasets.DataSet cimport _DataSet, DataSet
+from pycpptraj.DataSetList cimport _DataSetList, DataSetList
+from pycpptraj.CpptrajFile cimport _CpptrajFile, CpptrajFile
+from pycpptraj.BaseIOtype cimport _BaseIOtype, BaseIOtype
 
 
 cdef extern from "DataIO.h": 

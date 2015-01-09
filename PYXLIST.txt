@@ -7,7 +7,7 @@ magicmemoryview
 _FunctPtr
 _cast
 _utils
-#_iterload
+_iterload
 Atom
 AtomMask
 Box
@@ -67,7 +67,7 @@ _utils
 Timer
 Energy
 PDBfile
-trajs/Traj_Mol2File
+#trajs/Traj_Mol2File
 #ClusterList
 #clusters/ClusterDist
 datasets/DataSet_Vector

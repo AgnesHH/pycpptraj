@@ -4,7 +4,8 @@ import baseclasses for pycpptraj
 # TODO : make this file shorter
 from pycpptraj.Frame import Frame
 from pycpptraj.FrameArray import FrameArray
-from pycpptraj.FrameArray2 import FrameArray2
+from pycpptraj.FrameArray2 import FrameArray2 
+from pycpptraj.FrameArray2 import FrameArray2 as Trajectory
 from pycpptraj.FrameArray2 import FrameArray2 as TrajectoryReadOnly
 from pycpptraj.ReferenceFrame import ReferenceFrame
 from pycpptraj.Topology import Topology
@@ -21,7 +22,7 @@ from pycpptraj.DataFileList import DataFileList
 from pycpptraj.DataSetList import DataSetList
 from pycpptraj.ActionList import ActionList
 from pycpptraj._cast import cast_dataset
-#from pycpptraj._iterload import _iterload
+from pycpptraj._iterload import _iterload
 from pycpptraj import cpptraj_dict
 from pycpptraj.parms.Parm_Amber import Parm_Amber
 

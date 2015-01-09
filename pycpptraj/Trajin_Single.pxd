@@ -1,9 +1,10 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from ArgList cimport _ArgList, ArgList
-from trajs.Trajin cimport _Trajin, Trajin
-from Frame cimport _Frame, Frame
-from Topology cimport _Topology, Topology
+from pycpptraj.ArgList cimport _ArgList, ArgList
+from pycpptraj.trajs.Trajin cimport _Trajin, Trajin
+from pycpptraj.Frame cimport _Frame, Frame
+from pycpptraj.Topology cimport _Topology, Topology
+from pycpptraj.trajs.TrajectoryFile cimport _TrajectoryFile
 
 
 # How Trajin_Single (python) class can use methods from Trajin (python) class?
