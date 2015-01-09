@@ -1,10 +1,10 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 from libcpp.string cimport string
-from Topology cimport *
-from datasets.DataSet cimport *
-from Range cimport *
-from ArgList cimport *
+from pycpptraj.Topology cimport *
+from pycpptraj.datasets.DataSet cimport *
+from pycpptraj.Range cimport *
+from pycpptraj.ArgList cimport *
 
 
 cdef extern from "DihedralSearch.h": 
