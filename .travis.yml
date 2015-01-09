@@ -5,8 +5,8 @@ before_install:
     - sudo apt-get install libnetcdf-dev
     - sudo apt-get install gfortran
     - sudo apt-get install -qq libz-dev libbz2-dev
-    - sh ./for_travis/install_cpptraj.sh
     - sh ./for_travis/install_cython_git.sh
+    - sh ./for_travis/install_cpptraj.sh
 install:
     #- pip install cython # cython will be installed in ./for_travis/install_cython_git.sh
     - pip install numpy
