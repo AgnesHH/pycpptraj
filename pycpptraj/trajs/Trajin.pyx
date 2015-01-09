@@ -93,7 +93,7 @@ cdef class Trajin (TrajectoryFile):
 
         newstart = start
         while newstart <= self.size-chunk:
-            yield self[newstart:newstart+chunk]
+            yield self[newstart:newstart+chunk].copy()
             newstart += chunk
 
     def is_empty(self):
