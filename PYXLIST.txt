@@ -31,6 +31,7 @@ TrajinList
 Trajin_Single
 Vec3
 FileName
+FileTypes
 Frame
 Array1D
 FrameArray

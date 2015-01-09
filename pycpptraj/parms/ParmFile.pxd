@@ -1,8 +1,10 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from parms.ParmIO cimport *
-from FileTypes cimport *
-from FileName cimport _FileName, FileName
+from pycpptraj.parms.ParmIO cimport _ParmIO, ParmIo
+from pycpptraj.FileTypes cimport _FileTypes, FileType
+from pycpptraj.FileName cimport _FileName, FileName
+from pycpptraj.Topology cimport _Topology, Topology
+from pycpptraj.ArgList cimport _ArgList, ArgList
 
 
 cdef extern from "ParmFile.h": 
@@ -23,7 +25,7 @@ cdef extern from "ParmFile.h":
         int WritePrefixTopology(const _Topology&, const string&, ParmFormatType, int)
         int WriteTopology(const _Topology&, const string&, const _ArgList&, ParmFormatType, int)
         int WriteTopology(const _Topology& t, const string& n, ParmFormatType f, int d)
-        const _FileName ParmFilename() except +ValueError
+        const _FileName ParmFilename() 
 
 
 cdef class ParmFile:

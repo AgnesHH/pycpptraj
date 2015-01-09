@@ -1,11 +1,11 @@
 # distutils: language = c++
-from DataSetList cimport _DataSetList, DataSetList
-from FrameList cimport _FrameList, FrameList
-from datasets.DataSet_GridFlt cimport _DataSet_GridFlt, DataSet_GridFlt
-from Frame cimport _Frame, Frame
-from ArgList cimport _ArgList, ArgList
-from AtomMask cimport _AtomMask, AtomMask
-from Topology cimport _Topology, Topology
+from pycpptraj.DataSetList cimport _DataSetList, DataSetList
+from pycpptraj.FrameList cimport _FrameList, FrameList
+from pycpptraj.datasets.DataSet_GridFlt cimport _DataSet_GridFlt, DataSet_GridFlt
+from pycpptraj.Frame cimport _Frame, Frame
+from pycpptraj.ArgList cimport _ArgList, ArgList
+from pycpptraj.AtomMask cimport _AtomMask, AtomMask
+from pycpptraj.Topology cimport _Topology, Topology
 
 
 cdef extern from "GridAction.h": 

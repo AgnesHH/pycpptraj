@@ -1,6 +1,8 @@
 # distutils: language = c++
-from Topology cimport *
-from datasets.DataSet_1D cimport *
+from pycpptraj.Topology cimport _Topology, Topology
+from pycpptraj.datasets.DataSet_1D cimport _DataSet_1D, DataSet_1D
+from pycpptraj.datasets.DataSet cimport _DataSet, DataSet, DataType
+from pycpptraj.Frame cimport _Frame, Frame
 
 
 cdef extern from "DataSet_Coords.h": 

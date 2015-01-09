@@ -3,7 +3,7 @@ from libcpp.string cimport string
 from ArgList cimport _ArgList, ArgList
 from Topology cimport Topology, _Topology
 from CpptrajFile cimport _CpptrajFile, CpptrajFile
-from BaseIOtype cimport *
+from BaseIOtype cimport _BaseIOtype, BaseIOtype
 
 
 cdef extern from "ParmIO.h": 

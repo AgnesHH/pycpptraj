@@ -1,5 +1,5 @@
 # distutils: language = c++
-from Dimension cimport *
+from pycpptraj.Dimension cimport _Dimension, Dimension, DimIdxType
 from libcpp.string cimport string
 
 

@@ -23,3 +23,7 @@ cdef extern from "Grid.h":
         long int CalcIndex(int x, int y, int z)const 
         #iterator begin() 
         #iterator end() 
+
+cdef class Grid:
+    pass
+    #cdef _Grid[T]* thisptr

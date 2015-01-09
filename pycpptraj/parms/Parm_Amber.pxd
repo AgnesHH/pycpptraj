@@ -1,6 +1,6 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from parms.ParmIO cimport *
+from parms.ParmIO cimport _ParmIO, ParmIO
 from ArgList cimport ArgList
 
 

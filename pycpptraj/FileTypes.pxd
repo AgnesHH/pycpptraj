@@ -27,3 +27,6 @@ cdef extern from "FileTypes.h":
         _BaseIOtype * AllocIO(AllocPtr, FileFormatType, bint)
         void ReadOptions(KeyPtr, AllocPtr, FileFormatType)
         void WriteOptions(KeyPtr, AllocPtr, FileFormatType)
+
+cdef class FileTypes:
+    cdef _FileTypes* thisptr

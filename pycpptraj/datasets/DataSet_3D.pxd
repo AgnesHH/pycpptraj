@@ -1,7 +1,7 @@
 # distutils: language = c++
-from datasets.DataSet cimport *
-from CpptrajFile cimport *
-from Vec3 cimport *
+from pycpptraj.datasets.DataSet cimport _DataSet, DataSet, DataType
+from pycpptraj.CpptrajFile cimport _CpptrajFile, CpptrajFile
+from pycpptraj.Vec3 cimport _Vec3, Vec3
 
 
 cdef extern from "DataSet_3D.h": 
