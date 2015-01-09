@@ -1,8 +1,8 @@
 # distutils: language = c++
 
 from libcpp.vector cimport vector
-from Topology cimport _Topology, Topology
-from Frame cimport _Frame, Frame
+from pycpptraj.Topology cimport _Topology, Topology
+from pycpptraj.Frame cimport _Frame, Frame
 # Wrapper class for Vector of Topology pointers
 
 # should we have those clasess while having TopologyList and FrameArray?

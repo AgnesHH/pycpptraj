@@ -1,9 +1,9 @@
 # distutils: language = c++
 
 from libcpp.vector cimport vector
-from Topology cimport *
-from Timer cimport *
-from Frame cimport Frame, _Frame
+from pycpptraj.Topology cimport *
+from pycpptraj.Timer cimport *
+from pycpptraj.Frame cimport Frame, _Frame
 
 
 cdef extern from "Energy.h": 

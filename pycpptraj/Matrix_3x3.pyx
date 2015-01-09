@@ -30,12 +30,6 @@ In [8]: n.Print("3x3 matrix n: ")
      100.0000 100.0000 100.0000
 """
 
-#import numpy as np
-#cimport numpy as np
-from Vec3 cimport Vec3
-
-#check memory leaked
-
 cdef class Matrix_3x3:
     def __cinit__(self, double[::1] X=None):
         """TODO: 

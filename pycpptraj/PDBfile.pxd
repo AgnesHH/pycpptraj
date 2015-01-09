@@ -1,7 +1,7 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from CpptrajFile cimport *
-from Atom cimport *
+from pycpptraj.CpptrajFile cimport *
+from pycpptraj.Atom cimport *
 
 
 cdef extern from "PDBfile.h": 

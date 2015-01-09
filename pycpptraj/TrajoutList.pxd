@@ -1,13 +1,25 @@
-cdef extern from "TrajoutList.h":
+# distutils: language = c++
+from libcpp.vector cimport vector
+from libcpp.string cimport string
+from pycpptraj.Trajout cimport *
+from pycpptraj.TopologyList cimport *
+
+
+cdef extern from "TrajoutList.h": 
     cdef cppclass _TrajoutList "TrajoutList":
-        void Clear()
+        _TrajoutList() 
+        #~_TrajoutList() 
+        void Clear() 
         void SetDebug(int)
-        int AddEnsembleTrajout(ArgList, TopologyList, int)
-        int AddTrajout(ArgList, TopologyList)
-        #int WriteTrajout(int, Topology*, Frame*)
-        void CloseTrajout()
-        void List()
-        bint Empty()
-        #ctypedef vector<ArgList> ArgsArray
-        #ctypedef vector<ArgsArray::const_iterator ArgIt
+        int AddEnsembleTrajout(const _ArgList&, const _TopologyList&, int)
+        int AddTrajout(const _ArgList&, const _TopologyList&)
+        int WriteTrajout(int, _Topology *, _Frame *)
+        void CloseTrajout() 
+        void List() const 
+        bint Empty() const 
+        ArgIt argbegin() const 
+        ArgIt argend() const 
+
+cdef class TrajoutList:
+    cdef _TrajoutList* thisptr
 

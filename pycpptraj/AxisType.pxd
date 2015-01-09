@@ -1,5 +1,5 @@
 # distutils: language = c++
-from Topology cimport *
+from pycpptraj.Topology cimport *
 
 
 cdef extern from "AxisType.h": 

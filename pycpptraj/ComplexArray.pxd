@@ -1,5 +1,5 @@
 # distutils: language = c++
-from ArrayIterator cimport *
+from pycpptraj.ArrayIterator cimport *
 
 
 cdef extern from "ComplexArray.h": 

@@ -1,5 +1,5 @@
 # distutils: language = c++
-from CpptrajFile cimport *
+from pycpptraj.CpptrajFile cimport *
 
 
 cdef extern from "BufferedFrame.h": 

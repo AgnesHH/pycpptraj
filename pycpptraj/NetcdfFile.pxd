@@ -1,6 +1,6 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from ReplicaDimArray cimport *
+from pycpptraj.ReplicaDimArray cimport *
 
 
 cdef extern from "NetcdfFile.h": 

@@ -1,6 +1,6 @@
 # distutil: language = c++
 
-from ArrayIterator cimport *
+from pycpptraj.ArrayIterator cimport *
 
 cdef extern from "Grid.h":
     #ctypedef GridIterator "Grid::ArrayIterator[T]" iterator

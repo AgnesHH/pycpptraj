@@ -1,8 +1,8 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 from libcpp.string cimport string
-from MapAtom cimport *
-from Topology cimport *
+from pycpptraj.MapAtom cimport *
+from pycpptraj.Topology cimport *
 
 
 cdef extern from "AtomMap.h": 

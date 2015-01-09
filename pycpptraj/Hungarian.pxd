@@ -1,6 +1,6 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from Matrix cimport *
+from pycpptraj.Matrix cimport *
 
 
 cdef extern from "Hungarian.h": 

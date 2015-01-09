@@ -1,6 +1,6 @@
 # distutils: language = c++
-from PubFFT cimport *
-from ComplexArray cimport *
+from pycpptraj.PubFFT cimport *
+from pycpptraj.ComplexArray cimport *
 
 
 cdef extern from "Corr.h": 

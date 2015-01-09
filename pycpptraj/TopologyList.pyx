@@ -1,8 +1,5 @@
 # distutils: language = c++
 from cython.operator cimport dereference as deref
-from Topology cimport Topology
-from ArgList cimport ArgList
-
 
 cdef class TopologyList:
     def __cinit__(self, py_free_mem=True):

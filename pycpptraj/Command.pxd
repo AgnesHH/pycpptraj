@@ -1,8 +1,8 @@
 # distutils: language = c++
-from CpptrajState cimport *
-from ArgList cimport *
-from DispatchObject cimport *
-from _FunctPtr cimport FunctPtr
+from pycpptraj.CpptrajState cimport *
+from pycpptraj.ArgList cimport *
+from pycpptraj.DispatchObject cimport *
+from pycpptraj._FunctPtr cimport FunctPtr
 
 
 cdef extern from "Command.h": 
