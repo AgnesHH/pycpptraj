@@ -6,7 +6,7 @@ from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.Topology import Topology
 
-def iterload(top=None, traj=None, start=0, chunk=None):
+def iterload(top=None, fname=None, start=0, chunk=None):
     '''Iterately return Frame instance'''
     if not isinstance(top, Topology):
         # string
