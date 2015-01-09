@@ -4,7 +4,7 @@ from libcpp.string cimport string
 from Atom cimport *
 from AtomMask cimport *
 from Box cimport *
-from Topology cimport Topology
+from Topology cimport *
 
 ctypedef vector[float] CRDtype
 ctypedef vector[double] Darray

@@ -1,9 +1,8 @@
 # distutils: language = c++
+from libcpp.vector cimport vector
 from libcpp.string cimport string
 from DispatchObject cimport DispatchAllocatorType
-from libcpp.vector cimport vector
 from TrajinList cimport _TrajinList, TrajinList
-#from TrajoutList cimport _TrajoutList, TrajoutList
 from ArgList cimport _ArgList, ArgList
 from FrameList cimport _FrameList, FrameList
 from TopologyList cimport _TopologyList, TopologyList

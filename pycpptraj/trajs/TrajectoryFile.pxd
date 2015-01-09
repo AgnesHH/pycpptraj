@@ -1,6 +1,6 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from TrajectoryIO cimport *
+from trajs.TrajectoryIO cimport *
 from FileTypes cimport *
 from ArgList cimport *
 from Topology cimport *
