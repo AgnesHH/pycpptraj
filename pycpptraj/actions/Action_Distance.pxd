@@ -1,6 +1,6 @@
 # distutils: language = c++
-from actions.Action cimport *
-from actions.ImagedAction cimport *
+from pycpptraj.actions.Action cimport *
+from pycpptraj.actions.ImagedAction cimport *
 
 
 cdef extern from "Action_Distance.h": 
