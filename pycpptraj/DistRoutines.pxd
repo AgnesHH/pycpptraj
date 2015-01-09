@@ -1,6 +1,6 @@
 # distutil: language = c++
 
-from Box cimport *
+from pycpptraj.Box cimport *
 
 cdef extern from "DistRoutines.h":
     ctypedef enum ImagingType:
