@@ -2,187 +2,187 @@
 #include ../config.h
 
 test.general:
-	@-cd Test_General && ./RunTest.sh $(OPT)
+	@-cd Test_General && sh ./RunTest.sh.sh $(OPT)
 
 test.strip:
-	@-cd Test_Strip && ./RunTest.sh $(OPT)
+	@-cd Test_Strip && sh ./RunTest.sh.sh $(OPT)
 
 test.brokentraj:
-	@-cd Test_BrokenTraj && ./RunTest.sh $(OPT)
+	@-cd Test_BrokenTraj && sh ./RunTest.sh.sh $(OPT)
 
 test.traj:
-	@-cd Test_TrajinOffset && ./RunTest.sh $(OPT)
+	@-cd Test_TrajinOffset && sh ./RunTest.sh.sh $(OPT)
 
 test.remdnetcdf:
-	@-cd Test_RemdTraj && ./RunTest.sh $(OPT)
+	@-cd Test_RemdTraj && sh ./RunTest.sh.sh $(OPT)
 
 test.framerange:
-	@-cd Test_trajout_framerange && ./RunTest.sh $(OPT)
+	@-cd Test_trajout_framerange && sh ./RunTest.sh.sh $(OPT)
 
 test.perres:
-	@-cd Test_PerResRMSD && ./RunTest.sh $(OPT)
+	@-cd Test_PerResRMSD && sh ./RunTest.sh.sh $(OPT)
 
 test.dssp:
-	@-cd Test_DSSP && ./RunTest.sh $(OPT)
+	@-cd Test_DSSP && sh ./RunTest.sh.sh $(OPT)
 
 test.center:
-	@-cd Test_Center && ./RunTest.sh $(OPT)
+	@-cd Test_Center && sh ./RunTest.sh.sh $(OPT)
 
 test.hbond:
-	@-cd Test_Hbond && ./RunTest.sh $(OPT)
+	@-cd Test_Hbond && sh ./RunTest.sh.sh $(OPT)
 
 test.image:
-	@-cd Test_Image && ./RunTest.sh $(OPT)
+	@-cd Test_Image && sh ./RunTest.sh.sh $(OPT)
 
 test.comprehensive:
-	@-cd Test_Comprehensive && ./RunTest.sh $(OPT)
+	@-cd Test_Comprehensive && sh ./RunTest.sh.sh $(OPT)
 
 test.netcdftraj:
-	@-cd Test_NetcdfTraj && ./RunTest.sh $(OPT)
+	@-cd Test_NetcdfTraj && sh ./RunTest.sh.sh $(OPT)
 
 test.surf:
-	@-cd Test_Surf && ./RunTest.sh $(OPT)
+	@-cd Test_Surf && sh ./RunTest.sh.sh $(OPT)
 
 test.radgyr:
-	@-cd Test_Radgyr && ./RunTest.sh $(OPT)
+	@-cd Test_Radgyr && sh ./RunTest.sh.sh $(OPT)
 
 test.mask:
-	@-cd Test_Mask && ./RunTest.sh $(OPT)
+	@-cd Test_Mask && sh ./RunTest.sh.sh $(OPT)
 
 test.closest:
-	@-cd Test_Closest && ./RunTest.sh $(OPT)
+	@-cd Test_Closest && sh ./RunTest.sh.sh $(OPT)
 
 test.rmsd:
-	@-cd Test_RMSD && ./RunTest.sh $(OPT)
+	@-cd Test_RMSD && sh ./RunTest.sh.sh $(OPT)
 
 test.outtraj:
-	@-cd Test_Outtraj && ./RunTest.sh $(OPT)
+	@-cd Test_Outtraj && sh ./RunTest.sh.sh $(OPT)
 
 test.datafile:
-	@-cd Test_Datafile && ./RunTest.sh $(OPT)
+	@-cd Test_Datafile && sh ./RunTest.sh.sh $(OPT)
 
 #test.avgref:
-#	@cd Test_AvgRef && ./RunTest.sh $(OPT)
+#	@cd Test_AvgRef && sh ./RunTest.sh.sh $(OPT)
 
 test.mol2:
-	@-cd Test_Mol2 && ./RunTest.sh $(OPT)
+	@-cd Test_Mol2 && sh ./RunTest.sh.sh $(OPT)
 
 test.nastruct:
-	@-cd Test_NAstruct && ./RunTest.sh $(OPT)
+	@-cd Test_NAstruct && sh ./RunTest.sh.sh $(OPT)
 
 test.pucker:
-	@-cd Test_Pucker && ./RunTest.sh $(OPT)
+	@-cd Test_Pucker && sh ./RunTest.sh.sh $(OPT)
 
 test.atommap:
-	@-cd Test_AtomMap && ./RunTest.sh $(OPT)
+	@-cd Test_AtomMap && sh ./RunTest.sh.sh $(OPT)
 
 test.2drms:
-	@-cd Test_2DRMS && ./RunTest.sh $(OPT)
+	@-cd Test_2DRMS && sh ./RunTest.sh.sh $(OPT)
 
 test.average:
-	@-cd Test_Average && ./RunTest.sh $(OPT)
+	@-cd Test_Average && sh ./RunTest.sh.sh $(OPT)
 
 test.radial:
-	@-cd Test_Radial && ./RunTest.sh $(OPT)
+	@-cd Test_Radial && sh ./RunTest.sh.sh $(OPT)
 
 test.hist:
-	@-cd Test_Hist && ./RunTest.sh $(OPT)
+	@-cd Test_Hist && sh ./RunTest.sh.sh $(OPT)
 
 test.ncrestart:
-	@-cd Test_NCrestart && ./RunTest.sh $(OPT)
+	@-cd Test_NCrestart && sh ./RunTest.sh.sh $(OPT)
 
 test.drmsd:
-	@-cd Test_DRMSD && ./RunTest.sh $(OPT)
+	@-cd Test_DRMSD && sh ./RunTest.sh.sh $(OPT)
 
 test.jcoupling:
-	@-cd Test_Jcoupling && ./RunTest.sh $(OPT)
+	@-cd Test_Jcoupling && sh ./RunTest.sh.sh $(OPT)
 
 test.cluster:
-	@-cd Test_Cluster && ./RunTest.sh $(OPT)
+	@-cd Test_Cluster && sh ./RunTest.sh.sh $(OPT)
 
 test.ired:
-	@-cd Test_IRED && ./RunTest.sh $(OPT)
+	@-cd Test_IRED && sh ./RunTest.sh.sh $(OPT)
 
 test.molsurf:
-	@-cd Test_Molsurf && ./RunTest.sh $(OPT)
+	@-cd Test_Molsurf && sh ./RunTest.sh.sh $(OPT)
 
 test.charmm:
-	@-cd Test_Charmm && ./RunTest.sh $(OPT)
+	@-cd Test_Charmm && sh ./RunTest.sh.sh $(OPT)
 
 test.rotdif:
-	@-cd Test_Rotdif && ./RunTest.sh $(OPT)
+	@-cd Test_Rotdif && sh ./RunTest.sh.sh $(OPT)
 
 test.corr:
-	@cd Test_Corr && ./RunTest.sh $(OPT)
+	@cd Test_Corr && sh ./RunTest.sh.sh $(OPT)
 
 test.checkstructure:
-	@cd Test_CheckStructure && ./RunTest.sh $(OPT)
+	@cd Test_CheckStructure && sh ./RunTest.sh.sh $(OPT)
 
 test.runavg:
-	@cd Test_Runavg && ./RunTest.sh $(OPT)
+	@cd Test_Runavg && sh ./RunTest.sh.sh $(OPT)
 
 test.analrunavg:
-	@cd Test_AnalysisRunAvg && ./RunTest.sh $(OPT)
+	@cd Test_AnalysisRunAvg && sh ./RunTest.sh.sh $(OPT)
 
 test.rmsavgcorr:
-	@cd Test_RmsAvgCorr && ./RunTest.sh $(OPT)
+	@cd Test_RmsAvgCorr && sh ./RunTest.sh.sh $(OPT)
 
 test.contacts:
-	@cd Test_Contacts && ./RunTest.sh $(OPT)
+	@cd Test_Contacts && sh ./RunTest.sh.sh $(OPT)
 
 test.principal:
-	@cd Test_Principal && ./RunTest.sh $(OPT)
+	@cd Test_Principal && sh ./RunTest.sh.sh $(OPT)
 
 test.clusterdihedral:
-	@cd Test_ClusterDihedral && ./RunTest.sh $(OPT)
+	@cd Test_ClusterDihedral && sh ./RunTest.sh.sh $(OPT)
 
 test.vector:
-	@cd Test_Vector && ./RunTest.sh $(OPT)
+	@cd Test_Vector && sh ./RunTest.sh.sh $(OPT)
 
 test.matrix:
-	@cd Test_Matrix && ./RunTest.sh $(OPT)
+	@cd Test_Matrix && sh ./RunTest.sh.sh $(OPT)
 
 test.atomicfluct:
-	@cd Test_AtomicFluct && ./RunTest.sh $(OPT)
+	@cd Test_AtomicFluct && sh ./RunTest.sh.sh $(OPT)
 
 test.grid:
-	@cd Test_Grid && ./RunTest.sh $(OPT)
+	@cd Test_Grid && sh ./RunTest.sh.sh $(OPT)
 
 test.unwrap:
-	@cd Test_Unwrap && ./RunTest.sh $(OPT)
+	@cd Test_Unwrap && sh ./RunTest.sh.sh $(OPT)
 
 test.project:
-	@cd Test_Project && ./RunTest.sh $(OPT)
+	@cd Test_Project && sh ./RunTest.sh.sh $(OPT)
 
 test.analyzemodes:
-	@cd Test_Analyze_Modes && ./RunTest.sh $(OPT)
+	@cd Test_Analyze_Modes && sh ./RunTest.sh.sh $(OPT)
 
 test.watershell:
-	@cd Test_Watershell && ./RunTest.sh $(OPT)
+	@cd Test_Watershell && sh ./RunTest.sh.sh $(OPT)
 
 test.diffusion:
-	@cd Test_Diffusion && ./RunTest.sh $(OPT)
+	@cd Test_Diffusion && sh ./RunTest.sh.sh $(OPT)
 
 test.volmap:
-	@cd Test_Volmap && ./RunTest.sh $(OPT)
+	@cd Test_Volmap && sh ./RunTest.sh.sh $(OPT)
 
 test.lie:
-	@cd Test_LIE && ./RunTest.sh $(OPT)
+	@cd Test_LIE && sh ./RunTest.sh.sh $(OPT)
 
 test.spam:
-	@cd Test_SPAM && ./RunTest.sh $(OPT)
+	@cd Test_SPAM && sh ./RunTest.sh.sh $(OPT)
 
 test.randomizeions:
-	@cd Test_RandomizeIons && ./RunTest.sh $(OPT)
+	@cd Test_RandomizeIons && sh ./RunTest.sh.sh $(OPT)
 
 test.density:
-	@cd Test_Density && ./RunTest.sh $(OPT)
+	@cd Test_Density && sh ./RunTest.sh.sh $(OPT)
 
 test.lipidorder:
-	@cd Test_LipidOrder && ./RunTest.sh $(OPT)
+	@cd Test_LipidOrder && sh ./RunTest.sh.sh $(OPT)
 
 test.pairdist:
-	@cd Test_PairDist && ./RunTest.sh $(OPT)
+	@cd Test_PairDist && sh ./RunTest.sh.sh $(OPT)
 
 # Only crucial/non-time-consuming tests should go here.
 MAINTESTS=test.general \
