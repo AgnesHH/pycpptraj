@@ -9,8 +9,9 @@ from pycpptraj._utils cimport get_positive_idx
 from pycpptraj.Trajectory import Trajectory
 
 cdef class FrameArray:
-    def __cinit__(self, string fname='', top=Topology(), indices=None):
+    def __cinit__(self, string fname='', top=Topology(), indices=None, bint warning=False):
         self.top = top
+        self.warning = warning
         if not fname.empty():
             self.load(fname=fname, indices=indices)
 
@@ -87,6 +88,10 @@ cdef class FrameArray:
         cdef int idx_1, idx_2
 
         frame.py_free_mem = False
+
+        if self.warning = True:
+            print "return a Frame or sub-Framearray view of this instance"
+            print "Use with care. For safetype, use `copy` method"
 
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")

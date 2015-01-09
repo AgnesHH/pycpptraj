@@ -13,3 +13,6 @@ ctypedef vector[_Frame].iterator iterator
 cdef class FrameArray:
     cdef vector[_Frame] frame_v
     cdef public Topology top
+
+    # used for warning memory view
+    cdef public warning 
