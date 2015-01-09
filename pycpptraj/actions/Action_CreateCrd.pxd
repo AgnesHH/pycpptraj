@@ -1,5 +1,5 @@
 # distutils: language = c++
-from Action cimport *
+from pycpptraj.actions.Action cimport _Action, Action
 #from DataSet_Coords cimport *
 
 

@@ -1,6 +1,6 @@
 # distutils: language = c++
 #from libcpp.vector cimport vector
-from Action cimport *
+from pycpptraj.actions.Action cimport _Action, Action
 #from Trajout cimport *
 #from DataSet_1D cimport *
 

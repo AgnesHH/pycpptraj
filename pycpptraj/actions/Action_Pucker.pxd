@@ -1,6 +1,6 @@
 # distutils: language = c++
 #from libcpp.vector cimport vector
-from Action cimport *
+from pycpptraj.actions.Action cimport _Action, Action
 
 
 cdef extern from "Action_Pucker.h": 

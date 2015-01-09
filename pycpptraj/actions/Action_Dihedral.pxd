@@ -1,5 +1,5 @@
 # distutils: language = c++
-from Action cimport *
+from pycpptraj.actions.Action cimport _Action, Action
 #from .._FunctPtr cimport FunctPtr
 
 cdef extern from "Action_Dihedral.h": 

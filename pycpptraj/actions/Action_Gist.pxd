@@ -1,7 +1,7 @@
 # distutils: language = c++
 #from libcpp.vector cimport vector
 #from libcpp.string cimport string
-from Action cimport *
+from pycpptraj.actions.Action cimport _Action, Action
 #from Vec3 cimport *
 #from Matrix_3x3 cimport *
 #from ImagedAction cimport *

@@ -1,6 +1,6 @@
 # distutils: language = c++
 #from libcpp.string cimport string
-from Action cimport *
+from pycpptraj.actions.Action cimport _Action, Action
 from ActionFrameCounter cimport *
 
 

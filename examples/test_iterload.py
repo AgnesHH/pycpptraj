@@ -25,12 +25,13 @@ class TestIterLoad(unittest.TestCase):
     def test_iterload_1(self):
         """get FrameArray"""
         print __doc__
-        for i in range(10):
+        for i in range(1):
             print ""
             print "loop number = %s-th" % i
             genobj = iterload(fname="./data/md1_prod.Tc5b.x", top=Topology("./data/Tc5b.top"), chunk=50)
             
             farray = genobj.next()
+            farray.warning = True
             # create a view of farray[0]
             frame0_0 = farray[0].copy()
             print farray
