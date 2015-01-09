@@ -1,6 +1,6 @@
 # distutil: language = c++
 
-from DistRoutines cimport *
+from pycpptraj.DistRoutines cimport *
 from pycpptraj.Box cimport _Box, Box, BoxType
 
 cdef extern from "ImagedAction.h":
