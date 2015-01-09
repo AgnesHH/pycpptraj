@@ -4,6 +4,9 @@ from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 from libcpp.string cimport string
 from pycpptraj.TopologyList cimport TopologyList
+
+# Python level
+# use for write parm
 from pycpptraj.parms.Parm_Amber import Parm_Amber
 
 cdef class Topology:
@@ -330,8 +333,8 @@ cdef class Topology:
         tmptop.thisptr = self.thisptr.modifyStateByMask(atm.thisptr[0])
         self.thisptr[0] = tmptop.thisptr[0]
 
-    #def write_parm(self, name):
-    #    Parm_Amber().write_parm(name, self)
+    def write_AmberParm(self, name):
+        Parm_Amber().write_parm(name, self)
 
     def tag(self):
         return self.thisptr.Tag()
