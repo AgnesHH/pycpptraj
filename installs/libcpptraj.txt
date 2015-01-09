@@ -23,9 +23,3 @@
   
     # make *.so lib
     make CUSTOMBUILDFLAGS='-fPIC' libcpptraj.so
-
-2. Install pycpptraj
-   git clone https://github.com/hainm/pycpptraj
-   cd pycpptraj
-   (export LD_LIBRARY_PATH=$CPPTRAJHOME/lib:$LD_LIBRARY_PATH:$AMBERHOME/lib #if you have not done so)
-   python ./setup.py install

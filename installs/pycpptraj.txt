@@ -1,5 +1,6 @@
 Install pycpptraj (after installing `libcpptraj.so`)
-   git clone https://github.com/hainm/pycpptraj
+   (git clone https://github.com/hainm/pycpptraj # if you have not done so)
    cd pycpptraj
+   (export $PYCPPTRAJ_HOME=`pwd` # if you have not done so)
    (export LD_LIBRARY_PATH=$CPPTRAJHOME/lib:$LD_LIBRARY_PATH:$AMBERHOME/lib #if you have not done so)
    python ./setup.py install
