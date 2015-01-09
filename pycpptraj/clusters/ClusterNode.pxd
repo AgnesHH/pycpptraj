@@ -1,5 +1,7 @@
 # distutils: language = c++
-from clusters.ClusterDist cimport *
+from libcpp.string cimport string
+from clusters.ClusterDist cimport _ClusterDist, Cframes
+from clusters.ClusterDist cimport _Centroid, _ClusterMatrix
 
 #ctypedef Cframes.const_iterator frame_iterator
 cdef extern from "ClusterNode.h": 
@@ -11,9 +13,9 @@ cdef extern from "ClusterNode.h":
         #_ClusterNode& operator =(const _ClusterNode&)
         # inline bint operator < ( const _ClusterNode&) const 
         inline void Merge_Frames(const _ClusterNode&)
-        int Find_Centroid_Frame(const _ClusterMatrix&)
+        int FindCentroidFrame(const _ClusterMatrix&)
         void CalcEccentricity(const _ClusterMatrix&)
-        void Calculate_Centroid(_ClusterDist * Cdist)
+        void CalculateCentroid(_ClusterDist * Cdist)
         double CalcAvgTo_Centroid(_ClusterDist *)
         #frame_iterator beginframe() const 
         #frame_iterator endframe() const 
@@ -28,3 +30,6 @@ cdef extern from "ClusterNode.h":
         void Add_FrameToCluster(int fnum)
         void SetNum(int numIn)
         void SortFrameList() 
+
+cdef class ClusterNode:
+    cdef _ClusterNode* thisptr
