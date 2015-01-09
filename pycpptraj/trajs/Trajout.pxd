@@ -1,8 +1,8 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from TrajectoryFile cimport *
-from Range cimport *
-from ActionFrameCounter cimport *
+from pycpptraj.trajs.TrajectoryFile cimport *
+from pycpptraj.Range cimport *
+from pycpptraj.trajs.ActionFrameCounter cimport *
 
 
 cdef extern from "Trajout.h": 
