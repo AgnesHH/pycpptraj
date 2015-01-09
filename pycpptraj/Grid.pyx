@@ -3,7 +3,7 @@
 
 cdef class Grid:
     def __cinit__(self):
-        self.thisptr = new _Grid()
+        self.thisptr = new _Grid[float]()
 
     def __dealloc__(self):
         del self.thisptr
