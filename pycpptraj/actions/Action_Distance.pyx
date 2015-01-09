@@ -21,6 +21,6 @@ cdef class Action_Distance (Action):
     def help(self):
         self.thisptr.Help()
 
-    def NOE_args(self, ArgList argIn, double noe_lbound, double noe_ubound, double noe_rexp):
-        return self.thisptr.NOE_Args(argIn.thisptr[0], noe_lbound, noe_ubound, noe_rexp)
+    #def NOE_args(self, ArgList argIn, double noe_lbound, double noe_ubound, double noe_rexp):
+    #    return self.thisptr.NOE_Args(argIn.thisptr[0], noe_lbound, noe_ubound, noe_rexp)
 
