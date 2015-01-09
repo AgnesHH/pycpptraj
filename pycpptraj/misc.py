@@ -61,3 +61,17 @@ def strip(arg, mask):
 
     if isinstance(arg, Topology):
         return top.copy()
+
+def fit(frame, ref=None):
+    """fit Frame intance to reference Frame
+
+    Parameters
+    ---------
+    frame : Frame instance
+    ref : reference Frame (default = None)
+    """
+    if not ref:
+        raise ValueError("missing reference Frame")
+    else:
+        # TODO : fitting
+        pass
