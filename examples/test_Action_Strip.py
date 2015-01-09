@@ -6,20 +6,12 @@ from pycpptraj.Trajin_Single import Trajin_Single
 
 print dir(Action_Strip())
 
-farray = FrameArray(Topology("./data/Tc5b.top"))
+farray = FrameArray(top=Topology("./data/Tc5b.top"), fname='data/md1_prod.Tc5b.x')
 
 print "newtop"
 newtop = farray.top.copy()
 newtop2 = newtop.copy()
 trajin = Trajectory()
-#trajin.check_frame_args(ArgList("trajin 1 100 10"), 10, 1, 100, 10)
-trajin.set_max_frames(100)
-trajin.load("./data/md1_prod.Tc5b.x", newtop, ArgList("trajin ./data/md1_prod.Tc5b.x 1 100 10"))
-print trajin.max_frames
-farray.get_frames(trajin)
-farray2 = farray.copy()
-print 'farray.size: ', farray.size
-print 'farray2.size: ', farray2.size
 
 toplist = TopologyList()
 toplist.add_parm(newtop)
@@ -28,8 +20,9 @@ dflist = DataFileList()
 #
 stripact = Action_Strip()
 stripact.read_input(ArgList("strip !@CA"), toplist)
-stripact.process(toplist[0], newtop)
-stripact.do_action()
+stripact.process(toplist[0], newtop=newtop)
+stripact.do_action(0, farray[0])
+print farray[0].n_atoms
 #print "toplist"
 #print "toplist[0].n_atom ", toplist[0].n_atoms
 #print "end toplist"

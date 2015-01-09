@@ -102,9 +102,9 @@ cdef extern from "Topology.h":
         void PrintMoleculeInfo(const string&) const 
         void PrintResidueInfo(const string&) const 
         int PrintChargeMassInfo(const string&, int) const 
-        void PrintBonds(const BondArray&, _AtomMask&, int&) const;
-        void PrintAngles(const AngleArray&, const _AtomMask&, int&) const;
-        void PrintDihedrals(const DihedralArray&, const _AtomMask&, int&) const;
+        void PrintBonds(const BondArray&, _AtomMask&, int&) const
+        void PrintAngles(const AngleArray&, const _AtomMask&, int&) const
+        void PrintDihedrals(const DihedralArray&, const _AtomMask&, int&) const
         inline const _Box& Parm_Box() const 
         inline BoxType _BoxType() const 
         void SetBox(const _Box& bIn)
