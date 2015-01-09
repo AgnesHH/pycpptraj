@@ -86,11 +86,14 @@ cdef class Trajin (TrajectoryFile):
                     farray.append(frame)
             return farray
 
-    def frame_iter(self, int start, int chunk):
+    def frame_iter(self, int start=0, int chunk=1):
         """iterately get Frames with start, chunk
-        returning FrameArray or Frame instance depend on `chunk`
-        if chunk == 1: Frame (use __iter__ instead)
-        if chunk > 1: FrameArray
+        returning FrameArray or Frame instance depend on `chunk` value
+        Parameters
+        ---------
+        start : int (default = 0)
+        chunk : int (default = 1, return Frame instance). 
+                if `chunk` > 1 : return FrameArray instance
         """
         cdef int newstart
 
