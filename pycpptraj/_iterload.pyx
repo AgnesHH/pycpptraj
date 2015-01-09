@@ -1,7 +1,4 @@
-from libcpp.string cimport string
-from Trajin_Single cimport Trajin_Single
-from Topology cimport Topology
-
+# distutils: language=c++
 def _iterload(Topology top, string traj, int start=0, chunk=None):
     ts = Trajin_Single()
     ts.load(traj, top)

@@ -1,17 +1,16 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from DispatchObject cimport DispatchAllocatorType
+from pycpptraj.DispatchObject cimport DispatchAllocatorType
 from libcpp.vector cimport vector
-from TrajinList cimport _TrajinList, TrajinList
-#from TrajoutList cimport _TrajoutList, TrajoutList
-from ArgList cimport _ArgList, ArgList
-from FrameList cimport _FrameList, FrameList
-from TopologyList cimport _TopologyList, TopologyList
-from DataSetList cimport _DataSetList, DataSetList
-from DataFileList cimport _DataFileList, DataFileList
-from ActionList cimport _ActionList, ActionList
-from AnalysisList cimport _AnalysisList, AnalysisList
-from _FunctPtr cimport FunctPtr
+from pycpptraj.TrajinList cimport _TrajinList, TrajinList
+from pycpptraj.ArgList cimport _ArgList, ArgList
+from pycpptraj.FrameList cimport _FrameList, FrameList
+from pycpptraj.TopologyList cimport _TopologyList, TopologyList
+from pycpptraj.DataSetList cimport _DataSetList, DataSetList
+from pycpptraj.DataFileList cimport _DataFileList, DataFileList
+from pycpptraj.ActionList cimport _ActionList, ActionList
+from pycpptraj.AnalysisList cimport _AnalysisList, AnalysisList
+from pycpptraj._FunctPtr cimport FunctPtr
 
 
 cdef extern from "CpptrajState.h": 
