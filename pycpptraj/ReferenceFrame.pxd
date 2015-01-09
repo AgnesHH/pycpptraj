@@ -1,8 +1,11 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 from libcpp.string cimport string
-from Topology cimport *
-from ArgList cimport *
+from pycpptraj.Topology cimport _Topology, Topology
+from pycpptraj.ArgList cimport _ArgList, ArgList
+from pycpptraj.AtomMask cimport _AtomMask, AtomMask
+from pycpptraj.FileName cimport _FileName, FileName
+from pycpptraj.Frame cimport _Frame, Frame
 
 
 cdef extern from "ReferenceFrame.h": 

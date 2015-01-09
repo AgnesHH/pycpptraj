@@ -1,6 +1,6 @@
 # distutils: language = c++
-from trajs.Trajin cimport *
-from FrameArray cimport *
+from trajs.Trajin cimport _Trajin, Trajin
+from FrameArray cimport FrameArray
 from DataSet_RemLog cimport *
 
 
