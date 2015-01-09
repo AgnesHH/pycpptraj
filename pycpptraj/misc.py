@@ -11,9 +11,9 @@ def iterload(top=None, fname=None, start=0, chunk=None):
     if not isinstance(top, Topology):
         # string
         top = Topology(top)
-    return _iterload(top, traj, start, chunk)
+    return _iterload(top, fname, start, chunk)
 
-def load(top=None, traj=None, readonly=True):
+def load(top=None, fname=None, readonly=True):
     if not isinstance(top, Topology):
         # string
         top = Topology(top)
@@ -21,7 +21,7 @@ def load(top=None, traj=None, readonly=True):
         ts = Trajin_Single()
     else:
         ts = FrameArray()
-    ts.load(traj, top)
+    ts.load(fname, top)
     return ts
 
 def strip(arg, mask):
