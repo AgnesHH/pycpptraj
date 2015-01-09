@@ -26,4 +26,4 @@ cdef extern from "Grid.h":
 
 cdef class Grid:
     pass
-    #cdef _Grid[T]* thisptr
+    cdef _Grid[double]* thisptr
