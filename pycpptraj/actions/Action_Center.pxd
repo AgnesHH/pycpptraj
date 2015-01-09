@@ -1,5 +1,5 @@
 # distutils: language = c++
-from pycpptraj.actions.Action cimport _Action, Action
+from pycpptraj.actions.Action cimport _Action, Action, FunctPtr, _DispatchObject
 
 
 cdef extern from "Action_Center.h": 

@@ -1,7 +1,7 @@
 # distutils: language = c++
 #from libcpp.vector cimport vector
 #from libcpp.string cimport string
-from pycpptraj.actions.Action cimport _Action, Action
+from pycpptraj.actions.Action cimport _Action, Action, FunctPtr, _DispatchObject
 #from Random cimport *
 #from DataSet_Vector cimport *
 

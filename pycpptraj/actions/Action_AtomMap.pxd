@@ -1,8 +1,6 @@
 # distutils: language = c++
 #from libcpp.vector cimport vector
-from .Action cimport *
-from ..AtomMap cimport *
-
+from pycpptraj.actions.Action cimport _Action, Action, FunctPtr, _DispatchObject
 
 cdef extern from "Action_AtomMap.h": 
     cdef cppclass _Action_AtomMap "Action_AtomMap" (_Action):

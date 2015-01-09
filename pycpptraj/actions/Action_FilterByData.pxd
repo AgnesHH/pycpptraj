@@ -1,6 +1,6 @@
 # distutils: language = c++
 #from libcpp.vector cimport vector
-from pycpptraj.actions.Action cimport _Action, Action
+from pycpptraj.actions.Action cimport *
 #from Array1D cimport *
 
 
@@ -11,7 +11,7 @@ cdef extern from "Action_FilterByData.h":
         void Help() 
         size_t Determine_Frames() const 
         RetType Init(_ArgList&, _TopologyList *, _FrameList *, _DataSetList *, _DataFileList *, int)
-        RetType Do_Action(int, _Frame *, _Frame * *)
+        RetType DoAction(int, _Frame *, _Frame * *)
 
 
 cdef class Action_FilterByData (Action):

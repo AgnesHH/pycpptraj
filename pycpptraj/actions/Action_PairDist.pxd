@@ -1,6 +1,6 @@
 # distutils: language = c++
 #from libcpp.vector cimport vector
-from pycpptraj.actions.Action cimport _Action, Action
+from pycpptraj.actions.Action cimport _Action, Action, FunctPtr, _DispatchObject
 #from ImagedAction cimport *
 #from OnlineVarT cimport *
 

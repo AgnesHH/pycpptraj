@@ -1,6 +1,6 @@
 # distutils: language = c++
 #from libcpp.string cimport string
-from pycpptraj.actions.Action cimport _Action, Action
+from pycpptraj.actions.Action cimport _Action, Action, FunctPtr, _DispatchObject
 #from Traj_AmberNetcdf cimport *
 #from DataSet_1D cimport *
 

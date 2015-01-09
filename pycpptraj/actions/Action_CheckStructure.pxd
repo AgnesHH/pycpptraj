@@ -1,6 +1,10 @@
 # distutils: language = c++
 #from libcpp.vector cimport vector
-from pycpptraj.actions.Action cimport _Action, Action
+from pycpptraj.actions.Action cimport _Action, Action, FunctPtr, _DispatchObject
+from pycpptraj.actions.Action cimport _ArgList, _TopologyList, RetType
+from pycpptraj.actions.Action cimport _FrameList, _DataSetList, _DataFileList
+from pycpptraj.Frame cimport _Frame, Frame
+from pycpptraj.Topology cimport _Topology, Topology
 #from ImagedAction cimport *
 
 
@@ -17,7 +21,7 @@ cdef extern from "Action_CheckStructure.h":
         void Help() 
         #~_Action_CheckStructure() 
         RetType Init(_ArgList&, _TopologyList *, _FrameList *, _DataSetList *, _DataFileList *, int)
-        RetType Setup(_Topology *, _Topology * *)
+        RetType Setup(_Topology *, _Topology **)
         int Check_Frame(int, const _Frame&)
         void Print() 
 
