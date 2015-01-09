@@ -6,7 +6,7 @@ magicmemoryview
 _FunctPtr
 _cast
 _utils
-_iterload
+#_iterload
 Atom
 AtomMask
 Box
