@@ -63,6 +63,21 @@ cdef class Topology:
     def __repr__(self):
         return self.__str__()
 
+    def load(self, string fname):
+        """loading Topology from filename
+
+        fname : {str}
+
+        if Topology instance is not empty, it will be stilled replace by new one
+
+        # seriously why do we need this method?
+        >>> top = Topology("./data/Tc5b.top")
+        >>> # replace old with new topology
+        >>> top.load("./data/HP36.top")
+        >>> # why not using "top = Topology("./data/HP36.top")"?
+        """
+        self = Topology(fname)
+
     def copy(self, *args):
         """return a copy of 'self' or copy from 'other' to 'self'"""
         cdef Topology tmp
@@ -79,6 +94,20 @@ cdef class Topology:
             self.thisptr[0] = other.thisptr[0]
 
     def __getitem__(self, int idx):
+        """
+        return Atom instance:w
+
+        TODO : return either atoms or residues 
+
+                Example : 
+                    self['atom'], self['residue'] 
+                        return list of Atom instances or Residue instances
+
+                    self[0] 
+                        return 0-th Atom instance
+        END TODO
+        """
+
         cdef Atom atom = Atom()
         atom.thisptr[0] = self.thisptr.index_opr(idx)
         return atom
