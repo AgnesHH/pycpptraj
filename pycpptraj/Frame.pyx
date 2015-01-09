@@ -163,9 +163,10 @@ cdef class Frame (object):
         return tmp
 
     def __getitem__(self, idx):
-        return self.buffer[idx]
+        return self.coords[idx]
 
     def __setitem__(self, idx, value):
+        # TODO : should we use buffer. Kind of dangerous
         self.buffer[idx] = value
 
     def __iter__(self):

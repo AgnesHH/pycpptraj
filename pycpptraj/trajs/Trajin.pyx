@@ -46,6 +46,7 @@ cdef class Trajin (TrajectoryFile):
         cdef list tmplist
 
         if not isinstance(idxs, slice):
+            # assuming that `idxs` is integer
             idx_1 = get_positive_idx(idxs, self.size)
             # raise index out of range
             if idxs != 0 and idx_1 == 0:
@@ -87,7 +88,9 @@ cdef class Trajin (TrajectoryFile):
 
     def frame_iter(self, int start, int chunk):
         """iterately get Frames with start, chunk
-        Returning FrameArray instance
+        returning FrameArray or Frame instance depend on `chunk`
+        if chunk == 1: Frame (use __iter__ instead)
+        if chunk > 1: FrameArray
         """
         cdef int newstart
 
