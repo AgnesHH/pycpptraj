@@ -44,7 +44,7 @@ ext_modules = []
 for ext_name in pyxfiles:
     pyxfile = pycpptraj_home + ext_name + ext
 
-    # replace "/" by "." got get module
+    # replace "/" by "." get module
     if "/" in ext_name:
         ext_name = ext_name.replace("/", ".")
 
