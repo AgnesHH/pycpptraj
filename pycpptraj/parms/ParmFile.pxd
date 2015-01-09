@@ -1,7 +1,7 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from pycpptraj.parms.ParmIO cimport _ParmIO, ParmIo
-from pycpptraj.FileTypes cimport _FileTypes, FileType
+from pycpptraj.parms.ParmIO cimport _ParmIO, ParmIO
+from pycpptraj.FileTypes cimport _FileTypes, FileTypes
 from pycpptraj.FileName cimport _FileName, FileName
 from pycpptraj.Topology cimport _Topology, Topology
 from pycpptraj.ArgList cimport _ArgList, ArgList

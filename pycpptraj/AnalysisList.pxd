@@ -1,5 +1,10 @@
 # distutils: language = c++
-from analyses.Analysis cimport *
+from pycpptraj.DispatchObject  cimport DispatchAllocatorType
+from pycpptraj.analyses.Analysis cimport _Analysis, Analysis
+from pycpptraj.ArgList cimport _ArgList 
+from pycpptraj.TopologyList cimport _TopologyList
+from pycpptraj.DataSetList cimport _DataSetList
+from pycpptraj.DataFileList cimport _DataFileList
 
 
 cdef extern from "AnalysisList.h": 
@@ -9,7 +14,7 @@ cdef extern from "AnalysisList.h":
         void Clear() 
         void SetDebug(int)
         int Debug() const 
-        int Add_Analysis(DispatchAllocatorType, _ArgList &, _TopologyList *, _DataSetList *, _DataFileList *)
+        int AddAnalysis(DispatchAllocatorType, _ArgList &, _TopologyList *, _DataSetList *, _DataFileList *)
         int DoAnalyses() 
         void List() const 
         bint Empty() const 

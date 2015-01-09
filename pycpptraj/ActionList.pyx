@@ -1,5 +1,4 @@
 # distutils: language = c++
-from _FunctPtr cimport FunctPtr
 from cython.operator cimport dereference as deref
 
 cdef class ActionList:

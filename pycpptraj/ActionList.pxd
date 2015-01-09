@@ -1,12 +1,18 @@
 # distutil: language = c++
 
-from DispatchObject cimport *
-from Topology cimport *
-from TopologyList cimport *
-from FrameList cimport *
-from DataSetList cimport *
-from DataFileList cimport *
-from FrameArray cimport FrameArray
+from libcpp.string cimport string
+from pycpptraj.DispatchObject cimport _DispatchObject, DispatchObject, DispatchAllocatorType
+from pycpptraj.Topology cimport _Topology, Topology
+from pycpptraj.TopologyList cimport _TopologyList, TopologyList
+from pycpptraj.Frame cimport _Frame, Frame
+from pycpptraj.FrameList cimport _FrameList, FrameList
+from pycpptraj.DataSetList cimport _DataSetList, DataSetList
+from pycpptraj.DataFileList cimport _DataFileList, DataFileList
+from pycpptraj.FrameArray cimport FrameArray
+from pycpptraj.ArgList cimport _ArgList, ArgList
+from pycpptraj._FunctPtr cimport FunctPtr
+from pycpptraj.AtomMask cimport _AtomMask, AtomMask
+from pycpptraj.CpptrajFile cimport _CpptrajFile, CpptrajFile
 
 cdef extern from "ActionList.h":
     cdef cppclass _ActionList "ActionList":

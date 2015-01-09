@@ -1,6 +1,6 @@
 # distutils: language = c++
-from DispatchObject cimport DispatchAllocatorType
-from BaseIOtype cimport AllocatorType
+from pycpptraj.DispatchObject cimport DispatchAllocatorType 
+from pycpptraj.BaseIOtype cimport AllocatorType
 
 # dummy class to hold function pointer
 cdef class FunctPtr:

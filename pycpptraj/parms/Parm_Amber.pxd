@@ -1,7 +1,10 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from parms.ParmIO cimport _ParmIO, ParmIO
-from ArgList cimport ArgList
+from pycpptraj.parms.ParmIO cimport _ParmIO, ParmIO
+from pycpptraj.ArgList cimport _ArgList, ArgList
+from pycpptraj.CpptrajFile cimport _CpptrajFile, CpptrajFile
+from pycpptraj.BaseIOtype cimport _BaseIOtype, BaseIOtype
+from pycpptraj.Topology cimport _Topology, Topology
 
 
 cdef extern from "Parm_Amber.h": 

@@ -2,8 +2,8 @@
 cimport cython
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
-from Topology cimport Topology
-from _utils cimport get_positive_idx
+from pycpptraj.Topology cimport Topology
+from pycpptraj._utils cimport get_positive_idx
 
 # python level
 from pycpptraj.Trajectory import Trajectory

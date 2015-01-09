@@ -1,8 +1,11 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from DataSet_1D cimport *
-from Vec3 cimport *
-from ComplexArray cimport *
+from pycpptraj.datasets.DataSet cimport _DataSet, DataSet
+from pycpptraj.datasets.DataSet_3D cimport _DataSet_3D, DataSet_3D
+from pycpptraj.Grid cimport _Grid
+from pycpptraj.Vec3 cimport _Vec3, Vec3
+from pycpptraj.CpptrajFile cimport _CpptrajFile, CpptrajFile
+from pycpptraj.ComplexArray cimport _ComplexArray, ComplexArray
 
 
 cdef extern from "DataSet_Vector.h": 

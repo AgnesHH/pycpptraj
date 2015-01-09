@@ -1,6 +1,8 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from datasets.DataSet_1D cimport *
+from pycpptraj.datasets.DataSet cimport _DataSet, DataSet
+from pycpptraj.datasets.DataSet_1D cimport _DataSet_1D, DataSet_1D
+from pycpptraj.CpptrajFile cimport _CpptrajFile, CpptrajFile
 
 
 cdef extern from "DataSet_double.h": 

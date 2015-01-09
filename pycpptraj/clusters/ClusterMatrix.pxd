@@ -1,7 +1,7 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from Matrix cimport *
-from clusters.ClusterSieve cimport *
+from Matrix cimport _Matrix, Matrix
+from clusters.ClusterSieve cimport _ClusterSieve, ClusterSieve
 
 
 cdef extern from "ClusterMatrix.h": 

@@ -21,3 +21,6 @@ cdef extern from "ComplexArray.h":
         const double& operator[](int idx) const 
         #const iterator begin() const 
         #const iterator end() const 
+
+cdef class ComplexArray:
+    cdef _ComplexArray* thisptr

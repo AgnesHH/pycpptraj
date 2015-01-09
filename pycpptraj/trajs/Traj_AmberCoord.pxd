@@ -1,6 +1,7 @@
 # distutils: language = c++
-from trajs.TrajectoryIO cimport *
-from BufferedFrame cimport *
+from pycpptraj.trajs.TrajectoryIO cimport _TrajectoryIO, TrajectoryIO
+from pycpptraj.BufferedFrame cimport _BufferedFrame, BufferedFrame
+from pycpptraj.BaseIOtype cimport _BaseIOtype, BaseIOtype
 
 
 cdef extern from "Traj_AmberCoord.h": 

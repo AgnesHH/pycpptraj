@@ -2,7 +2,7 @@
 from libcpp.string cimport string
 from pycpptraj.Topology cimport _Topology, Topology
 from pycpptraj.ReplicaDimArray cimport * 
-from pycpptraj.CpptrajFile cimport *
+from pycpptraj.CpptrajFile cimport _CpptrajFile, CpptrajFile
 from pycpptraj.ArgList cimport _ArgList, ArgList
 from pycpptraj.BaseIOtype cimport _BaseIOtype, BaseIOtype
 from pycpptraj.Box cimport _Box, Box
