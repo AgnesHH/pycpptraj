@@ -24,3 +24,5 @@
     # make *.so lib
     make CUSTOMBUILDFLAGS='-fPIC' libcpptraj.so
 
+2. Install pycpptraj
+   python ./setup.py install
