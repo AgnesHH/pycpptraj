@@ -1,5 +1,9 @@
 # distutils: language = c++
-from .trajs.Trajin cimport *
+from libcpp.string cimport string
+from ArgList cimport _ArgList, ArgList
+from trajs.Trajin cimport _Trajin, Trajin
+from Frame cimport _Frame, Frame
+from Topology cimport _Topology, Topology
 
 
 # How Trajin_Single (python) class can use methods from Trajin (python) class?

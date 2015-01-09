@@ -1,8 +1,8 @@
 # distutils: language = c++
-from MaskToken cimport *
-from libcpp.vector cimport vector
-from vector_pycpptraj cimport vector as cppvector
 from libcpp.string cimport string
+from libcpp.vector cimport vector
+from pycpptraj.MaskToken cimport *
+from pycpptraj.vector_pycpptraj cimport vector as cppvector
 
 
 cdef extern from "AtomMask.h": 

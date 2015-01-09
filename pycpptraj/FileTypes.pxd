@@ -1,7 +1,7 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from BaseIOtype cimport *
-from ArgList cimport *
+from pycpptraj.BaseIOtype cimport *
+from pycpptraj.ArgList cimport *
 
 
 cdef extern from "FileTypes.h": 

@@ -1,5 +1,5 @@
 # distutil: language = c++
-from ArrayIterator cimport *
+from pycpptraj.ArrayIterator cimport *
 
 cdef extern from "Matrix.h":
     cdef cppclass _Matrix "Matrix" [T]:

@@ -1,8 +1,8 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 #from libcpp.set cimport set
-from NameType cimport *
-from vector_pycpptraj cimport vector as cppvector
+from pycpptraj.NameType cimport *
+from pycpptraj.vector_pycpptraj cimport vector as cppvector
 
 
 ctypedef cppvector[int].const_iterator bond_iterator

@@ -2,8 +2,9 @@
 from libcpp.vector cimport vector
 from libcpp.string cimport string
 from libcpp.list cimport list
-from ArgList cimport *
-from clusters.ClusterNode cimport *
+from pycpptraj.ArgList cimport _ArgList, ArgList
+from pycpptraj.clusters.ClusterNode cimport _ClusterNode, ClusterNode
+from pycpptraj.clusters.ClusterDist cimport DsArray
 
 #ctypedef list[_ClusterNode].const_iterator cluster_iterator
 ctypedef list[_ClusterNode].iterator cluster_it

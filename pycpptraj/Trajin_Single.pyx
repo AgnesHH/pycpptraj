@@ -1,6 +1,7 @@
 # distutils: language = c++
 import os
 include "config.pxi"
+from trajs.TrajectoryFile cimport _TrajectoryFile, TrajectoryFile
 
 cdef class Trajin_Single(Trajin):
     def __cinit__(self, *args):

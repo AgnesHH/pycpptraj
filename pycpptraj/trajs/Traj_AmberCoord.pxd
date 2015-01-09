@@ -1,5 +1,5 @@
 # distutils: language = c++
-from TrajectoryIO cimport *
+from trajs.TrajectoryIO cimport *
 from BufferedFrame cimport *
 
 

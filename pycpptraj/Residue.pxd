@@ -1,5 +1,5 @@
 # distutils: language = c++
-from NameType cimport *
+from pycpptraj.NameType cimport *
 
 
 cdef extern from "Residue.h": 

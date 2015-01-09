@@ -1,8 +1,12 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from Topology cimport *
-from Hungarian cimport *
-from AtomMap cimport *
+from pycpptraj.Topology cimport _Topology, Topology
+from pycpptraj.Hungarian cimport *
+from pycpptraj.AtomMap cimport _AtomMap, AtomMap
+from pycpptraj.AtomMask cimport _AtomMask, AtomMask
+from pycpptraj.Frame cimport _Frame, Frame
+from pycpptraj.Matrix_3x3 cimport _Matrix_3x3, Matrix_3x3
+from pycpptraj.Vec3 cimport _Vec3, Vec3
 
 
 cdef extern from "SymmetricRmsdCalc.h": 

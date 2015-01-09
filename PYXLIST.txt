@@ -1,12 +1,13 @@
 # This is a list of finished/workable files
 # setup.py will look at uncomment lines to "cythonize"
+trajs/Trajin
+ArgList
 DispatchObject
 magicmemoryview
 _FunctPtr
 _cast
 _utils
-_iterload
-ArgList
+#_iterload
 Atom
 AtomMask
 Box
@@ -26,7 +27,6 @@ parms/ParmFile
 Residue
 Topology
 TopologyList
-trajs/Trajin
 TrajinList
 Trajin_Single
 Vec3
@@ -36,7 +36,7 @@ Array1D
 FrameArray
 FrameArray2
 BaseIOtype
-TrajectoryIO
+trajs/TrajectoryIO
 trajs/Traj_AmberCoord
 FrameList
 datasets/DataSet

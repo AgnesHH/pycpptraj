@@ -1,14 +1,16 @@
 # distutils: language = c++
 include "config.pxi"
-from vector_pycpptraj cimport vector as cppvector
+from pycpptraj.vector_pycpptraj cimport vector as cppvector
 #from libcpp.set cimport set
-from Atom cimport *
-from Residue cimport *
-from Molecule cimport *
-from ParameterTypes cimport *
-from AtomMask cimport *
-from Frame cimport *
-from FileName cimport *
+from pycpptraj.Atom cimport _Atom, Atom
+from pycpptraj.Residue cimport _Residue, Residue
+from pycpptraj.Molecule cimport _Molecule, Molecule
+from pycpptraj.ParameterTypes cimport *
+from pycpptraj.AtomMask cimport _AtomMask, AtomMask
+from pycpptraj.Frame cimport _Frame, Frame
+from pycpptraj.FileName cimport _FileName, FileName
+from pycpptraj.NameType cimport _NameType, NameType
+from pycpptraj.Box cimport _Box, Box, BoxType
 
 ctypedef cppvector[_Atom].const_iterator atom_iterator
 ctypedef cppvector[_Residue].const_iterator res_iterator

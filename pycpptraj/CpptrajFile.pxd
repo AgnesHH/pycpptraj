@@ -2,8 +2,8 @@
 
 from posix.unistd cimport off_t
 from libcpp.string cimport string
-from FileName cimport *
-from FileIO  cimport *
+from pycpptraj.FileName cimport *
+from pycpptraj.FileIO  cimport *
 
 cdef extern from "CpptrajFile.h":
     ctypedef enum AccessType "CpptrajFile::AccessType":

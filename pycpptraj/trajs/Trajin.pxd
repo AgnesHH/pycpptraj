@@ -1,6 +1,13 @@
 # distutils: language = c++
-from trajs.TrajectoryFile cimport *
-from ProgressBar cimport *
+#from pycpptraj.trajs.TrajectoryFile cimport *
+from libcpp.string cimport string
+from pycpptraj.ArgList cimport _ArgList, ArgList
+from pycpptraj.Frame cimport _Frame, Frame
+from pycpptraj.Box cimport _Box, Box
+from pycpptraj.ProgressBar cimport *
+from pycpptraj.trajs.TrajectoryIO cimport _TrajectoryIO, TrajectoryIO
+from pycpptraj.trajs.TrajectoryFile cimport _TrajectoryFile, TrajectoryFile
+from pycpptraj.Topology cimport _Topology, Topology
 
 
 cdef extern from "Trajin.h": 

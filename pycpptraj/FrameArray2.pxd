@@ -1,8 +1,8 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 from libcpp.string cimport string
-from datasets.DataSet_Coords cimport *
-from trajs.Trajin cimport *
+from pycpptraj.datasets.DataSet_Coords cimport *
+from pycpptraj.trajs.Trajin cimport *
 
 
 cdef extern from "DataSet_Coords_TRJ.h": 

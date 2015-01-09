@@ -11,6 +11,7 @@ def read(fname):
 
 rootname = os.getcwd()
 pycpptraj_home = rootname + "/pycpptraj/"
+#pycpptraj_home = rootname 
 #action_dir = pycpptraj_home + "/Action/"
 #ana_dir = pycpptraj_home + "/Analysis/"
 
