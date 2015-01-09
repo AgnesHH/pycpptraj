@@ -98,6 +98,9 @@ cdef class Trajin (TrajectoryFile):
         cdef int newstart
 
         newstart = start
+        if chunk + newstart >= self.size:
+            raise ValueError("start + chunk must be smaller than max frames")
+
         while newstart <= self.size-chunk:
             yield self[newstart:newstart+chunk].copy()
             newstart += chunk
