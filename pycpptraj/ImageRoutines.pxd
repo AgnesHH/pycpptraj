@@ -1,7 +1,7 @@
 # distutil: language = c++
 
-from Topology cimport *
-from ImageTypes cimport *
+from pycpptraj.Topology cimport *
+from pycpptraj.ImageTypes cimport *
 
 cdef extern from "ImageRoutines.h" namespace "Image":
     PairType CreatePairList(const _Topology&, Mode, _AtomMask)
