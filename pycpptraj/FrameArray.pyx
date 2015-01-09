@@ -89,7 +89,7 @@ cdef class FrameArray:
 
         frame.py_free_mem = False
 
-        if self.warning = True:
+        if self.warning:
             print "return a Frame or sub-Framearray view of this instance"
             print "Use with care. For safetype, use `copy` method"
 
