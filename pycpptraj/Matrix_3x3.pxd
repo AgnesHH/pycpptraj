@@ -1,5 +1,5 @@
 # distutils: language = c++
-from Vec3 cimport *
+from pycpptraj.Vec3 cimport *
 
 
 cdef extern from "Matrix_3x3.h": 

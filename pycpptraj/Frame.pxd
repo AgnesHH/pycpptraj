@@ -1,10 +1,12 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 from libcpp.string cimport string
-from Atom cimport *
-from AtomMask cimport *
-from Box cimport *
-from Topology cimport *
+from pycpptraj.Atom cimport _Atom, Atom
+from pycpptraj.AtomMask cimport _AtomMask, AtomMask
+from pycpptraj.Box cimport _Box, Box, BoxType
+from pycpptraj.Topology cimport _Topology, Topology
+from pycpptraj.Vec3 cimport _Vec3, Vec3
+from pycpptraj.Matrix_3x3 cimport _Matrix_3x3, Matrix_3x3
 
 ctypedef vector[float] CRDtype
 ctypedef vector[double] Darray

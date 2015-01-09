@@ -1,5 +1,5 @@
 # distutils: language = c++
-from Matrix_3x3 cimport *
+from pycpptraj.Matrix_3x3 cimport *
 
 
 cdef extern from "Box.h": 

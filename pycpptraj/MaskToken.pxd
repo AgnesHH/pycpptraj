@@ -1,6 +1,6 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from NameType cimport *
+from pycpptraj.NameType cimport *
 
 
 cdef extern from "MaskToken.h": 

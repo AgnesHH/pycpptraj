@@ -1,7 +1,7 @@
 # distutils: language = c++
 from libcpp.string cimport string
 from libcpp.vector cimport vector
-from vector_pycpptraj cimport vector as cppvector
+from pycpptraj.vector_pycpptraj cimport vector as cppvector
 
 cdef extern from "ArgList.h": 
     cdef cppclass _ArgList "ArgList":

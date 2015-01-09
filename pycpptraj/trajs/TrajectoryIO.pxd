@@ -1,10 +1,10 @@
 # distutils: language = c++
 from libcpp.string cimport string
-from Topology cimport *
-from ReplicaDimArray cimport *
-from CpptrajFile cimport *
-from ArgList cimport *
-from BaseIOtype cimport *
+from pycpptraj.Topology cimport *
+from pycpptraj.ReplicaDimArray cimport *
+from pycpptraj.CpptrajFile cimport *
+from pycpptraj.ArgList cimport *
+from pycpptraj.BaseIOtype cimport *
 
 
 cdef extern from "TrajectoryIO.h": 

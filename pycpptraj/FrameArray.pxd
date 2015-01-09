@@ -1,10 +1,10 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
-from Frame cimport *
-from Topology cimport Topology
-from Trajin_Single cimport Trajin_Single
-from trajs.Trajin cimport Trajin, _Trajin
-from FrameArray2 cimport FrameArray2
+from pycpptraj.Frame cimport *
+from pycpptraj.Topology cimport Topology
+from pycpptraj.Trajin_Single cimport Trajin_Single
+from pycpptraj.trajs.Trajin cimport Trajin, _Trajin
+from pycpptraj.FrameArray2 cimport FrameArray2
 
 ctypedef vector[_Frame].iterator iterator
 

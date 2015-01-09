@@ -1,9 +1,10 @@
 # distutils: language = c++
+from __future__ import absolute_import
 from libcpp.string cimport string
-from trajs.TrajectoryIO cimport *
-from FileTypes cimport *
-from ArgList cimport *
-from Topology cimport *
+from pycpptraj.trajs.TrajectoryIO cimport *
+from pycpptraj.FileTypes cimport *
+from pycpptraj.ArgList cimport *
+from pycpptraj.Topology cimport *
 
 
 cdef extern from "TrajectoryFile.h": 
