@@ -7,9 +7,9 @@ b = Box(boxin)
 
 print "Original box"
 print b.boxarr
-print b.Lengths
-print b.Center
-print "has box? ", b.HasBox()
+print b.lengths
+print b.center
+print "has box? ", b.has_box()
 print "b.TypeName: %s" % (b.TypeName)
 
 print
@@ -18,7 +18,7 @@ b.SetTruncOct()
 print b.boxarr
 print b.Lengths
 print b.Center
-print "has box? ", b.HasBox()
+print "has box? ", b.has_box()
 print "b.TypeName: %s" % (b.TypeName)
 print
 print "set and get properties"
@@ -56,5 +56,5 @@ for b in b2:
 #print b.boxarr
 #print b.Lengths
 #print b.Center
-#print "has box? ", b.HasBox()
+#print "has box? ", b.has_box()
 #print "b.TypeName: %s" % (b.TypeName)
