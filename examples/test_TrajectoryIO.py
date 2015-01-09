@@ -1,5 +1,4 @@
-from pycpptraj.TrajectoryIO import TrajectoryIO  as TrajIO
+from pycpptraj.trajs.TrajectoryIO import TrajectoryIO  as TrajIO
 
 trajio = TrajIO()
-trajio.title = "my title"
-print trajio.trajio
+print trajio
