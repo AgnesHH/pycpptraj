@@ -1,6 +1,6 @@
 # distutils: language = c++
 from pycpptraj.actions.Action cimport *
-from pycpptraj.actions.ImagedAction cimport *
+#from pycpptraj.actions.ImagedAction cimport *
 
 
 cdef extern from "Action_Distance.h": 
@@ -8,7 +8,7 @@ cdef extern from "Action_Distance.h":
         _Action_Distance() 
         _DispatchObject * Alloc() 
         void Help() 
-        int NOE_Args(_ArgList& argIn, double&, double&, double&)
+        #int NOE_Args(_ArgList& argIn, double&, double&, double&)
 
 
 cdef class Action_Distance (Action):
