@@ -3,11 +3,8 @@ include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 from libcpp.string cimport string
-from FileName cimport FileName
-from Frame cimport Frame
-from NameType cimport NameType
-from TopologyList cimport TopologyList
-#from parms.Parm_Amber import Parm_Amber
+from pycpptraj.TopologyList cimport TopologyList
+from pycpptraj.parms.Parm_Amber import Parm_Amber
 
 cdef class Topology:
     def __cinit__(self, *args):
