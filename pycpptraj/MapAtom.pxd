@@ -1,5 +1,5 @@
 # distutils: language = c++
-from Atom cimport *
+from pycpptraj.Atom cimport *
 
 
 cdef extern from "MapAtom.h": 
