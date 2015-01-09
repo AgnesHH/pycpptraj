@@ -1,5 +1,5 @@
 # distutils: language = c++
-from pycpptraj_utils cimport list_to_char_pp
+from pycpptraj._utils cimport list_to_char_pp
 from libcpp.vector cimport vector
 from libcpp.string cimport string
 

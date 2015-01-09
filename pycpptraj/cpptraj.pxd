@@ -2,7 +2,6 @@
 
 from libcpp.vector cimport vector
 from libcpp.string cimport string
-from CpptrajState cimport *
 
 cdef extern from "Cpptraj.h":
     ctypedef enum Mode "Cpptraj::Mode":
