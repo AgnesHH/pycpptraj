@@ -1,7 +1,7 @@
 Install libcpptraj
 ------------------
 
-* Downloading
+* Dơnloading cpptraj from either:
    * Official AmberTools: http://ambermd.org/AmberTools14-get.html
    * Development version: https://github.com/mojyt/cpptraj 
         (git clone https://github.com/mojyt/cpptraj)
