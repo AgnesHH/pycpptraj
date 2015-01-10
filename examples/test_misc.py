@@ -22,7 +22,7 @@ def test_1(self):
             anp[i, j] = farray[i].rmsd(farray[j])
     print anp
 
-genobj = iterload(top=top, traj="./data/md1_prod.Tc5b.x")
+genobj = iterload(top=top, fname="./data/md1_prod.Tc5b.x")
 print genobj.next()
 
 i = 0
@@ -30,5 +30,5 @@ for range in genobj:
     i += 1
 print i
 
-farray_gen = iterload(top=top, traj="./data/md1_prod.Tc5b.x", chunk=50)
-print  farray_gen.next()
+farraygen = iterload(top=top, fname="./data/md1_prod.Tc5b.x", chunk=50)
+print  farraygen.next()

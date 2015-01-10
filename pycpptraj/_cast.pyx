@@ -6,7 +6,12 @@ from pycpptraj.datasets.DataSet_MatrixDbl cimport DataSet_MatrixDbl, _DataSet_Ma
 from pycpptraj.datasets.DataSet cimport DataSet, _DataSet
 
 def cast_dataset(DataSet dset, dtype=None):
-    """create memory for DataSet instance"""
+    """create memory for DataSet instance
+    Parameters
+    ---------
+    dset : DataSet instance
+    dtype : str (default dtype=None)
+    """
     # TODO : how to combine?
     cdef DataSet_1D newset1D
     cdef DataSet_2D newset2D
