@@ -16,6 +16,7 @@ from pycpptraj.FrameList import FrameList
 from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.FrameArray import FrameArray as Trajectory
 from pycpptraj.trajs.Trajin import Trajin
+from pycpptraj.trajs.Trajout import Trajout
 from pycpptraj.TrajinList import TrajinList
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList
@@ -33,7 +34,7 @@ __all__ = ['Topology', 'TopologyList',
            'ArgList', 'CpptrajState', 
            'FrameList', 'Trajin_Single', 
            'DataSetList', 'DataFileList', 'ActionList',
-           'Trajin', 'TrajinList',
+           'Trajin', 'Trajout', 'TrajinList',
            'Trajectory',
            'TrajectoryReadOnly',
            'FrameArray2',

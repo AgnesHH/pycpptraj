@@ -5,7 +5,7 @@ from pycpptraj.Frame import Frame
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.actions.Action_Rmsd import Action_Rmsd
 from pycpptraj.Trajin_Single import Trajin_Single
-from pycpptraj.Trajin import Trajin
+from pycpptraj.trajs.Trajin import Trajin
 from pycpptraj.ArgList import ArgList
 from pycpptraj.Topology import Topology
 from pycpptraj.TopologyList import TopologyList
@@ -34,3 +34,4 @@ with ts:
 
 print ts[:10]
 print ts[50:100]
+print ts[100:50:-2]

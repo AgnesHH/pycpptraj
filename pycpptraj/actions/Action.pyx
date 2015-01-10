@@ -1,7 +1,4 @@
 # distutils: language = c++
-from ..Topology cimport Topology
-from ..Frame cimport Frame
-from ..FrameArray cimport FrameArray
 
 
 cdef class Action:
@@ -31,8 +28,7 @@ cdef class Action:
         #del self.baseptr
         pass
 
-    #def read_input(self, ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug=0):
-    def read_input(self, ArgList argIn, TopologyList toplist, 
+    def read_input(self, command='', top=TopologyList(),
                    FrameList flist=FrameList(), 
                    DataSetList dslist=DataSetList(), 
                    DataFileList dflist=DataFileList(), 
@@ -41,8 +37,23 @@ cdef class Action:
         temp doc: 
         Input: ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug):       
         """
-        return self.baseptr.Init(argIn.thisptr[0], toplist.thisptr, flist.thisptr, dslist.thisptr, dflist.thisptr,
-                debug)
+        cdef ArgList arglist
+        cdef TopologyList toplist
+
+        if isinstance(top, Topology):
+            toplist = TopologyList()
+            toplist.add_parm(top)
+        elif isinstance(top, TopologyList):
+            toplist = <TopologyList> top
+
+        if isinstance(command, basestring):
+            arglist = ArgList(<string> command)
+        elif isinstance(command, ArgList):
+            arglist = <ArgList> command
+
+        return self.baseptr.Init(arglist.thisptr[0], toplist.thisptr, 
+                       flist.thisptr, dslist.thisptr, dflist.thisptr,
+                       debug)
 
     def process(self, Topology oldtop, Topology newtop): 
         """
@@ -58,8 +69,7 @@ cdef class Action:
             newtop.py_free_mem = False
         return self.baseptr.Setup(oldtop.thisptr, &(newtop.thisptr))
 
-    #def do_action(self, int idx, Frame oldframe, Frame newframe):
-    def do_action(self, Frame frame, int idx=0):
+    def do_action(self, int idx, Frame oldframe=Frame(), Frame newframe=Frame()):
         """
         Input:
         ====
@@ -67,12 +77,12 @@ cdef class Action:
         frame :: Frame instance
         """
         # debug
-        #oldframe.py_free_mem = newframe.py_free_mem = False
-        frame.py_free_mem = False
+        oldframe.py_free_mem = newframe.py_free_mem = False
+        #oldframe.py_free_mem = False
         # got double-free memory error when not using above flag
         # end debug
         #return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
-        return self.baseptr.DoAction(idx, frame.thisptr, &(frame.thisptr))
+        return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
 
     def do_action_2(self, Frame frame, FrameArray farray=FrameArray(), int idx=0):
         """

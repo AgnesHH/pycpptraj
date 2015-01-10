@@ -2,6 +2,7 @@
 # setup.py will look at uncomment lines to "cythonize"
 ComplexArray
 trajs/Trajin
+trajs/Trajout
 ArgList
 DispatchObject
 magicmemoryview

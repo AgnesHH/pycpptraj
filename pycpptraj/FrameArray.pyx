@@ -9,8 +9,13 @@ from pycpptraj._utils cimport get_positive_idx
 from pycpptraj.Trajectory import Trajectory
 
 cdef class FrameArray:
-    def __cinit__(self, string fname='', top=Topology(), indices=None, bint warning=False):
-        self.top = top
+    def __cinit__(self, string fname='', top=None, indices=None, bint warning=False):
+
+        if isinstance(top, basestring):
+            self.top = Topology(top)
+        elif isinstance(top, Topology):
+            self.top = top
+
         self.warning = warning
         if not fname.empty():
             self.load(fname=fname, indices=indices)

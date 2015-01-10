@@ -1,4 +1,5 @@
 # distutils: language = c++
+from libcpp.string cimport string
 from pycpptraj.DispatchObject cimport _DispatchObject, DispatchObject
 from pycpptraj.ArgList cimport _ArgList, ArgList
 from pycpptraj.DataFileList cimport _DataFileList, DataFileList
@@ -8,6 +9,7 @@ from pycpptraj.TopologyList cimport _TopologyList, TopologyList
 from pycpptraj._FunctPtr cimport FunctPtr
 from pycpptraj.Topology cimport _Topology, Topology
 from pycpptraj.Frame cimport _Frame, Frame
+from pycpptraj.FrameArray cimport FrameArray
 
 cdef extern from "Action.h": 
     # Action.h
