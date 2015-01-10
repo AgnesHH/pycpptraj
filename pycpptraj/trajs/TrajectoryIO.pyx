@@ -51,13 +51,13 @@ cdef class TrajectoryIO (BaseIOtype):
     def has_temperature(self):
         return self.baseptr_1.HasT()
 
-    @property
-    def title(self):
-        return self.baseptr_1.Title()
+    #@property
+    #def title(self):
+    #    return self.baseptr_1.Title()
 
-    title.setter
-    def title(self, string tIn):
-        self.baseptr_1.SetTitle(tIn)
+    #title.setter
+    #def title(self, string tIn):
+    #    self.baseptr_1.SetTitle(tIn)
 
     def replica_dim(self):
         cdef ReplicaDimArray repdim = ReplicaDimArray()

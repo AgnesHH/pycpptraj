@@ -7,9 +7,8 @@ class TestTrajout(unittest.TestCase):
         farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
         frame0 = farray[0]
         trajout = Trajout()
-        #trajout.openfile(fname="test.pdb", top=farray.top, more_args="append")
-        trajout.openfile(fname="test.pdb", top=farray.top, more_args="append")
-        for i in range(100):
+        trajout.openfile(fname="test.x", top=farray.top, fmt="AMBERTRAJ")
+        for i in range(2):
             trajout.writeframe(i, farray.top, frame0)
         trajout.closefile()
 
@@ -17,7 +16,7 @@ class TestTrajout(unittest.TestCase):
         """test open file writen from test_0"""
         farray = FrameArray()
         farray.top = Topology('./data/Tc5b.top')
-        farray.load("test.pdb")
+        farray.load("test.x")
         print farray.size
         
 if __name__ == "__main__":

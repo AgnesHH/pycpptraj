@@ -18,6 +18,7 @@ cdef class FrameArray:
 
         self.warning = warning
         if not fname.empty():
+            # TODO : check if file exist
             self.load(fname=fname, indices=indices)
 
     def copy(self):

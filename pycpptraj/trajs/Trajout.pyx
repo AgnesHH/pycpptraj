@@ -9,7 +9,7 @@ cdef class Trajout:
     def __dealloc__(self):
         del self.thisptr
 
-    def openfile(self, string fname='', Topology top=None, string ftm="AMBERNETCDF", more_args=None):
+    def openfile(self, string fname='', Topology top=None, string fmt="AMBERNETCDF", more_args=None):
         cdef ArgList arglist
 
         if more_args:
@@ -20,9 +20,9 @@ cdef class Trajout:
                 arglist = <ArgList> more_args
             else:
                 raise ValueError()
-            return self.thisptr.InitTrajWrite(fname, arglist.thisptr[0], top.thisptr, TrajFormatDict[ftm])
+            return self.thisptr.InitTrajWrite(fname, arglist.thisptr[0], top.thisptr, TrajFormatDict[fmt])
         else:
-            return self.thisptr.InitTrajWrite(fname, top.thisptr, TrajFormatDict[ftm])
+            return self.thisptr.InitTrajWrite(fname, top.thisptr, TrajFormatDict[fmt])
 
     #def init_stdout_traj_write(self,ArgList, Topology *, TrajFormatType):
     #    pass
