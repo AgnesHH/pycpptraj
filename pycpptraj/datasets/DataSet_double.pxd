@@ -10,7 +10,8 @@ cdef extern from "DataSet_double.h":
         _DataSet_double() 
         _DataSet * Alloc() 
         double& operator[](size_t idx)
-        double operator[](size_t idx) const 
+        double& index_opr "operator[]"(size_t idx)
+        #double operator[](size_t idx) const 
         const vector[double]& Data() const 
         #void operator =(const vector[double]& rhs)
         void AddElement(double d)

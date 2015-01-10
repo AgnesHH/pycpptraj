@@ -7,7 +7,7 @@ from pycpptraj.TopologyList cimport TopologyList
 
 # Python level
 # use for write parm
-from pycpptraj.parms.Parm_Amber import Parm_Amber
+#from pycpptraj.parms.Parm_Amber import Parm_Amber
 
 cdef class Topology:
     def __cinit__(self, *args):
@@ -333,8 +333,8 @@ cdef class Topology:
         tmptop.thisptr = self.thisptr.modifyStateByMask(atm.thisptr[0])
         self.thisptr[0] = tmptop.thisptr[0]
 
-    def write_AmberParm(self, name):
-        Parm_Amber().write_parm(name, self)
+    #def write_AmberParm(self, name):
+    #    Parm_Amber().write_parm(name, self)
 
     def tag(self):
         return self.thisptr.Tag()

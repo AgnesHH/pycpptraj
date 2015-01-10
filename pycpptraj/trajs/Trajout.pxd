@@ -15,10 +15,10 @@ cdef extern from "Trajout.h":
         int InitEnsembleTrajWrite(const string&, const _ArgList&, _Topology *, TrajFormatType, int)
         int InitTrajWriteWithArgs(const string&, const char *, _Topology *, _TrajectoryFile::TrajFormatType)
         void EndTraj() 
-        int Write_Frame(int, _Topology *, const _Frame&)
+        int WriteFrame(int, _Topology *, const _Frame&)
         void PrintInfo(int) const 
         bint TrajIsOpen() const 
-        int Num_FramesProcessed() const 
+        int NumFramesProcessed() const 
 
 
 cdef class Trajout:

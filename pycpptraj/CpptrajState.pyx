@@ -3,18 +3,14 @@ from cython.operator cimport dereference as deref
 
 
 cdef class CpptrajState:
-    #cdef public TopologyList toplist
     """
-    Original cpptraj doc:
-    ====================
-
-    pycpptraj doc:
-    ============
     CpptrajState hold instances of:
     + TopologyList
     + FrameList (having reference frames)
     + DataSetList (having output data)
     + DataFileList
+
+    TODO : add_trajin from Trajin or FrameArray instance too
     """
     def __cinit__(self):
         self.thisptr = new _CpptrajState()

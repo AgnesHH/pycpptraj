@@ -17,22 +17,33 @@ cdef class DataSet_double (DataSet_1D):
 
     #def DataSet_double(self):
 
-    #def DataSet * Alloc(self):
+    def alloc(self):
+        '''return a memoryview as DataSet instane'''
+        cdef DataSet dset = DataSet()
+        dset.baseptr0 = self.thisptr.Alloc()
+        return dset
 
-    #def double operator[](self,size_t idx):
+    def __getitem__(self, int idx):
+        return self.thisptr.index_opr(idx)
+
+    def __setitem__(self, int idx, double value):
+        cdef double* ptr
+        ptr = &(self.thisptr.index_opr(idx))
+        ptr[0] = value
 
     #def double operator[](self,size_t idx):
 
     @property
     def data(self):
-        # 
         return self.thisptr.Data()
 
     #def void AddElement(self,double d):
 
     #def void Resize(self,size_t sizeIn):
 
-    #def size_t Size(self):
+    @property
+    def size(self):
+        return self.thisptr.Size()
 
     #def int Sync(self):
 
