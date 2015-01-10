@@ -32,7 +32,7 @@ with open("PYXLIST.txt", 'r') as f:
         if "#" not in line:
             pyxfiles.append(line.split("\n")[0])
 
-#shuffle(pyxfiles)
+shuffle(pyxfiles)
 
 USE_PYX = True
 if not USE_PYX:
