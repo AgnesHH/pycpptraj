@@ -9,15 +9,15 @@ cdef class Trajout:
     def __dealloc__(self):
         del self.thisptr
 
-    def openfile(self, string fname, Topology top, string ftm="AMBERNETCDF", *args):
+    def openfile(self, string fname='', Topology top=None, string ftm="AMBERNETCDF", more_args=None):
         cdef ArgList arglist
 
-        if args:
-            if isinstance(args[0], basestring):
-                inputstring = args[0]
+        if more_args:
+            if isinstance(more_args, basestring):
+                inputstring = more_args
                 arglist = <ArgList> ArgList(inputstring) 
-            elif isinstance(args[0], ArgList):
-                arglist = <ArgList> args[0]
+            elif isinstance(more_args, ArgList):
+                arglist = <ArgList> more_args
             else:
                 raise ValueError()
             return self.thisptr.InitTrajWrite(fname, arglist.thisptr[0], top.thisptr, TrajFormatDict[ftm])
