@@ -15,4 +15,4 @@ cdef class FrameArray:
     cdef public Topology top
 
     # used for warning memory view
-    cdef public warning 
+    cdef public bint warning 
