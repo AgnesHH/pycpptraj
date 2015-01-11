@@ -14,10 +14,21 @@ TRAJ2.top = TRAJ.top
 TRAJ2.load("./data/md1_prod.Tc5b.x")
 
 class TestFrameArray2(unittest.TestCase):
+    #@no_test
     def test_size_0(self):
         TRAJ_ = TrajectoryReadOnly()
         assert  TRAJ_.size == 0
 
+    ##@no_test
+    def test_addframe(self):
+        # TODO : does not add any Frame
+        # TRAJ2 is still 0
+        TRAJ2 = TrajectoryReadOnly()
+        TRAJ2.top = TRAJ.top.copy()
+        TRAJ2.append(TRAJ[0])
+        print TRAJ2.size
+
+    #@no_test
     def test_slice(self):
         farray0 = TRAJ[:10]
         farray1 = TRAJ[:10]
