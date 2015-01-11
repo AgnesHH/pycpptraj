@@ -3,6 +3,7 @@ import numpy as np
 from time import time
 from pycpptraj.base import *
 from pycpptraj.FrameArray2 import FrameArray2 as FrameArray2ReadOnly
+from pycpptraj.FrameArray2 import FrameArray2 as FrameArray2ReadOnly
 from decorator import no_test
 
 TRAJ = FrameArray2()

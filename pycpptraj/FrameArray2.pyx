@@ -57,6 +57,7 @@ cdef class FrameArray2(DataSet_Coords):
         return dset
 
     def load(FrameArray2 self, string fname, Topology top=Topology(), ArgList arglist=ArgList()):
+        """load TRJ from file"""
         if top.is_empty():
             if not self.top.is_empty():
                 top = self.top
@@ -67,7 +68,8 @@ cdef class FrameArray2(DataSet_Coords):
             self.top = top
         return self.thisptr.AddSingleTrajin(fname, arglist.thisptr[0], top.thisptr)
 
-    def add_input_trajin(self,Trajin trajin):
+    def addtraj(self, Trajin trajin):
+        """add Trajin instance"""
         self.thisptr.AddInputTraj(trajin.baseptr_1)
 
     @property
