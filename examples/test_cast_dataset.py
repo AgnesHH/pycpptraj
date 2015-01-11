@@ -1,7 +1,9 @@
 import unittest
 from pycpptraj.base import *
+from pycpptraj.decorators import no_test
 
 class Test(unittest.TestCase):
+    @no_test
     def test_0(self):
         # DataSet_Coords_TRJ class
         traj = TrajectoryReadOnly()
@@ -20,6 +22,7 @@ class Test(unittest.TestCase):
         print db.is_empty()
         #print dir(db)
 
+    @no_test
     def test_addtrajin(self):
         traj = TrajectoryReadOnly()
         traj.top = Topology("data/Tc5b.top")
@@ -30,13 +33,24 @@ class Test(unittest.TestCase):
         dset = traj.alloc()
         db = cast_dataset(dset, dtype="general")
         print db
-        #traj.add_traj
 
     def test_addtrajin_from_emptyTRJ(self):
         traj = TrajectoryReadOnly()
         traj.top = Topology("data/Tc5b.top")
+        traj.top.summary()
         trajin = Trajin_Single(fname="data/md1_prod.Tc5b.x", top=traj.top)
         traj.addtraj(trajin)
+        traj.addtraj(trajin)
+        traj.addtraj(trajin)
+        traj.addtraj(trajin)
+        traj.addtraj(trajin)
+        traj.addtraj(trajin)
+        traj.addtraj(trajin)
+        traj.addtraj(trajin)
+        traj.addtraj(trajin)
+        print traj[500]
+        print traj[932]
+        print traj.size
 
 if __name__ == "__main__":
     unittest.main()

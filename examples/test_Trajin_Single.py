@@ -25,7 +25,7 @@ top = Topology(topname)
 trajin = """
 """
 
-ts.load(mdx, top, ArgList("trajin 1 100 10"))
+ts.load(mdx, top)
 frame = Frame(ts.top.n_atoms)
 #ts.begin_traj()
 with ts:

@@ -2,11 +2,10 @@ import unittest
 import numpy as np
 from time import time
 from pycpptraj.base import *
-from pycpptraj.FrameArray2 import FrameArray2 as FrameArray2ReadOnly
-from pycpptraj.FrameArray2 import FrameArray2 as FrameArray2ReadOnly
+from pycpptraj.FrameArray2 import FrameArray2 as TrajectoryReadOnly
 from decorator import no_test
 
-TRAJ = FrameArray2()
+TRAJ = TrajectoryReadOnly()
 TRAJ.top = Topology("data/Tc5b.top")
 TRAJ.load("./data/md1_prod.Tc5b.x")
 
@@ -15,6 +14,22 @@ TRAJ2.top = TRAJ.top
 TRAJ2.load("./data/md1_prod.Tc5b.x")
 
 class TestFrameArray2(unittest.TestCase):
+    def test_size_0(self):
+        TRAJ_ = TrajectoryReadOnly()
+        assert  TRAJ_.size == 0
+
+    def test_slice(self):
+        farray0 = TRAJ[:10]
+        farray1 = TRAJ[:10]
+
+        farray0[0][0] = 10.
+        print farray0[0][0]
+        print farray1[0][0]
+        # make sure that farray0 and farray1 are NOT views of TRAJ[:10]
+        assert farray0[0][0] == 10.
+        assert farray0[0][0] != farray1[0][0]
+
+    #@no_test
     def test_indices_0(self):
         # FIXME : incorrect memoryview when using TRAJ2[0].buffer
         # why?  TRAJ2[0] will return a temp Frame instance, if we don't hold this instance, 
@@ -42,7 +57,7 @@ class TestFrameArray2(unittest.TestCase):
         frame.buffer
         print "end test buffer of Frame"
 
-    @no_test
+    #@no_test
     def test_indices_1(self):
         """test repeating indexing
         """
@@ -66,15 +81,16 @@ class TestFrameArray2(unittest.TestCase):
         print frame0_0.coords_copy()[:10]
         #assert frame0_0_arr[:10] == np.array(frame0[:10])
 
-    @no_test
+    #@no_test
     def test_indices(self):
         """play with frame and traj[0] (frame = traj[0])"""
         traj = TRAJ
+        print traj.size
         frame = traj[0]
         print frame
         print traj[0]
-        print frame.coords_copy()[:10]
-        print traj[0].coords_copy()[:10]
+        print frame.coords[:10]
+        print traj[0].coords[:10]
 
         print "make sure frame is not an alias of traj[0]"
         assert frame != traj[0]
@@ -86,12 +102,15 @@ class TestFrameArray2(unittest.TestCase):
 
         print "make sure frame.buffer is equal (but not an alias) of traj[0]"
         frame_arr = np.asarray(frame.buffer)
-        traj0_arr = np.asarray((traj[0]).buffer)
-        print frame_arr[:10]
-        print traj0_arr[:10]
-        print np.testing.assert_almost_equal(frame_arr, traj0_arr, decimal=3)
 
-    @no_test
+        # can not make buffer view for traj0_arr since `traj[0]` will create 
+        # a temp Frame instance, when this instance is deallocated, the buffer is gone
+        # traj0_arr = np.asarray((traj[0]).buffer)
+        print frame_arr[:10]
+        # print traj0_arr[:10]
+        #np.testing.assert_almost_equal(frame_arr, traj0_arr, decimal=3)
+
+    #@no_test
     def test_strip_atoms(self):
         farray = FrameArray()
         #farray.get_frames(TRAJ, update_top=True)
@@ -101,7 +120,7 @@ class TestFrameArray2(unittest.TestCase):
         print time() - t0
         print farray.size
 
-    @no_test
+    #@no_test
     def test_general(self):
         traj = FrameArray2()
         traj2 = FrameArray2()

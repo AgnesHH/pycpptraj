@@ -10,6 +10,7 @@ from pycpptraj.datasets.DataSet_Coords cimport _DataSet_Coords, DataSet_Coords
 from pycpptraj.trajs.Trajin cimport _Trajin, Trajin
 from pycpptraj.datasets.DataSet cimport _DataSet, DataSet
 from pycpptraj.datasets.DataSet_1D cimport _DataSet_1D, DataSet_1D
+from pycpptraj._FunctPtr cimport FunctPtr
 
 
 cdef extern from "DataSet_Coords_TRJ.h": 

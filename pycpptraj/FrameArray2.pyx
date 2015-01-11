@@ -1,4 +1,8 @@
 # distutils: language = c++
+from pycpptraj.trajs.Trajin cimport Trajin
+from pycpptraj.Trajin_Single cimport Trajin_Single
+from pycpptraj.FrameArray cimport FrameArray
+from pycpptraj._utils cimport get_positive_idx
 
 
 cdef class FrameArray2(DataSet_Coords):
@@ -34,17 +38,72 @@ cdef class FrameArray2(DataSet_Coords):
             self.thisptr._GetFrame(i, frame.thisptr[0])
             yield frame
 
-    def __getitem__(FrameArray2 self, int idx):
-        """return a copy of Frame
-        NOTE : self[idx].buffer does not work (got zero coords if using
-        np.asarray(self[idx]) where `self` is FrameArray2 instance
-        ). Solution: creat a frame instance to hold self[idx], like frame = self[ixd]. 
-        Now you can use memoryview
-        """
+    def __getitem__(FrameArray2 self, idxs):
+        # TODO : same as Trajin class
+        # should combine or inherit or ?
+        # return either a Frame instance or FrameArray instance
+        
+
         cdef Frame frame
+        cdef FrameArray farray
+        cdef int start, stop, step
+        cdef int i
+        cdef int idx_1
+
         frame = self.allocate_frame()
-        self.thisptr._GetFrame(idx, frame.thisptr[0])
-        return frame
+
+        frame.py_free_mem = True
+
+        if self.size == 0:
+            raise ValueError("Your FrameArray is empty, how can I index it?")
+        if not isinstance(idxs, slice):
+            idx_1 = get_positive_idx(idxs, self.size)
+            # raise index out of range
+            if idxs != 0 and idx_1 == 0:
+                # need to check if array has only 1 element. 
+                # arr[0] is  arr[-1]
+                if idxs != -1:
+                    raise ValueError("index is out of range")
+            # get memoryview
+            self.thisptr._GetFrame(idx_1, frame.thisptr[0])
+            return frame
+        else:
+            # creat a subset array of `FrameArray`
+            farray = FrameArray()
+            farray.top = self.top
+            if idxs.step == None:
+                step = 1
+            else:
+                step = idxs.step
+            if idxs.stop == None:
+                stop = self.size
+            else:
+                stop = idxs.stop
+            if idxs.start == None:
+                start = 0
+            else:
+                start = idxs.start
+
+            for i in range(start, stop, step):
+                # turn `copy` to `False` to have memoryview
+                farray.append(self[i], copy=True)
+            return farray
+
+    def __setitem(self, int idx, value):
+        raise NotImplementedError("Read only")
+
+#    def __getitem__(FrameArray2 self, int idx):
+#        """return a copy of Frame
+#        NOTE : self[idx].buffer does not work (got zero coords if using
+#        np.asarray(self[idx]) where `self` is FrameArray2 instance). 
+#        Solution: creat a frame instance to hold self[idx], like frame = self[ixd]. 
+#        Now you can use memoryview
+#        TODO : fancy indexing
+#        """
+#        cdef Frame frame
+#        frame = self.allocate_frame()
+#        self.thisptr._GetFrame(idx, frame.thisptr[0])
+#        return frame
 
     def _recast(self):
         self.baseptr0 = <_DataSet*> self.thisptr
@@ -68,12 +127,27 @@ cdef class FrameArray2(DataSet_Coords):
             self.top = top
         return self.thisptr.AddSingleTrajin(fname, arglist.thisptr[0], top.thisptr)
 
-    def addtraj(self, Trajin trajin):
+#    def addtraj(self, Trajin trajin):
+#        """add Trajin instance"""
+#        self.thisptr.AddInputTraj(trajin.baseptr_1)
+
+    def addtraj(self, trajin):
         """add Trajin instance"""
-        self.thisptr.AddInputTraj(trajin.baseptr_1)
+        # use FunctPtr so that trajin could be anything classes having `baseptr_1`
+        # TODO : how to combine instead of using 2 temp variables?
+        cdef Trajin trajin_
+        cdef Trajin_Single trajinsingle
+
+        if isinstance(trajin, Trajin):
+            trajin_ = <Trajin> trajin
+            self.thisptr.AddInputTraj(trajin_.baseptr_1)
+        elif isinstance(trajin, Trajin_Single):
+            trajinsingle = <Trajin_Single> trajin
+            self.thisptr.AddInputTraj(trajinsingle.baseptr_1)
 
     @property
     def size(self):
+        # TODO : add checking self.size = 0
         return self.thisptr.Size()
 
     def info(self):
@@ -93,7 +167,8 @@ cdef class FrameArray2(DataSet_Coords):
 
 
     def set_crd(self,int idx, Frame fIn): 
-        pass
+        """"""
+        raise NotImplementedError()
 
     def get_frame(self, int idx, Frame frame_in, *args):
         cdef AtomMask atm_in

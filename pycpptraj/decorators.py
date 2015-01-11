@@ -20,3 +20,8 @@ def makesureABC(classname):
                 return func(self, *args, **kwd)
         return _inner
     return inner
+
+def no_test(func):
+    def _no_test(*args, **kwd):
+        pass
+    return _no_test

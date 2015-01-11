@@ -1,4 +1,5 @@
 # distutils: language = c++
+from pycpptraj.decorators import for_testing
 
 
 cdef class DataSet_Coords_TRJ(DataSet_Coords):
@@ -52,7 +53,7 @@ cdef class DataSet_Coords_TRJ(DataSet_Coords):
             self.top = top
         return self.thisptr.AddSingleTrajin(fname, arglist.thisptr[0], top.thisptr)
 
-    def add_input_trajin(self,Trajin trajin):
+    def add_input_trajin(self, Trajin trajin):
         self.thisptr.AddInputTraj(trajin.baseptr_1)
 
     @property
@@ -62,23 +63,12 @@ cdef class DataSet_Coords_TRJ(DataSet_Coords):
     def info(self):
         self.thisptr.Info()
 
-    # use base class?
-    #def allocate1D(self,size_t t):
-    #    self.thisptr.Allocate1D(t)
-
-    #def void Add(self,size_t, void *):
-
-    #def double Dval(self,size_t):
-
-    #def double Xcrd(self,size_t idx):
-
-    #def void WriteBuffer(self,CpptrajFile, size_t):
-
-
-    def set_crd(self,int idx, Frame fIn): 
-        pass
-
+    @for_testing
     def get_frame(self, int idx, Frame frame_in, *args):
+        """some test fails because I renamed this method"""
+        self.getframe(self, int idx, Frame frame_in, *args):
+
+    def getframe(self, int idx, Frame frame_in, *args):
         cdef AtomMask atm_in
         if self.top.n_atoms != frame_in.n_atoms:
             raise ValueError("n_atoms should be matched between Frame and Topology")
@@ -87,4 +77,3 @@ cdef class DataSet_Coords_TRJ(DataSet_Coords):
         else:
             atm_in = args[0]
             self.thisptr._GetFrame(idx, frame_in.thisptr[0], atm_in.thisptr[0])
-
