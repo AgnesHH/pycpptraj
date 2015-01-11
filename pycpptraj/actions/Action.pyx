@@ -16,7 +16,9 @@ cdef class Action:
 
     pycpptraj doc:
     =============
-    Adding get_action_from_functptr
+    Add new action: add to pycpptraj/actions/ folder 
+                    then update action in pycpptraj/actions/allactions
+                    (TODO : allactions.py might be changed)
     """
     def __cinit__(self):
         # don't directly create instance of this ABC class.
@@ -34,8 +36,16 @@ cdef class Action:
                    DataFileList dflist=DataFileList(), 
                    int debug=0):
         """
-        temp doc: 
-        Input: ArgList argIn, TopologyList toplist, FrameList flist, DataSetList dslist, DataFileList dflist, int debug):       
+        Parameters
+        ----------
+        command : str
+            Type of actions, mask, ... (Get help: Action_Box().help())
+        top : Topology or TopologyList instance, default=TopologyList()
+        flist : FrameList instance, default=FrameList()
+        dslist : DataSetList instance, default=DataSetList()
+        dflist : DataFileList instance, default=DataFileList()
+        debug : int, default=0
+            debug option from cpptraj. (Do we need this?)
         """
         cdef ArgList arglist
         cdef TopologyList toplist
@@ -55,26 +65,39 @@ cdef class Action:
                        flist.thisptr, dslist.thisptr, dflist.thisptr,
                        debug)
 
-    def process(self, Topology oldtop, Topology newtop): 
+    def process(self, Topology currenttop, Topology newtop=Topology()): 
         """
-        TODO : rename this method
-        Input: 
-        ====
-        top :: Topology instance
+        Process input and do initial setup
+        (TODO : add more doc)
+
+        Parameters:
+        ----------
+        currenttop : Topology instance, default (no default)
+        newtop : new Topology instance, default=Topology()
+            Need to provide this instance if you want to change topology
         """
         if "Strip" in self.__class__.__name__:
-            # since `Action_Strip` will copy a modified version of `oldtop` and 
+            # since `Action_Strip` will copy a modified version of `currenttop` and 
             # store in newtop, then __dealloc__ (from cpptraj)
             # we need to see py_free_mem to False
             newtop.py_free_mem = False
-        return self.baseptr.Setup(oldtop.thisptr, &(newtop.thisptr))
+        return self.baseptr.Setup(currenttop.thisptr, &(newtop.thisptr))
 
-    def do_action(self, int idx, Frame oldframe=Frame(), Frame newframe=Frame()):
+    def do_action(self, int idx=0, Frame oldframe=Frame(), Frame newframe=Frame()):
         """
-        Input:
-        ====
-        idx :: frame id
-        frame :: Frame instance
+        Perform action on Frame. Depend on what action you want to perform, you might get
+        newframe or get data from dslist or dflist...
+        TODO : add FrameArray
+        Parameters:
+        ----------
+        idx : int, defaul=0 
+            id of Frame
+        current_frame : Frame instance need to be processed, default=Frame() 
+        newframe : Frame instance, defaul=Frame()
+            if action change Frame, you need to have this
+        >>> from pycpptraj._cast import cast_dataset
+        >>> # dslist is DataSetList (list of DataSet instance)
+        >>> d0 = cast_dataset(dslist[0], dtype='DataSet_double')
         """
         # debug
         oldframe.py_free_mem = newframe.py_free_mem = False
@@ -82,32 +105,10 @@ cdef class Action:
         # got double-free memory error when not using above flag
         # end debug
         #return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
-        return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
-
-    def do_action_2(self, Frame frame, FrameArray farray=FrameArray(), int idx=0):
-        """
-        TEST
-        Input:
-        ====
-        idx :: frame id
-        frame :: Frame instance
-        """
-        # debug
-        #oldframe.py_free_mem = newframe.py_free_mem = False
-        #frame.py_free_mem = False
-        # got double-free memory error when not using above flag
-        # end debug
-        #return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
-        cdef Frame tmp1 = Frame(frame)
-        cdef Frame tmp2 = Frame()
-
-        # need to use this flag to avoid double-free mem
-        tmp2.py_free_mem = False
-
-        self.baseptr.DoAction(idx, tmp1.thisptr, &(tmp2.thisptr))
-        farray.append(tmp2)
+        self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
 
     def print_output(self):
+        """Do we need this?"""
         self.baseptr.Print()
 
     # Do we really need this method?

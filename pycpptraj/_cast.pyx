@@ -5,14 +5,16 @@ from pycpptraj.datasets.DataSet_double cimport DataSet_double, _DataSet_double
 from pycpptraj.datasets.DataSet_MatrixDbl cimport DataSet_MatrixDbl, _DataSet_MatrixDbl
 from pycpptraj.datasets.DataSet cimport DataSet, _DataSet
 
-def cast_dataset(DataSet dset, dtype=None):
-    """create memory for DataSet instance
+def cast_dataset(DataSet dset, dtype='dataset_double'):
+    """create memoryview for DataSet instance. 
+    DataSet instace is taken from DatatSetList
     Parameters
     ---------
     dset : DataSet instance
     dtype : str (default dtype=None)
+        {'dataset_double', 'dataset_matrixdbl', 'dataset_1d', 'dataset_2d'}
     """
-    # TODO : how to combine?
+    # TODO : rename data set
     cdef DataSet_1D newset1D
     cdef DataSet_2D newset2D
     cdef DataSet_double newset_double
