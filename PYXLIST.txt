@@ -7,9 +7,9 @@ ArgList
 DispatchObject
 magicmemoryview
 _FunctPtr
-_cast
+cast_dataset
 _utils
-_iterload
+iterload
 Atom
 AtomMask
 Box

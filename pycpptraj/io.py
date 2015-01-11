@@ -1,5 +1,5 @@
 from pycpptraj.base import *
-from pycpptraj._iterload import _iterload
+from pycpptraj.iterload import _iterload
 from pycpptraj.actions.Action_Strip import Action_Strip
 from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.FrameArray import FrameArray
