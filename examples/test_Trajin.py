@@ -1,6 +1,16 @@
-from pycpptraj.trajs.Trajin import Trajin
+import unittest
+from pycpptraj.base import *
 
-traj = Trajin()
+class TestTrajin(unittest.TestCase):
+    def test_0(self):
+        TRAJ = Trajin_Single(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        trajin = TRAJ.alloc()
+        print trajin.top
+        #print trajin.size
+        #print trajin[0]
+        #for frame in TRAJ:
+        #    pass
 
-print traj.max_frames
-print traj.check_finished()
+if __name__ == "__main__":
+    unittest.main()
+

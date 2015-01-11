@@ -25,14 +25,27 @@ cdef class Trajin_Single(Trajin):
         if self.thisptr:
             del self.thisptr
 
+    def alloc(self):
+        # TODO : get Segmentation fault error when:
+        # for traj in trajin:
+        #    pass
+        """return Trajin view"""
+        cdef Trajin trajin = Trajin()
+        trajin.baseptr_1 = <_Trajin*> self.thisptr
+        # re-cast baseptr0 too
+        # anyway to avoid re_casting?
+        trajin.baseptr0 = <_TrajectoryFile*> self.thisptr
+        # since we just get a view of `self`, we let `self` free memory for self.top
+        # don't let trajin.top do this
+        return trajin
+
     def gettrajinview(self):
+        # make alias name of self.alloc for easy understanding
         """return Trajin instance as a view of this class
         >>> trajin = Trajin_Single_Instance.getview_trajin()
         >>> DataSet_Coords_TRJ_Instance.addtraj(trajin)
         """
-        cdef Trajin trajin = Trajin()
-        trajin.baseptr_1 = <_Trajin*> self.thisptr
-        return trajin
+        return self.alloc()
 
     # Let base-class Trajin take care those methods?
     def load(Trajin_Single self, string fname='', Topology top=Topology(), 

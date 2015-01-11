@@ -32,7 +32,8 @@ cdef extern from "CpptrajState.h":
         int AddTrajin(_ArgList &, bint)
         int AddTrajin(const string&)
         int RunAnalyses()
-        const _TrajinList& InputTrajList()const 
+        #const _TrajinList& InputTrajList()const 
+        _TrajinList& InputTrajList()const 
         inline int AddTrajout(const _ArgList&)
         inline int AddTrajout(const string&)
         inline int AddReference(_ArgList &)

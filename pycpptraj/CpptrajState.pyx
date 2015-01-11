@@ -83,7 +83,8 @@ cdef class CpptrajState:
         trajlist.py_free_mem = False
         
         if self.thisptr:
-            trajlist.thisptr[0] = self.thisptr.InputTrajList()
+            #trajlist.thisptr[0] = self.thisptr.InputTrajList()
+            trajlist.thisptr = &(self.thisptr.InputTrajList())
             return trajlist
         else:
             raise MemoryError("")

@@ -24,6 +24,7 @@ cdef extern from "Trajin.h":
         int NreplicaDimension() const 
         # end virtual methods
 
+        @staticmethod
         int CheckFrameArgs(_ArgList &, int, int &, int &, int &)
         inline bint CheckFinished() 
         inline void UpdateCounters() 

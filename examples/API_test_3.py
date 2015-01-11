@@ -13,9 +13,19 @@ state.add_trajin("./data/md1_prod.Tc5b.x")
 state.add_trajout("./out.x netcdf")
 state.set_no_progress()
 #output = do_calculation(action=Action_Strip(), command="strip !@CA", state=state)
-do_calculation(action=Action_Distance(), command="distance :2@CA :3@CA", state=state)
-
-dslist = state.datasetlist
-print dslist.size
-
-d0 = dslist[0]
+TRAJ = Trajin_Single(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+trajinlist = state.get_trajinlist()
+print dir(trajinlist)
+#trajinlist.add_traj(TRAJ.alloc())
+trajin = trajinlist.front()
+trajinlist[0] = Trajin_Single(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+print trajinlist[0].size
+#trajin.top = Topology("./data/Tc5b.top")
+#trajin = Trajin()
+#print trajinlist.front().size
+#do_calculation(action=Action_Distance(), command="distance :2@CA :3@CA", state=state)
+#
+#dslist = state.datasetlist
+#print dslist.size
+#
+#d0 = dslist[0]

@@ -113,12 +113,11 @@ cdef class Trajin (TrajectoryFile):
         if self.is_empty():
             raise MemoryError("not allocate pointer yet or have empty traj")
 
-    def check_frame_args(self, ArgList argIn, int maxFrames):
+    @classmethod
+    def check_frame_args(cls, ArgList argIn, int maxFrames):
         cdef int startArg, stopArg, offsetArg 
-        self.check_allocated()
         startArg = stopArg = offsetArg = 0
-        # static method
-        self.baseptr_1.CheckFrameArgs(argIn.thisptr[0], maxFrames, startArg, stopArg, offsetArg)
+        _Trajin.CheckFrameArgs(argIn.thisptr[0], maxFrames, startArg, stopArg, offsetArg)
         return startArg, stopArg, offsetArg
 
     def check_finished(self):
