@@ -1,5 +1,14 @@
 """"""
 from __future__ import absolute_import
 from glob import glob
-from .allactions import *
+from pycpptraj.actions.allactions import *
+from pycpptraj.actions import allactions
 
+# get actionlist from `allactions module`
+#actionlist = [act if ('Action' in act) for act in allactions.__dict__.keys()]
+actionlist = []
+for act in allactions.__dict__.keys():
+    if 'Action' in act:
+        actionlist.append(act)
+
+__all__ += actionlist
