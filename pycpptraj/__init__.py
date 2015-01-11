@@ -21,7 +21,7 @@ from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList
 from pycpptraj.DataSetList import DataSetList
 
-from pycpptraj._cast import cast_dataset
+from pycpptraj.cast_dataset import cast_dataset
 
 try:
     amber_home = os.environ['AMBERHOME']

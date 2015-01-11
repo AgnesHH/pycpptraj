@@ -22,7 +22,7 @@ from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList
 from pycpptraj.DataSetList import DataSetList
 from pycpptraj.ActionList import ActionList
-from pycpptraj._cast import cast_dataset
+from pycpptraj.cast_dataset import cast_dataset
 from pycpptraj._iterload import _iterload
 from pycpptraj import cpptraj_dict
 from pycpptraj.parms.Parm_Amber import Parm_Amber
