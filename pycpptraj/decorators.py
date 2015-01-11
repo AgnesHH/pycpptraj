@@ -10,3 +10,11 @@ def iter_warning(funct):
             raise ValueError("empty object, cannot do iteration")
         return funct(*args, **kwd)
     return inner
+
+def makesureABC(func):
+    def inner(self, *args, **kwd):
+        if self.__class__.__name__ == 'Analysis':
+            raise NotImplementedError("This is Abstract Base Class")
+        else:
+            return func(self, *args, **kwd)
+    return inner

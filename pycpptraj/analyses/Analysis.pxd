@@ -1,5 +1,6 @@
 # distutils: language = c++
 # distutils: language = c++
+from libcpp.string cimport string
 from pycpptraj.DispatchObject cimport _DispatchObject, DispatchObject
 from pycpptraj.ArgList cimport _ArgList, ArgList
 from pycpptraj.DataFileList cimport _DataFileList, DataFileList
