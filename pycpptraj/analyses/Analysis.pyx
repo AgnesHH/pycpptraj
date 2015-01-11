@@ -34,7 +34,7 @@ cdef class Analysis:
         #del self.baseptr
         pass
 
-    @makesureABC
+    @makesureABC("Analysis")
     def read_input(self, command='', 
                    top=TopologyList(),
                    DataSetList dslist=DataSetList(), 
@@ -71,7 +71,7 @@ cdef class Analysis:
                        dflist.thisptr,
                        debug)
 
-    @makesureABC
+    @makesureABC("Analysis")
     def do_analysis(self):
         """
         Parameters: None

@@ -31,7 +31,7 @@ cdef class Action:
         #del self.baseptr
         pass
 
-    @makesureABC
+    @makesureABC("Action")
     def read_input(self, command='', top=TopologyList(),
                    FrameList flist=FrameList(), 
                    DataSetList dslist=DataSetList(), 
@@ -67,7 +67,7 @@ cdef class Action:
                        flist.thisptr, dslist.thisptr, dflist.thisptr,
                        debug)
 
-    @makesureABC
+    @makesureABC("Action")
     def process(self, Topology currenttop, Topology newtop=Topology()): 
         """
         Process input and do initial setup
@@ -86,7 +86,7 @@ cdef class Action:
             newtop.py_free_mem = False
         return self.baseptr.Setup(currenttop.thisptr, &(newtop.thisptr))
 
-    @makesureABC
+    @makesureABC("Action")
     def do_action(self, int idx=0, Frame oldframe=Frame(), Frame newframe=Frame()):
         """
         Perform action on Frame. Depend on what action you want to perform, you might get
@@ -111,7 +111,7 @@ cdef class Action:
         #return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
         self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
 
-    @makesureABC
+    @makesureABC("Action")
     def print_output(self):
         """Do we need this?"""
         self.baseptr.Print()
