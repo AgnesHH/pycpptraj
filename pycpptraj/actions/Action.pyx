@@ -1,4 +1,5 @@
 # distutils: language = c++
+from pycpptraj.decorators import makesureABC
 
 
 cdef class Action:
@@ -30,6 +31,7 @@ cdef class Action:
         #del self.baseptr
         pass
 
+    @makesureABC
     def read_input(self, command='', top=TopologyList(),
                    FrameList flist=FrameList(), 
                    DataSetList dslist=DataSetList(), 
@@ -65,6 +67,7 @@ cdef class Action:
                        flist.thisptr, dslist.thisptr, dflist.thisptr,
                        debug)
 
+    @makesureABC
     def process(self, Topology currenttop, Topology newtop=Topology()): 
         """
         Process input and do initial setup
@@ -83,6 +86,7 @@ cdef class Action:
             newtop.py_free_mem = False
         return self.baseptr.Setup(currenttop.thisptr, &(newtop.thisptr))
 
+    @makesureABC
     def do_action(self, int idx=0, Frame oldframe=Frame(), Frame newframe=Frame()):
         """
         Perform action on Frame. Depend on what action you want to perform, you might get
@@ -107,6 +111,7 @@ cdef class Action:
         #return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
         self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
 
+    @makesureABC
     def print_output(self):
         """Do we need this?"""
         self.baseptr.Print()
@@ -119,6 +124,3 @@ cdef class Action:
             raise ValueError("NULL pointer")
         act.baseptr = <_Action*> funct.ptr()
         return act
-
-    #def help(self):
-    #    raise NotImplementedError("Abstract Base Class")
