@@ -12,3 +12,4 @@ for act in allactions.__dict__.keys():
         actionlist.append(act)
 
 __all__ = actionlist + ['allactions',]
+__doc__ = "\n".join(__all__)
