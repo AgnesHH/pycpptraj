@@ -32,7 +32,7 @@ cdef class Action:
         pass
 
     @makesureABC("Action")
-    def read_input(self, command='', top=TopologyList(),
+    def read_input(self, command='', currenttop=TopologyList(),
                    FrameList flist=FrameList(), 
                    DataSetList dslist=DataSetList(), 
                    DataFileList dflist=DataFileList(), 
@@ -42,7 +42,7 @@ cdef class Action:
         ----------
         command : str
             Type of actions, mask, ... (Get help: Action_Box().help())
-        top : Topology or TopologyList instance, default=TopologyList()
+        currenttop : Topology or TopologyList instance, default=TopologyList()
         flist : FrameList instance, default=FrameList()
         dslist : DataSetList instance, default=DataSetList()
         dflist : DataFileList instance, default=DataFileList()
@@ -52,11 +52,11 @@ cdef class Action:
         cdef ArgList arglist
         cdef TopologyList toplist
 
-        if isinstance(top, Topology):
+        if isinstance(currenttop, Topology):
             toplist = TopologyList()
-            toplist.add_parm(top)
-        elif isinstance(top, TopologyList):
-            toplist = <TopologyList> top
+            toplist.add_parm(currenttop)
+        elif isinstance(currenttop, TopologyList):
+            toplist = <TopologyList> currenttop
 
         if isinstance(command, basestring):
             arglist = ArgList(<string> command)
@@ -68,7 +68,7 @@ cdef class Action:
                        debug)
 
     @makesureABC("Action")
-    def process(self, Topology currenttop, Topology newtop=Topology()): 
+    def process(self, Topology currenttop=Topology(), Topology newtop=Topology()): 
         """
         Process input and do initial setup
         (TODO : add more doc)
@@ -87,7 +87,7 @@ cdef class Action:
         return self.baseptr.Setup(currenttop.thisptr, &(newtop.thisptr))
 
     @makesureABC("Action")
-    def do_action(self, int idx=0, Frame oldframe=Frame(), Frame newframe=Frame()):
+    def do_action(self, int idx=0, Frame currentframe=Frame(), Frame newframe=Frame()):
         """
         Perform action on Frame. Depend on what action you want to perform, you might get
         newframe or get data from dslist or dflist...
@@ -96,7 +96,7 @@ cdef class Action:
         ----------
         idx : int, defaul=0 
             id of Frame
-        current_frame : Frame instance need to be processed, default=Frame() 
+        currentframe : Frame instance need to be processed, default=Frame() 
         newframe : Frame instance, defaul=Frame()
             if action change Frame, you need to have this
         >>> from pycpptraj._cast import cast_dataset
@@ -104,12 +104,12 @@ cdef class Action:
         >>> d0 = cast_dataset(dslist[0], dtype='DataSet_double')
         """
         # debug
-        oldframe.py_free_mem = newframe.py_free_mem = False
-        #oldframe.py_free_mem = False
+        currentframe.py_free_mem = newframe.py_free_mem = False
+        #currentframe.py_free_mem = False
         # got double-free memory error when not using above flag
         # end debug
-        #return self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
-        self.baseptr.DoAction(idx, oldframe.thisptr, &(newframe.thisptr))
+        #return self.baseptr.DoAction(idx, currentframe.thisptr, &(newframe.thisptr))
+        self.baseptr.DoAction(idx, currentframe.thisptr, &(newframe.thisptr))
 
     @makesureABC("Action")
     def print_output(self):
@@ -124,3 +124,18 @@ cdef class Action:
             raise ValueError("NULL pointer")
         act.baseptr = <_Action*> funct.ptr()
         return act
+
+    def master(self, command='', int idx=0,
+                   currenttop=TopologyList(),currentframe=Frame(),
+                   FrameList flist=FrameList(), 
+                   DataSetList dslist=DataSetList(), 
+                   DataFileList dflist=DataFileList(), 
+                   newtop=Topology(),
+                   newframe=Frame(),
+                   int debug=0):
+        """combined all 3 steps"""
+        self.read_input(command=command, currenttop=currenttop, 
+                        flist=flist, dslist=dslist,
+                        dflist=dflist, debug=debug)
+        self.process(currenttop=currenttop, newtop=newtop)
+        self.do_action(idx=idx, currentframe=currentframe, newframe=newframe)

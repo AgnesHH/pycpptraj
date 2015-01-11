@@ -23,10 +23,10 @@ cdef class Command:
     #cdef Token&& CmdToken(self, int idx):
     #    return self.thisptr.CmdToken(idx)
 
-    @classmethod
-    def load_crd(self, CpptrajState state, ArgList arglist, obj):
-        """temp doc: load_crd(self, CpptrajState state, ArgList arglist, obj)
-        obj :: action or analysis object
-        """
-        cdef FunctPtr func = <FunctPtr> obj.alloc()
-        LoadCrd(state.thisptr[0], arglist.thisptr[0], func.ptr)
+    #@classmethod
+    #def load_crd(cls, CpptrajState state, ArgList arglist, obj):
+    #    """temp doc: load_crd(self, CpptrajState state, ArgList arglist, obj)
+    #    obj :: action or analysis object
+    #    """
+    #    cdef FunctPtr func = <FunctPtr> obj.alloc()
+    #    _Command.LoadCrd(state.thisptr[0], arglist.thisptr[0], func.ptr)

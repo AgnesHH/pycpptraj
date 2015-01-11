@@ -3,6 +3,9 @@ include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 
+# python level
+from pycpptraj.cast_dataset import cast_dataset
+
 # can not import cpptraj_dict here
 # if doing this, we introduce circle-import since cpptraj_dict already imported
 # DataSet
@@ -94,16 +97,28 @@ cdef class DataSetList:
         cdef DataSet dset = DataSet()
         dset.baseptr0 = self.thisptr.GetSet(dsname, idx, attr_arg)
 
-    def get_dataset(self, string nameIn):
+    def get_dataset(self, string name="", idx=None, string dtype=""):
         """
         return DataSet instance
         Input:
         =====
         filename :: str
+        dtype : str
+            Type of dataset ('double', 'matrix', '1D', '2D')
         """
         cdef DataSet dset = DataSet()
-        dset.baseptr0 = self.thisptr.GetDataSet(nameIn)
-        return dset
+        if not name.empty() and idx is not None:
+            raise ValueError("name and idx must not be set at the same time")
+        else:
+            if not name.empty():
+                dset.baseptr0 = self.thisptr.GetDataSet(name)
+            if idx is not None:
+                dset = self[idx]
+            if dtype.empty():
+                return dset
+            else:
+                return cast_dataset(dset, dtype=dtype)
+
 
     def get_multiple_sets(self, string s):
         """TODO: double-check cpptraj"""
@@ -137,7 +152,7 @@ cdef class DataSetList:
     def add_copy_of_set(self, DataSet dset):
         self.thisptr.AddCopyOfSet(dset.baseptr0)
 
-    def list(self):
+    def printlist(self):
         self.thisptr.List()
 
     #def find_set_of_type(self, string fname, string key):

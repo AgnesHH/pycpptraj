@@ -11,6 +11,7 @@ from pycpptraj.AtomMask cimport _AtomMask, AtomMask
 cdef extern from "DataSet_Coords_CRD.h": 
     cdef cppclass _DataSet_Coords_CRD "DataSet_Coords_CRD" (_DataSet_Coords):
         _DataSet_Coords_CRD() 
+        @staticmethod
         _DataSet * Alloc() 
         size_t Size() const 
         int Sync() 

@@ -1,15 +1,44 @@
 import unittest
 from pycpptraj.base import *
 from pycpptraj.actions.Action_Strip import Action_Strip
+from pycpptraj import allactions
 from pycpptraj.actions import Action
 from pycpptraj.misc import strip
 from pycpptraj.Trajin_Single import Trajin_Single
+from pycpptraj.decorators import no_test
 
 print dir(Action_Strip())
 
 farray = FrameArray(top=Topology("./data/Tc5b.top"), fname='data/md1_prod.Tc5b.x')
 
 class TestStrip(unittest.TestCase):
+    def test_master(self):
+        top = Topology("./data/Tc5b.top")
+        newtop = top.copy()
+        frame0 = farray[0].copy()
+        newframe = Frame()
+        dslist = DataSetList()
+        act = Action_Strip()
+        act_surf = allactions.Action_Surf()
+        act.master(command="strip !@CA", 
+                   currenttop=top, 
+                   dslist=dslist,
+                   currentframe=frame0, 
+                   newframe=newframe, 
+                   newtop=newtop)
+        print newframe.size
+        print newframe.n_atoms
+        print newtop.n_atoms
+
+        act_surf.master(command="surf @CA", 
+                        currenttop=top, 
+                        dslist=dslist,
+                        currentframe=frame0, 
+                        )
+        d0 = dslist.get_dataset(idx=0, dtype='general')
+        print d0.data
+
+    @no_test
     def test_0(self):
         print "newtop"
         farray0 = farray.copy()

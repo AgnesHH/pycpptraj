@@ -13,31 +13,12 @@ cdef class DataSet_Coords_CRD (DataSet_Coords):
 
     #def DataSet_Coords_CRD(self):
 
-    #def DataSet * Alloc(self):
+    @classmethod
+    def alloc(self):
+        cdef DataSet dset = DataSet()
+        dset.baseptr0 = _DataSet_Coords_CRD.Alloc()
+        return dset
 
     @property
     def size(self):
         return self.thisptr.Size()
-
-    #def int Sync(self):
-
-    #def void Info(self):
-
-    #def int Allocate1D(self,size_t):
-
-    #def void Add(self,size_t, void *):
-
-    #def double Dval(self,size_t):
-
-    #def double Xcrd(self,size_t idx):
-
-    #def void WriteBuffer(self,CpptrajFile, size_t):
-
-    #def  void AddFrame(self, Frame fIn):
-
-    #def  void GetFrame(self,int idx, Frame fIn):
-
-    #def  void GetFrame(self,int idx, Frame fIn, AtomMask mIn):
-
-    #def  void SetCRD(self,int idx, Frame fIn):
-
