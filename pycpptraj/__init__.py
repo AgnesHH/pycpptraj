@@ -23,7 +23,13 @@ from pycpptraj.DataSetList import DataSetList
 
 from pycpptraj.cast_dataset import cast_dataset
 
+# actions
+from pycpptraj.actions import allactions
+from pycpptraj.analyses import allanalyses
+
 try:
     amber_home = os.environ['AMBERHOME']
 except:
     raise EnvironmentError("must set AMBERHOME")
+
+__all__ = base.__all__ + allactions + allanalyses 
