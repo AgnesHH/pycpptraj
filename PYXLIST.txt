@@ -156,3 +156,5 @@ actions/Action_Volmap
 actions/Action_Watershell
 DataFile
 analyses/Analysis_Matrix
+analyses/Analysis_Rmsd2d
+analyses/Analysis_Lifetime

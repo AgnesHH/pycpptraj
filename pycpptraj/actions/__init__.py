@@ -11,4 +11,4 @@ for act in allactions.__dict__.keys():
     if 'Action' in act:
         actionlist.append(act)
 
-__all__ = actionlist
+__all__ = actionlist + ['allactions',]

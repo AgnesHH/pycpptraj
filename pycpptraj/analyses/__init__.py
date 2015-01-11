@@ -10,4 +10,4 @@ for act in allanalyses.__dict__.keys():
     if 'Analysis' in act:
         analysislist.append(act)
 
-__all__ = analysislist
+__all__ = analysislist + ['allanalyses', ]
