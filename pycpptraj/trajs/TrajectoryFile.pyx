@@ -14,6 +14,7 @@ cdef class TrajectoryFile:
         self._top = Topology()
 
         # let cpptraj free memory for self._top
+        # Really?
         self._top.py_free_mem = False
 
         # we don't need to initialize self._top here
@@ -26,13 +27,16 @@ cdef class TrajectoryFile:
         # ABC
         pass
 
-    def read_options(self):
-        self.baseptr0.ReadOptions()
+    @classmethod
+    def read_options(cls):
+        _TrajectoryFile.ReadOptions()
 
-    def write_options(self):
-        self.baseptr0.WriteOptions()
+    @classmethod
+    def write_options(cls):
+        _TrajectoryFile.WriteOptions()
 
-    def get_format(self, arg):
+    @classmethod
+    def get_format(cls, arg):
         """
         Return format
         Parameters
@@ -43,30 +47,33 @@ cdef class TrajectoryFile:
         cdef string s
         if isinstance(arg, ArgList):
             arglist = <ArgList> arg
-            return self.baseptr0.GetFormatFromArg(arglist.thisptr[0])
+            return _TrajectoryFile.GetFormatFromArg(arglist.thisptr[0])
         elif isinstance(arg, basestring):
             s = arg
-            return self.baseptr0.GetFormatFromString(s)
+            return _TrajectoryFile.GetFormatFromString(s)
 
-    def get_ext_for_type(self, string key):
+    @classmethod
+    def get_ext_for_type(cls, string key):
         """
         Parameters
         ----------
         value : str
         """
-        return self.baseptr0.GetExtensionForType(TrajFormatDict[key])
+        return _TrajectoryFile.GetExtensionForType(TrajFormatDict[key])
 
-    def get_type_from_ext(self, string e):
+    @classmethod
+    def get_type_from_ext(cls, string e):
         """
         Parameters
         ----------
         value : str
         """
-        ttype = self.baseptr0.GetTypeFromExtension(e)
+        ttype = _TrajectoryFile.GetTypeFromExtension(e)
         return get_key(ttype, TrajFormatDict)
 
-    def format_string(self, string key):
-        return self.baseptr0.FormatString(TrajFormatDict[key])
+    @classmethod
+    def format_string(cls, string key):
+        return _TrajectoryFile.FormatString(TrajFormatDict[key])
 
     def set_debug(self, int debug=0):
         self.baseptr0.SetDebug(debug)

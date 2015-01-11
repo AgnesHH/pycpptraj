@@ -3,7 +3,8 @@ from __future__ import absolute_import
 from libcpp.string cimport string
 from pycpptraj.trajs.TrajectoryIO cimport _TrajectoryIO, TrajectoryIO
 from pycpptraj.FileTypes cimport _FileTypes, FileTypes
-from pycpptraj.FileName cimport _FileName, FileName
+from pycpptraj.FileName cimport *
+from pycpptraj.FileTypes cimport AllocToken, KeyToken
 from pycpptraj.ArgList cimport _ArgList, ArgList
 from pycpptraj.Topology cimport _Topology, Topology
 
@@ -26,13 +27,24 @@ cdef extern from "TrajectoryFile.h":
         UNKNOWN_TRAJ "TrajectoryFile::UNKNOWN_TRAJ"
 
     cdef cppclass _TrajectoryFile "TrajectoryFile":
+        @staticmethod
+        AllocToken TF_AllocArray[] 
+        @staticmethod
+        KeyToken TF_KeyArray[]
         _TrajectoryFile ()
+        @staticmethod
         void ReadOptions ()
+        @staticmethod
         void WriteOptions ()
+        @staticmethod
         TrajFormatType GetFormatFromArg(_ArgList & a)
+        @staticmethod
         TrajFormatType GetFormatFromString(const string& s)
+        @staticmethod
         string GetExtensionForType(TrajFormatType t)
+        @staticmethod
         TrajFormatType GetTypeFromExtension(const string& e)
+        @staticmethod
         const char * FormatString(TrajFormatType tt)
         void SetDebug(int)
         void SetTrajFileName(const string&, bint)
@@ -40,23 +52,6 @@ cdef extern from "TrajectoryFile.h":
         _Topology * TrajParm ()const 
         const _FileName & TrajFilename ()const 
 
-
-TrajFormatType_dict = {
-        AMBERNETCDF : "AMBERNETCDF",
-        AMBERRESTARTNC : "AMBERRESTARTNC",
-        PDBFILE : "PDBFILE",
-        MOL2FILE : "MOL2FILE",
-        CIF : "CIF",
-        CHARMMDCD : "CHARMMDCD",
-        GMXTRX : "GMXTRX",
-        BINPOS : "BINPOS",
-        AMBERRESTART : "AMBERRESTART",
-        AMBERTRAJ : "AMBERTRAJ",
-        SQM : "SQM",
-        SDF : "SDF",
-        CONFLIB : "CONFLIB",
-        UNKNOWN_TRAJ : "UNKNOWN_TRAJ",
-}
 
 cdef class TrajectoryFile:
     cdef _TrajectoryFile* baseptr0
