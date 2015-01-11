@@ -15,7 +15,9 @@ cdef class DataSet_Coords_CRD (DataSet_Coords):
 
     #def DataSet * Alloc(self):
 
-    #def size_t Size(self):
+    @property
+    def size(self):
+        return self.thisptr.Size()
 
     #def int Sync(self):
 

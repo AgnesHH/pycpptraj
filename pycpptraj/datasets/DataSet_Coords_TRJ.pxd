@@ -16,6 +16,7 @@ cdef extern from "DataSet_Coords_TRJ.h":
     cdef cppclass _DataSet_Coords_TRJ "DataSet_Coords_TRJ" (_DataSet_Coords):
         _DataSet_Coords_TRJ() 
         #~_DataSet_Coords_TRJ() 
+        @staticmethod
         _DataSet * Alloc() 
         int AddSingleTrajin(const string&, _ArgList&, _Topology *)
         int AddInputTraj(_Trajin *)

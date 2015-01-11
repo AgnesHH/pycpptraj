@@ -12,9 +12,13 @@ cdef class Trajin_Single(Trajin):
 
         if fname:
             if top:
+                if isinstance(top, basestring):
+                    top_ = Topology(top)
+                elif isinstance(top, Topology):
+                    top_ = top.copy()
                 if not self.top.is_empty():
                     print "Repalce self.top with new provided top"
-                self.top = top.copy()
+                self.top = top_.copy()
             self.load(fname)
         
     def __dealloc__(self):

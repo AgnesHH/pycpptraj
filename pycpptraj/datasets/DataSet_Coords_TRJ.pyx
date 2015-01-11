@@ -26,34 +26,31 @@ cdef class DataSet_Coords_TRJ(DataSet_Coords):
             self.thisptr._GetFrame(i, frame.thisptr[0])
             yield frame
 
-    def __getitem__(DataSet_Coords_TRJ self, int idx):
-        cdef Frame frame
-        frame = self.allocate_frame()
-        self.thisptr._GetFrame(idx, frame.thisptr[0])
-        return frame
-
     def _recast(self):
         self.baseptr0 = <_DataSet*> self.thisptr
         self.baseptr_1 = <_DataSet_1D*> self.thisptr
         self.baseptr_2 = <_DataSet_Coords*> self.thisptr
 
-    def alloc(self):
+    @classmethod
+    def alloc(cls):
         cdef DataSet dset = DataSet()
-        dset.baseptr0 = self.thisptr.Alloc()
+        dset.baseptr0 = _DataSet_Coords_TRJ.Alloc()
         return dset
 
-    def load(DataSet_Coords_TRJ self, string fname, Topology top=Topology(), ArgList arglist=ArgList()):
+    def load(self, string fname, Topology top=Topology(), ArgList arglist=ArgList()):
         if top.is_empty():
             if not self.top.is_empty():
                 top = self.top
             else:
                 raise ValueError("need to have non-empty topology file")
+
         if self.top.is_empty() and not top.is_empty():
             print "assigning new non-empty Topology"
             self.top = top
         return self.thisptr.AddSingleTrajin(fname, arglist.thisptr[0], top.thisptr)
 
-    def add_input_trajin(self, Trajin trajin):
+    def addtrajin(self, Trajin trajin):
+        """add memoryview for input trajin"""
         self.thisptr.AddInputTraj(trajin.baseptr_1)
 
     @property
@@ -66,9 +63,10 @@ cdef class DataSet_Coords_TRJ(DataSet_Coords):
     @for_testing
     def get_frame(self, int idx, Frame frame_in, *args):
         """some test fails because I renamed this method"""
-        self.getframe(self, int idx, Frame frame_in, *args):
+        self.getframe(self, idx, frame_in, *args)
 
     def getframe(self, int idx, Frame frame_in, *args):
+        # TODO : use DataSet_Coords method?
         cdef AtomMask atm_in
         if self.top.n_atoms != frame_in.n_atoms:
             raise ValueError("n_atoms should be matched between Frame and Topology")

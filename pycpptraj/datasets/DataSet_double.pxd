@@ -8,6 +8,7 @@ from pycpptraj.CpptrajFile cimport _CpptrajFile, CpptrajFile
 cdef extern from "DataSet_double.h": 
     cdef cppclass _DataSet_double "DataSet_double" (_DataSet_1D):
         _DataSet_double() 
+        @staticmethod
         _DataSet * Alloc() 
         double& operator[](size_t idx)
         double& index_opr "operator[]"(size_t idx)

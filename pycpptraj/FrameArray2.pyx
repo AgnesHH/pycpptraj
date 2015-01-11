@@ -4,6 +4,9 @@ from pycpptraj.Trajin_Single cimport Trajin_Single
 from pycpptraj.FrameArray cimport FrameArray
 from pycpptraj._utils cimport get_positive_idx
 
+# experimental wrapperr for DataSet_Coords_TRJ class
+# see also ./datasets/DataSet_Coords_TRJ.pyx
+
 
 cdef class FrameArray2(DataSet_Coords):
     # TODO : how to change internal data for this cpptraj class
@@ -127,9 +130,8 @@ cdef class FrameArray2(DataSet_Coords):
             self.top = top
         return self.thisptr.AddSingleTrajin(fname, arglist.thisptr[0], top.thisptr)
 
-#    def addtraj(self, Trajin trajin):
-#        """add Trajin instance"""
-#        self.thisptr.AddInputTraj(trajin.baseptr_1)
+    def addframe(self, Frame frame):
+        self.thisptr.AddFrame(frame.thisptr[0])
 
     def addtraj(self, trajin):
         """add Trajin instance"""

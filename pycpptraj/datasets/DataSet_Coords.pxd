@@ -3,6 +3,8 @@ from pycpptraj.Topology cimport _Topology, Topology
 from pycpptraj.datasets.DataSet_1D cimport _DataSet_1D, DataSet_1D
 from pycpptraj.datasets.DataSet cimport _DataSet, DataSet, DataType
 from pycpptraj.Frame cimport _Frame, Frame
+from pycpptraj.FrameArray cimport FrameArray
+from pycpptraj.AtomMask cimport _AtomMask, AtomMask
 
 
 cdef extern from "DataSet_Coords.h": 
@@ -15,8 +17,8 @@ cdef extern from "DataSet_Coords.h":
         # virtual methods
         void AddFrame(const _Frame&) 
         void SetCRD(int, const _Frame&) 
-        #void GetFrame(int, _Frame&) 
-        #void GetFrame(int, _Frame&, const _AtomMask&) 
+        void GetFrame(int, _Frame&) 
+        void GetFrame(int, _Frame&, const _AtomMask&) 
         # end virtual methods
 
         void SetTopology(const _Topology&)

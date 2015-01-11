@@ -5,7 +5,7 @@ from pycpptraj.Frame cimport _Frame, Frame
 from pycpptraj.Topology cimport _Topology, Topology
 from pycpptraj.Trajin_Single cimport _Trajin_Single, Trajin_Single
 from pycpptraj.trajs.Trajin cimport _Trajin, Trajin
-from pycpptraj.FrameArray2 cimport FrameArray2
+#from pycpptraj.FrameArray2 cimport FrameArray2
 
 ctypedef vector[_Frame].iterator iterator
 

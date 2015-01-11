@@ -23,6 +23,8 @@ from pycpptraj.TrajinList import TrajinList
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList
 from pycpptraj.DataSetList import DataSetList
+from pycpptraj.datasets.DataSet_Coords_CRD import DataSet_Coords_CRD
+from pycpptraj.datasets.DataSet_Coords_TRJ import DataSet_Coords_TRJ
 from pycpptraj.ActionList import ActionList
 from pycpptraj.cast_dataset import cast_dataset
 from pycpptraj.iterload import _iterload

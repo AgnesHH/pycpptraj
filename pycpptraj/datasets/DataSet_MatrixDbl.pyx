@@ -14,7 +14,10 @@ cdef class DataSet_MatrixDbl (DataSet_2D):
 
     #def double operator[](self,size_t idx):
 
-    #def DataSet * Alloc(self):
+    def alloc(self):
+        cdef DataSet dset = DataSet()
+        dset.baseptr0 = _DataSet_MatrixDbl.Alloc()
+        return dset
 
     #def size_t Size(self):
 

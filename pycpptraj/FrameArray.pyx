@@ -137,7 +137,7 @@ cdef class FrameArray:
                 farray.append(self[i], copy=False)
             return farray
 
-    def __setitem__(FrameArray self, int idx, Frame other):
+    def __setitem__(self, int idx, Frame other):
         # TODO : add slice
         # make a copy
         if len(self) == 0:
@@ -264,7 +264,8 @@ cdef class FrameArray:
                     self.append(frame)
                 ts.end_traj()
 
-        elif isinstance(ts, FrameArray2) or isinstance(ts, FrameArray):
+        #elif isinstance(ts, FrameArray2) or isinstance(ts, FrameArray):
+        elif isinstance(ts, FrameArray):
             # TODO : rename FrameArray2
             # use try and except?
             if not indices:

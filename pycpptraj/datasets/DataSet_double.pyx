@@ -17,10 +17,11 @@ cdef class DataSet_double (DataSet_1D):
 
     #def DataSet_double(self):
 
-    def alloc(self):
+    @classmethod
+    def alloc(cls):
         '''return a memoryview as DataSet instane'''
         cdef DataSet dset = DataSet()
-        dset.baseptr0 = self.thisptr.Alloc()
+        dset.baseptr0 = _DataSet_double.Alloc()
         return dset
 
     def __getitem__(self, int idx):

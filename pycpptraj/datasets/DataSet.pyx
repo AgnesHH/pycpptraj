@@ -30,15 +30,6 @@ cdef class DataSet:
 
     #def DataSet(self,DataType, int, int, int):
 
-    # don't use this method here since DataSet_1D is sub-class
-    # (circular importing)
-    #def _recast(self, subclass=None):
-    #    """if DataSet has sub-classes, need to re-case pointers in some cases"""
-    #    if subclass == 'dataset_1d':
-    #        dset_1d = DataSet_1D()
-    #        dset_1d.thisptr[0] = (<_DataSet_1D*> self.baseptr0)[0]
-    #        return dset_1d
-
     def set_width(self,int widthIn):
         self.baseptr0.SetWidth(widthIn)
 
@@ -95,6 +86,11 @@ cdef class DataSet:
     @property
     def data_type(self):
         return get_key(self.baseptr0.Type(), DataTypeDict)
+
+    @property
+    def dtype(self):
+        """Using `dtype` keyword since this is commond term"""
+        return self.data_type
 
     @property
     def scalar_mode(self):

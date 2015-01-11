@@ -49,6 +49,7 @@ datasets/DataSet_3D
 datasets/DataSet_double
 datasets/DataSet_Coords
 datasets/DataSet_Coords_CRD
+datasets/DataSet_Coords_TRJ
 DataFileList
 #NetcdfFile
 ReferenceFrame

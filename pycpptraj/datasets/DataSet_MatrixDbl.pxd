@@ -9,7 +9,8 @@ ctypedef vector[double] Darray
 cdef extern from "DataSet_MatrixDbl.h": 
     cdef cppclass _DataSet_MatrixDbl "DataSet_MatrixDbl" (_DataSet_2D):
         _DataSet_MatrixDbl() 
-        double& operator[](size_t idx)
+        double& index_opr "operator[]"(size_t idx)
+        @staticmethod
         _DataSet * Alloc() 
         size_t Size() const 
         int Sync() 
