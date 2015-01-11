@@ -17,27 +17,19 @@ class TestStrip(unittest.TestCase):
         newtop = top.copy()
         frame0 = farray[0].copy()
         newframe = Frame()
-        dslist = DataSetList()
         act = Action_Strip()
         act_surf = allactions.Action_Surf()
-        act.master(command="strip !@CA", 
-                   currenttop=top, 
-                   dslist=dslist,
-                   currentframe=frame0, 
-                   newframe=newframe, 
-                   newtop=newtop)
-        print newframe.size
-        print newframe.n_atoms
-        print newtop.n_atoms
 
-        act_surf.master(command="surf @CA", 
-                        currenttop=top, 
-                        dslist=dslist,
-                        currentframe=frame0, 
-                        )
-        d0 = dslist.get_dataset(idx=0, dtype='general')
-        print d0.data
-
+        for i in range(10):
+            currentframe = farray[i]
+            newframe = Frame()
+            dslist = DataSetList()
+            act.master(command="strip !@CA", 
+                       currenttop=top, 
+                       dslist=dslist,
+                       currentframe=frame0, 
+                       newframe=newframe, 
+                       newtop=newtop)
     @no_test
     def test_0(self):
         print "newtop"
