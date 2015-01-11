@@ -15,6 +15,9 @@ cdef class FrameArray:
             self.top = Topology(top)
         elif isinstance(top, Topology):
             self.top = top
+        else:
+            # create empty topology
+            self.top = Topology()
 
         self.warning = warning
         if not fname.empty():
@@ -146,10 +149,11 @@ cdef class FrameArray:
 
     def __str__(FrameArray self):
         name = self.__class__.__name__
+        n_atoms = 0 if self.top.is_empty() else self.top.n_atoms
         tmps = """%s instance with %s frames, %s atoms/frame
                   ID = %s
                """ % (
-                name, self.size, self.top.n_atoms,
+                name, self.size, n_atoms,
                 hex(id(self))
                 )
         return tmps

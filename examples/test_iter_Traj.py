@@ -2,9 +2,12 @@ from pycpptraj.base import *
 from time import time
 
 traj = Trajectory()
+print traj
 top = Topology("data/Tc5b.top")
-traj.load("data/md1_prod.Tc5b.x", top)
-print traj.max_frames
+traj.top = top
+traj.load("data/md1_prod.Tc5b.x")
+print traj
+print traj.size
 farray = FrameArray()
 
 t0 = time()

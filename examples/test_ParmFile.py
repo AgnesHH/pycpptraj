@@ -1,10 +1,10 @@
-from pycpptraj.ParmFile import ParmFile
+from pycpptraj.parms.ParmFile import ParmFile
 from pycpptraj.Topology import Topology
 
 top = Topology()
 parm = ParmFile()
 
-fname = "./Tc5b.top"
+fname = "./data/Tc5b.top"
 
 print "Read topology file and dump to 'top'"
 parm.read_topology(top, fname, 1)
@@ -34,4 +34,3 @@ for i in range(304):
 #top.PrintAtomInfo("@CA")
 #top.PrintBondInfo("@C*")
 pfname = parm.parm_filename()
-print pfname.full()
