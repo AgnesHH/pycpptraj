@@ -1,7 +1,7 @@
 # distutils: language = c++
-from DataSet_MatrixDbl cimport *
-from Frame cimport *
-from Analysis cimport *
+from pycpptraj.datasets.DataSet_MatrixDbl cimport *
+from pycpptraj.Frame cimport *
+from pycpptraj.analyses.Analysis cimport *
 
 
 cdef extern from "DataSet_Modes.h": 

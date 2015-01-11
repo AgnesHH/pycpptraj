@@ -1,16 +1,22 @@
 # distutils: language = c++
+from cython.operator cimport dereference as deref
 
-from CpptrajStdio cimport *
-from Analysis_Integrate_py cimport *
 
-cdef class Analysis_Integrate:
-    cdef _Analysis_Integrate  *thisptr
-
+cdef class Analysis_Integrate (Analysis):
     def __cinit__(self):
-        self.thisptr = new _Analysis_Integrate()
+        self.baseptr = <_Analysis*> new _Analysis_Integrate()
+        self.thisptr = <_Analysis_Integrate*> self.baseptr
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.baseptr is not NULL:
+            del self.baseptr
 
-    def Help(self):
-        self.Help(self)
+    def alloc(self):
+        """return a function-pointer object to be used with AnalysisList class
+        """
+        cdef FunctPtr func = FunctPtr()
+        func.ptr = &(self.thisptr.Alloc)
+        return func
+        
+    def help(self):
+        self.thisptr.Help()

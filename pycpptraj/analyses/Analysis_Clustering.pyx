@@ -1,20 +1,22 @@
-from libcpp.string cimport string as cstring
-from Analysis_Clustering cimport *
+# distutils: language = c++
+from cython.operator cimport dereference as deref
 
-cdef class Analysis_Clustering:
-    cdef:
-        _Analysis_Clustering * thisptr
-        cstring maskexpr_
-        int sieve_
-        bint nofitrms_
-        bint useMass_
 
+cdef class Analysis_Clustering (Analysis):
     def __cinit__(self):
-        self.thisptr = new _Analysis_Clustering()
+        self.baseptr = <_Analysis*> new _Analysis_Clustering()
+        self.thisptr = <_Analysis_Clustering*> self.baseptr
 
     def __dealloc__(self):
-        del self.thisptr
+        if self.baseptr is not NULL:
+            del self.baseptr
 
-    def Help(self):
+    def alloc(self):
+        """return a function-pointer object to be used with AnalysisList class
+        """
+        cdef FunctPtr func = FunctPtr()
+        func.ptr = &(self.thisptr.Alloc)
+        return func
+        
+    def help(self):
         self.thisptr.Help()
-
