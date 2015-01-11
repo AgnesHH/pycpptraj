@@ -68,7 +68,7 @@ cdef class Topology:
 
         fname : {str}
 
-        if Topology instance is not empty, it will be stilled replace by new one
+        if Topology instance is not empty, it will be still replaced by new one
 
         # seriously why do we need this method?
         >>> top = Topology("./data/Tc5b.top")
