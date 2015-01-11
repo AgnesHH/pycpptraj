@@ -121,5 +121,5 @@ cdef class TrajinList:
     def max_frames(self):
         return self.thisptr.MaxFrames()
 
-    def list(self):
+    def printlist(self):
         self.thisptr.List()
