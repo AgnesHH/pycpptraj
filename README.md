@@ -38,7 +38,10 @@ Journal of Chemical Theory and Computation 2013 9 (7), 3084-3095
 
 Install
 -------
-- intructions in ./installs/
+- install libcpptraj:
+    ./installs/libcpptraj.txt 
+- installs pycpptraj:
+    ./installs/pycpptraj.txt
 
 Usage: 
 -----
