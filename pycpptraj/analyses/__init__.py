@@ -6,7 +6,7 @@ from pycpptraj.analyses import allanalyses
 
 # get analysislist from `allanalyses module`
 analysislist = []
-for act in allanalyses._dict__.keys():
+for act in allanalyses.__dict__.keys():
     if 'Analysis' in act:
         analysislist.append(act)
 
