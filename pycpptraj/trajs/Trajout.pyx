@@ -6,14 +6,8 @@ cdef class Trajout:
     def __cinit__(self, *args, **kwd):
         self.thisptr = new _Trajout()
 
-    def __init__(self, *args, **kwd):
-        # need to use wit __init__ to make this works
         if args or kwd:
-            print "init Trajout with *args, **kwd"
-            print args, kwd
             self.open(*args, **kwd)
-            print self.is_open()
-            print "end itni Trajout with *args, **kwd"
 
     def __dealloc__(self):
         del self.thisptr
@@ -23,6 +17,16 @@ cdef class Trajout:
 
     def __exit__(self, arg1, arg2, arg3):
         self.close()
+
+    @classmethod
+    def help(cls):
+        print "TrajFormat"
+        print TrajFormatDict.keys()
+
+    @classmethod
+    def formats(cls):
+        """return a list of possible format to be used with self.open"""
+        return TrajFormatDict.keys()
         
     def open(self, string fname='', Topology top=Topology(), string fmt="AMBERNETCDF", more_args=None):
         cdef ArgList arglist
@@ -46,7 +50,7 @@ cdef class Trajout:
     def close(self):
         self.thisptr.EndTraj()
 
-    def writeframe(self, int idx, Frame frame, Topology top):
+    def writeframe(self, int idx=0, Frame frame=Frame(), Topology top=Topology()):
         """write trajout for Frame with given Topology
         Parameters:
         ----------
