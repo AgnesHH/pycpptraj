@@ -572,5 +572,8 @@ cdef class Frame (object):
         if update_top:
             top.thisptr[0] = newtop.thisptr[0]
 
-    def strip_atoms(Frame self, Topology top, string mask, bint update_top=False, bint has_box=False):
+    def strip_atoms(Frame self, string mask, Topology top=Topology(), 
+                    bint update_top=False, bint has_box=False):
+        """strip_atoms(Frame self, string mask, Topology top=Topology(), 
+                       bint update_top=False, bint has_box=False)"""
         self._strip_atoms(top, mask, update_top, has_box)
