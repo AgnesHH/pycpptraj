@@ -8,11 +8,11 @@ from cython.operator cimport preincrement as incr
 cdef class Vec3:
     def __cinit__(self, *args):
         cdef Vec3 vec
-        self.thisptr = new _Vec3()
-        if args:
+        if not args:
+            self.thisptr = new _Vec3()
+        else:
             if len(args) == 1 and isinstance(args[0], Vec3):
                 vec = args[0]
-                del self.thisptr
                 self.thisptr = new _Vec3(vec.thisptr[0])
             else:
                 self.SetVec(*args)
@@ -35,7 +35,8 @@ cdef class Vec3:
     def SetVec(self, *args):
         """args = either array of 3 elements or x, y, z"""
         cdef double x, y, z
-        cdef double[:] X
+        cdef double[3] X
+
         if len(args) == 1:
             # array
             X = args[0]
