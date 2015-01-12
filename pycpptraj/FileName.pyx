@@ -14,12 +14,12 @@ cdef class FileName:
         fname = fname.split("/")[-1]
         return fname
 
-    def set_filename(self, mystring):
-        self.thisptr.SetFileName(mystring)
+    def set_filename(self, mystring, ext=False):
+        if ext:
+            self.thisptr.SetFileNameWithExpansion(mystring)
+        else:
+            self.thisptr.SetFileName(mystring)
 
-    def set_filename_with_expansion(self, mystring):
-        self.thisptr.SetFileNameWithExpansion(mystring)
-    
     def clear(self):
         self.thisptr.clear()
 
@@ -27,7 +27,7 @@ cdef class FileName:
         return self.thisptr.MatchFullOrBase(mystring)
 
     @property
-    def full_name(self):
+    def fullname(self):
         return self.thisptr.Full()
 
     @property
@@ -38,7 +38,7 @@ cdef class FileName:
         def __get__(self):
             return self.thisptr.Ext()
 
-    def empty(self):
+    def is_empty(self):
         return self.thisptr.empty()
 
     @property
