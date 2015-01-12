@@ -79,11 +79,11 @@ def fit(frame, ref=None):
 def write_output(fname, frames, top, ftm='AMBERTRAJ'):
     """write Frame or FrameArray"""
     trajout = Trajout()
-    trajout.openfile(fname=fname, top=top, fmt=ftm)
+    trajout.open(fname=fname, top=top, fmt=ftm)
     if isinstance(frames, Frame):
-        trajout.writeframe(0, top, frames)
+        trajout.writeframe(0, frame, top)
     elif isinstance(frames, FrameArray) or isinstance(frames, Trajin_Single):
         # assume that 0w
         for idx, frame in enumerate(frames):
-            trajout.writeframe(idx, top, frame)
-    trajout.closefile()
+            trajout.writeframe(idx, frame, top)
+    trajout.close()

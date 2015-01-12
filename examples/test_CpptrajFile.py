@@ -1,18 +1,19 @@
-import os
+import unittest
+from pycpptraj.base import *
 from pycpptraj.CpptrajFile import CpptrajFile
-tdict = CpptrajFile.typedict
 
-cfile = CpptrajFile()
+class TestCpptrajFile(unittest.TestCase):
+    def test_0(self):
+        # test "with" statement
+        with CpptrajFile("Tc5b.crd", 'r') as cfile:
+            print cfile.is_open()
+            print dir(cfile)
+            print cfile.nextline()
+            print cfile.nextline()
+            print cfile.nextline()
+            print cfile.file_size()/1000.
+            print cfile.mode
 
-fname = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/md1_prod.x"
-#print fname
-#status = cfile.OpenRead(fname)
-print cfile.typedict("FileType")[1]
-print cfile.typedict(tdict="CompressType")[1]
-print tdict("CompressType").keys()
-#print status
-#magic = cfile.Read('', 10)[0]
-#print magic
-#print cfile.IsCompressed()
-#print cfile.UncompressedSize()
-#cfile.CloseFile()
+if __name__ == "__main__":
+    unittest.main()
+

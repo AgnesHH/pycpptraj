@@ -1,4 +1,6 @@
 # distutils: language = c++
+from pycpptraj.cpptraj_dict import AccessDict
+from pycpptraj import cpptraj_dict
 
 
 cdef class CpptrajFile:
@@ -6,31 +8,44 @@ cdef class CpptrajFile:
     Original cpptraj doc:
     Class to abstract handling of basic file routines.
     """
-    def __cinit__(self, *args):
+    def __cinit__(self, *args, **kwd):
+        """
+        >>> cpptraj = CpptrajFile()
+        >>> cpptraj2 = CpptrajFile(cpptraj)
+        >>> cpptraj23 = CpptrajFile("test.dat", 'r')
+        >>> with CpptrajFile("test2.dat", 'r') as cfile:
+        >>>    pass
+        """
+
         cdef CpptrajFile cfile
-        if not args:
+        if not args and kwd:
             self.thisptr = new _CpptrajFile()
         else:
             if isinstance(args[0], CpptrajFile):
+                # ignore other options
                 cfile = args[0]
                 self.thisptr = new _CpptrajFile(cfile.thisptr[0])
+            else:
+                self.thisptr = new _CpptrajFile()
+                self.open(*args, **kwd)
 
     def __dealloc__(self):
         """ This is virtual method"""
         #del self.thisptr
         pass
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, arg1, arg2, arg3):
+        self.close()
+
     def open_read(self, string fname):
         cdef bint sucess
         cdef int result
-        result = self.thisptr.OpenRead(fname)
-        if result == 0:
-            sucess = True
-        else:
-            sucess = False
-        return sucess
+        self.thisptr.OpenRead(fname)
 
-    def setup_read(self, string fname, int debug):
+    def _setup_read(self, string fname, int debug):
         return self.thisptr.SetupRead(fname, debug)
 
     def open_write_numbered(self, int numIn):
@@ -42,7 +57,7 @@ cdef class CpptrajFile:
     def open_ensemble_write(self, string fname, int debug):
         return self.thisptr.OpenEnsembleWrite(fname, debug)
 
-    def setup_write(self, *args):
+    def _setup_write(self, *args):
         cdef string fname
         cdef FileType ftype
         cdef int debug
@@ -55,17 +70,33 @@ cdef class CpptrajFile:
             return self.thisptr.SetupWrite(fname, debug)
         else:
             raise ValueError()
-           
+
+    def open(self, string fname="", status='r'):
+        """just like Python file
+        >>> cpptraj = CpptrajFile()
+        >>> cpptraj.open("test.dat", 'r')
+        """
+        status = status.lower()
+        if status == 'r' or status == 'read': 
+            self.thisptr.OpenRead(fname)
+        elif status == 'a' or status == 'append':
+            self.thisptr.OpenAppend(fname)
+        elif status == 'w' or status == 'write':
+            self.thisptr.OpenWrite(fname)
+        else:
+            raise ValueError("wrong open status")
+
     def open_append(self, string fname):
         return self.thisptr.OpenAppend(fname)
 
     def open_ensemble_append(self, string fname, int debug):
         return self.thisptr.OpenEnsembleAppend(fname, debug)
 
-    def setup_append(self, string fname, int debug):
+    def _setup_append(self, string fname, int debug):
         return self.thisptr.SetupAppend(fname, debug)
 
-    def open_file(self, *args):
+    def openfile(self, *args):
+        # TODO : what this method does?
         cdef AccessType accessIn
         if not args:
             return self.thisptr.OpenFile()
@@ -73,23 +104,20 @@ cdef class CpptrajFile:
             accessIn =args[0]
             return self.thisptr.OpenFile(accessIn)
         
-    def close_file(self):
+    def close(self):
         self.thisptr.CloseFile()
-
-    # How to wrap Printf(char*, ...) C++ function in Cython?
-    # Explicitly put args?
-    #def Printf(self, char * formart, *args):
-    #    self.thisptr.Printf(formart, *args)
 
     def get_line(self):
         return self.thisptr.GetLine()
 
-    def next_line(self):
+    def nextline(self):
         # return char*
         return self.thisptr.NextLine()
 
-    def access(self):
-        return self.thisptr.Access()
+    @property
+    def mode(self):
+        key = cpptraj_dict.get_key(self.thisptr.Access(), AccessDict)
+        return key.lower()
 
     def compression(self):
         return self.thisptr.Compression()
@@ -110,17 +138,3 @@ cdef class CpptrajFile:
 
     def uncompressed_size(self):
         return self.thisptr.UncompressedSize()
-
-    # STATUS: NOT WORK RIGHT YET
-    #def Read(self, int size):
-    #    cdef char* magic
-    #    cdef int status
-    #    status = self.thisptr.Read(&magic, size)
-    #    return magic, status
-
-    #def Read(self, char* dummy='', int size):
-    #    cdef char* magic2
-    #    cdef int status
-    #    status = self.thisptr.Read(magic, size)
-    #    dummy = magic
-    #    return magic2, status

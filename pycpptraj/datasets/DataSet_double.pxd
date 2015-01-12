@@ -15,6 +15,7 @@ cdef extern from "DataSet_double.h":
         #double operator[](size_t idx) const 
         const vector[double]& Data() const 
         #void operator =(const vector[double]& rhs)
+        void assign_opr "operator =" (const vector[double]& rhs)
         void AddElement(double d)
         void Resize(size_t sizeIn)
         size_t Size() const 

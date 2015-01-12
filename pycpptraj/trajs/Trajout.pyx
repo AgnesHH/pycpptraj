@@ -3,14 +3,33 @@ from pycpptraj.cpptraj_dict import TrajFormatDict
 
 
 cdef class Trajout:
-    def __cinit__(self):
+    def __cinit__(self, *args, **kwd):
         self.thisptr = new _Trajout()
+
+    def __init__(self, *args, **kwd):
+        # need to use wit __init__ to make this works
+        if args or kwd:
+            print "init Trajout with *args, **kwd"
+            print args, kwd
+            self.open(*args, **kwd)
+            print self.is_open()
+            print "end itni Trajout with *args, **kwd"
 
     def __dealloc__(self):
         del self.thisptr
 
-    def openfile(self, string fname='', Topology top=None, string fmt="AMBERNETCDF", more_args=None):
+    def __enter__(self):
+        return self
+
+    def __exit__(self, arg1, arg2, arg3):
+        self.close()
+        
+    def open(self, string fname='', Topology top=Topology(), string fmt="AMBERNETCDF", more_args=None):
         cdef ArgList arglist
+
+        #if top.is_empty():
+        #    raise ValueError("empty topology")
+        print "test opening", fname, top
 
         if more_args:
             if isinstance(more_args, basestring):
@@ -20,27 +39,20 @@ cdef class Trajout:
                 arglist = <ArgList> more_args
             else:
                 raise ValueError()
-            return self.thisptr.InitTrajWrite(fname, arglist.thisptr[0], top.thisptr, TrajFormatDict[fmt])
+            self.thisptr.InitTrajWrite(fname, arglist.thisptr[0], top.thisptr, TrajFormatDict[fmt])
         else:
-            return self.thisptr.InitTrajWrite(fname, top.thisptr, TrajFormatDict[fmt])
+            self.thisptr.InitTrajWrite(fname, top.thisptr, TrajFormatDict[fmt])
 
-    #def init_stdout_traj_write(self,ArgList, Topology *, TrajFormatType):
-    #    pass
-
-    #def init_ensemble_traj_write(self, string, ArgList, Topology *, TrajFormatType, int):
-    #    pass
-
-    #def init_traj_write_with_args(self, string, char *, Topology *, fmt='unknown'):
-    #    pass
-
-    def closefile(self):
+    def close(self):
         self.thisptr.EndTraj()
 
-    def endtraj(self):
-        self.close()
-
-    def writeframe(self, int idx, Topology top, Frame frame):
-        """writeframe(int idx, Topology top, Frame frame)"""
+    def writeframe(self, int idx, Frame frame, Topology top):
+        """write trajout for Frame with given Topology
+        Parameters:
+        ----------
+        frame : Frame instance
+        top : Topology instance
+        """
         self.thisptr.WriteFrame(idx, top.thisptr, frame.thisptr[0])
 
     def print_info(self, int idx):
