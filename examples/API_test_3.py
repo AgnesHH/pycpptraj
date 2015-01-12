@@ -5,7 +5,6 @@ from pycpptraj.actions.Action_Strip import Action_Strip
 from pycpptraj.actions.Action_Distance import Action_Distance
 from test_API.TestAPI2 import create_state, do_calculation
 
-#state = create_state(top="./data/Tc5b.top", trajin="./data/md1_prod.Tc5b.x", ref=None)
 state = CpptrajState()
 state.toplist.add_parm("./data/Tc5b.top")
 state.add_trajin("./data/md1_prod.Tc5b.x")
@@ -20,12 +19,3 @@ print dir(trajinlist)
 trajin = trajinlist.front()
 trajinlist[0] = Trajin_Single(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
 print trajinlist[0].size
-#trajin.top = Topology("./data/Tc5b.top")
-#trajin = Trajin()
-#print trajinlist.front().size
-#do_calculation(action=Action_Distance(), command="distance :2@CA :3@CA", state=state)
-#
-#dslist = state.datasetlist
-#print dslist.size
-#
-#d0 = dslist[0]

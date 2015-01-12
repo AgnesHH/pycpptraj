@@ -1,6 +1,6 @@
 import numpy as np
 from pycpptraj import CpptrajState
-from pycpptraj._cast import cast_dataset
+from pycpptraj.cast_dataset import cast_dataset
 from pycpptraj import ArgList
 
 # load prmtop file
@@ -47,5 +47,5 @@ def do_calculation(action=None, input=None, state=None):
     """
     state.add_action(action, ArgList(input))
     state.run()
-    d1 = cast_dataset(state.datasetlist[0], dtype="dataset_double")
+    d1 = cast_dataset(state.datasetlist[0], dtype="general")
     return np.asarray(d1.data)
