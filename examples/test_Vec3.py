@@ -1,5 +1,5 @@
 from pycpptraj.Vec3 import Vec3
-from pycpptraj import DistRoutines as dist
+#from pycpptraj import DistRoutines as dist
 import numpy as np
 import unittest
 
