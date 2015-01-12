@@ -15,6 +15,7 @@ cdef class Vec3:
                 vec = args[0]
                 self.thisptr = new _Vec3(vec.thisptr[0])
             else:
+                self.thisptr = new _Vec3()
                 self.SetVec(*args)
 
     def __dealloc__(self):
