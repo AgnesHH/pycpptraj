@@ -189,10 +189,15 @@ cdef class Topology:
         return atlist
 
     @property
-    def residuelist(self):
+    def residuelist(self, mode='normal'):
         reslist = []
         for res in self.res_generator():
-            reslist.append(res)
+            if mode == 'normal':
+                # add resname
+                reslist.append(res.__str__())
+            else:
+                # add residue instance
+                reslist.append(res)
         return reslist
 
     def summary(self):

@@ -136,7 +136,7 @@ cdef class DataSetList:
         dset.baseptr0 = self.thisptr.AddSet(dtype, s, c)
         return dset
         
-    def add_set_idx(self, DataType inType, string nameIn, int idx):
+    def add_setidx(self, DataType inType, string nameIn, int idx):
         cdef DataSet dset = DataSet()
         dset.baseptr0 = self.thisptr.AddSetIdx(inType, nameIn, idx)
         if not dset.baseptr0:
