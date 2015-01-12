@@ -40,6 +40,7 @@ cdef class Trajout:
         self.close()
 
     def writeframe(self, int idx, Topology top, Frame frame):
+        """writeframe(int idx, Topology top, Frame frame)"""
         self.thisptr.WriteFrame(idx, top.thisptr, frame.thisptr[0])
 
     def print_info(self, int idx):
