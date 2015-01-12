@@ -35,7 +35,7 @@ cdef class Vec3:
     def SetVec(self, *args):
         """args = either array of 3 elements or x, y, z"""
         cdef double x, y, z
-        cdef double[3] X
+        cdef double[:] X
 
         if len(args) == 1:
             # array
