@@ -6,6 +6,7 @@ from pycpptraj import base
 from pycpptraj.misc import load, iterload
 
 # TODO : should we load those module here or use .base?
+from pycpptraj import io
 from pycpptraj.Frame import Frame
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.Topology import Topology

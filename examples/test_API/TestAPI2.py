@@ -1,6 +1,6 @@
 import numpy as np
 from pycpptraj import CpptrajState
-from pycpptraj._cast import cast_dataset
+from pycpptraj.cast_dataset import cast_dataset
 from pycpptraj import ArgList
 
 # load prmtop file

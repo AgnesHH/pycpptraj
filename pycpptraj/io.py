@@ -5,6 +5,8 @@ from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.Topology import Topology
 
+__all__ = ['load', 'iterload', 'write_output', 'write_parm']
+
 def iterload(top=None, fname=None, start=0, chunk=None):
     '''Iterately return Frame instance'''
     if not isinstance(top, Topology):
@@ -38,3 +40,11 @@ def write_output(fname, traj, top, ftm='AMBERTRAJ', indices=None):
         for idx, frame in enumerate(traj):
             trajout.writeframe(idx, top, frame)
     trajout.closefile()
+
+def write_parm(fname=None, top=None, parmtype='AMBER'):
+    if parmtype == 'AMBER':
+        from pycpptraj.parms.Parm_Amber import Parm_Amber
+        parm = Parm_Amber()
+        parm.write_parm(fname, top)
+    else:
+        raise NotImplementedError("not yet supported other programs besides AMBER")
