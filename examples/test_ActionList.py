@@ -1,28 +1,6 @@
 from copy import copy
 from pycpptraj.base import *
-#from pycpptraj.FrameList import FrameList
-#from pycpptraj import cpptraj_dict
-from pycpptraj.actions.Action_Strip import Action_Strip
-from pycpptraj.actions.Action_Distance import Action_Distance
-#from pycpptraj.TopologyList import TopologyList
-#from pycpptraj.DataFileList import DataFileList
-#from pycpptraj.DataSetList import DataSetList
-from pycpptraj.actions.Action_Dihedral import Action_Dihedral
-#from pycpptraj.Topology import Topology
-from pycpptraj.ParmFile import ParmFile
-#from pycpptraj.Frame import Frame
-#from pycpptraj.ReferenceFrame import ReferenceFrame
-#from pycpptraj.Trajin_Single import Trajin_Single 
-#from pycpptraj.ArgList import ArgList
-#from pycpptraj.AtomMask import AtomMask
-#from pycpptraj.FrameArray import FrameArray
-from pycpptraj.actions.Action_Rmsd import Action_Rmsd
-#from pycpptraj.ActionList import ActionList
-#from pycpptraj.CpptrajState import CpptrajState
-#from pycpptraj._FunctPtr import FunctPtr
-from pycpptraj.actions.Action import Action
-from pycpptraj.actions.Action_Strip import Action_Strip
-from pycpptraj.PointerVec import TopVec, FrameVec
+from pycpptraj import allactions
 
 top = Topology("./data/Tc5b.top")
 ref = ReferenceFrame()
@@ -46,8 +24,8 @@ rmsd reference out test.out :1-20@CA
 arglist = ArgList(input2)
 traj.load(mdx, top, arglist)
 alist = ActionList()
-armsd = Action_Rmsd()
-distact = Action_Distance()
+armsd = allactions.Action_Rmsd()
+distact = allactions.Action_Distance()
 toplist = TopologyList()
 toplist.add_parm("./data/Tc5b.top")
 framelist = FrameList()
@@ -60,7 +38,7 @@ for i in range(10):
 traj.end_traj()
 
 print "test ActionList"
-stripact = Action_Strip()
+stripact = allactions.Action_Strip()
 dsetlist = DataSetList()
 dflist = DataFileList()
 alist.add_action(stripact, ArgList("@H*"), toplist, framelist, dsetlist, dflist)
