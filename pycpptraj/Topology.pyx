@@ -291,7 +291,7 @@ cdef class Topology:
             return self.thisptr.ParmName()
         def __set__(self, name):
             # TODO : check
-            self.thisptr.SetParmName(name, FileName())
+            self.thisptr.SetParmName(name, FileName().thisptr[0])
 
     property GB_radiiset:
         def __get__(self):
