@@ -79,7 +79,9 @@ cdef class Topology:
         self = Topology(fname)
 
     def copy(self, *args):
-        """return a copy of 'self' or copy from 'other' to 'self'"""
+        """return a copy of 'self' or copy from 'other' to 'self'
+        TODO : add more doc
+        """
         cdef Topology tmp
         cdef Topology other
 
@@ -95,7 +97,7 @@ cdef class Topology:
 
     def __getitem__(self, int idx):
         """
-        return Atom instance:w
+        return Atom instance
 
         TODO : return either atoms or residues 
 
@@ -287,6 +289,9 @@ cdef class Topology:
     property parm_name:
         def __get__(self):
             return self.thisptr.ParmName()
+        def __set__(self, name):
+            # TODO : check
+            self.thisptr.SetParmName(name, FileName())
 
     property GB_radiiset:
         def __get__(self):
@@ -294,17 +299,17 @@ cdef class Topology:
 
     #def int SetAmberExtra(self, vector[double], vector[NameType], vector[int], vector[int]):
 
-    def set_integer_mask(self, AtomMask atm):
-        return self.thisptr.SetupIntegerMask(atm.thisptr[0])
+    def set_integer_mask(self, AtomMask atm, Frame frame=Frame()):
+        if frame.is_empty():
+            return self.thisptr.SetupIntegerMask(atm.thisptr[0])
+        else:
+            return self.thisptr.SetupIntegerMask(atm.thisptr[0], frame.thisptr[0])
 
-    def set_char_mask(self, AtomMask atm):
-        return self.thisptr.SetupCharMask(atm.thisptr[0])
-
-    def set_integer_mask(self,AtomMask atm, Frame frame):
-        return self.thisptr.SetupIntegerMask(atm.thisptr[0], frame.thisptr[0])
-
-    def set_char_mask(self, AtomMask atm, Frame frame):
-        return self.thisptr.SetupCharMask(atm.thisptr[0], frame.thisptr[0])
+    def set_char_mask(self, AtomMask atm, Frame frame=Frame()):
+        if frame.is_empty():
+            return self.thisptr.SetupCharMask(atm.thisptr[0])
+        else:
+            return self.thisptr.SetupCharMask(atm.thisptr[0], frame.thisptr[0])
 
     def scale_dihedral_k(self, double value):
         self.thisptr.ScaleDihedralK(value)
