@@ -15,6 +15,7 @@ from pycpptraj.AtomMask import AtomMask
 from pycpptraj.CpptrajState import CpptrajState
 from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.cast_dataset import cast_dataset
+from pycpptraj.parms.ParmFile import ParmFile
 
 # actions
 from pycpptraj.actions import allactions
