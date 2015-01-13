@@ -24,7 +24,8 @@ try:
         libdir = os.environ['AMBERHOME'] + "/lib"
 except:
     try:
-        cpptraj_include = cpptraj_dir = pycpptraj_home + "/cpptraj/
+        cpptraj_include = cpptraj_dir = pycpptraj_home + "/cpptraj/"
+        libdir = cpptraj_dir + "/lib"
     except:
         raise EnvironmentError("Must set AMBERHOME or CPPTRAJHOME")
 
