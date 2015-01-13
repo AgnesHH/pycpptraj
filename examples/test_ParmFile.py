@@ -2,6 +2,7 @@ import unittest
 from pycpptraj.parms.ParmFile import ParmFile
 from pycpptraj.Topology import Topology
 
+print ParmFile.formats
 def test_generator(top):
    for atom in top.atom_generator():
        pass
