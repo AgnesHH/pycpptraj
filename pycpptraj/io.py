@@ -8,6 +8,15 @@ from pycpptraj.Topology import Topology
 
 __all__ = ['load', 'iterload', 'writetraj', 'readparm', 'writeparm']
 
+def load(*args, **kwd):
+    """try loading and returning appropriate values"""
+    if len(args) + len(kwd) == 1:
+        # loading only Topology
+        return readparm(*args, **kwd)
+    else:
+        # load traj
+        return loadtraj(*args, **kwd)
+
 def iterload(fname=None, top=Topology(), start=0, chunk=None):
     """iterload(fname=None, top=Topology(), start=0, chunk=None)"""
     if not isinstance(top, Topology):
@@ -15,7 +24,7 @@ def iterload(fname=None, top=Topology(), start=0, chunk=None):
         top = Topology(top)
     return _iterload(top, fname, start, chunk)
 
-def load(fname=None, top=Topology(), readonly=True):
+def loadtraj(fname=None, top=Topology(), readonly=True):
     """load(fname=None, top=Topology(), readonly=True)"""
     if not isinstance(top, Topology):
         # string
