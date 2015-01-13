@@ -23,7 +23,10 @@ try:
         cpptraj_dir = cpptraj_include = os.environ['AMBERHOME'] + "/AmberTools/src/cpptraj/src/"
         libdir = os.environ['AMBERHOME'] + "/lib"
 except:
-    raise EnvironmentError("Must set AMBERHOME or CPPTRAJHOME")
+    try:
+        cpptraj_include = cpptraj_dir = pycpptraj_home + "/cpptraj/
+    except:
+        raise EnvironmentError("Must set AMBERHOME or CPPTRAJHOME")
 
 # get *.pyx files
 pyxfiles = []
