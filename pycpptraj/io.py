@@ -2,10 +2,11 @@ from pycpptraj.base import *
 from pycpptraj.iterload import _iterload
 from pycpptraj.actions.Action_Strip import Action_Strip
 from pycpptraj.Trajin_Single import Trajin_Single
+from pycpptraj.Trajin_Single import Trajin_Single as Trajectory
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.Topology import Topology
 
-__all__ = ['load', 'iterload', 'write_output', 'write_parm']
+__all__ = ['load', 'iterload', 'writetraj', 'readparm', 'writeparm']
 
 def iterload(top=None, fname=None, start=0, chunk=None):
     '''Iterately return Frame instance'''
@@ -25,7 +26,8 @@ def load(top=None, fname=None, readonly=True):
     ts.load(fname, top)
     return ts
 
-def write_output(fname, traj, top, ftm='AMBERTRAJ', indices=None):
+def writetraj(fname=fname, traj=Trajectory(), top=Topology(), 
+              ftm='AMBERTRAJ', indices=None):
     """write Frame or FrameArray"""
     trajout = Trajout()
     trajout.openfile(fname=fname, top=top, fmt=ftm)
@@ -41,10 +43,12 @@ def write_output(fname, traj, top, ftm='AMBERTRAJ', indices=None):
             trajout.writeframe(idx, top, frame)
     trajout.closefile()
 
-def write_parm(fname=None, top=None, parmtype='AMBER'):
-    if parmtype == 'AMBER':
-        from pycpptraj.parms.Parm_Amber import Parm_Amber
-        parm = Parm_Amber()
-        parm.write_parm(fname, top)
-    else:
-        raise NotImplementedError("not yet supported other programs besides AMBER")
+def writeparm(fname=None, top=None, fmt='AMBER'):
+    # TODO : add *args
+    from pycpptraj.ParmFile import ParmFile
+    parm = ParmFile()
+    parm.writeparm(fname=fname, top=top, fmt=fmt)
+
+def readparm(fname):
+    """return topology instance from reading filename"""
+    return Topology(fname)
