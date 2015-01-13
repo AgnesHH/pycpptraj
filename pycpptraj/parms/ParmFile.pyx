@@ -1,4 +1,4 @@
-# distutils: language = c++
+# iistutils: languag]e = c++
 from pycpptraj.cpptraj_dict import ParmFormatDict
 
 cdef class ParmFile:
@@ -30,7 +30,7 @@ cdef class ParmFile:
         """return a list of supported parm formats"""
         return ParmFormatDict.keys()
 
-    def readparm(self, Topology top=Topology(), string fname="", *args):
+    def readparm(self, Topology top=Topology(), string fname="AMBERPARM", *args):
         """readparm(Topology top=Topology(), string fname="", "*args)
         Return : None (update `top`)
 
@@ -63,11 +63,20 @@ cdef class ParmFile:
         TODO : do we need this method?
         """
         cdef debug = 0
+        cdef ParmFormatType parmtype 
+        
+        if fmt.empty():
+            parmtype = UNKNOWN_PARM
+        else:
+            try:
+                parmtype = ParmFormatDict[fmt]
+            except:
+                print "supported keywords: ", self.formats
         # TODO : combine with write_topology
-        return self.thisptr.WritePrefixTopology(top.thisptr[0], prefix, ParmFormatDict[fmt], debug)
+        return self.thisptr.WritePrefixTopology(top.thisptr[0], prefix, parmtype, debug)
 
     def writeparm(self, Topology top=Topology(), string fname="default.top", 
-                  ArgList arglist=ArgList(), string fmt="AMBER"):
+                  ArgList arglist=ArgList(), string fmt=""):
         """writeparm(Topology top=top, string fname="default.top", 
                      ArgList arglist=ArgList(), string fmt="AMBER")")
         TODO : automatically get ParmFormatDict for this doc
@@ -83,11 +92,21 @@ cdef class ParmFile:
         """
         cdef int debug = 0
         # change `fmt` to upper
-        fmt = fmt.upper()
+        cdef ParmFormatType parmtype 
+        
+        if fmt.empty():
+            parmtype = UNKNOWN_PARM
+        else:
+            try:
+                fmt = fmt.upper()
+                parmtype = ParmFormatDict[fmt]
+            except:
+                print "supported keywords: ", self.formats
 
         if top.is_empty():
             raise ValueError("empty topology")
-        self.thisptr.WriteTopology(top.thisptr[0], fname, arglist.thisptr[0], ParmFormatDict[fmt], debug)
+
+        self.thisptr.WriteTopology(top.thisptr[0], fname, arglist.thisptr[0], parmtype, debug)
 
     def filename(self):
         cdef FileName fname = FileName()
