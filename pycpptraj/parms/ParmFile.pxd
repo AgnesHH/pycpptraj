@@ -9,13 +9,15 @@ from pycpptraj.ArgList cimport _ArgList, ArgList
 
 cdef extern from "ParmFile.h": 
     ctypedef enum ParmFormatType "ParmFile::ParmFormatType":
-        AMBERPARM "ParmFile::AMBERPARM"
-        PDBFILE "ParmFile::PDBFILE"
-        MOL2FILE "ParmFile::MOL2FILE"
-        CHARMMPSF "ParmFile::CHARMMPSF"
-        CIFFILE "ParmFile::CIFFILE"
-        SDFFILE "ParmFile::SDFFILE"
-        UNKNOWN_PARM "ParmFile::UNKNOWN_PARM"
+        pass
+    # we dont need enum here since we keep them in cpptraj_dict.pyx
+    #    AMBERPARM "ParmFile::AMBERPARM"
+    #    PDBFILE "ParmFile::PDBFILE"
+    #    MOL2FILE "ParmFile::MOL2FILE"
+    #    CHARMMPSF "ParmFile::CHARMMPSF"
+    #    CIFFILE "ParmFile::CIFFILE"
+    #    SDFFILE "ParmFile::SDFFILE"
+    #    UNKNOWN_PARM "ParmFile::UNKNOWN_PARM"
     cdef cppclass _ParmFile "ParmFile":
         @staticmethod
         void ReadOptions() 
