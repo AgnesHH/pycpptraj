@@ -327,16 +327,16 @@ RetDict = {
 
 # ParmFile
 #from ParmFile cimport *
-ParmFormatDict= {
-        AMBERPARM : "AMBERPARM",
-        PDBFILE : "PDBFILE",
-        MOL2FILE : "MOL2FILE",
-        CHARMMPSF : "CHARMMPSF",
-        CIFFILE : "CIFFILE",
-        GMXTOP : "GMXTOP",
-        SDFFILE : "SDFFILE",
-        TINKER : "TINKER",
-        UNKNOWN_PARM : "UNKNOWN_PARM",
+ParmFormatDict = {
+        "AMBERPARM" : AMBERPARM,
+        "PDBFILE" : PDBFILE,
+        "MOL2FILE" : MOL2FILE,
+        "CHARMMPSF" : CHARMMPSF,
+        "CIFFILE" : CIFFILE,
+        "GMXTOP" : GMXTOP,
+        "SDFFILE" : SDFFILE,
+        "TINKER" : TINKER,
+        "UNKNOWN_PARM" : UNKNOWN_PARM,
 }
 
 # ClusterList
