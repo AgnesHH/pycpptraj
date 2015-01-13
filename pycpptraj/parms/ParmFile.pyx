@@ -10,7 +10,12 @@ cdef class ParmFile:
 
     @classmethod
     def help(cls):
-        print ParmFormatDict.keys()
+        print "read_options"
+        cls.read_options()
+
+        print
+        print "write_options"
+        cls.write_options()
 
     @classmethod
     def read_options(cls):
@@ -19,6 +24,10 @@ cdef class ParmFile:
     @classmethod
     def write_options(cls):
         _ParmFile.WriteOptions()
+
+    def formats(cls):
+        """return a list of supported parm formats"""
+        return ParmFormatDict.keys()
 
     def readparm(self, Topology top=Topology(), string fname="", *args):
         """readparm(Topology top=Topology(), string fname="", "*args)
@@ -38,7 +47,7 @@ cdef class ParmFile:
             arglist = <ArgList> args[0]
             self.thisptr.ReadTopology(top.thisptr[0], fname, arglist.thisptr[0], debug)
 
-    def write_prefix_topology(self, Topology top=Topology(), string prefix="default", fmt="AMBER"):
+    def write_prefix_topology(self, Topology top=Topology(), string prefix="default", fmt=""):
         """write_prefix_topology(Topology Top, string prefix, fmt="AMBER")
         TODO : automatically get ParmFormatDict for this doc
         ParmFormatDict = {
