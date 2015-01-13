@@ -43,7 +43,7 @@ def writetraj(fname="", traj=Trajectory(), top=Topology(),
             trajout.writeframe(idx, top, frame)
     trajout.closefile()
 
-def writeparm(fname=None, top=None, fmt='AMBER'):
+def writeparm(fname=None, top=None, fmt=''):
     # TODO : add *args
     from pycpptraj.ParmFile import ParmFile
     parm = ParmFile()
