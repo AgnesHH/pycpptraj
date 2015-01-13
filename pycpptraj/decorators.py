@@ -25,3 +25,9 @@ def no_test(func):
     def _no_test(*args, **kwd):
         pass
     return _no_test
+
+
+def not_yet_supported(func):
+    def inner(*args, **kwd):
+        print "%s not_yet_supported" % func.__name__
+    return inner
