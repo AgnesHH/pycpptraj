@@ -17,7 +17,9 @@ cdef extern from "ParmFile.h":
         SDFFILE "ParmFile::SDFFILE"
         UNKNOWN_PARM "ParmFile::UNKNOWN_PARM"
     cdef cppclass _ParmFile "ParmFile":
+        @staticmethod
         void ReadOptions() 
+        @staticmethod
         void WriteOptions() 
         _ParmFile() 
         int ReadTopology(_Topology&, const string&, const _ArgList&, int)

@@ -1,7 +1,6 @@
 # distutils: language = c++
 from pycpptraj.cpptraj_dict import ParmFormatDict
 
-
 cdef class ParmFile:
     def __cinit__(self):
         self.thisptr = new _ParmFile()
@@ -9,29 +8,59 @@ cdef class ParmFile:
     def __dealloc__(self):
         del self.thisptr
 
-    def read_options(self):
-        self.thisptr.ReadOptions()
+    @classmethod
+    def help(cls):
+        print ParmFormatDict.keys()
 
-    def write_options(self):
-        self.thisptr.WriteOptions()
+    @classmethod
+    def read_options(cls):
+        _ParmFile.ReadOptions()
 
-    def readparm(self, *args):
-        cdef Topology Top
-        cdef string fname
+    @classmethod
+    def write_options(cls):
+        _ParmFile.WriteOptions()
+
+    def readparm(self, Topology top=Topology(), string fname="", *args):
+        """readparm(Topology top=Topology(), string fname="", "*args)
+        Return : None (update `top`)
+
+        top : Topology instance
+        fname : str, output filename
+        arglist : ArgList instance, optional
+
+        """
         cdef ArgList arglist
         cdef debug = 0
 
-        if len(args) == 2:
-            Top, fname = args
-            self.thisptr.ReadTopology(Top.thisptr[0], fname, debug)
-        elif len(args) == 3:
-            Top, fname, arglist= args
-            self.thisptr.ReadTopology(Top.thisptr[0], fname, arglist.thisptr[0], debug)
+        if not args:
+            self.thisptr.ReadTopology(top.thisptr[0], fname, debug)
         else:
-            raise ValueError("Must have topology instance, filename and (optionl) ArgList instance")
+            arglist = <ArgList> args[0]
+            self.thisptr.ReadTopology(top.thisptr[0], fname, arglist.thisptr[0], debug)
 
-    def write_prefix_topology(self, Topology Top, string prefix, fmt="AMBER"):
+    def write_prefix_topology(self, Topology top=Topology(), string prefix="default", fmt="AMBER"):
+        """write_prefix_topology(Topology Top, string prefix, fmt="AMBER")
+        TODO : automatically get ParmFormatDict for this doc
+        ParmFormatDict = {
+            "AMBER" : AMBERPARM,
+            "PDB" : PDBFILE,
+            "MOL2" : MOL2FILE,
+            "CHARMMPSF" : CHARMMPSF,
+            "CIF" : CIFFILE,
+            "SDF" : SDFFILE,
+            "UNKNOWN" : UNKNOWN_PARM,
+                         }
+        TODO : do we need this method?
         """
+        cdef debug = 0
+        # TODO : combine with write_topology
+        return self.thisptr.WritePrefixTopology(top.thisptr[0], prefix, ParmFormatDict[fmt], debug)
+
+    def writeparm(self, Topology top=Topology(), string fname="default.top", 
+                  ArgList arglist=ArgList(), string fmt="AMBER"):
+        """writeparm(Topology top=top, string fname="default.top", 
+                     ArgList arglist=ArgList(), string fmt="AMBER")")
+        TODO : automatically get ParmFormatDict for this doc
         ParmFormatDict = {
             "AMBER" : AMBERPARM,
             "PDB" : PDBFILE,
@@ -42,12 +71,13 @@ cdef class ParmFile:
             "UNKNOWN" : UNKNOWN_PARM,
                          }
         """
-        cdef debug = 0
-        # TODO : combine with write_topology
-        return self.thisptr.WritePrefixTopology(Top.thisptr[0], prefix, ParmFormatDict[fmt], debug)
+        cdef int debug = 0
+        # change `fmt` to upper
+        fmt = fmt.upper()
 
-    def writeparm(self, Topology Top, string fname, ArgList arglist, ParmFormatType fmtIn, int debug):
-        self.thisptr.WriteTopology(Top.thisptr[0], fname, arglist.thisptr[0], fmtIn, debug)
+        if top.is_empty():
+            raise ValueError("empty topology")
+        self.thisptr.WriteTopology(top.thisptr[0], fname, arglist.thisptr[0], ParmFormatDict[fmt], debug)
 
     def filename(self):
         cdef FileName fname = FileName()
