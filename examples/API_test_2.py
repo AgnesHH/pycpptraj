@@ -2,7 +2,7 @@ import os
 from time import time
 from array import array
 from pycpptraj import ArgList
-from pycpptraj._cast import cast_dataset
+from pycpptraj.cast_dataset import cast_dataset
 from pycpptraj.actions.Action_Radgyr import Action_Radgyr
 from pycpptraj.actions.Action_Molsurf import Action_Molsurf
 from pycpptraj.actions.Action_Matrix import Action_Matrix
@@ -13,9 +13,6 @@ from pycpptraj.CpptrajState import CpptrajState
 from test_API.TestAPI import create_state, do_calculation
 from pycpptraj.FrameArray import FrameArray
 
-#testdir = os.environ['PYCPPTRAJ_HOME'] + "/tests/Cpptraj_test/"
-#topfile = testdir + "Test_Matrix/1rrb_vac.prmtop"
-#trajinfile = testdir + "Test_Matrix/1rrb_vac.mdcrd"
 testdir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
 topfile = testdir + "Tc5b.top"
 trajinfile = testdir + "md1_prod.Tc5b.x"
