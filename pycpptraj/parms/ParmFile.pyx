@@ -25,6 +25,7 @@ cdef class ParmFile:
     def write_options(cls):
         _ParmFile.WriteOptions()
 
+    @classmethod
     def formats(cls):
         """return a list of supported parm formats"""
         return ParmFormatDict.keys()
