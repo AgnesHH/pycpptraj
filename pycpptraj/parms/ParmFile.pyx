@@ -62,7 +62,8 @@ cdef class ParmFile:
                          }
         TODO : do we need this method?
         """
-        cdef debug = 0
+        cdef int debug = 0
+        cdef int err  
         cdef ParmFormatType parmtype 
         
         if fmt.empty():
@@ -73,7 +74,9 @@ cdef class ParmFile:
             except:
                 print "supported keywords: ", self.formats
         # TODO : combine with write_topology
-        return self.thisptr.WritePrefixTopology(top.thisptr[0], prefix, parmtype, debug)
+        err = self.thisptr.WritePrefixTopology(top.thisptr[0], prefix, parmtype, debug)
+        if err == 1:
+            print "Not supported or failed to write"
 
     def writeparm(self, Topology top=Topology(), string fname="default.top", 
                   ArgList arglist=ArgList(), string fmt=""):
@@ -91,6 +94,7 @@ cdef class ParmFile:
                          }
         """
         cdef int debug = 0
+        cdef int err
         # change `fmt` to upper
         cdef ParmFormatType parmtype 
         
@@ -106,7 +110,9 @@ cdef class ParmFile:
         if top.is_empty():
             raise ValueError("empty topology")
 
-        self.thisptr.WriteTopology(top.thisptr[0], fname, arglist.thisptr[0], parmtype, debug)
+        err = self.thisptr.WriteTopology(top.thisptr[0], fname, arglist.thisptr[0], parmtype, debug)
+        if err == 1:
+            print "Not supported or failed to write"
 
     def filename(self):
         cdef FileName fname = FileName()
