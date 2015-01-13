@@ -16,18 +16,15 @@ from pycpptraj.AtomMask import AtomMask
 from pycpptraj.CpptrajState import CpptrajState
 from pycpptraj.FrameList import FrameList
 from pycpptraj.Trajin_Single import Trajin_Single
-from pycpptraj.FrameArray import FrameArray as Trajectory
-from pycpptraj.trajs.Trajin import Trajin
 from pycpptraj.trajs.Trajout import Trajout
 from pycpptraj.TrajinList import TrajinList
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList
 from pycpptraj.DataSetList import DataSetList
-from pycpptraj.datasets.DataSet_Coords_CRD import DataSet_Coords_CRD
-from pycpptraj.datasets.DataSet_Coords_TRJ import DataSet_Coords_TRJ
+#from pycpptraj.datasets.DataSet_Coords_CRD import DataSet_Coords_CRD
+#from pycpptraj.datasets.DataSet_Coords_TRJ import DataSet_Coords_TRJ
 from pycpptraj.ActionList import ActionList
 from pycpptraj.cast_dataset import cast_dataset
-from pycpptraj.iterload import _iterload
 from pycpptraj import cpptraj_dict
 from pycpptraj.parms.Parm_Amber import Parm_Amber
 
@@ -39,12 +36,12 @@ __all__ = ['Topology', 'TopologyList',
            'ReferenceFrame', 'AtomMask', 
            'ArgList', 'CpptrajState', 
            'FrameList', 'Trajin_Single', 
-           'DataSetList', 'DataFileList', 'ActionList',
-           'Trajin', 'Trajout', 'TrajinList',
+           'DataSetList', 'DataFileList', 
+           'ActionList',
+           'Trajout', 'TrajinList',
            'Trajectory',
            'TrajectoryReadOnly',
            'FrameArray2',
            'Parm_Amber', 
            'cast_dataset',
-           '_iterload',
            'cpptraj_dict']
