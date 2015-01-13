@@ -10,24 +10,16 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 rootname = os.getcwd()
-pycpptraj_home = rootname + "/pycpptraj/"
-#pycpptraj_home = rootname 
-#action_dir = pycpptraj_home + "/Action/"
-#ana_dir = pycpptraj_home + "/Analysis/"
+pycpptraj_home = rootname + "/pycpptraj"
 
 try:
-    try:
-        cpptraj_dir = cpptraj_include = os.environ['CPPTRAJHOME'] + "/src"
+        cpptraj_dir = os.environ['CPPTRAJHOME'] 
+        cpptraj_include = cpptraj_dir + "/src/"
         libdir = os.environ['CPPTRAJHOME'] + "/lib"
-    except:
-        cpptraj_dir = cpptraj_include = os.environ['AMBERHOME'] + "/AmberTools/src/cpptraj/src/"
-        libdir = os.environ['AMBERHOME'] + "/lib"
 except:
-    try:
-        cpptraj_include = cpptraj_dir = pycpptraj_home + "/cpptraj/"
-        libdir = cpptraj_dir + "/lib"
-    except:
-        raise EnvironmentError("Must set AMBERHOME or CPPTRAJHOME")
+    cpptraj_dir = rootname + "/cpptraj/"
+    cpptraj_include = cpptraj_dir + "/src/"
+    libdir = cpptraj_dir + "/lib"
 
 # get *.pyx files
 pyxfiles = []
