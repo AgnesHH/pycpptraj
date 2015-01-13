@@ -26,7 +26,7 @@ def load(top=None, fname=None, readonly=True):
     ts.load(fname, top)
     return ts
 
-def writetraj(fname=fname, traj=Trajectory(), top=Topology(), 
+def writetraj(fname="", traj=Trajectory(), top=Topology(), 
               ftm='AMBERTRAJ', indices=None):
     """write Frame or FrameArray"""
     trajout = Trajout()
