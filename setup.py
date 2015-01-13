@@ -68,6 +68,7 @@ pxd_include_patterns = [
          
 
 setup_args = {}
+# TODO : automatically discover packages
 packages = [
         'pycpptraj',
         'pycpptraj.utils',
