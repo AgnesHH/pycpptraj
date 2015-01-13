@@ -16,9 +16,9 @@ script:
     - export PYCPPTRAJ_HOME=`pwd`
     - export LD_LIBRARY_PATH=$AMBERHOME/lib:$LD_LIBRARY_PATH
     - python ./for_travis/fake_test.py
-    - python -c 'import pycpptraj'
     #- python ./tests/test_import_class.py
     - cd ./examples
+    - python -c 'import pycpptraj'
     - python ./API_test.py
     #- sh ./TestListTravis.sh
     - echo "Kool"
