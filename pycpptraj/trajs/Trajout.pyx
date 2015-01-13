@@ -28,12 +28,16 @@ cdef class Trajout:
         """return a list of possible format to be used with self.open"""
         return TrajFormatDict.keys()
         
-    def open(self, string fname='', Topology top=Topology(), string fmt="AMBERNETCDF", more_args=None):
+    def open(self, string fname='', top=Topology(), string fmt="AMBERNETCDF", more_args=None):
         cdef ArgList arglist
+        cdef Topology top_ 
 
-        #if top.is_empty():
-        #    raise ValueError("empty topology")
-        print "test opening", fname, top
+        # check Topology
+        if isinstance(top, basestring):
+            top_ = Topology(top)
+        elif isinstance(top, Topology):
+            # assume this is Topology instance
+            top_ = top
 
         if more_args:
             if isinstance(more_args, basestring):
@@ -43,21 +47,30 @@ cdef class Trajout:
                 arglist = <ArgList> more_args
             else:
                 raise ValueError()
-            self.thisptr.InitTrajWrite(fname, arglist.thisptr[0], top.thisptr, TrajFormatDict[fmt])
+
+            self.thisptr.InitTrajWrite(fname, arglist.thisptr[0], top_.thisptr, TrajFormatDict[fmt])
         else:
-            self.thisptr.InitTrajWrite(fname, top.thisptr, TrajFormatDict[fmt])
+            self.thisptr.InitTrajWrite(fname, top_.thisptr, TrajFormatDict[fmt])
 
     def close(self):
         self.thisptr.EndTraj()
 
-    def writeframe(self, int idx=0, Frame frame=Frame(), Topology top=Topology()):
+    def writeframe(self, int idx=0, Frame frame=Frame(), top=Topology()):
         """write trajout for Frame with given Topology
         Parameters:
         ----------
         frame : Frame instance
         top : Topology instance
         """
-        self.thisptr.WriteFrame(idx, top.thisptr, frame.thisptr[0])
+        cdef Topology _top
+        # check Topology
+        if isinstance(top, basestring):
+            top_ = Topology(top)
+        elif isinstance(top, Topology):
+            # assume this is Topology instance
+            top_ = <Topology> top
+
+        self.thisptr.WriteFrame(idx, top_.thisptr, frame.thisptr[0])
 
     def print_info(self, int idx):
         self.thisptr.PrintInfo(idx)
