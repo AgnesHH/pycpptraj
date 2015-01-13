@@ -17,16 +17,16 @@ cdef class ParmFile:
 
     def readparm(self, *args):
         cdef Topology Top
-        cdef string fnameIn
-        cdef ArgList argListIn
-        cdef debugIn = 0
+        cdef string fname
+        cdef ArgList arglist
+        cdef debug = 0
 
         if len(args) == 2:
-            Top, fnameIn = args
-            self.thisptr.ReadTopology(Top.thisptr[0], fnameIn, debugIn)
+            Top, fname = args
+            self.thisptr.ReadTopology(Top.thisptr[0], fname, debug)
         elif len(args) == 3:
-            Top, fnameIn, argListIn= args
-            self.thisptr.ReadTopology(Top.thisptr[0], fnameIn, argListIn.thisptr[0], debugIn)
+            Top, fname, arglist= args
+            self.thisptr.ReadTopology(Top.thisptr[0], fname, arglist.thisptr[0], debug)
         else:
             raise ValueError("Must have topology instance, filename and (optionl) ArgList instance")
 
@@ -46,8 +46,8 @@ cdef class ParmFile:
         # TODO : combine with write_topology
         return self.thisptr.WritePrefixTopology(Top.thisptr[0], prefix, ParmFormatDict[fmt], debug)
 
-    def write_topology(self, Topology Top, string fname, ArgList argListIn, ParmFormatType fmtIn, int debugIn):
-        return self.thisptr.WriteTopology(Top.thisptr[0], fname, argListIn.thisptr[0], fmtIn, debugIn)
+    def writeparm(self, Topology Top, string fname, ArgList arglist, ParmFormatType fmtIn, int debug):
+        self.thisptr.WriteTopology(Top.thisptr[0], fname, arglist.thisptr[0], fmtIn, debug)
 
     def filename(self):
         cdef FileName fname = FileName()
