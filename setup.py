@@ -10,12 +10,12 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 rootname = os.getcwd()
-pycpptraj_home = rootname + "/pycpptraj"
+pycpptraj_home = rootname + "/pycpptraj/"
 
 try:
         cpptraj_dir = os.environ['CPPTRAJHOME'] 
         cpptraj_include = cpptraj_dir + "/src/"
-        libdir = os.environ['CPPTRAJHOME'] + "/lib"
+        libdir = os.environ['CPPTRAJHOME'] + "/lib/"
 except:
     cpptraj_dir = rootname + "/cpptraj/"
     cpptraj_include = cpptraj_dir + "/src/"
