@@ -17,7 +17,8 @@ cdef extern from "ParmFile.h":
     #    CHARMMPSF "ParmFile::CHARMMPSF"
     #    CIFFILE "ParmFile::CIFFILE"
     #    SDFFILE "ParmFile::SDFFILE"
-    #    UNKNOWN_PARM "ParmFile::UNKNOWN_PARM"
+    # use UNKNOWN_PARM as default
+        UNKNOWN_PARM "ParmFile::UNKNOWN_PARM"
     cdef cppclass _ParmFile "ParmFile":
         @staticmethod
         void ReadOptions() 
