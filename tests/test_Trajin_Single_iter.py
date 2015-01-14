@@ -1,15 +1,16 @@
 import unittest
 from pycpptraj.base import *
 
+max_frame = 999
 class TestTrajingIter(unittest.TestCase):
     def test_iter_0(self):
         traj = Trajin_Single()
         traj.load(fname="data/md1_prod.Tc5b.x", top=Topology("./data/Tc5b.top"))
         
-        for i in range(20):
+        for i in range(2):
             print 
             print "loop number = %s-th" % i
-            for farray in traj.frame_iter(start=0, chunk=10000):
+            for farray in traj.frame_iter(start=0, chunk=999):
                 pass
             
             print farray
