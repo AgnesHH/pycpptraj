@@ -14,7 +14,7 @@ cdef class FrameArray:
         if isinstance(top, basestring):
             self.top = Topology(top)
         elif isinstance(top, Topology):
-            self.top = top
+            self.top = top.copy()
         else:
             # create empty topology
             self.top = Topology()
@@ -44,6 +44,7 @@ cdef class FrameArray:
         """should we free memory for Frame instances here?
         (we set frame.py_free_mem = False in __getitem__)
         """
+        #print "Test FrameArray exiting"
         pass
         #cdef Frame frame
         #if self.is_mem_parent:
@@ -88,8 +89,8 @@ cdef class FrameArray:
                 # indices is tuple, list, array, ...
                 # we loop all traj frames and extract frame-id in indices 
                 # TODO : check negative indexing?
-                for i in range(ts.size):
-                    if i in indices:
+                for idx in range(ts.size):
+                    if idx in indices:
                         self.append(ts[idx])
 
         elif isinstance(fname, (list, tuple)):
@@ -147,7 +148,8 @@ cdef class FrameArray:
             start, stop, step  = idxs.indices(self.size)
             
             # mimic negative step in python list
-            print "before updating (start, stop, step) = (%s, %s, %s)" % (start, stop, step)
+            # debug
+            #print "before updating (start, stop, step) = (%s, %s, %s)" % (start, stop, step)
             if start > stop and (step < 0):
                 # since reading TRAJ is not random access for large file, we read from
                 # begining to the end and append Frame to FrameArray
@@ -163,11 +165,12 @@ cdef class FrameArray:
                 is_reversed = False
 
             # debug
-            print "after updating (start, stop, step) = (%s, %s, %s)" % (start, stop, step)
+            #print "after updating (start, stop, step) = (%s, %s, %s)" % (start, stop, step)
       
             for i in range(start, stop, step):
                 # turn `copy` to `False` to have memoryview
-                farray.append(self[i], copy=False)
+                # turn `copy` to `True` to make a copy
+                farray.append(self[i], copy=True)
             if is_reversed:
                 # reverse vector if using negative index slice
                 # traj[:-1:-3]
