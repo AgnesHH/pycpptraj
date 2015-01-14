@@ -29,8 +29,20 @@ class TestFrame(unittest.TestCase):
         assert FRAME[0] == FRAME.buffer[0] == FRAME.coords_copy()[0]
         assert FRAME.buffer[-1] == FRAME[-1] == 29.
 
+        FRAME.buffer[:3] = array('d', [1, 2.3, 3.4])
+        assert FRAME.coords[:3] == array('d', [1, 2.3, 3.4])
+
         print "test slices"
         print FRAME[0:10:2] 
+
+        arr0 = np.asarray(FRAME.buffer)
+        print arr0.__len__()
+        arr1 = arr0.reshape(10, 3)
+        arr1[1] = [100., 200., 300.]
+        print FRAME.atom_xyz
+        print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        #arr0[10] = [100., 200., 300.]
+        #assert frame.atom_xyz(10) == arr0[10]
 
         print "test memoryview for slices"
         # TODO : add
@@ -38,7 +50,6 @@ class TestFrame(unittest.TestCase):
         stop = 10
         strip = 2
         arr = np.asarray(FRAME[start:stop:strip]) 
-        arr_tmp = np.array(range(FRAME.size))
 
         # does not work, got "ValueError: ndarray is not contiguous"
         #FRAME[start:stop:strip] = arr_tmp[start:stop:strip]
