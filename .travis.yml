@@ -22,6 +22,8 @@ script:
     - python -c 'import pycpptraj'
     - python ./API_test.py
     - sh ./TestListTravis.sh
+    - cd ../examples
+    - sh ./TestList.sh
     - echo "Kool"
     ## - cd $PYCPPTRAJ_HOME/tests/Cpptraj_test/
     ## - make test.complete
