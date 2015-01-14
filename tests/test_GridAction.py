@@ -1,6 +1,7 @@
 import unittest
-from pycpptraj.GridAction import GridAction
+from pycpptraj.actions.GridAction import GridAction
 
+# TODO : more tests
 class Test(unittest.TestCase):
     def test_1(self):
         ga = GridAction()
