@@ -37,12 +37,10 @@ cdef class DataSet_double (DataSet_1D):
         # use self.data so we can use fancy indexing
         return self.data[idx]
 
-    def __setitem__(self, idx, value):
-        #cdef double* ptr
-        #ptr = &(self.thisptr.index_opr(idx))
-        #ptr[0] = value
-        # use self.data so we can use fancy indexing
-        self.data[idx] = value
+    def __setitem__(self, int idx, double value):
+        cdef double* ptr
+        ptr = &(self.thisptr.index_opr(idx))
+        ptr[0] = value
         
     def __iter__(self):
         cdef int i
