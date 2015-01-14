@@ -92,6 +92,7 @@ cdef class Topology:
             return tmp
         elif isinstance(args[0], Topology):
             # copy other Topology instance to "self"
+            # no error? really?
             other = args[0]
             self.thisptr[0] = other.thisptr[0]
 
