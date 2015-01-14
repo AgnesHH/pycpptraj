@@ -20,6 +20,12 @@ cdef class FrameArray:
             self.top = Topology()
 
         self.warning = warning
+
+        # since we are using memoryview for slicing this class istance, we just need to 
+        # let `parent` free memory
+        # this variable is intended to let FrameArray control 
+        # freeing memory for Frame instance but it's too complicated
+        #self.is_mem_parent = True
         if not fname.empty():
             # TODO : check if file exist
             self.load(fname=fname, indices=indices)
@@ -38,15 +44,18 @@ cdef class FrameArray:
         """should we free memory for Frame instances here?
         (we set frame.py_free_mem = False in __getitem__)
         """
-        for frame in self:
-            # we don't __dealloc__ here.
-            # just turn py_free_mem on to let Frame class frees memory
-            # work?
-            # NO : Error in `python': double free or corruption (out)`
-            # --> don't need this method. We still have the commented code here to 
-            # remind not need to add in future.
-            #frame.py_free_mem = True
-            pass
+        pass
+        #cdef Frame frame
+        #if self.is_mem_parent:
+        #    for frame in self:
+        #        # we don't __dealloc__ here.
+        #        # just turn py_free_mem on to let Frame class frees memory
+        #        # work?
+        #        # NO : Error in `python': double free or corruption (out)`
+        #        # --> don't need this method. We still have the commented code here to 
+        #        # remind not need to add in future.
+        #        #frame.py_free_mem = True
+        #        del frame.thisptr
 
     def load(self, fname='', Topology top=None, indices=None):
         # TODO : add more test cases
@@ -126,6 +135,7 @@ cdef class FrameArray:
         else:
             # creat a subset array of `FrameArray`
             farray = FrameArray()
+            # farray.is_mem_parent = False
             farray.top = self.top
             if idxs.step == None:
                 step = 1
