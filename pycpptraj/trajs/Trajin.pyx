@@ -38,6 +38,7 @@ cdef class Trajin (TrajectoryFile):
     @cython.boundscheck(False)
     @cython.wraparound(False)
     def __getitem__(self, idxs):
+        # allocate frame for storing data
         cdef Frame frame = Frame(self.top.n_atoms)
         cdef FrameArray farray
         cdef int start, stop, step
@@ -52,19 +53,15 @@ cdef class Trajin (TrajectoryFile):
             if idxs != 0 and idx_1 == 0:
                 raise ValueError("index is out of range")
 
-            self.begin_traj()
-            for i in range(self.baseptr_1.TotalFrames()):
-                # don't use Python method to avoid overhead
-                self.baseptr_1.GetNextFrame(frame.thisptr[0])
-                if idx_1 == i:
-                    break
-            self.end_traj()
+            with self:
+                self.read_traj_frame(idx_1, frame)
             return frame
         else:
             if self.debug:
                 print idxs
             farray = FrameArray()
-            farray.top = self.top
+            # should we copy self.top or use memview?
+            farray.top = self.top.copy()
 
             # check comment in FrameArray class with __getitem__ method
             start, stop, step = idxs.indices(self.size)
