@@ -35,3 +35,10 @@ with ts:
 print ts[:10]
 print ts[50:100]
 print ts[100:50:-2]
+print ts[100:50:-2][0]
+fa0_1 = ts[100:50:-2][1]
+fa0 = ts[100:50:-2]
+print fa0[0], fa0_1
+print ts[100:50:-2][0]
+print ts[100:50:-2][0]
+print ts[100:50:-2][0]
