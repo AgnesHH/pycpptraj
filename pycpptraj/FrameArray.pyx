@@ -243,7 +243,8 @@ cdef class FrameArray:
             raise ValueError("n_atoms of two arrays do not match")
 
         for _frame in other.frame_v:
-            self.frame_v.push_back(_frame)
+            # make a copy
+            self.frame_v.push_back(_Frame(_frame))
         return self
 
     def append(self, Frame framein, copy=True):
