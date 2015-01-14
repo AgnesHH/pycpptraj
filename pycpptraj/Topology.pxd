@@ -1,6 +1,6 @@
 # distutils: language = c++
 include "config.pxi"
-from pycpptraj.vector_pycpptraj cimport vector as cppvector
+from pycpptraj.cpp_vector cimport vector as cppvector
 #from libcpp.set cimport set
 from pycpptraj.Atom cimport _Atom, Atom
 from pycpptraj.Residue cimport _Residue, Residue
