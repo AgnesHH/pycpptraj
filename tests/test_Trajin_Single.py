@@ -15,7 +15,7 @@ from pycpptraj.AtomMask import AtomMask
 
 ts = Trajin_Single()
 basetraj = Trajin()
-datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
+datadir = "./data/"
 topname = datadir + "Tc5b.top"
 refname = "./data/Tc5b.nat.crd"
 mdx = "./data/md1_prod.Tc5b.x"
