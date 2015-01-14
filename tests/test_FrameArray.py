@@ -321,5 +321,28 @@ class TestFrameArray(unittest.TestCase):
         print farray
         print farray_cp
 
+    def test_reverse_0(self):
+        farray = FARRAY.copy()
+        N = farray.size - 1
+        arr_end_old = farray[-1].coords[:10]
+        farray.reverse()
+        arr_end_new = farray[-1].coords[:10]
+        arr_begin_new = farray[0].coords[:10]
+        assert arr_end_old != arr_end_new
+        assert arr_end_old  == arr_begin_new
+
+    def test_reverse_0(self):
+        farray = FARRAY.copy()
+        N = farray.size
+        #farray_sub = farray[:-1:-3]
+        print "SPECIALLLLLLLLLLLLLLLLLLLLLLL"
+        print N
+        farray_sub = farray[:-3]
+        assert farray_sub.size + 3 == N
+        print farray_sub.size
+        print "SPECIALLLLLLLLLLLLLLLLLLLLLLL"
+        print farray_sub
+        #assert farray[N-1].has_same_coords(farray_sub[0])
+
 if __name__ == "__main__":
     unittest.main()
