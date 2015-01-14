@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from vector_pycpptraj cimport vector as cppvector
+from cpp_vector cimport vector as cppvector
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 
