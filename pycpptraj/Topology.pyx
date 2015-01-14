@@ -190,7 +190,7 @@ cdef class Topology:
             incr(it)
         return atlist
 
-    @property
+    #@property
     def residuelist(self, mode='normal'):
         reslist = []
         for res in self.res_generator():
