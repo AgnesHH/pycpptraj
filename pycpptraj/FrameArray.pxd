@@ -16,3 +16,9 @@ cdef class FrameArray:
 
     # used for warning memory view
     cdef public bint warning 
+
+    # make public?
+    # this variable is intended to let FrameArray control 
+    # freeing memory for Frame instance but it's too complicated
+    # 
+    #cdef bint is_mem_parent
