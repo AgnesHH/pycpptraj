@@ -49,6 +49,7 @@ class TestFrameArray(unittest.TestCase):
 
     @no_test
     def test_load_CHARMM(sefl):
+        # TODO : check Segmentation fault
         datadir = "./data/"
         print "test_load_CHARMM"
         farray = FrameArray()
