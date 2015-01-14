@@ -130,7 +130,9 @@ cdef class FrameArray:
                 if idxs != -1:
                     raise ValueError("index is out of range")
             # get memoryview
-            frame.thisptr = &(self.frame_v[idx_1])
+            #frame.thisptr = &(self.frame_v[idx_1])
+            # change [] to `at` for bound-checking
+            frame.thisptr = &(self.frame_v.at(idx_1))
             return frame
         else:
             # creat a subset array of `FrameArray`
@@ -149,10 +151,21 @@ cdef class FrameArray:
                 start = 0
             else:
                 start = idxs.start
-                
+
+            if start > stop:
+                # traj[:-1:-3]
+                is_reversed = True
+                start, stop = stop, start
+            else:
+                is_reversed = False
+      
             for i in range(start, stop, step):
                 # turn `copy` to `False` to have memoryview
                 farray.append(self[i], copy=False)
+            if is_reversed:
+                # reverse vector if using negative index slice
+                # traj[:-1:-3]
+                farray.reverse()
             return farray
 
     def __setitem__(self, int idx, Frame other):
@@ -176,8 +189,13 @@ cdef class FrameArray:
                 )
         return tmps
 
+    def reverse(self):
+        # should we just create a fake operator?
+        cpp_reverse(self.frame_v.begin(), self.frame_v.end())
+
     def erase(self, int idx):
         # TODO : massive erase (idx_0, idx_1), slice(0:3:1)...
+        # dealloc frame pointer too?
         self.frame_v.erase(self.frame_v.begin() + idx)
         
     @property
@@ -188,7 +206,11 @@ cdef class FrameArray:
         return self.size
 
     def __iter__(self):
-        """return a reference of Frame instance"""
+        """return a reference of Frame instance
+        >>> for frame in FrameArray_instance:
+        >>>     pass
+                
+        """
         cdef vector[_Frame].iterator it  = self.frame_v.begin()
         cdef Frame frame 
 
