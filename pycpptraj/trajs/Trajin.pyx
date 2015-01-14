@@ -65,18 +65,9 @@ cdef class Trajin (TrajectoryFile):
                 print idxs
             farray = FrameArray()
             farray.top = self.top
-            if idxs.step == None:
-                step = 1
-            else:
-                step = idxs.step
-            if idxs.stop == None:
-                stop = self.size
-            else:
-                stop = get_positive_idx(idxs.stop, self.size)
-            if idxs.start == None:
-                start = 0
-            else:
-                start = get_positive_idx(idxs.start, self.size)
+
+            # check comment in FrameArray class with __getitem__ method
+            start, stop, step = idxs.indices(self.size)
             if self.debug:
                 print (start, stop, step)
 
