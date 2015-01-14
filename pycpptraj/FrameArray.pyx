@@ -107,6 +107,8 @@ cdef class FrameArray:
         #To get a copy
         #>>>frame = FrameArray_instance[10].copy()
 
+        # TODO : why not using existing slice of list?
+
         cdef Frame frame = Frame(self.top.n_atoms)
         cdef FrameArray farray
         cdef int start, stop, step
@@ -146,16 +148,21 @@ cdef class FrameArray:
             if idxs.stop == None:
                 stop = self.size
             else:
-                stop = idxs.stop
+                stop = get_positive_idx(idxs.stop, self.size)
             if idxs.start == None:
                 start = 0
             else:
-                start = idxs.start
+                start = get_positive_idx(idxs.start, self.size)
 
-            if start > stop:
+            if start > stop and (step < 0):
                 # traj[:-1:-3]
                 is_reversed = True
-                start, stop = stop, start
+                # swap start and stop but adding +1 (Python does not take last index)
+                # a = range(10)
+                # a[5:1:-1] = [5, 4, 3, 2]
+                # a[2:5:1] = [2, 3, 4, 5]
+                start, stop = stop + 1, start + 1
+                step *= -1
             else:
                 is_reversed = False
       
@@ -171,6 +178,7 @@ cdef class FrameArray:
     def __setitem__(self, int idx, Frame other):
         # TODO : add slice
         # make a copy
+        # to make thing simple, we don't use fancy slicing here
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
         self.frame_v[idx] = other.thisptr[0]
