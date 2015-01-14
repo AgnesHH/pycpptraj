@@ -50,6 +50,8 @@ cdef class FrameArray:
 
     def load(self, fname='', Topology top=None, indices=None):
         # TODO : add more test cases
+        # TODO : if indices is a `list` or `tuple`, loading is really slow
+        # use slice instead
         cdef Trajin_Single ts
         cdef int idx
 
@@ -75,11 +77,17 @@ cdef class FrameArray:
                 self.join(ts[indices])
             else:
                 # indices is tuple, list, array, ...
-                for idx in indices:
-                    self.append(ts[idx])
-        elif isinstance(fname, list):
+                # we loop all traj frames and extract frame-id in indices 
+                # TODO : check negative indexing?
+                for i in range(ts.size):
+                    if i in indices:
+                        self.append(ts[idx])
+
+        elif isinstance(fname, (list, tuple)):
             for fh in fname:
                 self.load(fh, top, indices)
+        else:
+            raise ValueError("can not load file/files")
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -182,6 +190,10 @@ cdef class FrameArray:
             yield frame
             incr(it)
 
+    def __add__(self, FrameArray other):
+        self += other
+        return self
+
     def __iadd__(self, FrameArray other):
         """
         append `other`'s frames to `self`
@@ -273,9 +285,10 @@ cdef class FrameArray:
                     # TODO : make indices as an array?
                     self.append(ts[i])
             else:
-                for i in indices:
+                for i in range(ts.size):
+                    if i in indices:
                     # TODO : make indices as an array?
-                    self.append(ts[i])
+                        self.append(ts[i])
 
     def strip_atoms(self, mask=None, update_top=True, bint has_box=False):
         """if you use memory for numpy, you need to update after resizing Frame
