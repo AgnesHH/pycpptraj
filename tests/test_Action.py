@@ -3,7 +3,7 @@ import pycpptraj
 from importlib import import_module
 
 # get action list
-pylist = os.environ['PYCPPTRAJ_HOME'] + "/PYXLIST.txt"
+pylist = "../PYXLIST.txt"
 
 actions = []
 with open(pylist, 'r') as fh:
