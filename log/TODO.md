@@ -1,6 +1,8 @@
 TODO
 ----
 
+* Sometimes get every large ts[-1:-9:-1][0].n_atoms (example: 30401312 atoms vs Tc5b = 304 atoms)
+    (ts is FrameArray or Trajin_Single instance)
 * Add exception
 * Rename "./examples" folder to "tests" and make REAL example script
 * write script to mine the enum in cpptraj code and convert to dict : DONE
