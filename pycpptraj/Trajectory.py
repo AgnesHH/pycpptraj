@@ -1,8 +1,11 @@
 """This is a thin wrapper of Trajin_Single
-TODO: should combine Trajin_Single and Trajin_Multi
+We need to sub-class Trajin_Single to use FrameArray
+(we called Trajin_Single from FrameArray, so we can not call FrameArray back from 
+Trajin_Single)
 """
 from pycpptraj.Trajin_Single import Trajin_Single
+from pycpptraj.FrameArray import FrameArray
 
 class Trajectory(Trajin_Single):
-    def __init__(self, *args):
+    def __init__(self, *args, **kwd):
         pass
