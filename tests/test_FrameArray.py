@@ -32,9 +32,24 @@ FRAMENUM=999
 FARRAY = ts[:FRAMENUM]
 
 class TestFrameArray(unittest.TestCase):
+    #@no_test
+    def test_load_multiple_files(self):
+        print "test_load_multiple_files"
+        farray = FrameArray()
+        farray.top = Topology(datadir + "Tc5b.top")
+        farray.load("./data/md1_prod.Tc5b.x", indices=range(100))
+        farray.load("./data/md1_prod.Tc5b.x", indices=range(500, 600))
+        farray.load("./data/md1_prod.Tc5b.x", indices=slice(30, 50, 1))
+        farray.load("./data/md1_prod.Tc5b.x", indices=(2, 3))
+        print farray.size
+        assert farray.size == (100 + 100 + 20 + 2)
+        print farray[:-1]
+        print farray[:100:2]
+        print farray[100:2:-2]
+
     @no_test
     def test_load_CHARMM(sefl):
-        datadir = os.environ['PYCPPTRAJ_HOME'] + "/tests/Cpptraj_test/Test_Charmm/"
+        datadir = "./data/"
         print "test_load_CHARMM"
         farray = FrameArray()
         farray.top = Topology(datadir + "ala3.psf")
