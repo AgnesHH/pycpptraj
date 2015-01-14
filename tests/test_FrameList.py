@@ -9,7 +9,7 @@ from pycpptraj.TopologyList import TopologyList
 
 class TestFrameList(unittest.TestCase):
     def test_1(self):
-        datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
+        datadir = "./data/"
         toplist = TopologyList()
         toplist.add_parm("./data/Tc5b.top")
         top = toplist.get_parm(0)
