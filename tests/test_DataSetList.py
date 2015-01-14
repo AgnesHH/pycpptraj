@@ -1,6 +1,6 @@
 import unittest
 from pycpptraj.base import *
-from pycpptraj.DataSet import DataSet
+from pycpptraj.datasets.DataSet import DataSet
 
 class TestDataSetList(unittest.TestCase):
     def test_1(self):
