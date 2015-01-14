@@ -13,7 +13,7 @@ from pycpptraj.CpptrajState import CpptrajState
 from test_API.TestAPI import create_state, do_calculation
 from pycpptraj.FrameArray import FrameArray
 
-testdir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
+testdir = "./data/"
 topfile = testdir + "Tc5b.top"
 trajinfile = testdir + "md1_prod.Tc5b.x"
 
