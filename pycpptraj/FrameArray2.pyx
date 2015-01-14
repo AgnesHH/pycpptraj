@@ -127,7 +127,7 @@ cdef class FrameArray2(DataSet_Coords):
                 raise ValueError("need to have non-empty topology file")
         if self.top.is_empty() and not top.is_empty():
             print "assigning new non-empty Topology"
-            self.top = top
+            self.top = top.copy()
         return self.thisptr.AddSingleTrajin(fname, arglist.thisptr[0], top.thisptr)
 
     def addframe(self, Frame frame):
