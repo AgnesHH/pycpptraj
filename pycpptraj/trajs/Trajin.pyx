@@ -72,19 +72,21 @@ cdef class Trajin (TrajectoryFile):
             if idxs.stop == None:
                 stop = self.size
             else:
-                stop = idxs.stop
+                stop = get_positive_idx(idxs.stop, self.size)
             if idxs.start == None:
                 start = 0
             else:
-                start = idxs.start
+                start = get_positive_idx(idxs.start, self.size)
             if self.debug:
                 print (start, stop, step)
 
             with self:
-                if start > stop:
+                if start > stop and (step < 0):
                     # traj[:-1:-3]
                     is_reversed = True
-                    start, stop = stop, start
+                    # see comment in FrameArray (__getitem__)
+                    start, stop = stop + 1, start + 1
+                    step *= -1
                 else:
                     is_reversed = False
 
