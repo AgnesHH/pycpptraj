@@ -6,6 +6,7 @@ from cpython.array cimport array as pyarray
 
 cdef class DataSet_double (DataSet_1D):
     def __cinit__(self, *args):
+        # TODO : Use only one pointer? 
         self.baseptr0 = <_DataSet*> new _DataSet_double()
         # make sure 3 pointers pointing to the same address?
         self.baseptr_1 = <_DataSet_1D*> self.baseptr0
@@ -31,14 +32,16 @@ cdef class DataSet_double (DataSet_1D):
         dset.baseptr0 = _DataSet_double.Alloc()
         return dset
 
-    def __getitem__(self, int idx):
-        return self.thisptr.index_opr(idx)
+    def __getitem__(self, idx):
+        #return self.thisptr.index_opr(idx)
+        # use self.data so we can use fancy indexing
+        return self.data[idx]
 
     def __setitem__(self, int idx, double value):
         cdef double* ptr
         ptr = &(self.thisptr.index_opr(idx))
         ptr[0] = value
-
+        
     def __iter__(self):
         cdef int i
         for i in range(self.thisptr.Size()):
