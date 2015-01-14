@@ -7,20 +7,20 @@ from pycpptraj.Residue import Residue
 class TestResidue(unittest.TestCase):
     def test_0(self):
         top = Topology("./data/Tc5b.top")
-        print top.residuelist[0].first_atom
-        print top.residuelist[0].last_atom
-        print top.residuelist[0].n_atoms
+        print top.residuelist(mode="instance")[0].first_atom
+        print top.residuelist(mode="instance")[0].last_atom
+        print top.residuelist(mode="instance")[0].n_atoms
 
-        print top.residuelist[10].first_atom
-        print top.residuelist[10].last_atom
-        print top.residuelist[10].n_atoms
+        print top.residuelist(mode="instance")[10].first_atom
+        print top.residuelist(mode="instance")[10].last_atom
+        print top.residuelist(mode="instance")[10].n_atoms
 
         print dir(top.atomlist[0])
         anames = [atom.__str__() for atom in top.atomlist]
         print anames
 
     def test_1(self):
-        datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
+        datadir = "./data/"
         tl = TopologyList()
         tl.add_parm(datadir + "Tc5b.top")
         tl.add_parm(datadir + "HP36.top")
