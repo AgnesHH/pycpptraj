@@ -32,7 +32,6 @@ FRAMENUM=999
 FARRAY = ts[:FRAMENUM]
 
 class TestFrameArray(unittest.TestCase):
-
     def test_len(self):
         N = 10
         farray = FARRAY[:N].copy()
@@ -57,6 +56,15 @@ class TestFrameArray(unittest.TestCase):
         assert old_coords_5_10 == farray[5].coords[:10]
         print subfarray[0].coords[:10]
         print farray[5].coords[:10]
+
+        f_last = farray[-3:-1][-1]
+        print "***********XXXXXXXXXXXXX*"
+        print f_last
+        #print f_last.coords[:10]
+        #print farray[-1].coords[:10]
+        #print farray[-2].coords[:10]
+        #print farray[-3].coords[:10]
+        #assert f_last.same_coords_as(farray[-2]) == True
 
     def test_len_Trajin_Single(self):
         # create alias of `ts` (Trajin_Single instance  created above)
