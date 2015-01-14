@@ -5,7 +5,7 @@ from pycpptraj.Topology import Topology
 
 class TestTopologyList(unittest.TestCase):
     def test_1(self):
-        datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
+        datadir = "./data/"
         tlist = TopologyList()
 
         # create TopologyList instance with 4 Topology instances
@@ -54,12 +54,8 @@ class TestTopologyList(unittest.TestCase):
         tlist[0]
         tlist[1]
         tlist[2]
-        print tlist.size
 
         print "test iteration"
-        for idx, top in enumerate(tlist):
-            print idx, top
-
         print "test adding top instances from python list"
         tmplist = [Topology(), Topology(), Topology()]
         tlist_2 = TopologyList()
