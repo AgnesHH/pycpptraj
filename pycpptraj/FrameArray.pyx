@@ -140,31 +140,30 @@ cdef class FrameArray:
             # creat a subset array of `FrameArray`
             farray = FrameArray()
             # farray.is_mem_parent = False
-            farray.top = self.top
-            if idxs.step == None:
-                step = 1
-            else:
-                step = idxs.step
-            if idxs.stop == None:
-                stop = self.size
-            else:
-                stop = get_positive_idx(idxs.stop, self.size)
-            if idxs.start == None:
-                start = 0
-            else:
-                start = get_positive_idx(idxs.start, self.size)
 
+            # should we make a copy of self.top or get memview?
+            farray.top = self.top.copy()
+            # create positive indexing for start, stop if they are None
+            start, stop, step  = idxs.indices(self.size)
+            
+            # mimic negative step in python list
+            print "before updating (start, stop, step) = (%s, %s, %s)" % (start, stop, step)
             if start > stop and (step < 0):
+                # since reading TRAJ is not random access for large file, we read from
+                # begining to the end and append Frame to FrameArray
+                # we will reverse later after getting all needed frames
                 # traj[:-1:-3]
                 is_reversed = True
                 # swap start and stop but adding +1 (Python does not take last index)
-                # a = range(10)
-                # a[5:1:-1] = [5, 4, 3, 2]
+                # a = range(10) # a[5:1:-1] = [5, 4, 3, 2]
                 # a[2:5:1] = [2, 3, 4, 5]
                 start, stop = stop + 1, start + 1
                 step *= -1
             else:
                 is_reversed = False
+
+            # debug
+            print "after updating (start, stop, step) = (%s, %s, %s)" % (start, stop, step)
       
             for i in range(start, stop, step):
                 # turn `copy` to `False` to have memoryview
