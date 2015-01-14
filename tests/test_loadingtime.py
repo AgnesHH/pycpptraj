@@ -1,4 +1,5 @@
 from time import time
+import unittest
 from pycpptraj.base import *
 from pycpptraj.Trajectory import Trajectory
 
