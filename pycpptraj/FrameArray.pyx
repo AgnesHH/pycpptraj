@@ -1,4 +1,4 @@
-# distutils: language = c++
+#print print  distutils: language = c++
 cimport cython
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
@@ -287,14 +287,15 @@ cdef class FrameArray:
 
         cdef vector[_Frame].iterator it
         cdef Frame frame = Frame()
-        cdef Topology tmptop
+        cdef Topology tmptop = Topology()
 
-        if mask == None: return 
+        if mask == None: 
+            raise ValueError("Must provide mask to strip")
 
+        # do not dealloc since we use memoryview for _Frame
         frame.py_free_mem = False
         it = self.frame_v.begin()
         while it != self.frame_v.end():
-            # do not dealloc since we use memoryview for _Frame
             frame.thisptr = &(deref(it))
             # we need to update topology since _strip_atoms will modify it
             tmptop = self.top.copy()
