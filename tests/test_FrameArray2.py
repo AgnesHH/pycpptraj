@@ -121,13 +121,15 @@ class TestFrameArray2(unittest.TestCase):
         # print traj0_arr[:10]
         #np.testing.assert_almost_equal(frame_arr, traj0_arr, decimal=3)
 
-    #@no_test
+    ##@no_test
     def test_strip_atoms(self):
+        print "test_strip_atoms"
         farray = FrameArray()
         #farray.get_frames(TRAJ, update_top=True)
         farray.get_frames(TRAJ, indices=(1, 3, 5, 7,), update_top=True)
         t0 = time()
-        farray.strip_atoms(":2-10@CA")
+        print farray.top.n_atoms
+        farray.strip_atoms(mask=":2-10@CA", update_top=True)
         print time() - t0
         print farray.size
 
