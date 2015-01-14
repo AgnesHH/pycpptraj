@@ -1,7 +1,7 @@
 # This is a list of finished/workable files
 # setup.py will look at uncomment lines to "cythonize"
 DistRoutines
-ComplexArray
+#ComplexArray
 trajs/Trajin
 trajs/Trajout
 ArgList
@@ -14,7 +14,7 @@ iterload
 Atom
 AtomMask
 Box
-BufferedLine
+#BufferedLine
 CpptrajFile
 cpptraj
 CpptrajState
@@ -36,7 +36,7 @@ Vec3
 FileName
 FileTypes
 Frame
-Array1D
+#Array1D
 FrameArray
 FrameArray2
 BaseIOtype
@@ -57,7 +57,7 @@ ReferenceFrame
 DataSetList
 ActionList
 AnalysisList
-Command
+#Command
 trajs/TrajectoryFile
 ReplicaDimArray
 DihedralSearch
@@ -83,7 +83,7 @@ actions/GridAction
 Grid
 MapAtom
 AtomMap
-PointerVec
+#PointerVec
 actions/ImagedAction
 actions/Action_Angle
 actions/Action_AtomicCorr
