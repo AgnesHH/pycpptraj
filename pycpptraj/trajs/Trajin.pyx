@@ -81,9 +81,21 @@ cdef class Trajin (TrajectoryFile):
                 print (start, stop, step)
 
             with self:
+                if start > stop:
+                    # traj[:-1:-3]
+                    is_reversed = True
+                    start, stop = stop, start
+                else:
+                    is_reversed = False
+
                 for i in range(start, stop, step):
                     self.read_traj_frame(i, frame)
                     farray.append(frame)
+
+                if is_reversed:
+                    # reverse vector if using negative index slice
+                    # traj[:-1:-3]
+                    farray.reverse()
             return farray
 
     def frame_iter(self, int start=0, int chunk=1):
