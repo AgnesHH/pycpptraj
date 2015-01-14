@@ -101,6 +101,16 @@ cdef class Frame (object):
         if self.py_free_mem and self.thisptr:
             del self.thisptr
 
+    def same_coords_as(self, Frame other):
+        """check if two frames having the same coords"""
+        cdef bint is_equal = False
+
+        if self.size != other.size:
+            is_equal = False
+        for i in range(self.size):
+            is_equal += (self.coords[i] == other.coords[i])
+        return is_equal
+
     def copy(self):
         """return a copy"""
         cdef Frame frame = Frame()
