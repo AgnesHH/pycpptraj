@@ -6,12 +6,13 @@ state = create_state(top="./data/Tc5b.top", trajin="./data/md1_prod.Tc5b.x", ref
 state.set_no_progress()
 distance = do_calculation(action=Action_Distance(), input="distance :2@CA :10@CA", state=state)
 
-print distance[:10]
+distance[:10]
 
 # make sure to reproduce cpptraj output
 cppout = np.loadtxt("./data/CAres2_CAres10.Tc5b.dat", skiprows=1).transpose()[1]
 print cppout[:10]
 
-np.testing.assert_almost_equal(distance, cppout, decimal=3)
+dsize = len(distance)
+np.testing.assert_almost_equal(distance, cppout[:dsize], decimal=3)
 print "Kool"
 
