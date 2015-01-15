@@ -87,7 +87,7 @@ cdef class Action:
         return self.baseptr.Setup(currenttop.thisptr, &(newtop.thisptr))
 
     @makesureABC("Action")
-    def do_action(self, int idx=0, Frame currentframe=Frame(), Frame newframe=Frame()):
+    def do_action(self, int idx=0, currentframe=Frame(), Frame newframe=Frame()):
         """
         Perform action on Frame. Depend on what action you want to perform, you might get
         newframe or get data from dslist or dflist...
@@ -104,12 +104,23 @@ cdef class Action:
         >>> d0 = cast_dataset(dslist[0], dtype='DataSet_double')
         """
         # debug
-        currentframe.py_free_mem = newframe.py_free_mem = False
+        cdef Frame frame
+        newframe.py_free_mem = False
         #currentframe.py_free_mem = False
         # got double-free memory error when not using above flag
         # end debug
         #return self.baseptr.DoAction(idx, currentframe.thisptr, &(newframe.thisptr))
-        self.baseptr.DoAction(idx, currentframe.thisptr, &(newframe.thisptr))
+        if isinstance(currentframe, Frame):
+            frame = <Frame> currentframe
+            frame.py_free_mem = False
+            self.baseptr.DoAction(idx, frame.thisptr, &(newframe.thisptr))
+        else:
+            # add check
+            # assume Traj instance
+            # TODO : check newframe
+            for frame in currentframe:
+                frame.py_free_mem = False
+                self.baseptr.DoAction(idx, frame.thisptr, &(newframe.thisptr))
 
     @makesureABC("Action")
     def print_output(self):
@@ -133,7 +144,16 @@ cdef class Action:
                    newtop=Topology(),
                    newframe=Frame(),
                    int debug=0):
-        """combined all 3 steps"""
+        """combined all 3 steps
+                master(command='', int idx=0,
+                       currenttop=TopologyList(),currentframe=Frame(),
+                       FrameList flist=FrameList(), 
+                       DataSetList dslist=DataSetList(), 
+                       DataFileList dflist=DataFileList(), 
+                       newtop=Topology(),
+                       newframe=Frame(),
+                       int debug=0):
+        """
         self.read_input(command=command, currenttop=currenttop, 
                         flist=flist, dslist=dslist,
                         dflist=dflist, debug=debug)
