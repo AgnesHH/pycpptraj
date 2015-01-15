@@ -20,6 +20,7 @@ python ./test_TrajectoryFile.py
 python ./test_ParmFile.py
 python ./test_iterload.py
 python ./test_AtomMask.py
+python ./test_load_indices.py
 python ./test_Trajout.py
 python ./test_Vec3.py
 python ./test_GridAction.py
