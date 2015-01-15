@@ -138,7 +138,7 @@ cdef class Topology:
             yield res
             incr(it)
         
-    def mols()self):
+    def mols(self):
         cdef Molecule mol
         cdef mol_iterator it
         it = self.thisptr.MolStart()
@@ -196,7 +196,7 @@ cdef class Topology:
     #@property
     def residuelist(self, mode='normal'):
         reslist = []
-        for res in self.res_generator():
+        for res in self.residues():
             if mode == 'normal':
                 # add resname
                 reslist.append(res.__str__())
