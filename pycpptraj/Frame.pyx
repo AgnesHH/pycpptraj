@@ -103,13 +103,7 @@ cdef class Frame (object):
 
     def same_coords_as(self, Frame other):
         """check if two frames having the same coords"""
-        cdef bint is_equal = False
-
-        if self.size != other.size:
-            is_equal = False
-        for i in range(self.size):
-            is_equal += (self.coords[i] == other.coords[i])
-        return is_equal
+        return (self.coords == other.coords)
 
     def copy(self):
         """return a copy"""
