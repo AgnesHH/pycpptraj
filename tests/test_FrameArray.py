@@ -61,7 +61,7 @@ class TestFrameArray(unittest.TestCase):
 
         #print farray.top
         ts = Trajin_Single()
-        ts.top = farray.top
+        ts.top = farray.top.copy()
         ts.load("ala3.dcd")
         print ts.size
         print ts[0]
