@@ -69,6 +69,7 @@ cdef class Atom:
 
     @property
     def element_short_name(self):
+        """why method name is not short at all? :D"""
         return self.thisptr.ElementName()
 
     def name(self):
