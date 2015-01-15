@@ -58,6 +58,11 @@ cdef class FrameArray:
         #        #frame.py_free_mem = True
         #        del frame.thisptr
 
+    def __del__(self):
+        cdef Frame frame
+        for frame in self:
+            del frame.thisptr
+
     def load(self, fname='', Topology top=None, indices=None):
         # TODO : add more test cases
         # TODO : if indices is a `list` or `tuple`, loading is really slow
