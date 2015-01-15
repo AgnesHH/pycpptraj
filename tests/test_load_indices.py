@@ -94,8 +94,6 @@ class TestIndices(unittest.TestCase):
         print top2
         print top
         del top
-        print top2
-        print top
 
 if __name__ == "__main__":
     unittest.main()
