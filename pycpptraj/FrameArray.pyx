@@ -248,7 +248,8 @@ cdef class FrameArray:
         for _frame in other.frame_v:
             # make a copy
             self.frame_v.push_back(_Frame(_frame))
-        return self
+        #return self
+        #dont return anything
 
     def append(self, Frame framein, copy=True):
         cdef Frame frame = Frame() 
