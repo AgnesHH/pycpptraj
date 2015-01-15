@@ -33,6 +33,22 @@ FARRAY = ts[:FRAMENUM]
 
 class TestFrameArray(unittest.TestCase):
     #@no_test
+    def test_silly_index(self):
+        farray = FrameArray()
+        farray.top = Topology(datadir + "Tc5b.top")
+        farray.load("./data/md1_prod.Tc5b.x", indices=range(100))
+        # got segmentation fault
+        #print farray[:][0][0]
+        # got segmentation fault
+        # why?
+        #print farray[0:][0][0]
+
+        # NOT getting segmentation fault
+        # why?
+        f2 = farray[:]
+        print f2[0][0]
+
+    #@no_test
     def test_load_multiple_files(self):
         print "test_load_multiple_files"
         farray = FrameArray()
