@@ -23,8 +23,8 @@ def get_time_3(indices):
     return time()- t0
 
 print "slice: ", get_time_2(slice(0, 250, 1))
-print get_time(xrange(250))
-print get_time(xrange(0, 250, 1))
+print get_time(range(250))
+print get_time(range(0, 250, 1))
 print "slice: ", get_time(slice(0, 250, 1))
 print get_time(range(100) + range(500, 200, -2))
 print get_time(sorted(range(100) + range(500, 200, -2)))
