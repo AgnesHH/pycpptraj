@@ -24,7 +24,7 @@ def iterload(fname=None, top=Topology(), start=0, chunk=None):
         top = Topology(top)
     return _iterload(top, fname, start, chunk)
 
-def loadtraj(fname=None, top=Topology(), readonly=True, indices=None):
+def loadtraj(fname=None, top=Topology(), readonly=True):
     """load(fname=None, top=Topology(), readonly=True)"""
     if not isinstance(top, Topology):
         # string
@@ -33,7 +33,7 @@ def loadtraj(fname=None, top=Topology(), readonly=True, indices=None):
         ts = Trajin_Single()
     else:
         ts = FrameArray()
-    ts.load(fname, top, indices=indices)
+    ts.load(fname, top)
     return ts
 
 def writetraj(fname="", traj=Trajectory(), top=Topology(), 
