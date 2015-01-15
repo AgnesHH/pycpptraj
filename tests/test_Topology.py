@@ -16,9 +16,9 @@ class TestTopology(unittest.TestCase):
         print top.file_path()
         assert top.is_empty() == False
 
-    @no_test
+    #@no_test
     def test_1(self):
-        datadir = os.environ['PYCPPTRAJ_HOME'] + "/examples/data/"
+        datadir = "./data/" 
         fname = "./data/Tc5b.top"
         
         top = Topology(fname)
@@ -39,15 +39,15 @@ class TestTopology(unittest.TestCase):
         #top.write_parm("test_write2.top")
         
         print "test atom_iterator"
-        for atom in top.atoms():
-            pass
+        for atom in top.atoms:
+            print atom
         
         print "test res_iterator"
-        for res in top.residues():
+        for res in top.residues:
             pass
         
         print "test mol_iterator"
-        for mol in top.mols():
+        for mol in top.mols:
             pass
         
 if __name__ == "__main__":
