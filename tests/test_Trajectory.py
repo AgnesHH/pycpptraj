@@ -11,14 +11,41 @@ print "TRAJ.size", TRAJ.size
 class TestTrajectory(unittest.TestCase):
     def test_slice_basic(self):
         print "test_slice_basic"
-        TRAJ2 = Trajectory()
+        TRAJ2 = FrameArray()
+        print TRAJ2
         #TRAJ2.debug = True
         TRAJ2.top = Topology("./data/Tc5b.top")
         TRAJ2.load("./data/md1_prod.Tc5b.x")
-        print TRAJ2[::]
-        farray = TRAJ2[::]
-        print farray
-        print farray[::][0].n_atoms
+        TRAJ2.load("./data/md1_prod.Tc5b.x")
+        TRAJ2.load("./data/md1_prod.Tc5b.x")
+        TRAJ2.load("./data/md1_prod.Tc5b.x")
+        print "TRAJ.size", TRAJ2.size
+        print TRAJ2[3000]
+        print TRAJ2[3001]
+        print TRAJ2[2].coords[:10]
+        print TRAJ2[2].coords[:10]
+        print TRAJ2[2].coords[:10]
+        print TRAJ2[2].coords[:10]
+        print TRAJ2[2].coords[:10]
+        print TRAJ2[1001]
+        #fsub = TRAJ2[2:10].copy()
+        fsub = TRAJ2[2:10]
+        print fsub[0].coords[0]
+        print fsub[0].coords[0]
+        fsub[0][0] = 100.
+        print fsub[0][0]
+        print TRAJ2[2].coords[0]
+        #print TRAJ2[2:10].copy()[0].coords[:10]
+        #print TRAJ2[::]
+        #farray = TRAJ2[::]
+        #print farray
+        #print "REALLY REALLY "
+        #print farray.size
+        #print farray[:4][0].n_atoms
+        #print farray[:200][0].n_atoms
+        #print farray[:50][0].n_atoms
+        #fsub = farray[:200]
+        #print fsub[0].n_atoms
 
         # TODO : got segmentfault
         #print TRAJ2[::][0].n_atoms
