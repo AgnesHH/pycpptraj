@@ -88,8 +88,8 @@ cdef class FrameArray:
             elif isinstance(indices, slice):
                 self.join(ts[indices])
             else:
-                # indices is tuple, list, array, ...
-                # we loop all traj frames and extract frame-id in indices 
+                # indices is tuple, list, ...
+                # we loop all traj frames and extract frame-ith in indices 
                 # TODO : check negative indexing?
                 # increase size of vector
                 old_size = self.size
@@ -102,6 +102,7 @@ cdef class FrameArray:
                     # TODO : make it faster
                     # really need?
                     if idx in indices:
+                        # only work with `list` or `tuple`
                         idx_idx = indices.index(idx)
                         self[old_size + idx_idx] = ts[idx]
 
