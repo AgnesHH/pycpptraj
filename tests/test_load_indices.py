@@ -1,5 +1,6 @@
 import unittest
 import numpy as np
+from array import array
 from pycpptraj.base import *
 from pycpptraj.io import load
 from pycpptraj.decorators import no_test
@@ -63,6 +64,38 @@ class TestIndices(unittest.TestCase):
         print traj1[100][:11]
         assert (traj1[100][:11] == traj1[0][:11]) == False
         assert (traj1[100].coords[:11] == traj1[0].coords[:11]) == False
+
+    def test_1(self):
+        traj0 = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        traj = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
+        assert traj[0].coords == traj0[0].coords
+        print traj[0].coords[:10]
+
+        traj2 = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:][:10]
+        assert traj2[0].coords == traj0[0].coords
+
+        traj.join(traj[:] + traj[0:100] + traj[999:30:-10])
+        traj += traj[:]
+
+        assert traj[0].coords != array('d', [0 for _ in range(traj[0].size)])
+        assert traj[-1].coords != array('d', [0 for _ in range(traj[0].size)])
+
+        for frame in traj:
+            frame.zero_coords()
+
+        assert traj[0].coords == array('d', [0 for _ in range(traj[0].size)])
+        assert traj[-1].coords == array('d', [0 for _ in range(traj[0].size)])
+
+    def test_del_top(self):
+        # why here? lazy to make another file
+        top = Topology("./data/Tc5b.top")
+        top2 = top
+        print top2 == top
+        print top2
+        print top
+        del top
+        print top2
+        print top
 
 if __name__ == "__main__":
     unittest.main()
