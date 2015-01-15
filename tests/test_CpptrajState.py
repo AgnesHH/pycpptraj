@@ -1,26 +1,6 @@
 import os
-from pycpptraj.Timer import Timer
-from pycpptraj.base import FrameArray
-from pycpptraj.actions.Action_Box import Action_Box
-from pycpptraj.datasets.DataSet_1D import DataSet_1D
-from pycpptraj.DataFileList import DataFileList
-from pycpptraj.cast_dataset import cast_dataset
-from pycpptraj.DataSetList import DataSetList
-from pycpptraj.datasets.DataSet import DataSet
-from pycpptraj.actions.Action_Dihedral import Action_Dihedral
-from pycpptraj.actions.Action_Rmsd import Action_Rmsd
-from pycpptraj.actions.Action_Distance import Action_Distance
-from pycpptraj.Topology import Topology
-from pycpptraj.Frame import Frame
-from pycpptraj.TopologyList import TopologyList
-from pycpptraj.ArgList import ArgList
-from pycpptraj.FileName import FileName
-from pycpptraj.CpptrajState import CpptrajState
-from pycpptraj.CpptrajFile import CpptrajFile
-from pycpptraj.trajs.Trajin import Trajin
-from pycpptraj.TrajinList import TrajinList
-from pycpptraj.ReferenceFrame import ReferenceFrame
-from pycpptraj.FrameList import FrameList
+from pycpptraj.base import *
+from pycpptraj import allactions
 
 # setup filenames
 datadir = "./data/"
@@ -42,34 +22,24 @@ argIn = ArgList(trajininput)
 import unittest
 
 class TestCpptrajState(unittest.TestCase):
-#    def test_ref(self):
-#        refFrame = ReferenceFrame()
-#        refFrame.load_ref("./data/Tc5b.nat.crd", Topology(topname), 0)
-#        topref = refFrame.top
-#        crd = refFrame.frame
-#        print crd.size/3
-#        topref.set_reference_coords( refFrame.frame  )
-#        topref.residue_info(":2-5")
-#    
-#    def test_process_input(self):
-#        state = CpptrajState()
-#        toplist = state.toplist
-#        toplist.add_parm("./data/Tc5b.top")
-#        fname = "./data/pycpptraj.in"
-#        state.add_action(Action_Dihedral(), ArgList(":1@C  :2@N  :2@CA :2@C"))
-#        print state.trajinlist
-#        print state.trajinlist.mode
-#        print state.trajinlist.list()
-#    
+    
     def test_run(self):
         print "test_process_input"
         state2 = CpptrajState()
+
         toplist = state2.toplist
         toplist.add_parm("./data/Tc5b.top")
+
         state2.add_trajin("./data/md1_prod.Tc5b.x")
+
         state2.add_reference("./data/Tc5b.nat.crd")
-        state2.add_action(Action_Distance(), ArgList("distance :2@CA :10@CA"))
-        state2.add_action(Action_Distance(), ArgList("distance :4@CA :10@CA"))
+        state2.add_trajout("./output/test.out")
+
+        state2.add_action(allactions.Action_Distance(), 
+                          ArgList("distance :2@CA :10@CA out ./output/dist_test.txt"))
+
+        state2.add_action(allactions.Action_Distance(), ArgList("distance :4@CA :10@CA"))
+
         state2.framelist.set_active_ref(0)
         print "test framelist.list()"
         state2.run()
@@ -82,8 +52,8 @@ class TestCpptrajState(unittest.TestCase):
 
 
     def test_action(self):
-        distaction = Action_Distance()
-        boxaction = Action_Box()
+        distaction = allactions.Action_Distance()
+        boxaction = allactions.Action_Box()
         boxaction.help()
         toplist = TopologyList()
         framelist = FrameList()
