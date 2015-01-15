@@ -1,0 +1,7 @@
+* farray[:][0][0] : Segmentation fault
+    * solution: 
+    >>> f0 = farray[:]
+    >>> f0[0][0]
+
+* traj += traj
+    * solution: traj += traj[:]
