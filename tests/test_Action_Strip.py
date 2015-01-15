@@ -20,7 +20,7 @@ class TestStrip(unittest.TestCase):
         act = Action_Strip()
         act_surf = allactions.Action_Surf()
 
-        for i in range(10):
+        for i in range(1):
             currentframe = farray[i]
             newframe = Frame()
             dslist = DataSetList()
@@ -30,7 +30,28 @@ class TestStrip(unittest.TestCase):
                        currentframe=frame0, 
                        newframe=newframe, 
                        newtop=newtop)
-    @no_test
+
+            act_surf.master(command="@CA", 
+                       currenttop=top, 
+                       dslist=dslist,
+                       currentframe=farray)
+
+            act_surf.master(command="@H=", 
+                       currenttop=top, 
+                       dslist=dslist,
+                       currentframe=farray)
+
+        print newtop
+        print newframe
+        print dslist.is_empty()
+        print dslist.size
+        print dir(dslist[0])
+        dcast = cast_dataset(dslist[0], dtype='general')
+        print dcast
+        print dcast.size
+        print dcast[:20]
+
+    #@no_test
     def test_0(self):
         print "newtop"
         farray0 = farray.copy()
