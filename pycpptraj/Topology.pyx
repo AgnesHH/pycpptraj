@@ -1,4 +1,4 @@
-# distutils: language = c++
+ distutils: language = c++
 include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
@@ -117,6 +117,7 @@ cdef class Topology:
         atom.thisptr[0] = self.thisptr.index_opr(idx)
         return atom
 
+    @property
     def atoms(self):
         cdef Atom atom
         cdef atom_iterator it
@@ -128,20 +129,24 @@ cdef class Topology:
             yield atom
             incr(it)
 
+    @property
     def residues(self):
         cdef Residue res
         cdef res_iterator it
         it = self.thisptr.ResStart()
+
         while it != self.thisptr.ResEnd():
             res = Residue()
             res.thisptr[0] = deref(it)
             yield res
             incr(it)
         
+    @property
     def mols(self):
         cdef Molecule mol
         cdef mol_iterator it
         it = self.thisptr.MolStart()
+
         while it != self.thisptr.MolEnd():
             mol = Molecule()
             mol.thisptr[0] = deref(it)
