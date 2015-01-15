@@ -85,32 +85,29 @@ cdef class FrameArray:
             if indices is None:
                 # load all frames
                 self.join(ts[:])
-
             elif isinstance(indices, slice):
                 self.join(ts[indices])
             else:
-                raise NotImplementedError("loading random list of numbers is to slow")
                 # indices is tuple, list, array, ...
                 # we loop all traj frames and extract frame-id in indices 
                 # TODO : check negative indexing?
                 # increase size of vector
-                #old_size = self.size
-                #indices_len = len(indices)
+                old_size = self.size
+                indices_len = len(indices)
 
                 # make more room for vector
-                #self.frame_v.resize(old_size + indices_len, _Frame())
-                #print self.size
-                #print self[0]
-                #print self[1]
-                #print self[2]
+                self.frame_v.resize(old_size + indices_len, _Frame())
 
-                #for idx in range(ts.size):
-                #    if idx in indices:
-                #        idx_idx = indices.index(idx)
-                #        self[old_size + idx_idx - 1] = ts[idx].copy()
+                for idx in range(ts.size):
+                    # TODO : make it faster
+                    # really need?
+                    if idx in indices:
+                        idx_idx = indices.index(idx)
+                        self[old_size + idx_idx] = ts[idx]
 
         elif isinstance(fname, (list, tuple)):
             for fh in fname:
+                # recursive
                 self.load(fh, top, indices)
         else:
             raise ValueError("can not load file/files")
