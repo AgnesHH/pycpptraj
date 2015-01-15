@@ -39,15 +39,15 @@ class TestTopology(unittest.TestCase):
         #top.write_parm("test_write2.top")
         
         print "test atom_iterator"
-        for atom in top.atom_generator():
+        for atom in top.atoms():
             pass
         
         print "test res_iterator"
-        for res in top.res_generator():
+        for res in top.residues():
             pass
         
         print "test mol_iterator"
-        for mol in top.mol_generator():
+        for mol in top.mols():
             pass
         
 if __name__ == "__main__":
