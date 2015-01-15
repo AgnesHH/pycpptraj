@@ -2,10 +2,12 @@ import unittest
 import numpy as np
 from pycpptraj.base import *
 from pycpptraj.io import load
+from pycpptraj.decorators import no_test
 
 from load_traj import load as npload
 
 class TestIndices(unittest.TestCase):
+    #@no_test
     def test_0(self):
 
         traj1 = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
@@ -38,14 +40,15 @@ class TestIndices(unittest.TestCase):
         nparr = np.array(rmsdlist)
         for i in range(traj1.size):
             if traj0[0][0] in traj1[i].coords:
-                print i
+                pass
 
         # make sure we don't suport other indices 
         traj2 = FrameArray()
-        self.assertRaises(NotImplementedError, lambda:
-                          traj2.load(fname="./data/md1_prod.Tc5b.x", 
-                                     top=Topology("./data/Tc5b.top"), 
-                                     indices=[1, 5, 3, 20]))
+        traj2.load(fname="./data/md1_prod.Tc5b.x", 
+                   top=Topology("./data/Tc5b.top"), 
+                   indices=range(100) + range(999, 500, -1) + [499])
+        assert traj2[-1].coords == traj1[499].coords
+
 
     def test_array_assigment(self):
         traj1 = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
