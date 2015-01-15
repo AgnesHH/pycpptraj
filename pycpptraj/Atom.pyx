@@ -57,7 +57,8 @@ cdef class Atom:
         return self.thisptr.NoMol()
 
     def __str__(self):
-        return self.thisptr.c_str()
+        txt = "Atom object with name %s " % self.thisptr.c_str()
+        return txt
 
     @property
     def element(self):
