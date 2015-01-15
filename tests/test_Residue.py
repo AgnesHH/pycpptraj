@@ -28,7 +28,7 @@ class TestResidue(unittest.TestCase):
         top = tl.get_parm(1)
         
         print "get 1st residue"
-        res1 = top.res_generator().next()
+        res1 = top.residues().next()
         
         # get residue's name
         print res1
@@ -43,11 +43,11 @@ class TestResidue(unittest.TestCase):
         #print res1.NameIsSolvent()
         
         # print all residue's name in top file
-        #for res in top.res_generator():
+        #for res in top.residues():
         #    print res
         
         # test iterator
-        gen = top.res_generator()
+        gen = top.residues()
         print gen.next()
         print gen.next()
         print gen.next()
