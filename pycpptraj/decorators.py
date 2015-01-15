@@ -18,6 +18,10 @@ def makesureABC(classname):
                 raise NotImplementedError("This is Abstract Base Class")
             else:
                 return func(self, *args, **kwd)
+
+        # update _inner doc for func
+        _inner.__doc__ = func.__doc__
+        _inner.__name__ = func.__name__
         return _inner
     return inner
 
