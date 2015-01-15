@@ -91,7 +91,6 @@ if __name__ == "__main__":
         description="""Python wrapper for cpptraj""",
         long_description=read("README.md"),
         license = "BSD License",
-        platform = "",
         classifiers=[
                     'Development Status :: Beta',
                     'Operating System :: Linux',
