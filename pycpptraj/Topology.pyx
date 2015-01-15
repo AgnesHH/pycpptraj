@@ -5,6 +5,8 @@ from cython.operator cimport preincrement as incr
 from libcpp.string cimport string
 from pycpptraj.TopologyList cimport TopologyList
 
+from pycpptraj.decorators import name_will_be_changed
+
 # Python level
 # use for write parm
 #from pycpptraj.parms.Parm_Amber import Parm_Amber
@@ -115,7 +117,7 @@ cdef class Topology:
         atom.thisptr[0] = self.thisptr.index_opr(idx)
         return atom
 
-    def atom_generator(self):
+    def atoms(self):
         cdef Atom atom
         cdef atom_iterator it
 
@@ -126,7 +128,7 @@ cdef class Topology:
             yield atom
             incr(it)
 
-    def res_generator(self):
+    def residues(self):
         cdef Residue res
         cdef res_iterator it
         it = self.thisptr.ResStart()
@@ -136,7 +138,7 @@ cdef class Topology:
             yield res
             incr(it)
         
-    def mol_generator(self):
+    def mols()self):
         cdef Molecule mol
         cdef mol_iterator it
         it = self.thisptr.MolStart()
