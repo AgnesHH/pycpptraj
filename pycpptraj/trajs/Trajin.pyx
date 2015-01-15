@@ -135,10 +135,6 @@ cdef class Trajin (TrajectoryFile):
         self.baseptr_1.GetNextFrame(frame.thisptr[0])
         #return frame
 
-    def set_max_frames(self,int idx):
-        self.check_allocated()
-        self.baseptr_1.SetTotalFrames(idx)
-
     def setup_trajio(self, string s, TrajectoryIO trajio, ArgList arglist):
         self.check_allocated()
         return self.baseptr_1.SetupTrajIO(s, trajio.baseptr_1[0], arglist.thisptr[0])
@@ -163,12 +159,15 @@ cdef class Trajin (TrajectoryFile):
         self.check_allocated()
         self.baseptr_1.PrintFrameInfo()
 
-    @property
-    def max_frames(self):
-        if self.baseptr_1:
-            return self.baseptr_1.TotalFrames()
-        else:
-            return 0
+    property max_frames:
+        def __get__(self):
+            if self.baseptr_1:
+                return self.baseptr_1.TotalFrames()
+            else:
+                return 0
+
+        def __set__(self, int value):
+            self.baseptr_1.SetTotalFrames(value)
 
     @property
     def size(self):
