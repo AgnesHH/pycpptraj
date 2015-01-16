@@ -584,11 +584,12 @@ cdef class Frame (object):
         self._strip_atoms(top, mask, update_top, has_box)
 
     def __getbuffer__(self, Py_buffer* view, int flags):
-        view.buf = self.buffer.buf
-        view.len = self.buffer.len
-        view.shape = self.buffer.shape
-        view.strides = self.buffer.strides
-        view.readonly = 0
-        view.format = self.buffer.format
-        view.itemsize = self.buffer.itemsize
-        view.ndim = self.buffer.ndim
+        pass
+        #view.buf = self.buffer.buf
+        #view.len = self.buffer.len
+        #view.shape = self.buffer.shape
+        #view.strides = self.buffer.strides
+        #view.readonly = 0
+        #view.format = self.buffer.format
+        #view.itemsize = self.buffer.itemsize
+        #view.ndim = self.buffer.ndim
