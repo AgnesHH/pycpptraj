@@ -5,6 +5,7 @@ from cython cimport view
 from cpython.array cimport array as pyarray
 from cython.operator cimport dereference as deref
 from libcpp.vector cimport vector
+from cpython.buffer cimport Py_buffer
 from pycpptraj.decorators import for_testing, iter_warning
 
 def check_instance(inst, clsname):
