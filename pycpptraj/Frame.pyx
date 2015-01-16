@@ -583,11 +583,11 @@ cdef class Frame (object):
                        bint update_top=False, bint has_box=False)"""
         self._strip_atoms(top, mask, update_top, has_box)
 
-    def __getbuffer__(self, Py_buffer* view, int flags):
+    def __getbuffer__(self, Py_buffer* viewout, int flags):
         cdef double* ptr = self.thisptr.xAddress()
         cdef view.array my_arr
         my_arr = <double[:<int>self.size]> ptr
-        view = my_arr
+        viewout = my_arr
         #pass
         #view.buf = self.buffer.buf
         #view.len = self.buffer.len
