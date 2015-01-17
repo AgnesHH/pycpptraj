@@ -25,7 +25,7 @@ class Test(unittest.TestCase):
         assert distance(arr0, arr4) == math.sqrt(1+ 1 + 1)
 
     def test_distance_from_frame(self):
-        traj = FrameArray(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        traj = FrameArray(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
         frame0 = traj[10]
 
         print distance(frame0.coords[0:3], frame0.coords[96:99])
