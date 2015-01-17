@@ -30,12 +30,12 @@ cdef class ParmFile:
         """return a list of supported parm formats"""
         return ParmFormatDict.keys()
 
-    def readparm(self, Topology top=Topology(), string fname="AMBERPARM", *args):
-        """readparm(Topology top=Topology(), string fname="", "*args)
+    def readparm(self, Topology top=Topology(), string filename="AMBERPARM", *args):
+        """readparm(Topology top=Topology(), string filename="", "*args)
         Return : None (update `top`)
 
         top : Topology instance
-        fname : str, output filename
+        filename : str, output filename
         arglist : ArgList instance, optional
 
         """
@@ -43,10 +43,10 @@ cdef class ParmFile:
         cdef debug = 0
 
         if not args:
-            self.thisptr.ReadTopology(top.thisptr[0], fname, debug)
+            self.thisptr.ReadTopology(top.thisptr[0], filename, debug)
         else:
             arglist = <ArgList> args[0]
-            self.thisptr.ReadTopology(top.thisptr[0], fname, arglist.thisptr[0], debug)
+            self.thisptr.ReadTopology(top.thisptr[0], filename, arglist.thisptr[0], debug)
 
     def write_prefix_topology(self, Topology top=Topology(), string prefix="default", fmt=""):
         """write_prefix_topology(Topology Top, string prefix, fmt="AMBER")
@@ -78,9 +78,9 @@ cdef class ParmFile:
         if err == 1:
             print "Not supported or failed to write"
 
-    def writeparm(self, Topology top=Topology(), string fname="default.top", 
+    def writeparm(self, Topology top=Topology(), string filename="default.top", 
                   ArgList arglist=ArgList(), string fmt=""):
-        """writeparm(Topology top=top, string fname="default.top", 
+        """writeparm(Topology top=top, string filename="default.top", 
                      ArgList arglist=ArgList(), string fmt="AMBER")")
         TODO : automatically get ParmFormatDict for this doc
         ParmFormatDict = {
@@ -110,12 +110,12 @@ cdef class ParmFile:
         if top.is_empty():
             raise ValueError("empty topology")
 
-        err = self.thisptr.WriteTopology(top.thisptr[0], fname, arglist.thisptr[0], parmtype, debug)
+        err = self.thisptr.WriteTopology(top.thisptr[0], filename, arglist.thisptr[0], parmtype, debug)
         if err == 1:
             print "Not supported or failed to write"
 
     def filename(self):
-        cdef FileName fname = FileName()
-        #del fname.thisptr
-        fname.thisptr[0] = self.thisptr.ParmFilename()
-        return fname
+        cdef FileName filename = FileName()
+        #del filename.thisptr
+        filename.thisptr[0] = self.thisptr.ParmFilename()
+        return filename
