@@ -14,7 +14,7 @@ from pycpptraj.base import *
 class TestIterLoad(unittest.TestCase):
     def test_iterload_0(self):
         """get single frame"""
-        genobj = iterload(fname="./data/md1_prod.Tc5b.x", top=Topology("./data/Tc5b.top"))
+        genobj = iterload(filename="./data/md1_prod.Tc5b.x", top=Topology("./data/Tc5b.top"))
         
         frame0 = genobj.next()
         print frame0
@@ -28,7 +28,7 @@ class TestIterLoad(unittest.TestCase):
         for i in range(1):
             print ""
             print "loop number = %s-th" % i
-            genobj = iterload(fname="./data/md1_prod.Tc5b.x", top=Topology("./data/Tc5b.top"), chunk=50)
+            genobj = iterload(filename="./data/md1_prod.Tc5b.x", top=Topology("./data/Tc5b.top"), chunk=50)
             
             farray = genobj.next()
             farray.warning = True
