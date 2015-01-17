@@ -28,10 +28,10 @@ cdef class Vec3:
         if self.thisptr is not NULL:
             del self.thisptr
 
-    def __str__(self):
-        cdef double x, y, z 
-        x, y, z = self.to_list()
-        return "Vec3 %s %s %s" %(str(x), str(y), str(z))
+    #def __str__(self):
+    #    cdef double x, y, z 
+    #    x, y, z = self.to_list()
+    #    return "Vec3 %s %s %s" %(str(x), str(y), str(z))
 
     def Magnitude2(self):
         return self.thisptr.Magnitude2()
