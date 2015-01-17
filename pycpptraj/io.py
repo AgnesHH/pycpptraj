@@ -18,15 +18,15 @@ def load(*args, **kwd):
         # load traj
         return loadtraj(*args, **kwd)
 
-def iterload(fname=None, top=Topology(), start=0, chunk=None):
-    """iterload(fname=None, top=Topology(), start=0, chunk=None)"""
+def iterload(filename=None, top=Topology(), start=0, chunk=None):
+    """iterload(filename=None, top=Topology(), start=0, chunk=None)"""
     if not isinstance(top, Topology):
         # string
         top = Topology(top)
-    return _iterload(top, fname, start, chunk)
+    return _iterload(top, filename, start, chunk)
 
-def loadtraj(fname=None, top=Topology(), readonly=True):
-    """load(fname=None, top=Topology(), readonly=True)"""
+def loadtraj(filename=None, top=Topology(), readonly=True):
+    """load(filename=None, top=Topology(), readonly=True)"""
     if not isinstance(top, Topology):
         # string
         top = Topology(top)
@@ -34,15 +34,15 @@ def loadtraj(fname=None, top=Topology(), readonly=True):
         ts = Trajin_Single()
     else:
         ts = FrameArray()
-    ts.load(fname, top)
+    ts.load(filename, top)
     return ts
 
-def writetraj(fname="", traj=Trajectory(), top=Topology(), 
+def writetraj(filename="", traj=Trajectory(), top=Topology(), 
               fmt='AMBERTRAJ', indices=None):
-    """writetraj(fname="", traj=Trajectory(), top=Topology(), 
+    """writetraj(filename="", traj=Trajectory(), top=Topology(), 
               ftm='AMBERTRAJ', indices=None):
     """
-    with Trajout(fname=fname, top=top, fmt=fmt) as trajout:
+    with Trajout(filename=filename, top=top, fmt=fmt) as trajout:
         if isinstance(traj, Frame):
             if indices is not None:
                 raise ValueError("indices does not work with single Frame")
@@ -57,12 +57,12 @@ def writetraj(fname="", traj=Trajectory(), top=Topology(),
                 for idx in indices:
                     trajout.writeframe(idx, traj[idx], top)
 
-def writeparm(fname=None, top=None, fmt='AMBERPARM'):
+def writeparm(filename=None, top=None, fmt='AMBERPARM'):
     # TODO : add *args
     from pycpptraj.parms.ParmFile import ParmFile
     parm = ParmFile()
-    parm.writeparm(fname=fname, top=top, fmt=fmt)
+    parm.writeparm(filename=filename, top=top, fmt=fmt)
 
-def readparm(fname):
+def readparm(filename):
     """return topology instance from reading filename"""
-    return Topology(fname)
+    return Topology(filename)
