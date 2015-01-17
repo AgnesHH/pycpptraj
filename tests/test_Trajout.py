@@ -25,7 +25,7 @@ class TestTrajout(unittest.TestCase):
         assert trajout.is_open() == True
         trajout.close()
 
-    #@no_test
+    @no_test
     def test_with_statement(self):
         frame0 = farray[0]
         with Trajout(fname="test_trajout_withstatement.x", top=farray.top) as trajout:
@@ -42,7 +42,7 @@ class TestTrajout(unittest.TestCase):
         
         print Trajout.formats()
         
-    #@no_test
+    @no_test
     def test_1(self):
         """test open file writen from test_0"""
         farray = FrameArray()
@@ -50,7 +50,7 @@ class TestTrajout(unittest.TestCase):
         farray.load("test.x")
         print farray.size
        
-    #@no_test
+    @no_test
     def test_2(self):
         """test write FrameArray"""
         farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
@@ -58,8 +58,13 @@ class TestTrajout(unittest.TestCase):
 
     def test_write_PDBFILE(self):
         frame0 = farray[0]
-        with Trajout(fname="test_0.pdb", top=farray.top, fmt="PDBFILE", more_args="pdb") as trajout:
+        with Trajout(fname="test_0.pdb", top=farray.top, fmt="PDBFILE", more_args=".pdb") as trajout:
+        #with Trajout(fname="test_0.pdb", top=farray.top, fmt="PDBFILE") as trajout:
             trajout.writeframe(0, frame0, farray.top)
+
+    def test_load(self):
+        farray = FrameArray("test_0.pdb.1", "./data/Tc5b.top")[0]
+        print farray.n_atoms
 
 if __name__ == "__main__":
     unittest.main()
