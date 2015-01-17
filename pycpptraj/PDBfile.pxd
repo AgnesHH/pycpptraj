@@ -7,14 +7,15 @@ from pycpptraj.Atom cimport *
 cdef extern from "PDBfile.h": 
     # PDBfile.h
     ctypedef enum PDB_RECTYPE "PDBfile::PDB_RECTYPE":
-        ATOM "PDBfile::ATOM"
-        HETATM "PDBfile::HETATM"
-        CRYST1 "PDBfile::CRYST1"
-        TER "PDBfile::TER"
-        END "PDBfile::END"
-        ANISOU "PDBfile::ANISOU"
-        END_OF_FILE "PDBfile::END_OF_FILE"
-        UNKNOWN "PDBfile::UNKNOWN"
+        pass
+        #ATOM "PDBfile::ATOM"
+        #HETATM "PDBfile::HETATM"
+        #CRYST1 "PDBfile::CRYST1"
+        #TER "PDBfile::TER"
+        #END "PDBfile::END"
+        #ANISOU "PDBfile::ANISOU"
+        #END_OF_FILE "PDBfile::END_OF_FILE"
+        #UNKNOWN "PDBfile::UNKNOWN"
     cdef cppclass _PDBfile "PDBfile":
         _PDBfile() 
         bint ID_PDB(_CpptrajFile&)
@@ -42,4 +43,3 @@ cdef extern from "PDBfile.h":
 
 cdef class PDBfile:
     cdef _PDBfile* thisptr
-
