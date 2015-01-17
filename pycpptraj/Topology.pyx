@@ -201,7 +201,7 @@ cdef class Topology:
     #@property
     def residuelist(self, mode='normal'):
         reslist = []
-        for res in self.residues():
+        for res in self.residues:
             if mode == 'normal':
                 # add resname
                 reslist.append(res.__str__())
