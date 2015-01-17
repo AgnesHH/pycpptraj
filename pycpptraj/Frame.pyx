@@ -443,20 +443,39 @@ cdef class Frame (object):
         self.thisptr.NegTranslate(vec.thisptr[0])
 
     def rotate(self, Matrix_3x3 m3, *args):
+        """rotate(Matrix_3x3 m3, *args)
+        Paramters:
+        m3 : Matrix_3x3
+        *args : optional
+            atmmaks : AtomMaks instance
+         or (mask (str), Topology instance)
+
+        """
         cdef AtomMask atmask
+        cdef string mask
+        cdef Topology top
+
         if not args:
             self.thisptr.Rotate(m3.thisptr[0])
         elif len(args) == 1:
             atmask = args[0]
             self.thisptr.Rotate(m3.thisptr[0], atmask.thisptr[0])
+        elif len(args) == 2:
+            mask, top = args
+            atmask = AtomMask(mask)
+            top.set_integer_mask(atmask)
+            self.thisptr.Rotate(m3.thisptr[0], atmask.thisptr[0])
 
     def trans_rot_trans(self, Vec3 vec3, Matrix_3x3 m3, Vec3 vec3_2):
+        # TODO : add doc, make test case
         self.thisptr.Trans_Rot_Trans(vec3.thisptr[0], m3.thisptr[0], vec3_2.thisptr[0])
 
     def scale(self, AtomMask atm, double sx, double sy, double sz):
+        # TODO : add doc, make test case
         self.thisptr.Scale(atm.thisptr[0], sx, sy, sz)
 
     def center_on_origin(self,bint useMassIn):
+        # TODO : add doc, make test case
         cdef Vec3 v = Vec3()
         v.thisptr[0] = self.thisptr.CenterOnOrigin(useMassIn)
         return v
@@ -582,7 +601,3 @@ cdef class Frame (object):
             raise ValueError("Empty topology is not allowed")
         top.set_integer_mask(atm)
         return Frame(self, atm)
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
