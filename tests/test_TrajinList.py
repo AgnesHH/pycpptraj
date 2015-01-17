@@ -4,7 +4,7 @@ from pycpptraj.TrajinList import TrajinList
 
 topname = "./data/Tc5b.top"
 trajoutname = "./data/test.x"
-refname = "./data/Tc5b.nat.crd"
+refilename = "./data/Tc5b.nat.crd"
 trajinname = "./data/md1_prod.Tc5b.x"
 toplist = TopologyList()
 toplist.add_parm(topname)
