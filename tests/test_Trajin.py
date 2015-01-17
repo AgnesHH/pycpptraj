@@ -3,7 +3,7 @@ from pycpptraj.base import *
 
 class TestTrajin(unittest.TestCase):
     def test_0(self):
-        TRAJ = Trajin_Single(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        TRAJ = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
         trajin = TRAJ.alloc()
         print trajin.top
         #print trajin.size
