@@ -4,6 +4,7 @@ import baseclasses for pycpptraj
 # TODO : make this file shorter
 import sys
 
+from pycpptraj.Atom import Atom
 from pycpptraj.Frame import Frame
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.FrameArray2 import FrameArray2 
@@ -21,8 +22,6 @@ from pycpptraj.TrajinList import TrajinList
 from pycpptraj.TopologyList import TopologyList
 from pycpptraj.DataFileList import DataFileList
 from pycpptraj.DataSetList import DataSetList
-#from pycpptraj.datasets.DataSet_Coords_CRD import DataSet_Coords_CRD
-#from pycpptraj.datasets.DataSet_Coords_TRJ import DataSet_Coords_TRJ
 from pycpptraj.ActionList import ActionList
 from pycpptraj.cast_dataset import cast_dataset
 from pycpptraj import cpptraj_dict
@@ -31,7 +30,8 @@ from pycpptraj.parms.Parm_Amber import Parm_Amber
 
 
 # `Trajectory` is alias of `FrameArray`
-__all__ = ['Topology', 'TopologyList', 
+__all__ = ['Atom',
+           'Topology', 'TopologyList', 
            'Frame', 'FrameArray', 
            'ReferenceFrame', 'AtomMask', 
            'ArgList', 'CpptrajState', 
