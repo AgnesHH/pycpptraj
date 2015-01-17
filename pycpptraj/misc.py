@@ -6,14 +6,14 @@ from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.Topology import Topology
 
-def iterload(top=None, fname=None, start=0, chunk=None):
+def iterload(top=None, filename=None, start=0, chunk=None):
     '''Iterately return Frame instance'''
     if not isinstance(top, Topology):
         # string
         top = Topology(top)
-    return _iterload(top, fname, start, chunk)
+    return _iterload(top, filename, start, chunk)
 
-def load(top=None, fname=None, readonly=True):
+def load(top=None, filename=None, readonly=True):
     if not isinstance(top, Topology):
         # string
         top = Topology(top)
@@ -21,7 +21,7 @@ def load(top=None, fname=None, readonly=True):
         ts = Trajin_Single()
     else:
         ts = FrameArray()
-    ts.load(fname, top)
+    ts.load(filename, top)
     return ts
 
 def strip(arg, mask):
@@ -76,10 +76,10 @@ def fit(frame, ref=None):
         # TODO : fitting
         pass
 
-def write_output(fname, frames, top, ftm='AMBERTRAJ'):
+def write_output(filename, frames, top, ftm='AMBERTRAJ'):
     """write Frame or FrameArray"""
     trajout = Trajout()
-    trajout.open(fname=fname, top=top, fmt=ftm)
+    trajout.open(filename=filename, top=top, fmt=ftm)
     if isinstance(frames, Frame):
         trajout.writeframe(0, frame, top)
     elif isinstance(frames, FrameArray) or isinstance(frames, Trajin_Single):
