@@ -52,15 +52,15 @@ cdef class CpptrajState:
 
     def add_trajin(self, arg, isEnsemble=False):
         # TODO: add trajector instance?
-        cdef string fname
+        cdef string filename
         cdef ArgList argIn
         
         if isinstance(arg, ArgList):
             argIn = arg
             self.thisptr.AddTrajin(argIn.thisptr[0], isEnsemble)
         elif isinstance(arg, basestring):
-            fname = arg
-            self.thisptr.AddTrajin(fname)
+            filename = arg
+            self.thisptr.AddTrajin(filename)
         else:
             raise NotImplementedError()
 
@@ -90,15 +90,15 @@ cdef class CpptrajState:
             raise MemoryError("")
 
     def add_trajout(self, arg):
-        cdef string fname
+        cdef string filename
         cdef ArgList arglist
 
         if isinstance(arg, ArgList):
             arglist = arg
             return self.thisptr.AddTrajout(arglist.thisptr[0])
         elif isinstance(arg, basestring):
-            fname = arg
-            return self.thisptr.AddTrajout(fname)
+            filename = arg
+            return self.thisptr.AddTrajout(filename)
         else:
             raise NotImplementedError()
 
