@@ -78,6 +78,7 @@ def fit(frame, ref=None):
 
 def write_output(filename, frames, top, ftm='AMBERTRAJ'):
     """write Frame or FrameArray"""
+    # TODO : move to `io.py`
     trajout = Trajout()
     trajout.open(filename=filename, top=top, fmt=ftm)
     if isinstance(frames, Frame):
@@ -89,4 +90,9 @@ def write_output(filename, frames, top, ftm='AMBERTRAJ'):
     trajout.close()
 
 def get_subframe(frame=None, mask=None, top=None):
+    # TODO : move to `io.py`
     return frame.get_subframe(mask, top)
+
+def file_exist(filename):
+    import os
+    return os.path.isfile(filename)
