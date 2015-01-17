@@ -15,18 +15,34 @@ FRAME.set_from_crd(arr)
 FRAME_orig = FRAME.copy()
 
 class TestFrame(unittest.TestCase):
+    def test_create_frame(self):
+        # test creating Frame from a list!
+        frame = Frame(range(300))
+        assert frame.size == 300
+        assert frame.n_atoms == 100
+        assert frame.coords == array('d', [x for x in range(300)])
+        assert frame[:] == frame.coords
+
+        frame[:] = array('d', range(300, 0, -1))
+        assert frame[:] == array('d', range(300, 0, -1))
+        assert frame.coords == array('d', range(300, 0, -1))
+
+        frame[:] = np.arange(300, dtype='d')
+        assert frame.coords == array('d', [x for x in range(300)])
+        assert frame[:] == frame.coords
+  
     def test_buffer(self):
         print "+++++start test_buffer+++++++"
-        print FRAME.coords_copy()
+        print FRAME.coords
         print FRAME.buffer
 
         FRAME.buffer[0] = 199.
-        print FRAME.coords_copy()[0]
+        print FRAME.coords[0]
         print FRAME[0]
-        assert FRAME[0] == FRAME.buffer[0] == FRAME.coords_copy()[0]
+        assert FRAME[0] == FRAME.buffer[0] == FRAME.coords[0]
 
         FRAME[0] = 0.1
-        assert FRAME[0] == FRAME.buffer[0] == FRAME.coords_copy()[0]
+        assert FRAME[0] == FRAME.buffer[0] == FRAME.coords[0]
         assert FRAME.buffer[-1] == FRAME[-1] == 29.
 
         FRAME.buffer[:3] = array('d', [1, 2.3, 3.4])
@@ -77,7 +93,7 @@ class TestFrame(unittest.TestCase):
         frame = Frame(N_ATOMS)
         arr = np.arange(3 * N_ATOMS)
         frame.set_from_crd(arr)
-        print frame.coords_copy()
+        print frame.coords
 
         #print "test negative indexing"
         print frame[-1]
@@ -101,6 +117,26 @@ class TestFrame(unittest.TestCase):
     def test_other_stuff(self):
         print "print FRAME"
         print FRAME
+
+        farray = FrameArray("./data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=(1,))
+        frame0 = farray[0]
+        print frame0
+        atm = AtomMask("@CA")
+        farray.top.set_integer_mask(atm)
+        print dir(atm)
+        frame1 = Frame(frame0, atm)
+        frame2 = frame0.get_subframe(mask="@CA", top=farray.top)
+        frame3 = frame0.get_subframe("@CA", farray.top)
+        assert frame1.coords == frame2.coords == frame3.coords
+        frame4 = frame0.get_subframe("!@CA", farray.top)
+        print frame4
+
+    def test_rmsd_return_mat_vec_vec(self):
+        # TODO : add assert
+        print "test_rmsd_return_mat_vec_vec"
+        farray = FrameArray("./data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=(1,2))
+        rmsd, mat, v1, v2 = farray[0].rmsd(farray[1], get_mvv=True)
+        print rmsd,  mat, v1, v2
 
     def test_long(self):
         N_ATOMS = 10
@@ -153,9 +189,9 @@ class TestFrame(unittest.TestCase):
 
         print "set zero_coords_copy"
         frame.zero_coords()
-        arr = np.asarray(frame.coords_copy())
+        arr = np.asarray(frame.coords)
         frame[0] = 1001.10
-        assert frame[0] == frame.coords_copy()[0]
+        assert frame[0] == frame.coords[0]
         print frame[0]
         
         arrref = np.random.rand(30)
@@ -166,6 +202,7 @@ class TestFrame(unittest.TestCase):
         print frame.atom_xyz(0)
         assert frame.atom_xyz(0) == array('d', [0., 0., 0.1])
         assert frame.atom_xyz(3) ==  array('d', [1.1, 2.3, 3.])
+
 
 if __name__ == "__main__":
     unittest.main()
