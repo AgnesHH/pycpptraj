@@ -78,8 +78,8 @@ cdef class TrajectoryFile:
     def set_debug(self, int debug=0):
         self.baseptr0.SetDebug(debug)
 
-    def set_trajfilename(self, string fname, bint is_read=True):
-        self.baseptr0.SetTrajFileName(fname, is_read)
+    def set_trajfilename(self, string filename, bint is_read=True):
+        self.baseptr0.SetTrajFileName(filename, is_read)
 
     # this decorator does not work
     # Python complains that 'property' is not callable
@@ -110,8 +110,8 @@ cdef class TrajectoryFile:
             self._top.thisptr = self.baseptr0.TrajParm()
 
     def trajfilename(self):
-        cdef FileName fname = FileName()
-        if not fname.thisptr:
+        cdef FileName filename = FileName()
+        if not filename.thisptr:
             raise MemoryError("Can not get Filename instance")
-        fname.thisptr[0] = self.baseptr0.TrajFilename()
-        return fname
+        filename.thisptr[0] = self.baseptr0.TrajFilename()
+        return filename
