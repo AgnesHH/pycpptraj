@@ -44,7 +44,7 @@ cdef class ReferenceFrame:
         return fn
 
     def load_ref(self, string filename="", Topology top=Topology(), int debug=0, ArgList arglist=ArgList(), string mask=""):
-        """Temp doc: load_ref(self, string fname, Topology parmIn, debug=0, *args)"""
+        """Temp doc: load_ref(self, string filename, Topology parmIn, debug=0, *args)"""
         return self.thisptr.LoadRef(filename, arglist.thisptr[0], top.thisptr, mask, debug)
 
     def strip_ref(self, AtomMask atm):
