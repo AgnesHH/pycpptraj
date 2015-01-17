@@ -10,7 +10,7 @@ from decorator import no_test
 ts = Trajin_Single()
 datadir = "./data/"
 topname = datadir + "Tc5b.top"
-refname = "./data/Tc5b.nat.crd"
+refilename = "./data/Tc5b.nat.crd"
 mdx = "./data/md1_prod.Tc5b.x"
 ts = Trajin_Single()
 print ts.top.tag
@@ -84,10 +84,10 @@ class TestFrameArray(unittest.TestCase):
 
     #@no_test
     def test_default_load(self):
-        farray0 = FrameArray(fname="./data/md1_prod.Tc5b.x", top=Topology(datadir + "Tc5b.top"), indices=slice(0, 10, 2))
+        farray0 = FrameArray(filename="./data/md1_prod.Tc5b.x", top=Topology(datadir + "Tc5b.top"), indices=slice(0, 10, 2))
         print farray0
-        farray1 = FrameArray(fname="./data/md1_prod.Tc5b.x", top=Topology(datadir + "Tc5b.top"), indices=range(30, 40))
-        farray2 = FrameArray(fname="./data/md1_prod.Tc5b.x", top=Topology(datadir + "Tc5b.top"), indices=range(30, 40))
+        farray1 = FrameArray(filename="./data/md1_prod.Tc5b.x", top=Topology(datadir + "Tc5b.top"), indices=range(30, 40))
+        farray2 = FrameArray(filename="./data/md1_prod.Tc5b.x", top=Topology(datadir + "Tc5b.top"), indices=range(30, 40))
         farray0.join(farray1, farray2)
         print farray0
 
@@ -106,13 +106,13 @@ class TestFrameArray(unittest.TestCase):
     def test_load(self):
         farray = FrameArray()
         farray.top = Topology(datadir + "Tc5b.top")
-        farray.load(fname="./data/md1_prod.Tc5b.x")
+        farray.load(filename="./data/md1_prod.Tc5b.x")
         # add more frame
-        farray.load(fname="./data/md1_prod.Tc5b.x", top=ts.top)
+        farray.load(filename="./data/md1_prod.Tc5b.x", top=ts.top)
         # add slice
-        farray.load(fname="./data/md1_prod.Tc5b.x", top=ts.top, indices=slice(0, ts.size, 2))
-        farray.load(fname="./data/md1_prod.Tc5b.x", top=ts.top, indices=slice(0, ts.size, 2))
-        farray.load(fname="./data/md1_prod.Tc5b.x", top=ts.top, indices=(1, 3, 99, 500))
+        farray.load(filename="./data/md1_prod.Tc5b.x", top=ts.top, indices=slice(0, ts.size, 2))
+        farray.load(filename="./data/md1_prod.Tc5b.x", top=ts.top, indices=slice(0, ts.size, 2))
+        farray.load(filename="./data/md1_prod.Tc5b.x", top=ts.top, indices=(1, 3, 99, 500))
 
         # load list of files
         flist = ["./data/md1_prod.Tc5b.x", "./data/md1_prod.Tc5b.x"]
