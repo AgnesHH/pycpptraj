@@ -106,14 +106,14 @@ class TestTrajectory(unittest.TestCase):
         arr = np.asarray(TRAJ2[0].buffer)
         print "len"
         print len(arr)
-        print TRAJ2[0].coords_copy()[:10]
+        print TRAJ2[0].coords[:10]
         print "arr[:10]: ", arr[:10]
         print "test buffer view"
         frame0 = TRAJ2[0]
         arr0 = np.asarray(frame0.buffer)
         print "arr0[:10]: ", arr0[:10]
-        print TRAJ2[0].coords_copy()[:10]
-        print frame0.coords_copy()[:10]
+        print TRAJ2[0].coords[:10]
+        print frame0.coords[:10]
 
         mat0 = np.asmatrix(arr0).reshape(304, 3) 
         print mat0.shape
@@ -131,16 +131,16 @@ class TestTrajectory(unittest.TestCase):
         TRAJ2.load("./data/md1_prod.Tc5b.x")
         print TRAJ2.size
         print TRAJ2.top.n_atoms
-        print TRAJ2[0].coords_copy()[:10]
-        print TRAJ2[100].coords_copy()[:10]
+        print TRAJ2[0].coords[:10]
+        print TRAJ2[100].coords[:10]
         print "out of index testing"
         self.assertRaises(ValueError, lambda: TRAJ2[10407])
         assert TRAJ2[0] != TRAJ2[100]
 
         print "test negative indexing"
-        print TRAJ2[-1].coords_copy()[0] 
-        print TRAJ2[10406].coords_copy()[0]
-        assert TRAJ2[-1].coords_copy()[0] == TRAJ2[10406].coords_copy()[0]
+        print TRAJ2[-1].coords[0] 
+        print TRAJ2[10406].coords[0]
+        assert TRAJ2[-1].coords[0] == TRAJ2[10406].coords[0]
 
     #@no_test
     def test_iter_basic(self):
