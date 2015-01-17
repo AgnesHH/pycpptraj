@@ -9,7 +9,9 @@ from pycpptraj._utils cimport get_positive_idx
 from pycpptraj.Trajectory import Trajectory
 
 cdef class FrameArray:
-    def __cinit__(self, string filename='', top=None, indices=None, bint warning=False):
+    def __cinit__(self, string filename='', top=None, indices=None, 
+                  bint warning=False,
+                  mask=None):
 
         if isinstance(top, basestring):
             self.top = Topology(top)
@@ -18,6 +20,8 @@ cdef class FrameArray:
         else:
             # create empty topology
             self.top = Topology()
+
+        self.oldtop = None
 
         self.warning = warning
 
@@ -28,7 +32,7 @@ cdef class FrameArray:
         #self.is_mem_parent = True
         if not filename.empty():
             # TODO : check if file exist
-            self.load(filename=filename, indices=indices)
+            self.load(filename=filename, indices=indices, mask=mask)
 
     def copy(self):
         "Return a copy of FrameArray"
@@ -63,7 +67,7 @@ cdef class FrameArray:
         for frame in self:
             del frame.thisptr
 
-    def load(self, filename='', Topology top=None, indices=None):
+    def load(self, filename='', Topology top=None, indices=None, mask=None):
         # TODO : add more test cases
         cdef Trajin_Single ts
         cdef int idx
@@ -80,13 +84,14 @@ cdef class FrameArray:
             else:
                 # use self.top
                 ts.top = self.top.copy()
+                # this does not load whole traj into disk, just "prepare" to load
                 ts.load(filename)
 
             if indices is None:
                 # load all frames
-                self.join(ts[:])
+                self.join(ts[:], mask=mask)
             elif isinstance(indices, slice):
-                self.join(ts[indices])
+                self.join(ts[indices], mask=mask)
             else:
                 # indices is tuple, list, ...
                 # we loop all traj frames and extract frame-ith in indices 
@@ -105,13 +110,21 @@ cdef class FrameArray:
                         # only work with `list` or `tuple`
                         idx_idx = indices.index(idx)
                         self[old_size + idx_idx] = ts[idx]
+                        if mask:
+                            # can we combine with previous step?
+                            self[old_size + idx_idx].strip_atoms(mask, update_top=False)
 
         elif isinstance(filename, (list, tuple)):
+            # list of files
             for fh in filename:
                 # recursive
-                self.load(fh, top, indices)
+                self.load(fh, top, indices, mask)
         else:
             raise ValueError("can not load file/files")
+
+        if mask:
+            self.oldtop = self.top.copy()
+            self.top.strip_atoms(mask)
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
@@ -282,7 +295,7 @@ cdef class FrameArray:
         for arg in args:
             self._join(arg)
 
-    def _join(self, FrameArray other):
+    cdef void _join(self, FrameArray other, mask=None):
         # TODO : do we need this method when we have `get_frames`
         if self.top.n_atoms != other.top.n_atoms:
             raise ValueError("n_atoms of two arrays do not match")
