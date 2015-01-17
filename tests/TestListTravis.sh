@@ -10,6 +10,7 @@ python ./test_FrameArray_extensive_indexing.py
 python ./test_io.py
 python ./test_CpptrajFile.py
 python ./test_template.py
+python ./test_get_subframe.py
 python ./test_Residue.py
 python ./test_CpptrajState.py
 python ./test_Action_Radgyr.py
@@ -21,6 +22,7 @@ python ./test_ParmFile.py
 python ./test_iterload.py
 python ./test_AtomMask.py
 python ./test_load_indices.py
+python ./test_load_CHARMM.py
 python ./test_Trajout.py
 python ./test_Vec3.py
 python ./test_GridAction.py
