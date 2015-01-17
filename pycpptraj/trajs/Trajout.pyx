@@ -4,6 +4,20 @@ from pycpptraj.misc import file_exist
 
 
 cdef class Trajout:
+    formats = TrajFormatDict.keys()
+    """Writing output
+    Parameters :
+    filename: str
+
+    fmt : str, optional, default='AMBERTRAJ'
+        output format: %s 
+
+    if `fmt` is not provided, Trajout will decide format based on extension.
+    if not `fmt` and no extension, default format = AMBERTRAJ
+
+    So the priority is fmt > extension > default
+        
+    """
     def __cinit__(self, *args, **kwd):
         self.thisptr = new _Trajout()
 
@@ -24,10 +38,10 @@ cdef class Trajout:
         print "TrajFormat"
         print TrajFormatDict.keys()
 
-    @property
-    def formats(cls):
-        """return a list of possible format to be used with self.open"""
-        return TrajFormatDict.keys()
+    #@property
+    #def formats(self):
+    #    """return a list of possible format to be used with self.open"""
+    #    return TrajFormatDict.keys()
         
     def open(self, string filename='', top=Topology(), fmt='UNKNOWN_TRAJ', 
              more_args=None, overwrite=False):
