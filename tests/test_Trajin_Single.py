@@ -17,7 +17,7 @@ ts = Trajin_Single()
 basetraj = Trajin()
 datadir = "./data/"
 topname = datadir + "Tc5b.top"
-refname = "./data/Tc5b.nat.crd"
+refilename = "./data/Tc5b.nat.crd"
 mdx = "./data/md1_prod.Tc5b.x"
 ts = Trajin_Single()
 
