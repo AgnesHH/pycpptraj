@@ -91,7 +91,7 @@ cdef class ArgList:
     def n_args(self):
         return self.thisptr.Nargs()
 
-    def empty(self):
+    def is_empty(self):
         return self.thisptr.empty()
 
     def arg_line(self):
