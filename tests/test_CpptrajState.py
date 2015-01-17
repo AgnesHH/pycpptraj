@@ -6,7 +6,7 @@ from pycpptraj import allactions
 datadir = "./data/"
 topname = datadir + "Tc5b.top"
 trajoutname = datadir + "test.x"
-refname = "./data/Tc5b.nat.crd"
+refilename = "./data/Tc5b.nat.crd"
 trajinname = datadir + "md1_prod.Tc5b.x"
 
 
