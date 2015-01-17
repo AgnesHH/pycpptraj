@@ -11,12 +11,12 @@ class TestIndices(unittest.TestCase):
     #@no_test
     def test_0(self):
 
-        traj1 = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        traj1 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
         print traj1.size
         indices = slice(100, 97, -1)
         print indices.indices(traj1.size)
         traj0 = FrameArray()
-        traj0.load(fname="./data/md1_prod.Tc5b.x", top=Topology("./data/Tc5b.top"), indices=indices)
+        traj0.load(filename="./data/md1_prod.Tc5b.x", top=Topology("./data/Tc5b.top"), indices=indices)
         print traj0.size
         # load whole traj
 
@@ -45,14 +45,14 @@ class TestIndices(unittest.TestCase):
 
         # make sure we don't suport other indices 
         traj2 = FrameArray()
-        traj2.load(fname="./data/md1_prod.Tc5b.x", 
+        traj2.load(filename="./data/md1_prod.Tc5b.x", 
                    top=Topology("./data/Tc5b.top"), 
                    indices=range(100) + range(999, 500, -1) + [499])
         assert traj2[-1].coords == traj1[499].coords
 
 
     def test_array_assigment(self):
-        traj1 = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
+        traj1 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
         print traj1[0][10]
         print traj1[100][10]
         traj1[0] = traj1[100]
@@ -66,12 +66,12 @@ class TestIndices(unittest.TestCase):
         assert (traj1[100].coords[:11] == traj1[0].coords[:11]) == False
 
     def test_1(self):
-        traj0 = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
-        traj = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
+        traj0 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        traj = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
         assert traj[0].coords == traj0[0].coords
         print traj[0].coords[:10]
 
-        traj2 = Trajin_Single(fname="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:][:10]
+        traj2 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:][:10]
         assert traj2[0].coords == traj0[0].coords
 
         traj.join(traj[:] + traj[0:100] + traj[999:30:-10])
