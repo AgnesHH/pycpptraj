@@ -18,8 +18,8 @@ cdef class TrajinList:
     def set_debug(self,int dIn):
         self.thisptr.SetDebug(dIn)
 
-    def add_traj(self, string fname, ArgList arglist, TopologyList toplist):
-        return self.thisptr.AddTrajin(fname, arglist.thisptr[0], toplist.thisptr[0])
+    def add_traj(self, string filename, ArgList arglist, TopologyList toplist):
+        return self.thisptr.AddTrajin(filename, arglist.thisptr[0], toplist.thisptr[0])
 
     def add_ensemble(self, string s, ArgList arglist, TopologyList toplist):
         return self.thisptr.AddEnsemble(s, arglist.thisptr[0], toplist.thisptr[0])
