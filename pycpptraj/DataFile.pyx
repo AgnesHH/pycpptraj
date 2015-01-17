@@ -32,11 +32,11 @@ cdef class DataFile:
     def set_data_file_precision(self, int widthIn, int precisionIn):
         self.thisptr.SetDataFilePrecision(widthIn, precisionIn)
 
-    def read_data_in(self, string fnameIn, ArgList argListIn, DataSetList datasetlist):
-        return self.thisptr.ReadDataIn(fnameIn.thisptr[0], argListIn.thisptr[0], datasetlist.thisptr[0])
+    def read_data_in(self, string filenameIn, ArgList argListIn, DataSetList datasetlist):
+        return self.thisptr.ReadDataIn(filenameIn.thisptr[0], argListIn.thisptr[0], datasetlist.thisptr[0])
 
-    def setup_datafile(self, string fnameIn, ArgList argIn, int debugIn):
-        return self.thisptr.SetupDatafile(fnameIn, argIn.thisptr[0], debugIn)
+    def setup_datafile(self, string filenameIn, ArgList argIn, int debugIn):
+        return self.thisptr.SetupDatafile(filenameIn, argIn.thisptr[0], debugIn)
 
     #def AddSet(self,DataSet dataIn):
     #    # DataSet has virtual method
