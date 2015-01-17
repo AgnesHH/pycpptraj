@@ -87,3 +87,6 @@ def write_output(fname, frames, top, ftm='AMBERTRAJ'):
         for idx, frame in enumerate(frames):
             trajout.writeframe(idx, frame, top)
     trajout.close()
+
+def get_subframe(frame=None, mask=None, top=None):
+    return frame.get_subframe(mask, top)
