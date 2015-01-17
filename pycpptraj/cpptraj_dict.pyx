@@ -12,10 +12,10 @@ def get_key(value, dict Dict):
 # Traj_PDBfile
 #from Traj_PDBfile cimport *
 cdef dict PDBWRITEMODEDict = {
-    "NONE" : NONE, 
+    "NONE" : NONEPDBWRITEMODE, 
     "SINGLE" : SINGLE, 
     "MODEL" : MODEL, 
-    "MULTI" : MULTI, 
+    "MULTI" : MULTIPDB, 
     }
 # CpptrajFile
 #from CpptrajFile cimport *
@@ -143,10 +143,10 @@ AtomicElementDict = {
 # Traj_Mol2File
 #from Traj_Mol2File cimport *
 MOL2WRITEMODEDict = {
-    "NONE" : NONE, 
-    "SINGLE" : SINGLE, 
+    "NONE" : NONEMOL2WRITEMODE, 
+    "SINGLE" : SINGLEMol2File, 
     "MOL" : MOL, 
-    "MULTI" : MULTI, 
+    "MULTI" : MULTIMOL2, 
     }
 
 # DataFile
@@ -157,10 +157,10 @@ DataFormatDict = {
     "GNUPLOT" : GNUPLOT, 
     "XPLOR" : XPLOR, 
     "OPENDX" : OPENDX, 
-    "REMLOG" : REMLOG, 
+    "REMLOG" : REMLOGDATAFILE, 
     "MDOUT" : MDOUT, 
     "EVECS" : EVECS, 
-    "UNKNOWN_DATA" : UNKNOWN_DATA, 
+    "UNKNOWN_DATA" : UNKNOWN_DATAFORMAT, 
     }
 # Analysis_Hist
 ##from Analysis_Hist.Analysis_Hist cimport *
@@ -182,7 +182,7 @@ LINKAGETYPEDict = {
 #from Mol2File cimport *
 TRIPOSTAGDict = {
     "MOLECULE" : MOLECULE, 
-    "ATOM" : ATOM, 
+    "ATOM" : ATOMMOL2, 
     "BOND" : BOND, 
     "SUBSTRUCT" : SUBSTRUCT, 
     }
@@ -190,7 +190,7 @@ TRIPOSTAGDict = {
 # ReplicaDimArray
 #from ReplicaDimArray cimport *
 RemDimDict = {
-    "UNKNOWN" : UNKNOWN, 
+    "UNKNOWN" : UNKNOWNREPDIM, 
     "TEMPERATURE" : TEMPERATURE, 
     "PARTIAL" : PARTIAL, 
     "HAMILTONIAN" : HAMILTONIAN, 
@@ -246,7 +246,7 @@ TrajFormatDict = {
 #from .DataSet cimport (UNKNOWN_DATA, DOUBLE, FLOAT, INTEGER, STRING, MATRIX_DBL, MATRIX_FLT,
 #                       COORDS, VECTOR, MODES, GRID_FLT, REMLOG, XYMESH, TRAJ)
 DataTypeDict = {
-        "UNKNOWN_DATA " : UNKNOWN_DATA,  
+        "UNKNOWN_DATA " : UNKNOWN_DATASET,  
         "DOUBLE" : DOUBLE, 
         "FLOAT" : FLOAT,
         "INTEGER" : INTEGER,
@@ -257,7 +257,7 @@ DataTypeDict = {
         "VECTOR" : VECTOR,
         "MODES" : MODES,
         "GRID_FLT" : GRID_FLT,
-        "REMLOG" : REMLOG, 
+        "REMLOG" : REMLOGDATATYPE, 
         "XYMESH" : XYMESH, 
         "TRAJ" : TRAJ, 
     }
@@ -293,14 +293,14 @@ MatrixKindDict = {
 # PDBfile
 #from PDBfile cimport *
 PDB_RECTYPEDict = {
-    "ATOM" : ATOM, 
+    "ATOM" : ATOMPDB, 
     "HETATM" : HETATM, 
     "CRYST1" : CRYST1, 
     "TER" : TER, 
     "END" : END, 
     "ANISOU" : ANISOU, 
     "END_OF_FILE" : END_OF_FILE, 
-    "UNKNOWN" : UNKNOWN, 
+    "UNKNOWN" : UNKNOWNPDBFILE, 
     }
 
 # Action
@@ -309,9 +309,9 @@ PDB_RECTYPEDict = {
 ##from actions.Action cimport USEORIGINALFRAME, SUPPRESSCOORDOUTPUT as A_USEORIGINALFRAME, A_SUPPRESSCOORDOUTPUT
 #from actions cimport Action
 
-RetDict = {
-    "OK" : OK, 
-    "ERR" : ERR, 
+RetActionDict = {
+    "OK" : OKACTION, 
+    "ERR" : ERRACTION, 
     "USEORIGINALFRAME" : USEORIGINALFRAME, 
     "SUPPRESSCOORDOUTPUT" : SUPPRESSCOORDOUTPUT, 
     }
@@ -329,13 +329,13 @@ RetDict = {
 #from ParmFile cimport *
 ParmFormatDict = {
         "AMBERPARM" : AMBERPARM,
-        "PDBFILE" : PDBFILE,
-        "MOL2FILE" : MOL2FILE,
+        "PDBFILE" : PDBFILEPARM,
+        "MOL2FILE" : MOL2FILEPARM,
         "CHARMMPSF" : CHARMMPSF,
         "CIFFILE" : CIFFILE,
         "GMXTOP" : GMXTOP,
         "SDFFILE" : SDFFILE,
-        "TINKER" : TINKER,
+        "TINKER" : TINKERPARM,
         "UNKNOWN_PARM" : UNKNOWN_PARM,
 }
 
@@ -366,7 +366,7 @@ GridModeDict = {
 # Trajin_Multi
 #from Trajin_Multi cimport *
 TargetDict = {
-    "NONE" : NONE, 
+    "NONE" : NONETARGETTYPE, 
     "TEMP" : TEMP, 
     "INDICES" : INDICES, 
     "CRDIDX" : CRDIDX, 
@@ -375,14 +375,14 @@ TargetDict = {
 # TrajinList
 #from TrajinList cimport *
 TrajModeDict = {
-    "UNDEFINED" : UNDEFINED, 
+    "UNDEFINED" : UNDEFINEDTRAJINLIST, 
     "NORMAL" : NORMAL, 
     "ENSEMBLE" : ENSEMBLE, 
     }
 
 # Analysis
 ###from Analysis cimport *
-#RetDict = {
-#    "OK" : OK, 
-#    "ERR" : ERR, 
+#RetAnalysisDict = {
+#    "OK" : OKANALYSIS, 
+#    "ERR" : ERRANALYSIS, 
 #    }
