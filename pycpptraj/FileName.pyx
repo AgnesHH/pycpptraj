@@ -10,9 +10,9 @@ cdef class FileName:
         del self.thisptr
 
     def __str__(self):
-        fname = self.thisptr.Full()
-        fname = fname.split("/")[-1]
-        return fname
+        filename = self.thisptr.Full()
+        filename = filename.split("/")[-1]
+        return filename
 
     def set_filename(self, mystring, ext=False):
         if ext:
