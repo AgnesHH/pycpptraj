@@ -12,11 +12,11 @@ IF BINTRAJ:
         def ID_TrajFormat(self, CpptrajFile fileIn):
             return self.thisptr.ID_TrajFormat(fileIn.thisptr[0])
     
-        def setupTrajin(self, string fname, Topology trajParm):
-            return self.thisptr.setupTrajin(fname, trajParm.thisptr)
+        def setupTrajin(self, string filename, Topology trajParm):
+            return self.thisptr.setupTrajin(filename, trajParm.thisptr)
     
-        def setupTrajout(self, string fname, Topology trajParm, int NframesToWrite, bint append):
-            return self.thisptr.setupTrajout(fname, trajParm.thisptr, NframesToWrite, append)
+        def setupTrajout(self, string filename, Topology trajParm, int NframesToWrite, bint append):
+            return self.thisptr.setupTrajout(filename, trajParm.thisptr, NframesToWrite, append)
     
         def openTrajin(self):
             return self.thisptr.openTrajin()
