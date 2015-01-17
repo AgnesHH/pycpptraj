@@ -134,9 +134,19 @@ class TestFrame(unittest.TestCase):
     def test_rmsd_return_mat_vec_vec(self):
         # TODO : add assert
         print "test_rmsd_return_mat_vec_vec"
-        farray = FrameArray("./data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=(1,2))
-        rmsd, mat, v1, v2 = farray[0].rmsd(farray[1], get_mvv=True)
+        farray = FrameArray("./data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=(0,1))
+        frame0 = farray[0]
+        rmsd, mat, v1, v2 = frame0.rmsd(farray[1], get_mvv=True)
         print rmsd,  mat, v1, v2
+        assert abs(rmsd - 10.3964) < 1E-3
+        arr1 = np.asarray(frame0.buffer)[:3]
+        print frame0.coords[:3]
+        print arr1
+        frame0.translate(v1)
+        print v1.tolist()
+        print np.array(v1.tolist(), dtype='d')
+        print arr1
+        print frame0[:3]
 
     def test_long(self):
         N_ATOMS = 10
