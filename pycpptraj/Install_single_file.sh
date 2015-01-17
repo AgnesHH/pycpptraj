@@ -19,6 +19,7 @@ ext = pyxfile.split(".")[0]
 setup(
       ext_modules = cythonize([
           Extension(ext, ["$pyxfile",],
+                    language='c++'
                     libraries=['cpptraj'],
                     library_dirs=[lib_dir,],
                     include_dirs=[PXD_include, PXD_include_ana, PXD_include_action, cpptraj_include, amber_include,])
