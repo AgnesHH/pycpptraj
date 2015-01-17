@@ -40,60 +40,60 @@ cdef class CpptrajFile:
     def __exit__(self, arg1, arg2, arg3):
         self.close()
 
-    def open_read(self, string fname):
+    def open_read(self, string filename):
         cdef bint sucess
         cdef int result
-        self.thisptr.OpenRead(fname)
+        self.thisptr.OpenRead(filename)
 
-    def _setup_read(self, string fname, int debug):
-        return self.thisptr.SetupRead(fname, debug)
+    def _setup_read(self, string filename, int debug):
+        return self.thisptr.SetupRead(filename, debug)
 
     def open_write_numbered(self, int numIn):
         return self.thisptr.OpenWriteNumbered(numIn)
 
-    def open_write(self, string fname):
-        return self.thisptr.OpenWrite(fname)
+    def open_write(self, string filename):
+        return self.thisptr.OpenWrite(filename)
 
-    def open_ensemble_write(self, string fname, int debug):
-        return self.thisptr.OpenEnsembleWrite(fname, debug)
+    def open_ensemble_write(self, string filename, int debug):
+        return self.thisptr.OpenEnsembleWrite(filename, debug)
 
     def _setup_write(self, *args):
-        cdef string fname
+        cdef string filename
         cdef FileType ftype
         cdef int debug
 
         if len(args) == 3:
-            fname, ftype, debug = args
-            return self.thisptr.SetupWrite(fname, ftype, debug)
+            filename, ftype, debug = args
+            return self.thisptr.SetupWrite(filename, ftype, debug)
         elif len(args) == 2:
-            fname, debug = args
-            return self.thisptr.SetupWrite(fname, debug)
+            filename, debug = args
+            return self.thisptr.SetupWrite(filename, debug)
         else:
             raise ValueError()
 
-    def open(self, string fname="", status='r'):
+    def open(self, string filename="", status='r'):
         """just like Python file
         >>> cpptraj = CpptrajFile()
         >>> cpptraj.open("test.dat", 'r')
         """
         status = status.lower()
         if status == 'r' or status == 'read': 
-            self.thisptr.OpenRead(fname)
+            self.thisptr.OpenRead(filename)
         elif status == 'a' or status == 'append':
-            self.thisptr.OpenAppend(fname)
+            self.thisptr.OpenAppend(filename)
         elif status == 'w' or status == 'write':
-            self.thisptr.OpenWrite(fname)
+            self.thisptr.OpenWrite(filename)
         else:
             raise ValueError("wrong open status")
 
-    def open_append(self, string fname):
-        return self.thisptr.OpenAppend(fname)
+    def open_append(self, string filename):
+        return self.thisptr.OpenAppend(filename)
 
-    def open_ensemble_append(self, string fname, int debug):
-        return self.thisptr.OpenEnsembleAppend(fname, debug)
+    def open_ensemble_append(self, string filename, int debug):
+        return self.thisptr.OpenEnsembleAppend(filename, debug)
 
-    def _setup_append(self, string fname, int debug):
-        return self.thisptr.SetupAppend(fname, debug)
+    def _setup_append(self, string filename, int debug):
+        return self.thisptr.SetupAppend(filename, debug)
 
     def openfile(self, *args):
         # TODO : what this method does?
@@ -126,9 +126,9 @@ cdef class CpptrajFile:
         return self.thisptr.IsOpen()
 
     def filename(self):
-        cdef FileName fname = FileName()
-        fname.thisptr[0] = self.thisptr.Filename()
-        return fname
+        cdef FileName filename = FileName()
+        filename.thisptr[0] = self.thisptr.Filename()
+        return filename
 
     def file_size(self):
         return self.thisptr.FileSize()
