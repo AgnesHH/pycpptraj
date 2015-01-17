@@ -10,7 +10,7 @@ class Test(unittest.TestCase):
         #mdio.writetraj("test_1.pdb", traj[0], top=traj.top, fmt='CHARMM')
         print dir(Trajout)
         print Trajout.writeframe
-        with Trajout("test_1.pdb", fmt='CHARMMDCD') as trajout:
+        with Trajout("test_1.pdb", fmt='PDBFILE', overwrite=True) as trajout:
             trajout.writeframe(frame=traj[0], top=traj.top)
 
     def test_1(self):
