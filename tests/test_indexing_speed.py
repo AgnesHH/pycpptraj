@@ -4,13 +4,13 @@ from pycpptraj.base import *
 from pycpptraj.Trajectory import Trajectory
 
 def get_time(indices):
-    traj = Trajin_Single(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+    traj = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
     t0 = time()
     print traj.size
     traj[indices]
     return time()- t0
 
-traj = Trajin_Single(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+traj = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
 N = traj.size
 #traj[slice(0, N-1, 3)]
 
@@ -27,7 +27,7 @@ class TestSpeed(unittest.TestCase):
         #f1 = traj[998]
         #print f1
         #
-        traj2 = FrameArray(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        traj2 = FrameArray(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
         f0 = traj2[-3:-1][0]
         print f0
         #f1 = traj2[998]
