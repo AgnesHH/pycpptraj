@@ -584,16 +584,6 @@ cdef class Frame (object):
         self._strip_atoms(top, mask, update_top, has_box)
 
     def __getbuffer__(self, Py_buffer* viewout, int flags):
-        cdef double* ptr = self.thisptr.xAddress()
-        cdef view.array my_arr
-        my_arr = <double[:<int>self.size]> ptr
-        viewout = my_arr
-        #pass
-        #view.buf = self.buffer.buf
-        #view.len = self.buffer.len
-        #view.shape = self.buffer.shape
-        #view.strides = self.buffer.strides
-        #view.readonly = 0
-        #view.format = self.buffer.format
-        #view.itemsize = self.buffer.itemsize
-        #view.ndim = self.buffer.ndim
+        # NotImplementedYet
+        # idea: use np.asarray(frame) rather using np.asarray(frame.buffer)
+        pass
