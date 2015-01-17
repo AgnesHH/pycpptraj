@@ -76,20 +76,20 @@ class TestFrameArray2(unittest.TestCase):
         frame1 = TRAJ2[0]
         frame2 = TRAJ2[0]
         print frame0_0, frame1, frame2
-        print frame0_0.coords_copy()[:10]
+        print frame0_0.coords[:10]
 
-        assert frame0_0.coords_copy() == frame1.coords_copy() == frame2.coords_copy()
+        assert frame0_0.coords == frame1.coords == frame2.coords
 
         print "updating coords for frame0_0, make sure does not change frame1, frame2"
         frame0_0[0] = 10000.
-        assert frame0_0.coords_copy() != frame1.coords_copy() == frame2.coords_copy()
-        assert frame1.coords_copy() == frame2.coords_copy()
-        assert frame0_0.coords_copy() != TRAJ2[0].coords_copy()
-        assert frame1.coords_copy() == TRAJ2[0].coords_copy() == frame2.coords_copy()
+        assert frame0_0.coords != frame1.coords == frame2.coords
+        assert frame1.coords == frame2.coords
+        assert frame0_0.coords != TRAJ2[0].coords
+        assert frame1.coords == TRAJ2[0].coords == frame2.coords
 
         frame0_0_arr = np.asarray(frame0_0.buffer)
         print frame0_0_arr[:10]
-        print frame0_0.coords_copy()[:10]
+        print frame0_0.coords[:10]
         #assert frame0_0_arr[:10] == np.array(frame0[:10])
 
     #@no_test
@@ -163,11 +163,11 @@ class TestFrameArray2(unittest.TestCase):
         print frame[0]
         
         frame0 = traj[0]
-        assert frame0.coords_copy() == frame.coords_copy()
+        assert frame0.coords == frame.coords
         
         # make sure that frame and frame0 are copies. Changing frame0 does not affact frame
         frame0[10] = 10000.
-        assert frame0.coords_copy() != frame.coords_copy()
+        assert frame0.coords != frame.coords
         #traj.get_frame(1, frame)
         #print frame[0]
 
