@@ -4,6 +4,7 @@ DistRoutines
 #ComplexArray
 trajs/Trajin
 trajs/Trajout
+trajs/Traj_PDBfile
 ArgList
 DispatchObject
 magicmemoryview
@@ -74,7 +75,7 @@ PDBfile
 #trajs/Traj_Mol2File
 #ClusterList
 #clusters/ClusterDist
-datasets/DataSet_Vector
+#datasets/DataSet_Vector
 datasets/DataSet_GridFlt
 datasets/DataSet_MatrixDbl
 datasets/DataSet_RemLog
