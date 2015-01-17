@@ -24,14 +24,14 @@ cdef class Parm_Amber:
     def process_read_args(self, ArgList arglist):
         return self.thisptr.processReadArgs(arglist.thisptr[0])
 
-    def read_parm(self, string fname, Topology TopIn):
-        return self.thisptr.ReadParm(fname, TopIn.thisptr[0])
+    def read_parm(self, string filename, Topology TopIn):
+        return self.thisptr.ReadParm(filename, TopIn.thisptr[0])
 
     def process_write_args(self, ArgList argIn):
         self.thisptr.processWriteArgs(argIn.thisptr[0])
 
-    def write_parm(self, string fname, Topology parmIn):
-        return self.thisptr.WriteParm(fname, parmIn.thisptr[0])
+    def write_parm(self, string filename, Topology parmIn):
+        return self.thisptr.WriteParm(filename, parmIn.thisptr[0])
 
     def set_debug(self, int debugIn):
         self.thisptr.SetDebug(debugIn)
