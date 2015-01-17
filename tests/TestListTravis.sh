@@ -27,6 +27,7 @@ python ./test_Trajout.py
 python ./test_Vec3.py
 python ./test_GridAction.py
 python ./test_DistRoutines.py
+python ./test_writepdb.py
 python ./test_indexing_speed.py
 python ./test_DataSet_Coords_TRJ.py
 python ./test_DataSet_Coords_CRD.py
