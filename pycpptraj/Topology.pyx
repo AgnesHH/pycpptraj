@@ -20,12 +20,12 @@ cdef class Topology:
             self.instance_num += 1
         cdef TopologyList toplist = TopologyList()
         cdef Topology tp
-        cdef string fname
+        cdef string filename
         self.thisptr = new _Topology()
 
         # I dont make default py_free_mem (True) in __cinit__ since
-        # when passing something like top = Topology(fname), Python/Cython
-        # would think "fname" is value of py_free_mem
+        # when passing something like top = Topology(filename), Python/Cython
+        # would think "filename" is value of py_free_mem
         self.py_free_mem = True
 
         if not args:
@@ -35,8 +35,8 @@ cdef class Topology:
         else:
             if len(args) == 1:
                if isinstance(args[0], basestring):
-                   fname = args[0]
-                   toplist.add_parm(fname)
+                   filename = args[0]
+                   toplist.add_parm(filename)
                    self.thisptr[0] = toplist.thisptr.GetParm(0)[0]
                elif isinstance(args[0], Topology):
                    tp = args[0]
@@ -65,10 +65,10 @@ cdef class Topology:
     def __repr__(self):
         return self.__str__()
 
-    def load(self, string fname):
+    def load(self, string filename):
         """loading Topology from filename
 
-        fname : {str}
+        filename : {str}
 
         if Topology instance is not empty, it will be still replaced by new one
 
@@ -78,7 +78,7 @@ cdef class Topology:
         >>> top.load("./data/HP36.top")
         >>> # why not using "top = Topology("./data/HP36.top")"?
         """
-        self = Topology(fname)
+        self = Topology(filename)
 
     def copy(self, *args):
         """return a copy of 'self' or copy from 'other' to 'self'
@@ -262,9 +262,9 @@ cdef class Topology:
     #    return self.thisptr.HasVelInfo()
 
     def original_filename(self):
-        cdef FileName fname = FileName()
-        fname.thisptr[0] = self.thisptr.OriginalFilename()
-        return fname
+        cdef FileName filename = FileName()
+        filename.thisptr[0] = self.thisptr.OriginalFilename()
+        return filename
 
     property p_index:
         def __get__(self):
