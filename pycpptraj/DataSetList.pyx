@@ -155,7 +155,7 @@ cdef class DataSetList:
     def printlist(self):
         self.thisptr.List()
 
-    #def find_set_of_type(self, string fname, string key):
+    #def find_set_of_type(self, string filename, string key):
     #    pass
     #    # make sure to use upper case and there is no blank around
     #    # "MyString  " --> "MYSTRING"
@@ -166,17 +166,17 @@ cdef class DataSetList:
     #    cdef DataType dtype = <DataType> DataTypeDict[key]
     #    #cdef DataSet dtset = DataSet()
     #    cdef DataSet_Coords_TRJ dtset = DataSet_Coords_TRJ()
-    #    dtset.thisptr = <_DataSet_Coords_TRJ*> self.thisptr.FindSetOfType(fname, dtype)
-    #    #print <_DataSet_Coords_TRJ*> self.thisptr.FindSetOfType(fname, dtype)
+    #    dtset.thisptr = <_DataSet_Coords_TRJ*> self.thisptr.FindSetOfType(filename, dtype)
+    #    #print <_DataSet_Coords_TRJ*> self.thisptr.FindSetOfType(filename, dtype)
     #    # add py_free_mem?
     #    # make sure that all pointers pointing to the same addresses
     #    dtset._recast()
     #    return dtset
 
-    def find_coords_set(self, string fname):
+    def find_coords_set(self, string filename):
         cdef DataSet dtset = DataSet()
-        dtset.baseptr0 = self.thisptr.FindCoordsSet(fname)
+        dtset.baseptr0 = self.thisptr.FindCoordsSet(filename)
         if not dtset.baseptr0:
             raise MemoryError("Can not initialize pointer")
-        #dtset.baseptr0[0] = (self.thisptr.FindCoordsSet(fname))[0]
+        #dtset.baseptr0[0] = (self.thisptr.FindCoordsSet(filename))[0]
         return dtset
