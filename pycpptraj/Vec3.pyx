@@ -173,7 +173,7 @@ cdef class Vec3:
     def SignedAngle(self, Vec3 v1, Vec3 v2):
         return self.thisptr.SignedAngle(v1.thisptr[0], v2.thisptr[0])
  
-    def to_list(self):
+    def tolist(self):
         cdef double* ptr = self.thisptr.Dptr()
         cdef int i
         cdef vector[double] v
