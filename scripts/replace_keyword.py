@@ -2,8 +2,8 @@
 import sys
 """replace old key word by new key word in a file and save it to ./tmp/"""
 
-oldfile, oldword, newword = sys.argv[1:]
-with open(sys.argv[1], 'r') as fh:
+oldword, newword, oldfile = sys.argv[1:]
+with open(oldfile, 'r') as fh:
     txt = fh.read()
 
 if oldword in txt:
