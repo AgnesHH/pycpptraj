@@ -9,7 +9,7 @@ from pycpptraj.decorators import no_test
 
 print dir(Action_Strip())
 
-farray = FrameArray(top=Topology("./data/Tc5b.top"), fname='data/md1_prod.Tc5b.x')
+farray = FrameArray(top=Topology("./data/Tc5b.top"), filename='data/md1_prod.Tc5b.x')
 
 class TestStrip(unittest.TestCase):
     def test_master(self):
