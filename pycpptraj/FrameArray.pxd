@@ -14,9 +14,11 @@ ctypedef vector[_Frame].iterator iterator
 cdef class FrameArray:
     cdef vector[_Frame] frame_v
     cdef public Topology top
+    cdef public Topology oldtop 
 
     # used for warning memory view
     cdef public bint warning 
+    cdef void _join(FrameArray self, FrameArray other, mask=*)
 
     # make public?
     # this variable is intended to let FrameArray control 
