@@ -4,7 +4,7 @@ from pycpptraj import allactions
 from pycpptraj.cast_dataset import cast_dataset
 
 farray = Trajin_Single(top=Topology("./data/Tc5b.top"), 
-                    fname='data/md1_prod.Tc5b.x', 
+                    filename='data/md1_prod.Tc5b.x', 
                     )
 
 class TestRadgyr(unittest.TestCase):
