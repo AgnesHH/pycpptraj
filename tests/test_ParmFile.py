@@ -4,17 +4,17 @@ from pycpptraj.Topology import Topology
 from pycpptraj.decorators import not_yet_supported
 
 def test_generator(top):
-   for atom in top.atoms():
+   for atom in top.atoms:
        pass
        #print atom
    
    print "\nres_iterator for top"
-   for res in top.residues():
+   for res in top.residues:
        pass
        #print res
    
    print "\nmol_iterator for top"
-   for mol in top.mols():
+   for mol in top.mols:
        pass
        #print mol
    
