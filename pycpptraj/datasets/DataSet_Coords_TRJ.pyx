@@ -37,7 +37,7 @@ cdef class DataSet_Coords_TRJ(DataSet_Coords):
         dset.baseptr0 = _DataSet_Coords_TRJ.Alloc()
         return dset
 
-    def load(self, string fname, Topology top=Topology(), ArgList arglist=ArgList()):
+    def load(self, string filename, Topology top=Topology(), ArgList arglist=ArgList()):
         if top.is_empty():
             if not self.top.is_empty():
                 top = self.top
@@ -47,7 +47,7 @@ cdef class DataSet_Coords_TRJ(DataSet_Coords):
         if self.top.is_empty() and not top.is_empty():
             print "assigning new non-empty Topology"
             self.top = top
-        return self.thisptr.AddSingleTrajin(fname, arglist.thisptr[0], top.thisptr)
+        return self.thisptr.AddSingleTrajin(filename, arglist.thisptr[0], top.thisptr)
 
     def addtrajin(self, Trajin trajin):
         """add memoryview for input trajin"""
