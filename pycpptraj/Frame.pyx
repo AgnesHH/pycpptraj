@@ -49,8 +49,7 @@ cdef class Frame (object):
         # Should I include topology in Frame?
         # May by not: memory
         # Include topology in Trajectory instance? 
-        """
-        TODO: add doc
+        """Constructor for Frame instance
         >>> from pycpptraj.Frame import Frame
         >>> # created empty Frame instance
         >>> frame0 = Frame()
@@ -58,7 +57,8 @@ cdef class Frame (object):
         >>> frame1 = Frame(304)
         >>> # create a copy of frame1
         >>> frame2 = Frame(frame1)
-        >>> # add more examples
+        >>> # create a copy of frame with atommask
+        >>> frame3 = Frame(frame1, atm_instance)
         """
         cdef Frame frame
         cdef AtomMask atmask
@@ -66,7 +66,8 @@ cdef class Frame (object):
         cdef Topology top
         cdef Atom at
         cdef list atlist
-        cdef int natom
+        cdef int natom, natom3
+        cdef int i
 
         self.py_free_mem = True
 
@@ -82,13 +83,15 @@ cdef class Frame (object):
                     frame = args[0]
                     self.thisptr = new _Frame(frame.thisptr[0])
                 # creat a new Frame instance with natom
-                elif isinstance(args[0], (int, long)):
+                elif isinstance(args[0], int):
                     natom = <int> args[0]
                     self.thisptr = new _Frame(natom)
-                #elif isinstance(args[0], Topology):
-                #    top = <Topology> args[0]
-                #    # get Command terminated error
-                #    self.thisptr.SetupFrameV(top.thisptr.Atoms(), False, 0)
+                elif isinstance(args[0], (list, tuple, pyarray)):
+                    # TODO : specify all things similar to list or array
+                    natom3 = <int> len(args[0])
+                    self.thisptr = new _Frame(natom3/3)
+                    for i in range(natom3):
+                        self[i] = args[0][i]
                 else:
                     # Create Frame from list of atom mask
                     atlist = args[0]
@@ -131,18 +134,6 @@ cdef class Frame (object):
             # TODO : shape checking
             numCrd = len(farray)
             self.thisptr.SetFromCRD(farray, numCrd, 0, False)
-
-    # don't need this method since we have self.coords_copy()
-    #def convert_to_crd(self, int num_box_crd=0, bint has_vel=False):
-    #    """convert_to_crd(self, int num_box_crd=0, bint has_vel=False):
-    #    TODO : do we need this method?
-    #    """
-    #    return self.thisptr.ConvertToCRD(num_box_crd, has_vel)
-        
-    # don't need this since we can use `print self.xyz(atom_num)`
-    #def print_atom_coord(self, int atom):
-    #    """"""
-    #    self.thisptr.printAtomCoord(atom)
 
     def info(self, char* msg=''):
         self.thisptr.Info(msg)
@@ -273,10 +264,6 @@ cdef class Frame (object):
         arr.append(self.thisptr.XYZ(atomnum)[2])
         return arr
 
-    @for_testing
-    def coords_copy(self):
-        return self.coords
-
     @property
     def coords(self):
         """
@@ -285,7 +272,7 @@ cdef class Frame (object):
         cdef pyarray arr = pyarray('d', [])
         cdef int i
 
-        for  i in range(3 * self.thisptr.Natom()):
+        for i in range(3 * self.thisptr.Natom()):
             arr.append(deref(self.thisptr.CRD(i)))
         return arr
 
@@ -328,11 +315,6 @@ cdef class Frame (object):
     def set_box_angles(self, double[:] ain):
         self.thisptr.SetBoxAngles(&ain[0])
 
-    #def set_frame_m(self, list atlist):
-    #    cdef vector[_Atom] v 
-    #    v = atomlist_to_vector(atlist)
-    #    return self.thisptr.SetupFrameM(v)
-
     def set_frame(self, *args):
         cdef int atomnum 
         cdef AtomMask atm
@@ -354,9 +336,12 @@ cdef class Frame (object):
         """
         return self.thisptr.SetupFrameV(top.thisptr.Atoms(), has_vel, n_repdims)
 
-    #def set_frame_from_mask(self, AtomMask atmask, list atlist):
-    #    cdef vector[_Atom] v = atomlist_to_vector(atlist)
-    #    return self.thisptr.SetupFrameFromMask(atmask.thisptr[0], v)
+    def set_frame_from_mask(self, AtomMask atmask, list atlist):
+        cdef Atom atom
+        cdef vector[_Atom] v 
+        for atom in atlist:
+            v.push_back(atom.thisptr[0])
+        return self.thisptr.SetupFrameFromMask(atmask.thisptr[0], v)
 
     def set_coord(self, Frame frame, *args):
         cdef AtomMask atmask 
@@ -476,26 +461,29 @@ cdef class Frame (object):
         v.thisptr[0] = self.thisptr.CenterOnOrigin(useMassIn)
         return v
 
-    def rmsd(self, Frame frame, bint use_mass=False, *args):
+    def rmsd(self, Frame frame, bint use_mass=False, get_mvv=False):
         # TODO : add mask
         """Calculate rmsd betwen two frames
+        rmsd(Frame frame, bint use_mass=False, get_mvv=False):
         Parameters:
         ----------
         frame : Frame instance
         use_mass : bool, default = False
-        *args :  optional, 3 args (Matrix_3x3 instance, Vec3 instance, Vec3 instance)
+        get_mvv : bool
+            if True: return rmsd, Matrix_3x3, Vec3, Vec3
+            if False: return rmsd
         """
 
         cdef Matrix_3x3 m3
         cdef Vec3 v1, v2
 
-        if not args:
+        if not get_mvv:
             return self.thisptr.RMSD(frame.thisptr[0], use_mass)
-        elif len(args) == 3:
-            m3, v1, v2 = args
-            return self.thisptr.RMSD(frame.thisptr[0], m3.thisptr[0], v1.thisptr[0], v2.thisptr[0], use_mass)
         else:
-            raise NotImplementedError()
+            m3 = Matrix_3x3()
+            v1, v2 = Vec3(), Vec3()
+            rmsd_ = self.thisptr.RMSD(frame.thisptr[0], m3.thisptr[0], v1.thisptr[0], v2.thisptr[0], use_mass)
+            return rmsd_, m3, v1, v2
 
     def rmsd_centered_ref(self, Frame ref, bint use_mass=False, *args):
         """Calculate rmsd betwen two frames
@@ -587,3 +575,14 @@ cdef class Frame (object):
         # NotImplementedYet
         # idea: use np.asarray(frame) rather using np.asarray(frame.buffer)
         pass
+
+    def get_subframe(self, string mask="", Topology top=Topology()):
+        cdef AtomMask atm = AtomMask(mask)
+        if top.is_empty():
+            raise ValueError("Empty topology is not allowed")
+        top.set_integer_mask(atm)
+        return Frame(self, atm)
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
