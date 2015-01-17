@@ -23,12 +23,12 @@ cdef class Trajout:
         print "TrajFormat"
         print TrajFormatDict.keys()
 
-    @classmethod
+    @property
     def formats(cls):
         """return a list of possible format to be used with self.open"""
         return TrajFormatDict.keys()
         
-    def open(self, string fname='', top=Topology(), string fmt="AMBERNETCDF", more_args=None):
+    def open(self, string filename='', top=Topology(), fmt=None, more_args=None):
         cdef ArgList arglist
         cdef Topology top_ 
 
@@ -39,6 +39,9 @@ cdef class Trajout:
             # assume this is Topology instance
             top_ = top
 
+        local_dict = TrajFormatDict.copy()
+        local_dict.get("", "")
+
         if more_args:
             if isinstance(more_args, basestring):
                 inputstring = more_args
@@ -47,10 +50,9 @@ cdef class Trajout:
                 arglist = <ArgList> more_args
             else:
                 raise ValueError()
-
-            self.thisptr.InitTrajWrite(fname, arglist.thisptr[0], top_.thisptr, TrajFormatDict[fmt])
+            self.thisptr.InitTrajWrite(filename, arglist.thisptr[0], top_.thisptr, local_dict[fmt])
         else:
-            self.thisptr.InitTrajWrite(fname, top_.thisptr, TrajFormatDict[fmt])
+            self.thisptr.InitTrajWrite(filename, top_.thisptr, local_dict[fmt])
 
     def close(self):
         self.thisptr.EndTraj()
