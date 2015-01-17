@@ -1,5 +1,6 @@
 # distutils: language = c++
 from pycpptraj.cpptraj_dict import TrajFormatDict
+from pycpptraj.misc import file_exist
 
 
 cdef class Trajout:
@@ -28,9 +29,15 @@ cdef class Trajout:
         """return a list of possible format to be used with self.open"""
         return TrajFormatDict.keys()
         
-    def open(self, string filename='', top=Topology(), fmt=None, more_args=None):
+    def open(self, string filename='', top=Topology(), fmt='UNKNOWN_TRAJ', 
+             more_args=None, overwrite=False):
         cdef ArgList arglist
         cdef Topology top_ 
+
+        if not overwrite:
+            if file_exist(filename):
+                err = "file exist and you're in overwrite=%s mode" % str(overwrite) 
+                raise RuntimeError(err)
 
         # check Topology
         if isinstance(top, basestring):
