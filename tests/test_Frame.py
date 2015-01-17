@@ -18,7 +18,7 @@ class TestFrame(unittest.TestCase):
     def test_create_frame(self):
         # test creating Frame from a list!
         frame = Frame(range(300))
-        assert frame.size == 3000
+        assert frame.size == 300
         assert frame.n_atoms == 100
         assert frame.coords == array('d', [x for x in range(300)])
         assert frame[:] == frame.coords
