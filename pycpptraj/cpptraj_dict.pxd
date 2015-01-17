@@ -1,10 +1,10 @@
     # Traj_PDBfile.h
 cdef extern from "Traj_PDBfile.h":
     ctypedef enum PDBWRITEMODE "Traj_PDBfile::PDBWRITEMODE":
-        NONE "Traj_PDBfile::NONE"
+        NONEPDBWRITEMODE "Traj_PDBfile::NONE"
         SINGLE "Traj_PDBfile::SINGLE"
         MODEL "Traj_PDBfile::MODEL"
-        MULTI "Traj_PDBfile::MULTI"
+        MULTIPDB "Traj_PDBfile::MULTI"
     # CpptrajFile.h
 cdef extern from "CpptrajFile.h":
     ctypedef enum AccessType "CpptrajFile::AccessType":
@@ -125,10 +125,11 @@ cdef extern from "Atom.h":
     # Traj_Mol2File.h
 cdef extern from "Traj_Mol2File.h":
     ctypedef enum MOL2WRITEMODE "Traj_Mol2File::MOL2WRITEMODE":
-        NONE "Traj_Mol2File::NONE"
-        SINGLE "Traj_Mol2File::SINGLE"
+        NONEMOL2WRITEMODE "Traj_Mol2File::NONE"
+        # change name to avoid name conflict
+        SINGLEMol2File "Traj_Mol2File::SINGLE"
         MOL "Traj_Mol2File::MOL"
-        MULTI "Traj_Mol2File::MULTI"
+        MULTIMOL2 "Traj_Mol2File::MULTI"
     # DataFile.h
 cdef extern from "DataFile.h":
     ctypedef enum DataFormatType "DataFile::DataFormatType":
@@ -137,11 +138,11 @@ cdef extern from "DataFile.h":
         GNUPLOT "DataFile::GNUPLOT"
         XPLOR "DataFile::XPLOR"
         OPENDX "DataFile::OPENDX"
-        REMLOG "DataFile::REMLOG"
+        REMLOGDATAFILE "DataFile::REMLOG"
         MDOUT "DataFile::MDOUT"
         EVECS "DataFile::EVECS"
         VECTRAJ "DataFile::VECTRAJ"
-        UNKNOWN_DATA "DataFile::UNKNOWN_DATA"
+        UNKNOWN_DATAFORMAT "DataFile::UNKNOWN_DATA"
     # Analysis_Hist.h
 cdef extern from "Analysis_Hist.h":
     ctypedef enum NormMode "Analysis_Hist::NormMode":
@@ -158,13 +159,13 @@ cdef extern from "Cluster_HierAgglo.h":
 cdef extern from "Mol2File.h":
     ctypedef enum TRIPOSTAG "Mol2File::TRIPOSTAG":
         MOLECULE "Mol2File::MOLECULE"
-        ATOM "Mol2File::ATOM"
+        ATOMMOL2 "Mol2File::ATOM"
         BOND "Mol2File::BOND"
         SUBSTRUCT "Mol2File::SUBSTRUCT"
     # ReplicaDimArray.h
 cdef extern from "ReplicaDimArray.h":
     ctypedef enum RemDimType "ReplicaDimArray::RemDimType":
-        UNKNOWN "ReplicaDimArray::UNKNOWN"
+        UNKNOWNREPDIM "ReplicaDimArray::UNKNOWN"
         TEMPERATURE "ReplicaDimArray::TEMPERATURE"
         PARTIAL "ReplicaDimArray::PARTIAL"
         HAMILTONIAN "ReplicaDimArray::HAMILTONIAN"
@@ -204,7 +205,7 @@ cdef extern from "NetcdfFile.h":
 cdef extern from "DataSet.h": 
     # DataSet.h
     ctypedef enum DataType "DataSet::DataType":
-        UNKNOWN_DATA "DataSet::UNKNOWN_DATA"
+        UNKNOWN_DATASET "DataSet::UNKNOWN_DATA"
         DOUBLE "DataSet::DOUBLE"
         FLOAT "DataSet::FLOAT"
         INTEGER "DataSet::INTEGER"
@@ -215,7 +216,7 @@ cdef extern from "DataSet.h":
         VECTOR "DataSet::VECTOR"
         MODES "DataSet::MODES"
         GRID_FLT "DataSet::GRID_FLT"
-        REMLOG "DataSet::REMLOG"
+        REMLOGDATATYPE "DataSet::REMLOG"
         XYMESH "DataSet::XYMESH"
         TRAJ "DataSet::TRAJ"
     # DataSet.h
@@ -243,7 +244,7 @@ cdef extern from "DataSet.h":
         PCHI "DataSet::PCHI"
         OMEGA "DataSet::OMEGA"
         NOE "DataSet::NOE"
-        UNDEFINED "DataSet::UNDEFINED"
+        UNDEFINEDSCALARTYPE "DataSet::UNDEFINED"
     # DataSet_2D.h
 cdef extern from "DataSet_2D.h":
     ctypedef enum MatrixType "DataSet_2D::MatrixType":
@@ -266,7 +267,7 @@ cdef extern from "DataSet_2D.h":
     # ClusterSieve.h
 cdef extern from "ClusterSieve.h":
     ctypedef enum SieveType "ClusterSieve::SieveType":
-        NONE "ClusterSieve::NONE"
+        NONESieveType "ClusterSieve::NONE"
         REGULAR "ClusterSieve::REGULAR"
         RANDOM "ClusterSieve::RANDOM"
     # Dimension.h
@@ -278,37 +279,38 @@ cdef extern from "Dimension.h":
     # PDBfile.h
 cdef extern from "PDBfile.h":
     ctypedef enum PDB_RECTYPE "PDBfile::PDB_RECTYPE":
-        ATOM "PDBfile::ATOM"
+        ATOMPDB "PDBfile::ATOM"
         HETATM "PDBfile::HETATM"
         CRYST1 "PDBfile::CRYST1"
         TER "PDBfile::TER"
         END "PDBfile::END"
         ANISOU "PDBfile::ANISOU"
         END_OF_FILE "PDBfile::END_OF_FILE"
-        UNKNOWN "PDBfile::UNKNOWN"
+        UNKNOWNPDBFILE "PDBfile::UNKNOWN"
     # Action.h
 cdef extern from "Action.h":
-    ctypedef enum RetType "Action::RetType":
-        OK "Action::OK"
-        ERR "Action::ERR"
+    ctypedef enum RetTypeAct "Action::RetType":
+        OKACTION "Action::OK"
+        ERRACTION "Action::ERR"
         USEORIGINALFRAME "Action::USEORIGINALFRAME"
         SUPPRESSCOORDOUTPUT "Action::SUPPRESSCOORDOUTPUT"
     # ParmFile.h
 cdef extern from "ParmFile.h":
     ctypedef enum ParmFormatType "ParmFile::ParmFormatType":
         AMBERPARM "ParmFile::AMBERPARM"
-        PDBFILE "ParmFile::PDBFILE"
-        MOL2FILE "ParmFile::MOL2FILE"
+        PDBFILEPARM "ParmFile::PDBFILE"
+        MOL2FILEPARM "ParmFile::MOL2FILE"
         CHARMMPSF "ParmFile::CHARMMPSF"
         CIFFILE "ParmFile::CIFFILE"
         GMXTOP "ParmFile::GMXTOP"
         SDFFILE "ParmFile::SDFFILE"
-        TINKER "ParmFile::TINKER"
+        # change name to avoid conflict
+        TINKERPARM "ParmFile::TINKER"
         UNKNOWN_PARM "ParmFile::UNKNOWN_PARM"
     # TrajinList.h
 cdef extern from "TrajinList.h":
     ctypedef enum TrajModeType "TrajinList::TrajModeType":
-        UNDEFINED "TrajinList::UNDEFINED"
+        UNDEFINEDTRAJINLIST "TrajinList::UNDEFINED"
         NORMAL "TrajinList::NORMAL"
         ENSEMBLE "TrajinList::ENSEMBLE"
     # ClusterList.h
@@ -333,12 +335,12 @@ cdef extern from "GridAction.h":
     # Trajin_Multi.h
 cdef extern from "Trajin_Multi.h":
     ctypedef enum TargetType "Trajin_Multi::TargetType":
-        NONE "Trajin_Multi::NONE"
+        NONETARGETTYPE "Trajin_Multi::NONE"
         TEMP "Trajin_Multi::TEMP"
         INDICES "Trajin_Multi::INDICES"
         CRDIDX "Trajin_Multi::CRDIDX"
     # Analysis.h
 cdef extern from "Analysis.h":
-    ctypedef enum RetType "Analysis::RetType":
-        OK "Analysis::OK"
-        ERR "Analysis::ERR"
+    ctypedef enum RetTypeAna "Analysis::RetType":
+        OKANALYSIS "Analysis::OK"
+        ERRANALYSIS "Analysis::ERR"
