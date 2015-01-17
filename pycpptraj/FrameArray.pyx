@@ -9,7 +9,7 @@ from pycpptraj._utils cimport get_positive_idx
 from pycpptraj.Trajectory import Trajectory
 
 cdef class FrameArray:
-    def __cinit__(self, string fname='', top=None, indices=None, bint warning=False):
+    def __cinit__(self, string filename='', top=None, indices=None, bint warning=False):
 
         if isinstance(top, basestring):
             self.top = Topology(top)
@@ -26,9 +26,9 @@ cdef class FrameArray:
         # this variable is intended to let FrameArray control 
         # freeing memory for Frame instance but it's too complicated
         #self.is_mem_parent = True
-        if not fname.empty():
+        if not filename.empty():
             # TODO : check if file exist
-            self.load(fname=fname, indices=indices)
+            self.load(filename=filename, indices=indices)
 
     def copy(self):
         "Return a copy of FrameArray"
@@ -63,16 +63,16 @@ cdef class FrameArray:
         for frame in self:
             del frame.thisptr
 
-    def load(self, fname='', Topology top=None, indices=None):
+    def load(self, filename='', Topology top=None, indices=None):
         # TODO : add more test cases
         cdef Trajin_Single ts
         cdef int idx
 
-        if isinstance(fname, basestring):
+        if isinstance(filename, basestring):
             ts = Trajin_Single()
             if top is not None:
                 ts.top = top.copy()
-                ts.load(fname)
+                ts.load(filename)
                 # update top for self too
                 if not self.top.is_empty():
                     print "updating FrameArray topology"
@@ -80,7 +80,7 @@ cdef class FrameArray:
             else:
                 # use self.top
                 ts.top = self.top.copy()
-                ts.load(fname)
+                ts.load(filename)
 
             if indices is None:
                 # load all frames
@@ -106,8 +106,8 @@ cdef class FrameArray:
                         idx_idx = indices.index(idx)
                         self[old_size + idx_idx] = ts[idx]
 
-        elif isinstance(fname, (list, tuple)):
-            for fh in fname:
+        elif isinstance(filename, (list, tuple)):
+            for fh in filename:
                 # recursive
                 self.load(fh, top, indices)
         else:
