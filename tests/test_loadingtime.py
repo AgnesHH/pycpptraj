@@ -5,18 +5,18 @@ from pycpptraj.Trajectory import Trajectory
 
 def get_time(indices):
     t0 = time()
-    traj = FrameArray(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top",
+    traj = FrameArray(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top",
                           indices=indices)
     return time() - t0
 
 def get_time_2(indices):
-    traj = Trajin_Single(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+    traj = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
     t0 = time()
     traj[indices]
     return time()- t0
 
 def get_time_3(indices):
-    traj = Trajectory(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top"
+    traj = Trajectory(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top"
            )
     t0 = time()
     traj[indices]
@@ -31,7 +31,7 @@ print get_time(sorted(range(100) + range(500, 200, -2)))
 
 print get_time_3(slice(0, 250, 1))
 
-traj = Trajectory(fname="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+traj = Trajectory(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
 print traj[:100]
 print traj[300:500:2]
 print traj[600:]
