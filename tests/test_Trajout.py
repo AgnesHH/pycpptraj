@@ -12,9 +12,9 @@ class TestTrajout(unittest.TestCase):
         farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
         frame0 = farray[0]
         trajout = Trajout()
-        #trajout.open(fname="test.x", top=farray.top, fmt="AMBERTRAJ")
-        trajout.open(fname="test.x", top=farray.top, fmt="AMBERNETCDF")
-        #trajout.open(fname="test.pdb", top=farray.top, fmt="PDBFILE", more_args="pdb")
+        #trajout.open(filename="test.x", top=farray.top, fmt="AMBERTRAJ")
+        trajout.open(filename="test.x", top=farray.top, fmt="AMBERNETCDF")
+        #trajout.open(filename="test.pdb", top=farray.top, fmt="PDBFILE", more_args="pdb")
         trajout.writeframe(0, frame0, farray.top)
         assert trajout.is_open() == True
 
@@ -28,7 +28,7 @@ class TestTrajout(unittest.TestCase):
     @no_test
     def test_with_statement(self):
         frame0 = farray[0]
-        with Trajout(fname="test_trajout_withstatement.x", top=farray.top) as trajout:
+        with Trajout(filename="test_trajout_withstatement.x", top=farray.top) as trajout:
             trajout.writeframe(0, frame0, farray.top)
 
         # reload
@@ -58,8 +58,8 @@ class TestTrajout(unittest.TestCase):
 
     def test_write_PDBFILE(self):
         frame0 = farray[0]
-        with Trajout(fname="test_0.pdb", top=farray.top, fmt="PDBFILE", more_args=".pdb") as trajout:
-        #with Trajout(fname="test_0.pdb", top=farray.top, fmt="PDBFILE") as trajout:
+        with Trajout(filename="test_0.pdb", top=farray.top, fmt="PDBFILE", more_args=".pdb") as trajout:
+        #with Trajout(filename="test_0.pdb", top=farray.top, fmt="PDBFILE") as trajout:
             trajout.writeframe(0, frame0, farray.top)
 
     def test_load(self):
