@@ -18,8 +18,8 @@ cdef class TrajectoryIO (BaseIOtype):
     #def virtual bint ID_TrajFormat(self,CpptrajFile):
 
     @makesureABC("TrajectoryIO")
-    def total_frames(self, string fname, Topology top):
-        return self.baseptr_1.setupTrajin(fname, top.thisptr)
+    def total_frames(self, string filename, Topology top):
+        return self.baseptr_1.setupTrajin(filename, top.thisptr)
 
     #def virtual int setupTrajout(self, string, Topology *, int, bint):
 
