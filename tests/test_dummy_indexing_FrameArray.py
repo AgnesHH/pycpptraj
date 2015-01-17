@@ -8,7 +8,7 @@ from decorator import no_test
 ts = Trajin_Single()
 datadir = "./data/"
 topname = datadir + "Tc5b.top"
-refname = "./data/Tc5b.nat.crd"
+refilename = "./data/Tc5b.nat.crd"
 mdx = "./data/md1_prod.Tc5b.x"
 ts = Trajin_Single()
 print ts.top.tag
