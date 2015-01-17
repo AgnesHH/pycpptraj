@@ -10,14 +10,13 @@ class Test(unittest.TestCase):
         #mdio.writetraj("test_1.pdb", traj[0], top=traj.top, fmt='CHARMM')
         print dir(Trajout)
         print Trajout.writeframe
-        with Trajout("test_1.pdb", fmt='PDBFILE') as trajout:
+        with Trajout("test_1.pdb", fmt='CHARMMDCD') as trajout:
             trajout.writeframe(frame=traj[0], top=traj.top)
 
     def test_1(self):
         traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
         trajout = Trajout()
+        print trajout.formats
          
-        
-
 if __name__ == "__main__":
     unittest.main()
