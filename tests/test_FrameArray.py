@@ -265,8 +265,8 @@ class TestFrameArray(unittest.TestCase):
         print farray[0].buffer
         np_arrview = np.asarray(farray[0].buffer)
         print np_arrview[:20]
-        print farray[0].coords_copy()[:20]
-        np.testing.assert_almost_equal(np_arrview, farray[0].coords_copy())
+        print farray[0].coords[:20]
+        np.testing.assert_almost_equal(np_arrview, farray[0].coords)
 
     #@no_test
     def test_1(self):
@@ -327,10 +327,10 @@ class TestFrameArray(unittest.TestCase):
         t.stop()
         print "time for stripping atoms of %s frames is %s" % (N, t.total())
         print farray_cp.top.n_atoms
-        print farray_cp[0].coords_copy()
+        print farray_cp[0].coords
 
         arr = load("./data/stripAllButCA.Tc5b.x", (10, 60))
-        np.testing.assert_almost_equal(arr[0], farray_cp[0].coords_copy(), decimal=3)
+        np.testing.assert_almost_equal(arr[0], farray_cp[0].coords, decimal=3)
 
         print "Test printing __str__"
         print farray_cp.size
