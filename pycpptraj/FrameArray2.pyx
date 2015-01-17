@@ -118,7 +118,7 @@ cdef class FrameArray2(DataSet_Coords):
         dset.baseptr0 = self.thisptr.Alloc()
         return dset
 
-    def load(FrameArray2 self, string fname, Topology top=Topology(), ArgList arglist=ArgList()):
+    def load(FrameArray2 self, string filename, Topology top=Topology(), ArgList arglist=ArgList()):
         """load TRJ from file"""
         if top.is_empty():
             if not self.top.is_empty():
@@ -128,7 +128,7 @@ cdef class FrameArray2(DataSet_Coords):
         if self.top.is_empty() and not top.is_empty():
             print "assigning new non-empty Topology"
             self.top = top.copy()
-        return self.thisptr.AddSingleTrajin(fname, arglist.thisptr[0], top.thisptr)
+        return self.thisptr.AddSingleTrajin(filename, arglist.thisptr[0], top.thisptr)
 
     def addframe(self, Frame frame):
         self.thisptr.AddFrame(frame.thisptr[0])
