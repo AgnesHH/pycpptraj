@@ -23,8 +23,8 @@ def test_generator(top):
 
 top = Topology()
 parm = ParmFile()
-fname = "./data/Tc5b.top"
-parm.readparm(top, fname)
+filename = "./data/Tc5b.top"
+parm.readparm(top, filename)
 assert top.n_atoms == 304
 parm.help()
 
@@ -35,10 +35,10 @@ class TestParmFile(unittest.TestCase):
         parm = ParmFile()
         print parm.formats()
         
-        fname = "./data/Tc5b.top"
+        filename = "./data/Tc5b.top"
         
         print "Read topology file and dump to 'top'"
-        parm.readparm(top, fname)
+        parm.readparm(top, filename)
         assert top.n_atoms == 304
         
         print "\natom_iterator for top"
@@ -47,40 +47,40 @@ class TestParmFile(unittest.TestCase):
 
     def test_write_CHARMMPSF(self):
         print "write parm for CHARMM"
-        parm.writeparm(top=top, fname="output/test.psf", fmt="CHARMMPSF")
+        parm.writeparm(top=top, filename="output/test.psf", fmt="CHARMMPSF")
         top2 = Topology()
-        parm.readparm(fname="output/test.psf", top=top2)
+        parm.readparm(filename="output/test.psf", top=top2)
         assert top2.n_atoms == 304
         test_generator(top2)
 
     def test_write_AMBERPARM(self):
         top2 = Topology()
-        parm.writeparm(top=top, fname="output/test.parm7", fmt="AMBERPARM")
-        parm.readparm(fname="output/test.parm7", top=top2)
+        parm.writeparm(top=top, filename="output/test.parm7", fmt="AMBERPARM")
+        parm.readparm(filename="output/test.parm7", top=top2)
         assert top2.n_atoms == 304
         test_generator(top2)
 
     #@not_yet_supported
     def test_write_GROMACS(self):
         top2 = Topology()
-        parm.writeparm(top=top, fname="output/test.gmxtop", fmt="GMXTOP")
-        #parm.readparm(fname="output/test.gmxtop", top=top2)
+        parm.writeparm(top=top, filename="output/test.gmxtop", fmt="GMXTOP")
+        #parm.readparm(filename="output/test.gmxtop", top=top2)
         #assert top2.n_atoms == 304
         #test_generator(top2)
 
     #@not_yet_supported
     def test_write_mol2(self):
         top2 = Topology()
-        parm.writeparm(top=top, fname="output/test.mol2", fmt="MOL2FILE")
-        #parm.readparm(fname="output/test.mol2", top=top2)
+        parm.writeparm(top=top, filename="output/test.mol2", fmt="MOL2FILE")
+        #parm.readparm(filename="output/test.mol2", top=top2)
         #assert top2.n_atoms == 304
         #test_generator(top2)
 
     #@not_yet_supported
     def test_write_TINKER(self):
         top2 = Topology()
-        parm.writeparm(top=top, fname="output/test.arc", fmt="TINKER")
-        #parm.readparm(fname="output/test.arc", top=top2)
+        parm.writeparm(top=top, filename="output/test.arc", fmt="TINKER")
+        #parm.readparm(filename="output/test.arc", top=top2)
         #assert top2.n_atoms == 304
         #test_generator(top2)
 
