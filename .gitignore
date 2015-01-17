@@ -6,8 +6,8 @@ build
 *.so
 nohup.out
 *.swp
+test.parm7
+tests/output/*
 test*.pyx
 temp.*
-tests/Cpptraj_test/Test*
 examples/data/cpptraj.log
-tests/output/test*top
