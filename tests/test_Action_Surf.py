@@ -8,7 +8,7 @@ from pycpptraj import cast_dataset
 
 print dir(Action_Surf())
 
-farray = FrameArray(top=Topology("./data/Tc5b.top"), fname='data/md1_prod.Tc5b.x')
+farray = FrameArray(top=Topology("./data/Tc5b.top"), filename='data/md1_prod.Tc5b.x')
 
 class TestSurf(unittest.TestCase):
     def test_0(self):
