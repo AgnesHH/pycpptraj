@@ -5,6 +5,7 @@ from pycpptraj.actions.Action_Strip import Action_Strip
 from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.Topology import Topology
+from pycpptraj.trajs.Trajout import Trajout
 
 def iterload(top=None, filename=None, start=0, chunk=None):
     '''Iterately return Frame instance'''
@@ -76,11 +77,11 @@ def fit(frame, ref=None):
         # TODO : fitting
         pass
 
-def write_output(filename, frames, top, ftm='AMBERTRAJ'):
+def write_output(filename, frames, top, ftm='AMBERTRAJ', overwrite=False):
     """write Frame or FrameArray"""
     # TODO : move to `io.py`
     trajout = Trajout()
-    trajout.open(filename=filename, top=top, fmt=ftm)
+    trajout.open(filename=filename, top=top, fmt=ftm, overwrite=overwrite)
     if isinstance(frames, Frame):
         trajout.writeframe(0, frame, top)
     elif isinstance(frames, FrameArray) or isinstance(frames, Trajin_Single):
