@@ -42,7 +42,7 @@ cdef class Residue:
         # TODO: return char*
         return self.thisptr.c_str()
 
-    def name_type(self):
+    def ntype(self):
         cdef NameType nt = NameType()
         nt.thisptr[0] = self.thisptr.Name()
         return nt
