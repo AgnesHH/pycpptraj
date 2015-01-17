@@ -1,10 +1,10 @@
 import unittest
 from pycpptraj.base import *
+from pycpptraj import io as mdio
 
 class Test(unittest.TestCase):
     def test_0(self):
-        pass
+        traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
 
 if __name__ == "__main__":
     unittest.main()
-
