@@ -5,6 +5,7 @@ from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.Trajin_Single import Trajin_Single as Trajectory
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.Topology import Topology
+from pycpptraj.trajs.Traj_PDBfile import Traj_PDBfile
 
 __all__ = ['load', 'iterload', 'writetraj', 'readparm', 'writeparm']
 
