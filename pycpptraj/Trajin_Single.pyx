@@ -3,14 +3,14 @@ import os
 include "config.pxi"
 
 cdef class Trajin_Single(Trajin):
-    def __cinit__(self, fname=None, top=None, *args):
+    def __cinit__(self, filename=None, top=None, *args):
         # thisptr is from Trajin class
         # now it points to derived class
         self.baseptr0 = <_TrajectoryFile*> new _Trajin_Single()
         self.baseptr_1 = <_Trajin*> self.baseptr0
         self.thisptr = <_Trajin_Single*> self.baseptr0
 
-        if fname:
+        if filename:
             if top:
                 if isinstance(top, basestring):
                     top_ = Topology(top)
@@ -19,7 +19,7 @@ cdef class Trajin_Single(Trajin):
                 if not self.top.is_empty():
                     print "Repalce self.top with new provided top"
                 self.top = top_.copy()
-            self.load(fname)
+            self.load(filename)
         
     def __dealloc__(self):
         if self.thisptr:
@@ -48,7 +48,7 @@ cdef class Trajin_Single(Trajin):
         return self.alloc()
 
     # Let base-class Trajin take care those methods?
-    def load(Trajin_Single self, string fname='', Topology top=Topology(), 
+    def load(Trajin_Single self, string filename='', Topology top=Topology(), 
              ArgList arglist=ArgList(), bint check_box=True,
              ):
         """
@@ -65,4 +65,4 @@ cdef class Trajin_Single(Trajin):
         if not top.is_empty():
             print "update Topology for %s instance" % (self.__class__.__name__)
             self._top = top.copy()
-        return self.thisptr.SetupTrajRead(fname, arglist.thisptr[0], self._top.thisptr, check_box)
+        return self.thisptr.SetupTrajRead(filename, arglist.thisptr[0], self._top.thisptr, check_box)
