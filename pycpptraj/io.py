@@ -38,11 +38,12 @@ def loadtraj(filename=None, top=Topology(), readonly=True):
     return ts
 
 def writetraj(filename="", traj=Trajectory(), top=Topology(), 
-              fmt='AMBERTRAJ', indices=None):
+              fmt='AMBERTRAJ', indices=None,
+              overwrite=False):
     """writetraj(filename="", traj=Trajectory(), top=Topology(), 
               ftm='AMBERTRAJ', indices=None):
     """
-    with Trajout(filename=filename, top=top, fmt=fmt) as trajout:
+    with Trajout(filename=filename, top=top, fmt=fmt, overwrite=overwrite) as trajout:
         if isinstance(traj, Frame):
             if indices is not None:
                 raise ValueError("indices does not work with single Frame")
