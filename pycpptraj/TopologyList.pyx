@@ -7,7 +7,7 @@ cdef class TopologyList:
         # cpptraj does
         # check ./CpptrajState.pyx
 
-        cdef string fname
+        cdef string filename
         self.thisptr = new _TopologyList()
         self.py_free_mem = py_free_mem
 
@@ -102,15 +102,15 @@ cdef class TopologyList:
         arglist :: ArgList instance
         """
         # TODO: what's about adding Topology instance to TopologyList?
-        cdef string fname
+        cdef string filename
         cdef ArgList arglist
         cdef Topology top
         cdef Topology newtop
 
         if len(args) == 1:
             if isinstance(args[0], basestring):
-                fname = args[0]
-                self.thisptr.AddParmFile(fname)
+                filename = args[0]
+                self.thisptr.AddParmFile(filename)
             elif isinstance(args[0], Topology):
                 top = args[0]
                 # let cpptraj frees memory since we pass a pointer
@@ -118,8 +118,8 @@ cdef class TopologyList:
                 newtop.py_free_mem = False
                 self.thisptr.AddParm(newtop.thisptr)
         elif len(args) == 2:
-            fname, arglist = args
-            self.thisptr.AddParmFile(fname, arglist.thisptr[0])
+            filename, arglist = args
+            self.thisptr.AddParmFile(filename, arglist.thisptr[0])
         
     def info(self):
         self.thisptr.List()
