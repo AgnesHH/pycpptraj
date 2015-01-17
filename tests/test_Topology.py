@@ -11,17 +11,17 @@ class TestTopology(unittest.TestCase):
         top = Topology()
         print top.file_path()
         assert top.is_empty() == True
-        fname = "./data/Tc5b.top"
-        top = Topology(fname)
+        filename = "./data/Tc5b.top"
+        top = Topology(filename)
         print top.file_path()
         assert top.is_empty() == False
 
     #@no_test
     def test_1(self):
         datadir = "./data/" 
-        fname = "./data/Tc5b.top"
+        filename = "./data/Tc5b.top"
         
-        top = Topology(fname)
+        top = Topology(filename)
         #top2 = top.modify_state_by_mask(AtomMask("!@CA"))
         #
         top.summary()
