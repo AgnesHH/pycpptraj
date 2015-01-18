@@ -62,6 +62,8 @@ cdef class Trajout:
 
         local_dict = TrajFormatDict.copy()
         local_dict.get("", "")
+        # make upper case in case user uses lower ones
+        fmt = fmt.upper()
 
         if more_args:
             if isinstance(more_args, basestring):
