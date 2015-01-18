@@ -29,7 +29,8 @@ class TestPyCpptrajIO(unittest.TestCase):
                        traj=traj, 
                        top="./data/Tc5b.top",
                        fmt='AMBERTRAJ', 
-                       indices=indices)
+                       indices=indices,
+                       overwrite=True)
 
         # check frames
         traj = mdio.load(filename="./output/test_io_saved.x", top="./data/Tc5b.top")
