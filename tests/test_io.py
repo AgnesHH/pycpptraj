@@ -36,6 +36,24 @@ class TestPyCpptrajIO(unittest.TestCase):
         traj = mdio.load(filename="./output/test_io_saved.x", top="./data/Tc5b.top")
         assert traj.size == len(indices) 
 
+    def test_load_and_save_1(self):
+        traj = mdio.load(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        trajiter = mdio.iterload(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top", chunk=100)
+        print trajiter
+
+        indices = range(20, 30, 5) + [103, 78, 90, 82]
+        mdio.writetraj(filename="./output/test_io_saved.pdb", 
+                       traj=traj, 
+                       top="./data/Tc5b.top",
+                       fmt='PDBFILE', 
+                       indices=indices,
+                       overwrite=True)
+
+        # check frames
+        traj = mdio.load(filename="./output/test_io_saved.pdb", top="./data/Tc5b.top")
+        assert traj.size == len(indices) 
+        assert traj.top.n_atoms == 304
+
 if __name__ == "__main__":
     unittest.main()
 
