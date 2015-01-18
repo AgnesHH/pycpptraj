@@ -45,7 +45,7 @@ class TestPyCpptrajIO(unittest.TestCase):
         mdio.writetraj(filename="./output/test_io_saved.pdb", 
                        traj=traj, 
                        top="./data/Tc5b.top",
-                       fmt='PDBFILE', 
+                       fmt='pdbfile', 
                        indices=indices,
                        overwrite=True)
 
