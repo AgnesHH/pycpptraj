@@ -22,12 +22,10 @@ cdef class NameType:
     def __dealloc__(self):
         del self.thisptr
 
-    #def NameType(self, char *):
-
-    def ToBuffer(self,char *c):
+    def tobuffer(self,char *c):
         self.thisptr.ToBuffer(c)
 
-    def Match(self, NameType nt):
+    def match(self, NameType nt):
         """return bool"""
         return self.thisptr.Match(nt.thisptr[00])
 
@@ -57,9 +55,9 @@ cdef class NameType:
     def __getitem__(self, int idx):
         return self.thisptr[0][idx]
 
-    def Truncated(self):
+    def truncated(self):
         """return string"""
         return self.thisptr.Truncated()
 
-    def ReplaceAsterisk(self):
+    def replace_asterisk(self):
         self.thisptr.ReplaceAsterisk()
