@@ -4,7 +4,7 @@ from pycpptraj.Topology import Topology
 from pycpptraj.AtomMask import AtomMask
 from pycpptraj.FileName import FileName
 from pycpptraj.base import *
-from decorator import no_test
+from pycpptraj.decorators import no_test
 
 class TestTopology(unittest.TestCase):
     def test_empty_top(self):
