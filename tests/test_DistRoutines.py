@@ -48,8 +48,9 @@ class Test(unittest.TestCase):
         frame0.strip_atoms("!@CA", traj.top)
         frame1 = traj[1]
         frame1.strip_atoms("!@CA", traj.top)
-        print frame0, frame1
-        print distance_frames(frame0, frame1)[:-10]
+        print "dist_rmsd = ", frame0.dist_rmsd(frame1)
+        distframes = distance_frames(frame0, frame1)
+        print distframes.__len__()
         xyz0_0 = frame0.atom_xyz(0)
         xyz0_1 = frame0.atom_xyz(1)
         
