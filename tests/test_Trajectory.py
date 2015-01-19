@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from pycpptraj.base import *
-from decorator import no_test
+from pycpptraj.decorators import no_test
 
 TRAJ = Trajin_Single()
 TRAJ.top = Topology("./data/Tc5b.top")
