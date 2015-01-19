@@ -63,6 +63,6 @@ cdef class Trajin_Single(Trajin):
         # Currently we can not assigne self.top to top.copy() since Cython does not know self.top type
         # need to use self._top since we declare it in TrajectoryFile.pxd
         if not top.is_empty():
-            print "update Topology for %s instance" % (self.__class__.__name__)
+            #print "update Topology for %s instance" % (self.__class__.__name__)
             self._top = top.copy()
         return self.thisptr.SetupTrajRead(filename, arglist.thisptr[0], self._top.thisptr, check_box)
