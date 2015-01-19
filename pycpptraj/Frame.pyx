@@ -481,7 +481,7 @@ cdef class Frame (object):
         return v
 
     def rmsd(self, Frame frame, bint use_mass=False, get_mvv=False):
-        # TODO : add mask
+        # TODO : add mask,
         """Calculate rmsd betwen two frames
         rmsd(Frame frame, bint use_mass=False, get_mvv=False):
         Parameters:
