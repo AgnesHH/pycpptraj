@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 from pycpptraj.base import *
-from decorator import no_test
+from pycpptraj.decorators import no_test
 from pycpptraj.io import writetraj
 
 farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
