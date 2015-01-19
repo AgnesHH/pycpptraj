@@ -7,11 +7,13 @@ cd cpptraj
 export CPPTRAJHOME=`pwd`
 #export AMBERHOME=$CPPTRAJHOME
 mkdir lib
-wget https://raw.githubusercontent.com/hainm/pycpptraj/master/for_travis/Makefile
-wget https://raw.githubusercontent.com/hainm/pycpptraj/master/for_travis/configure_pycpptraj
-mv Makefile* ./src/
-bash ./configure_pycpptraj -nomathlib -shared gnu
+#wget https://raw.githubusercontent.com/hainm/pycpptraj/master/for_travis/Makefile
+#wget https://raw.githubusercontent.com/hainm/pycpptraj/master/for_travis/configure_pycpptraj
+#mv Makefile* ./src/
+# using configure_pycpptraj file in pycpptraj/installs
+bash ../installs/configure_pycpptraj -nomathlib -shared gnu
 cd ./src
-make -f Makefile.1 libcpptraj.so
+# using Makefile file in pycpptraj/installs
+make -f ../../installs/Makefile libcpptraj.so
 
 cd $PYCPPTRAJ_HOME
