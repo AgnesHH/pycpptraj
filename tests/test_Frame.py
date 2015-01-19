@@ -4,6 +4,7 @@ import numpy as np
 from numpy.testing import assert_almost_equal
 from pycpptraj.Frame import Frame
 from pycpptraj.base import *
+from pycpptraj import io as mdio
 from pycpptraj.decorators import no_test
 
 SMALL = 1E-6
@@ -15,6 +16,33 @@ FRAME.set_from_crd(arr)
 FRAME_orig = FRAME.copy()
 
 class TestFrame(unittest.TestCase):
+    #@no_test
+    def test_strip_atoms(self):
+        traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        frame0 = traj[0]
+        frame1 = traj[1]
+        frame2 = traj[2]
+        frame3 = traj[3]
+        frame1 = frame0.strip_atoms("!@CA", traj.top, copy=True)
+        frame2 = Frame(frame0)
+        print frame2.n_atoms
+        print frame1.n_atoms
+        print frame1
+        assert frame1.n_atoms == 20
+        assert frame0.n_atoms == 304
+        frame0.strip_atoms("!@CA", traj.top, copy=False)
+        assert frame0.n_atoms == 20
+
+        _, mat, v1, v2 = frame2.rmsd(frame3, get_mvv=True)
+        print mat, v1, v2
+        print frame2[:10]
+        print mdio.writetraj("./test_0_before.pdb", traj=frame2, top=traj.top, overwrite=True)
+        frame2.trans_rot_trans(v1, mat, v2)
+        print frame2[:10]
+        print mdio.writetraj("./test_0_afeter.pdb", traj=frame2, top=traj.top, overwrite=True)
+        print Trajout().help()
+
+    #@no_test
     def test_create_frame(self):
         # test creating Frame from a list!
         frame = Frame(range(300))
@@ -31,6 +59,7 @@ class TestFrame(unittest.TestCase):
         assert frame.coords == array('d', [x for x in range(300)])
         assert frame[:] == frame.coords
   
+    #no_test
     def test_buffer(self):
         print "+++++start test_buffer+++++++"
         print FRAME.coords
