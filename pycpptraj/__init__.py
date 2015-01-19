@@ -3,7 +3,6 @@ pycpptraj
 """
 import os
 from pycpptraj import base
-from pycpptraj.misc import load, iterload
 
 # TODO : should we load those module here or use .base?
 from pycpptraj import io
