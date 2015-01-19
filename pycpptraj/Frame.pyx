@@ -585,10 +585,33 @@ cdef class Frame (object):
             top.thisptr[0] = newtop.thisptr[0]
 
     def strip_atoms(Frame self, string mask, Topology top=Topology(), 
-                    bint update_top=False, bint has_box=False):
-        """strip_atoms(Frame self, string mask, Topology top=Topology(), 
-                       bint update_top=False, bint has_box=False)"""
-        self._strip_atoms(top, mask, update_top, has_box)
+                    bint update_top=False, bint has_box=False, bint copy=False):
+        """strip_atoms(string mask, Topology top=Topology(), 
+                       bint update_top=False, bint has_box=False)
+
+        Return:
+          None : if copy=False
+          new striped Frame instance if copy=True
+
+        Parameters:
+        ----------
+        mask : str, mask, non-default
+
+        top : Topology, default=Topology()
+
+        update_top : bint, default=False
+
+        has_box : bint, default=False
+
+        copy : bint, default=False
+        """
+        cdef Frame frame
+        if not copy:
+            self._strip_atoms(top, mask, update_top, has_box)
+        else:
+            frame = Frame(self)
+            frame._strip_atoms(top, mask, update_top, has_box)
+            return frame
 
     def __getbuffer__(self, Py_buffer* viewout, int flags):
         # NotImplementedYet
