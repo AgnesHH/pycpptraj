@@ -37,12 +37,15 @@ def loadtraj(filename=None, top=Topology(), readonly=True):
     ts.load(filename, top)
     return ts
 
-def writetraj(filename="", traj=Trajectory(), top=Topology(), 
+def writetraj(filename="", traj=None, top=None, 
               fmt='AMBERTRAJ', indices=None,
               overwrite=False):
     """writetraj(filename="", traj=Trajectory(), top=Topology(), 
               ftm='AMBERTRAJ', indices=None):
     """
+    if not traj or not top or traj.size == 0 or top.is_empty():
+        raise ValueError("Need non-empty traj and top files")
+
     with Trajout(filename=filename, top=top, fmt=fmt, overwrite=overwrite) as trajout:
         if isinstance(traj, Frame):
             if indices is not None:
