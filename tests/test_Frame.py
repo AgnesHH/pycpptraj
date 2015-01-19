@@ -4,7 +4,7 @@ import numpy as np
 from numpy.testing import assert_almost_equal
 from pycpptraj.Frame import Frame
 from pycpptraj.base import *
-from decorator import no_test
+from pycpptraj.decorators import no_test
 
 SMALL = 1E-6
 
