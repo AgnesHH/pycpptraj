@@ -1,4 +1,6 @@
-#check ./utils/actions.py
+"""this file has commonly used actions such as rmsd calculation, 
+randomizeions, strip atoms, ..."""
+
 from pycpptraj.Topology import Topology
 from pycpptraj.Frame import Frame
 from pycpptraj.Trajin_Single import Trajin_Single
