@@ -3,7 +3,7 @@ import numpy as np
 from time import time
 from pycpptraj.base import *
 from pycpptraj.FrameArray2 import FrameArray2 as TrajectoryReadOnly
-from decorator import no_test
+from pycpptraj.decorators import no_test
 
 TRAJ = TrajectoryReadOnly()
 TRAJ.top = Topology("data/Tc5b.top")
