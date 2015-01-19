@@ -54,6 +54,7 @@ class TestTrajout(unittest.TestCase):
         """test write FrameArray"""
         farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
         writetraj("test_write_output.x", farray, farray.top, overwrite=True)
+        writetraj("test_pdb_1.dummyext", farray[0], farray.top, overwrite=True, fmt='pdb')
 
     #@no_test
     def test_write_PDBFILE(self):
