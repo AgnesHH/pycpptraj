@@ -11,7 +11,7 @@ cdef class MapAtom:
         elif len(args) == 1:
             if isinstance(args[0], Atom):
                 atom = args[0]
-                self.thisptr_ma = new _MapAtom(atom.thisptr_ma[0])
+                self.thisptr_ma = new _MapAtom(atom.thisptr[0])
             elif isinstance(args[0], MapAtom):
                 map_atom = args[0]
                 self.thisptr_ma = new _MapAtom(map_atom.thisptr_ma[0])
