@@ -43,7 +43,8 @@ def writetraj(filename="", traj=None, top=None,
     """writetraj(filename="", traj=Trajectory(), top=Topology(), 
               ftm='AMBERTRAJ', indices=None):
     """
-    if not traj or not top or traj.size == 0 or top.is_empty():
+    print "hello writetraj"
+    if not traj or not top:
         raise ValueError("Need non-empty traj and top files")
 
     with Trajout(filename=filename, top=top, fmt=fmt, overwrite=overwrite) as trajout:
