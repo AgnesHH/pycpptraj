@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from pycpptraj.base import *
 from decorator import no_test
-from pycpptraj.misc import write_output
+from pycpptraj.io import writetraj
 
 farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
 
@@ -53,7 +53,7 @@ class TestTrajout(unittest.TestCase):
     def test_2(self):
         """test write FrameArray"""
         farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
-        write_output("test_write_output.x", farray, farray.top, overwrite=True)
+        writetraj("test_write_output.x", farray, farray.top, overwrite=True)
 
     #@no_test
     def test_write_PDBFILE(self):
