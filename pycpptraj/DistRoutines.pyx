@@ -1,6 +1,7 @@
 # distutil: language = c++
 from math import sqrt
 from cpython.array cimport array
+from pycpptraj.Frame cimport Frame, _Frame
 #from pycpptraj.Vec3 cimport _Vec3, Vec3
 
 def dist2_image_nonOrtho(Vec3 v1, Vec3 v2, Matrix_3x3 m1, Matrix_3x3 m2):
@@ -34,3 +35,18 @@ def distance(p1, p2, image=None, image_type=None, *args, **kwd):
         return sqrt(DIST2_NoImage(v1.thisptr[0], v2.thisptr[0]))
     else:
         raise NotImplementedError("not yet supported")
+
+def distance_frames(Frame f1, Frame f2, image=None, image_type=None, *args, **kwd):
+    # TODO : extend this method
+    cdef int i
+    cdef array arr0 = array('d', [])
+
+    if f1.n_atoms != f2.n_atoms:
+        raise ValueError("two frames must have the same number of atoms")
+    if not image:
+        for i in range(f1.n_atoms):
+            arr0.append(sqrt(DIST2_NoImage(f1.thisptr.XYZ(i), f2.thisptr.XYZ(i))))
+    else:
+        raise NotImplementedError("not yet supported for image")
+
+    return arr0
