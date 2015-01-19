@@ -1,4 +1,5 @@
 # adapted from CSB package
+# dir: http://csb.codeplex.com/
 # turn-off numpy.sum, numpy.power
 # use builtin `sum`
 # TODO : add more acknowledgement
@@ -13,7 +14,7 @@ def _tm_d0(Lmin):
 
 def tm_score(x, y, L=None, d0=None):
     """
-    Evaluate the TM-score of two Frames as they are (no fitting is done).
+    Evaluate the TM-score of two Frames (no fitting is done).
     Return : float
     
     Parameters:
