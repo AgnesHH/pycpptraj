@@ -1,6 +1,6 @@
 # distutils: language = c++
 from pycpptraj.cpptraj_dict import TrajFormatDict
-from pycpptraj.misc import file_exist
+from pycpptraj.utils.check_and_assert import file_exist
 
 
 cdef class Trajout:
