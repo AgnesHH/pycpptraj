@@ -7,7 +7,7 @@ build
 nohup.out
 *.swp
 test.parm7
-tests/output/*
+tests/output/test*
 test*.pyx
 temp.*
 examples/data/cpptraj.log
