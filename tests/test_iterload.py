@@ -1,5 +1,5 @@
 import unittest
-from pycpptraj.misc import iterload
+from pycpptraj.io import iterload
 from pycpptraj.base import *
 
 # test load single frame
