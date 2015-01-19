@@ -38,12 +38,11 @@ def loadtraj(filename=None, top=Topology(), readonly=True):
     return ts
 
 def writetraj(filename="", traj=None, top=None, 
-              fmt='AMBERTRAJ', indices=None,
+              fmt='UNKNOWN_TRAJ', indices=None,
               overwrite=False):
     """writetraj(filename="", traj=Trajectory(), top=Topology(), 
               ftm='AMBERTRAJ', indices=None):
     """
-    print "hello writetraj"
     if not traj or not top:
         raise ValueError("Need non-empty traj and top files")
 
@@ -52,15 +51,20 @@ def writetraj(filename="", traj=None, top=None,
             if indices is not None:
                 raise ValueError("indices does not work with single Frame")
             trajout.writeframe(0, traj, top)
-        elif isinstance(traj, FrameArray) or isinstance(traj, Trajin_Single):
-            # assume
+        else:
+            if isinstance(traj, FrameArray) or isinstance(traj, Trajin_Single):
+                traj2 = traj
+            elif isinstance(traj, basestring):
+                traj2 = load(traj, top)
+            else:
+                raise NotImplementedError("must be FrameArray, Trajin_Single or string")
             if not indices:
                 # write all traj
-                for idx, frame in enumerate(traj):
+                for idx, frame in enumerate(traj2):
                     trajout.writeframe(idx, frame, top)
             else:
                 for idx in indices:
-                    trajout.writeframe(idx, traj[idx], top)
+                    trajout.writeframe(idx, traj2[idx], top)
 
 def writeparm(filename=None, top=None, fmt='AMBERPARM'):
     # TODO : add *args
