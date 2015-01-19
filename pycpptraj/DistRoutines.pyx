@@ -37,7 +37,9 @@ def distance(p1, p2, image=None, image_type=None, *args, **kwd):
         raise NotImplementedError("not yet supported")
 
 def distance_frames(Frame f1, Frame f2, image=None, image_type=None, *args, **kwd):
-    # TODO : extend this method
+    # TODO : 
+    #     + extend this method
+    #     + test cases
     cdef int i
     cdef array arr0 = array('d', [])
 
@@ -48,5 +50,4 @@ def distance_frames(Frame f1, Frame f2, image=None, image_type=None, *args, **kw
             arr0.append(sqrt(DIST2_NoImage(f1.thisptr.XYZ(i), f2.thisptr.XYZ(i))))
     else:
         raise NotImplementedError("not yet supported for image")
-
     return arr0
