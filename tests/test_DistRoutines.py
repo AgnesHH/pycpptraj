@@ -2,8 +2,9 @@ import math
 import unittest
 from pycpptraj.base import *
 from pycpptraj.Vec3 import Vec3
-from pycpptraj.common_actions import distance
+from pycpptraj.DistRoutines import distance, distance_frames
 from pycpptraj.decorators import no_test
+from pycpptraj import allactions
 
 class Test(unittest.TestCase):
     def test_Vec3_noimage(self):
@@ -28,10 +29,31 @@ class Test(unittest.TestCase):
         traj = FrameArray(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
         frame0 = traj[10]
 
-        print distance(frame0.coords[0:3], frame0.coords[96:99])
+        #print distance(frame0.coords[0:3], frame0.coords[96:99])
         for i in range(frame0.n_atoms):
             for j in range(i, frame0.n_atoms):
                 distance(frame0.atom_xyz(i), frame0.atom_xyz(j))
+
+    def test_distance_frames(self):
+        traj = FrameArray(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        dslist = DataSetList()
+        act = allactions.Action_Distance()
+        act.master(command="distance :1@CA :2@CA",
+                   currentframe=traj,
+                   currenttop=traj.top, dslist=dslist)
+        d1 = cast_dataset(dslist[0], dtype="general")
+        print d1.data[:10]
+
+        frame0 = traj[0]
+        frame0.strip_atoms("!@CA", traj.top)
+        frame1 = traj[1]
+        frame1.strip_atoms("!@CA", traj.top)
+        print frame0, frame1
+        print distance_frames(frame0, frame1)[:-10]
+        xyz0_0 = frame0.atom_xyz(0)
+        xyz0_1 = frame0.atom_xyz(1)
+        
+        assert distance(xyz0_1, xyz0_0) == d1.data[0]
 
 if __name__ == "__main__":
     unittest.main()
