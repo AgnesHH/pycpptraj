@@ -3,6 +3,21 @@ from pycpptraj.base import *
 import pycpptraj.io as mdio
 
 class TestPyCpptrajIO(unittest.TestCase):
+    def test_save_traj_from_file(self):
+        Trajout().help()
+        traj = mdio.load("./data/md1_prod.Tc5b.x",
+                         "./data/Tc5b.top")
+        print traj.size
+        mdio.writetraj(filename="test_0.x", 
+                       traj="./data/md1_prod.Tc5b.x", 
+                       #traj=traj,
+                       top="./data/Tc5b.top",
+                       fmt="BINPOS",
+                       overwrite=True)
+
+        savedtraj = mdio.load("./test_0.x", traj.top)
+        assert savedtraj.size == traj.size
+
     def test_blindload(self):
         top = mdio.load("./data/Tc5b.top")
         assert isinstance(top, Topology) == True
