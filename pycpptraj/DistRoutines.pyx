@@ -31,18 +31,17 @@ def distance(p1, p2, image=None, image_type=None, *args, **kwd):
             v1 = <Vec3> p1
             v2 = <Vec3> p2
         else:
-            v1 = Vec3(p1[0], p1[0], p1[1])
-            v2 = Vec3(p2[0], p2[0], p2[1])
+            v1 = Vec3(p1[0], p1[1], p1[2])
+            v2 = Vec3(p2[0], p2[1], p2[2])
         return sqrt(DIST2_NoImage(v1.thisptr[0], v2.thisptr[0]))
     else:
         raise NotImplementedError("not yet supported")
 
-def distance_frames(Frame f1, Frame f2, image=None, image_type=None, *args, **kwd):
+def distance_frames(Frame f1, Frame f2, image=False, image_type="", *args, **kwd):
     # TODO : addd *args and **kwd
-    cdef double[:] arr0
     if f1.n_atoms != f2.n_atoms:
         raise ValueError("two frames must have the same number of atoms")
-    ar0 = _distance_frames(f1.thisptr[0], f2.thisptr[0], image, image_type, f1.n_atoms)
+    return array('d', _distance_frames(f1.thisptr[0], f2.thisptr[0], image, image_type, f1.n_atoms))
 
 cdef double[:] _distance_frames(_Frame f1, _Frame f2, bint image, 
                                 string image_type, int natoms):
@@ -50,7 +49,7 @@ cdef double[:] _distance_frames(_Frame f1, _Frame f2, bint image,
     #     + extend this method
     #     + test cases
     cdef int i
-    cdef double[:] arr0 = array('d', [None]*natoms)
+    cdef double[:] arr0 = array('d', [-1]*natoms)
 
     if not image:
         for i in range(natoms):
