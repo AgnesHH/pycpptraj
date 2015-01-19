@@ -12,7 +12,10 @@ def _tm_d0(Lmin):
         d0 = 0.5
     return max(0.5, d0)
 
-def tm_score(x, y, L=None, d0=None):
+def tm_score(x, y, L=None, d0=None, mask=None, 
+             top=None,
+             mask1=None, mask2=None,
+             top1=None, top2=None):
     """
     Evaluate the TM-score of two Frames (no fitting is done).
     Return : float
@@ -28,10 +31,26 @@ def tm_score(x, y, L=None, d0=None):
     """
     import numpy as np
 
+    if mask is not None:
+        mask1 = mask
+        mask2 = mask
+        top1 = top
+        top2 = top
+        xx = x.strip_atoms(mask1, top1, copy=True)
+        yy = y.strip_atoms(mask2, top2, copy=True)
+    else:
+        have_top1_2 = (top1 != None) & (top2 != None)
+        have_mask1_2 = (mask1 != None) & (mask2 != None)
+        if have_top1_2 and have_mask1_2:
+            xx = x.strip_atoms(mask1, top1, copy=True)
+            yy = y.strip_atoms(mask2, top2, copy=True)
+        else:
+            xx = x
+            yy = y
     if not L:
         L = x.n_atoms
     if not d0:
         d0 = _tm_d0(L)
     # convert Python array to numpy array 
-    d = np.array(distance_frames(x, y))
+    d = np.array(distance_frames(xx, yy))
     return sum(1 / (1 + (d / d0) ** 2)) / L
