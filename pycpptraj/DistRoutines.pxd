@@ -3,6 +3,7 @@
 from pycpptraj.Box cimport _Box, Box
 from pycpptraj.Vec3 cimport _Vec3, Vec3
 from pycpptraj.Matrix_3x3 cimport _Matrix_3x3, Matrix_3x3
+from libc.math cimport sqrt
 
 cdef extern from "DistRoutines.h":
     ctypedef enum ImagingType:
@@ -18,3 +19,4 @@ cdef extern from "DistRoutines.h":
     double DIST_NoImage "DIST2_NoImage"( const _Vec3&, const _Vec3& )
     double DIST2(const double*, const double*, ImagingType, const _Box &, 
                  const _Matrix_3x3&, const _Matrix_3x3&)
+
