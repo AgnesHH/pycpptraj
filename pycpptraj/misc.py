@@ -1,29 +1,11 @@
 #check ./utils/actions.py
-from pycpptraj.base import *
-from pycpptraj.iterload import _iterload
-from pycpptraj.actions.Action_Strip import Action_Strip
+from pycpptraj.Topology import Topology
+from pycpptraj.Frame import Frame
 from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.FrameArray import FrameArray
-from pycpptraj.Topology import Topology
-from pycpptraj.trajs.Trajout import Trajout
+from pycpptraj.actions import allactions
 
-def iterload(top=None, filename=None, start=0, chunk=None):
-    '''Iterately return Frame instance'''
-    if not isinstance(top, Topology):
-        # string
-        top = Topology(top)
-    return _iterload(top, filename, start, chunk)
-
-def load(top=None, filename=None, readonly=True):
-    if not isinstance(top, Topology):
-        # string
-        top = Topology(top)
-    if readonly:
-        ts = Trajin_Single()
-    else:
-        ts = FrameArray()
-    ts.load(filename, top)
-    return ts
+__all__ = ['strip', 'fit', 'get_subframe', 'randomize_ions']
 
 def strip(arg, mask):
     """
@@ -48,7 +30,7 @@ def strip(arg, mask):
     toplist = TopologyList()
     toplist.add_parm(top)
 
-    stripact = Action_Strip()
+    stripact = allactions.Action_Strip()
     stripact.read_input(ArgList("strip " + mask), toplist)
     stripact.process(toplist[0], top)
 
@@ -77,19 +59,6 @@ def fit(frame, ref=None):
         # TODO : fitting
         pass
 
-def write_output(filename, frames, top, ftm='AMBERTRAJ', overwrite=False):
-    """write Frame or FrameArray"""
-    # TODO : move to `io.py`
-    trajout = Trajout()
-    trajout.open(filename=filename, top=top, fmt=ftm, overwrite=overwrite)
-    if isinstance(frames, Frame):
-        trajout.writeframe(0, frame, top)
-    elif isinstance(frames, FrameArray) or isinstance(frames, Trajin_Single):
-        # assume that 0w
-        for idx, frame in enumerate(frames):
-            trajout.writeframe(idx, frame, top)
-    trajout.close()
-
 def get_subframe(frame=None, mask=None, top=None):
     # TODO : move to `io.py`
     return frame.get_subframe(mask, top)
@@ -97,3 +66,22 @@ def get_subframe(frame=None, mask=None, top=None):
 def file_exist(filename):
     import os
     return os.path.isfile(filename)
+
+def randomize_ions(frame=Frame(), top=Topology(), command=""):
+    """randomize_ions for given Frame with Topology
+    Return : None
+    Parameters
+    ---------
+    frame : Frame instance, default=Frame()
+        frame coords will be modified
+
+    top : Topology instance, default=Topology()
+
+    >>> from pycpptraj.misc import randomize_ions
+    >>> randomize_ions(frame, top, command="randomizeions @Na+ around :1-16 by 5.0 overlap 3.0")
+    """
+    act = allactions.Action_RandomizeIons()
+    act.master(command=command,
+               currenttop=top,
+               currentframe=frame,
+               )
