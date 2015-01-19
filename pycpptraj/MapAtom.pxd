@@ -3,7 +3,7 @@ from pycpptraj.Atom cimport *
 
 
 cdef extern from "MapAtom.h": 
-    cdef cppclass _MapAtom "MapAtom":
+    cdef cppclass _MapAtom "MapAtom" (_Atom):
         _MapAtom() 
         _MapAtom(const _MapAtom&)
         _MapAtom(const _Atom&)
@@ -28,5 +28,6 @@ cdef extern from "MapAtom.h":
         void SetNotComplete() 
         void SetNotChiral() 
 
-cdef class MapAtom:
-    cdef _MapAtom* thisptr
+cdef class MapAtom (Atom):
+    # _Atom* thisptr
+    cdef _MapAtom* thisptr_ma
