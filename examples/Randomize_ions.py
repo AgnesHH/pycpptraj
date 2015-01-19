@@ -2,7 +2,7 @@ import unittest
 from pycpptraj.misc import randomize_ions
 from pycpptraj.io import load
 
-def randions(self):
+def randions():
     # get `traj` instance (FrameArray)
     traj = load(filename="./Test_RandomizeIons/adh206.tip3p.rst7.gz", 
                 top="./Test_RandomizeIons/adh206.ff10.tip3p.parm7.gz")
@@ -21,4 +21,4 @@ def randions(self):
     assert frame0.rmsd(savedframe) < 1E-3
 
 if __name__ == "__main__":
-    unittest.main()
+    randions()
