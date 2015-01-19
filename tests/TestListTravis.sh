@@ -2,9 +2,11 @@ python ./test_cast_dataset.py
 python ./test_FrameList.py 
 python ./test_teasing_traj.py 
 python ./test_DataSet_double.py 
+python ./test_NameType.py 
 python ./test_Trajin_Single.py 
 python ./test_FrameArray.py 
 python ./test_Action_Surf.py 
+python ./test_randomize_ions.py 
 python ./test_Frame.py 
 python ./test_FrameArray_extensive_indexing.py 
 python ./test_io.py 
