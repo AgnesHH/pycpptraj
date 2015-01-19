@@ -5,7 +5,7 @@ import numpy as np
 from pycpptraj.base import *
 from pycpptraj.Timer import Timer
 from load_traj import load
-from decorator import no_test
+from pycpptraj.decorators import no_test
 
 ts = Trajin_Single()
 datadir = "./data/"
