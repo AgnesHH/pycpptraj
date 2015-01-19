@@ -49,6 +49,7 @@ cdef class Trajout:
         cdef Topology top_ 
 
         if not overwrite:
+            # TODO : what's about 'append'?
             if file_exist(filename):
                 err = "file exist and you're in overwrite=%s mode" % str(overwrite) 
                 raise RuntimeError(err)
@@ -64,6 +65,11 @@ cdef class Trajout:
         local_dict.get("", "")
         # make upper case in case user uses lower ones
         fmt = fmt.upper()
+
+        if fmt == "PDB" or fmt == "MOL2":
+            # add 'FILE' the end
+            # 'PDBFILE' 'MOL2FILE'
+            fmt += 'FILE'
 
         if more_args:
             if isinstance(more_args, basestring):
