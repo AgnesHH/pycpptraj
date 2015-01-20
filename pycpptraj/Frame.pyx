@@ -521,7 +521,7 @@ cdef class Frame (object):
             mat, v = args
             return self.thisptr.RMSD_CenteredRef(ref.thisptr[0], mat.thisptr[0], v.thisptr[0], use_mass)
 
-    def rmsd_no_fit(self, Frame frame, bint use_mass=False):
+    def rmsd_nofit(self, Frame frame, bint use_mass=False):
         """Calculate rmsd betwen two frames without fitting
         Parameters:
         ----------
