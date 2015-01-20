@@ -34,6 +34,9 @@ class TestPyCpptrajIO(unittest.TestCase):
         newtop = mdio.readparm("./output/test_io.top")
         assert top.n_atoms == newtop.n_atoms
 
+        top2 = mdio.readparm("test_0_after.pdb")
+        print top2
+
     def test_load_and_save(self):
         traj = mdio.load(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
         trajiter = mdio.iterload(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top", chunk=100)
