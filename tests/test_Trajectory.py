@@ -50,7 +50,7 @@ class TestTrajectory(unittest.TestCase):
         # TODO : got segmentfault
         #print TRAJ2[::][0].n_atoms
 
-    @no_test
+    #@no_test
     def test_slice(self):
         print "test_slice"
         TRAJ2 = Trajectory()
@@ -90,16 +90,16 @@ class TestTrajectory(unittest.TestCase):
         farray3 = FrameArray()
         farray3.get_frames(farray2, update_top=True)
 
-    @no_test
+    #@no_test
     def test_indexing_0(self):
         print "test_indexing_0"
         TRAJ2 = Trajectory()
         TRAJ2.top = Topology("./data/Tc5b.top")
         TRAJ2.load("./data/md1_prod.Tc5b.x")
         farray = FrameArray()
-        farray.get_frames(TRAJ2, indices=(0, 10406, 100), update_top=True)
+        farray.get_frames(TRAJ2, indices=(0, 999, 100), update_top=True)
         assert TRAJ2[0].atom_xyz(0) == farray[0].atom_xyz(0)
-        assert TRAJ2[10406].atom_xyz(0) == farray[1].atom_xyz(0)
+        assert TRAJ2[999].atom_xyz(0) == farray[1].atom_xyz(0)
         assert TRAJ2[100].atom_xyz(0) == farray[2].atom_xyz(0)
 
         # FIXME: arr = np.asarray(TRAJ2[0].buffer) does not rerturn correct view
@@ -122,7 +122,7 @@ class TestTrajectory(unittest.TestCase):
         assert frame0[3] == 1.
         assert frame0[6] == 2.
         
-    @no_test
+    #@no_test
     def test_indexing_1(self):
         print "test_indexing_1"
         TRAJ2 = Trajectory()
@@ -148,7 +148,7 @@ class TestTrajectory(unittest.TestCase):
         for frame in TRAJ:
             pass
 
-    @no_test
+    #@no_test
     def test_iter(self):
         farray = FrameArray()
         farray.top = TRAJ.top
@@ -177,7 +177,7 @@ class TestTrajectory(unittest.TestCase):
         np.testing.assert_almost_equal(arr, cpptraj_rmsd, decimal=3)
         print "Kool, reproduce cpptraj output"
 
-    @no_test
+    #@no_test
     def test_trj_top(self):
         traj = Trajectory()
         #traj = Trajin_Single()
@@ -190,7 +190,7 @@ class TestTrajectory(unittest.TestCase):
         #traj.load("./data/md1_prod.Tc5b.x", Topology("./data/Tc5b.top"))
         print traj.size
 
-    @no_test
+    #@no_test
     def test_1(self):
         traj = Trajectory()
 
