@@ -59,6 +59,8 @@ class TestFrameArray(unittest.TestCase):
         farray.load("./data/md1_prod.Tc5b.x", indices=(2, 3))
         print farray.size
         assert farray.size == (100 + 100 + 20 + 2)
+        assert farray.__len__() == (100 + 100 + 20 + 2)
+        assert farray.n_frames == (100 + 100 + 20 + 2)
         print farray[:-1]
         print farray[:100:2]
         print farray[100:2:-2]
