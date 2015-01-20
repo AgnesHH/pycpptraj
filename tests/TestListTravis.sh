@@ -18,6 +18,7 @@ python ./test_CpptrajState.py
 python ./test_Action_Radgyr.py 
 python ./test_MolSurf.py 
 python ./test_Trajectory.py 
+python ./test_TMscore.py 
 python ./test_Topology.py 
 python ./test_TrajectoryFile.py 
 python ./test_ParmFile.py 
@@ -35,6 +36,7 @@ python ./test_DataSet_Coords_TRJ.py
 python ./test_DataSet_Coords_CRD.py 
 python ./test_Trajin_Single_iter.py 
 python ./test_dummy_indexing_FrameArray.py 
+python ./test_Action_Distance.py 
 python ./test_TopologyList.py 
 python ./test_DataSetList.py 
 python ./test_Trajin.py 
