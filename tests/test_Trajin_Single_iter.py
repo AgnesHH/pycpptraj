@@ -6,6 +6,8 @@ class TestTrajingIter(unittest.TestCase):
     def test_iter_0(self):
         traj = Trajin_Single()
         traj.load(filename="data/md1_prod.Tc5b.x", top=Topology("./data/Tc5b.top"))
+
+        assert traj.size == traj.n_frames == len(traj)
         
         for i in range(2):
             print 
