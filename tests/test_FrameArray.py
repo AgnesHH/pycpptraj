@@ -339,6 +339,7 @@ class TestFrameArray(unittest.TestCase):
         print farray
         print farray_cp
 
+    #@no_test
     def test_reverse_0(self):
         farray = FARRAY.copy()
         N = farray.size - 1
