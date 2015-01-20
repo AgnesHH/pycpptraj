@@ -245,6 +245,10 @@ cdef class Frame (object):
             ptr[1] = xyz[3*i + 1]
             ptr[2] = xyz[3*i + 2]
 
+    def atoms(self, int atomnum):
+        """self.atoms is shortcut of self.atom_xyz"""
+        return self.atom_xyz(atomnum)
+
     def atom_xyz(self, int atomnum):
         """return xyz coordinates of idx-th atom"""
         # return XYZ for atomnum
@@ -632,9 +636,16 @@ cdef class Frame (object):
         # idea: use np.asarray(frame) rather using np.asarray(frame.buffer)
         pass
 
-    def get_subframe(self, string mask="", Topology top=Topology()):
+    def get_subframe(self, string mask="", Topology top=Topology(), AtomMask atommask=AtomMask()):
         cdef AtomMask atm = AtomMask(mask)
-        if top.is_empty():
-            raise ValueError("Empty topology is not allowed")
-        top.set_integer_mask(atm)
+
+        if top.is_empty() and atommask.n_selected == 0:
+            raise ValueError("topology and atommask can not be both empty")
+        elif not top.is_empty() and atommask.n_selected != 0:
+            raise ValueError("topology and atommask can not both exist")
+        else:
+            if not top.is_empty():
+                top.set_integer_mask(atm)
+            else:
+                atm = atommask
         return Frame(self, atm)
