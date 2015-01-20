@@ -36,7 +36,8 @@ class TestFrame(unittest.TestCase):
 
         # try do-fitting from Python
         # not right yet
-        _, mat, v1, v2 = frame1.rmsd(frame0, get_mvv=True)
+        rmsd, mat, v1, v2 = frame1.rmsd(frame0, get_mvv=True)
+        print rmsd
         frame1.trans_rot_trans(v1, mat, v2)
         print frame1[:10]
         print frame1.rmsd_nofit(frame1new)
