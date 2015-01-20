@@ -93,11 +93,17 @@ class TestTrajectory(unittest.TestCase):
     #@no_test
     def test_indexing_0(self):
         print "test_indexing_0"
-        TRAJ2 = Trajectory()
+        TRAJ2 = Trajin_Single()
         TRAJ2.top = Topology("./data/Tc5b.top")
         TRAJ2.load("./data/md1_prod.Tc5b.x")
         farray = FrameArray()
         farray.get_frames(TRAJ2, indices=(0, 999, 100), update_top=True)
+        print farray.top
+        print farray.size
+        print TRAJ2.size
+        assert farray.size == 3
+        print "************XDDFDFDFDFD"
+        print farray.size
         assert TRAJ2[0].atom_xyz(0) == farray[0].atom_xyz(0)
         assert TRAJ2[999].atom_xyz(0) == farray[1].atom_xyz(0)
         assert TRAJ2[100].atom_xyz(0) == farray[2].atom_xyz(0)
@@ -139,11 +145,14 @@ class TestTrajectory(unittest.TestCase):
 
         print "test negative indexing"
         print TRAJ2[-1].coords[0] 
-        print TRAJ2[10406].coords[0]
-        assert TRAJ2[-1].coords[0] == TRAJ2[10406].coords[0]
+        print TRAJ2[999].coords[0]
+        assert TRAJ2[-1].coords[0] == TRAJ2[999].coords[0]
 
     #@no_test
     def test_iter_basic(self):
+        TRAJ = Trajin_Single()
+        TRAJ.top = Topology("./data/Tc5b.top")
+        TRAJ.load("./data/md1_prod.Tc5b.x")
         print "test_iter_basic"
         for frame in TRAJ:
             pass
@@ -156,7 +165,7 @@ class TestTrajectory(unittest.TestCase):
         i = 0
         for frame in TRAJ:
             i +=1
-            frame.strip_atoms(TRAJ.top.copy(), mask="!@CA")
+            frame.strip_atoms(top=TRAJ.top.copy(), mask="!@CA")
             farray.append(frame)
         assert i == TRAJ.size == TRAJ.max_frames
         assert frame.size == TRAJ.top.n_res * 3
