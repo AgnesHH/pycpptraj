@@ -232,6 +232,11 @@ cdef class FrameArray:
     def size(self):
         return self.frame_v.size()
 
+    @property
+    def n_frames(self):
+        """same as self.size"""
+        return self.size
+
     def __len__(self):
         return self.size
 
