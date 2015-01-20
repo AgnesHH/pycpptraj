@@ -621,9 +621,10 @@ cdef class Frame (object):
 
         copy : bint, default=False
         """
-        if mask is None:
-            raise ValueError("need non-empty mask")
+        if mask is None or top.is_empty():
+            raise ValueError("need non-empty mask and non-empty Topology")
         cdef Frame frame
+
         if not copy:
             self._strip_atoms(top, mask, update_top, has_box)
         else:
