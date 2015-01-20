@@ -12,10 +12,12 @@ def _tm_d0(Lmin):
         d0 = 0.5
     return max(0.5, d0)
 
-def tm_score(x, y, L=None, d0=None, mask=None, 
+def tm_score(x, y, L=None, 
+             d0=None, mask=None, 
              top=None,
              mask1=None, mask2=None,
              top1=None, top2=None):
+    # TODO : create new top if `top` is string
     """
     Evaluate the TM-score of two Frames (no fitting is done).
     Return : float
