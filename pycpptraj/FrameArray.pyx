@@ -324,7 +324,7 @@ cdef class FrameArray:
                 raise ValueError("FrameArray.top.n_atoms should be equal to Trajin_Single.top.n_atoms or set update_top=True")
 
         if isinstance(ts, Trajin_Single) or isinstance(ts, Trajectory):
-            if indices:
+            if indices is not None:
                 # slow method
                 # TODO : use `for idx in leng(indices)`?
                 if isinstance(indices, slice):
@@ -335,6 +335,7 @@ cdef class FrameArray:
                 else:
                     # regular list, tuple, array,...
                     for i in indices:
+                        print "debug FrameArray.get_frames"
                         self.append(ts[i])
             else:    
                 # get whole traj
@@ -350,15 +351,14 @@ cdef class FrameArray:
         elif isinstance(ts, FrameArray):
             # TODO : rename FrameArray2
             # use try and except?
-            if not indices:
+            if indices is None:
                 for i in range(ts.size):
                     # TODO : make indices as an array?
                     self.append(ts[i])
             else:
-                for i in range(ts.size):
-                    if i in indices:
+                for i in indices:
                     # TODO : make indices as an array?
-                        self.append(ts[i])
+                    self.append(ts[i])
 
     def strip_atoms(self, mask=None, update_top=True, bint has_box=False):
         """if you use memory for numpy, you need to update after resizing Frame
