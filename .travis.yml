@@ -10,6 +10,8 @@ before_install:
 install:
     #- pip install cython # cython will be installed in ./for_travis/install_cython_git.sh
     - pip install numpy
+    - pip install memory_profiler
+    - pip install line_profiler
     - export AMBERHOME=`pwd`"/cpptraj"
     - python ./setup.py install
 script:
