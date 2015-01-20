@@ -20,11 +20,14 @@ def calc_pairwise_distance():
         for j in range(frame0.n_atoms):
             arr[i, j] = distance(frame0.atom_xyz(i), frame0.atom_xyz(j))
 
-    arr = np.asmatrix(arr)
+    #arr = np.asmatrix(arr)
 
     # plot distance matrix
-    plt.imshow(arr)
-    plt.savefig("./output/dist_mat_0.png")
+    #plt.imshow(arr)
+    #plt.savefig("./output/dist_mat_0.png")
 
 if __name__ == "__main__":
+    from time import time
+    t0 = time()
     calc_pairwise_distance()
+    print time() - t0
