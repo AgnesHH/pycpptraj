@@ -2,6 +2,7 @@ import unittest
 from pycpptraj.parms.ParmFile import ParmFile
 from pycpptraj.Topology import Topology
 from pycpptraj.decorators import not_yet_supported
+from pycpptraj import io as mdio
 
 def test_generator(top):
    for atom in top.atoms:
@@ -29,6 +30,15 @@ assert top.n_atoms == 304
 parm.help()
 
 class TestParmFile(unittest.TestCase):
+    def test_readpdb(self):
+        print "test_readpdb +++++++++++++++++++++++++++++++"
+        pdbtop = mdio.readparm("./test_0_after.pdb")
+        assert pdbtop.n_atoms == 304
+        print pdbtop.n_atoms
+        top2 = pdbtop.copy()
+        top2.strip_atoms("!@CA")
+        print top2.n_atoms
+        assert top2.n_atoms == 20
 
     def test_0(self):
         top = Topology()
