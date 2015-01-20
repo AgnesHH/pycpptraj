@@ -35,6 +35,16 @@ cdef class Trajin (TrajectoryFile):
             yield frame
         self.end_traj()
 
+    def __len__(self):
+        return self.size
+
+    @property
+    def n_frames(self):
+        """self.n_frames == self.size
+        Use this to match MDTraj API
+        """
+        return self.size
+
     @cython.boundscheck(False)
     @cython.wraparound(False)
     def __getitem__(self, idxs):
