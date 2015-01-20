@@ -61,9 +61,9 @@ def fit(frame, ref=None):
         # TODO : fitting
         pass
 
-def get_subframe(frame=None, mask=None, top=None):
+def get_subframe(frame=None, mask=None, top=None, atommask=None):
     # TODO : move to `io.py`
-    return frame.get_subframe(mask, top)
+    return frame.get_subframe(mask=mask, top=top, atommask=atommask)
 
 def file_exist(filename):
     import os
