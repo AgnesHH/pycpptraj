@@ -1,4 +1,5 @@
 python ./test_cast_dataset.py 
+python ./test_rmsd.py 
 python ./test_FrameList.py 
 python ./test_teasing_traj.py 
 python ./test_DataSet_double.py 
@@ -44,3 +45,4 @@ python ./test_FrameArray2.py
 python ./test_base.py 
 python ./test_Action_Strip.py 
 python ./test_loadingtime.py 
+python ./test_Frame_2.py 
