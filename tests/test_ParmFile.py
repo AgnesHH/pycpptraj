@@ -40,6 +40,12 @@ class TestParmFile(unittest.TestCase):
         print top2.n_atoms
         assert top2.n_atoms == 20
 
+        # make sure that making Topology instance from pdb file is FINE
+        traj0 = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        traj1 = mdio.load("./data/md1_prod.Tc5b.x", "./test_0_after.pdb")
+        assert traj0[0].coords == traj1[0].coords
+        assert traj0[999].coords == traj1[999].coords
+
     def test_0(self):
         top = Topology()
         parm = ParmFile()
