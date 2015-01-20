@@ -6,6 +6,9 @@ from pycpptraj.tm_score import tm_score
 class Test(unittest.TestCase):
     def test_0(self):
         traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+
+        # we could generate new traj.top from pdb file too
+        #traj.top = Topology("./test_0_after.pdb")
         tm_0 = tm_score(traj[0], traj[1])
         print tm_0
         print tm_score(traj[0], traj[0])
