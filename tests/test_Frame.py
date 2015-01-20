@@ -17,6 +17,32 @@ FRAME_orig = FRAME.copy()
 
 class TestFrame(unittest.TestCase):
     #@no_test
+    def test_fit(self):
+        traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        trajnew = mdio.load("./data/md1_prod.fit_to_first.Tc5b.x", "./data/Tc5b.top")
+
+        # make sure 0-th frame does not change
+        frame0 = traj[0]
+        frame0new = trajnew[0]
+        assert (frame0.coords == frame0new.coords) == True
+        print frame0[:10]
+        print frame0new[:10]
+
+        frame1 = traj[1]
+        frame1new = trajnew[1]
+        print frame1[:10]
+        print frame1new[:10]
+        assert (frame1.coords == frame1new.coords) == False
+
+        # try do-fitting from Python
+        # not right yet
+        _, mat, v1, v2 = frame1.rmsd(frame0, get_mvv=True)
+        frame1.trans_rot_trans(v1, mat, v2)
+        print frame1[:10]
+        print frame1.rmsd_nofit(frame1new)
+        assert frame1.rmsd(frame1new) < 1E-3
+
+    @no_test
     def test_strip_atoms(self):
         traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
         frame0 = traj[0]
@@ -42,7 +68,7 @@ class TestFrame(unittest.TestCase):
         print mdio.writetraj("./test_0_afeter.pdb", traj=frame2, top=traj.top, overwrite=True)
         print Trajout().help()
 
-    #@no_test
+    @no_test
     def test_create_frame(self):
         # test creating Frame from a list!
         frame = Frame(range(300))
@@ -59,7 +85,7 @@ class TestFrame(unittest.TestCase):
         assert frame.coords == array('d', [x for x in range(300)])
         assert frame[:] == frame.coords
   
-    #no_test
+    @no_test
     def test_buffer(self):
         print "+++++start test_buffer+++++++"
         print FRAME.coords
@@ -99,6 +125,7 @@ class TestFrame(unittest.TestCase):
         # does not work, got "ValueError: ndarray is not contiguous"
         #FRAME[start:stop:strip] = arr_tmp[start:stop:strip]
 
+    @no_test
     def test_iter(self):
         print "test iteration"
         alist = []
@@ -116,6 +143,7 @@ class TestFrame(unittest.TestCase):
         print alist
         print "====================end test_iter"
 
+    @no_test
     def test_indexing(self):
         # create a Frame instance with N_ATOMS atoms
         N_ATOMS = 10
@@ -143,6 +171,7 @@ class TestFrame(unittest.TestCase):
         frame[0] = 100.
         print frame[0]
 
+    @no_test
     def test_other_stuff(self):
         print "print FRAME"
         print FRAME
@@ -160,6 +189,7 @@ class TestFrame(unittest.TestCase):
         frame4 = frame0.get_subframe("!@CA", farray.top)
         print frame4
 
+    @no_test
     def test_rmsd_return_mat_vec_vec(self):
         # TODO : add assert
         print "test_rmsd_return_mat_vec_vec"
@@ -177,6 +207,7 @@ class TestFrame(unittest.TestCase):
         print arr1
         print frame0[:3]
 
+    @no_test
     def test_long(self):
         N_ATOMS = 10
         # create frame instance with 10 atoms
