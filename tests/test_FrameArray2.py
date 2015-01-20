@@ -19,7 +19,7 @@ class TestFrameArray2(unittest.TestCase):
         TRAJ_ = TrajectoryReadOnly()
         assert  TRAJ_.size == 0
 
-    ##@no_test
+    #@no_test
     def test_addframe(self):
         # TODO : does not add any Frame
         # TRAJ2 is still 0
@@ -121,7 +121,7 @@ class TestFrameArray2(unittest.TestCase):
         # print traj0_arr[:10]
         #np.testing.assert_almost_equal(frame_arr, traj0_arr, decimal=3)
 
-    ##@no_test
+    #@no_test
     def test_strip_atoms(self):
         print "test_strip_atoms"
         farray = FrameArray()
