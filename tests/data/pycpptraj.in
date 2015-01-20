@@ -1,4 +1,5 @@
 trajin md1_prod.Tc5b.x 
 rms first out rmsd_allatoms_to_1st.Tc5b.dat
 distance d1 out CAres2_CAres10.Tc5b.dat :2@CA :10@CA
+trajout md1_prod.fit_to_first.Tc5b.x
 go
