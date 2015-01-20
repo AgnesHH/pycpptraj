@@ -480,7 +480,8 @@ cdef class Frame (object):
         v.thisptr[0] = self.thisptr.CenterOnOrigin(useMassIn)
         return v
 
-    def rmsd(self, Frame frame, bint use_mass=False, get_mvv=False):
+    def rmsd(self, Frame frame, bint use_mass=False, get_mvv=False, 
+             mask=None, top=None, AtomMask atommask=None):
         # TODO : add mask,
         """Calculate rmsd betwen two frames
         rmsd(Frame frame, bint use_mass=False, get_mvv=False):
@@ -495,13 +496,25 @@ cdef class Frame (object):
 
         cdef Matrix_3x3 m3
         cdef Vec3 v1, v2
+        if top is not None and mask is not None and atommask is None:
+            atm = AtomMask(mask)
+            top.set_integer_mask(atm)
+            new_self = Frame(self, atm)
+            new_ref = Frame(frame, atm)
+        if top is None and mask is None and atommask is not None:
+            new_self = Frame(self, atommask)
+            new_ref = Frame(frame, atommask)
+        if top is None and mask is None and atommask is None:
+            # all atoms
+            new_self = self
+            new_ref = frame
 
         if not get_mvv:
-            return self.thisptr.RMSD(frame.thisptr[0], use_mass)
+            return new_self.thisptr.RMSD(new_ref.thisptr[0], use_mass)
         else:
             m3 = Matrix_3x3()
             v1, v2 = Vec3(), Vec3()
-            rmsd_ = self.thisptr.RMSD(frame.thisptr[0], m3.thisptr[0], v1.thisptr[0], v2.thisptr[0], use_mass)
+            rmsd_ = new_self.thisptr.RMSD(new_ref.thisptr[0], m3.thisptr[0], v1.thisptr[0], v2.thisptr[0], use_mass)
             return rmsd_, m3, v1, v2
 
     def rmsd_centered_ref(self, Frame ref, bint use_mass=False, *args):
@@ -552,7 +565,7 @@ cdef class Frame (object):
         return self.thisptr.CalcTemperature(mask.thisptr[0], deg_of_freedom)
 
     # use Action_Strip here?
-    cdef void _strip_atoms(Frame self, Topology top, string m, bint update_top, bint has_box):
+    cdef void _strip_atoms(Frame self, Topology top, string mask, bint update_top, bint has_box):
         """this method is too slow vs cpptraj
         if you use memory for numpy, you need to update after resizing Frame
         >>> arr0 = np.asarray(frame.buffer)
@@ -563,28 +576,27 @@ cdef class Frame (object):
 
         cdef Topology newtop = Topology()
         newtop.py_free_mem = False
-        cdef AtomMask mask = AtomMask()
+        cdef AtomMask atm = AtomMask()
         cdef Frame tmpframe = Frame() 
 
         del tmpframe.thisptr
 
         tmpframe.thisptr = new _Frame(self.thisptr[0])
         
-        mask.thisptr.SetMaskString(m)
-        mask.thisptr.InvertMask()
-        top.thisptr.SetupIntegerMask(mask.thisptr[0])
-        #newtop.thisptr[0] = top.thisptr.modifyStateByMask(mask.thisptr[0])
-        newtop.thisptr = top.thisptr.modifyStateByMask(mask.thisptr[0])
+        atm.thisptr.SetMaskString(mask)
+        atm.thisptr.InvertMask()
+        top.thisptr.SetupIntegerMask(atm.thisptr[0])
+        newtop.thisptr = top.thisptr.modifyStateByMask(atm.thisptr[0])
         if not has_box:
             newtop.thisptr.SetBox(_Box())
         tmpframe.thisptr.SetupFrameV(newtop.thisptr.Atoms(), newtop.thisptr.HasVelInfo(), 
                                      newtop.thisptr.NrepDims()) 
-        tmpframe.thisptr.SetFrame(self.thisptr[0], mask.thisptr[0])
+        tmpframe.thisptr.SetFrame(self.thisptr[0], atm.thisptr[0])
         self.thisptr[0] = tmpframe.thisptr[0]
         if update_top:
             top.thisptr[0] = newtop.thisptr[0]
 
-    def strip_atoms(Frame self, string mask, Topology top=Topology(), 
+    def strip_atoms(Frame self, mask=None, Topology top=Topology(), 
                     bint update_top=False, bint has_box=False, bint copy=False):
         """strip_atoms(string mask, Topology top=Topology(), 
                        bint update_top=False, bint has_box=False)
@@ -605,6 +617,8 @@ cdef class Frame (object):
 
         copy : bint, default=False
         """
+        if mask is None:
+            raise ValueError("need non-empty mask")
         cdef Frame frame
         if not copy:
             self._strip_atoms(top, mask, update_top, has_box)
