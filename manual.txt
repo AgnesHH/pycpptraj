@@ -1,0 +1,11 @@
+* Requirement
+    * Compiling: cython + cpptraj
+    * Running: pycpptraj
+
+* numpy
+    * pycpptraj does not depend on numpy but it does have limited feature numpy array-like
+      for Frame instance (fancy indexing, ...)
+    * to fully use numpy's power, you can expose Frame buffer like:
+        * arr0 = np.asarray(frame.buffer) (arr0.shape = (frame.size, ))
+        * arr1 = np.asarray(frame.buffer3d) (arr0.shape = (frame.size/3, 3))
+    
