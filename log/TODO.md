@@ -1,10 +1,11 @@
 TODO
 ----
-* load pdb file without topology
+* load pdb file without topology: DONE
+* database for pycpptraj
 * Sometimes get every large ts[-1:-9:-1][0].n_atoms (example: 30401312 atoms vs Tc5b = 304 atoms)
     (ts is FrameArray or Trajin_Single instance)
 * Add exception
-* Rename "./examples" folder to "tests" and make REAL example script
+* Rename "./examples" folder to "tests" and make REAL example script: DONE
 * make action, analysis dictionary
 * write script to mine the enum in cpptraj code and convert to dict : DONE
 * Write automated script to convert *.h (cpptraj) to *.pxd (pycpptraj) files : DONE
