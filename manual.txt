@@ -14,3 +14,6 @@
         (:2-10@CA --> choosing CA from residue 2 to residue 10)
     * for other things, index starts from 0
         frame.atoms(0) --> xyz coords of 1st atom
+* FAQ
+    * After updating source code, I got message saying wrong size
+        * Solution: run "sh ./clean_cpp.sh" to clean all *.cpp generated from *.pyx files and reinstall
