@@ -55,6 +55,9 @@ class TestFrame(unittest.TestCase):
         # TODO : ":" for all atoms
         #print frame0[:, 2]
         self.assertRaises(ValueError, lambda: frame0[:, 2])
+        framesub = frame0.get_subframe("@CA", traj.top)
+        assert framesub.n_atoms == 20
+        print framesub[19, :]
 
 if __name__ == "__main__":
     unittest.main()
