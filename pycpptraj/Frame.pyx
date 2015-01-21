@@ -162,6 +162,8 @@ cdef class Frame (object):
         if isinstance(idx, int) or isinstance(idx, slice):
             return self.coords[idx]
         elif isinstance(idx, tuple) and len(idx) == 2:
+            if not isinstance(idx[0], int):
+                raise ValueError("not supported")
             return self.atoms(idx[0])[idx[1]]
         else:
             raise ValueError("not supported")
