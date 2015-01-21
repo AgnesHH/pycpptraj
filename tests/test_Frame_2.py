@@ -52,9 +52,7 @@ class TestFrame(unittest.TestCase):
         print frame0[0, :]
         print frame0.atoms(0)
 
-        # TODO : ":" for all atoms
-        #print frame0[:, 2]
-        self.assertRaises(ValueError, lambda: frame0[:, 2])
+        print frame0[:, 2]
         framesub = frame0.get_subframe("@CA", traj.top)
         assert framesub.n_atoms == 20
         print framesub[19, :]
