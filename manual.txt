@@ -9,3 +9,8 @@
         * arr0 = np.asarray(frame.buffer) (arr0.shape = (frame.size, ))
         * arr1 = np.asarray(frame.buffer3d) (arr0.shape = (frame.size/3, 3))
     
+* Atom mask:
+    * To make atom mask consitent with cpptraj, I use index of 1 as starting
+        (:2-10@CA --> choosing CA from residue 2 to residue 10)
+    * for other things, index starts from 0
+        frame.atoms(0) --> xyz coords of 1st atom
