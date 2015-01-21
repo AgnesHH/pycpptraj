@@ -7,6 +7,10 @@ from cython.operator cimport dereference as deref
 from libcpp.vector cimport vector
 from cpython.buffer cimport Py_buffer
 from pycpptraj.decorators import for_testing, iter_warning
+from pycpptraj.decorators import name_will_be_changed
+
+# TODO : reogarnize memory view, there are too many ways to assess
+# need to finalize
 
 def check_instance(inst, clsname):
     if not isinstance(inst, clsname):
@@ -178,8 +182,8 @@ cdef class Frame (object):
         # TODO : should we use buffer. Kind of dangerous
         self.buffer[idx] = value
 
-    def __array__(self):
-        return pyarray('d', self.buffer)
+    #def __array__(self):
+    #    return pyarray('d', self.buffer)
 
     def __iter__(self):
         cdef int i
@@ -197,6 +201,7 @@ cdef class Frame (object):
         # debug
         #print "from calling buffer: py_free_mem = ", self.py_free_mem
         # end debug
+        print "name_will_be_changed, this is for development"
         def _buffer(N):
             cdef double* ptr = self.thisptr.xAddress()
             cdef view.array my_arr
@@ -205,7 +210,11 @@ cdef class Frame (object):
         return _buffer(self.size)
 
     @property
-    def _buffer3(self):
+    def xyz1d(self):
+        return self.buffer
+
+    @property
+    def xyz3d(self):
         """return memory view for Frame coordinates but reshape
         (just like self._buffer3 = self.buffer.reshape())
         TODO : rename?
@@ -213,6 +222,7 @@ cdef class Frame (object):
         # debug
         #print "from calling buffer: py_free_mem = ", self.py_free_mem
         # end debug
+        print "name_will_be_changed, this is for development"
         def _buffer(N):
             cdef double* ptr = self.thisptr.xAddress()
             cdef view.array my_arr
