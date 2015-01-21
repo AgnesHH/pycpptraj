@@ -173,6 +173,7 @@ cdef class Frame (object):
         if isinstance(idx, int) or isinstance(idx, slice):
             return self.coords[idx]
         elif isinstance(idx, tuple) and len(idx) == 2:
+            print "Frame class test"
             if isinstance(idx[0], int): #and isinstance(idx[1], int):
                 # return x, y or z coord of atom idx[0]
                 return self.atoms(idx[0])[idx[1]]
