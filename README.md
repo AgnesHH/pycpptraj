@@ -33,8 +33,7 @@ Citing (optional):
 Daniel R. Roe and Thomas E. Cheatham, III
 Journal of Chemical Theory and Computation 2013 9 (7), 3084-3095 
 
-- pycpptraj : Cite `cpptraj` paper and also:
-    * H. Nguyen (year) pycpptraj (version XXX). Available at github.com/hainm/pycpptraj (Accessed date)
+- pycpptraj : (in preparation)
 
 Install
 -------
