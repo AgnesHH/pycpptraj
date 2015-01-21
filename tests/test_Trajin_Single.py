@@ -32,13 +32,19 @@ with ts:
     ts.read_traj_frame(100, frame)
     print frame
 
-print ts[:10]
-print ts[50:100]
-print ts[100:50:-2]
-print ts[100:50:-2][0]
-fa0_1 = ts[100:50:-2][1]
-fa0 = ts[100:50:-2]
-print fa0[0], fa0_1
-print ts[100:50:-2][0]
-print ts[100:50:-2][0]
-print ts[100:50:-2][0]
+#print ts[:10]
+#print ts[50:100]
+#print ts[100:50:-2]
+#print ts[100:50:-2][0]
+#fa0_1 = ts[100:50:-2][1]
+#fa0 = ts[100:50:-2]
+#print fa0[0], fa0_1
+#print ts[100:50:-2][0]
+#print ts[100:50:-2][0]
+#print ts[100:50:-2][0]
+#print ts[0, 0, 0]
+print "TEST TEST"
+print ts[100][:, 0][0]
+#print ts[0:30:40]
+#assert ts[0, 0, 0] == ts[0][0, 0]
+#print ts[0][:, :].shape
