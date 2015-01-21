@@ -8,7 +8,6 @@ python ./test_Trajin_Single.py
 python ./test_FrameArray.py 
 python ./test_Action_Surf.py 
 python ./test_randomize_ions.py 
-python ./test_Frame.py 
 python ./test_FrameArray_extensive_indexing.py 
 python ./test_io.py 
 python ./test_CpptrajFile.py 
@@ -42,6 +41,7 @@ python ./test_Action_Distance.py
 python ./test_TopologyList.py 
 python ./test_DataSetList.py 
 python ./test_Trajin.py 
+python ./test_Frame_1.py 
 python ./test_FrameArray2.py 
 python ./test_base.py 
 python ./test_Action_Strip.py 
