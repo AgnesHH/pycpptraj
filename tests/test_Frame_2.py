@@ -43,5 +43,17 @@ class TestFrame(unittest.TestCase):
         print frame1.rmsd_nofit(frame1new)
         assert frame1.rmsd(frame1new) < 1E-3
 
+    def test_1(self):
+        traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        trajnew = mdio.load("./data/md1_prod.fit_to_first.Tc5b.x", "./data/Tc5b.top")
+        frame0 = traj[0]
+        assert frame0[0, 2] == frame0.atoms(0)[2]
+        assert frame0[0, :] == frame0.atoms(0)
+        print frame0[0, :]
+        print frame0.atoms(0)
+
+        # TODO : 
+        print frame0[:, 2]
+
 if __name__ == "__main__":
     unittest.main()
