@@ -64,7 +64,7 @@ cdef class Trajin (TrajectoryFile):
                 idx_0, idx_1, idx_2 = idxs
                 print idx_0, idx_1, idx_2
                 frame = self[idx_0]
-                return frame[idx_1][idx_2]
+                return frame[idx_1, idx_2]
             else:
                 print idxs
                 # assuming that `idxs` is integer
