@@ -101,6 +101,9 @@ cdef class Frame (object):
             else:
                 raise ValueError()
 
+    #def __init__(self, *args):
+    #    self.__dict__ = {}
+
     def __dealloc__(self):
         if self.py_free_mem and self.thisptr:
             del self.thisptr
@@ -157,6 +160,9 @@ cdef class Frame (object):
                 hex(id(self))
                 )
         return tmp
+
+    #def __setattr__(self, name, att):
+    #    self.__dict__[name] = att
 
     def __getitem__(self, idx):
         if isinstance(idx, int) or isinstance(idx, slice):
