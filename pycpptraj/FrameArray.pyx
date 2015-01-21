@@ -219,6 +219,9 @@ cdef class FrameArray:
                 )
         return tmps
 
+    def __repr__(self):
+        return self.__str__()
+
     def reverse(self):
         # should we just create a fake operator?
         cpp_reverse(self.frame_v.begin(), self.frame_v.end())
