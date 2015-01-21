@@ -169,18 +169,28 @@ cdef class Frame (object):
     #    self.__dict__[name] = att
 
     def __getitem__(self, idx):
+        # TODO : support frame[1:10, : ]  
         if isinstance(idx, int) or isinstance(idx, slice):
             return self.coords[idx]
         elif isinstance(idx, tuple) and len(idx) == 2:
-            if not isinstance(idx[0], int):
-                raise ValueError("not supported")
-            return self.atoms(idx[0])[idx[1]]
+            if isinstance(idx[0], int): #and isinstance(idx[1], int):
+                # return x, y or z coord of atom idx[0]
+                return self.atoms(idx[0])[idx[1]]
+            else:
+                # currenty support only memoryview
+                return self.buffer3d[idx]
         else:
             raise ValueError("not supported")
 
     def __setitem__(self, idx, value):
         # TODO : should we use buffer. Kind of dangerous
-        self.buffer[idx] = value
+        # TODO : add examples hereo
+        if not isinstance(idx, (list, tuple)):
+            self.buffer[idx] = value
+        else:
+            if isinstance(value, (list, tuple)):
+                value = pyarray('d', value)
+            self.buffer3d[idx] = value
 
     #def __array__(self):
     #    return pyarray('d', self.buffer)
@@ -201,7 +211,7 @@ cdef class Frame (object):
         # debug
         #print "from calling buffer: py_free_mem = ", self.py_free_mem
         # end debug
-        print "name_will_be_changed, this is for development"
+        #"name_will_be_changed, this is for development"
         def _buffer(N):
             cdef double* ptr = self.thisptr.xAddress()
             cdef view.array my_arr
@@ -215,6 +225,11 @@ cdef class Frame (object):
 
     @property
     def xyz3d(self):
+        """return memoryview"""
+        return self.buffer3d
+
+    @property
+    def buffer3d(self):
         """return memory view for Frame coordinates but reshape
         (just like self._buffer3 = self.buffer.reshape())
         TODO : rename?
@@ -222,7 +237,6 @@ cdef class Frame (object):
         # debug
         #print "from calling buffer: py_free_mem = ", self.py_free_mem
         # end debug
-        print "name_will_be_changed, this is for development"
         def _buffer(N):
             cdef double* ptr = self.thisptr.xAddress()
             cdef view.array my_arr
