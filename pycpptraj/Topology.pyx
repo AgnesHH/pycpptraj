@@ -10,6 +10,7 @@ from pycpptraj.decorators import name_will_be_changed
 # Python level
 # use for write parm
 #from pycpptraj.parms.Parm_Amber import Parm_Amber
+# creat easy way to build new top from scratch
 
 cdef class Topology:
     def __cinit__(self, *args):
