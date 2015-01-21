@@ -178,6 +178,9 @@ cdef class Frame (object):
         # TODO : should we use buffer. Kind of dangerous
         self.buffer[idx] = value
 
+    def __array__(self):
+        return pyarray('d', self.buffer)
+
     def __iter__(self):
         cdef int i
         for i in range(self.thisptr.size()):
@@ -200,6 +203,22 @@ cdef class Frame (object):
             my_arr = <double[:N]> ptr
             return my_arr
         return _buffer(self.size)
+
+    @property
+    def _buffer3(self):
+        """return memory view for Frame coordinates but reshape
+        (just like self._buffer3 = self.buffer.reshape())
+        TODO : rename?
+        """
+        # debug
+        #print "from calling buffer: py_free_mem = ", self.py_free_mem
+        # end debug
+        def _buffer(N):
+            cdef double* ptr = self.thisptr.xAddress()
+            cdef view.array my_arr
+            my_arr = <double[:N, :3]> ptr
+            return my_arr
+        return _buffer(self.n_atoms)
         
     def is_empty(self):
         return self.thisptr.empty()
