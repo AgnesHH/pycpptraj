@@ -49,6 +49,7 @@ cdef class Trajin (TrajectoryFile):
     @cython.wraparound(False)
     def __getitem__(self, idxs):
         # allocate frame for storing data
+        cdef Frame frame0
         cdef Frame frame = Frame(self.top.n_atoms)
         cdef FrameArray farray
         cdef int start, stop, step
@@ -56,16 +57,24 @@ cdef class Trajin (TrajectoryFile):
         cdef int idx_1, idx_2
         cdef list tmplist
 
+        print type(idxs)
+        print idxs
         if not isinstance(idxs, slice):
-            # assuming that `idxs` is integer
-            idx_1 = get_positive_idx(idxs, self.size)
-            # raise index out of range
-            if idxs != 0 and idx_1 == 0:
-                raise ValueError("index is out of range")
+            if isinstance(idxs, tuple) and len(idxs) == 3:
+                idx_0, idx_1, idx_2 = idxs
+                frame = self[idx_0]
+                return frame[idx_1][idx_2]
+            else:
+                print idxs
+                # assuming that `idxs` is integer
+                idx_1 = get_positive_idx(idxs, self.size)
+                # raise index out of range
+                if idxs != 0 and idx_1 == 0:
+                    raise ValueError("index is out of range")
 
-            with self:
-                self.read_traj_frame(idx_1, frame)
-            return frame
+                with self:
+                    self.read_traj_frame(idx_1, frame)
+                return frame
         else:
             if self.debug:
                 print idxs
