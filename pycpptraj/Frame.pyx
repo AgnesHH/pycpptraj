@@ -177,6 +177,7 @@ cdef class Frame (object):
                 # return x, y or z coord of atom idx[0]
                 return self.atoms(idx[0])[idx[1]]
             else:
+                print type(idx)
                 # currenty support only memoryview
                 return self.buffer3d[idx]
         else:
