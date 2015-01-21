@@ -60,8 +60,9 @@ cdef class Trajin (TrajectoryFile):
         print type(idxs)
         print idxs
         if not isinstance(idxs, slice):
-            if isinstance(idxs, tuple) and len(idxs) == 3:
+            if isinstance(idxs, tuple):
                 idx_0, idx_1, idx_2 = idxs
+                print idx_0, idx_1, idx_2
                 frame = self[idx_0]
                 return frame[idx_1][idx_2]
             else:
