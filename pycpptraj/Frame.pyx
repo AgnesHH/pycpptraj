@@ -159,7 +159,12 @@ cdef class Frame (object):
         return tmp
 
     def __getitem__(self, idx):
-        return self.coords[idx]
+        if isinstance(idx, int) or isinstance(idx, slice):
+            return self.coords[idx]
+        elif isinstance(idx, tuple) and len(idx) == 2:
+            return self.atoms(idx[0])[idx[1]]
+        else:
+            raise ValueError("not supported")
 
     def __setitem__(self, idx, value):
         # TODO : should we use buffer. Kind of dangerous
