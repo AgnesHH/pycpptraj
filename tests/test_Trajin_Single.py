@@ -46,8 +46,8 @@ with ts:
 print "TEST TEST"
 #print ts[100][:, 0][0]
 #print ts[0][:, :].shape
-#print ts[(0, 10, 0)]
+print ts[(0, 10, 0)]
 #TODO : make ts[0, 0:3, :] work
 #print ts[0, slice(0, 3)]
 #print ts[0:30:40]
-#assert ts[0, 0, 0] == ts[0][0, 0]
+assert ts[0, 0, 0] == ts[0][0, 0]
