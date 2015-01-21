@@ -4,8 +4,10 @@ import numpy as np
 from numpy.testing import assert_almost_equal
 from pycpptraj.Frame import Frame
 from pycpptraj.base import *
+from pycpptraj.Vec3 import Vec3
 from pycpptraj import io as mdio
 from pycpptraj.decorators import no_test
+from rmsd import rmsd as arr_rmsd
 
 SMALL = 1E-6
 
@@ -16,7 +18,7 @@ FRAME.set_from_crd(arr)
 FRAME_orig = FRAME.copy()
 
 class TestFrame(unittest.TestCase):
-    ##@no_test
+    #@no_test
     def test_fit(self):
         traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
         trajnew = mdio.load("./data/md1_prod.fit_to_first.Tc5b.x", "./data/Tc5b.top")
@@ -39,9 +41,14 @@ class TestFrame(unittest.TestCase):
         rmsd, mat, v1, v2 = frame1.rmsd(frame0, get_mvv=True)
         print rmsd
         frame1.trans_rot_trans(v1, mat, v2)
-        print frame1[:10]
+        #frame1.trans_rot_trans(v1, mat, Vec3(0, 0, 0))
+        #assert frame1[:10] == frame1new[:10]
+        print "**************XXXXXXXXXXXXXXXXXXXXXXXXXxxx"
         print frame1.rmsd_nofit(frame1new)
+        print arr_rmsd(np.asarray(frame1.coords), np.asarray(frame1new.coords))
+        print frame1.rmsd(frame1new)
         assert frame1.rmsd(frame1new) < 1E-3
+        assert frame1new.rmsd(frame1, top=trajnew.top, mask="@CA") < 1E-3
 
     #@no_test
     def test_strip_atoms(self):
