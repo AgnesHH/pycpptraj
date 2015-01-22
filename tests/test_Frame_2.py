@@ -1,7 +1,8 @@
 import unittest
 from array import array
 import numpy as np
-from numpy.testing import assert_almost_equal
+#from numpy.testing import assert_almost_equal
+from pycpptraj.utils.check_and_assert import assert_almost_equal
 from pycpptraj.Frame import Frame
 from pycpptraj.base import *
 from pycpptraj import io as mdio
@@ -48,7 +49,7 @@ class TestFrame(unittest.TestCase):
         trajnew = mdio.load("./data/md1_prod.fit_to_first.Tc5b.x", "./data/Tc5b.top")
         frame0 = traj[0]
         assert frame0[0, 2] == frame0.atoms(0)[2]
-        assert frame0[0, :] == frame0.atoms(0)
+        assert_almost_equal(frame0[0, :], frame0.atoms(0))
         print frame0[0, :]
         print frame0.atoms(0)
 
