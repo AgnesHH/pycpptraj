@@ -8,6 +8,7 @@ from libcpp.vector cimport vector
 from cpython.buffer cimport Py_buffer
 from pycpptraj.decorators import for_testing, iter_warning
 from pycpptraj.decorators import name_will_be_changed
+from pycpptraj.utils.check_and_assert import _import_numpy
 
 # TODO : reogarnize memory view, there are too many ways to assess
 # need to finalize
@@ -184,7 +185,11 @@ cdef class Frame (object):
         #elif isinstance(idx, slice):
         #    return self.buffer3d[idx]
         else:
-            return self.buffer3d[idx]
+            has_numpy, np = _import_numpy()
+            if has_numpy:
+                return np.asarray(self.buffer3d[idx])
+            else:
+                return self.buffer3d[idx]
             #raise ValueError("not supported")
 
     def __setitem__(self, idx, value):
