@@ -43,6 +43,9 @@ def writetraj(filename="", traj=None, top=None,
     """writetraj(filename="", traj=Trajectory(), top=Topology(), 
               ftm='AMBERTRAJ', indices=None):
     """
+    # TODO : support list (tuple) of FrameArray, Trajin_Single or 
+    # list of filenames
+
     if not traj or not top:
         raise ValueError("Need non-empty traj and top files")
 
@@ -52,10 +55,10 @@ def writetraj(filename="", traj=None, top=None,
                 raise ValueError("indices does not work with single Frame")
             trajout.writeframe(0, traj, top)
         else:
-            if isinstance(traj, FrameArray) or isinstance(traj, Trajin_Single) or isinstance(traj, list):
-                traj2 = traj
-            elif isinstance(traj, basestring):
+            if isinstance(traj, basestring):
                 traj2 = load(traj, top)
+            else:
+                traj2 = traj
             #else:
             #    raise NotImplementedError("must be FrameArray, Trajin_Single or string")
             if not indices:
@@ -63,6 +66,8 @@ def writetraj(filename="", traj=None, top=None,
                 for idx, frame in enumerate(traj2):
                     trajout.writeframe(idx, frame, top)
             else:
+                if isinstance(traj2, (list, tuple)):
+                    raise NotImplementedError(must be FrameArray or Trajin_Single instance)
                 for idx in indices:
                     trajout.writeframe(idx, traj2[idx], top)
 
