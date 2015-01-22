@@ -44,6 +44,15 @@ cdef class Box:
         for i in range(6):
             yield self[i]
 
+    @classmethod
+    def get_all_boxtypes(cls):
+        return BoxTypeDict.keys()
+
+    @classmethod
+    def help(cls):
+        print cls.get_all_boxtypes()
+
+
     @property
     def bname(self):
         return self.thisptr.TypeName()
