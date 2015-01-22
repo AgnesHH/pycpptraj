@@ -13,6 +13,16 @@ def assert_almost_equal(arr0, arr1, decimals=3):
             almost_equal = False
     assert almost_equal == True
 
+def _import_numpy():
+    has_numpy = False
+    try:
+        import numpy
+        has_numpy = True
+        return (has_numpy, __import__('numpy'))
+    except ImportError:
+        has_numpy = False
+        return (has_numpy, None)
+
 if __name__ == "__main__":
     import numpy as np
     assert_almost_equal([1., 2., 3.], [1., 2., 3.], decimals=3)
