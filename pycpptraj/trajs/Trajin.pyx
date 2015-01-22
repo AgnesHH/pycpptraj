@@ -60,7 +60,9 @@ cdef class Trajin (TrajectoryFile):
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
                 idx_0 = idxs[0]
-                frame = self[idx_0]
+                # do not specify type of frames here
+                # it might be Frame or FrameArray instances
+                frames = self[idx_0]
                 return frame[idxs[1:]]
             else:
                 # assuming that `idxs` is integer
