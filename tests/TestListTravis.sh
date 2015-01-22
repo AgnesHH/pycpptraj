@@ -1,6 +1,7 @@
 python ./test_cast_dataset.py 
 python ./test_rmsd.py 
 python ./test_FrameList.py 
+python ./test_Box.py 
 python ./test_teasing_traj.py 
 python ./test_DataSet_double.py 
 python ./test_NameType.py 
