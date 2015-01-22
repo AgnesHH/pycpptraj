@@ -46,7 +46,7 @@ cdef class Box:
 
     @classmethod
     def get_all_boxtypes(cls):
-        return BoxTypeDict.keys()
+        return [x.lower() for x in BoxTypeDict.keys()]
 
     @classmethod
     def help(cls):
