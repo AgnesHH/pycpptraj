@@ -59,11 +59,15 @@ cdef class Trajin (TrajectoryFile):
 
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
-                idx_0 = idxs[0]
+                # bugs: trajcpp[0, 0, 0] is not the same as trajcpp[0][0, 0]
+                #idx_0 = idxs[0]
                 # do not specify type of frames here
                 # it might be Frame or FrameArray instances
-                frames = self[idx_0]
-                return frame[idxs[1:]]
+                #frames = self[idx_0]
+                #return frame[idxs[1:]]
+                txt = "Not implementing for Trajin_Single. Use traj[idx][idx1, idx2]"
+                txt += "\n or use FrameArray class"
+                raise NotImplementedError(txt)
             else:
                 # assuming that `idxs` is integer
                 idx_1 = get_positive_idx(idxs, self.size)
