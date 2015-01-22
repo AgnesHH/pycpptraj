@@ -146,10 +146,27 @@ cdef class FrameArray:
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
                 idx_0 = idxs[0]
-                if isinstance(idx_0, slice):
-                    raise NotImplementedError("not supported")
-                #print idx_0, idx_1, idx_2
-                # get temp `frames`. This could be either Frame or FrameArray instance
+
+                all_are_slice_instances = True
+                for tmp in idxs:
+                    if not isinstance(tmp, slice): all_are_slice_instances = False
+
+                has_numpy, _np = _import_numpy()
+                # got Segmentation fault if using "is_instance3 and not has_numpy"
+                # TODO : Why?
+                #if is_instance3 and not has_numpy:
+                if all_are_slice_instances:
+                    # traj[:, :, :]
+                    # traj[1:2, :, :]
+                    tmplist = []
+                    for frame in self[idxs[0]]:
+                        tmplist.append(frame[idxs[1:]])
+                    if has_numpy:
+                        return _np.asarray(tmplist)
+                    else:
+                        return tmplist
+                    #raise NotImplementedError("not yet supported if all indcies are slices")
+
                 if isinstance(self[idx_0], Frame):
                     frame = self[idx_0]
                     return frame[idxs[1:]]
@@ -171,6 +188,8 @@ cdef class FrameArray:
                 frame.thisptr = &(self.frame_v.at(idx_1))
                 return frame
         else:
+            if self.warning:
+                print "FrameArray slice"
             # creat a subset array of `FrameArray`
             farray = FrameArray()
             # farray.is_mem_parent = False
@@ -208,7 +227,13 @@ cdef class FrameArray:
                 # reverse vector if using negative index slice
                 # traj[:-1:-3]
                 farray.reverse()
-            return farray
+
+            # hold farray by self.tmpfarray object
+            # so self[:][0][0] is still legit
+            self.tmpfarray = farray
+            #if self.tmpfarray.size == 1:
+            #    return self.tmpfarray[0]
+            return self.tmpfarray
 
     def __setitem__(self, idx, other):
         # TODO : add slice
