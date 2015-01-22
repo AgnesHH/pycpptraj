@@ -163,27 +163,27 @@ class TestFrameArray(unittest.TestCase):
         FARRAYcp = FARRAY.copy()
         print FARRAYcp
         frame0 = FARRAYcp[0]
-        frame0[0] = tmp 
-        assert frame0[0] == tmp
-        assert FARRAYcp[0][0] == tmp
+        frame0[0] = [tmp, 1000, 1000.]
+        assert frame0[0, 0] == tmp
+        assert FARRAYcp[0][0, 0] == tmp
         arr = np.asarray(FARRAYcp[0].buffer)
         assert arr[0] == tmp
         arr[0] = 2 * tmp
-        assert frame0[0] == 2 * tmp
-        assert FARRAYcp[0][0] == 2 * tmp
+        assert frame0[0, 0] == 2 * tmp
+        assert FARRAYcp[0, 0, 0] == 2 * tmp
 
         # test memoryview for sub-array
         subfarray = FARRAYcp[:2]
         print "subfarray: ", subfarray
-        assert subfarray[0][0] == 2 * tmp
-        subfarray[0][0] = 4 * tmp
-        assert subfarray[0][0] == 4 * tmp
+        assert subfarray[0, 0, 0] == 2 * tmp
+        subfarray[0][:] = [4*tmp, 1000, 1000.]
+        assert subfarray[0, 0, 0] == 4 * tmp
         arr[0] = 4 * tmp
         print subfarray
 
         subfarray_cp = subfarray.copy()
         print "make sure we DO a copy, not a memoryview"
-        subfarray_cp[0][0] = 0.1
+        subfarray_cp[0][0, 0] = 0.1
         assert subfarray_cp[0][0] == 0.1
         assert subfarray[0][0] != 0.1
         assert arr[0] != 0.1
