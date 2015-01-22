@@ -14,6 +14,11 @@ def assert_almost_equal(arr0, arr1, decimals=3):
     assert almost_equal == True
 
 if __name__ == "__main__":
+    import numpy as np
     assert_almost_equal([1., 2., 3.], [1., 2., 3.], decimals=3)
     assert_almost_equal([1., 2., 3.], [1., 2.,], decimals=3)
-    assert_almost_equal([1., 2., 4.], [1., 2., 3.], decimals=3)
+    #assert_almost_equal([1., 2., 4.], [1., 2., 3.], decimals=3)
+
+    arr0 = np.array([1., 2., 3.])
+    arr1 = np.array([1., 2., 3.])
+    assert_almost_equal(arr0, arr1)
