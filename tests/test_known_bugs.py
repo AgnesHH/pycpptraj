@@ -10,13 +10,10 @@ class TestBugs(unittest.TestCase):
         trajcpp = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
         farray = trajcpp[:]
         print farray[0, 0, 0]
-        print trajcpp[0, 0, 0]
-        print np.array(trajcpp[0, :, 0])[:10]
-        print np.array(farray[0, :, 0])[:10]
+        self.assertRaises(NotImplementedError, lambda: trajcpp[0, 0, 0])
 
         # bugs: trajcpp[0, 0, 0] != farray[0, 0, 0] (must be equal)
-        print farray[0][0, 0]
-        print trajcpp[0][0, 0]
+        assert farray[0][0, 0] == trajcpp[0][0, 0]
 
 if __name__ == "__main__":
     unittest.main()
