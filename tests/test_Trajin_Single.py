@@ -13,41 +13,32 @@ from pycpptraj.ReferenceFrame import ReferenceFrame
 from pycpptraj.Energy import Energy_Amber
 from pycpptraj.AtomMask import AtomMask
 
-ts = Trajin_Single()
-basetraj = Trajin()
-datadir = "./data/"
-topname = datadir + "Tc5b.top"
-refilename = "./data/Tc5b.nat.crd"
-mdx = "./data/md1_prod.Tc5b.x"
-ts = Trajin_Single()
+class TestTrajinSingle(unittest.TestCase):
+    def test_dummy(self):
 
-top = Topology(topname)
-trajin = """
-"""
+        ts = Trajin_Single()
+        basetraj = Trajin()
+        datadir = "./data/"
+        topname = datadir + "Tc5b.top"
+        refilename = "./data/Tc5b.nat.crd"
+        mdx = "./data/md1_prod.Tc5b.x"
+        ts = Trajin_Single()
+        
+        top = Topology(topname)
+        trajin = """
+        """
+        
+        ts.load(mdx, top)
+        frame = Frame(ts.top.n_atoms)
+        #ts.begin_traj()
+        with ts:
+            ts.read_traj_frame(100, frame)
+            print frame
+        
+        print ts[0, 0, 0]
+        print ts[0, 0, 0:2][0]
+        print ts[:, :, :]
+        assert ts[0, 0, 0] == ts[0][0, 0]
 
-ts.load(mdx, top)
-frame = Frame(ts.top.n_atoms)
-#ts.begin_traj()
-with ts:
-    ts.read_traj_frame(100, frame)
-    print frame
-
-#print ts[:10]
-#print ts[50:100]
-#print ts[100:50:-2]
-#print ts[100:50:-2][0]
-#fa0_1 = ts[100:50:-2][1]
-#fa0 = ts[100:50:-2]
-#print fa0[0], fa0_1
-#print ts[100:50:-2][0]
-#print ts[100:50:-2][0]
-#print ts[100:50:-2][0]
-#print ts[0, 0, 0]
-print "TEST TEST"
-#print ts[100][:, 0][0]
-#print ts[0][:, :].shape
-print ts[(0, 10, 0)]
-#TODO : make ts[0, 0:3, :] work
-print ts[0, :, :]
-print ts[0:30:4]
-assert ts[0, 0, 0] == ts[0][0, 0]
+if __name__ == "__main__":
+    unittest.main()
