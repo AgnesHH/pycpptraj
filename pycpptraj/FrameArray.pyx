@@ -7,6 +7,7 @@ from pycpptraj._utils cimport get_positive_idx
 
 # python level
 from pycpptraj.Trajectory import Trajectory
+from pycpptraj.utils.check_and_assert import _import_numpy
 
 cdef class FrameArray:
     def __cinit__(self, string filename='', top=None, indices=None, 
@@ -214,8 +215,10 @@ cdef class FrameArray:
         # TODO : check this
         #self[idx].py_free_mem = False
         else:
-            txt = "not yet implemented. Try using framearray[idx1][idx2, idx3] = value"
-            raise NotImplementedError(txt)
+            # example: self[0, 0, 0] = 100.
+            self[idx[0]][idx[1:]] = other
+            #txt = "not yet implemented. Try using framearray[idx1][idx2, idx3] = value"
+            #raise NotImplementedError(txt)
         
     def __delitem__(FrameArray self, int idx):
         self.erase(idx)
