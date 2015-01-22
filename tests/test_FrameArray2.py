@@ -33,12 +33,12 @@ class TestFrameArray2(unittest.TestCase):
         farray0 = TRAJ[:10]
         farray1 = TRAJ[:10]
 
-        farray0[0][0] = 10.
-        print farray0[0][0]
-        print farray1[0][0]
+        farray0[0][0, 0] = 10.
+        print farray0[0, 0, 0]
+        print farray1[0, 0, 1]
         # make sure that farray0 and farray1 are NOT views of TRAJ[:10]
-        assert farray0[0][0] == 10.
-        assert farray0[0][0] != farray1[0][0]
+        assert farray0[0, 0, 0] == 10.
+        assert farray0[0, 0, 0] != farray1[0, 0, 0]
 
     #@no_test
     def test_indices_0(self):
