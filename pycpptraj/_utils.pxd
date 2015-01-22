@@ -1,6 +1,7 @@
 # distutils: language = c++
 from libc.stdlib cimport malloc 
 from libcpp.vector cimport vector
+from cython cimport view
 
 cdef inline int get_positive_idx(idx, size):
     # TODO : do we need this method?
@@ -22,3 +23,7 @@ cdef inline char** list_to_char_pp(args):
          c_argv[idx] = s
      return c_argv
 
+cdef inline _get_buffer1D(int N, double* ptr):
+    cdef view.array my_arr
+    my_arr = <double[:N]> ptr
+    return my_arr
