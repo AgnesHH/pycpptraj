@@ -10,8 +10,10 @@ class Test(unittest.TestCase):
         traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
         frame0 = traj[0]
         assert frame0.has_box() == False
-        print frame0.get_box()
+        box = frame0.get_box()
+        print box
         assert frame0.get_box().btype == 'nobox'
+        print box.type_name
 
 if __name__ == "__main__":
     unittest.main()
