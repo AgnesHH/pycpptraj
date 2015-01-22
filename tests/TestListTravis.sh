@@ -32,6 +32,7 @@ python ./test_GridAction.py
 python ./test_DistRoutines.py 
 python ./test_writepdb.py 
 python ./test_indexing_speed.py 
+python ./test_known_bugs.py 
 python ./test_DataSet_Coords_TRJ.py 
 python ./test_DataSet_Coords_CRD.py 
 python ./test_Frame_3.py 
