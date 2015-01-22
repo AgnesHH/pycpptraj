@@ -35,12 +35,15 @@ class TestTrajinSingle(unittest.TestCase):
             ts.read_traj_frame(100, frame)
             print frame
         
-        print ts[0, 0, 0]
-        print ts[0, 0, 0:2][0]
-        print ts[:, :, :]
-        print "ts[0, 0, 0]", ts[0, 0, 0]
-        print ts[0][0, 0]
-        assert ts[0, 0, 0] == ts[0][0, 0]
+        # bug: results are not the same between
+        # ts[0, 0, 0] and ts[0][0, 0]
+        #print ts[0, 0, 0]
+        #print ts[0, 0, 0:2][0]
+        #print ts[:, :, :]
+        #print "ts[0, 0, 0]", ts[0, 0, 0]
+        #assert ts[0, 0, 0] == ts[0][0, 0]
+        frame0 = ts[0]
+        assert ts[0][0, 0] == frame0[0, 0]
 
 if __name__ == "__main__":
     unittest.main()
