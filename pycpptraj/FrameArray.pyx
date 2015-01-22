@@ -145,7 +145,7 @@ cdef class FrameArray:
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
                 idx_0, idx_1, idx_2 = idxs
-                print idx_0, idx_1, idx_2
+                #print idx_0, idx_1, idx_2
                 frame = self[idx_0]
                 return frame[idx_1, idx_2]
             else:
