@@ -1,4 +1,5 @@
 import os
+from pycpptraj import io as mdio
 from pycpptraj.base import *
 from pycpptraj import allactions
 
@@ -74,6 +75,14 @@ class TestCpptrajState(unittest.TestCase):
         # update Frame instance with new Box info
         boxaction.do_action(idx, frame0)
         print frame0.box
+        mdio.writetraj(filename="test_withbox.r", traj=frame0, 
+                       top=farray.top, fmt='AMBERRESTART',
+                       overwrite=True)
+        frame0.set_nobox()
+        print frame0.box
+        mdio.writetraj(filename="test.r", traj=frame0, 
+                       top=farray.top, fmt='AMBERRESTART',
+                       overwrite=True)
 
 if __name__ == "__main__":
     unittest.main()
