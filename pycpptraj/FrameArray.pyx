@@ -143,18 +143,24 @@ cdef class FrameArray:
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
         if not isinstance(idxs, slice):
-            idx_1 = get_positive_idx(idxs, self.size)
-            # raise index out of range
-            if idxs != 0 and idx_1 == 0:
-                # need to check if array has only 1 element. 
-                # arr[0] is  arr[-1]
-                if idxs != -1:
-                    raise ValueError("index is out of range")
-            # get memoryview
-            #frame.thisptr = &(self.frame_v[idx_1])
-            # change [] to `at` for bound-checking
-            frame.thisptr = &(self.frame_v.at(idx_1))
-            return frame
+            if isinstance(idxs, tuple):
+                idx_0, idx_1, idx_2 = idxs
+                print idx_0, idx_1, idx_2
+                frame = self[idx_0]
+                return frame[idx_1, idx_2]
+            else:
+                idx_1 = get_positive_idx(idxs, self.size)
+                # raise index out of range
+                if idxs != 0 and idx_1 == 0:
+                    # need to check if array has only 1 element. 
+                    # arr[0] is  arr[-1]
+                    if idxs != -1:
+                        raise ValueError("index is out of range")
+                # get memoryview
+                #frame.thisptr = &(self.frame_v[idx_1])
+                # change [] to `at` for bound-checking
+                frame.thisptr = &(self.frame_v.at(idx_1))
+                return frame
         else:
             # creat a subset array of `FrameArray`
             farray = FrameArray()
