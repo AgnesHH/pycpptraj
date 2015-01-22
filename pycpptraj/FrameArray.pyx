@@ -144,10 +144,10 @@ cdef class FrameArray:
             raise ValueError("Your FrameArray is empty, how can I index it?")
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
-                idx_0, idx_1, idx_2 = idxs
+                idx_0 = idxs[0]
                 #print idx_0, idx_1, idx_2
                 frame = self[idx_0]
-                return frame[idx_1, idx_2]
+                return frame[idxs[1:]]
             else:
                 idx_1 = get_positive_idx(idxs, self.size)
                 # raise index out of range
