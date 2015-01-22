@@ -20,5 +20,3 @@
     * ts[0, 0, 0] is not the same as ts[0][0, 0] (ts is Trajing_Single)
         * For some unknow reasons, C++ or Python deallocate memory too soon for ts[0, 0, 0]
           Use ts[0][0, 0]
-    * Not implemented Error with farray[0, 0, 0] = 100 (farray is FrameArray instance)
-        * Due to technical dificulty, we don't support this yet. Use farray[0][0, 0] = 100 for assigment
