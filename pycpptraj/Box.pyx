@@ -1,6 +1,7 @@
 # distutils: language = c++
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
+from pycpptraj.cpptraj_dict import BoxTypeDict, get_key
 
 
 cdef class Box:
@@ -29,10 +30,13 @@ cdef class Box:
 
     def __getitem__(self, idx):
         """add fancy indexing?"""
-        return self.thisptr.index_opr(idx)
+        #return self.thisptr.index_opr(idx)
+        return self.tolist()[idx]
 
     def __setitem__(self, idx, double value):
         cdef double* ptr
+        if not isinstance(idx, (long, int)):
+            raise NotImplementedError("support only integer indexing, not slice")
         ptr = &(self.thisptr.index_opr(idx))
         ptr[0] = value
 
@@ -63,8 +67,8 @@ cdef class Box:
         return self.thisptr.ToRecip(ucell.thisptr[0], recip.thisptr[0])
 
     @property
-    def type(self):
-        return self.thisptr.Type()
+    def btype(self):
+        return get_key(self.thisptr.Type(), BoxTypeDict).lower()
 
     property x:
         def __get__(self):
