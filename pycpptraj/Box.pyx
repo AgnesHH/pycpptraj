@@ -19,11 +19,22 @@ cdef class Box:
         else: 
             raise ValueError("")
 
+    def __str__(self):
+        boxlisttxt = ", ".join([str(tmp) for tmp in self.tolist()])
+        txt = "<Box instance with x, y, z, alpha, beta, gamma = %s>" % boxlisttxt
+        return txt
+
     def __dealloc__(self):
         del self.thisptr
 
     def __getitem__(self, idx):
+        """add fancy indexing?"""
         return self.thisptr.index_opr(idx)
+
+    def __setitem__(self, idx, double value):
+        cdef double* ptr
+        ptr = &(self.thisptr.index_opr(idx))
+        ptr[0] = value
 
     def __iter__(self):
         for i in range(6):
@@ -42,7 +53,7 @@ cdef class Box:
     def set_trunc_oct(self):
         self.thisptr.SetTruncOct()
 
-    def set_no_box(self):
+    def set_nobox(self):
         self.thisptr.SetNoBox()
 
     def set_missing_info(self, Box boxinst):
@@ -55,37 +66,37 @@ cdef class Box:
     def type(self):
         return self.thisptr.Type()
 
-    property BoxX:
+    property x:
         def __get__(self):
             return self.thisptr.BoxX()
         def __set__(self, double value):
             self.thisptr.SetX(value)
 
-    property BoxY:
+    property y:
         def __get__(self):
             return self.thisptr.BoxY()
         def __set__(self, double value):
             self.thisptr.SetY(value)
 
-    property BoxZ:
+    property z:
         def __get__(self):
             return self.thisptr.BoxZ()
         def __set__(self, double value):
             self.thisptr.SetZ(value)
 
-    property Alpha:
+    property alpha:
         def __get__(self):
             return self.thisptr.Alpha()
         def __set__(self, double value):
             self.thisptr.SetAlpha(value)
 
-    property Beta:
+    property beta:
         def __get__(self):
             return self.thisptr.Beta()
         def __set__(self, double value):
             self.thisptr.SetBeta(value)
 
-    property Gamma:
+    property gamma:
         def __get__(self):
             return self.thisptr.Gamma()
         def __set__(self, double value):
@@ -106,8 +117,7 @@ cdef class Box:
         vec.thisptr[0] = self.thisptr.Lengths()
         return vec
 
-    @property
-    def boxarr(self):
+    def tolist(self):
         cdef int i
         cdef vector[double] v
         cdef double* ptr = self.thisptr.boxPtr()
@@ -115,4 +125,3 @@ cdef class Box:
         for i in range(6):
             v.push_back(deref(ptr+i))
         return v
-
