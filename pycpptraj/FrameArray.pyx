@@ -214,7 +214,8 @@ cdef class FrameArray:
         # TODO : check this
         #self[idx].py_free_mem = False
         else:
-            raise NotImplementedError("not yet implemented")
+            txt = "not yet implemented. Try using framearray[idx1][idx2, idx3] = value"
+            raise NotImplementedError(txt)
         
     def __delitem__(FrameArray self, int idx):
         self.erase(idx)
