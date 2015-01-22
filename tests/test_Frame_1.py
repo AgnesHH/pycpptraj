@@ -1,7 +1,7 @@
 import unittest
 from array import array
 import numpy as np
-from numpy.testing import assert_almost_equal
+from pycpptraj.utils.check_and_assert import assert_almost_equal
 from pycpptraj.Frame import Frame
 from pycpptraj.base import *
 from pycpptraj.Vec3 import Vec3
@@ -43,7 +43,6 @@ class TestFrame(unittest.TestCase):
         frame1.trans_rot_trans(v1, mat, v2)
         #frame1.trans_rot_trans(v1, mat, Vec3(0, 0, 0))
         #assert frame1[:10] == frame1new[:10]
-        print "**************XXXXXXXXXXXXXXXXXXXXXXXXXxxx"
         print frame1.rmsd_nofit(frame1new)
         print arr_rmsd(np.asarray(frame1.coords), np.asarray(frame1new.coords))
         print frame1.rmsd(frame1new)
@@ -78,20 +77,24 @@ class TestFrame(unittest.TestCase):
 
     #@no_test
     def test_create_frame(self):
-        # test creating Frame from a list!
+        print  "test creating Frame from a list!"
         frame = Frame(range(300))
         assert frame.size == 300
         assert frame.n_atoms == 100
         assert frame.coords == array('d', [x for x in range(300)])
-        assert frame[:] == frame.coords
+        assert_almost_equal(np.asarray(frame[:, :][0]), frame.coords[:3])
 
-        frame[:] = array('d', range(300, 0, -1))
-        assert frame[:] == array('d', range(300, 0, -1))
-        assert frame.coords == array('d', range(300, 0, -1))
+        arr0 = np.arange(300, 0, -1).reshape(100, 3)
+        frame[0, :] = array('d', arr0[0, :])
+        assert arr0.shape == (100, 3)
+        assert frame.xyz3d.shape == (100, 3)
+        assert frame[0, 1] == arr0[0, 1]
+        ##frame[:], np.arange(300, 0, -1).reshape(100, 3))
+        #assert frame.coords == array('d', range(300, 0, -1))
 
-        frame[:] = np.arange(300, dtype='d')
-        assert frame.coords == array('d', [x for x in range(300)])
-        assert frame[:] == frame.coords
+        #frame[:] = np.arange(300, dtype='d')
+        #assert frame.coords == array('d', [x for x in range(300)])
+        #assert frame[:] == frame.coords
   
     #@no_test
     def test_buffer(self):
@@ -102,11 +105,11 @@ class TestFrame(unittest.TestCase):
         FRAME.buffer[0] = 199.
         print FRAME.coords[0]
         print FRAME[0]
-        assert FRAME[0] == FRAME.buffer[0] == FRAME.coords[0]
+        assert FRAME[0, 0] == FRAME.buffer[0] == FRAME.coords[0]
 
         FRAME[0] = 0.1
-        assert FRAME[0] == FRAME.buffer[0] == FRAME.coords[0]
-        assert FRAME.buffer[-1] == FRAME[-1] == 29.
+        assert FRAME[0, 0] == FRAME.buffer[0] == FRAME.coords[0]
+        assert FRAME.buffer[-1] == FRAME[-1, 2]
 
         FRAME.buffer[:3] = array('d', [1, 2.3, 3.4])
         assert FRAME.coords[:3] == array('d', [1, 2.3, 3.4])
@@ -119,7 +122,6 @@ class TestFrame(unittest.TestCase):
         arr1 = arr0.reshape(10, 3)
         arr1[1] = [100., 200., 300.]
         print FRAME.atom_xyz
-        print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
         #arr0[10] = [100., 200., 300.]
         #assert frame.atom_xyz(10) == arr0[10]
 
@@ -139,14 +141,14 @@ class TestFrame(unittest.TestCase):
         alist = []
         frame = FRAME_orig.copy()
         for x in frame:
-            alist.append(int(x))
+            alist += [int(a) for a in x]
         print alist
         assert alist == range(3 * N_ATOMS)
 
         print "test enumerate"
         alist = []
         for idx, x in enumerate(frame):
-            alist.append(int(x))
+            alist += [int(a) for a in x]
         assert alist == range(3 * N_ATOMS)
         print alist
         print "====================end test_iter"
@@ -156,28 +158,30 @@ class TestFrame(unittest.TestCase):
         # create a Frame instance with N_ATOMS atoms
         N_ATOMS = 10
         frame = Frame(N_ATOMS)
-        arr = np.arange(3 * N_ATOMS)
+        arr = np.arange(3 * N_ATOMS, dtype=float)
         frame.set_from_crd(arr)
         print frame.coords
 
         #print "test negative indexing"
         print frame[-1]
-        assert frame[-1] == 29.
+        #assert frame[-1] == 29.
         print frame[-2]
-        assert frame[-2] == frame[N_ATOMS*3-2]
-        assert frame[-2] == frame[N_ATOMS*3-2]
-        assert frame[-2] == 28.
+        assert frame[-2] == frame[N_ATOMS - 2]
+        assert frame[-2] == frame[N_ATOMS - 2]
+        print np.asarray(frame[-2])
+        print arr.reshape(N_ATOMS, 3)[-2]
+        assert_almost_equal(frame[-2], arr.reshape(N_ATOMS, 3)[-2])
 
-        frame[-1] = 100.
-        assert frame[-1] == 100.
+        frame[-1] = [100., 0, 0]
+        assert frame[-1, 0] == 100.
         #print frame[-1]
 
         #frame[-2] = 101.
         #assert frame[-2] == frame[N_ATOMS*3 - 2] == 101.
 
         print frame[0:10]
-        frame[0] = 100.
-        print frame[0]
+        frame[0, 0] = 100.
+        assert frame[0, 0] == 100.
 
     #@no_test
     def test_other_stuff(self):
@@ -231,7 +235,7 @@ class TestFrame(unittest.TestCase):
         print frame.atom_xyz(0)
         print arr_reshape[0]
         assert_almost_equal(np.array(frame.atom_xyz(0)), arr_reshape[0])
-        assert_almost_equal(frame[0], arr[0])
+        assert_almost_equal(frame[0], arr[:3])
 
         # frame.info('frame info')
         frame.swap_atoms(1, 8)
@@ -254,22 +258,24 @@ class TestFrame(unittest.TestCase):
         for x in frame:
             count += 1
         print "count = %s " % count
-        assert count == N_ATOMS * 3
+        assert count == N_ATOMS
 
         print "test enumeration"
         for i, x in enumerate(frame):
-            if i == 10:
-                frame[i] = 1010.
+            if i == 9:
+                old_i = frame[i]
+                frame[i] = array('d', [1010., 0., 0.])
         print i
-        assert i == N_ATOMS * 3 - 1
-        assert x == frame[frame.size-1]
-        assert frame[10] == 1010.
+        assert i == N_ATOMS - 1
+        print x
+        assert_almost_equal(x, old_i)
+        assert frame[9][0] == 1010.
 
         print "set zero_coords_copy"
         frame.zero_coords()
         arr = np.asarray(frame.coords)
         frame[0] = 1001.10
-        assert frame[0] == frame.coords[0]
+        assert frame[0, 0] == frame.coords[0]
         print frame[0]
         
         arrref = np.random.rand(30)
