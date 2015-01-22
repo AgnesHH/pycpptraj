@@ -57,8 +57,6 @@ cdef class Trajin (TrajectoryFile):
         cdef int idx_1, idx_2
         cdef list tmplist
 
-        print type(idxs)
-        print idxs
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
                 idx_0, idx_1, idx_2 = idxs
