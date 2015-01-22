@@ -45,5 +45,9 @@ class TestTrajinSingle(unittest.TestCase):
         frame0 = ts[0]
         assert ts[0][0, 0] == frame0[0, 0]
 
+    def test_indexing(self):
+        traj = Trajin_Single("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        print traj[:][0, 0]
+
 if __name__ == "__main__":
     unittest.main()
