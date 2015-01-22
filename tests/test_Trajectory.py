@@ -124,9 +124,9 @@ class TestTrajectory(unittest.TestCase):
         mat0 = np.asmatrix(arr0).reshape(304, 3) 
         print mat0.shape
         mat0[:, 0] = np.asmatrix(range(304)).reshape(304, 1)
-        assert frame0[0] == 0.
-        assert frame0[3] == 1.
-        assert frame0[6] == 2.
+        assert frame0[0, 0] == 0.
+        assert frame0[1, 0] == 1.
+        assert frame0[2, 0] == 2.
         
     #@no_test
     def test_indexing_1(self):
