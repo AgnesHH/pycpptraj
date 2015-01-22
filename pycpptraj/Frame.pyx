@@ -108,10 +108,6 @@ cdef class Frame (object):
             else:
                 raise ValueError()
 
-        # set box
-        # use py_free_mem for self.box?
-        self.box.thisptr = self.thisptr.bAddress()
-
     #def __init__(self, *args):
     #    self.__dict__ = {}
 
@@ -381,7 +377,7 @@ cdef class Frame (object):
         raise NotImplementedError()
 
     @property
-    def _box(self):
+    def box(self):
         cdef Box box = Box()
         box.thisptr.SetBox(self.thisptr.bAddress())
         return box
