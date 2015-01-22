@@ -367,6 +367,9 @@ cdef class Frame (object):
         """return `mass` of atnum-th atom"""
         return self.thisptr.Mass(atnum)
 
+    def set_nobox(self):
+        self.boxview[:] = pyarray('d', [0. for _ in range(6)])
+
     def box_crd(self):
         cdef Box box = Box()
         box.thisptr[0] = self.thisptr.BoxCrd()
