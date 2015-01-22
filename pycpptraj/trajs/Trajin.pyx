@@ -5,6 +5,9 @@ from cpython.array cimport array as pyarray
 from pycpptraj._utils cimport get_positive_idx
 from pycpptraj.FrameArray cimport FrameArray
 
+from pycpptraj.utils.check_and_assert import _import_numpy
+
+
 cdef class Trajin (TrajectoryFile):
 
     def __cinit__(self):
@@ -59,15 +62,45 @@ cdef class Trajin (TrajectoryFile):
 
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
-                # bugs: trajcpp[0, 0, 0] is not the same as trajcpp[0][0, 0]
-                #idx_0 = idxs[0]
-                # do not specify type of frames here
-                # it might be Frame or FrameArray instances
-                #frames = self[idx_0]
+                idx_0 = idxs[0]
+
+                all_are_slice_instances = True
+                for tmp in idxs:
+                    if not isinstance(tmp, slice): all_are_slice_instances = False
+
+                has_numpy, _np = _import_numpy()
+                # got Segmentation fault if using "is_instance3 and not has_numpy"
+                # TODO : Why?
+                #if is_instance3 and not has_numpy:
+                if all_are_slice_instances:
+                    # traj[:, :, :]
+                    # traj[1:2, :, :]
+                    tmplist = []
+                    for frame in self[idxs[0]]:
+                        tmplist.append(frame[idxs[1:]])
+                    if has_numpy:
+                        return _np.asarray(tmplist)
+                    else:
+                        return tmplist
+                    #raise NotImplementedError("not yet supported if all indcies are slices")
+
+                if isinstance(self[idx_0], Frame):
+                    frame = self[idx_0]
+                    return frame[idxs[1:]]
+                elif isinstance(self[idx_0], FrameArray):
+                    farray = self[idx_0]
+                    return farray[idxs[1:]]
                 #return frame[idxs[1:]]
-                txt = "Not implementing for Trajin_Single. Use traj[idx][idx1, idx2]"
-                txt += "\n or use FrameArray class"
-                raise NotImplementedError(txt)
+            #if isinstance(idxs, tuple):
+            #    # bugs: trajcpp[0, 0, 0] is not the same as trajcpp[0][0, 0]
+            #    #idx_0 = idxs[0]
+            #    # do not specify type of frames here
+            #    # it might be Frame or FrameArray instances
+            #    #frames = self[idx_0]
+            #    #return frame[idxs[1:]]
+            #    txt = "Not implementing for Trajin_Single. Use traj[idx][idx1, idx2]"
+            #    txt += "\n or use FrameArray class"
+            #    raise NotImplementedError(txt)
             else:
                 # assuming that `idxs` is integer
                 idx_1 = get_positive_idx(idxs, self.size)
@@ -108,7 +141,11 @@ cdef class Trajin (TrajectoryFile):
                     # reverse vector if using negative index slice
                     # traj[:-1:-3]
                     farray.reverse()
-            return farray
+
+            # use tmpfarray to hold farray for nested indexing
+            # if not, Python will free memory for sub-FrameArray 
+            self.tmpfarray = farray
+            return self.tmpfarray
 
     def __setitem__(self, idx, value):
         raise NotImplementedError("Read only Trajectory. Use FrameArray class for __setitem__")
