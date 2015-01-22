@@ -379,15 +379,18 @@ cdef class Frame (object):
         # cpptraj: return double*
         raise NotImplementedError()
 
-    @property
-    def box(self):
+    def get_box(self):
         cdef Box box = Box()
         box.thisptr.SetBox(self.thisptr.bAddress())
         return box
 
+    def has_box(self):
+        box = self.get_box()
+        return box.has_box()
+
     @property
     def boxview(self):
-        """return a memory of box array"""
+        """return a memoryview of box array"""
         cdef double* ptr = self.thisptr.bAddress()
         cdef view.array my_arr
         my_arr = <double[:6]> ptr
