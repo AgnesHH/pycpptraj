@@ -45,7 +45,7 @@ cdef class Box:
             yield self[i]
 
     @property
-    def type_name(self):
+    def bname(self):
         return self.thisptr.TypeName()
     
     def set_beta_lengths(self, double beta, double xin, double yin, double zin):
@@ -63,7 +63,7 @@ cdef class Box:
     def set_missing_info(self, Box boxinst):
         self.thisptr.SetMissingInfo(boxinst.thisptr[0])
 
-    def to_recip(self,Matrix_3x3 ucell, Matrix_3x3 recip):
+    def torecip(self,Matrix_3x3 ucell, Matrix_3x3 recip):
         return self.thisptr.ToRecip(ucell.thisptr[0], recip.thisptr[0])
 
     @property
