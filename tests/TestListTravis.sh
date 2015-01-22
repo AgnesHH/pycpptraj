@@ -48,3 +48,4 @@ python ./test_base.py
 python ./test_Action_Strip.py 
 python ./test_loadingtime.py 
 python ./test_Frame_2.py 
+python ./test_has_numpy.py 
