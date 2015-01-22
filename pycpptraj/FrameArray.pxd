@@ -20,6 +20,10 @@ cdef class FrameArray:
     cdef public bint warning 
     cdef void _join(FrameArray self, FrameArray other, mask=*)
 
+    # create tmpfarray to hold sub FrameArray
+    # traj[0:10][0] will give wrong answer
+    cdef object tmpfarray
+
     # make public?
     # this variable is intended to let FrameArray control 
     # freeing memory for Frame instance but it's too complicated
