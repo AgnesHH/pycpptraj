@@ -67,7 +67,7 @@ def writetraj(filename="", traj=None, top=None,
                     trajout.writeframe(idx, frame, top)
             else:
                 if isinstance(traj2, (list, tuple)):
-                    raise NotImplementedError(must be FrameArray or Trajin_Single instance)
+                    raise NotImplementedError("must be FrameArray or Trajin_Single instance")
                 for idx in indices:
                     trajout.writeframe(idx, traj2[idx], top)
 
