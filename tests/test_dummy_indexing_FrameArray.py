@@ -47,7 +47,7 @@ class TestFrameArray(unittest.TestCase):
         print farray[-1:-10:-2]
         newfarray = farray[:5] + farray[10:20]
         newfarray[0][0] = 100000.
-        assert newfarray[0][0] == 100000.
+        assert newfarray[0][0, 0] == 100000.
         print farray[0][0]
         print "farray[::-1]", farray[::-1]
         farray2 = farray[::-1] + farray[:]
