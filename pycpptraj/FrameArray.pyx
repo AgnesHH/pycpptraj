@@ -201,15 +201,20 @@ cdef class FrameArray:
                 farray.reverse()
             return farray
 
-    def __setitem__(self, int idx, Frame other):
+    def __setitem__(self, idx, other):
         # TODO : add slice
         # make a copy
         # to make thing simple, we don't use fancy slicing here
+        cdef Frame frame
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
-        self.frame_v[idx] = other.thisptr[0]
+        if isinstance(idx, (long, int)) and isinstance(other, Frame):
+            frame = <Frame> other
+            self.frame_v[idx] = frame.thisptr[0]
         # TODO : check this
         #self[idx].py_free_mem = False
+        else:
+            raise NotImplementedError("not yet implemented")
         
     def __delitem__(FrameArray self, int idx):
         self.erase(idx)
