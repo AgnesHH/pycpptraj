@@ -19,5 +19,14 @@ class TestBox(unittest.TestCase):
     def test_help(self):
         Box.help()
 
+    def test_1(self):
+        box = Box()
+        box.set_trunc_oct()
+        print box
+        print box.btype
+        box.set_nobox()
+        print box
+        print box.btype
+
 if __name__ == "__main__":
     unittest.main()
