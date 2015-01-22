@@ -56,14 +56,14 @@ class TestIndices(unittest.TestCase):
         print traj1[0][10]
         print traj1[100][10]
         traj1[0] = traj1[100]
-        print traj1[0].same_coords_as(traj1[100]) 
+        print traj1[0].same_coords_as(traj1[100])
         print "update traj1[0] and make sure this does not affect traj[100]"
-        traj1[0][10] = 1000000.
+        traj1[0][10, 0] = 1000000.
         assert (traj1[0].same_coords_as(traj1[100])) == False
         print traj1[0][:11]
         print traj1[100][:11]
         assert (traj1[100][:11] == traj1[0][:11]) == False
-        assert (traj1[100].coords[:11] == traj1[0].coords[:11]) == False
+        assert (traj1[100, 10, 0] == traj1[0, 10, 0]) == False
 
     def test_1(self):
         traj0 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
