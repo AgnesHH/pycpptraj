@@ -31,7 +31,8 @@ class Test(unittest.TestCase):
         print frame1.xyz3d.shape
 
         CA_2 = frame0.get_subframe("@CA", traj.top)[2, :]
-        assert CA_2 == frame1[2, :] == frame1.coords[6:9]
+        assert_almost_equal(CA_2, frame1[2, :]) 
+        assert_almost_equal(frame1.coords[6:9], frame1[2, :])
         frame0[:] == frame0.coords
         print frame0.xyz3d[:, 2]
         print array('d', frame0.xyz3d[2:4, 0])
