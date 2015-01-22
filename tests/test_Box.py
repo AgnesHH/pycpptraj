@@ -1,60 +1,19 @@
-import numpy as np
-from pycpptraj.Box import Box
+import unittest
+from pycpptraj.base import *
+from pycpptraj import io as mdio
+from array import array as pyarray
 
-boxin = np.array([1., 2., 3., 4. ,5. ,6.])
-# create Box instance from np array
-b = Box(boxin)
+class TestBox(unittest.TestCase):
+    def test_0(self):
+        traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        frame0 = traj[0]
+        frame0.box_crd()
+        print frame0.box
+        frame0.boxview[:] = pyarray('d', [0.0, 1.0, 2.0, 3.0, 4.0, 6.])
+        print frame0.box
 
-print "Original box"
-print b.boxarr
-print b.lengths
-print b.center
-print "has box? ", b.has_box()
-print "b.TypeName: %s" % (b.TypeName)
+        frame0.box.x = 1000.
+        print frame0.box
 
-print
-print "b.SetTruncOct()"
-b.SetTruncOct()
-print b.boxarr
-print b.Lengths
-print b.Center
-print "has box? ", b.has_box()
-print "b.TypeName: %s" % (b.TypeName)
-print
-print "set and get properties"
-b.BoxX = 1.1 
-b.BoxY = 2.1 
-b.BoxZ = 3.1 
-b.Alpha = 4.1 
-b.Beta = 5.1 
-b.Gamma = 6.1 
-print """b.BoxX = 1.1 
-b.BoxY = 2.1 
-b.BoxZ = 3.1 
-b.Alpha = 4.1 
-b.Beta = 5.1 
-b.Gamma = 6.1"""
-
-print b.boxarr
-
-print "Test Box copy"
-b2 = Box(b)
-print b2 == b
-print b2.boxarr
-print
-print "Test box indexing"
-for i in range(6):
-    print b2[i]
-
-print 
-print "Test iterator"
-for b in b2:
-    print b
-#print
-#print "b.SetNoBox()"
-#b.SetNoBox()
-#print b.boxarr
-#print b.Lengths
-#print b.Center
-#print "has box? ", b.has_box()
-#print "b.TypeName: %s" % (b.TypeName)
+if __name__ == "__main__":
+    unittest.main()
