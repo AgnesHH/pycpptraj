@@ -23,8 +23,8 @@ class TestSubFrame(unittest.TestCase):
             farray2.append(frame.get_subframe("@CA", farray.top))
 
         print farray2.size
-        farray2[0][0] = 100.
-        assert farray2[0][0] == 100.
+        farray2[0, 0, 0] = 100.
+        assert farray2[0, 0, 0] == 100.
         assert farray[0][0] != 100.
         print farray[0].atoms(0)
 
