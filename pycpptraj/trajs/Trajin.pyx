@@ -59,12 +59,10 @@ cdef class Trajin (TrajectoryFile):
 
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
-                idx_0, idx_1, idx_2 = idxs
-                print idx_0, idx_1, idx_2
+                idx_0 = idxs[0]
                 frame = self[idx_0]
-                return frame[idx_1, idx_2]
+                return frame[idxs[1:]]
             else:
-                print idxs
                 # assuming that `idxs` is integer
                 idx_1 = get_positive_idx(idxs, self.size)
                 # raise index out of range
@@ -105,6 +103,9 @@ cdef class Trajin (TrajectoryFile):
                     # traj[:-1:-3]
                     farray.reverse()
             return farray
+
+    def __setitem__(self, idx, value):
+        raise NotImplementedError("Read only Trajectory. Use FrameArray class for __setitem__")
 
     def frame_iter(self, int start=0, int chunk=1):
         """iterately get Frames with start, chunk
