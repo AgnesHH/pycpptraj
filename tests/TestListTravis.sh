@@ -13,6 +13,7 @@ python ./test_io.py
 python ./test_CpptrajFile.py 
 python ./test_template.py 
 python ./test_get_subframe.py 
+python ./test_fancy_indexing.py 
 python ./test_Residue.py 
 python ./test_CpptrajState.py 
 python ./test_Action_Radgyr.py 
