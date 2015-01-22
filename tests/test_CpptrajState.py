@@ -74,12 +74,12 @@ class TestCpptrajState(unittest.TestCase):
         frame0 = farray[idx]
         # update Frame instance with new Box info
         boxaction.do_action(idx, frame0)
-        print frame0.box
+        print frame0.get_box()
         mdio.writetraj(filename="test_withbox.r", traj=frame0, 
                        top=farray.top, fmt='AMBERRESTART',
                        overwrite=True)
         frame0.set_nobox()
-        print frame0.box
+        print frame0.get_box()
         mdio.writetraj(filename="test.r", traj=frame0, 
                        top=farray.top, fmt='AMBERRESTART',
                        overwrite=True)
