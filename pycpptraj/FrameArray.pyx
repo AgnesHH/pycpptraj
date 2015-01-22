@@ -146,9 +146,17 @@ cdef class FrameArray:
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
                 idx_0 = idxs[0]
+                if isinstance(idx_0, slice):
+                    raise NotImplementedError("not supported")
                 #print idx_0, idx_1, idx_2
-                frame = self[idx_0]
-                return frame[idxs[1:]]
+                # get temp `frames`. This could be either Frame or FrameArray instance
+                if isinstance(self[idx_0], Frame):
+                    frame = self[idx_0]
+                    return frame[idxs[1:]]
+                elif isinstance(self[idx_0], FrameArray):
+                    farray = self[idx_0]
+                    return farray[idxs[1:]]
+                #return frame[idxs[1:]]
             else:
                 idx_1 = get_positive_idx(idxs, self.size)
                 # raise index out of range
