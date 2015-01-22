@@ -199,7 +199,7 @@ RemDimDict = {
 
 # Box
 #from Box cimport *
-BoxDict = {
+BoxTypeDict = {
     "NOBOX" : NOBOX, 
     "ORTHO" : ORTHO, 
     "TRUNCOCT" : TRUNCOCT, 
