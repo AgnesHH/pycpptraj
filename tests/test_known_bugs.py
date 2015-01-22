@@ -3,6 +3,7 @@
 import unittest
 from pycpptraj.base import *
 from pycpptraj import io as mdio
+import numpy as np
 
 class TestBugs(unittest.TestCase):
     def test_0(self):
@@ -10,6 +11,12 @@ class TestBugs(unittest.TestCase):
         farray = trajcpp[:]
         print farray[0, 0, 0]
         print trajcpp[0, 0, 0]
+        print np.array(trajcpp[0, :, 0])[:10]
+        print np.array(farray[0, :, 0])[:10]
+
+        # bugs: trajcpp[0, 0, 0] != farray[0, 0, 0] (must be equal)
+        print farray[0][0, 0]
+        print trajcpp[0][0, 0]
 
 if __name__ == "__main__":
     unittest.main()
