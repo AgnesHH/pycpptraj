@@ -11,8 +11,7 @@ class TestBox(unittest.TestCase):
         print frame0.box
         frame0.boxview[:] = pyarray('d', [0.0, 1.0, 2.0, 3.0, 4.0, 6.])
         print frame0.box
-
-        frame0.box.x = 1000.
+        frame0.set_nobox()
         print frame0.box
 
 if __name__ == "__main__":
