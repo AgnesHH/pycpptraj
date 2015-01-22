@@ -38,6 +38,8 @@ class TestTrajinSingle(unittest.TestCase):
         print ts[0, 0, 0]
         print ts[0, 0, 0:2][0]
         print ts[:, :, :]
+        print "ts[0, 0, 0]", ts[0, 0, 0]
+        print ts[0][0, 0]
         assert ts[0, 0, 0] == ts[0][0, 0]
 
 if __name__ == "__main__":
