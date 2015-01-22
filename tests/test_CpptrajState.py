@@ -73,13 +73,7 @@ class TestCpptrajState(unittest.TestCase):
         frame0 = farray[idx]
         # update Frame instance with new Box info
         boxaction.do_action(idx, frame0)
-        boxnew = frame0.get_box()
+        print frame0.box
 
-        print "box = ", boxnew.boxarr
-        print boxnew
-        boxaction.print_output()
-        distaction.print_output()
-        # how to get output?
-#
 if __name__ == "__main__":
     unittest.main()
