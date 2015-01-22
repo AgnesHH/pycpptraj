@@ -6,6 +6,8 @@ from cpython.array cimport array as pyarray
 from cython.operator cimport dereference as deref
 from libcpp.vector cimport vector
 from cpython.buffer cimport Py_buffer
+from pycpptraj._utils cimport _get_buffer1D
+
 from pycpptraj.decorators import for_testing, iter_warning
 from pycpptraj.decorators import name_will_be_changed
 from pycpptraj.utils.check_and_assert import _import_numpy
@@ -105,6 +107,9 @@ cdef class Frame (object):
                     self.thisptr = new _Frame(vt)
             else:
                 raise ValueError()
+
+        # set box
+        self.box.thisptr.SetBox(self.thisptr.bAddress())
 
     #def __init__(self, *args):
     #    self.__dict__ = {}
@@ -368,16 +373,25 @@ cdef class Frame (object):
     def box_crd(self):
         cdef Box box = Box()
         box.thisptr[0] = self.thisptr.BoxCrd()
-        return box
+        return box.tolist()
 
     def v_address(self):
         # cpptraj: return double*
         raise NotImplementedError()
 
-    def get_box(self):
+    @property
+    def _box(self):
         cdef Box box = Box()
         box.thisptr.SetBox(self.thisptr.bAddress())
         return box
+
+    @property
+    def boxview(self):
+        """return a memory of box array"""
+        cdef double* ptr = self.thisptr.bAddress()
+        cdef view.array my_arr
+        my_arr = <double[:6]> ptr
+        return my_arr
 
     def t_address(self):
         # cpptraj: return double*
