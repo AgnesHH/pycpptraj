@@ -95,7 +95,7 @@ cdef class Frame (object):
                     natom3 = <int> len(args[0])
                     self.thisptr = new _Frame(natom3/3)
                     for i in range(natom3):
-                        self[i] = args[0][i]
+                        self.set_from_crd(pyarray('d', args[0]))
                 else:
                     # Create Frame from list of atom mask
                     atlist = args[0]
@@ -169,29 +169,37 @@ cdef class Frame (object):
     #    self.__dict__[name] = att
 
     def __getitem__(self, idx):
+        #return self.buffer3d[idx]
         # TODO : support frame[1:10, : ]  
-        if isinstance(idx, int) or isinstance(idx, slice):
-            return self.coords[idx]
-        elif isinstance(idx, tuple) and len(idx) == 2:
-            print "Frame class test"
-            if isinstance(idx[0], int): #and isinstance(idx[1], int):
-                # return x, y or z coord of atom idx[0]
-                return self.atoms(idx[0])[idx[1]]
-            else:
-                print type(idx)
-                # currenty support only memoryview
-                return self.buffer3d[idx]
+        if isinstance(idx, int):
+            return pyarray('d', self.buffer3d[idx])
+        #elif isinstance(idx, tuple) and len(idx) == 2:
+        #    if isinstance(idx[0], int): #and isinstance(idx[1], int):
+        #        # return x, y or z coord of atom idx[0]
+        #        return self.atoms(idx[0])[idx[1]]
+        #    else:
+        #        #print type(idx)
+        #        # currenty support only memoryview
+        #        return self.buffer3d[idx]
+        #elif isinstance(idx, slice):
+        #    return self.buffer3d[idx]
         else:
-            raise ValueError("not supported")
+            return self.buffer3d[idx]
+            #raise ValueError("not supported")
 
     def __setitem__(self, idx, value):
         # TODO : should we use buffer. Kind of dangerous
         # TODO : add examples hereo
-        if not isinstance(idx, (list, tuple)):
-            self.buffer[idx] = value
+        #if not isinstance(idx, (list, tuple)):
+        #    self.buffer[idx] = value
+        #else:
+        #    if isinstance(value, (list, tuple)):
+        #        value = pyarray('d', value)
+        #    self.buffer3d[idx] = value
+        if isinstance(value, (tuple, list)):
+            value = pyarray('d', value)
+            self.buffer3d[idx] = value
         else:
-            if isinstance(value, (list, tuple)):
-                value = pyarray('d', value)
             self.buffer3d[idx] = value
 
     #def __array__(self):
@@ -199,8 +207,8 @@ cdef class Frame (object):
 
     def __iter__(self):
         cdef int i
-        for i in range(self.thisptr.size()):
-            yield self.thisptr.CRD(i)[0]
+        for i in range(self.n_atoms):
+            yield self.atoms(i)
 
     def __len__(self):
         return self.size
