@@ -4,6 +4,7 @@ from array import array
 from pycpptraj.base import *
 from pycpptraj.io import load
 from pycpptraj.decorators import no_test
+from pycpptraj.utils.check_and_assert import assert_almost_equal
 
 from load_traj import load as npload
 
@@ -55,15 +56,20 @@ class TestIndices(unittest.TestCase):
         traj1 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
         print traj1[0][10]
         print traj1[100][10]
-        traj1[0] = traj1[100]
-        print traj1[0].same_coords_as(traj1[100])
+
+        # assign traj1[0] 
+        traj1[0] = traj1[100].copy()
+        # make sure the assignment happed correctly
+        assert traj1[0].same_coords_as(traj1[100]) == True
+
         print "update traj1[0] and make sure this does not affect traj[100]"
         traj1[0][10, 0] = 1000000.
+        assert traj1[0][10, 0] == traj1[0, 10, 0] == 1000000.
         assert (traj1[0].same_coords_as(traj1[100])) == False
+        assert traj1[0, 10, 0] != traj1[100, 10, 0]
+
         print traj1[0][:11]
         print traj1[100][:11]
-        assert (traj1[100][:11] == traj1[0][:11]) == False
-        assert (traj1[100, 10, 0] == traj1[0, 10, 0]) == False
 
     def test_1(self):
         traj0 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
