@@ -184,7 +184,7 @@ class TestFrameArray(unittest.TestCase):
         subfarray_cp = subfarray.copy()
         print "make sure we DO a copy, not a memoryview"
         subfarray_cp[0][0, 0] = 0.1
-        assert subfarray_cp[0][0] == 0.1
+        assert subfarray_cp[0, 0, 0] == 0.1
         assert subfarray[0][0] != 0.1
         assert arr[0] != 0.1
         assert subfarray[0][0] != 0.1
@@ -200,9 +200,9 @@ class TestFrameArray(unittest.TestCase):
 
         # doing Frame calculation
         print "test *= "
-        tmp = subfarray[0][0]
+        tmp = subfarray[0, 0, 0]
         subfarray[0]*= subfarray[0]
-        assert subfarray[0][0] == tmp*tmp
+        assert subfarray[0, 0, 0] == tmp*tmp
 
         #subfarray[0] /= subfarray[0]
         
@@ -212,8 +212,8 @@ class TestFrameArray(unittest.TestCase):
         FARRAY_sub0 = FARRAYcp[:3]
         print FARRAY_sub0
         tmp = 10000. 
-        FARRAY_sub0[0][100] = tmp
-        assert FARRAY_sub0[0][100] == tmp
+        FARRAY_sub0[0][100, 0] = tmp
+        assert FARRAY_sub0[0, 100, 0] == tmp
         FARRAY_sub0 = FARRAYcp[:3]
         print FARRAY_sub0
         print FARRAY_sub0[0].py_free_mem 
