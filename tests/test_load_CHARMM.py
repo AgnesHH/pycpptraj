@@ -1,6 +1,7 @@
 import unittest
 from array import array
 from pycpptraj.base import *
+import numpy as np
 
 class TestCHARMM(unittest.TestCase):
     def test_0(self):
@@ -25,13 +26,12 @@ class TestCHARMM(unittest.TestCase):
 
         atm.invert_mask()
         frame = Frame(atm.n_selected)
-        frame[:10] = array('d', range(10))
-        print frame[:10]
+        frame[:10] = np.asarray(array('d', range(30))).reshape(10, 3)
+        print frame[0]
         print dir(frame)
         frame.zero_coords()
-        print frame[:10]
+        print frame[0]
         print atm.is_char_mask()
 
 if __name__ == "__main__":
     unittest.main()
-
