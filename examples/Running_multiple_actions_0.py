@@ -45,10 +45,13 @@ def run_0():
     # don't use "for i in range(farray.size)"
     for frame in farray:
         # perform actions for each frame
-        alist.do_actions(frame)
+        frame0 = frame.copy()
+        alist.do_actions(frame0)
+        #alist.do_actions(frame)
 
         # we need to keep the modified frame in farray2
-        farray2.append(frame)
+        #farray2.append(frame)
+        farray2.append(frame0)
     print time() - t0
 
     # make sure that Action_Strip does its job in stripping
