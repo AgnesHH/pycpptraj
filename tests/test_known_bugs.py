@@ -11,7 +11,6 @@ class TestBugs(unittest.TestCase):
         trajcpp = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
         farray = trajcpp[:]
         print farray[0, 0, 0]
-        self.assertRaises(NotImplementedError, lambda: trajcpp[0, 0, 0])
 
         # bugs: trajcpp[0, 0, 0] != farray[0, 0, 0] (must be equal)
         assert farray[0][0, 0] == trajcpp[0][0, 0]
