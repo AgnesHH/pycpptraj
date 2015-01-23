@@ -1,6 +1,7 @@
 # distutils: language = c++
 #from libcpp.string cimport string
-from pycpptraj.actions.Action cimport *
+#from pycpptraj.actions.Action cimport *
+from pycpptraj.actions.Action cimport _Action, Action, FunctPtr, _DispatchObject
 #from DataSet_GridFlt cimport *
 #from GridAction cimport *
 
