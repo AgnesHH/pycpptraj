@@ -110,6 +110,8 @@ cdef class Action:
         # got double-free memory error when not using above flag
         # end debug
         #return self.baseptr.DoAction(idx, currentframe.thisptr, &(newframe.thisptr))
+        if currentframe.is_empty():
+            raise ValueError("require providing Frame or FrameArray")
         if isinstance(currentframe, Frame):
             frame = <Frame> currentframe
             frame.py_free_mem = False
