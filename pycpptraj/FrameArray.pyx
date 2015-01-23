@@ -293,6 +293,9 @@ cdef class FrameArray:
     def size(self):
         return self.frame_v.size()
 
+    def is_empty(self):
+        return self.size == 0
+
     @property
     def n_frames(self):
         """same as self.size"""
