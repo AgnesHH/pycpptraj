@@ -1,5 +1,6 @@
 # distutils: language = c++
-from pycpptraj.actions.Action cimport *
+#from pycpptraj.actions.Action cimport *
+from pycpptraj.actions.Action cimport _Action, Action, FunctPtr, _DispatchObject
 #from pycpptraj.actions.ImagedAction cimport *
 
 
