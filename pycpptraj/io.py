@@ -80,3 +80,14 @@ def writeparm(filename=None, top=None, fmt='AMBERPARM'):
 def readparm(filename):
     """return topology instance from reading filename"""
     return Topology(filename)
+
+def loadpdb_rcsb(pdbid):
+    """load pdb file from rcsb website and convert to Topology instance"""
+    import urllib
+    url = 'http://www.rcsb.org/pdb/files/%s.pdb' % pdbid
+    txt = urllib.urlopen(url).read()
+    with open("_tmp", 'w') as fh:
+        fh.write(txt)
+    top = readparm("_tmp")
+    frames = load("_tmp", top)
+    return top, frames
