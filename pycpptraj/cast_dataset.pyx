@@ -27,11 +27,13 @@ def cast_dataset(DataSet dset, dtype='general'):
         # need to recast baseptr_1
         newset1D._recast_pointers(0)
         return newset1D
-    if dtype == '2D':
+
+    elif dtype == '2D':
         newset2D = DataSet_2D()
         newset2D.baseptr0 = <_DataSet*> dset.baseptr0
         newset2D.baseptr_1 = <_DataSet_2D*> dset.baseptr0
         return newset2D
+
     elif dtype == 'general':
         newset_double = DataSet_double()
         # since we introduce memory view, we let cpptraj free memory
@@ -41,6 +43,7 @@ def cast_dataset(DataSet dset, dtype='general'):
         newset_double.baseptr_1 = <_DataSet_1D*> dset.baseptr0
         newset_double.thisptr = <_DataSet_double*> dset.baseptr0
         return newset_double
+
     elif dtype == 'matrix':
         newset_matrixdbl = DataSet_MatrixDbl()
         # since we introduce memory view, we let cpptraj free memory
