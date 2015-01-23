@@ -32,7 +32,7 @@ class Test(unittest.TestCase):
         #print distance(frame0.coords[0:3], frame0.coords[96:99])
         for i in range(frame0.n_atoms):
             for j in range(i, frame0.n_atoms):
-                distance(frame0.atom_xyz(i), frame0.atom_xyz(j))
+                distance(frame0.atoms(i), frame0.atoms(j))
 
     def test_distance_frames(self):
         traj = FrameArray(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
@@ -51,8 +51,8 @@ class Test(unittest.TestCase):
         print "dist_rmsd = ", frame0.dist_rmsd(frame1)
         distframes = distance_frames(frame0, frame1)
         print distframes.__len__()
-        xyz0_0 = frame0.atom_xyz(0)
-        xyz0_1 = frame0.atom_xyz(1)
+        xyz0_0 = frame0.atoms(0)
+        xyz0_1 = frame0.atoms(1)
         
         assert distance(xyz0_1, xyz0_0) == d1.data[0]
 

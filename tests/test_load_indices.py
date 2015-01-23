@@ -40,9 +40,6 @@ class TestIndices(unittest.TestCase):
             rmsdlist.append(frame.rmsd(ref))
 
         nparr = np.array(rmsdlist)
-        for i in range(traj1.size):
-            if traj0[0][0] in traj1[i].coords:
-                pass
 
         # make sure we don't suport other indices 
         traj2 = FrameArray()

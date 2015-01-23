@@ -18,7 +18,7 @@ class TestTrajingIter(unittest.TestCase):
             print farray
             print farray[0]
             print farray[0].coords[:10]
-            print farray[0].buffer
+            print farray[0].buffer1d
             print farray[0][0]
 
 if __name__ == '__main__':

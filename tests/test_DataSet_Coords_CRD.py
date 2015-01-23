@@ -1,6 +1,7 @@
 import unittest
 from pycpptraj.base import *
 from pycpptraj.datasets.DataSet_Coords_CRD import DataSet_Coords_CRD as Trajectory
+from pycpptraj.utils.check_and_assert import assert_almost_equal
 
 class Test(unittest.TestCase):
     def test_0(self):
@@ -15,12 +16,12 @@ class Test(unittest.TestCase):
         assert traj.size == Nframe
 
         # test negative indexing
-        assert traj[-1][0] == traj[Nframe-1][0]
-        assert traj[-2][0] == traj[Nframe-2][0]
+        assert_almost_equal(traj[-1][0], traj[Nframe-1][0])
+        assert_almost_equal(traj[-2][0], traj[Nframe-2][0])
 
         # test set Frame
         traj[0] = traj[9]
-        assert traj[0][0] == traj[9][0]
+        assert_almost_equal(traj[0][0], traj[9][0])
         
 if __name__ == "__main__":
     unittest.main()

@@ -42,17 +42,17 @@ class TestFrameArray2(unittest.TestCase):
 
     #@no_test
     def test_indices_0(self):
-        # FIXME : incorrect memoryview when using TRAJ2[0].buffer
+        # FIXME : incorrect memoryview when using TRAJ2[0].buffer1d
         # why?  TRAJ2[0] will return a temp Frame instance, if we don't hold this instance, 
-        # its memory will be freed --> zero coords since we no longer have buffer?
+        # its memory will be freed --> zero coords since we no longer have buffer1d?
         # everytime we use TRAJ2[0], Python actually create a new Frame instance
         # Solution: don't let Python free memory if using this style?
         TRAJ2[0].py_free_mem = False
-        buffer = TRAJ2[0].buffer
-        print "start testing `buffer`+++++++++"
-        print buffer
-        print buffer
-        print "end testing `buffer`+++++++++"
+        buffer1d = TRAJ2[0].buffer1d
+        print "start testing `buffer1d`+++++++++"
+        print buffer1d
+        print buffer1d
+        print "end testing `buffer1d`+++++++++"
         print "calling TRAJ[0] several time, what do we expect?"
         print TRAJ[0]
         print TRAJ[0]
@@ -60,13 +60,13 @@ class TestFrameArray2(unittest.TestCase):
         print TRAJ[0]
         print frame
         print "calling TRAJ[0] several time, is what we are expecting?"
-        print np.asarray(frame.buffer)[0:10]
-        print np.asarray(TRAJ[0].buffer)[0:10]
+        print np.asarray(frame.buffer1d)[0:10]
+        print np.asarray(TRAJ[0].buffer1d)[0:10]
 
-        print "test buffer of Frame"
+        print "test buffer1d of Frame"
         frame.py_free_mem = False
-        frame.buffer
-        print "end test buffer of Frame"
+        frame.buffer1d
+        print "end test buffer1d of Frame"
 
     #@no_test
     def test_indices_1(self):
@@ -87,7 +87,7 @@ class TestFrameArray2(unittest.TestCase):
         assert frame0_0.coords != TRAJ2[0].coords
         assert frame1.coords == TRAJ2[0].coords == frame2.coords
 
-        frame0_0_arr = np.asarray(frame0_0.buffer)
+        frame0_0_arr = np.asarray(frame0_0.buffer1d)
         print frame0_0_arr[:10]
         print frame0_0.coords[:10]
         #assert frame0_0_arr[:10] == np.array(frame0[:10])
@@ -111,12 +111,12 @@ class TestFrameArray2(unittest.TestCase):
         assert frame.size == traj[0].size
         assert frame.n_atoms == traj[0].n_atoms 
 
-        print "make sure frame.buffer is equal (but not an alias) of traj[0]"
-        frame_arr = np.asarray(frame.buffer)
+        print "make sure frame.buffer1d is equal (but not an alias) of traj[0]"
+        frame_arr = np.asarray(frame.buffer1d)
 
-        # can not make buffer view for traj0_arr since `traj[0]` will create 
-        # a temp Frame instance, when this instance is deallocated, the buffer is gone
-        # traj0_arr = np.asarray((traj[0]).buffer)
+        # can not make buffer1d view for traj0_arr since `traj[0]` will create 
+        # a temp Frame instance, when this instance is deallocated, the buffer1d is gone
+        # traj0_arr = np.asarray((traj[0]).buffer1d)
         print frame_arr[:10]
         # print traj0_arr[:10]
         #np.testing.assert_almost_equal(frame_arr, traj0_arr, decimal=3)

@@ -44,8 +44,8 @@ class Test(unittest.TestCase):
         #  got ~0.0 value 
         assert_almost_equal(traj[:, 0, 0], traj[0][0])
 
-        for i in range(traj[0].xyz3d.__len__()):
-            assert_almost_equal(traj[:, :, 0][i], traj[0].xyz3d[i])
+        for i in range(traj[0].buffer3d.shape[0]):
+            assert_almost_equal(traj[:, :, 0][i], traj[0].buffer3d[i])
 
 if __name__ == "__main__":
     unittest.main()

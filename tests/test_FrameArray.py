@@ -124,10 +124,10 @@ class TestFrameArray(unittest.TestCase):
         print farray2
 
     #@no_test
-    def test_buffer_none(self):
+    def test_buffer1d_none(self):
         FARRAYcp = FARRAY.copy()
-        print FARRAYcp[0].buffer
-        arr0 = np.asarray(FARRAYcp[0].buffer)
+        print FARRAYcp[0].buffer1d
+        arr0 = np.asarray(FARRAYcp[0].buffer1d)
         print arr0[:10]
         
         # what happen if we assign arr0 to `None`?
@@ -138,8 +138,8 @@ class TestFrameArray(unittest.TestCase):
     #@no_test
     def test_strip_atoms(self):
         FARRAYcp = FARRAY.copy()
-        arr0 = np.asarray(FARRAYcp[0].buffer)
-        buff0 = FARRAYcp[0].buffer
+        arr0 = np.asarray(FARRAYcp[0].buffer1d)
+        buff0 = FARRAYcp[0].buffer1d
         print arr0[:20]
         FARRAYcp.strip_atoms("!@CA")
         print FARRAYcp.top
@@ -147,13 +147,13 @@ class TestFrameArray(unittest.TestCase):
         # memory is blown up
         print arr0[:20]
 
-        arr1 = np.asarray(FARRAYcp[0].buffer)
+        arr1 = np.asarray(FARRAYcp[0].buffer1d)
         print arr1[:10]
         print FARRAYcp[0].coords[:10]
-        buff1 = FARRAYcp[0].buffer
+        buff1 = FARRAYcp[0].buffer1d
         print buff0, buff1
         print buff0[0], buff1[0]
-        print FARRAYcp[0].buffer
+        print FARRAYcp[0].buffer1d
         print FARRAYcp[0][0]
 
     #@no_test
@@ -166,7 +166,7 @@ class TestFrameArray(unittest.TestCase):
         frame0[0] = [tmp, 1000, 1000.]
         assert frame0[0, 0] == tmp
         assert FARRAYcp[0][0, 0] == tmp
-        arr = np.asarray(FARRAYcp[0].buffer)
+        arr = np.asarray(FARRAYcp[0].buffer1d)
         assert arr[0] == tmp
         arr[0] = 2 * tmp
         assert frame0[0, 0] == 2 * tmp
@@ -185,9 +185,9 @@ class TestFrameArray(unittest.TestCase):
         print "make sure we DO a copy, not a memoryview"
         subfarray_cp[0][0, 0] = 0.1
         assert subfarray_cp[0, 0, 0] == 0.1
-        assert subfarray[0][0] != 0.1
+        assert subfarray[0][0, 0] != 0.1
         assert arr[0] != 0.1
-        assert subfarray[0][0] != 0.1
+        assert subfarray[0][0, 0] != 0.1
 
         # what's about re-assign subfarray with wrong size?
         # (subfarray used to be a view of FARRAYcp[:2])
@@ -260,12 +260,12 @@ class TestFrameArray(unittest.TestCase):
         print frame0cp_1[0]
 
     #@no_test
-    def test_indexing_and_buffer(self):
+    def test_indexing_and_buffer1d(self):
         farray = FARRAY.copy()
         print farray.size
-        print farray[0].buffer
-        print farray[0].buffer
-        np_arrview = np.asarray(farray[0].buffer)
+        print farray[0].buffer1d
+        print farray[0].buffer1d
+        np_arrview = np.asarray(farray[0].buffer1d)
         print np_arrview[:20]
         print farray[0].coords[:20]
         np.testing.assert_almost_equal(np_arrview, farray[0].coords)

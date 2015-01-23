@@ -71,7 +71,7 @@ class TestParmFile(unittest.TestCase):
 
     def test_write_AMBERPARM(self):
         top2 = Topology()
-        parm.writeparm(top=top, filename="output/test.parm7", fmt="AMBERPARM")
+        parm.writeparm(top=top, filename="output/test.parm7")
         parm.readparm(filename="output/test.parm7", top=top2)
         assert top2.n_atoms == 304
         test_generator(top2)
@@ -79,7 +79,7 @@ class TestParmFile(unittest.TestCase):
     #@not_yet_supported
     def test_write_GROMACS(self):
         top2 = Topology()
-        parm.writeparm(top=top, filename="output/test.gmxtop", fmt="GMXTOP")
+        parm.writeparm(top=top, filename="output/test.gmxtop")
         #parm.readparm(filename="output/test.gmxtop", top=top2)
         #assert top2.n_atoms == 304
         #test_generator(top2)
@@ -87,7 +87,7 @@ class TestParmFile(unittest.TestCase):
     #@not_yet_supported
     def test_write_mol2(self):
         top2 = Topology()
-        parm.writeparm(top=top, filename="output/test.mol2", fmt="MOL2FILE")
+        parm.writeparm(top=top, filename="output/test.mol2")
         #parm.readparm(filename="output/test.mol2", top=top2)
         #assert top2.n_atoms == 304
         #test_generator(top2)
@@ -95,7 +95,7 @@ class TestParmFile(unittest.TestCase):
     #@not_yet_supported
     def test_write_TINKER(self):
         top2 = Topology()
-        parm.writeparm(top=top, filename="output/test.arc", fmt="TINKER")
+        parm.writeparm(top=top, filename="output/test.arc")
         #parm.readparm(filename="output/test.arc", top=top2)
         #assert top2.n_atoms == 304
         #test_generator(top2)

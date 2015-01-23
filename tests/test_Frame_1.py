@@ -87,7 +87,7 @@ class TestFrame(unittest.TestCase):
         arr0 = np.arange(300, 0, -1).reshape(100, 3)
         frame[0, :] = array('d', arr0[0, :])
         assert arr0.shape == (100, 3)
-        assert frame.xyz3d.shape == (100, 3)
+        assert frame.buffer3d.shape == (100, 3)
         assert frame[0, 1] == arr0[0, 1]
         ##frame[:], np.arange(300, 0, -1).reshape(100, 3))
         #assert frame.coords == array('d', range(300, 0, -1))
@@ -97,33 +97,33 @@ class TestFrame(unittest.TestCase):
         #assert frame[:] == frame.coords
   
     #@no_test
-    def test_buffer(self):
-        print "+++++start test_buffer+++++++"
+    def test_buffer1d(self):
+        print "+++++start test_buffer1d+++++++"
         print FRAME.coords
-        print FRAME.buffer
+        print FRAME.buffer1d
 
-        FRAME.buffer[0] = 199.
+        FRAME.buffer1d[0] = 199.
         print FRAME.coords[0]
         print FRAME[0]
-        assert FRAME[0, 0] == FRAME.buffer[0] == FRAME.coords[0]
+        assert FRAME[0, 0] == FRAME.buffer1d[0] == FRAME.coords[0]
 
         FRAME[0] = 0.1
-        assert FRAME[0, 0] == FRAME.buffer[0] == FRAME.coords[0]
-        assert FRAME.buffer[-1] == FRAME[-1, 2]
+        assert FRAME[0, 0] == FRAME.buffer1d[0] == FRAME.coords[0]
+        assert FRAME.buffer1d[-1] == FRAME[-1, 2]
 
-        FRAME.buffer[:3] = array('d', [1, 2.3, 3.4])
+        FRAME.buffer1d[:3] = array('d', [1, 2.3, 3.4])
         assert FRAME.coords[:3] == array('d', [1, 2.3, 3.4])
 
         print "test slices"
         print FRAME[0:10:2] 
 
-        arr0 = np.asarray(FRAME.buffer)
+        arr0 = np.asarray(FRAME.buffer1d)
         print arr0.__len__()
         arr1 = arr0.reshape(10, 3)
         arr1[1] = [100., 200., 300.]
-        print FRAME.atom_xyz
+        print FRAME.atoms
         #arr0[10] = [100., 200., 300.]
-        #assert frame.atom_xyz(10) == arr0[10]
+        #assert frame.atoms(10) == arr0[10]
 
         print "test memoryview for slices"
         # TODO : add
@@ -166,8 +166,7 @@ class TestFrame(unittest.TestCase):
         print frame[-1]
         #assert frame[-1] == 29.
         print frame[-2]
-        assert frame[-2] == frame[N_ATOMS - 2]
-        assert frame[-2] == frame[N_ATOMS - 2]
+        assert_almost_equal (frame[-2], frame[N_ATOMS - 2])
         print np.asarray(frame[-2])
         print arr.reshape(N_ATOMS, 3)[-2]
         assert_almost_equal(frame[-2], arr.reshape(N_ATOMS, 3)[-2])
@@ -210,7 +209,7 @@ class TestFrame(unittest.TestCase):
         rmsd, mat, v1, v2 = frame0.rmsd(farray[1], get_mvv=True)
         print rmsd,  mat, v1, v2
         assert abs(rmsd - 10.3964) < 1E-3
-        arr1 = np.asarray(frame0.buffer)[:3]
+        arr1 = np.asarray(frame0.buffer1d)[:3]
         print frame0.coords[:3]
         print arr1
         frame0.translate(v1)
@@ -232,9 +231,9 @@ class TestFrame(unittest.TestCase):
         assert frame.n_atoms == N_ATOMS
         assert frame.size == N_ATOMS*3
         
-        print frame.atom_xyz(0)
+        print frame.atoms(0)
         print arr_reshape[0]
-        assert_almost_equal(np.array(frame.atom_xyz(0)), arr_reshape[0])
+        assert_almost_equal(np.array(frame.atoms(0)), arr_reshape[0])
         assert_almost_equal(frame[0], arr[:3])
 
         # frame.info('frame info')
@@ -244,11 +243,11 @@ class TestFrame(unittest.TestCase):
 
         print "update coords_copy for atom 1"
         frame.update_atom(1, array('d', [1., 1000., 3000.]))
-        print frame.atom_xyz(1)
+        print frame.atoms(1)
         print frame[3]
         print "assign frame[3] to 1000000."
         frame[3] = 1000000.
-        print frame.atom_xyz(1)
+        print frame.atoms(1)
         
         print "deviding Frame"
         frame.divide(2.)
@@ -268,7 +267,7 @@ class TestFrame(unittest.TestCase):
         print i
         assert i == N_ATOMS - 1
         print x
-        assert_almost_equal(x, old_i)
+        assert_almost_equal (x, old_i)
         assert frame[9][0] == 1010.
 
         print "set zero_coords_copy"
@@ -282,10 +281,10 @@ class TestFrame(unittest.TestCase):
         frameref.set_from_crd(arr, 30, 0, False)
 
         frame.update_atoms(array('i', [0, 3]), array('d', [0., 0., 0.1, 1.1, 2.3, 3.]))
-        print type(frame.atom_xyz(0))
-        print frame.atom_xyz(0)
-        assert frame.atom_xyz(0) == array('d', [0., 0., 0.1])
-        assert frame.atom_xyz(3) ==  array('d', [1.1, 2.3, 3.])
+        print type(frame.atoms(0))
+        print frame.atoms(0)
+        assert frame.atoms(0) == array('d', [0., 0., 0.1])
+        assert frame.atoms(3) ==  array('d', [1.1, 2.3, 3.])
 
 
 if __name__ == "__main__":

@@ -173,27 +173,12 @@ cdef class Frame (object):
     #    self.__dict__[name] = att
 
     def __getitem__(self, idx):
-        #return self.buffer3d[idx]
-        # TODO : support frame[1:10, : ]  
-        if isinstance(idx, int):
-            return pyarray('d', self.buffer3d[idx])
-        #elif isinstance(idx, tuple) and len(idx) == 2:
-        #    if isinstance(idx[0], int): #and isinstance(idx[1], int):
-        #        # return x, y or z coord of atom idx[0]
-        #        return self.atoms(idx[0])[idx[1]]
-        #    else:
-        #        #print type(idx)
-        #        # currenty support only memoryview
-        #        return self.buffer3d[idx]
-        #elif isinstance(idx, slice):
-        #    return self.buffer3d[idx]
+        # always return memoryview 
+        has_numpy, np = _import_numpy()
+        if has_numpy:
+            return np.asarray(self.buffer3d[idx])
         else:
-            has_numpy, np = _import_numpy()
-            if has_numpy:
-                return np.asarray(self.buffer3d[idx])
-            else:
-                return self.buffer3d[idx]
-            #raise ValueError("not supported")
+            return self.buffer3d[idx]
 
     def __setitem__(self, idx, value):
         # TODO : should we use buffer. Kind of dangerous
@@ -216,18 +201,18 @@ cdef class Frame (object):
     def __iter__(self):
         cdef int i
         for i in range(self.n_atoms):
-            yield self.atoms(i)
+            yield self.buffer3d[i]
 
     def __len__(self):
         return self.size
 
     @property
-    def buffer(self):
+    def buffer1d(self):
         """return memory view for Frame coordinates
         TODO : rename?
         """
         # debug
-        #print "from calling buffer: py_free_mem = ", self.py_free_mem
+        #print "from calling buffer1d: py_free_mem = ", self.py_free_mem
         # end debug
         #"name_will_be_changed, this is for development"
         def _buffer(N):
@@ -236,15 +221,6 @@ cdef class Frame (object):
             my_arr = <double[:N]> ptr
             return my_arr
         return _buffer(self.size)
-
-    @property
-    def xyz1d(self):
-        return self.buffer
-
-    @property
-    def xyz3d(self):
-        """return memoryview"""
-        return self.buffer3d
 
     @property
     def buffer3d(self):
@@ -320,10 +296,6 @@ cdef class Frame (object):
             ptr[2] = xyz[3*i + 2]
 
     def atoms(self, int atomnum):
-        """self.atoms is shortcut of self.atom_xyz"""
-        return self.atom_xyz(atomnum)
-
-    def atom_xyz(self, int atomnum):
         """return xyz coordinates of idx-th atom"""
         # return XYZ for atomnum
         # cpptraj: return double*
