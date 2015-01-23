@@ -12,6 +12,7 @@ class Test(unittest.TestCase):
         print traj
         arr0 = traj[:, :, :]
         print arr0.shape
+        print type(arr0)
 
 if __name__ == "__main__":
     unittest.main()
