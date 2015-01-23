@@ -91,8 +91,25 @@ class TestTrajinSingle(unittest.TestCase):
         print traj2[0][0, :] == traj2[:][0, 0]
 
     def test_get_array(self):
+        print "test_get_array"
         traj = Trajin_Single("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
         arr0 = np.array(traj[:, :, :], copy=True)
+        for i in range(304):
+            assert_almost_equal(arr0[0, i], traj[0, i][:])
+
+        # update arr0 and we expect this does not change traj[0, 0][:]
+        # (Trajin_Single is ReadOnly)
+        # we make copy too
+        arr0[0, 0] = (1., 2., 3.)
+        print arr0[0, 0]
+        assert_almost_equal(arr0[0, 0] == traj[0, 0][:], [False, False, False])
+
+        print arr0.shape
+        print arr0.shape
+        frame = Frame(arr0[0].reshape(912,))
+        assert frame.size == traj[0].size
+        assert frame[:].all() == arr0[0].all()
+        print frame.check_coords_invalid()
 
 if __name__ == "__main__":
     unittest.main()
