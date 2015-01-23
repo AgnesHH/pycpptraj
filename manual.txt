@@ -7,7 +7,9 @@
       >>> traj = mdio.iterload("./data/md1_prod.Tc5b.x", "./data/Tc5b.top", chunk=100).next()
       >>> traj[:, :, :] 
       >>> # return numpy array with shape of (100, 304, 3) if has_numpy
-      >>> if not has_numpy: return a list of memoryview arrays (shape= (304, 3))
+      >>> # if not has_numpy: return a list of memoryview arrays (shape= (304, 3))
+      >>> # it's safer to use copy=True to convert to numpy array
+      >>> arr0 = np.array(traj[:, :, :], copy=True)
 
 * numpy
     * pycpptraj does not depend on numpy but it does have limited feature numpy array-like
