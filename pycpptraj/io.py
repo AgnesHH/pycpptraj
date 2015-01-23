@@ -61,7 +61,7 @@ def writetraj(filename="", traj=None, top=None,
                 traj2 = traj
             #else:
             #    raise NotImplementedError("must be FrameArray, Trajin_Single or string")
-            if not indices:
+            if indices is None:
                 # write all traj
                 for idx, frame in enumerate(traj2):
                     trajout.writeframe(idx, frame, top)
