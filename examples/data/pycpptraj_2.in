@@ -1,4 +1,3 @@
-trajin md1_prod.Tc5b.x 1 10
-strip !@CA
-trajout stripAllButCA.Tc5b.x
+trajin md1_prod.Tc5b.x
+rms first out rmsd_to_firstFrame_CA.Tc5b.dat @CA
 go
