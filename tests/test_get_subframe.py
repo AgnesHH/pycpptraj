@@ -27,7 +27,7 @@ class TestSubFrame(unittest.TestCase):
         #farray2[0, 0, 0] = 100.
         farray2[0][0, 0] = 100.
         assert farray2[0, 0, 0] == 100.
-        assert farray[0][0] != 100.
+        assert farray[0, 0, 0] != 100.
         print farray[0].atoms(0)
 
         f1sub = farray[0].get_subframe("@CA", farray.top)
