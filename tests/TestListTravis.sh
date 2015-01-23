@@ -1,5 +1,7 @@
 python ./test_Action_Radgyr.py 
+python ./test_fancy_indexing_simple_test.py 
 python ./test_get_subframe.py 
+python ./test_ActionList.py 
 python ./test_indexing_speed.py 
 python ./test_randomize_ions.py 
 python ./test_Trajout.py 
