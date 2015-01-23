@@ -39,9 +39,12 @@ cdef class ActionList:
         top.py_free_mem = False
         return self.thisptr.SetupActions(&(top.thisptr))
 
-    def do_actions(self, int idx=0, Frame frame):
+    def do_actions(self, int idx=0, Frame frame=Frame()):
         # TODO : read cpptraj code to check memory stuff
         # set py_free_mem = False to let cpptraj does its job
+        if frame.is_empty():
+            raise ValueError("empty Frame, what can I do with this?")
+
         frame.py_free_mem = False
         return self.thisptr.DoActions(&(frame.thisptr), idx)
 
