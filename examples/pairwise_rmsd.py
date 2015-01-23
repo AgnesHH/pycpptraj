@@ -1,5 +1,6 @@
 import numpy as np
 from pycpptraj.base import *
+from time import time
 
 TRAJ = Trajin_Single()
 TRAJ.top = Topology("./data/Tc5b.top")
@@ -16,9 +17,12 @@ def calc_pairwise_rmsd():
     size = farray.size
     arr = np.empty(shape=(size, size))
     #
-    for i in range(size):
-        for j in range(size):
-            arr[i, j] = farray[i].rmsd(farray[j])
+    t0 = time()
+    for i, framei in enumerate(farray):
+        for j, framej in enumerate(farray):
+            arr[i, j] = framei.rmsd(framej)
+
+    print "time = %s" % (time() - t0)
 
 if __name__ == "__main__":
     calc_pairwise_rmsd()
