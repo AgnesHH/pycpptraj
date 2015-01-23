@@ -86,10 +86,12 @@ cdef class Trajin (TrajectoryFile):
 
                 if isinstance(self[idx_0], Frame):
                     frame = self[idx_0]
-                    return frame[idxs[1:]]
+                    self.tmpfarray = frame
+                    return self.tmpfarray[idxs[1:]]
                 elif isinstance(self[idx_0], FrameArray):
                     farray = self[idx_0]
-                    return farray[idxs[1:]]
+                    self.tmpfarray = farray
+                    return self.tmpfarray[idxs[1:]]
                 #return frame[idxs[1:]]
             #if isinstance(idxs, tuple):
             #    # bugs: trajcpp[0, 0, 0] is not the same as trajcpp[0][0, 0]
@@ -110,7 +112,8 @@ cdef class Trajin (TrajectoryFile):
 
                 with self:
                     self.read_traj_frame(idx_1, frame)
-                return frame
+                self.tmpfarray = frame
+                return self.tmpfarray
         else:
             if self.debug:
                 print idxs
