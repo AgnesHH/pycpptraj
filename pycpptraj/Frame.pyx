@@ -85,6 +85,7 @@ cdef class Frame (object):
                 frame, atmask = args
                 self.thisptr = new _Frame(frame.thisptr[0], atmask.thisptr[0])
             elif len(args) == 1:
+                _, _np = _import_numpy()
                 # copy Frame
                 if isinstance(args[0], Frame):
                     frame = args[0]
@@ -93,7 +94,7 @@ cdef class Frame (object):
                 elif isinstance(args[0], int):
                     natom = <int> args[0]
                     self.thisptr = new _Frame(natom)
-                elif isinstance(args[0], (list, tuple, pyarray)):
+                elif isinstance(args[0], (list, tuple, pyarray, _np.ndarray)):
                     # TODO : specify all things similar to list or array
                     natom3 = <int> len(args[0])
                     self.thisptr = new _Frame(natom3/3)
