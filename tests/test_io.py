@@ -6,16 +6,16 @@ class TestPyCpptrajIO(unittest.TestCase):
     def test_save_traj_from_file(self):
         Trajout().help()
         traj = mdio.load("./data/md1_prod.Tc5b.x",
-                         "./data/Tc5b.top")
+                "./data/Tc5b.top")[:5]
         print traj.size
-        mdio.writetraj(filename="test_0.x", 
-                       traj="./data/md1_prod.Tc5b.x", 
-                       #traj=traj,
+        mdio.writetraj(filename="test_0.binpos", 
+                       traj=traj, 
                        top="./data/Tc5b.top",
                        fmt="BINPOS",
                        overwrite=True)
 
-        savedtraj = mdio.load("./test_0.x", traj.top)
+        savedtraj = mdio.load("./test_0.binpos", traj.top)
+        print "test_0.binpos size = ", savedtraj.size
         assert savedtraj.size == traj.size
 
     def test_blindload(self):
@@ -38,12 +38,15 @@ class TestPyCpptrajIO(unittest.TestCase):
         print top2
 
     def test_load_and_save(self):
+        print "test_load_and_save"
         traj = mdio.load(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
         trajiter = mdio.iterload(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top", chunk=100)
         print trajiter
 
         indices = range(20, 30, 5) + [103, 78, 90, 82]
-        mdio.writetraj(filename="./output/test_io_saved.x", 
+        print type(indices)
+        print indices
+        mdio.writetraj(filename="./output/test_io_saved_.x", 
                        traj=traj, 
                        top="./data/Tc5b.top",
                        fmt='AMBERTRAJ', 
@@ -51,8 +54,10 @@ class TestPyCpptrajIO(unittest.TestCase):
                        overwrite=True)
 
         # check frames
-        traj = mdio.load(filename="./output/test_io_saved.x", top="./data/Tc5b.top")
-        assert traj.size == len(indices) 
+        traj2 = mdio.load(filename="./output/test_io_saved_.x", top="./data/Tc5b.top")
+        print traj2.size
+        print traj2.is_empty()
+        assert traj2.size == len(indices) 
 
     def test_load_and_save_1(self):
         traj = mdio.load(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
