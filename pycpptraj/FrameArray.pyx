@@ -135,6 +135,9 @@ cdef class FrameArray:
         cdef int i
         cdef int idx_1, idx_2
 
+        # test memoryview for traj[:, :, :]
+        cdef double[:, :, :] arr3d
+
         frame.py_free_mem = False
 
         if self.warning:
