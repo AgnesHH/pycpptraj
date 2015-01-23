@@ -68,7 +68,7 @@ def writetraj(filename="", traj=None, top=None,
                 if isinstance(traj2, (list, tuple)):
                     raise NotImplementedError("must be FrameArray or Trajin_Single instance")
                 for idx in indices:
-                    print "test writing indices"
+                    #print "test writing indices"
                     trajout.writeframe(idx, traj2[idx], top)
 
 def writeparm(filename=None, top=None, fmt='AMBERPARM'):
