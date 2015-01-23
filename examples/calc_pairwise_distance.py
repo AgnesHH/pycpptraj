@@ -19,7 +19,7 @@ def calc_pairwise_distance():
     # for nested loop (which is quite expensive in Python)
     for i in range(frame0.n_atoms):
         for j in range(frame0.n_atoms):
-            arr[i, j] = distance(frame0.atom_xyz(i), frame0.atom_xyz(j))
+            arr[i, j] = distance(frame0.atoms(i), frame0.atoms(j))
 
     #arr = np.asmatrix(arr)
 
