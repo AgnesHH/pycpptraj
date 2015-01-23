@@ -155,17 +155,18 @@ cdef class FrameArray:
                 # got Segmentation fault if using "is_instance3 and not has_numpy"
                 # TODO : Why?
                 #if is_instance3 and not has_numpy:
+                # TODO : make memoryview for traj[:, :, :]
                 if all_are_slice_instances:
                     # traj[:, :, :]
                     # traj[1:2, :, :]
                     tmplist = []
                     for frame in self[idxs[0]]:
                         tmplist.append(frame[idxs[1:]])
-                    #if has_numpy:
-                    #    return _np.asarray(tmplist)
-                    #else:
-                    #    return tmplist
-                    return tmplist
+                    if has_numpy:
+                        return _np.asarray(tmplist)
+                    else:
+                        return tmplist
+                    #return tmplist
                     #raise NotImplementedError("not yet supported if all indcies are slices")
                 if isinstance(self[idx_0], Frame):
                     frame = self[idx_0]
