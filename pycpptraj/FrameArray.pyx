@@ -160,17 +160,23 @@ cdef class FrameArray:
                 #if is_instance3 and not has_numpy:
                 # TODO : make memoryview for traj[:, :, :]
                 if all_are_slice_instances:
+                    # return 3D array or list of 2D arrays?
                     # traj[:, :, :]
                     # traj[1:2, :, :]
                     tmplist = []
                     for frame in self[idxs[0]]:
                         tmplist.append(frame[idxs[1:]])
                     if has_numpy:
+                        # test memoryview, does not work yet.
+                        #arr3d = _np.empty(shape=_np.asarray(tmplist).shape)
+                        #for i, frame in enumerate(self[idxs[0]]):
+                        #    for j, f0 in enumerate(frame[idxs[1]]):
+                        #        arr3d[i][j] = f0[:]
+                        #return arr3d
+
                         return _np.asarray(tmplist)
                     else:
                         return tmplist
-                    #return tmplist
-                    #raise NotImplementedError("not yet supported if all indcies are slices")
                 if isinstance(self[idx_0], Frame):
                     frame = self[idx_0]
                     return frame[idxs[1:]]
