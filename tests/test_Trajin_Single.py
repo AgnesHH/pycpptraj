@@ -1,4 +1,5 @@
 import os
+from copy import copy
 import unittest
 import numpy as np
 from pycpptraj.Frame import Frame
@@ -12,6 +13,8 @@ from pycpptraj.TopologyList import TopologyList
 from pycpptraj.ReferenceFrame import ReferenceFrame
 from pycpptraj.Energy import Energy_Amber
 from pycpptraj.AtomMask import AtomMask
+
+from pycpptraj.utils.check_and_assert import assert_almost_equal
 
 class TestTrajinSingle(unittest.TestCase):
     def test_dummy(self):
@@ -47,7 +50,49 @@ class TestTrajinSingle(unittest.TestCase):
 
     def test_indexing(self):
         traj = Trajin_Single("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        #print traj[0][0, :]
+        #print traj[0, 0, :]
+        #print traj[0, :, :][0]
+        #print traj[0][0, :]
+        print type(traj[:][0, 0])
+        print type(traj[0][0, :])
         print traj[:][0, 0]
+        print traj[0][0, :]
+        print traj[0][0, :][0] == traj[:][0, 0, 0]
+        print traj[0:1]
+        arr0 = np.array(traj[:][0, 0], copy=True)
+        arr1 = np.array(traj[0][0, :], copy=True)
+        print arr0[:10], arr1[:10]
+
+        print  "TODO : wrong result"
+        #assert_almost_equal (traj[0][0, :], traj[:][0, 0])
+        print traj[:][0, 0]
+        print traj[0][0, :]
+        print traj[0][0, :] == traj[:][0, 0]
+        print traj[:][0, 0]
+        print traj[0][0, :]
+        print traj[0][0, :] == traj[:][0, 0]
+        for x in traj[:][0, 0]:
+            print x
+        for x in traj[0][0, :]:
+            print x
+        print  "TODO : wrong result"
+
+        assert_almost_equal (arr0, arr1)
+        # create FrameArray instance
+        traj2 = traj[:]
+        assert_almost_equal (traj2[0][0, :], traj2[:][0, 0])
+        assert_almost_equal (traj2[0][0, :], traj2[:][0, 0])
+        assert_almost_equal (traj2[0][0, :], traj2[:][0, 0])
+        assert_almost_equal (traj2[0][0, :], traj2[:][0, 0])
+
+        print traj2[0][0, :] == traj2[:][0, 0]
+        print traj2[0][0, :] == traj2[:][0, 0]
+        print traj2[0][0, :] == traj2[:][0, 0]
+
+    def test_get_array(self):
+        traj = Trajin_Single("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        arr0 = np.array(traj[:, :, :], copy=True)
 
 if __name__ == "__main__":
     unittest.main()
