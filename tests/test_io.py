@@ -49,7 +49,6 @@ class TestPyCpptrajIO(unittest.TestCase):
         mdio.writetraj(filename="./output/test_io_saved_.x", 
                        traj=traj, 
                        top="./data/Tc5b.top",
-                       fmt='AMBERTRAJ', 
                        indices=indices,
                        overwrite=True)
 
