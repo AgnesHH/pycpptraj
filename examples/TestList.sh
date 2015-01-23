@@ -1,5 +1,5 @@
-python ./get_pyfiles.py
-python ./pairwise_rmsd.py
-python ./API_test_2.py
-python ./API_test_3.py
-python ./API_test.py
+from glob import glob
+
+for pyfile in glob("*.py"):
+    with open(pyfile, 'r') as fh:
+        print "python ./%s" % pyfile
