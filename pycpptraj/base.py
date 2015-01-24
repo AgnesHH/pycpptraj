@@ -8,7 +8,6 @@ from pycpptraj.Atom import Atom
 from pycpptraj.Frame import Frame
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.FrameArray2 import FrameArray2 
-from pycpptraj.FrameArray2 import FrameArray2 as Trajectory
 from pycpptraj.ReferenceFrame import ReferenceFrame
 from pycpptraj.Topology import Topology
 from pycpptraj.ArgList import ArgList
@@ -39,7 +38,6 @@ __all__ = ['Atom',
            'DataSetList', 'DataFileList', 
            'ActionList',
            'Trajout', 'TrajinList',
-           'Trajectory',
            'FrameArray2',
            'Parm_Amber', 
            'cast_dataset',
