@@ -39,7 +39,8 @@ class TestPyCpptrajIO(unittest.TestCase):
 
     def test_load_and_save_0(self):
         print "test_load_and_save"
-        traj = mdio.load(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        # need to load to FrameArray to save
+        traj = mdio.load(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
         trajiter = mdio.iterload(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top", chunk=100)
         print trajiter
         print traj.size
@@ -57,8 +58,7 @@ class TestPyCpptrajIO(unittest.TestCase):
         traj2 = mdio.load(filename="./output/test_io_saved_.x", top="./data/Tc5b.top")
         print traj2.size
         print traj2.is_empty()
-        # TODO : check error
-        #assert traj2.size == len(indices) 
+        assert traj2.size == len(indices) 
 
     def test_load_and_save_1(self):
         traj = mdio.load(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
