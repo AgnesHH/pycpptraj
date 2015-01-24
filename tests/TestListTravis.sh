@@ -35,6 +35,7 @@ python ./test_Vec3.py
 python ./test_GridAction.py 
 python ./test_ActionList.py 
 python ./test_DistRoutines.py 
+python ./test_memview3D.py 
 python ./test_writepdb.py 
 python ./test_indexing_speed.py 
 python ./test_known_bugs.py 
@@ -44,6 +45,7 @@ python ./test_DataSet_Coords_CRD.py
 python ./test_Frame_3.py 
 python ./test_dummy_indexing_FrameArray.py 
 python ./test_Action_Distance.py 
+python ./test_Frame_4.py 
 python ./test_TopologyList.py 
 python ./test_DataSetList.py 
 python ./test_loadpdb_rcsb.py 
