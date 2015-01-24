@@ -23,6 +23,7 @@ class TestPyCpptrajIO(unittest.TestCase):
         assert isinstance(top, Topology) == True
 
         traj = mdio.load(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        print traj
 
         # TODO : add more classes here
         is_traj = (isinstance(traj, TrajReadOnly) or isinstance(traj, FrameArray))
