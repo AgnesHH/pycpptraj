@@ -10,7 +10,7 @@ def get_time(indices):
     return time() - t0
 
 def get_time_2(indices):
-    traj = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+    traj = TrajReadOnly(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
     t0 = time()
     traj[indices]
     return time()- t0

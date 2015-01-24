@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 from pycpptraj.base import *
 
-ts = Trajin_Single()
+ts = TrajReadOnly()
 ts.top = Topology("./data/Tc5b.top")
 mdx = "./data/md1_prod.Tc5b.x"
 ts.load(mdx)

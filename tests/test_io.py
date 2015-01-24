@@ -25,7 +25,7 @@ class TestPyCpptrajIO(unittest.TestCase):
         traj = mdio.load(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
 
         # TODO : add more classes here
-        is_traj = (isinstance(traj, Trajin_Single) or isinstance(traj, FrameArray))
+        is_traj = (isinstance(traj, TrajReadOnly) or isinstance(traj, FrameArray))
         assert is_traj == True
 
     def test_ParmFile(self):

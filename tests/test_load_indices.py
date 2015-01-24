@@ -12,7 +12,7 @@ class TestIndices(unittest.TestCase):
     #@no_test
     def test_0(self):
 
-        traj1 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        traj1 = TrajReadOnly(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
         print traj1.size
         indices = slice(100, 97, -1)
         print indices.indices(traj1.size)
@@ -50,7 +50,7 @@ class TestIndices(unittest.TestCase):
 
 
     def test_array_assigment(self):
-        traj1 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
+        traj1 = TrajReadOnly(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
         print traj1[0][10]
         print traj1[100][10]
 
@@ -69,12 +69,12 @@ class TestIndices(unittest.TestCase):
         print traj1[100][:11]
 
     def test_1(self):
-        traj0 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
-        traj = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
+        traj0 = TrajReadOnly(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        traj = TrajReadOnly(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
         assert traj[0].coords == traj0[0].coords
         print traj[0].coords[:10]
 
-        traj2 = Trajin_Single(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:][:10]
+        traj2 = TrajReadOnly(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:][:10]
         assert traj2[0].coords == traj0[0].coords
 
         traj.join(traj[:] + traj[0:100] + traj[999:30:-10])

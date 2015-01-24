@@ -4,7 +4,7 @@ from pycpptraj.actions.Action_Strip import Action_Strip
 from pycpptraj import allactions
 from pycpptraj.actions import Action
 from pycpptraj.misc import strip
-from pycpptraj.Trajin_Single import Trajin_Single
+from pycpptraj.TrajReadOnly import TrajReadOnly
 from pycpptraj.decorators import no_test
 
 print dir(Action_Strip())

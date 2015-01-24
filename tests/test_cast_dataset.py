@@ -28,7 +28,7 @@ class Test(unittest.TestCase):
         traj.top = Topology("data/Tc5b.top")
         traj.load("data/md1_prod.Tc5b.x")
 
-        trajin = Trajin_Single(filename="data/md1_prod.Tc5b.x", top=traj.top)
+        trajin = TrajReadOnly(filename="data/md1_prod.Tc5b.x", top=traj.top)
         print dir(trajin)
         dset = traj.alloc()
         db = cast_dataset(dset, dtype="general")
@@ -39,7 +39,7 @@ class Test(unittest.TestCase):
         traj = TrajectoryReadOnly()
         traj.top = Topology("data/Tc5b.top")
         traj.top.summary()
-        trajin = Trajin_Single(filename="data/md1_prod.Tc5b.x", top=traj.top)
+        trajin = TrajReadOnly(filename="data/md1_prod.Tc5b.x", top=traj.top)
         traj.addtraj(trajin)
         traj.addtraj(trajin)
         traj.addtraj(trajin)

@@ -4,13 +4,13 @@ from pycpptraj.base import *
 from pycpptraj.Trajectory import Trajectory
 
 def get_time(indices):
-    traj = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+    traj = TrajReadOnly(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
     t0 = time()
     print traj.size
     traj[indices]
     return time()- t0
 
-traj = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+traj = TrajReadOnly(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
 N = traj.size
 #traj[slice(0, N-1, 3)]
 

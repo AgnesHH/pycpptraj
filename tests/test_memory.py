@@ -7,7 +7,7 @@ from pycpptraj.common_actions import distance
 
 def calc_pairwise_distance():
     #traj = FrameArray(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
-    traj = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+    traj = TrajReadOnly(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
 
     # extract 11th frame (index start from 0)
     frame0 = traj[10]

@@ -3,7 +3,7 @@ from pycpptraj.base import *
 from pycpptraj.actions.Action_Surf import Action_Surf
 from pycpptraj.actions import Action
 from pycpptraj.misc import strip
-from pycpptraj.Trajin_Single import Trajin_Single
+from pycpptraj.TrajReadOnly import TrajReadOnly
 from pycpptraj import cast_dataset
 
 print dir(Action_Surf())

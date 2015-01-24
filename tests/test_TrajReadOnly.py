@@ -93,7 +93,7 @@ class TestTrajectory(unittest.TestCase):
     #@no_test
     def test_indexing_0(self):
         print "test_indexing_0"
-        TRAJ2 = Trajin_Single()
+        TRAJ2 = TrajReadOnly()
         TRAJ2.top = Topology("./data/Tc5b.top")
         TRAJ2.load("./data/md1_prod.Tc5b.x")
         farray = FrameArray()
@@ -150,7 +150,7 @@ class TestTrajectory(unittest.TestCase):
 
     #@no_test
     def test_iter_basic(self):
-        TRAJ = Trajin_Single()
+        TRAJ = TrajReadOnly()
         TRAJ.top = Topology("./data/Tc5b.top")
         TRAJ.load("./data/md1_prod.Tc5b.x")
         print "test_iter_basic"
@@ -188,8 +188,7 @@ class TestTrajectory(unittest.TestCase):
 
     #@no_test
     def test_trj_top(self):
-        traj = Trajectory()
-        #traj = Trajin_Single()
+        traj = TrajReadOnly()
         print traj.top.is_empty()
         assert traj.top.is_empty() == True
         traj.top = Topology("./data/Tc5b.top")

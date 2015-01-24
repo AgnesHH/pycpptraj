@@ -7,12 +7,12 @@ from pycpptraj.Timer import Timer
 from load_traj import load
 from pycpptraj.decorators import no_test
 
-ts = Trajin_Single()
+ts = TrajReadOnly()
 datadir = "./data/"
 topname = datadir + "Tc5b.top"
 refilename = "./data/Tc5b.nat.crd"
 mdx = "./data/md1_prod.Tc5b.x"
-ts = Trajin_Single()
+ts = TrajReadOnly()
 print ts.top.tag
 
 top = Topology(topname)
@@ -66,8 +66,8 @@ class TestFrameArray(unittest.TestCase):
         #print farray[-3].coords[:10]
         #assert f_last.same_coords_as(farray[-2]) == True
 
-    def test_len_Trajin_Single(self):
-        # create alias of `ts` (Trajin_Single instance  created above)
+    def test_len_TrajReadOnly(self):
+        # create alias of `ts` (TrajReadOnly instance  created above)
         farray = ts
         N = ts.size
         assert farray.size == N

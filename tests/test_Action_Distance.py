@@ -3,7 +3,7 @@ from pycpptraj.base import *
 from pycpptraj import allactions
 from pycpptraj.cast_dataset import cast_dataset
 
-farray = Trajin_Single(top=Topology("./data/Tc5b.top"), 
+farray = TrajReadOnly(top=Topology("./data/Tc5b.top"), 
                     filename='data/md1_prod.Tc5b.x', 
                     )
 

@@ -3,7 +3,7 @@ import numpy as np
 #from line_profiler import profile
 from pycpptraj.base import *
 
-TRAJ = Trajin_Single()
+TRAJ = TrajReadOnly()
 TRAJ.top = Topology("./data/Tc5b.top")
 TRAJ.load("./data/md1_prod.Tc5b.x")
 

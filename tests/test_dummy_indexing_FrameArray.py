@@ -5,12 +5,12 @@ from pycpptraj.base import *
 from load_traj import load
 from pycpptraj.decorators import no_test
 
-ts = Trajin_Single()
+ts = TrajReadOnly()
 datadir = "./data/"
 topname = datadir + "Tc5b.top"
 refilename = "./data/Tc5b.nat.crd"
 mdx = "./data/md1_prod.Tc5b.x"
-ts = Trajin_Single()
+ts = TrajReadOnly()
 print ts.top.tag
 
 top = Topology(topname)

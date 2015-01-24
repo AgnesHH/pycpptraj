@@ -3,7 +3,7 @@ from pycpptraj.base import *
 from pycpptraj import io as mdio
 import numpy as np
 
-TRAJ = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+TRAJ = TrajReadOnly(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
 cpptraj_rmsd = np.loadtxt("./data/rmsd_to_firstFrame_CA_allres.Tc5b.dat", skiprows=1).transpose()[1]
 
 class Test(unittest.TestCase):
@@ -35,7 +35,7 @@ class Test(unittest.TestCase):
         print "Kool, reproduce cpptraj output"
 
     def test_rmsd_with_mask(self):
-        TRAJ = Trajin_Single(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        TRAJ = TrajReadOnly(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
         cpptraj_rmsd = np.loadtxt("./data/rmsd_to_firstFrame_CA_allres.Tc5b.dat", skiprows=1).transpose()[1]
         f0 = TRAJ[0]
         arr0 = np.zeros(TRAJ.size)
