@@ -9,7 +9,6 @@ from pycpptraj.Frame import Frame
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.FrameArray2 import FrameArray2 
 from pycpptraj.FrameArray2 import FrameArray2 as Trajectory
-from pycpptraj.FrameArray2 import FrameArray2 as TrajectoryReadOnly
 from pycpptraj.ReferenceFrame import ReferenceFrame
 from pycpptraj.Topology import Topology
 from pycpptraj.ArgList import ArgList
@@ -17,6 +16,7 @@ from pycpptraj.AtomMask import AtomMask
 from pycpptraj.CpptrajState import CpptrajState
 from pycpptraj.FrameList import FrameList
 from pycpptraj.Trajin_Single import Trajin_Single
+from pycpptraj.TrajReadOnly import TrajReadOnly
 from pycpptraj.trajs.Trajout import Trajout
 from pycpptraj.TrajinList import TrajinList
 from pycpptraj.TopologyList import TopologyList
@@ -35,12 +35,11 @@ __all__ = ['Atom',
            'Frame', 'FrameArray', 
            'ReferenceFrame', 'AtomMask', 
            'ArgList', 'CpptrajState', 
-           'FrameList', 'Trajin_Single', 
+           'FrameList', 'TrajReadOnly', 
            'DataSetList', 'DataFileList', 
            'ActionList',
            'Trajout', 'TrajinList',
            'Trajectory',
-           'TrajectoryReadOnly',
            'FrameArray2',
            'Parm_Amber', 
            'cast_dataset',
