@@ -6,7 +6,7 @@ from pycpptraj.Topology cimport Topology
 from pycpptraj._utils cimport get_positive_idx
 
 # python level
-from pycpptraj.Trajectory import Trajectory
+from pycpptraj.TrajReadOnly import TrajReadOnly
 from pycpptraj.utils.check_and_assert import _import_numpy
 
 cdef class FrameArray:
@@ -389,7 +389,7 @@ cdef class FrameArray:
             if self.top.n_atoms != ts.top.n_atoms:
                 raise ValueError("FrameArray.top.n_atoms should be equal to Trajin_Single.top.n_atoms or set update_top=True")
 
-        if isinstance(ts, Trajin_Single) or isinstance(ts, Trajectory):
+        if isinstance(ts, Trajin_Single) or isinstance(ts, TrajReadOnly):
             if indices is not None:
                 # slow method
                 # TODO : use `for idx in leng(indices)`?
