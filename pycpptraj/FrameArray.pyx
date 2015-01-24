@@ -134,6 +134,7 @@ cdef class FrameArray:
         cdef int start, stop, step
         cdef int i
         cdef int idx_1, idx_2
+        #cdef list tmplist
 
         # test memoryview for traj[:, :, :]
         cdef double[:, :, :] arr3d
