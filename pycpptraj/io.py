@@ -1,8 +1,7 @@
 from pycpptraj.base import *
 from pycpptraj.iterload import _iterload
 from pycpptraj.actions.Action_Strip import Action_Strip
-from pycpptraj.Trajin_Single import Trajin_Single
-from pycpptraj.Trajin_Single import Trajin_Single as Trajectory
+from pycpptraj.TrajReadOnly import TrajReadOnly
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.Topology import Topology
 from pycpptraj.trajs.Traj_PDBfile import Traj_PDBfile
@@ -31,7 +30,7 @@ def loadtraj(filename=None, top=Topology(), readonly=True):
         # string
         top = Topology(top)
     if readonly:
-        ts = Trajin_Single()
+        ts = TrajReadOnly()
     else:
         ts = FrameArray()
     ts.load(filename, top)
@@ -43,7 +42,7 @@ def writetraj(filename="", traj=None, top=None,
     """writetraj(filename="", traj=Trajectory(), top=Topology(), 
               ftm='AMBERTRAJ', indices=None):
     """
-    # TODO : support list (tuple) of FrameArray, Trajin_Single or 
+    # TODO : support list (tuple) of FrameArray, TrajReadOnly or 
     # list of filenames
 
     if not traj or not top:
@@ -66,7 +65,7 @@ def writetraj(filename="", traj=None, top=None,
                     trajout.writeframe(idx, frame, top)
             else:
                 if isinstance(traj2, (list, tuple)):
-                    raise NotImplementedError("must be FrameArray or Trajin_Single instance")
+                    raise NotImplementedError("must be FrameArray or TrajReadOnly instance")
                 for idx in indices:
                     #print "test writing indices"
                     trajout.writeframe(idx, traj2[idx], top)
