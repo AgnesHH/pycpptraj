@@ -81,7 +81,11 @@ def readparm(filename):
     return Topology(filename)
 
 def loadpdb_rcsb(pdbid):
-    """load pdb file from rcsb website and convert to Topology instance"""
+    # TODO : use tempfile
+    """load pdb file from rcsb website
+    Return : Topology and FrameArray instance
+    """
+
     import urllib
     url = 'http://www.rcsb.org/pdb/files/%s.pdb' % pdbid
     txt = urllib.urlopen(url).read()
