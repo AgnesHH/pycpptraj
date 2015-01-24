@@ -6,7 +6,7 @@ class Test(unittest.TestCase):
     #@no_test
     def test_0(self):
         # DataSet_Coords_TRJ class
-        traj = TrajectoryReadOnly()
+        traj = FrameArray2()
         traj.top = Topology("data/Tc5b.top")
         traj.load("data/md1_prod.Tc5b.x")
         print dir(traj)
@@ -24,7 +24,7 @@ class Test(unittest.TestCase):
 
     #@no_test
     def test_addtrajin(self):
-        traj = TrajectoryReadOnly()
+        traj = FrameArray2()
         traj.top = Topology("data/Tc5b.top")
         traj.load("data/md1_prod.Tc5b.x")
 
@@ -36,7 +36,7 @@ class Test(unittest.TestCase):
 
     #@no_test
     def test_addtrajin_from_emptyTRJ(self):
-        traj = TrajectoryReadOnly()
+        traj = FrameArray2()
         traj.top = Topology("data/Tc5b.top")
         traj.top.summary()
         trajin = TrajReadOnly(filename="data/md1_prod.Tc5b.x", top=traj.top)
