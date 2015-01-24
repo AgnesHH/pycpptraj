@@ -53,7 +53,7 @@ class TestTrajectory(unittest.TestCase):
     #@no_test
     def test_slice(self):
         print "test_slice"
-        TRAJ2 = Trajectory()
+        TRAJ2 = TrajReadOnly()
         #TRAJ2.debug = True
         TRAJ2.top = Topology("./data/Tc5b.top")
         TRAJ2.load("./data/md1_prod.Tc5b.x")
@@ -131,7 +131,7 @@ class TestTrajectory(unittest.TestCase):
     #@no_test
     def test_indexing_1(self):
         print "test_indexing_1"
-        TRAJ2 = Trajectory()
+        TRAJ2 = TrajReadOnly()
         TRAJ2.top = Topology("./data/Tc5b.top")
         #TRAJ2.top.strip_atoms("!@CA")
         TRAJ2.load("./data/md1_prod.Tc5b.x")
@@ -200,7 +200,7 @@ class TestTrajectory(unittest.TestCase):
 
     #@no_test
     def test_1(self):
-        traj = Trajectory()
+        traj = TrajReadOnly()
 
         traj.load("./data/md1_prod.Tc5b.x", Topology("./data/Tc5b.top"))
 
