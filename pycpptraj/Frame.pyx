@@ -401,12 +401,33 @@ cdef class Frame (object):
         """
         return self.thisptr.SetupFrameV(top.thisptr.Atoms(), has_vel, n_repdims)
 
-    def set_frame_from_mask(self, AtomMask atmask, list atlist):
+    def set_frame_from_mask(self, mask, atomlist_or_top):
         cdef Atom atom
         cdef vector[_Atom] v 
-        for atom in atlist:
-            v.push_back(atom.thisptr[0])
-        return self.thisptr.SetupFrameFromMask(atmask.thisptr[0], v)
+        cdef AtomMask atm
+        cdef Topology top
+
+        if isinstance(mask, basestring):
+            # if providing mask string
+            # create AtomMask instance
+            atm = AtomMask(mask)
+            # assume atht atomlist_or_top is Topology instance
+            atomlist_or_top.set_integer_mask(atm)
+        elif isinstance(mask, AtomMask):
+            atm = mask 
+        else:
+            raise NotImplementedError("must be `str` or AtomMask")
+
+        if isinstance(atomlist_or_top, (list, tuple)):
+            # list of atoms
+            for atom in atomlist_or_top:
+                v.push_back(atom.thisptr[0])
+            return self.thisptr.SetupFrameFromMask(atm.thisptr[0], v)
+        elif isinstance(atomlist_or_top, Topology):
+            top = atomlist_or_top
+            return self.thisptr.SetupFrameFromMask(atm.thisptr[0], top.thisptr.Atoms())
+        else:
+            raise NotImplementedError("must be list of Atom objects or Topology")
 
     def set_coord(self, Frame frame, *args):
         cdef AtomMask atmask 
