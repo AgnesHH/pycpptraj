@@ -39,8 +39,8 @@ def loadtraj(filename=None, top=Topology(), readonly=True):
 def writetraj(filename="", traj=None, top=None, 
               fmt='UNKNOWN_TRAJ', indices=None,
               overwrite=False):
-    """writetraj(filename="", traj=Trajectory(), top=Topology(), 
-              ftm='AMBERTRAJ', indices=None):
+    """writetraj(filename="", traj=None, top=None, 
+              ftm='UNKNOWN_TRAJ', indices=None):
     """
     # TODO : support list (tuple) of FrameArray, TrajReadOnly or 
     # list of filenames
