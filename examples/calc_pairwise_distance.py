@@ -1,6 +1,6 @@
 import math
 import numpy as np
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 from pycpptraj.base import *
 from pycpptraj.common_actions import distance
 
