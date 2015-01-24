@@ -6,6 +6,6 @@ Trajin_Single)
 from pycpptraj.Trajin_Single import Trajin_Single
 from pycpptraj.FrameArray import FrameArray
 
-class Trajectory(Trajin_Single):
+class TrajReadOnly(Trajin_Single):
     def __init__(self, *args, **kwd):
         pass
