@@ -2,7 +2,7 @@ import numpy as np
 from pycpptraj.base import *
 from time import time
 
-TRAJ = Trajin_Single()
+TRAJ = TrajReadOnly()
 TRAJ.top = Topology("./data/Tc5b.top")
 TRAJ.load("./data/md1_prod.Tc5b.x")
 
