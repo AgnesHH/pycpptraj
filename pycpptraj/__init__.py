@@ -13,7 +13,6 @@ from pycpptraj.ArgList import ArgList
 from pycpptraj.AtomMask import AtomMask
 from pycpptraj.CpptrajState import CpptrajState
 from pycpptraj.TrajReadOnly import TrajReadOnly
-from pycpptraj.Trajectory import Trajectory
 from pycpptraj.trajs.Trajout import Trajout
 from pycpptraj.cast_dataset import cast_dataset
 from pycpptraj.parms.ParmFile import ParmFile
