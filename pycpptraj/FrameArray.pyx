@@ -168,6 +168,7 @@ cdef class FrameArray:
                         tmplist.append(frame[idxs[1:]])
                     if has_numpy:
                         # test memoryview, does not work yet.
+                        # don't delete those line to remind we DID work on this
                         #arr3d = _np.empty(shape=_np.asarray(tmplist).shape)
                         #for i, frame in enumerate(self[idxs[0]]):
                         #    for j, f0 in enumerate(frame[idxs[1]]):
