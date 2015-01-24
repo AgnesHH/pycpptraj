@@ -85,8 +85,8 @@ def loadpdb_rcsb(pdbid):
     import urllib
     url = 'http://www.rcsb.org/pdb/files/%s.pdb' % pdbid
     txt = urllib.urlopen(url).read()
-    with open("_tmp", 'w') as fh:
+    with open("._tmp", 'w') as fh:
         fh.write(txt)
-    top = readparm("_tmp")
-    frames = load("_tmp", top)
+    top = readparm("._tmp")
+    frames = load("._tmp", top)
     return top, frames
