@@ -77,7 +77,6 @@ def run_0():
     rmsdcpp = np.loadtxt("./data/rmsd_to_firstFrame_CA_allres.Tc5b.dat", skiprows=1).transpose()[1][:10]
     # YES
     assert_almost_equal(rmsdcpp, ds1[:10])
-    help(cast_dataset)
 
 if __name__ == "__main__":
     run_0()
