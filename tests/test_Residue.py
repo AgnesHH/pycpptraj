@@ -7,12 +7,12 @@ from pycpptraj.Residue import Residue
 class TestResidue(unittest.TestCase):
     def test_0(self):
         top = Topology("./data/Tc5b.top")
-        print top.residuelist(mode="instance")[0].first_atom
-        print top.residuelist(mode="instance")[0].last_atom
+        print top.residuelist(mode="instance")[0].first_atom_idx
+        print top.residuelist(mode="instance")[0].last_atom_idx
         print top.residuelist(mode="instance")[0].n_atoms
 
-        print top.residuelist(mode="instance")[10].first_atom
-        print top.residuelist(mode="instance")[10].last_atom
+        print top.residuelist(mode="instance")[10].first_atom_idx
+        print top.residuelist(mode="instance")[10].last_atom_idx
         print top.residuelist(mode="instance")[10].n_atoms
 
         print dir(top.atomlist[0])
@@ -34,8 +34,8 @@ class TestResidue(unittest.TestCase):
         print res1
         #print help(res1)
         # extract residue info
-        print "1st atom: %s" % res1.first_atom
-        print "last atom: %s" % res1.last_atom
+        print "1st atom: %s" % res1.first_atom_idx
+        print "last atom: %s" % res1.last_atom_idx
         print res1.original_res_num
         #print res1.c_str()
         #print res1.Name()
