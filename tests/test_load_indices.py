@@ -98,6 +98,12 @@ class TestIndices(unittest.TestCase):
         print top
         del top
 
+    def test_join_dummy(self):
+        traj0 = TrajReadOnly(filename="data/md1_prod.Tc5b.x", top="./data/Tc5b.top")[:]
+        #traj0 += traj0
+        traj0 += traj0[:]
+        print traj0
+
 if __name__ == "__main__":
     unittest.main()
 
