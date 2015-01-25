@@ -92,17 +92,6 @@ cdef class Trajin (TrajectoryFile):
                     farray = self[idx_0]
                     self.tmpfarray = farray
                     return self.tmpfarray[idxs[1:]]
-                #return frame[idxs[1:]]
-            #if isinstance(idxs, tuple):
-            #    # bugs: trajcpp[0, 0, 0] is not the same as trajcpp[0][0, 0]
-            #    #idx_0 = idxs[0]
-            #    # do not specify type of frames here
-            #    # it might be Frame or FrameArray instances
-            #    #frames = self[idx_0]
-            #    #return frame[idxs[1:]]
-            #    txt = "Not implementing for Trajin_Single. Use traj[idx][idx1, idx2]"
-            #    txt += "\n or use FrameArray class"
-            #    raise NotImplementedError(txt)
             else:
                 # assuming that `idxs` is integer
                 idx_1 = get_positive_idx(idxs, self.size)
@@ -216,13 +205,15 @@ cdef class Trajin (TrajectoryFile):
         self.check_allocated()
         self.baseptr_1.PrepareForRead(b)
 
-    def print_info_line(self):
-        self.check_allocated()
-        self.baseptr_1.PrintInfoLine()
+    # don't need this method
+    #def print_info_line(self):
+    #    self.check_allocated()
+    #    self.baseptr_1.PrintInfoLine()
 
-    def print_frame_info(self):
-        self.check_allocated()
-        self.baseptr_1.PrintFrameInfo()
+    # don't need this method
+    #def print_frame_info(self):
+    #    self.check_allocated()
+    #    self.baseptr_1.PrintFrameInfo()
 
     property max_frames:
         def __get__(self):
@@ -301,9 +292,10 @@ cdef class Trajin (TrajectoryFile):
         return self.baseptr_1.ReadTrajFrame(currentFrame, frameIn.thisptr[0])
 
     #@abstractmethod('Trajin')
-    def print_info(self,int showExtended):
-        self.check_allocated()
-        self.baseptr_1.PrintInfo(showExtended)
+    # don't need this method
+    #def print_info(self, int showExtended):
+    #    self.check_allocated()
+    #    self.baseptr_1.PrintInfo(showExtended)
 
     #@abstractmethod('Trajin')
     def has_vel(self):
