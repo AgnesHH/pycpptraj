@@ -87,7 +87,7 @@ cdef class Action:
         return self.baseptr.Setup(currenttop.thisptr, &(newtop.thisptr))
 
     @makesureABC("Action")
-    def do_action(self, currentframe=Frame(), Frame newframe=Frame(), int idx=0):
+    def do_action(self, int idx=0, currentframe=Frame(), Frame newframe=Frame()):
         """
         Perform action on Frame. Depend on what action you want to perform, you might get
         newframe or get data from dslist or dflist...
