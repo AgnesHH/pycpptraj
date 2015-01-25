@@ -27,20 +27,16 @@ cdef class Residue:
         self.thisptr.SetOriginalNum(i)
 
     @property
-    def first_atom(self):
+    def first_atom_idx(self):
         return self.thisptr.FirstAtom()
 
     @property
-    def last_atom(self):
+    def last_atom_idx(self):
         return self.thisptr.LastAtom()
 
     @property
     def original_res_num(self):
         return self.thisptr.OriginalResNum()
-
-    def parm_name(self):
-        # TODO: return char*
-        return self.thisptr.c_str()
 
     def ntype(self):
         cdef NameType nt = NameType()
@@ -54,3 +50,5 @@ cdef class Residue:
     def name_is_solvent(self):
         return self.thisptr.NameIsSolvent()
 
+    def name(self):
+        return self.thisptr.c_str()
