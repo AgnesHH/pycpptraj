@@ -65,9 +65,6 @@ def get_subframe(frame=None, mask=None, top=None, atommask=None):
     # TODO : move to `io.py`
     return frame.get_subframe(mask=mask, top=top, atommask=atommask)
 
-def file_exist(filename):
-    import os
-    return os.path.isfile(filename)
 
 def randomize_ions(frame=Frame(), top=Topology(), command=""):
     """randomize_ions for given Frame with Topology
