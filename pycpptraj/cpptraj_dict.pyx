@@ -11,7 +11,7 @@ def get_key(value, dict Dict):
 # Below are dictionary for cpptraj files/types, ...
 # Traj_PDBfile
 #from Traj_PDBfile cimport *
-cdef dict PDBWRITEMODEDict = {
+PDBWRITEMODEDict = {
     "NONE" : NONEPDBWRITEMODE, 
     "SINGLE" : SINGLE, 
     "MODEL" : MODEL, 
