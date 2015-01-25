@@ -1,7 +1,10 @@
 # distutils: language = c++
-from trajs.Trajin cimport _Trajin, Trajin
-from FrameArray cimport FrameArray
-from DataSet_RemLog cimport *
+from libcpp.string cimport string
+from pycpptraj.trajs.Trajin cimport _Trajin, Trajin
+from pycpptraj.trajs.TrajectoryFile cimport _TrajectoryFile, TrajectoryFile
+from pycpptraj.FrameArray cimport FrameArray
+from pycpptraj.FrameArray2 cimport FrameArray2
+from pycpptraj.datasets.DataSet_RemLog cimport *
 
 
 cdef extern from "Trajin_Multi.h": 
@@ -14,13 +17,13 @@ cdef extern from "Trajin_Multi.h":
     cdef cppclass _Trajin_Multi "Trajin_Multi" (_Trajin):
         _Trajin_Multi() 
         #~_Trajin_Multi() 
-        int SetupTrajRead(const string&, _ArgList&, _Topology *)
-        int BeginTraj(bint)
-        void EndTraj() 
-        int ReadTrajFrame(int, _Frame&)
-        void PrintInfo(int) const 
-        bint HasVelocity() const 
-        int Nreplica_Dimension() const 
+        #int SetupTrajRead(const string&, _ArgList&, _Topology *)
+        #int BeginTraj(bint)
+        #void EndTraj() 
+        #int ReadTrajFrame(int, _Frame&)
+        #void PrintInfo(int) const 
+        #bint HasVelocity() const 
+        #int Nreplica_Dimension() const 
         void EnsembleInfo() const 
         int EnsembleSetup(_FrameArray&)
         int GetNextEnsemble(_FrameArray&)
