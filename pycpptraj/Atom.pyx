@@ -2,11 +2,20 @@
 from pycpptraj.cpptraj_dict import get_key, AtomicElementDict
 
 cdef class Atom:
-    def __cinit__(self, *args):
+    def __cinit__(self, nametype=None, chainID=0, name=None,
+                        charge=None, mass=None, *args):
+
+        # TODO : add more constructors
         self.thisptr = new _Atom()
 
     def __dealloc__(self):
         del self.thisptr
+
+    def copy(self):
+        cdef Atom atom = Atom()
+        del atom.thisptr
+        atom.thisptr = new _Atom(self.thisptr[0])
+        return atom
 
     #def Atom(self):
 
@@ -24,12 +33,14 @@ cdef class Atom:
         self.thisptr.swap(at1.thisptr[0], at2.thisptr[0])
 
     #def  bond_iterator bondbegin(self):
-
     #def  bond_iterator bondend(self):
+    def bond_iter(self):
+        pass
 
     #def  excluded_iterator excludedbegin(self):
-
     #def  excluded_iterator excludedend(self):
+    def excluded_iter(self):
+        pass
 
     property resnum:
         def __set__(self, int resnumIn):
@@ -48,6 +59,7 @@ cdef class Atom:
             return self.thisptr.Charge()
     
     property GBradius:
+        # Do we need this?
         def __set__(self,double rin):
             self.thisptr.SetGBradius(rin)
         def __get__(self):
@@ -73,11 +85,16 @@ cdef class Atom:
         """why method name is not short at all? :D"""
         return self.thisptr.ElementName()
 
-    def name(self):
+    def nametype(self):
         # TODO : do we need this method?
         cdef NameType nt = NameType()
         nt.thisptr[0] = self.thisptr.Name()
         return nt
+
+    @property
+    def name(self):
+        # TODO : do we need this method?
+        return self.thisptr.c_str()
 
     @property
     def atype(self):
@@ -98,11 +115,11 @@ cdef class Atom:
         return self.thisptr.ChainID()
 
     @property
-    def nbonds(self):
+    def n_bonds(self):
         return self.thisptr.Nbonds()
 
     @property
-    def nexcluded(self):
+    def n_excluded(self):
         return self.thisptr.Nexcluded()
 
     @property
@@ -126,9 +143,30 @@ cdef class Atom:
     def sort_bonds(self):
         self.thisptr.SortBonds()
 
+    def is_bonded_to(self, int idx):
+        # TODO : add doc
+        return self.thisptr.IsBondedTo(idx)
+
     #def add_exclusion_list(self, list[int] intset):
     #    cdef set[int] tmp = intset
     #    self.thisptr.AddExclusionList(intset)
 
-    def get_bond_length(self, AtomicElementType id1, AtomicElementType id2):
-        return self.thisptr.GetBondLength(id1, id2)
+    @classmethod
+    def get_bond_length(cls, id1, id2):
+        """get_bond_length(id1, id2)
+        Return : bond length of two atomic elements (Angstrom)
+
+        Parameters:
+        ---------
+        id1 : str, AtomicElement 1
+        id2 : str, AtomicElement 2
+        """
+        id1 = id1.upper()
+        id2 = id2.upper()
+        return _Atom.GetBondLength(AtomicElementDict[id1], 
+                                          AtomicElementDict[id2])
+
+    @classmethod
+    def atomic_elements(cls):
+        """return a list of all atomic_elements, class method"""
+        return AtomicElementDict.keys()
