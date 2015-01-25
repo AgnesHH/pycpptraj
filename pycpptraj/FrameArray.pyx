@@ -296,10 +296,16 @@ cdef class FrameArray:
         # should we just create a fake operator?
         cpp_reverse(self.frame_v.begin(), self.frame_v.end())
 
-    def erase(self, int idx):
-        # TODO : massive erase (idx_0, idx_1), slice(0:3:1)...
+    def erase(self, idxs):
+        cdef int idx
         # dealloc frame pointer too?
-        self.frame_v.erase(self.frame_v.begin() + idx)
+        if isinstance(idxs, (int, long)):
+            idx = idxs
+            self.frame_v.erase(self.frame_v.begin() + idx)
+        else:
+            # assume : list, slice, iteratable object
+            for idx in idxs:
+                self.erase(idx)
         
     @property
     def size(self):
@@ -392,9 +398,13 @@ cdef class FrameArray:
     def get_frames(self, from_traj=None, indices=None, update_top=False, copy=True):
         # TODO : fater loading?
         """get frames from Trajin instance
+        def get_frames(from_traj=None, indices=None, update_top=False, copy=True)
         Parameters:
         ----------
-        traj : Trajin or Trajing_Single or Trajectory instance
+        from_traj : TrajReadOnly or FrameArray, default=None
+        indices : default=None
+        update_top : bool, default=False
+        copy : bool, default=True
 
         Note:
         ----
@@ -454,6 +464,8 @@ cdef class FrameArray:
         else:
             # if from_traj is None, return new FrameArray
             newfarray = FrameArray()
+            if update_top:
+                newfarray.top = self.top.copy()
             for i in indices:
                 newfarray.append(self[i], copy=copy)
             return newfarray
