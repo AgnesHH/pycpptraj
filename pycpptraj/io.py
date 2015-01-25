@@ -24,7 +24,7 @@ def iterload(filename=None, top=Topology(), start=0, chunk=None):
         top = Topology(top)
     return _iterload(top, filename, start, chunk)
 
-def loadtraj(filename=None, top=Topology(), readonly=True):
+def loadtraj(filename=None, top=Topology(), readonly=True, indices=None):
     """load(filename=None, top=Topology(), readonly=True)"""
     if not isinstance(top, Topology):
         # string
@@ -33,6 +33,9 @@ def loadtraj(filename=None, top=Topology(), readonly=True):
         ts = TrajReadOnly()
     else:
         ts = FrameArray()
+    # TODO : use indices
+    if indices is not None:
+        raise RuntimeError("not yet supported")
     ts.load(filename, top)
     return ts
 
