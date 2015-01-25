@@ -39,6 +39,8 @@ cdef class FrameArray:
             # TODO : check if file exist
             if not file_exist(filename):
                 raise ValueError("There is not file having this name")
+            if self.top.is_empty():
+                raise ValueError("Need to have non-empty Topology")
             self.load(filename=filename, indices=indices)
 
     def copy(self):
