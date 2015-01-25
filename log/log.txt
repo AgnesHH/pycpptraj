@@ -7,3 +7,5 @@
 * Dec-04-2014: Write setup.py and test installing
 
 * Dec-11-2014: Know how to create wrapper for abstract and sub-class
+
+* Jan-24-2015: Taking 3D numpy array just by traj[:, :, :] or traj[0:20, :, :] (read only)
