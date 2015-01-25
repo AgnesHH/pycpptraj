@@ -13,7 +13,8 @@ calc_distance = distance
 # clalc_angle
 
 ## do
-#do_fitting(frame, ref=Frame())
-#do_translation
-#do_rotation
-#
+# do_fitting(frame, ref=Frame())
+# do_translation
+# do_rotation
+# 
+
