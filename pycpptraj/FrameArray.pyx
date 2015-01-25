@@ -367,7 +367,7 @@ cdef class FrameArray:
         self.frame_v.insert(self.frame_v.end(), 
                             other.frame_v.begin(), other.frame_v.end())
 
-    def get_frames(self, ts, indices=None, update_top=False):
+    def get_frames(self, from_traj=None, indices=None, update_top=False, copy=True):
         # TODO : fater loading?
         """get frames from Trajin instance
         Parameters:
@@ -382,49 +382,59 @@ cdef class FrameArray:
         cdef int start, stop, step
         cdef Frame frame
 
-        if update_top:
-            self.top = ts.top.copy()
+        if from_traj is not None:
+            ts = from_traj
+            # append new frames to `self`
+            if update_top:
+                self.top = ts.top.copy()
 
-        if not update_top:
-            if self.top.n_atoms != ts.top.n_atoms:
-                raise ValueError("FrameArray.top.n_atoms should be equal to Trajin_Single.top.n_atoms or set update_top=True")
+            if not update_top:
+                if self.top.n_atoms != ts.top.n_atoms:
+                    raise ValueError("FrameArray.top.n_atoms should be equal to Trajin_Single.top.n_atoms or set update_top=True")
 
-        if isinstance(ts, Trajin_Single) or isinstance(ts, TrajReadOnly):
-            if indices is not None:
-                # slow method
-                # TODO : use `for idx in leng(indices)`?
-                if isinstance(indices, slice):
-                    # use slice for saving memory
-                    start, stop, step = indices.start, indices.stop, indices.step
-                    for i in range(start, stop, step):
-                        self.append(ts[i])
+            if isinstance(ts, Trajin_Single) or isinstance(ts, TrajReadOnly):
+                if indices is not None:
+                    # slow method
+                    # TODO : use `for idx in leng(indices)`?
+                    if isinstance(indices, slice):
+                        # use slice for saving memory
+                        start, stop, step = indices.start, indices.stop, indices.step
+                        for i in range(start, stop, step):
+                            self.append(ts[i], copy=copy)
+                    else:
+                        # regular list, tuple, array,...
+                        for i in indices:
+                            print "debug FrameArray.get_frames"
+                            self.append(ts[i], copy=copy)
+                else:    
+                    # get whole traj
+                    frame = Frame()
+                    frame.set_frame_v(ts.top, ts.has_vel(), ts.n_repdims)
+                    ts.begin_traj()
+                    for i in range(ts.max_frames):
+                        ts.get_next_frame(frame)
+                        self.append(frame, copy=copy)
+                    ts.end_traj()
+
+            #elif isinstance(ts, FrameArray2) or isinstance(ts, FrameArray):
+            elif isinstance(ts, FrameArray):
+                # TODO : rename FrameArray2
+                # use try and except?
+                if indices is None:
+                    for i in range(ts.size):
+                        # TODO : make indices as an array?
+                        self.append(ts[i], copy=copy)
                 else:
-                    # regular list, tuple, array,...
                     for i in indices:
-                        print "debug FrameArray.get_frames"
-                        self.append(ts[i])
-            else:    
-                # get whole traj
-                frame = Frame()
-                frame.set_frame_v(ts.top, ts.has_vel(), ts.n_repdims)
-                ts.begin_traj()
-                for i in range(ts.max_frames):
-                    ts.get_next_frame(frame)
-                    self.append(frame)
-                ts.end_traj()
+                        # TODO : make indices as an array?
+                        self.append(ts[i], copy=copy)
 
-        #elif isinstance(ts, FrameArray2) or isinstance(ts, FrameArray):
-        elif isinstance(ts, FrameArray):
-            # TODO : rename FrameArray2
-            # use try and except?
-            if indices is None:
-                for i in range(ts.size):
-                    # TODO : make indices as an array?
-                    self.append(ts[i])
-            else:
-                for i in indices:
-                    # TODO : make indices as an array?
-                    self.append(ts[i])
+        else:
+            # if from_traj is None, return new FrameArray
+            newfarray = FrameArray()
+            for i in indices:
+                newfarray.append(self[i], copy=copy)
+            return newfarray
 
     def strip_atoms(self, mask=None, update_top=True, bint has_box=False):
         """if you use memory for numpy, you need to update after resizing Frame
@@ -452,3 +462,12 @@ cdef class FrameArray:
             incr(it)
         if update_top:
             self.top = tmptop.copy()
+
+    # taking from Trajin_Single
+    @classmethod
+    def write_options(cls):
+        TrajReadOnly.write_options()
+
+    @classmethod
+    def read_options(cls):
+        TrajReadOnly.read_options()
