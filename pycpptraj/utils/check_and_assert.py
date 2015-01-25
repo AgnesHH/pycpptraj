@@ -23,6 +23,10 @@ def _import_numpy():
         has_numpy = False
         return (has_numpy, None)
 
+def file_exist(filename):
+    import os
+    return os.path.isfile(filename)
+
 if __name__ == "__main__":
     import numpy as np
     assert_almost_equal([1., 2., 3.], [1., 2., 3.], decimals=3)
