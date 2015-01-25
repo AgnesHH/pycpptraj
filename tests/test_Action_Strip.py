@@ -29,7 +29,7 @@ class TestStrip(unittest.TestCase):
                        dslist=dslist,
                        current_frame=frame0, 
                        new_frame=newframe, 
-                       newtop=newtop)
+                       new_top=newtop)
 
             act_surf.master(command="@CA", 
                        current_top=top, 
