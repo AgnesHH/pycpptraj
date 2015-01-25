@@ -125,7 +125,9 @@ cdef extern from "Atom.h":
         void AddBond(int)
         void ClearBonds() 
         void SortBonds() 
+        bint IsBondedTo(int)
         #void AddExclusionList(const set[int]&)
+        @staticmethod
         double GetBondLength(AtomicElementType, AtomicElementType)
 
 
