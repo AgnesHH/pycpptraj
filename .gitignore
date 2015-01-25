@@ -11,3 +11,6 @@ tests/output/test*
 test*.pyx
 temp.*
 examples/data/cpptraj.log
+pycpptraj/*html
+pycpptraj/*tmp
+pycpptraj/*bk
