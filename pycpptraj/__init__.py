@@ -16,6 +16,7 @@ from pycpptraj.TrajReadOnly import TrajReadOnly
 from pycpptraj.trajs.Trajout import Trajout
 from pycpptraj.cast_dataset import cast_dataset
 from pycpptraj.parms.ParmFile import ParmFile
+from pycpptraj.misc import action_help
 
 # actions
 from pycpptraj.actions import allactions
