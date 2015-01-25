@@ -64,8 +64,6 @@ class TestTrajinSingle(unittest.TestCase):
         arr1 = np.array(traj[0][0, :], copy=True)
         print arr0[:10], arr1[:10]
 
-        print  "TODO : wrong result"
-        #assert_almost_equal (traj[0][0, :], traj[:][0, 0])
         print traj[:][0, 0]
         print traj[0][0, :]
         print traj[0][0, :] == traj[:][0, 0]
