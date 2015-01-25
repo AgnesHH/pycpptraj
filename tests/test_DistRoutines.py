@@ -39,8 +39,8 @@ class Test(unittest.TestCase):
         dslist = DataSetList()
         act = allactions.Action_Distance()
         act.master(command="distance :1@CA :2@CA",
-                   currentframe=traj,
-                   currenttop=traj.top, dslist=dslist)
+                   current_frame=traj,
+                   current_top=traj.top, dslist=dslist)
         d1 = cast_dataset(dslist[0], dtype="general")
         print d1.data[:10]
 
