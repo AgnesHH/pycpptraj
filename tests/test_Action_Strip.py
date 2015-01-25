@@ -21,25 +21,25 @@ class TestStrip(unittest.TestCase):
         act_surf = allactions.Action_Surf()
 
         for i in range(1):
-            currentframe = farray[i]
+            current_frame = farray[i]
             newframe = Frame()
             dslist = DataSetList()
             act.master(command="strip !@CA", 
-                       currenttop=top, 
+                       current_top=top, 
                        dslist=dslist,
-                       currentframe=frame0, 
-                       newframe=newframe, 
+                       current_frame=frame0, 
+                       new_frame=newframe, 
                        newtop=newtop)
 
             act_surf.master(command="@CA", 
-                       currenttop=top, 
+                       current_top=top, 
                        dslist=dslist,
-                       currentframe=farray)
+                       current_frame=farray)
 
             act_surf.master(command="@H=", 
-                       currenttop=top, 
+                       current_top=top, 
                        dslist=dslist,
-                       currentframe=farray)
+                       current_frame=farray)
 
         print newtop
         print newframe
