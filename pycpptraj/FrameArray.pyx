@@ -9,6 +9,7 @@ from pycpptraj._utils cimport get_positive_idx
 # python level
 from pycpptraj.TrajReadOnly import TrajReadOnly
 from pycpptraj.utils.check_and_assert import _import_numpy
+from pycpptraj.utils.check_and_assert import file_exist
 
 cdef class FrameArray:
     def __cinit__(self, string filename='', top=None, indices=None, 
@@ -36,6 +37,8 @@ cdef class FrameArray:
         #self.is_mem_parent = True
         if not filename.empty():
             # TODO : check if file exist
+            if not file_exist(filename):
+                raise ValueError("There is not file having this name")
             self.load(filename=filename, indices=indices)
 
     def copy(self):
