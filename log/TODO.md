@@ -1,9 +1,11 @@
 TODO
 ----
+* add more examples
 * load pdb file without topology: DONE
 * database for pycpptraj
-* Sometimes get every large ts[-1:-9:-1][0].n_atoms (example: 30401312 atoms vs Tc5b = 304 atoms)
+* Sometimes get every large ts[-1:-9:-1][0].n_atoms (example: 30401312 atoms vs Tc5b = 304 atoms): DONE
     (ts is FrameArray or Trajin_Single instance)
+    * create tmpfarray for FrameArray and Trajin_Single classes
 * Add exception
 * Rename "./examples" folder to "tests" and make REAL example script: DONE
 * make action, analysis dictionary
