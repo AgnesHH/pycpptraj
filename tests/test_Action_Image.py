@@ -7,10 +7,12 @@ from pycpptraj.utils.check_and_assert import assert_almost_equal
 from pycpptraj.utils.check_and_assert import file_exist
 
 
+# TODO : not reproduce cpptraj's output yet
 class TestRadgyr(unittest.TestCase):
     def test_0(self):
         farray = FrameArray(filename="./data/tz2.truncoct.nc", top="./data/tz2.truncoct.parm7")[:2]
         fold = farray.copy()
+        print "old file: ", fold[0, 0, :]
 
         act = allactions.Action_Image()
         ptrajin = """
@@ -36,7 +38,9 @@ class TestRadgyr(unittest.TestCase):
             # make sure that pycpptraj reproduce cpptraj outputo
             # TODO : not yet. double-check
             print fnew[0].same_coords_as(farray[0])
+            print fnew[0, 0, :]
             print fold[0].same_coords_as(farray[0])
+            print fnew[0].rmsd(farray[0])
 
 if __name__ == "__main__":
     unittest.main()
