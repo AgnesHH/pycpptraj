@@ -1,4 +1,5 @@
 #print print  distutils: language = c++
+from cpython.array cimport array as pyarray
 cimport cython
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
@@ -11,7 +12,7 @@ from pycpptraj.utils.check_and_assert import _import_numpy
 
 cdef class FrameArray:
     def __cinit__(self, string filename='', top=None, indices=None, 
-            bint warning=False):
+            bint warning=False, n_frames=None):
         if isinstance(top, basestring):
             self.top = Topology(top)
         elif isinstance(top, Topology):
@@ -19,6 +20,10 @@ cdef class FrameArray:
         else:
             # create empty topology
             self.top = Topology()
+
+        if n_frames is not None:
+            # reserve n_frames
+            self.resize(n_frames)
 
         self.oldtop = None
 
@@ -366,6 +371,18 @@ cdef class FrameArray:
         self.frame_v.reserve(self.frame_v.size() + other.frame_v.size())
         self.frame_v.insert(self.frame_v.end(), 
                             other.frame_v.begin(), other.frame_v.end())
+
+    def resize(self, int n_frames):
+        self.frame_v.resize(n_frames)
+
+    @property
+    def temperatures(self):
+        """return a Python array of temperatures"""
+        cdef pyarray tarr = pyarray('d', [])
+
+        for frame in self:
+            tarr.append(frame.temperature)
+        return tarr
 
     def get_frames(self, from_traj=None, indices=None, update_top=False, copy=True):
         # TODO : fater loading?
