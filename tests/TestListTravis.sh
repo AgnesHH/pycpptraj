@@ -1,6 +1,7 @@
 python ./test_cast_dataset.py 
 python ./test_rmsd.py 
 python ./test_FrameList.py 
+python ./test_get_remdtraj.py 
 python ./test_Box.py 
 python ./test_io_save_indices.py 
 python ./test_teasing_traj.py 
