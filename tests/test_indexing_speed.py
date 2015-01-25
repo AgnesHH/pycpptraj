@@ -1,7 +1,7 @@
 import unittest
 from time import time
 from pycpptraj.base import *
-from pycpptraj.Trajectory import Trajectory
+from pycpptraj.TrajReadOnly import TrajReadOnly
 
 def get_time(indices):
     traj = TrajReadOnly(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
