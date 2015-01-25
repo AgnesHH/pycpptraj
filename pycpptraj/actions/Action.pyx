@@ -32,7 +32,7 @@ cdef class Action:
         pass
 
     @makesureABC("Action")
-    def read_input(self, command='', currenttop=TopologyList(),
+    def read_input(self, command='', current_top=TopologyList(),
                    FrameList flist=FrameList(), 
                    DataSetList dslist=DataSetList(), 
                    DataFileList dflist=DataFileList(), 
@@ -42,7 +42,7 @@ cdef class Action:
         ----------
         command : str
             Type of actions, mask, ... (Get help: Action_Box().help())
-        currenttop : Topology or TopologyList instance, default=TopologyList()
+        current_top : Topology or TopologyList instance, default=TopologyList()
         flist : FrameList instance, default=FrameList()
         dslist : DataSetList instance, default=DataSetList()
         dflist : DataFileList instance, default=DataFileList()
@@ -52,11 +52,11 @@ cdef class Action:
         cdef ArgList arglist
         cdef TopologyList toplist
 
-        if isinstance(currenttop, Topology):
+        if isinstance(current_top, Topology):
             toplist = TopologyList()
-            toplist.add_parm(currenttop)
-        elif isinstance(currenttop, TopologyList):
-            toplist = <TopologyList> currenttop
+            toplist.add_parm(current_top)
+        elif isinstance(current_top, TopologyList):
+            toplist = <TopologyList> current_top
 
         if isinstance(command, basestring):
             arglist = ArgList(<string> command)
@@ -68,36 +68,36 @@ cdef class Action:
                        debug)
 
     @makesureABC("Action")
-    def process(self, Topology currenttop=Topology(), Topology newtop=Topology()): 
+    def process(self, Topology current_top=Topology(), Topology new_top=Topology()): 
         """
         Process input and do initial setup
         (TODO : add more doc)
 
         Parameters:
         ----------
-        currenttop : Topology instance, default (no default)
-        newtop : new Topology instance, default=Topology()
+        current_top : Topology instance, default (no default)
+        new_top : new Topology instance, default=Topology()
             Need to provide this instance if you want to change topology
         """
         if "Strip" in self.__class__.__name__:
-            # since `Action_Strip` will copy a modified version of `currenttop` and 
-            # store in newtop, then __dealloc__ (from cpptraj)
+            # since `Action_Strip` will copy a modified version of `current_top` and 
+            # store in new_top, then __dealloc__ (from cpptraj)
             # we need to see py_free_mem to False
-            newtop.py_free_mem = False
-        return self.baseptr.Setup(currenttop.thisptr, &(newtop.thisptr))
+            new_top.py_free_mem = False
+        return self.baseptr.Setup(current_top.thisptr, &(new_top.thisptr))
 
     @makesureABC("Action")
-    def do_action(self, int idx=0, currentframe=Frame(), Frame newframe=Frame()):
+    def do_action(self, int idx=0, current_frame=Frame(), Frame new_frame=Frame()):
         """
         Perform action on Frame. Depend on what action you want to perform, you might get
-        newframe or get data from dslist or dflist...
+        new_frame or get data from dslist or dflist...
         TODO : add FrameArray
         Parameters:
         ----------
         idx : int, defaul=0 
             id of Frame
-        currentframe : Frame instance need to be processed, default=Frame() 
-        newframe : Frame instance, defaul=Frame()
+        current_frame : Frame instance need to be processed, default=Frame() 
+        new_frame : Frame instance, defaul=Frame()
             if action change Frame, you need to have this
         >>> from pycpptraj._cast import cast_dataset
         >>> # dslist is DataSetList (list of DataSet instance)
@@ -105,24 +105,24 @@ cdef class Action:
         """
         # debug
         cdef Frame frame
-        newframe.py_free_mem = False
-        #currentframe.py_free_mem = False
+        new_frame.py_free_mem = False
+        #current_frame.py_free_mem = False
         # got double-free memory error when not using above flag
         # end debug
-        #return self.baseptr.DoAction(idx, currentframe.thisptr, &(newframe.thisptr))
-        if currentframe.is_empty():
+        #return self.baseptr.DoAction(idx, current_frame.thisptr, &(new_frame.thisptr))
+        if current_frame.is_empty():
             raise ValueError("require providing Frame or FrameArray")
-        if isinstance(currentframe, Frame):
-            frame = <Frame> currentframe
+        if isinstance(current_frame, Frame):
+            frame = <Frame> current_frame
             frame.py_free_mem = False
-            self.baseptr.DoAction(idx, frame.thisptr, &(newframe.thisptr))
+            self.baseptr.DoAction(idx, frame.thisptr, &(new_frame.thisptr))
         else:
             # add check
             # assume Traj instance
-            # TODO : check newframe
-            for frame in currentframe:
+            # TODO : check new_frame
+            for frame in current_frame:
                 frame.py_free_mem = False
-                self.baseptr.DoAction(idx, frame.thisptr, &(newframe.thisptr))
+                self.baseptr.DoAction(idx, frame.thisptr, &(new_frame.thisptr))
 
     @makesureABC("Action")
     def print_output(self):
@@ -139,25 +139,25 @@ cdef class Action:
         return act
 
     def master(self, command='', int idx=0,
-                   currenttop=TopologyList(),currentframe=Frame(),
+                   current_top=TopologyList(),current_frame=Frame(),
                    FrameList flist=FrameList(), 
                    DataSetList dslist=DataSetList(), 
                    DataFileList dflist=DataFileList(), 
-                   newtop=Topology(),
-                   newframe=Frame(),
+                   new_top=Topology(),
+                   new_frame=Frame(),
                    int debug=0):
         """combined all 3 steps
                 master(command='', int idx=0,
-                       currenttop=TopologyList(),currentframe=Frame(),
+                       current_top=TopologyList(),current_frame=Frame(),
                        FrameList flist=FrameList(), 
                        DataSetList dslist=DataSetList(), 
                        DataFileList dflist=DataFileList(), 
-                       newtop=Topology(),
-                       newframe=Frame(),
+                       new_top=Topology(),
+                       new_frame=Frame(),
                        int debug=0):
         """
-        self.read_input(command=command, currenttop=currenttop, 
+        self.read_input(command=command, current_top=current_top, 
                         flist=flist, dslist=dslist,
                         dflist=dflist, debug=debug)
-        self.process(currenttop=currenttop, newtop=newtop)
-        self.do_action(idx=idx, currentframe=currentframe, newframe=newframe)
+        self.process(current_top=current_top, new_top=new_top)
+        self.do_action(idx=idx, current_frame=current_frame, new_frame=new_frame)
