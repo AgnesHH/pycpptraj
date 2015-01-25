@@ -81,8 +81,8 @@ def randomize_ions(frame=Frame(), top=Topology(), command=""):
     """
     act = allactions.Action_RandomizeIons()
     act.master(command=command,
-               currenttop=top,
-               currentframe=frame,
+               current_top=top,
+               current_frame=frame,
                )
 
 def action_help(action=None):
