@@ -84,3 +84,23 @@ def randomize_ions(frame=Frame(), top=Topology(), command=""):
                currenttop=top,
                currentframe=frame,
                )
+
+def action_help(action=None):
+    # where should we put this method? putting here seems not really reasonable
+    from pycpptraj import allactions
+
+    actlist = []
+
+    for key in allactions.__dict__.keys():
+        if "Action_" in key:
+            act = key.split("_")[1]
+            actlist.append(act)
+
+    if action is None:
+        print "give the name of Action to get help"
+        print "action_help('RadGyr')"
+        print actlist
+    else:
+        actname = "Action_" + action
+        act = allactions.__dict__[actname]()
+        act.help()
