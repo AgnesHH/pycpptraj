@@ -67,7 +67,6 @@ def writetraj(filename="", traj=None, top=None,
                 if isinstance(traj2, (list, tuple)):
                     raise NotImplementedError("must be FrameArray or TrajReadOnly instance")
                 for idx in indices:
-                    #print "test writing indices"
                     trajout.writeframe(idx, traj2[idx], top)
 
 def writeparm(filename=None, top=None, fmt='AMBERPARM'):
@@ -94,3 +93,7 @@ def loadpdb_rcsb(pdbid):
     top = readparm("._tmp")
     frames = load("._tmp", top)
     return top, frames
+
+def load_single_frame(frame=None, top=None):
+    """load single Frame"""
+    return load(frame, top)[0]
