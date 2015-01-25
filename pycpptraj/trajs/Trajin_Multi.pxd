@@ -11,7 +11,7 @@ cdef extern from "Trajin_Multi.h":
         TEMP "Trajin_Multi::TEMP"
         INDICES "Trajin_Multi::INDICES"
         CRDIDX "Trajin_Multi::CRDIDX"
-    cdef cppclass _Trajin_Multi "Trajin_Multi":
+    cdef cppclass _Trajin_Multi "Trajin_Multi" (_Trajin):
         _Trajin_Multi() 
         #~_Trajin_Multi() 
         int SetupTrajRead(const string&, _ArgList&, _Topology *)
@@ -34,5 +34,5 @@ cdef extern from "Trajin_Multi.h":
         TargetType TargetMode() const 
         string FinalCrdIndices() const 
 
-cdef class Trajin_Multi:
+cdef class Trajin_Multi (Trajin):
     cdef _Trajin_Multi* thisptr
