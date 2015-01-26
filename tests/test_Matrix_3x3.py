@@ -10,6 +10,7 @@ class TestMatrix_3x3(unittest.TestCase):
         mat = Matrix_3x3(range(9))
         print mat
         print mat.tolist()
+        print mat[:]
 
         assert mat[:].shape == (3, 3)
         assert mat.buffer1d.shape == (9,)
@@ -25,8 +26,13 @@ class TestMatrix_3x3(unittest.TestCase):
         print mat
         print mat.tolist()
         mat.pprint()
-        print mat.row1()
-        
+        v1 = mat.row1()
 
+        v1np = np.asarray(v1[:]).reshape(3, 1)
+        print v1np
+        print (npmat * v1np)
+        print (mat * v1).tolist()
+        print mat[0, :]
+        
 if __name__ == "__main__":
     unittest.main()
