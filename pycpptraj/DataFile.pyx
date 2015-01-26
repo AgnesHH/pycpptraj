@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-#from ArgList cimport ArgList
+from pycpptraj.cpptraj_dict import DataFormatDict
 
 cdef class DataFile:
     def __cinit__(self, py_free_mem=True):
@@ -11,28 +11,31 @@ cdef class DataFile:
         if self.py_free_mem:
             del self.thisptr
 
-    def write_help(self):
-        self.thisptr.WriteHelp()
+    @classmethod
+    def write_help(cls):
+        _DataFile.WriteHelp()
 
-    def read_options(self):
-        self.thisptr.ReadOptions()
+    @classmethod
+    def read_options(cls):
+        _DataFile.ReadOptions()
 
-    def write_options(self):
-        self.thisptr.WriteOptions()
+    @classmethod
+    def write_options(cls):
+        _DataFile.WriteOptions()
 
-    def get_format_from_arg(self, ArgList a):
-        return self.thisptr.GetFormatFromArg(a.thisptr[0])
+    @classmethod
+    def get_format_from_arg(cls, ArgList a):
+        return _DataFile.GetFormatFromArg(a.thisptr[0])
 
-    def format_string(self,DataFormatType t=DATAFILE):
-        return self.thisptr.FormatString(t)
+    #@classmethod
+    def format_string(self, string t):
+        cdef DataFormatType fmt = DataFormatDict[t]
+        return self.thisptr.FormatString(fmt)
 
-    def set_debug(self,int i):
-        self.thisptr.SetDebug(i)
-
-    def set_data_file_precision(self, int widthIn, int precisionIn):
+    def set_precision(self, int widthIn, int precisionIn):
         self.thisptr.SetDataFilePrecision(widthIn, precisionIn)
 
-    def read_data_in(self, string filenameIn, ArgList argListIn, DataSetList datasetlist):
+    def read_data(self, string filenameIn, ArgList argListIn, DataSetList datasetlist):
         return self.thisptr.ReadDataIn(filenameIn.thisptr[0], argListIn.thisptr[0], datasetlist.thisptr[0])
 
     def setup_datafile(self, string filenameIn, ArgList argIn, int debugIn):
@@ -65,7 +68,7 @@ cdef class DataFile:
     def data_set_names(self):
         self.thisptr.DataSetNames()
 
-    def setDF_lwrite(self,bint fIn):
+    def setDF_lwrite(self, bint fIn):
         self.thisptr.SetDFLwrite(fIn)
 
     def dF_lwrite(self):
