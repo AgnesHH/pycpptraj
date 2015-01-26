@@ -5,7 +5,7 @@ from pycpptraj.NameType import NameType
 
 class TestNameType(unittest.TestCase):
     def test_0(self):
-        nt = NameType()
+        nt = NameType("CA")
         print dir(nt)
 
 if __name__ == "__main__":
