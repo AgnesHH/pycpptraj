@@ -7,17 +7,17 @@ from pycpptraj.Residue import Residue
 class TestResidue(unittest.TestCase):
     def test_0(self):
         top = Topology("./data/Tc5b.top")
-        print top.residuelist(mode="instance")[0].first_atom_idx
-        print top.residuelist(mode="instance")[0].last_atom_idx
-        print top.residuelist(mode="instance")[0].n_atoms
+        print top.residuelist[0].first_atom_idx
+        print top.residuelist[0].last_atom_idx
+        print top.residuelist[0].n_atoms
 
-        print top.residuelist(mode="instance")[10].first_atom_idx
-        print top.residuelist(mode="instance")[10].last_atom_idx
-        print top.residuelist(mode="instance")[10].n_atoms
+        print top.residuelist[10].first_atom_idx
+        print top.residuelist[10].last_atom_idx
+        print top.residuelist[10].n_atoms
 
         print dir(top.atomlist[0])
         anames = [atom.__str__() for atom in top.atomlist]
-        print anames
+        #print anames
 
     def test_1(self):
         datadir = "./data/"
@@ -48,12 +48,22 @@ class TestResidue(unittest.TestCase):
         
         # test iterator
         gen = top.residues
-        print gen.next()
-        print gen.next()
-        print gen.next()
-        print gen.next()
-        print gen.next()
-        print gen.next()
+        for idx, res in enumerate(top.residues):
+            print res.name
+            print res.n_atoms
+            if idx == 10:
+                break
+        print dir(res)
+        print res.first_atom_idx
+        print res.last_atom_idx
+        print res.n_atoms
+
+        res0 = top.residuelist[0]
+        print res0
+        print top.atomlist[0]
+        print res0.first_atom_idx
+        print res0.last_atom_idx
+        print res0.n_atoms
         
 if __name__ == '__main__':
     unittest.main()

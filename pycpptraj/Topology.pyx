@@ -199,16 +199,11 @@ cdef class Topology:
             incr(it)
         return atlist
 
-    #@property
-    def residuelist(self, mode='normal'):
+    @property
+    def residuelist(self):
         reslist = []
         for res in self.residues:
-            if mode == 'normal':
-                # add resname
-                reslist.append(res.__str__())
-            else:
-                # add residue instance
-                reslist.append(res)
+            reslist.append(res)
         return reslist
 
     def summary(self):

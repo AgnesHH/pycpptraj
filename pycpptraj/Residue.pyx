@@ -50,5 +50,6 @@ cdef class Residue:
     def name_is_solvent(self):
         return self.thisptr.NameIsSolvent()
 
+    @property
     def name(self):
         return self.thisptr.c_str()

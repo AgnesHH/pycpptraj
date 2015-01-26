@@ -50,7 +50,7 @@ class TestPyCpptrajIO(unittest.TestCase):
         print type(indices)
         print indices
         mdio.writetraj(filename="./output/test_io_saved_.x", 
-                       traj=traj, 
+                       traj=traj[:], 
                        top="./data/Tc5b.top",
                        indices=indices,
                        overwrite=True)
