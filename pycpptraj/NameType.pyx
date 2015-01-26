@@ -5,6 +5,7 @@ cdef class NameType:
     def __cinit__(self, *args):
         cdef string s
         cdef NameType rhs
+
         if not args:
             self.thisptr = new _NameType()
         elif len(args) == 1:
@@ -19,10 +20,17 @@ cdef class NameType:
         else:
             raise ValueError()
 
+    def copy(self):
+        cdef NameType nt = NameType()
+        del nt.thisptr 
+        nt.thisptr = new _NameType(self.thisptr[0])
+        return nt
+
     def __dealloc__(self):
         del self.thisptr
 
-    def to_buffer(self,char *c):
+    def to_buffer(self, char* c):
+        # TODO : what does this method do?
         self.thisptr.ToBuffer(c)
 
     def match(self, NameType nt):
@@ -53,7 +61,7 @@ cdef class NameType:
     #def  char * operator *(self):
 
     def __getitem__(self, int idx):
-        return self.thisptr[0][idx]
+        return self.thisptr.opr_idx(idx)
 
     def truncated(self):
         """return string"""
@@ -61,3 +69,6 @@ cdef class NameType:
 
     def replace_asterisk(self):
         self.thisptr.ReplaceAsterisk()
+
+    def __str__(self):
+        return str(self.thisptr.opr_star())
