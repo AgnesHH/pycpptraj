@@ -16,8 +16,8 @@ cdef extern from "NameType.h":
         #bint opr_ne "operator !="(const _NameType&) const 
         bint operator !=(const _NameType&) const 
         bint operator !=(const char *) const 
-        const char* operator*() const 
-        char operator[](int) const 
+        const char* opr_star "operator*" () const 
+        char opr_idx "operator[]"(int) const 
         string Truncated() const 
         void ReplaceAsterisk() 
 
