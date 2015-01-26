@@ -11,22 +11,19 @@ from pycpptraj.FileName cimport _FileName, FileName
 cdef extern from "DataFile.h": 
     # DataFile.h
     ctypedef enum DataFormatType "DataFile::DataFormatType":
-        DATAFILE "DataFile::DATAFILE"
-        XMGRACE "DataFile::XMGRACE"
-        GNUPLOT "DataFile::GNUPLOT"
-        XPLOR "DataFile::XPLOR"
-        OPENDX "DataFile::OPENDX"
-        REMLOG "DataFile::REMLOG"
-        MDOUT "DataFile::MDOUT"
-        EVECS "DataFile::EVECS"
-        UNKNOWN_DATA "DataFile::UNKNOWN_DATA"
+        pass
     cdef cppclass _DataFile "DataFile":
         _DataFile() 
         #~_DataFile() 
+        @staticmethod
         void WriteHelp() 
+        @staticmethod
         void ReadOptions() 
+        @staticmethod
         void WriteOptions() 
+        @staticmethod
         DataFormatType GetFormatFromArg(_ArgList& a)
+        #@staticmethod
         const char * FormatString(DataFormatType t)
         const char * FormatString() const 
         void SetDebug(int)
@@ -49,4 +46,3 @@ cdef extern from "DataFile.h":
 cdef class DataFile:
     cdef _DataFile* thisptr
     cdef bint py_free_mem
-
