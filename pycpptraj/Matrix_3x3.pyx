@@ -4,6 +4,7 @@ from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 from libcpp.vector cimport vector
 from cpython.array cimport array as pyarray
+from pycpptraj.utils.check_and_assert import _import_numpy
 """
 In [1]: from Matrix_3x3 import Matrix_3x3 as M3x3
 
@@ -85,12 +86,13 @@ cdef class Matrix_3x3:
             del self.thisptr
         #print "I was deallocated"
 
-    def __imul__(self, Matrix_3x3 other):
+    def __imul__(Matrix_3x3 self, Matrix_3x3 other):
         """mat *= other"""
+
         self.thisptr[0].star_equal(other.thisptr[0])
         return self
 
-    def Row1(self):
+    def row1(self):
         """
         Parameters: None
         ---------------
@@ -103,92 +105,74 @@ cdef class Matrix_3x3:
         vec.thisptr[0] = self.thisptr.Row1()
         return vec
 
-    def Row2(self):
+    def row2(self):
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.Row2()
         return vec
 
-    def Row3(self):
+    def row3(self):
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.Row3()
         return vec
 
-    def Col1(self):
+    def col1(self):
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.Col1()
         return vec
 
-    def Col2(self):
+    def col2(self):
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.Col2()
         return vec
 
-    def Col3(self):
+    def col3(self):
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.Col3()
         return vec
 
-    def Zero(self):
+    def zeros(self):
         self.thisptr.Zero()
 
-    def Print(self, char* Title=""):
+    def pprint(self, char* Title=""):
         """Print matrix"""
         self.thisptr.Print(Title)
 
-    def Diagonalize(self, Vec3 vect): 
+    def diagonalize(self, Vec3 vect): 
         self.thisptr.Diagonalize(vect.thisptr[0])
-        
-    def Diagonalize_Sort(self, Vec3 vectds):
+
+    def diagonalize_sort(self, Vec3 vectds):
         self.thisptr.Diagonalize_Sort(vectds.thisptr[0])
 
-    def Diagonalize_Sort_Chirality(self, Vec3 vectds, int idx):
+    def diagonalize_sort_chirality(self, Vec3 vectds, int idx):
         self.thisptr.Diagonalize_Sort_Chirality(vectds.thisptr[0], idx)
 
-    def Transpose(self):
+    def transpose(self):
         self.thisptr.Transpose()
 
-    def RotationAroundZ(self, idx, idy):
+    def rotation_around__zaxis(self, idx, idy):
         self.thisptr.RotationAroundZ(idx, idy)
 
-    def RotationAroundY(self, idx, idz):
+    def rotation_around__yaxis(self, idx, idz):
         self.thisptr.RotationAroundY(idx, idz)
 
     def __mul__(Matrix_3x3 self, other):
-        #cdef Matrix_3x3 result = Matrix_3x3()
-        #result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
-        #return result
-        if isinstance(other, Vec3) or isinstance(other, Matrix_3x3):
-            return self.mul(other)
+        cdef Matrix_3x3 mat_other, mat_result
+        cdef Vec3 vec_other, vec_result
+
+        if isinstance(other, Vec3):
+            vec_other = other
+            vec_result = Vec3()
+            vec_result.thisptr[0] = self.thisptr[0] * vec_other.thisptr[0]
+            return vec_result
+        elif isinstance(other, Matrix_3x3):
+            mat_other = other
+            mat_result = Matrix_3x3()
+            mat_result.thisptr[0] = self.thisptr[0] * mat_other.thisptr[0]
+            return mat_result
         else:
-            raise ValueError("Must be either Matrix_3x3")
+            raise ValueError("Must be either Matrix_3x3 or Vec3") 
 
-
-    #def mul(Matrix_3x3 self, MatVecType other):
-    #    """ 
-    #    Note: for some reason this code does not work yet.
-    #    (works fine with regular method "mult", but not with __mul__)
-    #    Multiply two matrices or a matrix with a vector
-
-    #    Parameters
-    #    ----------
-    #    self: Matrix_3x3 instance
-    #    other: Matrix_3x3 instance or Vec3 instance
-
-    #    Output
-    #    ------
-    #    new Matrix_3x3 instance or Vec3 instance
-    #    """
-    #    cdef MatVecType result
-    #    if isinstance(other, Vec3):
-    #        result = Vec3()
-    #    elif isinstance(other, Matrix_3x3):
-    #        result = Matrix_3x3()
-    #    else:
-    #        raise ValueError("Must be a Matrix_3x3 or a Vec3 instance")
-    #    result.thisptr[0] = self.thisptr[0] * other.thisptr[0]
-    #    return result
-
-    def CalcRotationMatrix(self, *args):
+    def calc_rotation_matrix(self, *args):
         """
         """
         cdef Vec3 vec
@@ -206,15 +190,15 @@ cdef class Matrix_3x3:
         else:
             raise ValueError('must be "Vec3, theta" or "x, y, z"')
 
-    def RotationAngle(self):
+    def rotation_angle(self):
        return self.thisptr.RotationAngle()
 
-    def AxisOfRotation(self, theta):
+    def axis_of_rotation(self, theta):
         cdef Vec3 vec = Vec3()
         vec.thisptr[0] = self.thisptr.AxisOfRotation(theta)
         return vec 
 
-    def TransposeMult(self, Matrix_3x3 other):
+    def transpose_mult(self, Matrix_3x3 other):
         cdef Matrix_3x3 result
         result =  Matrix_3x3()
         result.thisptr[0] = self.thisptr.TransposeMult(other.thisptr[0])
@@ -251,7 +235,11 @@ cdef class Matrix_3x3:
         return arr0
 
     def __getitem__(self, idx):
-        return self.buffer3d[idx]
+        has_numpy, _np = _import_numpy()
+        if has_numpy:
+            return _np.asarray(self.buffer3d[idx])
+        else:
+            return self.buffer3d[idx]
 
     def __setitem__(self, idx, value):
         self.buffer3d[idx] = value
