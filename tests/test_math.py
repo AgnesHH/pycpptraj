@@ -8,6 +8,8 @@ class Test(unittest.TestCase):
     def test_0(self):
         mat = Matrix_3x3(range(10, 19))
         vec = Vec3(range(3))
+        print vec[:]
+        print mat[:]
 
 if __name__ == "__main__":
     unittest.main()
