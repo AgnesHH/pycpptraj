@@ -4,6 +4,8 @@ from libcpp.vector cimport vector
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 
+from pycpptraj.utils.check_and_assert import _import_numpy
+
 # should we use numpy rather reinvent the wheel?
 cdef class Vec3:
     def __cinit__(self, *args):
@@ -161,7 +163,12 @@ cdef class Vec3:
         return vec
 
     def __getitem__(self, idx):
-        return self.buffer1d[idx]
+        # either return ndarray or memovryview
+        has_numpy, _np = _import_numpy()
+        if has_numpy:
+            return _np.asarray(self.buffer1d[idx])
+        else:
+            return self.buffer1d[idx]
 
     def __setitem__(self, idx, value):
         if isinstance(value, (list, tuple)):
