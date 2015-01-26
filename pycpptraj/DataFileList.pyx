@@ -14,7 +14,7 @@ cdef class DataFileList:
     def clear(self):
         self.thisptr.Clear()
 
-    def remove_data_file(self, DataFile dfIn):
+    def remove_datafile(self, DataFile dfIn):
         cdef DataFile dfile = DataFile()
         dfile.thisptr[0] = deref(self.thisptr.RemoveDataFile(dfIn.thisptr))
         return dfile
@@ -22,36 +22,29 @@ cdef class DataFileList:
     def remove_data_set(self,DataSet dsIn):
         self.thisptr.RemoveDataSet(dsIn.baseptr0)
         
-    def set_debug(self, int debug):
-        self.thisptr.SetDebug(debug)
-
-    # this method is for MPI. 
-    #def set_ensemble_mode(self,int mIn):
-    #    self.thisptr.SetEnsembleNum(mIn)
-
-    def get_data_file(self, string nameIn):
+    def get_datafile(self, string datafilename):
         cdef DataFile dfile = DataFile()
         dfile.py_free_mem = False
-        dfile.thisptr = self.thisptr.GetDataFile(nameIn)
+        dfile.thisptr = self.thisptr.GetDataFile(datafilename)
         return dfile
 
-    def add_data_file(self, string nameIn, *args):
+    def add_datafile(self, string datafilename, *args):
         cdef DataFile dfile = DataFile()
         cdef ArgList argIn
 
         if not args:
-            dfile.thisptr[0] = deref(self.thisptr.AddDataFile(nameIn))
+            dfile.thisptr[0] = deref(self.thisptr.AddDataFile(datafilename))
         else:
             argIn = args[0]
-            dfile.thisptr[0] = deref(self.thisptr.AddDataFile(nameIn, argIn.thisptr[0]))
+            dfile.thisptr[0] = deref(self.thisptr.AddDataFile(datafilename, argIn.thisptr[0]))
         return dfile
 
-    def add_set_to_file(self, string nameIn, DataSet dsetIn):
+    def add_dataset(self, string datafilename, DataSet dsetIn):
         cdef DataFile dfile = DataFile()
-        dfile.thisptr[0] = deref(self.thisptr.AddSetToFile(nameIn, dsetIn.baseptr0))
+        dfile.thisptr[0] = deref(self.thisptr.AddSetToFile(datafilename, dsetIn.baseptr0))
         return dfile
 
-    def list(self):
+    def listinfo(self):
         self.thisptr.List()
 
     def write_all_datafiles(self):
@@ -62,4 +55,3 @@ cdef class DataFileList:
 
     def process_data_file_args(self, ArgList argIn):
         return self.thisptr.ProcessDataFileArgs(argIn.thisptr[0])
-
