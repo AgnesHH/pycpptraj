@@ -1,8 +1,10 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
 
+# FIXME : property does not work properly
 
-cdef class AtomMask:
+
+cdef class AtomMask(object):
     # TODO : rename methods, add doc
     def __cinit__(self, *args):
         cdef int begin_atom, end_atom, atom_num
