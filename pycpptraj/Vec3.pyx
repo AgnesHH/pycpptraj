@@ -1,5 +1,5 @@
 # distutils: language = c++
-from array import array
+from cpython.array cimport array as pyarray
 from libcpp.vector cimport vector
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
@@ -28,10 +28,9 @@ cdef class Vec3:
         if self.thisptr is not NULL:
             del self.thisptr
 
-    #def __str__(self):
-    #    cdef double x, y, z 
-    #    x, y, z = self.to_list()
-    #    return "Vec3 %s %s %s" %(str(x), str(y), str(z))
+    def __str__(self):
+        x, y, z = self.tolist()
+        return "Vec3 instance: %s %s %s" %(x, y, z)
 
     def Magnitude2(self):
         return self.thisptr.Magnitude2()
@@ -161,23 +160,28 @@ cdef class Vec3:
         vec.thisptr[0] = self.thisptr.Cross(rhs.thisptr[0])
         return vec
 
-    def __getitem__(self, int idx):
-        return self.thisptr.index_opr(idx)
+    def __getitem__(self, idx):
+        return self.buffer1d[idx]
+
+    def __setitem__(self, idx, value):
+        if isinstance(value, (list, tuple)):
+            value = pyarray('d', value)
+        self.buffer1d[idx] = value
 
     def IsZero(self):
         return self.thisptr.IsZero()
 
-    def Neg(self):
+    def neg(self):
         self.thisptr.Neg()
 
-    def SignedAngle(self, Vec3 v1, Vec3 v2):
+    def signed_angle(self, Vec3 v1, Vec3 v2):
         return self.thisptr.SignedAngle(v1.thisptr[0], v2.thisptr[0])
  
     def tolist(self):
-        cdef double* ptr = self.thisptr.Dptr()
-        cdef int i
-        cdef vector[double] v
-        for i in range(3):
-            v.push_back(deref(ptr))
-            incr(ptr)
-        return v
+        vlist = [x for x in pyarray('d', self.buffer1d[:])]
+        return vlist
+
+    @property
+    def buffer1d(self):
+        cdef double[:] arr = <double[:3]> self.thisptr.Dptr()
+        return  arr
