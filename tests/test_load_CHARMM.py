@@ -10,7 +10,7 @@ class TestCHARMM(unittest.TestCase):
         print top.n_atoms
         print dir(top)
         top.summary()
-        reslit = top.residuelist()
+        reslit = top.residuelist
         print reslit
         atm = AtomMask("@CA")
         print atm.n_selected
