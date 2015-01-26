@@ -35,10 +35,8 @@ cdef extern from "Matrix_3x3.h":
         #_Vec3 TransposeMult(const _Vec3& rhs) const  #not yet implemented in cpptraj?
         _Matrix_3x3 operator *(const _Matrix_3x3&) const 
         _Matrix_3x3 TransposeMult(const _Matrix_3x3&) const 
-        const double * Dptr() const 
-        #double * Dptr() 
+        #const double * Dptr() const 
+        double * Dptr() 
 
 cdef class Matrix_3x3:
     cdef _Matrix_3x3* thisptr
-    #cdef _CalcRotationMatrix(Matrix_3x3 self, Vec3 vec, double theta)
-    #cdef _CalcRotationMatrix_xyz(self, double x, double y, double z)
