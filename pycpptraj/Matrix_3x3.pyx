@@ -3,6 +3,7 @@
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 from libcpp.vector cimport vector
+from cpython.array cimport array as pyarray
 """
 In [1]: from Matrix_3x3 import Matrix_3x3 as M3x3
 
@@ -31,18 +32,24 @@ In [8]: n.Print("3x3 matrix n: ")
 """
 
 cdef class Matrix_3x3:
-    def __cinit__(self, double[::1] X=None):
+    def __cinit__(self, Xin=None):
         """TODO: 
              add doc
              Add: mat1 = Matrix_3x3(mat2)
                   (Cython complains "TypeError: 'src.Matrix_3x3.Matrix_3x3' 
                    does not have the buffer interface")
         """
-        if X is None:
+        cdef double[:] X 
+        if Xin is None:
             #make new instance
             # make a Matrix_3x3 with 0.0 element
             self.thisptr = new _Matrix_3x3(0.0)
         else:
+            if isinstance(Xin, (list, tuple)):
+                assert len(Xin) == 9
+                X = pyarray('d', Xin)
+            else:
+                X = Xin
             if X.shape[0] == 9:
                 #Takes array of 9, row-major
                 self.thisptr = new _Matrix_3x3(&X[0])
@@ -213,7 +220,7 @@ cdef class Matrix_3x3:
         result.thisptr[0] = self.thisptr.TransposeMult(other.thisptr[0])
         return result 
 
-    def to_list(self):
+    def tolist(self):
         cdef double* ptr = self.thisptr.Dptr()
         cdef int i
         cdef vector[double] v
@@ -232,3 +239,19 @@ cdef class Matrix_3x3:
             return mat
         except:
             raise ImportError("Must have numpy installed")
+
+    @property
+    def buffer3d(self):
+        cdef double[:, :] arr0 = <double[:3, :3]> self.thisptr.Dptr()
+        return arr0
+
+    @property
+    def buffer1d(self):
+        cdef double[:] arr0 = <double[:9]> self.thisptr.Dptr()
+        return arr0
+
+    def __getitem__(self, idx):
+        return self.buffer3d[idx]
+
+    def __setitem__(self, idx, value):
+        self.buffer3d[idx] = value
