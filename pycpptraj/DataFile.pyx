@@ -41,13 +41,11 @@ cdef class DataFile:
     def setup_datafile(self, string filenameIn, ArgList argIn, int debugIn):
         return self.thisptr.SetupDatafile(filenameIn, argIn.thisptr[0], debugIn)
 
-    #def AddSet(self,DataSet dataIn):
-    #    # DataSet has virtual method
-    #    # How can I add here?
-    #    return self.thisptr.AddSet(dataIn.thisptr)
+    def addset(self, DataSet dataIn):
+        return self.thisptr.AddSet(dataIn.baseptr0)
 
-    #def RemoveSet(self,DataSet dataIn):
-    #    return self.thisptr.RemoveSet(dataIn.thisptr)
+    def removeset(self, DataSet dataIn):
+        return self.thisptr.RemoveSet(dataIn.baseptr0)
 
     def process_args(self, arg):
         cdef string s
@@ -68,12 +66,12 @@ cdef class DataFile:
     def data_set_names(self):
         self.thisptr.DataSetNames()
 
-    def setDF_lwrite(self, bint fIn):
+    def setDFLwrite(self, bint fIn):
         self.thisptr.SetDFLwrite(fIn)
 
-    def dF_lwrite(self):
+    def DFLwrite(self):
         return self.thisptr.DFLwrite()
 
-    property data_format_type:
+    property dtype:
         def __get__(self):
             return self.thisptr.Type()
