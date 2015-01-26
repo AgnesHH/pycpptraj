@@ -22,7 +22,7 @@ cdef class NameType:
     def __dealloc__(self):
         del self.thisptr
 
-    def tobuffer(self,char *c):
+    def to_buffer(self,char *c):
         self.thisptr.ToBuffer(c)
 
     def match(self, NameType nt):
