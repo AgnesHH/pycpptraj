@@ -21,6 +21,7 @@ python ./test_fancy_indexing.py
 python ./test_Residue.py 
 python ./test_CpptrajState.py 
 python ./test_Action_Radgyr.py 
+python ./test_math.py 
 python ./test_MolSurf.py 
 python ./test_listIndex_FrameArray.py 
 python ./test_TMscore.py 
@@ -47,6 +48,7 @@ python ./test_known_bugs.py
 python ./test_DataSet_Coords_TRJ.py 
 python ./test_Frame_box.py 
 python ./test_DataSet_Coords_CRD.py 
+python ./test_Matrix_3x3.py 
 python ./test_FrameArray_help.py 
 python ./test_Frame_3.py 
 python ./test_dummy_indexing_FrameArray.py 
