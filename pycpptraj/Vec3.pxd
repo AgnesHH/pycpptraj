@@ -27,7 +27,7 @@ cdef extern from "Vec3.h":
         _Vec3 Cross(const _Vec3& rhs) const 
         #double operator[](int idx) const 
         #double& index_opr "operator[]"(int idx)
-        double index_opr "operator[]"(int idx) const
+        double& index_opr "operator[]"(int idx) const
         double Magnitude2() const 
         void Zero() 
         bint IsZero() const 
