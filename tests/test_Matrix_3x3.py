@@ -21,7 +21,12 @@ class TestMatrix_3x3(unittest.TestCase):
         npmat = np.asmatrix(mat[:])
         mat[0, 0] = 20.
         assert npmat[0, 0] == 20.
-        print type(npmat)
+        mat *= mat
+        print mat
+        print mat.tolist()
+        mat.pprint()
+        print mat.row1()
+        
 
 if __name__ == "__main__":
     unittest.main()
