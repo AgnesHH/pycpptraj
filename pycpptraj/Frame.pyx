@@ -289,6 +289,7 @@ cdef class Frame (object):
 
     def update_atoms(self, indices, xyz):
         """TODO: add doc"""
+        # xyz : 1D array
         if len(indices) != len(xyz)/3:
             raise ValueError("TODO: add doc")
         self._update_atoms(pyarray('i', indices), pyarray('d', xyz), len(indices))
