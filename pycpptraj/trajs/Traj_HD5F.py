@@ -12,25 +12,27 @@ assert has_numpy == True
 
 # TODO : inherit from FrameArray?
 # FIXME: *** Error in `python': double free or corruption (out)
-class HD5F(FrameArray):
+class HD5F():
     def __init__(self, filename=None, mode='r', flag='hd5f', *args, **kwd):
         print "creating new HD5F instance"
         self.filename = filename
         self.mode = mode
         self.flag = flag # for what?
 
-    def load(self, filename, mode='r', top=None):
+    def load_toframearray(self, filename, mode='r', top=None):
+        farray = FrameArray()
         h5fh = h5py.File(filename, mode)
-        self.resize(h5fh['coordinates'].shape[0])
+        farray.resize(h5fh['coordinates'].shape[0])
 
         for idx, arr in enumerate(h5fh['coordinates']):
             # allocate frame
-            self[idx] = Frame(arr.shape[0])
+            farray[idx] = Frame(arr.shape[0])
             # turn py_free_mem to False does not help avoiding memory error
             # why?
             #self[idx].py_free_mem = False
             # make sure to use np.float64 (double)
-            self[idx].set_from_crd(arr.flatten().astype(np.float64))
+            farray[idx].set_from_crd(arr.flatten().astype(np.float64))
+        return farray
 
     def write(self, *args, **kwd):
         raise NotImplementedError("not yet supported")
