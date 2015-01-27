@@ -4,6 +4,8 @@ from .Frame import Frame
 from .utils.check_and_assert import _import_numpy
 from .AtomMask import AtomMask
 
+# TODO : using 'vmd_style' flag to turn on/off mask style
+
 has_numpy, np = _import_numpy()
 if not has_numpy:
     raise ImportError("must has numpy installed")
