@@ -48,6 +48,7 @@ cdef class DataFileList:
         self.thisptr.List()
 
     def write_all_datafiles(self):
+        # perhaps pycpptraj only uses this method
         self.thisptr.WriteAllDF()
 
     def reset_write_status(self):
