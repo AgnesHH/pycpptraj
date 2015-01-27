@@ -11,6 +11,8 @@ from pycpptraj.TrajReadOnly import TrajReadOnly
 from pycpptraj.utils.check_and_assert import _import_numpy
 from pycpptraj.utils.check_and_assert import file_exist
 
+# we don't allow sub-class in Python level since we will mess up with memory
+@cython.final
 cdef class FrameArray:
     def __cinit__(self, string filename='', top=None, indices=None, 
                   bint warning=False, n_frames=None, flag=None):
