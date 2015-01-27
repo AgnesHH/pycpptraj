@@ -9,8 +9,8 @@ import numpy as np
 class Test(unittest.TestCase):
     def test_0(self):
         pass
-        h5 = HD5F()
-        h5.load("./data/ala2.h5")
+        #h5 = HD5F()
+        #h5.load("./data/ala2.h5")
 
     def test_1(self):
         farray = FrameArray()
