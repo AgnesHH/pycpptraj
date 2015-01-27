@@ -6,7 +6,6 @@ has_numpy, np = _import_numpy()
 ctypedef signed short sshort
 cdef extern from "./src/gdt_.h":
     sshort * _gdt "gdtCPUOneReference"(float *reference, float *arr,  int conformers,int protlen,int score)
-    #int * _gdt "gdtCPUOneReference"(float *reference, float *arr,  int conformers,int protlen,int score)
 
 
 def gdt(float[:] reference, float[:] arr, int conformers, int protlen, int score):
