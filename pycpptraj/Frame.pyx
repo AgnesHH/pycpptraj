@@ -170,8 +170,9 @@ cdef class Frame (object):
                 )
         return tmp
 
-    #def __setattr__(self, name, att):
-    #    self.__dict__[name] = att
+    @property
+    def shape(self):
+        return self.buffer3d[:].shape
 
     def __getitem__(self, idx):
         # always return memoryview 
