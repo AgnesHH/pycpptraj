@@ -75,10 +75,12 @@ packages = [
         'pycpptraj.clusters',
         'pycpptraj.trajs',
         'pycpptraj.gdt',
+        'pycpptraj.data_sample',
         ]
 
+datalist = [[p[10:] for p in pxd_include_patterns] + ['data_sample/*/*', 'data_sample/*']]
 setup_args['package_data'] = {
-        'pycpptraj' : [p[10:] for p in pxd_include_patterns],
+        'pycpptraj' : datalist[0], 
         }
 
 if __name__ == "__main__":

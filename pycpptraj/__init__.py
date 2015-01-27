@@ -18,6 +18,7 @@ from pycpptraj.trajs.Trajout import Trajout
 from pycpptraj.cast_dataset import cast_dataset
 from pycpptraj.parms.ParmFile import ParmFile
 from pycpptraj.misc import action_help
+from pycpptraj.data_sample.load_sample_data import load_sample_data
 
 # actions
 from pycpptraj.actions import allactions
