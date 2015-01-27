@@ -10,6 +10,7 @@ python ./test_DataSet_double.py
 python ./test_NameType.py 
 python ./test_Trajin_Single.py 
 python ./test_FrameArray.py 
+python ./test_misc.py 
 python ./test_Action_Surf.py 
 python ./test_randomize_ions.py 
 python ./test_FrameArray_extensive_indexing.py 
@@ -43,12 +44,14 @@ python ./test_DistRoutines.py
 python ./test_Action_Image.py 
 python ./test_memview3D.py 
 python ./test_writepdb.py 
+python ./test_AtomSelect.py 
 python ./test_indexing_speed.py 
 python ./test_known_bugs.py 
 python ./test_DataSet_Coords_TRJ.py 
 python ./test_Frame_box.py 
 python ./test_DataSet_Coords_CRD.py 
 python ./test_Matrix_3x3.py 
+python ./test_GDTscore.py 
 python ./test_FrameArray_help.py 
 python ./test_Frame_3.py 
 python ./test_dummy_indexing_FrameArray.py 
@@ -56,6 +59,7 @@ python ./test_Action_Distance.py
 python ./test_Frame_4.py 
 python ./test_TopologyList.py 
 python ./test_DataSetList.py 
+python ./test_hd5f.py 
 python ./test_loadpdb_rcsb.py 
 python ./test_Atom.py 
 python ./test_Trajin.py 
