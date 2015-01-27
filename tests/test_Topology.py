@@ -1,10 +1,12 @@
 import os
+import numpy as np
 import unittest
 from pycpptraj.Topology import Topology
 from pycpptraj.AtomMask import AtomMask
 from pycpptraj.FileName import FileName
 from pycpptraj.base import *
 from pycpptraj.decorators import no_test
+from pycpptraj.NameType import NameType
 
 class TestTopology(unittest.TestCase):
     def test_empty_top(self):
@@ -49,6 +51,35 @@ class TestTopology(unittest.TestCase):
         print "test mol_iterator"
         for mol in top.mols:
             pass
+
+    def test_2(self):
+        from pycpptraj import load_sample_data
+        # load Ala3
+        traj = load_sample_data()
+        top = traj.top
+        for i in range(top.n_atoms):
+            print top.trunc_res_atom_name(i)
+
+        for i in range(top.n_residues):
+            print top.trunc_resname_num(i)
+
+        print dir(top)
+        print top.n_atoms 
+        atom = Atom("CA")
+        restype = NameType("ALA")
+        xyz = np.arange(3, dtype=np.float64)
+        top.add_atom(atom, 4, restype, xyz)
+        assert top.n_atoms == 35
+        top.add_atom(Atom("CB  "), 4, restype)
+        assert top.n_atoms == 36
+        #assert ("TEST" in top.trunc_res_atom_name(34))
+        print top.trunc_res_atom_name(34)
+
+        # TODO: cpptraj does not recognize new atom names
+        print top[33]
+        print top[34]
+        print top.n_atoms
+        print top[35]
         
 if __name__ == "__main__":
     unittest.main()
