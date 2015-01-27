@@ -78,6 +78,7 @@ cdef class FrameArray:
 
     def load(self, filename='', Topology top=None, indices=None):
         # TODO : add more test cases
+        # should we add hdf5 format here?
         cdef Trajin_Single ts
         cdef int idx
 
