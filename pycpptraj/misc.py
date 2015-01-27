@@ -104,3 +104,15 @@ def action_help(action=None):
         actname = "Action_" + action
         act = allactions.__dict__[actname]()
         act.help()
+
+def get_action_dict():
+    actdict = {}
+    for key in allactions.__dict__.keys():
+        if "Action_" in key:
+            act = key.split("_")[1]
+            # add Action classes
+            actdict[act] = allactions.__dict__["Action_" + act]
+    return actdict
+
+# add action_dict
+action_dict = get_action_dict()
