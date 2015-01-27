@@ -3,6 +3,7 @@
 >>> from pycpptraj.common_actions import translate
 """
 from pycpptraj.DistRoutines import distance 
+from pycpptraj.gdt.calc_score import calc_score
 
 calc_distance = distance
 
