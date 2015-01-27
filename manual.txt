@@ -3,6 +3,22 @@ TODO : finish this manual
     * Compiling: cython + cpptraj
     * Running: pycpptraj
 
+* Frame
+    * Like cpptraj, Frame class is center of pycpptraj. pycpptraj added many fancy ways for indexing
+      >>> frame = mdio.load"./data/md1_prod.Tc5b.x", "./data/Tc5b.top")[0]
+      >>> # using dictionary to get a sub-array with mask
+      >>> frame[dict(top=traj.top, mask='@CA')] 
+      >>> frame[:] # return a memoryview (eithe cython memview or numpy array (if numpy is available))
+      >>> frame[AtomMaskInstance] # return a subarray copy of frame with AtomMask instance
+      >>> frame[:10, :] # like numpy indexing, return a memoryview
+      >>> # expose a `view` to numpy array
+      >>> arr0 = np.asarray(frame[:]) # shape = (n_atoms, 3)
+      >>> arr1 = np.asarray(frame.buffer3d[:]) # shape = (n_atoms, 3), same as frame[:]
+      >>> arr2 = np.asarray(frame.buffer1d[:]) # shape = (3*n_atoms,) # some C/C++ program prefer to 
+      >>> # use 1D array for frame coordinates
+      >>> # more importantly, you can use cpptraj Action_* class to perform 'actions'
+      >>> # Action_Rmsd, Action_Strip, ...
+
 * FrameArray
     * >>> farray = from pycpptraj import io as mdio
       >>> traj = mdio.iterload("./data/md1_prod.Tc5b.x", "./data/Tc5b.top", chunk=100).next()
