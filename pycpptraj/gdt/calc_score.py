@@ -18,4 +18,4 @@ def calc_score(frame0=None, frame1=None, mask="*", top=None, score="gdtscore"):
 
     ats.selected_frame = frame1
     arr1 = np.asarray(ats.select(mask).flatten(), dtype=np.float32)
-    return gdt(arr0, arr1, 1, len(arr0)/3, _score)
+    return gdt(arr0, arr1, 1, len(arr0)/3, _score)[0]
