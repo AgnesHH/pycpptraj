@@ -10,6 +10,7 @@ from pycpptraj.AtomSelect import AtomSelect
 from pycpptraj.Frame import Frame
 from pycpptraj.FrameArray import FrameArray
 from pycpptraj.Topology import Topology
+from pycpptraj.NameType import NameType
 from pycpptraj.ArgList import ArgList
 from pycpptraj.AtomMask import AtomMask
 from pycpptraj.CpptrajState import CpptrajState
