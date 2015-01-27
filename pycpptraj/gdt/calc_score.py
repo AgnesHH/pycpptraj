@@ -4,6 +4,7 @@ import numpy as np
 from .gdt import gdt
 
 def calc_score(frame0=None, frame1=None, mask="*", top=None, score="gdtscore"):
+    print "API will be changed"
     if score == 'gdtscore':
         _score = 1
     elif score == 'tmscore':
