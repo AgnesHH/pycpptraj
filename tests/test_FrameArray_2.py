@@ -8,7 +8,7 @@ class Test(unittest.TestCase):
         traj = mdio.load("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
         print traj['coordinates'].shape 
         assert traj['coordinates'].shape == (traj.size, traj[0].n_atoms, 3)
-        assert traj['topology'].n_atoms = traj.top.n_atoms
+        assert traj['topology'].n_atoms == traj.top.n_atoms
 
 if __name__ == "__main__":
     unittest.main()
