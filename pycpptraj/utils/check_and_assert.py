@@ -23,6 +23,16 @@ def _import_numpy():
         has_numpy = False
         return (has_numpy, None)
 
+def _import_h5py():
+    has_h5py = False
+    try:
+        import h5py
+        has_h5py = True
+        return (has_h5py, __import__('h5py'))
+    except ImportError:
+        has_h5py = False
+        return (has_h5py, None)
+
 def file_exist(filename):
     import os
     return os.path.isfile(filename)
