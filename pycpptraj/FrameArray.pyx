@@ -13,7 +13,7 @@ from pycpptraj.utils.check_and_assert import file_exist
 
 cdef class FrameArray:
     def __cinit__(self, string filename='', top=None, indices=None, 
-            bint warning=False, n_frames=None):
+                  bint warning=False, n_frames=None, flag=None):
         if isinstance(top, basestring):
             self.top = Topology(top)
         elif isinstance(top, Topology):
@@ -35,7 +35,7 @@ cdef class FrameArray:
         # this variable is intended to let FrameArray control 
         # freeing memory for Frame instance but it's too complicated
         #self.is_mem_parent = True
-        if not filename.empty():
+        if not filename.empty() and flag != 'hd5f':
             # TODO : check if file exist
             if not file_exist(filename):
                 raise ValueError("There is not file having this name")
@@ -128,6 +128,10 @@ cdef class FrameArray:
                 self.load(fh, top, indices)
         else:
             raise ValueError("can not load file/files")
+
+    @property
+    def shape(self):
+        return (self.n_frames, self[0].n_atoms, 3)
 
     @cython.boundscheck(False)
     @cython.wraparound(False)
