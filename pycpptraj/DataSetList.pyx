@@ -1,5 +1,4 @@
 # distutils: language = c++
-include "config.pxi"
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 
