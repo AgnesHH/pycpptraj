@@ -203,22 +203,22 @@ cdef class Topology:
     def brief(self, char* heading):
         self.thisptr.Brief(heading)
 
-    def atom_info(self, string maskString):
+    def atom_info(self, string maskString="*"):
         self.thisptr.PrintAtomInfo(maskString)
 
-    def bond_info(self, string maskString):
+    def bond_info(self, string maskString="*"):
         self.thisptr.PrintBondInfo(maskString)
     
-    def angle_info(self, string maskString):
+    def angle_info(self, string maskString="*"):
         self.thisptr.PrintAngleInfo(maskString)
 
-    def dihedral_info(self, string maskString):
+    def dihedral_info(self, string maskString="*"):
         self.thisptr.PrintDihedralInfo(maskString)
 
-    def molecule_info(self, maskString):
+    def molecule_info(self, maskString="*"):
         self.thisptr.PrintMoleculeInfo(maskString)
 
-    def residue_info(self, string maskString):
+    def residue_info(self, string maskString="*"):
         self.thisptr.PrintResidueInfo(maskString)
 
     def charge_mass_info(self, string maskString, int idtype):
@@ -227,7 +227,8 @@ cdef class Topology:
     def has_vel(self):
         return self.thisptr.HasVelInfo()
     
-    def add_top_atom(self, Atom atomIn, int o_resnum, NameType resname, double[:] XYZin):
+    def add_atom(self, Atom atomIn, int o_resnum, NameType resname, double[:] XYZin):
+        # TODO : convert mdtraj.topology instance to pycpptraj.topology instance
         return self.thisptr.AddTopAtom(atomIn.thisptr[0], o_resnum, resname.thisptr[0], &XYZin[0])
 
     def start_new_mol(self):
@@ -242,18 +243,17 @@ cdef class Topology:
     def set_ipol(self, int id):
         self.thisptr.SetIpol(id)
 
-    #def NextraPts(self):
-    #    pass
-
-    #def HasVelInfo(self):
-    #    return self.thisptr.HasVelInfo()
-
-    def original_filename(self):
+    def orig_filename(self):
         cdef FileName filename = FileName()
         filename.thisptr[0] = self.thisptr.OriginalFilename()
         return filename
 
+    property parm_index:
+        def __get__(self):
+            return self.thisptr.Pindex()
+
     property p_index:
+        # shortcut of parm_index
         def __get__(self):
             return self.thisptr.Pindex()
 
@@ -262,14 +262,19 @@ cdef class Topology:
             return self.thisptr.Natom()
 
     property n_res:
+        # shortcur 
+        def __get__(self):
+            return self.n_residues
+
+    property n_residues:
         def __get__(self):
             return self.thisptr.Nres()
 
-    property n_mol:
+    property n_mols:
         def __get__(self):
             return self.thisptr.Nmol()
 
-    property n_solvent:
+    property n_solvents:
         def __get__(self):
             return self.thisptr.Nsolvent()
 
@@ -338,10 +343,8 @@ cdef class Topology:
         tmptop.thisptr = self.thisptr.modifyStateByMask(atm.thisptr[0])
         self.thisptr[0] = tmptop.thisptr[0]
 
-    #def write_AmberParm(self, name):
-    #    Parm_Amber().write_parm(name, self)
-
     def tag(self):
+        # what does this do?
         return self.thisptr.Tag()
 
     def is_empty(self):
