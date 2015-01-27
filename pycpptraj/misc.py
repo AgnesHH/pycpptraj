@@ -93,7 +93,7 @@ def action_help(action=None):
 
     for key in allactions.__dict__.keys():
         if "Action_" in key:
-            act = key.split("_")[1]
+            act = key.split("Action_")[1]
             actlist.append(act)
 
     if action is None:
@@ -109,7 +109,7 @@ def get_action_dict():
     actdict = {}
     for key in allactions.__dict__.keys():
         if "Action_" in key:
-            act = key.split("_")[1]
+            act = key.split("Action_")[1]
             # add Action classes
             actdict[act] = allactions.__dict__["Action_" + act]
     return actdict
