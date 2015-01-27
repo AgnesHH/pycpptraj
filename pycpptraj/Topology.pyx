@@ -160,7 +160,7 @@ cdef class Topology:
     def atom_mask_name(self, int atom):
         return self.thisptr.AtomMaskName(atom)
 
-    def trunc_res_name_num(self, int res):
+    def trunc_resname_num(self, int res):
         return self.thisptr.TruncResNameNum(res)
 
     def find_atom_in_residue(self, int res, NameType atname):
@@ -200,7 +200,7 @@ cdef class Topology:
     def summary(self):
         self.thisptr.Summary()
 
-    def brief(self, char* heading):
+    def brief(self, char* heading="*"):
         self.thisptr.Brief(heading)
 
     def atom_info(self, string maskString="*"):
