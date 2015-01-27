@@ -65,12 +65,12 @@ class TestTopology(unittest.TestCase):
 
         print dir(top)
         print top.n_atoms 
-        atom = Atom("CA")
+        atom = Atom("CA", "CA")
         restype = NameType("ALA")
         xyz = np.arange(3, dtype=np.float64)
         top.add_atom(atom, 4, restype, xyz)
         assert top.n_atoms == 35
-        top.add_atom(Atom("CB  "), 4, restype)
+        top.add_atom(Atom("CB", "CB"), 4, restype)
         assert top.n_atoms == 36
         #assert ("TEST" in top.trunc_res_atom_name(34))
         print top.trunc_res_atom_name(34)
@@ -80,6 +80,12 @@ class TestTopology(unittest.TestCase):
         print top[34]
         print top.n_atoms
         print top[35]
+
+    def test_select_mask(self):
+        top = Topology("./data/Tc5b.top")
+        arr0 = top.get_atom_indices("@CA")
+        print arr0 
+        print type(arr0)
         
 if __name__ == "__main__":
     unittest.main()
