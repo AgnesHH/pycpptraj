@@ -1,7 +1,5 @@
 # distutils: language = c++
-include "config.pxi"
 from pycpptraj.cpp_vector cimport vector as cppvector
-#from libcpp.set cimport set
 from pycpptraj.Atom cimport _Atom, Atom
 from pycpptraj.Residue cimport _Residue, Residue
 from pycpptraj.Molecule cimport _Molecule, Molecule
@@ -124,5 +122,3 @@ cdef extern from "Topology.h":
 cdef class Topology:
     cdef _Topology* thisptr
     cdef public bint py_free_mem
-    IF DEBUG:
-        cdef unsigned int instance_num
