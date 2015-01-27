@@ -86,6 +86,12 @@ class TestTopology(unittest.TestCase):
         arr0 = top.get_atom_indices("@CA")
         print arr0 
         print type(arr0)
+
+    def test_call(self):
+        traj = FrameArray("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        top = traj.top
+        frame = traj[0]
+        print frame[top(":2-18@CA")]
         
 if __name__ == "__main__":
     unittest.main()
