@@ -6,6 +6,7 @@ python ./test_Box.py
 python ./test_io_save_indices.py 
 python ./test_teasing_traj.py 
 python ./test_TrajReadOnly_iter.py 
+python ./test_load_data_sample.py 
 python ./test_DataSet_double.py 
 python ./test_NameType.py 
 python ./test_Trajin_Single.py 
