@@ -11,6 +11,7 @@ from pycpptraj._utils cimport _get_buffer1D
 from pycpptraj.decorators import for_testing, iter_warning
 from pycpptraj.decorators import name_will_be_changed
 from pycpptraj.utils.check_and_assert import _import_numpy
+from pycpptraj.ArgList import ArgList
 
 # TODO : reogarnize memory view, there are too many ways to assess
 # need to finalize
@@ -175,10 +176,18 @@ cdef class Frame (object):
     def __getitem__(self, idx):
         # always return memoryview 
         has_numpy, np = _import_numpy()
-        if has_numpy:
-            return np.asarray(self.buffer3d[idx])
+        if isinstance(idx, AtomMask):
+            # return a sub-array copy with indices got from 
+            # idx.selected()
+            # TODO : add doc
+            if not has_numpy:
+                raise NotImplementedError("supported if having numpy installed")
+            return self[np.array(idx.selected())]
         else:
-            return self.buffer3d[idx]
+            if has_numpy:
+                return np.asarray(self.buffer3d[idx])
+            else:
+                return self.buffer3d[idx]
 
     def __setitem__(self, idx, value):
         # TODO : should we use buffer. Kind of dangerous
