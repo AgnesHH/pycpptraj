@@ -22,7 +22,6 @@ cdef extern from "FrameList.h":
         int NumFrames() const 
         const char* RefArgs
 
-
 cdef class FrameList:
     cdef _FrameList* thisptr
     #cdef const char* info
