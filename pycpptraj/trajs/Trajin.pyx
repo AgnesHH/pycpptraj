@@ -60,6 +60,16 @@ cdef class Trajin (TrajectoryFile):
         cdef int idx_1, idx_2
         cdef list tmplist
 
+        if isinstance(idxs, basestring):
+            # mimic API of MDtraj
+            if idxs == 'coordinates':
+                return self[:, :, :]
+            elif idxs == 'topology':
+                return self.top
+            else:
+                txt = "not supported keyword `%s`" % idxs
+                raise NotImplementedError(txt)
+
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
                 idx_0 = idxs[0]

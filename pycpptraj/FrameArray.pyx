@@ -162,6 +162,17 @@ cdef class FrameArray:
 
         if len(self) == 0:
             raise ValueError("Your FrameArray is empty, how can I index it?")
+
+        if isinstance(idxs, basestring):
+            # mimic API of MDtraj
+            if idxs == 'coordinates':
+                return self[:, :, :]
+            elif idxs == 'topology':
+                return self.top
+            else:
+                txt = "not supported keyword `%s`" % idxs
+                raise NotImplementedError(txt)
+
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
                 idx_0 = idxs[0]
