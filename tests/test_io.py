@@ -6,7 +6,7 @@ class TestPyCpptrajIO(unittest.TestCase):
     def test_save_traj_from_file(self):
         Trajout().help()
         traj = mdio.load("./data/md1_prod.Tc5b.x",
-                "./data/Tc5b.top")[:5]
+                        "./data/Tc5b.top")[:5]
         print traj.size
         mdio.writetraj(filename="test_0.binpos", 
                        traj=traj, 
@@ -16,6 +16,7 @@ class TestPyCpptrajIO(unittest.TestCase):
 
         savedtraj = mdio.load("./test_0.binpos", traj.top)
         print "test_0.binpos size = ", savedtraj.size
+        print traj.size
         assert savedtraj.size == traj.size
 
     def test_blindload(self):
@@ -57,8 +58,10 @@ class TestPyCpptrajIO(unittest.TestCase):
 
         # check frames
         traj2 = mdio.load(filename="./output/test_io_saved_.x", top="./data/Tc5b.top")
+        print "test_load_and_save_0"
         print traj2.size
         print traj2.is_empty()
+        print len(indices)
         assert traj2.size == len(indices) 
 
     def test_load_and_save_1(self):
