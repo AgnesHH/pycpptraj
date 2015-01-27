@@ -111,6 +111,15 @@ cdef class Topology:
         atom.thisptr[0] = self.thisptr.index_opr(idx)
         return atom
 
+    def __call__(self, mask, *args, **kwd):
+        """intended to use with Frame indexing
+        Return : AtomMask object
+        >>> frame[top("@CA")]
+        """
+        cdef AtomMask atm = AtomMask(mask)
+        self.set_integer_mask(atm)
+        return atm
+
     @property
     def atoms(self):
         cdef Atom atom
@@ -363,7 +372,7 @@ cdef class Topology:
         s = self.file_path()
         return s == ""
 
-    def get_atom_indices(self, mask):
+    def get_atom_indices(self, mask, *args, **kwd):
         """return atom indices with given mask
         To be the same as cpptraj/Ambertools: we mask indexing starts from 1
         but the return list/array use 0
