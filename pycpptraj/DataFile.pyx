@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from pycpptraj.cpptraj_dict import DataFormatDict
+from pycpptraj.cpptraj_dict import DataFormatDict, get_key
 
 cdef class DataFile:
     def __cinit__(self, py_free_mem=True):
@@ -74,4 +74,4 @@ cdef class DataFile:
 
     property dtype:
         def __get__(self):
-            return self.thisptr.Type()
+            return get_key(self.thisptr.Type(), DataFormatDict)
