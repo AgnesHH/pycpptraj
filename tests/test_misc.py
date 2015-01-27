@@ -1,34 +1,12 @@
-"""calculate pairwise rmsd for trajectory"""
-
-import inspect
-import numpy as np
+import unittest
 from pycpptraj.base import *
-from pycpptraj.misc import strip, iterload
+from pycpptraj import io as mdio
+from pycpptraj.utils.check_and_assert import assert_almost_equal
+from pycpptraj.misc import action_dict
 
-top=Topology("./data/Tc5b.top")
+class TestMisc(unittest.TestCase):
+    def test_0(self):
+        print action_dict.keys()
 
-farray = FrameArray()
-traj = Trajectory()
-print traj
-traj.load("./data/md1_prod.Tc5b.x", Topology("./data/Tc5b.top"))
-farray.get_frames(traj, update_top=True)
-
-strip(farray, mask="!@CA")
-
-def test_1(self):
-    anp = np.zeros(100*100).reshape(100, 100)
-    for i in range(100):
-        for j in range(100):
-            anp[i, j] = farray[i].rmsd(farray[j])
-    print anp
-
-genobj = iterload(top=top, filename="./data/md1_prod.Tc5b.x")
-print genobj.next()
-
-i = 0
-for range in genobj:
-    i += 1
-print i
-
-farraygen = iterload(top=top, filename="./data/md1_prod.Tc5b.x", chunk=50)
-print  farraygen.next()
+if __name__ == "__main__":
+    unittest.main()
