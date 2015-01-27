@@ -2,6 +2,7 @@
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
 from libcpp.string cimport string
+from cpython.array cimport array as pyarray
 from pycpptraj.TopologyList cimport TopologyList
 
 from pycpptraj.decorators import name_will_be_changed
@@ -227,9 +228,16 @@ cdef class Topology:
     def has_vel(self):
         return self.thisptr.HasVelInfo()
     
-    def add_atom(self, Atom atomIn, int o_resnum, NameType resname, double[:] XYZin):
-        # TODO : convert mdtraj.topology instance to pycpptraj.topology instance
-        return self.thisptr.AddTopAtom(atomIn.thisptr[0], o_resnum, resname.thisptr[0], &XYZin[0])
+    def add_atom(self, Atom atomIn, int o_resnum, 
+                 NameType resname, xyz=None):
+        """add_atom(Atom atomIn, int o_resnum, NameType resname, double[:] XYZin)"""
+        cdef double[:] XYZin
+        if xyz is None:
+            XYZin = pyarray('d', [0., 0., 0.])
+        else:
+            XYZin = pyarray('d', xyz)
+
+        self.thisptr.AddTopAtom(atomIn.thisptr[0], o_resnum, resname.thisptr[0], &XYZin[0])
 
     def start_new_mol(self):
         self.thisptr.StartNewMol()
