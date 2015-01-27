@@ -182,7 +182,19 @@ cdef class Frame (object):
             # TODO : add doc
             if not has_numpy:
                 raise NotImplementedError("supported if having numpy installed")
-            return self[np.array(idx.selected())]
+            arr0 = np.asarray(self.buffer3d[:])
+            return arr0[np.array(idx.selected())]
+        if isinstance(idx, dict):
+            # Example: frame[dict(top=top, mask='@CA')]
+            # return a sub-array copy with indices got from 
+            # idx as a `dict` instance
+            # TODO : add doc
+            if not has_numpy:
+                raise NotImplementedError("supported if having numpy installed")
+            atm = AtomMask(idx['mask'])
+            idx['top'].set_integer_mask(atm)
+            arr0 = np.asarray(self.buffer3d[:])
+            return arr0[np.array(atm.selected())]
         else:
             if has_numpy:
                 return np.asarray(self.buffer3d[idx])
@@ -203,9 +215,6 @@ cdef class Frame (object):
             self.buffer3d[idx] = value
         else:
             self.buffer3d[idx] = value
-
-    #def __array__(self):
-    #    return pyarray('d', self.buffer)
 
     def __iter__(self):
         cdef int i
