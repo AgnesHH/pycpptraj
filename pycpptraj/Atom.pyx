@@ -14,10 +14,12 @@ cdef class Atom:
             self.thisptr = new _Atom()
         else:
             if len(args) == 2:
-                if isinstance(args[0], NameType) and isinstance(args[1], NameType):
-                    aname = <NameType> args[0]
-                    atype = <NameType> args[1]
+                if isinstance(args[0], basestring) and isinstance(args[1], basestring):
+                    aname = NameType(args[0])
+                    atype = NameType (args[1])
                     self.thisptr = new _Atom(aname.thisptr[0], atype.thisptr[0], 1.0) 
+            else:
+                raise NotImplementedError("not yet supported")
 
     def __dealloc__(self):
         del self.thisptr
