@@ -9,13 +9,13 @@ import numpy as np
 
 # note : API will be changed. 
 class Test(unittest.TestCase):
-    @no_test
     def test_0(self):
         h5 = HD5F()
         # FIXME : *** Error in `python': double free or corruption
-        #h5.load("./data/ala2.h5")
-        #print h5
-        #print h5[0]
+        farray = h5.load_toframearray("./data/ala2.h5")
+        print farray
+        print farray[0]
+        print farray[0, 0]
 
     def test_1(self):
         traj = load_hd5f("./data/ala2.h5")
