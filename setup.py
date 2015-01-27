@@ -74,6 +74,7 @@ packages = [
         'pycpptraj.parms',
         'pycpptraj.clusters',
         'pycpptraj.trajs',
+        'pycpptraj.gdt',
         ]
 
 setup_args['package_data'] = {
