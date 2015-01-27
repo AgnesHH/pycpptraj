@@ -1,6 +1,5 @@
 # distutils: language = c++
 import os
-include "config.pxi"
 
 cdef class Trajin_Single(Trajin):
     def __cinit__(self, filename=None, top=None, *args):
