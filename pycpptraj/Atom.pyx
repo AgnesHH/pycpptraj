@@ -2,11 +2,22 @@
 from pycpptraj.cpptraj_dict import get_key, AtomicElementDict
 
 cdef class Atom:
-    def __cinit__(self, nametype=None, chainID=0, name=None,
-                        charge=None, mass=None, *args):
-
+#    def __cinit__(self, aname="", atype=None, index=0, 
+#                        chainID=' ', resnum=0, mol=0,
+#                        charge=0.0, polar=0.0, mass=1.0, 
+#                        element=None,
+#                        *args, **kwd):
+    def __cinit__(self, *args, **kwd):
         # TODO : add more constructors
-        self.thisptr = new _Atom()
+        cdef NameType aname, atype
+        if not args and not kwd:
+            self.thisptr = new _Atom()
+        else:
+            if len(args) == 2:
+                if isinstance(args[0], NameType) and isinstance(args[1], NameType):
+                    aname = <NameType> args[0]
+                    atype = <NameType> args[1]
+                    self.thisptr = new _Atom(aname.thisptr[0], atype.thisptr[0], 1.0) 
 
     def __dealloc__(self):
         del self.thisptr
@@ -58,7 +69,7 @@ cdef class Atom:
         def __get__(self):
             return self.thisptr.Charge()
     
-    property GBradius:
+    property gb_radius:
         # Do we need this?
         def __set__(self,double rin):
             self.thisptr.SetGBradius(rin)
