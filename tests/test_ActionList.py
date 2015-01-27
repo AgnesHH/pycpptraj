@@ -27,7 +27,8 @@ class TestActionList(unittest.TestCase):
     
         # add two actions: Action_Strip and Action_Distance
         alist.add_action(stripact, ArgList("@H*"), toplist, None, dsetlist, dflist)
-        alist.add_action(allactions.Action_Distance(), ArgList(":2@CA :3@CA"), toplist, None, dsetlist, dflist)
+        alist.add_action(allactions.Action_Distance(), ArgList(":2@CA :3@CA out test_df.dat"), 
+                         toplist, None, dsetlist, dflist)
     
         # 
         print "test setup_actions"
@@ -63,6 +64,8 @@ class TestActionList(unittest.TestCase):
         # it's time to retrieve the data
         ds = cast_dataset(dsetlist[0], dtype='general')
         print ds[:10]
+        print dir(dflist)
+        dflist.write_all_datafiles()
 
 if __name__ == "__main__":
     unittest.main()
