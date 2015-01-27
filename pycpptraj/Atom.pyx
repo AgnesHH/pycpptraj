@@ -178,6 +178,6 @@ cdef class Atom:
                                           AtomicElementDict[id2])
 
     @classmethod
-    def atomic_elements(cls):
+    def get_all_atomic_elements(cls):
         """return a list of all atomic_elements, class method"""
         return AtomicElementDict.keys()
