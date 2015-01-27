@@ -6,6 +6,7 @@ from cpython.array cimport array as pyarray
 from pycpptraj.TopologyList cimport TopologyList
 
 from pycpptraj.decorators import name_will_be_changed
+from pycpptraj.utils.check_and_assert import _import_numpy
 
 # Python level
 # use for write parm
@@ -361,3 +362,18 @@ cdef class Topology:
     def is_empty(self):
         s = self.file_path()
         return s == ""
+
+    def get_atom_indices(self, mask):
+        """return atom indices with given mask
+        To be the same as cpptraj/Ambertools: we mask indexing starts from 1
+        but the return list/array use 0
+        """
+        cdef AtomMask atm = AtomMask(mask)
+        self.set_integer_mask(atm)
+        has_numpy, np = _import_numpy()
+        if has_numpy:
+            # ndarray
+            return np.asarray(atm.selected())
+        else:
+            # list
+            return atm.selected()
