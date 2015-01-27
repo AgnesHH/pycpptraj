@@ -177,15 +177,19 @@ cdef class Frame (object):
     def __getitem__(self, idx):
         # always return memoryview 
         has_numpy, np = _import_numpy()
-        if isinstance(idx, AtomMask):
+        if isinstance(idx, AtomMask) or isinstance(idx, np.ndarray):
             # return a sub-array copy with indices got from 
             # idx.selected()
             # TODO : add doc
             if not has_numpy:
                 raise NotImplementedError("supported if having numpy installed")
             arr0 = np.asarray(self.buffer3d[:])
-            return arr0[np.array(idx.selected())]
-        if isinstance(idx, dict):
+            if isinstance(idx, AtomMask):
+                return arr0[np.array(idx.selected())]
+            else:
+                # isinstance(idx, pyarray)
+                return arr0[idx]
+        elif isinstance(idx, dict):
             # Example: frame[dict(top=top, mask='@CA')]
             # return a sub-array copy with indices got from 
             # idx as a `dict` instance
