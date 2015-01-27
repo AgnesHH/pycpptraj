@@ -3,7 +3,8 @@ from pycpptraj import AtomSelect
 import numpy as np
 from .gdt import gdt
 
-def calc_score(frame0=None, frame1=None, mask="*", top=None, score="gdtscore"):
+def calc_score(frame0=None, frame1=None, mask="*", 
+               top=None, score="gdtscore", *args, **kwd):
     #print "API will be changed"
     if score == 'gdtscore':
         _score = 1
