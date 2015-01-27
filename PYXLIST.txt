@@ -7,7 +7,6 @@ trajs/Trajout
 trajs/Traj_PDBfile
 ArgList
 DispatchObject
-magicmemoryview
 _FunctPtr
 cast_dataset
 _utils
