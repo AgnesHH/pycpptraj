@@ -179,13 +179,13 @@ cdef class Frame (object):
         has_numpy, np = _import_numpy()
         if isinstance(idx, AtomMask) or isinstance(idx, np.ndarray):
             # return a sub-array copy with indices got from 
-            # idx.selected()
+            # idx.selected_indices()
             # TODO : add doc
             if not has_numpy:
                 raise NotImplementedError("supported if having numpy installed")
             arr0 = np.asarray(self.buffer3d[:])
             if isinstance(idx, AtomMask):
-                return arr0[np.array(idx.selected())]
+                return arr0[np.array(idx.selected_indices())]
             else:
                 # isinstance(idx, pyarray)
                 return arr0[idx]
@@ -199,7 +199,7 @@ cdef class Frame (object):
             atm = AtomMask(idx['mask'])
             idx['top'].set_integer_mask(atm)
             arr0 = np.asarray(self.buffer3d[:])
-            return arr0[np.array(atm.selected())]
+            return arr0[np.array(atm.selected_indices())]
         elif isinstance(idx, basestring):
             # Example: frame['@CA']
             if self.top is not None and not self.top.is_empty():
