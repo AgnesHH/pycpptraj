@@ -14,21 +14,24 @@ def run_0():
 
     # creat datasetlist to hold distance data
     dsetlist = DataSetList()
+
+    # creat datafilelist to hold filenames and do writing later
     dflist = DataFileList()
 
-    # creat ActionList to hold actions
+    # creat ActionList to hold all actions
     alist = ActionList()
 
-    # creat TopologyList
+    # creat TopologyList to hold Topology instances
     toplist = TopologyList()
-
     # add parm
     toplist.add_parm(farray.top)
 
-    # add two actions: Action_Strip and Action_Distance
+    # add actions: Action_Strip, Action_Distance and Action_Rmsd
     alist.add_action(stripact, ArgList("@H*"), toplist, None, dsetlist, dflist)
-    alist.add_action(allactions.Action_Distance(), ArgList(":2@CA :3@CA"), toplist, None, dsetlist, dflist)
-    alist.add_action(allactions.Action_Rmsd(), ArgList("rms first @CA"), toplist, None, dsetlist, dflist)
+    alist.add_action(allactions.Action_Distance(), ArgList(":2@CA :3@CA out _distance.dat"), 
+                     toplist, None, dsetlist, dflist)
+    alist.add_action(allactions.Action_Rmsd(), ArgList("rms first @CA out _rmsd.dat"), 
+                     toplist, None, dsetlist, dflist)
 
     # 
     print "test setup_actions"
@@ -66,17 +69,31 @@ def run_0():
 
     # it's time to retrieve the data
     # get distance data
+    # we need to explicitly cast_dataset
+    # future : automatically cast data
+
+    # get distance
     ds0 = cast_dataset(dsetlist[0], dtype='general')
     # get rmsd data
     ds1 = cast_dataset(dsetlist[1], dtype='general')
     print ds0[:10]
     print ds1[:10]
 
+
     # reproduce cpptraj's output?
     import numpy as np
     rmsdcpp = np.loadtxt("./data/rmsd_to_firstFrame_CA_allres.Tc5b.dat", skiprows=1).transpose()[1][:10]
     # YES
     assert_almost_equal(rmsdcpp, ds1[:10])
+
+    # write output for rmsd and distance (stored in dflist)
+    # datatfile: ./_rmsd.dat, _distance.dat
+    dflist.write_all_datafiles()
+    print dir(dflist) 
+
+    # add more
+    # FIXME : "Command terminated" error
+    #dflist.add_dataset("./output/dfout_0.dat", ds0)
 
 if __name__ == "__main__":
     run_0()
