@@ -55,11 +55,11 @@ class AtomSelect(object):
         arr0 = np.asarray(self._selected_frame.buffer3d)
 
         if isinstance(mask, AtomMask):
-            return arr0[mask.selected()]
+            return arr0[mask.selected_indices()]
         elif isinstance(mask, basestring):
             atm = AtomMask(mask)
             self.top.set_integer_mask(atm)
-            return arr0[atm.selected()]
+            return arr0[atm.selected_indices()]
         elif isinstance(mask, (pyarray, np.ndarray, list, tuple)):
             return  arr0[mask]
         else:
@@ -70,8 +70,8 @@ class AtomSelect(object):
         arr0 = np.asarray(self._selected_frame.buffer3d)
 
         if isinstance(mask, AtomMask):
-            return mask.selected()
+            return mask.selected_indices()
         elif isinstance(mask, basestring):
             atm = AtomMask(mask)
             self.top.set_integer_mask(atm)
-            return atm.selected()
+            return atm.selected_indices()
