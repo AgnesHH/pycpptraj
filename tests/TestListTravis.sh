@@ -14,6 +14,7 @@ python ./test_FrameArray.py
 python ./test_misc.py 
 python ./test_Action_Surf.py 
 python ./test_randomize_ions.py 
+python ./test_Frame_5.py 
 python ./test_FrameArray_extensive_indexing.py 
 python ./test_io.py 
 python ./test_CpptrajFile.py 
@@ -57,12 +58,14 @@ python ./test_GDTscore.py
 python ./test_FrameArray_help.py 
 python ./test_Frame_3.py 
 python ./test_dummy_indexing_FrameArray.py 
+python ./test_Topology_build.py 
 python ./test_Action_Distance.py 
 python ./test_Frame_4.py 
 python ./test_TopologyList.py 
 python ./test_DataSetList.py 
 python ./test_hd5f.py 
 python ./test_loadpdb_rcsb.py 
+python ./test_mdtraj_to_pycpptraj_top.py 
 python ./test_Atom.py 
 python ./test_Trajin.py 
 python ./test_Frame_1.py 
