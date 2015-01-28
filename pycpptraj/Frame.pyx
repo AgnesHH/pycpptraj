@@ -765,3 +765,4 @@ cdef class Frame (object):
 
     def set_top(self, value):
         self.top = value
+
