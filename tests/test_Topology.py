@@ -92,6 +92,14 @@ class TestTopology(unittest.TestCase):
         top = traj.top
         frame = traj[0]
         print frame[top(":2-18@CA")]
-        
+
+    def test_get_unique(self):
+        traj = FrameArray("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        top = traj.top
+        print top.get_unique_atomname()
+        print top.get_unique_resname()
+        print top.get_atomname_set()
+        print top.get_resname_set()
+
 if __name__ == "__main__":
     unittest.main()
