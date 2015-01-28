@@ -67,8 +67,22 @@ cdef class Trajin (TrajectoryFile):
             elif idxs == 'topology':
                 return self.top
             else:
-                txt = "not supported keyword `%s`" % idxs
-                raise NotImplementedError(txt)
+                # return array with given mask
+                # traj[':@CA']
+                try:
+                    # use `mask` to avoid confusion
+                    mask = idxs
+                    has_numpy, np = _import_numpy()
+                    if not has_numpy:
+                        raise NotImplementedError("must have numpy")
+                    N = self.top(mask).n_selected
+                    arr0 = np.empty(N*self.size*3).reshape(self.size, N, 3)
+                    for i, frame in enumerate(self):
+                        arr0[i] = frame[self.top(mask)]
+                    return arr0
+                except:
+                    txt = "not supported keyword `%s`" % idxs
+                    raise NotImplementedError(txt)
 
         if not isinstance(idxs, slice):
             if isinstance(idxs, tuple):
