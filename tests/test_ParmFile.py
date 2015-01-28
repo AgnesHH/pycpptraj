@@ -5,17 +5,17 @@ from pycpptraj.decorators import not_yet_supported
 from pycpptraj import io as mdio
 
 def test_generator(top):
-   for atom in top.atoms:
+   for atom in top.atomiter:
        pass
        #print atom
    
    print "\nres_iterator for top"
-   for res in top.residues:
+   for res in top.residueiter:
        pass
        #print res
    
    print "\nmol_iterator for top"
-   for mol in top.mols:
+   for mol in top.moliter:
        pass
        #print mol
    
