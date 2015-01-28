@@ -35,7 +35,8 @@ class Test(unittest.TestCase):
                 distance(frame0.atoms(i), frame0.atoms(j))
 
     def test_distance_frames(self):
-        traj = FrameArray(filename="./data/md1_prod.Tc5b.x", top="./data/Tc5b.top")
+        traj = FrameArray(filename="./data/md1_prod.Tc5b.x", 
+                           top="./data/Tc5b.top")
         dslist = DataSetList()
         act = allactions.Action_Distance()
         act.master(command="distance :1@CA :2@CA",
