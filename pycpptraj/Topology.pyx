@@ -389,7 +389,7 @@ cdef class Topology:
         has_numpy, np = _import_numpy()
         if has_numpy:
             # ndarray
-            return np.asarray(atm.selected())
+            return np.asarray(atm.selected_indices())
         else:
             # list
-            return atm.selected()
+            return atm.selected_indices()
