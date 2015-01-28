@@ -92,5 +92,13 @@ class TestFrameArray(unittest.TestCase):
         print subfarray[0].coords[:10]
         print farray[5].coords[:10]
 
+    def test_mask_indexing(self):
+        traj = ts[:]
+        print type(traj["@CA"])
+        print traj["@CA"].shape
+        assert traj["@CA"].shape == (traj.size, traj.top("@CA").n_selected, 3)
+        print traj[12:14]["@CA"]
+        assert traj[12:14]["@CA"].shape == (2, traj.top("@CA").n_selected, 3)
+
 if __name__ == "__main__":
     unittest.main()
