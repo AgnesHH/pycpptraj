@@ -24,6 +24,18 @@ class TestAtomMask(unittest.TestCase):
         print "Oxygen"
         print "hydrogen"
 
+    def test_indexing(self):
+        print "test_indexing"
+        top = Topology("./data/Tc5b.top")
+        atm = AtomMask("@CA")
+        top.set_integer_mask(atm)
+        print atm[0]
+
+        for i in atm:
+            print i
+
+        print dir(atm)
+
 if __name__ == "__main__":
     unittest.main()
 
