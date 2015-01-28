@@ -26,10 +26,12 @@ def makesureABC(classname):
     return inner
 
 def name_will_be_changed(msg):
-    txt = "this method name will be changed to %s" % msg
-    print txt
+    txt = "this method name will be changed"
+    if not msg == "":
+        txt +=  "to %s" % msg
     def inner(func):
         def _inner(self, *args, **kwd):
+            print txt
             return func(self, *args, **kwd)
         return _inner
     return inner
