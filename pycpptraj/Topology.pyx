@@ -121,7 +121,7 @@ cdef class Topology:
         return atm
 
     @property
-    def atoms(self):
+    def atomiter(self):
         cdef Atom atom
         cdef atom_iterator it
 
@@ -133,7 +133,7 @@ cdef class Topology:
             incr(it)
 
     @property
-    def residues(self):
+    def residueiter(self):
         cdef Residue res
         cdef res_iterator it
         it = self.thisptr.ResStart()
@@ -145,7 +145,7 @@ cdef class Topology:
             incr(it)
         
     @property
-    def mols(self):
+    def moliter(self):
         cdef Molecule mol
         cdef mol_iterator it
         it = self.thisptr.MolStart()
@@ -204,9 +204,16 @@ cdef class Topology:
     @property
     def residuelist(self):
         reslist = []
-        for res in self.residues:
+        for res in self.residueiter:
             reslist.append(res)
         return reslist
+
+    @property
+    def moleculelist(self):
+        mlist = []
+        for mol in self.moliter:
+            mlist.append(mol)
+        return mlist
 
     def summary(self):
         self.thisptr.Summary()
