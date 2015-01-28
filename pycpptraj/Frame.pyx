@@ -200,6 +200,12 @@ cdef class Frame (object):
             idx['top'].set_integer_mask(atm)
             arr0 = np.asarray(self.buffer3d[:])
             return arr0[np.array(atm.selected())]
+        elif isinstance(idx, basestring):
+            # Example: frame['@CA']
+            if self.top is not None and not self.top.is_empty():
+                return self[self.top(idx)]
+            else:
+                raise ValueError("must have non-empty topology")
         else:
             if has_numpy:
                 return np.asarray(self.buffer3d[idx])
@@ -756,3 +762,6 @@ cdef class Frame (object):
             else:
                 atm = atommask
         return Frame(self, atm)
+
+    def set_top(self, value):
+        self.top = value
