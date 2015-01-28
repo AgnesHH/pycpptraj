@@ -1,5 +1,7 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
+from cython.operator cimport dereference as deref
+from cython.operator cimport preincrement as incr
 
 # FIXME : property does not work properly
 
@@ -34,14 +36,16 @@ cdef class AtomMask(object):
         if self.thisptr != NULL:
             del self.thisptr
 
-    def selected(self):
+    def selected_indices(self):
         return self.thisptr.Selected()
 
-    #def _iterator begin(self):
-    #def _iterator end(self):
     def __iter__(self):
-        # Not yet supported
-        raise NotImplementedError()
+        cdef cppvector[int].const_iterator it
+        it = self.thisptr.begin()
+
+        while it != self.thisptr.end():
+            yield deref(it)
+            incr(it)
 
     def back(self):
         return self.thisptr.back()
