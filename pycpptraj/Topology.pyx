@@ -92,7 +92,7 @@ cdef class Topology:
             other = args[0]
             self.thisptr[0] = other.thisptr[0]
 
-    def __getitem__(self, int idx):
+    def __getitem__(self, idx):
         """
         return Atom instance
 
@@ -107,9 +107,24 @@ cdef class Topology:
         END TODO
         """
 
-        cdef Atom atom = Atom()
-        atom.thisptr[0] = self.thisptr.index_opr(idx)
-        return atom
+        cdef Atom atom 
+        cdef int i
+
+        if isinstance(idx, (int, long)):
+            # need to explicitly cast to int
+            i = <int> idx
+            atom = Atom()
+            atom.thisptr[0] = self.thisptr.index_opr(i)
+            return atom
+        elif isinstance(idx, basestring):
+            alist = []
+            # return atom object iterator with given mask
+            # self(idx) return AtomMask object
+            for i in self(idx).selected_indices():
+                alist.append(self[i])
+            return alist
+        else:
+            raise ValueError("must be integer or string")
 
     def __call__(self, mask, *args, **kwd):
         """intended to use with Frame indexing
@@ -393,3 +408,25 @@ cdef class Topology:
         else:
             # list
             return atm.selected_indices()
+
+    @name_will_be_changed("")
+    def get_unique_resname(self):
+        from sets import Set 
+        s = Set()
+        for res in self.residueiter:
+            s.add(res.name)
+        return s
+
+    @name_will_be_changed("")
+    def get_unique_atomname(self):
+        from sets import Set 
+        s = Set()
+        for atom in self.atomiter:
+            s.add(atom.name)
+        return s
+
+    def get_atomname_set(self):
+        return self.get_unique_atomname()
+
+    def get_resname_set(self):
+        return self.get_unique_resname()
