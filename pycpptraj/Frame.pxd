@@ -115,6 +115,8 @@ cdef class Frame:
     cdef public bint py_free_mem
     cdef void _strip_atoms(Frame self, Topology top, string m, bint update_top, bint has_box)
     cdef _update_atoms(self, int[:], double[:], int)
+    # create and object as alias to Topology instance
+    cdef object top
 
 cdef inline int get_positive_idx(idx, size):
     # TODO : do we need this method?
