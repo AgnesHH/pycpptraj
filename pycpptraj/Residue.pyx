@@ -20,6 +20,9 @@ cdef class Residue:
     def __str__(self):
         return self.thisptr.c_str()
 
+    def __repr__(self):
+        pass
+
     def set_last_atom(self,int i):
         self.thisptr.SetLastAtom(i)
 
@@ -37,6 +40,11 @@ cdef class Residue:
     @property
     def original_res_num(self):
         return self.thisptr.OriginalResNum()
+
+    @property
+    def index(self):
+        """shortcut of original_res_num"""
+        return self.original_res_num()
 
     def ntype(self):
         cdef NameType nt = NameType()
