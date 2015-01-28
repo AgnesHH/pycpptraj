@@ -85,6 +85,10 @@ cdef class Atom:
         txt = "Atom object with name %s " % self.thisptr.c_str()
         return txt
 
+    def __repr__(self):
+        txt = "<Atom object: %s>" % self.thisptr.c_str()
+        return txt
+
     @property
     def element(self):
         return get_key(self.thisptr.Element(), AtomicElementDict)
