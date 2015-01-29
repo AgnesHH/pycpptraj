@@ -59,6 +59,9 @@ cdef class Topology:
     def __repr__(self):
         return self.__str__()
 
+    def __len__(self):
+        return self.n_atoms
+
     def load(self, string filename):
         """loading Topology from filename
 
