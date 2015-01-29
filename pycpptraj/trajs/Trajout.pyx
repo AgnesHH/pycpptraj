@@ -100,7 +100,9 @@ cdef class Trajout:
         elif isinstance(top, Topology):
             # assume this is Topology instance
             top_ = <Topology> top
-        if top.is_empty():
+        if len(top) == 0:
+            # we use `len` here since we don't know if this is string or 
+            # Topology object
             raise ValueError("require non-empty topology")
 
         self.thisptr.WriteFrame(idx, top_.thisptr, frame.thisptr[0])
