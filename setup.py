@@ -1,10 +1,24 @@
 from __future__ import print_function
 import os
+import sys
 from distutils.core import setup
 from distutils.extension import Extension
-import Cython.Distutils.build_ext
-from Cython.Build import cythonize
 from random import shuffle
+
+
+# import/install Cython
+try:
+    import Cython.Distutils.build_ext
+    from Cython.Build import cythonize
+except:
+    print("There is no Cython")
+    print("try: pip install --upgrade git+git://github.com/cython/cython@master")
+    try_cython = raw_input("install Cython? y/n ")
+
+    if try_cython.upper() in ['Y', 'YES']:
+        os.system("pip install --upgrade git+git://github.com/cython/cython@master")
+    else:
+        sys.exit("I can't install pycpptraj without cython")
 
 # this setup.py file was adapted from setup.py file in Cython package
 def read(fname):
@@ -17,6 +31,7 @@ class PathError(Exception):
 rootname = os.getcwd()
 pycpptraj_home = rootname + "/pycpptraj/"
 
+# find/install libcpptraj
 try:
         cpptraj_dir = os.environ['CPPTRAJHOME'] 
         cpptraj_include = cpptraj_dir + "/src/"
@@ -28,7 +43,7 @@ except:
 
 if not os.path.exists(cpptraj_dir):
     print("cpptraj_dir does not exist")
-    cpptraj_dir = input("Please specify your cpptraj_dir: \n")
+    cpptraj_dir = raw_input("Please specify your cpptraj_dir: \n")
     cpptraj_include = cpptraj_dir + "/src/"
     libdir = cpptraj_dir + "/lib/"
     #raise PathError("cpptraj_dir does not exist")
@@ -40,6 +55,8 @@ with open("PYXLIST.txt", 'r') as f:
         if "#" not in line:
             pyxfiles.append(line.split("\n")[0])
 
+# use shuffle so we can use "python ./setup.py build" several times
+# to make the compiling faster (really?)
 shuffle(pyxfiles)
 
 USE_PYX = True
@@ -57,7 +74,7 @@ for ext_name in pyxfiles:
         ext_name = ext_name.replace("/", ".")
 
     extmod = Extension("pycpptraj." + ext_name,
-                    [pyxfile],
+                    sources=[pyxfile],
                     libraries=['cpptraj'],
                     language='c++',
                     library_dirs=[libdir,],
