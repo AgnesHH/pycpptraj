@@ -10,6 +10,7 @@ from pycpptraj._utils cimport get_positive_idx
 from pycpptraj.TrajReadOnly import TrajReadOnly
 from pycpptraj.utils.check_and_assert import _import_numpy
 from pycpptraj.utils.check_and_assert import file_exist
+from pycpptraj.trajs.Trajout import Trajout
 
 # we don't allow sub-class in Python level since we will mess up with memory
 @cython.final
@@ -537,3 +538,15 @@ cdef class FrameArray:
     @classmethod
     def read_options(cls):
         TrajReadOnly.read_options()
+
+    def save(self, filename="", fmt='unknown', overwrite=False):
+        if fmt == 'unknown':
+            # convert to "UNKNOWN_TRAJ"
+            fmt = fmt.upper() + "_TRAJ"
+        else:
+            fmt = fmt.upper()
+
+        with Trajout(filename=filename, top=self.top, fmt=fmt, 
+                     overwrite=overwrite, more_args=None) as trajout:
+            for idx, frame in enumerate(self):
+                trajout.writeframe(idx, frame, self.top)
