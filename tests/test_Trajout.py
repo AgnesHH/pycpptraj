@@ -3,6 +3,7 @@ import numpy as np
 from pycpptraj.base import *
 from pycpptraj.decorators import no_test
 from pycpptraj.io import writetraj
+from pycpptraj import io as mdio
 
 farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
 
@@ -49,12 +50,6 @@ class TestTrajout(unittest.TestCase):
         farray.load("test.x")
         print farray.size
        
-    #@no_test
-    def test_2(self):
-        """test write FrameArray"""
-        farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
-        writetraj("test_write_output.x", farray, farray.top, overwrite=True)
-        writetraj("test_pdb_1.dummyext", farray[0], farray.top, overwrite=True, fmt='pdb')
 
     #@no_test
     def test_write_PDBFILE(self):
@@ -67,6 +62,24 @@ class TestTrajout(unittest.TestCase):
     def test_load(self):
         farray = FrameArray("test_0.pdb", "./data/Tc5b.top")[0]
         print farray.n_atoms
+
+    #@no_test
+    def test_2(self):
+        """test write FrameArray"""
+        farray = FrameArray("data/md1_prod.Tc5b.x", "./data/Tc5b.top", indices=range(10))
+        writetraj("test_write_output.x", farray, farray.top, overwrite=True)
+        writetraj("test_pdb_1.dummyext", farray[0], farray.top, overwrite=True, fmt='pdb')
+
+        # test 'save'
+        print farray
+        farray.save("test_write_output_save_method.x", overwrite=True)
+
+        # reproduce result?
+        f0 = mdio.load("test_write_output.x", "./data/Tc5b.top")
+        f1 = mdio.load("test_write_output_save_method.x", "./data/Tc5b.top")
+        from numpy.testing import assert_almost_equal as assert_ae
+        assert_ae(f0[:, :, :], f1[:, :, :])
+
 
 if __name__ == "__main__":
     unittest.main()
