@@ -20,7 +20,7 @@ dependclean:
 	/bin/rm -f FindDepend.o findDepend
 
 libcpptraj: $(OBJECTS) pub_fft.o $(READLINE)
-	    $(CXX)  -shared -o libcpptraj $(OBJECTS) pub_fft.o $(READLINE) $(LDFLAGS)
+	    $(CXX)  -shared -o libcpptraj.so $(OBJECTS) pub_fft.o $(READLINE) $(LDFLAGS)
 		mv libcpptraj.so $(CPPTRAJHOME)/lib
 
 cpptraj$(SFX): $(OBJECTS) pub_fft.o $(READLINE)
