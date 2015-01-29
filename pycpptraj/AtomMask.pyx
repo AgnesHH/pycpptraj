@@ -2,6 +2,7 @@
 from libcpp.vector cimport vector
 from cython.operator cimport dereference as deref
 from cython.operator cimport preincrement as incr
+from cpython.array cimport array as pyarrary
 
 # FIXME : property does not work properly
 
@@ -37,7 +38,7 @@ cdef class AtomMask(object):
             del self.thisptr
 
     def selected_indices(self):
-        return self.thisptr.Selected()
+        return pyarrary('i', self.thisptr.Selected())
 
     def __iter__(self):
         cdef cppvector[int].const_iterator it
