@@ -162,3 +162,4 @@ analyses/Analysis_Matrix
 analyses/Analysis_Rms2d
 analyses/Analysis_Lifetime
 gdt/gdt
+_save_traj
