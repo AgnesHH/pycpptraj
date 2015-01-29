@@ -27,9 +27,11 @@ except:
     libdir = cpptraj_dir + "/lib"
 
 if not os.path.exists(cpptraj_dir):
-    #print("cpptraj_dir does not exist")
-    #cpptraj_dir = input("Please specify your cpptraj_dir: \n")
-    raise PathError("cpptraj_dir does not exist")
+    print("cpptraj_dir does not exist")
+    cpptraj_dir = input("Please specify your cpptraj_dir: \n")
+    cpptraj_include = cpptraj_dir + "/src/"
+    libdir = cpptraj_dir + "/lib/"
+    #raise PathError("cpptraj_dir does not exist")
 
 # get *.pyx files
 pyxfiles = []
