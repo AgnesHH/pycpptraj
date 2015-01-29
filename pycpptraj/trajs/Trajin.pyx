@@ -1,4 +1,5 @@
 # distutils: language = c++
+from __future__ import absolute_import
 import os
 cimport cython
 from cpython.array cimport array as pyarray
@@ -6,6 +7,7 @@ from pycpptraj._utils cimport get_positive_idx
 from pycpptraj.FrameArray cimport FrameArray
 
 from pycpptraj.utils.check_and_assert import _import_numpy
+from .Trajout import Trajout
 
 
 cdef class Trajin (TrajectoryFile):
@@ -332,3 +334,15 @@ cdef class Trajin (TrajectoryFile):
         self.check_allocated()
         return self.baseptr_1.NreplicaDimension()
     # end virtual methods
+
+    def save(self, filename="", fmt='unknown', overwrite=False):
+        if fmt == 'unknown':
+            # convert to "UNKNOWN_TRAJ"
+            fmt = fmt.upper() + "_TRAJ"
+        else:
+            fmt = fmt.upper()
+
+        with Trajout(filename=filename, top=self.top, fmt=fmt, 
+                     overwrite=overwrite, more_args=None) as trajout:
+            for idx, frame in enumerate(self):
+                trajout.writeframe(idx, frame, self.top)
