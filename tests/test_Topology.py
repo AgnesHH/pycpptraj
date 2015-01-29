@@ -101,5 +101,10 @@ class TestTopology(unittest.TestCase):
         print top.get_atomname_set()
         print top.get_resname_set()
 
+    def test_len(self):
+        traj = FrameArray("./data/md1_prod.Tc5b.x", "./data/Tc5b.top")
+        top = traj.top
+        assert len(top) == top.n_atoms
+
 if __name__ == "__main__":
     unittest.main()
