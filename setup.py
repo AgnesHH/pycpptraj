@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 from distutils.core import setup
 from distutils.extension import Extension
@@ -9,17 +10,26 @@ from random import shuffle
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+class PathError(Exception):
+    def __init__(self, msg):
+        pass
+
 rootname = os.getcwd()
 pycpptraj_home = rootname + "/pycpptraj/"
 
 try:
         cpptraj_dir = os.environ['CPPTRAJHOME'] 
         cpptraj_include = cpptraj_dir + "/src/"
-        libdir = os.environ['CPPTRAJHOME'] + "/lib/"
+        libdir = cpptraj_dir + "/lib/"
 except:
     cpptraj_dir = rootname + "/cpptraj/"
     cpptraj_include = cpptraj_dir + "/src/"
     libdir = cpptraj_dir + "/lib"
+
+if not os.path.exists(cpptraj_dir):
+    #print("cpptraj_dir does not exist")
+    #cpptraj_dir = input("Please specify your cpptraj_dir: \n")
+    raise PathError("cpptraj_dir does not exist")
 
 # get *.pyx files
 pyxfiles = []
