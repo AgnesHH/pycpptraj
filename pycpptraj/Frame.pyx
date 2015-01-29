@@ -12,6 +12,7 @@ from pycpptraj.decorators import for_testing, iter_warning
 from pycpptraj.decorators import name_will_be_changed
 from pycpptraj.utils.check_and_assert import _import_numpy
 from pycpptraj.ArgList import ArgList
+from pycpptraj.trajs.Trajout import Trajout
 
 # TODO : reogarnize memory view, there are too many ways to assess
 # need to finalize
@@ -769,3 +770,10 @@ cdef class Frame (object):
     def set_top(self, value):
         self.top = value
 
+    def save(self, filename="", top=None, fmt='unknown', overwrite=False):
+        if fmt == 'unknown':
+            # convert to "UNKNOWN_TRAJ"
+            fmt = fmt.upper() + "_TRAJ"
+        with Trajout(filename=filename, top=top, fmt=fmt, 
+                     overwrite=overwrite, more_args=None) as trajout:
+            trajout.writeframe(0, self, top)
