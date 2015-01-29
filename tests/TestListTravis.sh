@@ -29,6 +29,8 @@ python ./test_MolSurf.py
 python ./test_listIndex_FrameArray.py 
 python ./test_FrameArray_2.py 
 python ./test_TMscore.py 
+python ./test_Topology_2.py 
+python ./test_FrameArray_save.py 
 python ./test_allactions_allanalyses_doc.py 
 python ./test_Topology.py 
 python ./test_TrajectoryFile.py 
