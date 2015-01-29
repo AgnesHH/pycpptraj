@@ -114,7 +114,7 @@ setup_args['package_data'] = {
 if __name__ == "__main__":
     setup(
         name="PyCpptraj",
-        version="0.1",
+        version="0.1.beta",
         author="Hai Nguyen",
         author_email="hainm.comp@gmail.com",
         url="https://github.com/hainm/pycpptraj",
