@@ -48,6 +48,11 @@ def writetraj(filename="", traj=None, top=None,
     # TODO : support list (tuple) of FrameArray, TrajReadOnly or 
     # list of filenames
 
+    if fmt == 'unknown':
+        fmt = fmt.upper() + "_TRAJ"
+    else:
+        fmt = fmt.upper()
+
     if not traj or not top:
         raise ValueError("Need non-empty traj and top files")
 
