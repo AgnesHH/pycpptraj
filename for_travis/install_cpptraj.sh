@@ -14,6 +14,6 @@ mkdir lib
 bash ../installs/configure_pycpptraj -nomathlib -shared gnu
 cd ./src
 # using Makefile file in pycpptraj/installs
-make -f ../../installs/Makefile_libcpptraj libcpptraj.so
+make -f ../../installs/Makefile_libcpptraj libcpptraj
 
 cd $PYCPPTRAJ_HOME
