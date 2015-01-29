@@ -1,8 +1,3 @@
-* farray[:][0][0] : Segmentation fault or wrong values (getting 0)
-    * solution: 
-    >>> f0 = farray[:]
-    >>> f0[0][0] or f0[0, 0]
-
 * traj += traj
     * solution: traj += traj[:]
 
