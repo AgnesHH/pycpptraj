@@ -8,6 +8,7 @@ from pycpptraj.FrameArray cimport FrameArray
 
 from pycpptraj.utils.check_and_assert import _import_numpy
 from .Trajout import Trajout
+from pycpptraj._save_traj import _save
 
 
 cdef class Trajin (TrajectoryFile):
@@ -336,13 +337,14 @@ cdef class Trajin (TrajectoryFile):
     # end virtual methods
 
     def save(self, filename="", fmt='unknown', overwrite=False):
-        if fmt == 'unknown':
-            # convert to "UNKNOWN_TRAJ"
-            fmt = fmt.upper() + "_TRAJ"
-        else:
-            fmt = fmt.upper()
+        _save(self, filename, fmt, overwrite)
+        #if fmt == 'unknown':
+        #    # convert to "UNKNOWN_TRAJ"
+        #    fmt = fmt.upper() + "_TRAJ"
+        #else:
+        #    fmt = fmt.upper()
 
-        with Trajout(filename=filename, top=self.top, fmt=fmt, 
-                     overwrite=overwrite, more_args=None) as trajout:
-            for idx, frame in enumerate(self):
-                trajout.writeframe(idx, frame, self.top)
+        #with Trajout(filename=filename, top=self.top, fmt=fmt, 
+        #             overwrite=overwrite, more_args=None) as trajout:
+        #    for idx, frame in enumerate(self):
+        #        trajout.writeframe(idx, frame, self.top)
