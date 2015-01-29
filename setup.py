@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 import sys
 from distutils.core import setup
@@ -11,8 +10,8 @@ try:
     import Cython.Distutils.build_ext
     from Cython.Build import cythonize
 except:
-    print("There is no Cython")
-    print("try: pip install --upgrade git+git://github.com/cython/cython@master")
+    print "There is no Cython"
+    print "try: pip install --upgrade git+git://github.com/cython/cython@master"
     try_cython = raw_input("install Cython? y/n ")
 
     if try_cython.upper() in ['Y', 'YES']:
@@ -42,7 +41,7 @@ except:
     libdir = cpptraj_dir + "/lib"
 
 if not os.path.exists(cpptraj_dir):
-    print("cpptraj_dir does not exist")
+    print "cpptraj_dir does not exist"
     cpptraj_dir = raw_input("Please specify your cpptraj_dir: \n")
     cpptraj_include = cpptraj_dir + "/src/"
     libdir = cpptraj_dir + "/lib/"
@@ -55,7 +54,7 @@ with open("PYXLIST.txt", 'r') as f:
         if "#" not in line:
             pyxfiles.append(line.split("\n")[0])
 
-# use shuffle so we can use "python ./setup.py build" several times
+#" use shuffle so we can use "python ./setup.py build" several times
 # to make the compiling faster (really?)
 shuffle(pyxfiles)
 
