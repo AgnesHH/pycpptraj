@@ -9,3 +9,5 @@
 * Dec-11-2014: Know how to create wrapper for abstract and sub-class
 
 * Jan-24-2015: Taking 3D numpy array just by traj[:, :, :] or traj[0:20, :, :] (read only)
+
+* Jan-29-2015: working on pip: python setup.py sdist
